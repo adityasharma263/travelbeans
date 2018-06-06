@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask_script import Manager, Server
 from flask_migrate import Migrate, MigrateCommand
-from stay import db, app
+from cta import db, app
 # from books.seed import SeedData
 
 migrate = Migrate(app, db)
