@@ -13,4 +13,4 @@ ma = Marshmallow(app)
 # Load config
 app.config.from_pyfile('../config.cfg')
 # print(app.config['BROKER_URL'])
-import cta.model
+import cta.view
