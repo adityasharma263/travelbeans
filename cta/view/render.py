@@ -11,7 +11,7 @@ from cta import db
 
 
 @app.route('/stay', methods=['GET'])
-def home():
+def stay():
     args = request.args.to_dict()
     args.pop('page', None)
     args.pop('per_page', None)
@@ -20,6 +20,11 @@ def home():
     stay = Stay.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
     data = StaySchema(many=True).dump(stay)
     return render_template('stay.html',stay=data,per_page=per_page,page=page)
+
+@app.route('/home', methods=['GET'])
+def home():
+    
+    return render_template('index.html')
 
 @app.route('/stay/<string:slug>', methods=['GET'])
 def stay_id(slug):
