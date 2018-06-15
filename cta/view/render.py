@@ -1,4 +1,4 @@
--*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 __author__ = 'aditya'
 
 from cta.model.hotel import Hotel
@@ -10,7 +10,7 @@ from  sqlalchemy.sql.expression import func
 from cta import db
 
 
-@app.route('/stay', methods=['GET'])
+@app.route('/hotel', methods=['GET'])
 def hotel():
     args = request.args.to_dict()
     args.pop('page', None)
@@ -18,7 +18,7 @@ def hotel():
     per_page = int(request.args.get('per_page', 10))
     page = int(request.args.get('page', 1))
     hotel = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-    data = HotelSchema(many=True).dump(stay)
+    data = HotelSchema(many=True).dump(hotel)
     return render_template('stay.html',hotel=data,per_page=per_page,page=page)
 
 @app.route('/home', methods=['GET'])
