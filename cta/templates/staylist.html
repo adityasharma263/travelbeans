@@ -58,9 +58,11 @@
       <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
       <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
 <script type="text/javascript" charset="UTF-8" src="../static/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/stats.js"></script></head>
-<body>
-    
+<body ng-app="comparetravel">
+    <div ng-controller="stayController"> 
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
@@ -701,7 +703,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="hotel-list listing-style3 hotel">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotels">
                                 <article class="box">
                                     
                                           <figure class="col-sm-5 col-md-4">
@@ -712,8 +714,8 @@
                                           
                                               <div>
                                                   <div>
-                                                      <h4 class="box-title">Leela Convention Hotel<small>
-                                                      <i class="soap-icon-departure yellow-color"></i> Delhi , India</small></h4>
+                                                      <h4 class="box-title">[[hotel.name]]<small>
+                                                      <i class="soap-icon-departure yellow-color"></i> [[hotel.address]],[[hotel.city]]</small></h4>
       
                                                       <div class="amenities">
                                                           <i class="soap-icon-wifi circle"></i>
@@ -934,6 +936,7 @@
     <script type="text/javascript" src="./list_files/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="./list_files/jquery.placeholder.js"></script>
     <script type="text/javascript" src="./list_files/jquery-ui.1.10.4.min.js"></script>
+    <script type="text/javascript" src="../static/app.js"></script>
     
     <!-- Twitter Bootstrap -->
     <script type="text/javascript" src="./list_files/bootstrap.js"></script>
@@ -1188,4 +1191,4 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ul></div></div></body></html>
+                        </ul></div></div></div></body></html>
