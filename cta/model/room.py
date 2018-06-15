@@ -2,7 +2,6 @@
 from cta import db
 from cta.model.base import Base
 
-
 class Room(Base):
     __tablename__ = 'room'
 
@@ -24,7 +23,7 @@ class Room(Base):
     electric_kettle = db.Column(db.Boolean, default=False, nullable=True)
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
     members = db.relationship('Member', backref='room')
-    websites = db.relationship('Website', backref='room')
+    websites = db.relationship('WebsiteRoom', backref="room")
 
 
     def __init__(self, *args, **kwargs):

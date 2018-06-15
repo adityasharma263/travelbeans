@@ -8,11 +8,13 @@ class Price(Base):
 
     price = db.Column(db.Integer, nullable=True)
     avg_price = db.Column(db.Integer, nullable=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
-    website_id = db.Column(db.Integer, db.ForeignKey('website.id'))
+    website_room_id = db.Column(db.Integer, db.ForeignKey("website_room.website_room_id"))
+    # website_id = db.Column(db.Integer)
+    # website_room_id = db.Column(db.Integer)
+    # fk_website_room_id = db.ForeignKeyConstraint([website_id, website_room_id], ['website_room.website_id', 'website_room.id'])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<our_price %r>' % self.our_price
+        return '<price %r>' % self.price
