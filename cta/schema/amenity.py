@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.stay import Stay
+from cta.model.amenity import Amenity
 from cta import ma
 
 
-class StaySchema(ma.ModelSchema):
-
+class AmenitySchema(ma.ModelSchema):
     class Meta:
-        model = Stay
+        model = Amenity
         exclude = ('updated_at', 'created_at')
