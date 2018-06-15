@@ -6,6 +6,7 @@ from cta.model.base import Base
 class Room(Base):
     __tablename__ = 'room'
 
+    images = db.Column(db.String, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
     bed_type = db.Column(db.Integer, nullable=True)
     no_of_bed = db.Column(db.Integer, nullable=True)
@@ -21,9 +22,10 @@ class Room(Base):
     desk = db.Column(db.Boolean, default=False, nullable=True)
     fan = db.Column(db.Boolean, default=False, nullable=True)
     electric_kettle = db.Column(db.Boolean, default=False, nullable=True)
-    hotels = db.relationship('Hotel', backref='room')
-    member_id = db.Column(db.Integer, db.ForeignKey('member.id'))
-    members = db.relationship('Member', foreign_keys=member_id)
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
+    members = db.relationship('Member', backref='room')
+    websites = db.relationship('Website', backref='room')
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

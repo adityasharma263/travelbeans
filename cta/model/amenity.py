@@ -16,7 +16,7 @@ class Amenity(Base):
     wifi_in_lobby = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
-    hotels = db.relationship('Hotel', backref='amenity')
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
 
 
     def __init__(self, *args, **kwargs):
