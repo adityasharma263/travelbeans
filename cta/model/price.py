@@ -8,10 +8,10 @@ class Price(Base):
 
     price = db.Column(db.Integer, nullable=True)
     avg_price = db.Column(db.Integer, nullable=True)
-    website_room_id = db.Column(db.Integer, db.ForeignKey("website_room.website_room_id"))
-    # website_id = db.Column(db.Integer)
-    # website_room_id = db.Column(db.Integer)
-    # fk_website_room_id = db.ForeignKeyConstraint([website_id, website_room_id], ['website_room.website_id', 'website_room.id'])
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
+    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
+    room = db.relationship('Room', foreign_keys=room_id)
+    website = db.relationship('Website', foreign_keys=website_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

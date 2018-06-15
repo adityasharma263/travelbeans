@@ -9,7 +9,7 @@ class Member(Base):
     no_of_adults = db.Column(db.Integer, nullable=True)
     no_of_children = db.Column(db.Integer, nullable=True)
     total_members = db.Column(db.Integer, nullable=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

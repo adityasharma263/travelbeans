@@ -7,7 +7,7 @@ from cta.schema.hotel import HotelSchema
 
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
-def stay_api():
+def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         args.pop('page', None)

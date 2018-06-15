@@ -13,7 +13,8 @@ class Hotel(Base):
     city = db.Column(db.String, nullable=True)
     address = db.Column(db.String, nullable=True)
     rooms = db.relationship('Room', backref='hotel')
-    amenities = db.relationship('Amenity', backref='hotel')
+    amenities = db.relationship('Amenity', uselist=False, backref='hotel')
+    websites = db.relationship('WebsiteHotel', backref="hotel")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

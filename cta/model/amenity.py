@@ -16,7 +16,7 @@ class Amenity(Base):
     wifi_in_lobby = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
 
 
     def __init__(self, *args, **kwargs):
