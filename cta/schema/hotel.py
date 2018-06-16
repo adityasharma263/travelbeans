@@ -13,6 +13,7 @@ class AmenitySchema(ma.ModelSchema):
         model = Amenity
         exclude = ('updated_at', 'created_at')
 
+
 class ImageSchema(ma.ModelSchema):
     class Meta:
         model = Image
