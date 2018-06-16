@@ -8,10 +8,28 @@ angular.module('comparetravel', ['angular.filter'])
 
   var hotelData = [];
   $scope.hotels = [];
+  $scope.hotel = [];
+
+  // var jsonToQueryString = function(json) {
+  //   return '?' +
+  //     Object.keys(json).map(function(key) {
+  //       if(json[key]){
+  //         return encodeURIComponent(key) + '=' +
+  //           encodeURIComponent(json[key]);
+  //       } else {
+  //         return '';
+  //       }
+  //     }).join('&');
+  // }
+
+  $scope.getTransactions = function(hotel) {
+    
+   
+    console.log(hotel.city);
 
   $http({
     method: 'GET',
-    url: '/api/v1/hotel'
+    url: '/api/v1/hotel' 
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
       $scope.hotels = response.data.result.hotel;
@@ -22,4 +40,5 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+}
 }])

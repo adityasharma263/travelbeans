@@ -162,12 +162,12 @@
                     
                     <div class="search-tab-content">
                         <div class="tab-pane fade active in" id="hotels-tab">
-                            <form action="http://www.soaptheme.net/html/travelo/hotel-list-view.html" method="post">
+                            <form action="/hotel-list">
                                 <div class="row">
                                     <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Where</h4>
-                                        <label>Your Destination</label>
-                                        <input type="text" class="input-text full-width" placeholder="enter a destination or hotel name">
+                                        <label for="destination">Your Destination</label>
+                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name">
                                     </div>
                                     
                                     <div class="form-group col-sm-6 col-md-4">
@@ -192,9 +192,9 @@
                                         <h4 class="title">Who</h4>
                                         <div class="row">
                                             <div class="col-xs-4">
-                                                <label>Rooms</label>
+                                                <label for="room">Rooms</label>
                                                 <div class="selector">
-                                                    <select class="full-width">
+                                                    <select id="room" class="full-width" ng-model="hotel.rooms.room_type">
                                                         <option value="1">01</option>
                                                         <option value="2">02</option>
                                                         <option value="3">03</option>
@@ -229,7 +229,7 @@
                                     
                                     <div class="form-group col-sm-6 col-md-2 fixheight">
                                         <label class="hidden-xs">&nbsp;</label>
-                                        <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
+                                        <button type="submit" class="full-width icon-check animated bounce" ng-click="getTransactions(hotel)" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
                                     </div>
                                 </div>
                             </form>
