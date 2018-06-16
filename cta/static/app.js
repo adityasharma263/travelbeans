@@ -10,19 +10,25 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotels = [];
   $scope.hotel = [];
 
-  // var jsonToQueryString = function(json) {
-  //   return '?' +
-  //     Object.keys(json).map(function(key) {
-  //       if(json[key]){
-  //         return encodeURIComponent(key) + '=' +
-  //           encodeURIComponent(json[key]);
-  //       } else {
-  //         return '';
-  //       }
-  //     }).join('&');
-  // }
+  var jsonToQueryString = function(json) {
+    return '?' +
+      Object.keys(json).map(function(key) {
+        if(json[key]){
+          return encodeURIComponent(key) + '=' +
+            encodeURIComponent(json[key]);
+        } else {
+          return '';
+        }
+      }).join('&');
+  }
 
-  $scope.getTransactions = function(hotel) {
+  $scope.getHotel = function(hotel) {
+    if(hotel.from_date) {
+      hotel.from_date = Date.parse(hotel.from_date)/1000;
+    }
+    if(hotel.to_date) {
+      hotel.to_date = Date.parse(hotel.to_date)/1000;
+    }
     
    
     console.log(hotel.city);
