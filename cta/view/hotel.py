@@ -11,17 +11,17 @@ import datetime
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        from_date = request.args.get('from_date')
-        to_date = request.args.get('to_date')
-        if from_date and to_date:
-            from_date = datetime.datetime.fromtimestamp(
-                int(from_date)).strftime('%Y-%m-%d %H:%M:%S')
-            to_date = datetime.datetime.fromtimestamp(
-                int(to_date)).strftime('%Y-%m-%d %H:%M:%S')
-            args['check_in'] = from_date
-            args['check_out'] = to_date
-        args.pop('from_date', None)
-        args.pop('to date', None)
+        date_from = request.args.get('date_from')
+        date_to = request.args.get('date_to')
+        if date_from and date_to:
+            date_from = datetime.datetime.fromtimestamp(
+                int(date_from)).strftime('%Y-%m-%d %H:%M:%S')
+            date_to = datetime.datetime.fromtimestamp(
+                int(date_to)).strftime('%Y-%m-%d %H:%M:%S')
+            args['check_in'] = date_from
+            args['check_out'] = date_to
+        args.pop('date_from', None)
+        args.pop('date_to', None)
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
