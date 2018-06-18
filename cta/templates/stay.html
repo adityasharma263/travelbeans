@@ -167,10 +167,10 @@
                                     <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Where</h4>
                                         <label for="destination">Your Destination</label>
-                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name">
+                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="city" placeholder="enter a destination or hotel name">
                                     </div>
                                     
-                                    <div class="form-group col-sm-6 col-md-4">
+                                    <!-- <div class="form-group col-sm-6 col-md-4">
                                         <h4 class="title">When</h4>
                                         <div class="row">
                                             <div class="col-xs-6">
@@ -187,8 +187,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="form-group col-sm-6 col-md-3">
+                                     -->
+                                    <!-- <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Who</h4>
                                         <div class="row">
                                             <div class="col-xs-4">
@@ -225,11 +225,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     
                                     <div class="form-group col-sm-6 col-md-2 fixheight">
                                         <label class="hidden-xs">&nbsp;</label>
-                                        <button type="submit" class="full-width icon-check animated bounce" ng-click="getHotel(hotel)" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
+                                        <button type="submit" class="full-width icon-check animated bounce" ng-click="getHotel(city)" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
                                     </div>
                                 </div>
                             </form>
@@ -343,7 +343,7 @@
                                                 <p class="no-margin">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
                                             </div>
                                             <div class="col-xs-2">
-                                                <span class="price"><small>avg/night</small>$115</span>
+                                                <span class="price"><small>avg/night</small>₹115</span>
                                                 <br><br>
                                                 <a class="button green-bg pull-right" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html">SELECT</a>
                                             </div>
@@ -357,7 +357,7 @@
                                                 <p class="no-margin">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
                                             </div>
                                             <div class="col-xs-2">
-                                                <span class="price"><small>avg/night</small>$115</span>
+                                                <span class="price"><small>avg/night</small><i class="fa fa-inr" aria-hidden="true"></i>115</span>
                                                 <br><br>
                                                 <a class="button green-bg pull-right" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html">SELECT</a>
                                             </div>
@@ -399,7 +399,7 @@
                                                 <p class="no-margin">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
                                             </div>
                                             <div class="col-xs-2">
-                                                <span class="price"><small>avg/night</small>$115</span>
+                                                <span class="price"><small>avg/night</small><i class="fa fa-inr" aria-hidden="true">115</i></span>
                                                 <br><br>
                                                 <a class="button green-bg pull-right" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html">SELECT</a>
                                             </div>
@@ -413,7 +413,7 @@
                                                 <p class="no-margin">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
                                             </div>
                                             <div class="col-xs-2">
-                                                <span class="price"><small>avg/night</small>$115</span>
+                                                <span class="price"><small>avg/night</small>₹115</span>
                                                 <br><br>
                                                 <a class="button green-bg pull-right" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html">SELECT</a>
                                             </div>
@@ -449,14 +449,14 @@
                                     <div class="details">
                                         <span class="price">
                                             <small>avg/night</small>
-                                            $360
+                                            ₹360
                                         </span>
                                         <h4 class="box-title">[[hotel.name]]<small>Paris france</small></h4>
                                         <div class="feedback">
                                             <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
                                             <span class="review">270 reviews</span>
                                         </div>
-                                        <p class="description">Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massa idporta nequetiam.</p>
+                                        <p class="description">[[hotel.desc]]</p>
                                         <div class="action">
                                             <a class="button btn-small" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html">SELECT</a>
                                             <a class="button btn-small yellow popup-map" href="http://www.soaptheme.net/html/travelo/hotel-index.html#" data-box="48.856614, 2.352222">VIEW ON MAP</a>
