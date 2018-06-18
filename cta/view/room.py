@@ -11,21 +11,22 @@ import datetime
 def room_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        date_from = request.args.get('date_from')
-        date_to = request.args.get('date_to')
-        if date_from and date_to:
-            date_from = datetime.datetime.fromtimestamp(
-                int(date_from)).strftime('%Y-%m-%d %H:%M:%S')
-            date_to = datetime.datetime.fromtimestamp(
-                int(date_to)).strftime('%Y-%m-%d %H:%M:%S')
-            args['check_in'] = date_from
-            args['check_out'] = date_to
+        check_in = request.args.get('check_in')
+        check_out = request.args.get('check_out')
+        if check_in and check_out:
+            check_in = datetime.datetime.fromtimestamp(
+                int(check_in)).strftime('%Y-%m-%d %H:%M:%S')
+            check_out = datetime.datetime.fromtimestamp(
+                int(check_out)).strftime('%Y-%m-%d %H:%M:%S')
+            args['check_in'] = check_in
+            args['check_out'] = check_out
         args.pop('date_from', None)
         args.pop('date_to', None)
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
+        print(args)
         rooms = Room.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = RoomSchema(many=True).dump(rooms)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
