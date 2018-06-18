@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ac381923a139
+Revision ID: 51a644ea58cc
 Revises: 
-Create Date: 2018-06-15 15:16:20.383172
+Create Date: 2018-06-19 02:46:32.682333
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ac381923a139'
+revision = '51a644ea58cc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,11 +23,17 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('name', sa.String(), nullable=True),
-    sa.Column('images', sa.String(), nullable=True),
     sa.Column('star', sa.Integer(), nullable=True),
     sa.Column('rating', sa.Float(), nullable=True),
+    sa.Column('status', sa.Boolean(), nullable=True),
     sa.Column('city', sa.String(), nullable=True),
+    sa.Column('desc', sa.Text(), nullable=True),
     sa.Column('address', sa.String(), nullable=True),
+    sa.Column('room_type', sa.Integer(), nullable=True),
+    sa.Column('bed_type', sa.Integer(), nullable=True),
+    sa.Column('no_of_bed', sa.Integer(), nullable=True),
+    sa.Column('check_in', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('check_out', sa.DateTime(timezone=True), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_hotel_id'), 'hotel', ['id'], unique=False)
@@ -44,6 +50,20 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('conference_room', sa.Boolean(), nullable=True),
+    sa.Column('express_check_in_out', sa.Boolean(), nullable=True),
+    sa.Column('laundry_service', sa.Boolean(), nullable=True),
+    sa.Column('indoor_swimming_pool', sa.Boolean(), nullable=True),
+    sa.Column('outdoor_swimming_pool', sa.Boolean(), nullable=True),
+    sa.Column('porter_service', sa.Boolean(), nullable=True),
+    sa.Column('Room_cleaning_service', sa.Boolean(), nullable=True),
+    sa.Column('terrace', sa.Boolean(), nullable=True),
+    sa.Column('child_baby_cot', sa.Boolean(), nullable=True),
+    sa.Column('wheelchair_accessible', sa.Boolean(), nullable=True),
+    sa.Column('doorman', sa.Boolean(), nullable=True),
+    sa.Column('hairdresser', sa.Boolean(), nullable=True),
+    sa.Column('banquets', sa.Boolean(), nullable=True),
+    sa.Column('non_smoking_smoking_rooms', sa.Boolean(), nullable=True),
     sa.Column('pet_allowance', sa.Boolean(), nullable=True),
     sa.Column('lift', sa.Boolean(), nullable=True),
     sa.Column('bar', sa.Boolean(), nullable=True),
@@ -56,19 +76,64 @@ def upgrade():
     sa.Column('twenty_four_hr_room_service', sa.Boolean(), nullable=True),
     sa.Column('hotel_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['hotel_id'], ['hotel.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('hotel_id')
     )
     op.create_index(op.f('ix_amenity_id'), 'amenity', ['id'], unique=False)
-    op.create_table('room',
+    op.create_table('image',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('images', sa.String(), nullable=True),
-    sa.Column('room_type', sa.Integer(), nullable=True),
-    sa.Column('bed_type', sa.Integer(), nullable=True),
-    sa.Column('no_of_bed', sa.Integer(), nullable=True),
-    sa.Column('check_in', sa.DateTime(timezone=True), nullable=False),
-    sa.Column('check_out', sa.DateTime(timezone=True), nullable=False),
+    sa.Column('image_url', sa.String(), nullable=True),
+    sa.Column('hotel_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['hotel_id'], ['hotel.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_image_id'), 'image', ['id'], unique=False)
+    op.create_table('member',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('no_of_adults', sa.Integer(), nullable=True),
+    sa.Column('children', sa.Integer(), nullable=True),
+    sa.Column('total_members', sa.Integer(), nullable=True),
+    sa.Column('hotel_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['hotel_id'], ['hotel.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('hotel_id')
+    )
+    op.create_index(op.f('ix_member_id'), 'member', ['id'], unique=False)
+    op.create_table('price',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('price', sa.Integer(), nullable=True),
+    sa.Column('avg_price', sa.Integer(), nullable=True),
+    sa.Column('hotel_id', sa.Integer(), nullable=True),
+    sa.Column('website_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['hotel_id'], ['hotel.id'], ),
+    sa.ForeignKeyConstraint(['website_id'], ['website.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_price_id'), 'price', ['id'], unique=False)
+    op.create_table('room_facility',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('bathroom_with_shower', sa.Boolean(), nullable=True),
+    sa.Column('bathroom_nightie', sa.Boolean(), nullable=True),
+    sa.Column('wardrobes_closet', sa.Boolean(), nullable=True),
+    sa.Column('room_slipper', sa.Boolean(), nullable=True),
+    sa.Column('morning_newspaper', sa.Boolean(), nullable=True),
+    sa.Column('food_serve_at_room', sa.Boolean(), nullable=True),
+    sa.Column('ironing_facility', sa.Boolean(), nullable=True),
+    sa.Column('view', sa.Boolean(), nullable=True),
+    sa.Column('free_toiletries', sa.Boolean(), nullable=True),
+    sa.Column('bathroom_towels', sa.Boolean(), nullable=True),
+    sa.Column('bathroom_cosmetics', sa.Boolean(), nullable=True),
+    sa.Column('weighing_machine', sa.Boolean(), nullable=True),
+    sa.Column('room_seating_area', sa.Boolean(), nullable=True),
+    sa.Column('free_evening_snacks', sa.Boolean(), nullable=True),
     sa.Column('ac', sa.Boolean(), nullable=True),
     sa.Column('hairdryer', sa.Boolean(), nullable=True),
     sa.Column('wifi', sa.Boolean(), nullable=True),
@@ -81,53 +146,23 @@ def upgrade():
     sa.Column('electric_kettle', sa.Boolean(), nullable=True),
     sa.Column('hotel_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['hotel_id'], ['hotel.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('hotel_id')
     )
-    op.create_index(op.f('ix_room_id'), 'room', ['id'], unique=False)
-    op.create_table('member',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('no_of_adults', sa.Integer(), nullable=True),
-    sa.Column('no_of_children', sa.Integer(), nullable=True),
-    sa.Column('total_members', sa.Integer(), nullable=True),
-    sa.Column('room_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_member_id'), 'member', ['id'], unique=False)
-    op.create_table('price',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
-    sa.Column('price', sa.Integer(), nullable=True),
-    sa.Column('avg_price', sa.Integer(), nullable=True),
-    sa.Column('room_id', sa.Integer(), nullable=True),
-    sa.Column('website_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
-    sa.ForeignKeyConstraint(['website_id'], ['website.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_price_id'), 'price', ['id'], unique=False)
-    op.create_table('website_room',
-    sa.Column('website_id', sa.Integer(), nullable=False),
-    sa.Column('room_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
-    sa.ForeignKeyConstraint(['website_id'], ['website.id'], ),
-    sa.PrimaryKeyConstraint('website_id', 'room_id')
-    )
+    op.create_index(op.f('ix_room_facility_id'), 'room_facility', ['id'], unique=False)
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_table('website_room')
+    op.drop_index(op.f('ix_room_facility_id'), table_name='room_facility')
+    op.drop_table('room_facility')
     op.drop_index(op.f('ix_price_id'), table_name='price')
     op.drop_table('price')
     op.drop_index(op.f('ix_member_id'), table_name='member')
     op.drop_table('member')
-    op.drop_index(op.f('ix_room_id'), table_name='room')
-    op.drop_table('room')
+    op.drop_index(op.f('ix_image_id'), table_name='image')
+    op.drop_table('image')
     op.drop_index(op.f('ix_amenity_id'), table_name='amenity')
     op.drop_table('amenity')
     op.drop_index(op.f('ix_website_id'), table_name='website')
