@@ -53,8 +53,8 @@ angular.module('comparetravel', ['angular.filter'])
     url: '/api/v1/price' 
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
-      $scope.price = response.data.result;
-      console.log("$scope.hotels=====",$scope.hotels);
+      $scope.price = response.data.result.hotel;
+      console.log("$scope.price=====",$scope.price);
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -65,11 +65,11 @@ angular.module('comparetravel', ['angular.filter'])
   $http({
     method: 'GET',
     url: '/api/v1/room',
-
+    params: $scope.hotel
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
-      $scope.rooms = response.data.result;
-      console.log("$scope.hotels=====",$scope.hotels);
+      $scope.rooms = response.data.result.hotel;
+      console.log("$scope.rooms=====",$scope.rooms);
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -83,8 +83,8 @@ angular.module('comparetravel', ['angular.filter'])
     params: $scope.hotel 
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
-      $scope.rooms = response.data.result;
-      console.log("$scope.hotels=====",$scope.hotels);
+      $scope.members = response.data.result.hotel;
+      console.log("$scope.members=====",$scope.members);
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
