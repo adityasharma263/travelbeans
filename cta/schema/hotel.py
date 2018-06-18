@@ -2,29 +2,66 @@
 
 from cta.model.hotel import Hotel
 from cta.model.hotel import Image
-from cta.schema.room import RoomSchema
-from cta.schema.website import WebsiteSchema
+from cta.model.hotel import Facility
+from cta.model.hotel import Member
+from cta.schema.base import safe_execute
 from cta.model.hotel import Amenity
+from cta.model.hotel import Price
+from cta.model.hotel import Website
 from cta import ma
 
 
 class AmenitySchema(ma.ModelSchema):
     class Meta:
         model = Amenity
-        exclude = ('updated_at', 'created_at')
+        exclude = ('updated_at', 'created_at', 'hotel')
 
 
 class ImageSchema(ma.ModelSchema):
     class Meta:
         model = Image
+        exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class MemberSchema(ma.ModelSchema):
+    class Meta:
+        model = Member
+        exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class FacilitySchema(ma.ModelSchema):
+    class Meta:
+        model = Facility
+        exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class WebsiteSchema(ma.ModelSchema):
+
+    class Meta:
+        model = Website
+        exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class PriceSchema(ma.ModelSchema):
+    class Meta:
+        model = Price
         exclude = ('updated_at', 'created_at')
 
 
 class HotelSchema(ma.ModelSchema):
     amenities = ma.Nested(AmenitySchema, many=False)
     images = ma.Nested(ImageSchema, many=True)
-    rooms = ma.Nested(RoomSchema, many=True)
-    websites = ma.Nested(WebsiteSchema, many=True)
+    prices = ma.Nested(PriceSchema, many=True)
+    member = ma.Nested(MemberSchema, many=False)
+    facilities = ma.Nested(FacilitySchema, many=False)
+    check_in = ma.Method('check_in_epoch')
+    check_out = ma.Method('check_out_epoch')
+
+    def check_in_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.check_in)
+
+    def check_out_epoch(self, obj):
+        return safe_execute(None, ValueError, obj.check_out)
 
     class Meta:
         model = Hotel
