@@ -37,6 +37,11 @@ def home():
     
     return render_template('index.html')
 
+@app.route('/admin', methods=['GET'])
+def admin():
+    
+    return render_template('admin.html')    
+
 @app.route('/hotel-list/<string:name>', methods=['GET'])
 def stay_id(name):
     hotel = Hotel.query.filter_by(name=name).first()

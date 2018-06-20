@@ -1,19 +1,19 @@
 angular.module('comparetravel', ['angular.filter'])
-.config(['$interpolateProvider', '$locationProvider', function($interpolateProvider ,$locationProvider) {
+.config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
-  $locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 }])
 
 
 
-.controller('stayController',["$scope", "$http", "$location", function($scope, $http, $location, $filter) {
+.controller('stayController',["$scope", "$http", function($scope, $http, $filter) {
 
 
   
 
 
-  var hotelData = [];
+  $scope.hotelData = [];
   $scope.hotels = [];
   $scope.hotel = [];
   $scope.rooms = [];
@@ -29,11 +29,14 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("$scope.hotel.city",$scope.hotel.city)
     $http({
       method: 'GET',
-      url: '/api/v1/hotel?city=' + $scope.hotel.city
+      url: '/api/v1/hotel',
+      params: {
+        city: $scope.hotel.city
+      }
     }).then(function successCallback(response) {
         // hotelData = response.data.result;
-        $scope.hotels = response.data.result.hotel;
-        console.log("$scope.hotel.city",$scope.hotels);
+        $scope.hotelData = response.data.result.hotel;
+        console.log("$scope.hotel.city",$scope.hotelData);
         // this.router.navigate(['/hotel-list'], { queryParams: { city: $scope.hotel.city} });
         // this callback will be called asynchronously
         // when the response is available
@@ -81,3 +84,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 //  }
 }])
+
+.controller('stayController',["$scope", "$http", function($scope, $http, $filter) {
+
+}])  

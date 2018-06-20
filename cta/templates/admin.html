@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Trip Key</title>
+   </head>
+	
+   <body>
+    <form>
+        <div>
+          <label for="name">Hotel name: 
+            <input id="name" ng-model="hotel.name" type="text" required>
+          </label>      
+        </div>
+        <div>
+          <label for="city">City: 
+            <input id="city" ng-model="hotel.city" type="text" required>
+          </label>  
+        </div>
+        <div>
+            <label for="address">Address: 
+                <input id="address" ng-model="hotel.address" type="text" required>
+            </label>
+        </div>
+        <div>
+            <label for="rating">Rating:
+                <div class="radio">
+                  <label>
+                    <input id="optionsRadios1" type="radio" name="optionsRadios" value="1" ng-model="hotel.rating"/>1
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input id="optionsRadios2" type="radio" name="optionsRadios" value="2" ng-model="hotel.rating"/>2
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input id="optionsRadios3" type="radio" name="optionsRadios" value="3" ng-model="hotel.rating"/>3
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input id="optionsRadios4" type="radio" name="optionsRadios" value="4" ng-model="hotel.rating"/>4
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input id="optionsRadios5" type="radio" name="optionsRadios" value="4" ng-model="hotel.rating"/>5
+                  </label>
+                </div>
+            </label>
+        </div>
+        <div>
+            <label for="star">Star:
+                <div class="radio">
+                    <label>
+                      <input id="optionsRadios1" type="radio" name="optionsRadios" value="1" ng-model="hotel.star"/>1
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="optionsRadios2" type="radio" name="optionsRadios" value="2" ng-model="hotel.star"/>2
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="optionsRadios3" type="radio" name="optionsRadios" value="3" ng-model="hotel.star"/>3
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="optionsRadios4" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>4
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="optionsRadios5" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>5
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="optionsRadios6" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>6
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input id="optionsRadios7" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>7
+                    </label>
+                </div>
+            </label>
+        </div>
+        
+        <label for="">Is_Staff:
+                <input type="checkbox" value="" ng-model="user.is_staff"/>
+              </label>
+      </form>
+   </body>
+	
+</html>
