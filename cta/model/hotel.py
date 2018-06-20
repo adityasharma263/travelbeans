@@ -99,6 +99,7 @@ class Facility(Base):
 
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
+    balcony = db.Column(db.Boolean, default=False, nullable=True)
     wardrobes_closet = db.Column(db.Boolean, default=False, nullable=True)
     room_slipper = db.Column(db.Boolean, default=False, nullable=True)
     morning_newspaper = db.Column(db.Boolean, default=False, nullable=True)
@@ -150,6 +151,7 @@ class Price(Base):
     avg_price = db.Column(db.Integer, nullable=True)
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
+    website = db.relationship('Website', foreign_keys=website_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
