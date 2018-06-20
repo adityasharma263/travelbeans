@@ -6,6 +6,7 @@ from cta.model.base import Base
 class Hotel(Base):
     __tablename__ = 'hotel'
 
+    member = db.relationship('Member', uselist=False, backref='hotel')
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.Float, nullable=True)
@@ -13,12 +14,11 @@ class Hotel(Base):
     city = db.Column(db.String, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     address = db.Column(db.String, nullable=True)
-    room_type = db.Column(db.Integer, nullable=True)
+    room_type = db.Column(db.Integer, nullable=False)
     bed_type = db.Column(db.Integer, nullable=True)
     no_of_bed = db.Column(db.Integer, nullable=True)
     check_in = db.Column(db.DateTime(timezone=True), nullable=False)
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
-    member = db.relationship('Member', uselist=False, backref='hotel')
     room_facilities = db.relationship('Facility', uselist=False, backref='hotel')
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
     images = db.relationship('Image', backref='hotel')
@@ -150,6 +150,7 @@ class Price(Base):
     avg_price = db.Column(db.Integer, nullable=True)
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
+    website = db.relationship('Website', foreign_keys=website_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

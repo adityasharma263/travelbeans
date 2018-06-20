@@ -43,6 +43,7 @@ class WebsiteSchema(ma.ModelSchema):
 
 
 class PriceSchema(ma.ModelSchema):
+    website = ma.Nested(WebsiteSchema, many=False)
     class Meta:
         model = Price
         exclude = ('updated_at', 'created_at')
