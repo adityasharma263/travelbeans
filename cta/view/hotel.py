@@ -28,10 +28,11 @@ def hotel_api():
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Hotel(**request.json)
-        post.save()
-        result = HotelSchema().dump(post)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        print(request.json)
+        # post = Hotel(**request.json)
+        # post.save()
+        # result = HotelSchema().dump(post)
+        return jsonify({'result': {'hotel': request.json}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/amenity', methods=['GET', 'POST'])
@@ -62,12 +63,12 @@ def image_api():
         per_page = int(request.args.get('per_page', 10))
         data = Image.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = ImageSchema(many=True).dump(data)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'images': result.data}, 'message': "Success", 'error': False})
     else:
         post = Image(**request.json)
         post.save()
         result = ImageSchema().dump(post)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'image': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/member', methods=['GET', 'POST'])
@@ -80,12 +81,12 @@ def member_api():
         per_page = int(request.args.get('per_page', 10))
         members = Member.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = MemberSchema(many=True).dump(members)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'members': result.data}, 'message': "Success", 'error': False})
     else:
         post = Member(**request.json)
         post.save()
         result = MemberSchema().dump(post)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'member': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/facility', methods=['GET', 'POST'])
@@ -98,12 +99,12 @@ def facility_api():
         per_page = int(request.args.get('per_page', 10))
         data = Facility.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = FacilitySchema(many=True).dump(data)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'facilities': result.data}, 'message': "Success", 'error': False})
     else:
         post = Facility(**request.json)
         post.save()
         result = FacilitySchema().dump(post)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'facilities': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/website', methods=['GET', 'POST'])
@@ -139,4 +140,4 @@ def price_api():
         post = Price(**request.json)
         post.save()
         result = PriceSchema().dump(post)
-        return jsonify({'result': {'price': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'price': result.data}, 'message': 'Success', 'error': False})

@@ -99,6 +99,7 @@ class Facility(Base):
 
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
+    balcony = db.Column(db.Boolean, default=False, nullable=True)
     wardrobes_closet = db.Column(db.Boolean, default=False, nullable=True)
     room_slipper = db.Column(db.Boolean, default=False, nullable=True)
     morning_newspaper = db.Column(db.Boolean, default=False, nullable=True)
