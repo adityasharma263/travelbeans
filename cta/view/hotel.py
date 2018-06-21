@@ -28,7 +28,9 @@ def hotel_api():
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
-        print(request.json)
+        data = request.json
+        for hotel in data['hotel']:
+            address = hotel.get("address", None)
         # post = Hotel(**request.json)
         # post.save()
         # result = HotelSchema().dump(post)
