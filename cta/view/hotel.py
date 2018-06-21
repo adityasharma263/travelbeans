@@ -38,8 +38,8 @@ def hotel_api():
             address = hotel.get("address", None)
             star = hotel.get("star", None)
             status = hotel.get("status", None)
-            bed_type = hotel.get("bed_type", None)
-            no_of_bed = bed_type = hotel.get("bed_type", None)
+            for price in data['hotel']['price']:
+                price = price.get("price", None)
 
 
 
