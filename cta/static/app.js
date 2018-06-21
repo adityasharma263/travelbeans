@@ -85,6 +85,28 @@ angular.module('comparetravel', ['angular.filter'])
 //  }
 }])
 
-.controller('stayController',["$scope", "$http", function($scope, $http, $filter) {
+.controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
 
+  $scope.hotel = [];
+
+  var sendPostCall = function(url, data) {
+    console.log(data);
+    
+    $http({
+      method: 'POST',
+      url: url,
+      data: data
+    }).then(function (res) {
+        console.log(res);
+      },
+      // failed callback
+      function (req) {
+        alert("Something went wrong!!");
+      })
+  }
+
+  $scope.createHotel = function(e) {
+    e.preventDefault()
+    sendPostCall('/api/v1/hotel', $scope.hotel)
+  }
 }])  
