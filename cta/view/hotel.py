@@ -30,7 +30,21 @@ def hotel_api():
     else:
         data = request.json
         for hotel in data['hotel']:
+            name = hotel.get("name", None)
+            city = hotel.get("city", None)
+            rating = hotel.get("rating", None)
+            desc = hotel.get("desc", None)
+            room_type = hotel.get("room_type", None)
             address = hotel.get("address", None)
+            star = hotel.get("star", None)
+            status = hotel.get("status", None)
+            for price in data['hotel']['price']:
+                price = price.get("price", None)
+
+
+
+
+
         # post = Hotel(**request.json)
         # post.save()
         # result = HotelSchema().dump(post)
