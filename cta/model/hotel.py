@@ -14,8 +14,6 @@ class Hotel(Base):
     desc = db.Column(db.Text, nullable=True)
     address = db.Column(db.String, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
-    bed_type = db.Column(db.Integer, nullable=True)
-    no_of_bed = db.Column(db.Integer, nullable=True)
     check_in = db.Column(db.DateTime(timezone=True), nullable=False)
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
     member = db.relationship('Member', uselist=False, backref='hotel')
@@ -97,6 +95,8 @@ class Member(Base):
 class Facility(Base):
     __tablename__ = 'facility'
 
+    bed_type = db.Column(db.Integer, nullable=True)
+    no_of_bed = db.Column(db.Integer, nullable=True)
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
     balcony = db.Column(db.Boolean, default=False, nullable=True)
