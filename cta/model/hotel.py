@@ -20,7 +20,7 @@ class Hotel(Base):
     facilities = db.relationship('Facility', uselist=False, backref='hotel')
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
     images = db.relationship('Image', backref='hotel')
-    prices = db.relationship('Price', backref='hotel')
+    deals = db.relationship('Deal', backref='hotel')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -138,6 +138,7 @@ class Website(Base):
     website = db.Column(db.String)
     logo_image = db.Column(db.String, nullable=True)
 
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -145,10 +146,11 @@ class Website(Base):
         return '<website %r>' % self.website
 
 
-class Price(Base):
-    __tablename__ = 'price'
+class Deal(Base):
+    __tablename__ = 'deal'
 
     price = db.Column(db.Integer, nullable=True)
+    hotel_url = db.Column(db.String)
     weekend = db.Column(db.Boolean, default=False,nullable=False)
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)

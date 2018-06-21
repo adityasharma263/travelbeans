@@ -6,7 +6,7 @@ from cta.model.hotel import Facility
 from cta.model.hotel import Member
 from cta.schema.base import safe_execute
 from cta.model.hotel import Amenity
-from cta.model.hotel import Price
+from cta.model.hotel import Deal
 from cta.model.hotel import Website
 from cta import ma
 
@@ -42,18 +42,18 @@ class WebsiteSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
-class PriceSchema(ma.ModelSchema):
+class DealSchema(ma.ModelSchema):
     website = ma.Nested(WebsiteSchema, many=False)
 
     class Meta:
-        model = Price
+        model = Deal
         exclude = ('updated_at', 'created_at')
 
 
 class HotelSchema(ma.ModelSchema):
     amenities = ma.Nested(AmenitySchema, many=False)
     images = ma.Nested(ImageSchema, many=True)
-    prices = ma.Nested(PriceSchema, many=True)
+    deals = ma.Nested(DealSchema, many=True)
     member = ma.Nested(MemberSchema, many=False)
     facilities = ma.Nested(FacilitySchema, many=False)
     check_in = ma.Method('check_in_epoch')
