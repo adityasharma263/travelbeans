@@ -19,7 +19,7 @@ class Hotel(Base):
     check_in = db.Column(db.DateTime(timezone=True), nullable=False)
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
     member = db.relationship('Member', uselist=False, backref='hotel')
-    room_facilities = db.relationship('Facility', uselist=False, backref='hotel')
+    facilities = db.relationship('Facility', uselist=False, backref='hotel')
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
     images = db.relationship('Image', backref='hotel')
     prices = db.relationship('Price', backref='hotel')
@@ -95,7 +95,7 @@ class Member(Base):
 
 
 class Facility(Base):
-    __tablename__ = 'room_facility'
+    __tablename__ = 'facility'
 
     bathroom_with_shower = db.Column(db.Boolean, default=False, nullable=True)
     bathroom_nightie = db.Column(db.Boolean, default=False, nullable=True)
@@ -148,7 +148,7 @@ class Price(Base):
     __tablename__ = 'price'
 
     price = db.Column(db.Integer, nullable=True)
-    avg_price = db.Column(db.Integer, nullable=True)
+    weekend = db.Column(db.Boolean, default=False,nullable=False)
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
     website = db.relationship('Website', foreign_keys=website_id)
