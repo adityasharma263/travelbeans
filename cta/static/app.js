@@ -97,7 +97,7 @@ angular.module('comparetravel', ['angular.filter'])
       url: url,
       data: data
     }).then(function (res) {
-        console.log(res);
+        console.log("res",res);
       },
       // failed callback
       function (req) {
@@ -107,6 +107,7 @@ angular.module('comparetravel', ['angular.filter'])
 
   $scope.createHotel = function(e) {
     e.preventDefault()
+    console.log("$scope.hotel",$scope.hotel);
     sendPostCall('/api/v1/hotel', $scope.hotel)
   }
 }])  
