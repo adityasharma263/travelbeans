@@ -125,4 +125,11 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.removeInput = function (index) {
       $scope.hotel.images.splice(index, 1);
   }
+
+  $scope.openRoom = function () {
+    
+    $(".js-pop-room").css("top", "50%");
+    
+  };
+
 }])  
