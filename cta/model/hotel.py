@@ -6,7 +6,6 @@ from cta.model.base import Base
 class Hotel(Base):
     __tablename__ = 'hotel'
 
-    member = db.relationship('Member', uselist=False, backref='hotel')
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.Float, nullable=True)

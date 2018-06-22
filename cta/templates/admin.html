@@ -3,17 +3,63 @@
 
    <head>
       <title>Trip Key</title>
+      <style>
+          * {
+            box-sizing: border-box;
+            }
+
+            body {
+            background-color: #01b7f2;
+            }
+
+            #hotelForm {
+            background-color: #ffffff;
+            margin: 100px auto;
+            padding: 40px;
+            width: 70%;
+            min-width: 300px;
+            }
+
+            h1 {
+            text-align: center;  
+            }
+
+            button {
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 17px;
+            cursor: pointer;
+            }
+
+            button:hover {
+            opacity: 0.8;
+            }
+
+          input[type=text], select, textarea{
+           
+                height: 30px;
+                padding-left: 15px;
+                padding-right: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: vertical;
+        }
+      </style>    
       <link rel="stylesheet" href="../static/css/admin.css">
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+      
    </head>
 	
-   <body ng-app="comparetravel" style="background: #0099ff">
+   <body ng-app="comparetravel">
     <div ng-controller="adminController">    
-    <form action="#" method="POST">
+    <form id="hotelForm" action="#" method="POST">
+        <h1>Hotel Details</h1>
         <div>
-          <label for="name">Hotel name: 
-            <input class="input-text" id="name" ng-model="hotel.name" type="text" required>
+          <label for="name">Name: 
+            <input id="name" ng-model="hotel.name" type="text" required/>
           </label>      
         </div>
         <div>
@@ -28,39 +74,45 @@
         </div>
         <div>
             <label for="desc">Description: 
-                <input id="desc" ng-model="hotel.desc" type="text" required>
+                <input id="desc" ng-model="hotel.desc" type="textarea" required>
             </label>      
         </div>
         <div>
             <label for="images">Images: 
-                <input id="images" ng-model="hotel.images" type="url" required>
+                <input id="images" ng-model="hotel.images[0].image_url" type="url" required>
             </label>  
+            <!-- <button class="button button-small button-balanced" ng-if="$index == hotel.images.length - 1" ng-click="addInput()">
+                <i class="icon ion-plus"></i>
+            </button>
+                <button class="button button-small button-assertive" ng-if="$index != hotel.images.length - 1" ng-click="removeInput($index)">
+                <i class="icon ion-minus"></i>
+            </button> -->
         </div>
         <div>
             <label for="rating">Rating:
                 <div class="radio">
                   <label>
-                    <input id="optionsRadios1" type="radio" name="optionsRadios" value="1" ng-model="hotel.rating"/>1
+                    <input id="rating1" type="radio" name="rating" value="1" ng-model="hotel.rating"/>1
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input id="optionsRadios2" type="radio" name="optionsRadios" value="2" ng-model="hotel.rating"/>2
+                    <input id="rating2" type="radio" name="rating" value="2" ng-model="hotel.rating"/>2
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input id="optionsRadios3" type="radio" name="optionsRadios" value="3" ng-model="hotel.rating"/>3
+                    <input id="rating3" type="radio" name="rating" value="3" ng-model="hotel.rating"/>3
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input id="optionsRadios4" type="radio" name="optionsRadios" value="4" ng-model="hotel.rating"/>4
+                    <input id="rating4" type="radio" name="rating" value="4" ng-model="hotel.rating"/>4
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input id="optionsRadios5" type="radio" name="optionsRadios" value="4" ng-model="hotel.rating"/>5
+                    <input id="rating5" type="radio" name="rating" value="5" ng-model="hotel.rating"/>5
                   </label>
                 </div>
             </label>
@@ -69,44 +121,45 @@
             <label for="star">Star:
                 <div class="radio">
                     <label>
-                      <input id="optionsRadios1" type="radio" name="optionsRadios" value="1" ng-model="hotel.star"/>1
+                      <input id="star1" type="radio" name="star" value="1" ng-model="hotel.star"/>1
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input id="optionsRadios2" type="radio" name="optionsRadios" value="2" ng-model="hotel.star"/>2
+                        <input id="star2" type="radio" name="star" value="2" ng-model="hotel.star"/>2
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input id="optionsRadios3" type="radio" name="optionsRadios" value="3" ng-model="hotel.star"/>3
+                        <input id="star3" type="radio" name="star" value="3" ng-model="hotel.star"/>3
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input id="optionsRadios4" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>4
+                        <input id="star4" type="radio" name="star" value="4" ng-model="hotel.star"/>4
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input id="optionsRadios5" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>5
+                        <input id="star5" type="radio" name="star" value="5" ng-model="hotel.star"/>5
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input id="optionsRadios6" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>6
+                        <input id="star6" type="radio" name="star" value="6" ng-model="hotel.star"/>6
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <input id="optionsRadios7" type="radio" name="optionsRadios" value="4" ng-model="hotel.star"/>7
+                        <input id="star7" type="radio" name="star" value="7" ng-model="hotel.star"/>7
                     </label>
                 </div>
             </label>
         </div>
+        <h3>Hotel Amenities</h3>
         <div>
-            <label for="Room_cleaning_service">Room_cleaning_service
-                <input type="checkbox" value="" ng-model="hotel.amenities.Room_cleaning_service"/>
+            <label for="Room_cleaning_service">
+                <input type="checkbox" value="" ng-model="hotel.amenities.Room_cleaning_service"/>Room Cleaning Service
             </label>
         </div>
         <div>
@@ -228,22 +281,22 @@
             <label for="room_type">room_type:
                 <div class="radio">
                     <label>
-                    <input id="optionsRadios1" type="radio" name="optionsRadios" value="1" ng-model="hotel.room_type"/>Premium
+                    <input id="room_type1" type="radio" name="room_type" value="1" ng-model="hotel.room_type"/>Premium
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                    <input id="optionsRadios2" type="radio" name="optionsRadios" value="2" ng-model="hotel.room_type"/>Executive
+                    <input id="room_type2" type="radio" name="room_type" value="2" ng-model="hotel.room_type"/>Executive
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                    <input id="optionsRadios3" type="radio" name="optionsRadios" value="3" ng-model="hotel.room_type"/>Sweet
+                    <input id="room_type3" type="radio" name="room_type" value="3" ng-model="hotel.room_type"/>Sweet
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                    <input id="optionsRadios4" type="radio" name="optionsRadios" value="4" ng-model="hotel.room_type"/>Super Deluxe
+                    <input id="room_type4" type="radio" name="room_type" value="4" ng-model="hotel.room_type"/>Super Deluxe
                     </label>
                 </div>
             </label>
@@ -258,22 +311,22 @@
                     <label for="bed_type">Bed Type:
                         <div class="radio">
                             <label>
-                            <input id="optionsRadios1" type="radio" name="optionsRadios" value="1" ng-model="hotel.facilities.bed_type"/>Single
+                            <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="hotel.facilities.bed_type"/>Single
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="optionsRadios2" type="radio" name="optionsRadios" value="2" ng-model="hotel.facilities.bed_type"/>Double
+                            <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="hotel.facilities.bed_type"/>Double
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="optionsRadios3" type="radio" name="optionsRadios" value="3" ng-model="hotel.facilities.bed_type"/>Queen
+                            <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="hotel.facilities.bed_type"/>Queen
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="optionsRadios4" type="radio" name="optionsRadios" value="4" ng-model="hotel.facilities.bed_type"/>King
+                            <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="hotel.facilities.bed_type"/>King
                             </label>
                         </div>
                     </label>
@@ -290,7 +343,7 @@
                   </div>
                   <div class="col-sm-3">
                     <label for="children">children:
-                        <input id="children" type="text" ng-model="hotel.member.children"/>
+                        <input id="children" type="number" ng-model="hotel.member.children"/>
                     </label>
                   </div>
                   <div class="col-sm-3">
@@ -300,9 +353,10 @@
                   </div>
                   <div class="col-sm-3">
                     <label for="total_members">total_members :
-                        <input id="status" type="text" ng-model="hotel.member.total_members"/>
+                        <input id="status" type="number" ng-model="hotel.member.total_members"/>
                     </label>
                   </div>
+                  <h3>Hotel Facilities</h3>
                   <div>
                     <label for="ac">AC
                         <input type="checkbox" value="" ng-model="hotel.facilties.ac"/>
@@ -435,17 +489,17 @@
                   </div>
                   <div>
                     <label for="wname">website name: 
-                      <input class="input-text" id="wname" ng-model="hotel.prices.website.website" type="text" required>
+                      <input class="input-text" id="wname" ng-model="hotel.deals.website.website" type="text" required>
                     </label>      
                   </div>
                   <div class="col-sm-3">
                     <label for="price">price:
-                      <input id="price" type="number" ng-model="hotel.prices.price"/>
+                      <input id="price" type="number" ng-model="hotel.deals.price"/>
                     </label>
                   </div>
                   <div class="col-sm-3">
                     <label for="weekend">weekend :
-                        <input id="weekend" type="checkbox" value="" ng-model="hotel.prices.weekend"/>
+                        <input id="weekend" type="checkbox" value="" ng-model="hotel.deals.weekend"/>
                     </label>
                   </div>
                   <input type="submit" ng-click="createHotel($event)" class="btn btn-outline-primary btn-lg"/>

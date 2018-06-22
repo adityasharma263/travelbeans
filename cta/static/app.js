@@ -110,4 +110,19 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("$scope.hotel",$scope.hotel);
     sendPostCall('/api/v1/hotel', $scope.hotel)
   }
+
+  // $scope.hotel.images = [{
+  //   value: null
+  // }];
+
+  $scope.addInput = function () {
+      console.log("new input");
+      $scope.hotel.images.push({
+          value: null
+      });
+  }
+
+  $scope.removeInput = function (index) {
+      $scope.hotel.images.splice(index, 1);
+  }
 }])  
