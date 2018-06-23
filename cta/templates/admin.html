@@ -91,9 +91,9 @@
 
 <body ng-app="comparetravel">
     <div ng-controller="adminController">    
+        <div id="snackbar"></div>
         <form id="regForm" ng-submit="createHotel()">
             <!-- One "tab" for each step in the form: -->
-                   
             <div class="tab">
                 <h1>Hotel Details</h1>
                 <label for="name">Hotel Name: 
@@ -382,7 +382,7 @@
                     <br>
                     <div></div>
                     <label for="ac">AC
-                        <input type="checkbox" value="" ng-model="hotel.facilties.ac"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.ac"/>
                     </label>
                     <br>
                     <label for="balcony">Balcony
@@ -390,19 +390,19 @@
                     </label>
                     <br>
                     <label for="bathroom_cosmetics">Bathroom Cosmetics
-                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_cosmetics"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_cosmetics"/>
                     </label>
                     <br>
                     <label for="bathroom_nightie">Bathroom Nightie
-                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_nightie"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_nightie"/>
                     </label>
                   , <br>
                     <label for="bathroom_towels">Bathroom Towels
-                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_towels"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_towels"/>
                     </label>
                     <br>
                     <label for="bathroom_with_shower">Bathroom with Shower
-                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_with_shower"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_with_shower"/>
                     </label>
                     <br>
                     <label for="breakfast">Breakfast
@@ -410,79 +410,79 @@
                     </label>
                     <br>
                     <label for="desk">Desk
-                        <input type="checkbox" value="" ng-model="hotel.facilties.desk"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.desk"/>
                     </label>
                     <br>
                     <label for="electric_kettle">Electric Kettle
-                        <input type="checkbox" value="" ng-model="hotel.facilties.electric_kettle"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.electric_kettle"/>
                     </label>
                     <br>
                     <label for="fan">Fan
-                        <input type="checkbox" value="" ng-model="hotel.facilties.fan"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.fan"/>
                     </label>
                     <br>
                     <label for="food_serve_at_room">Food serve at room
-                        <input type="checkbox" value="" ng-model="hotel.facilties.food_serve_at_room"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.food_serve_at_room"/>
                     </label>
                     <br>
                     <label for="free_evening_snacks">Free Evening Snacks
-                        <input type="checkbox" value="" ng-model="hotel.facilties.free_evening_snacks"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.free_evening_snacks"/>
                     </label>
                     <br>
                     <label for="free_toiletries">Free Toiletries
-                        <input type="checkbox" value="" ng-model="hotel.facilties.free_toiletries"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.free_toiletries"/>
                     </label>
                     <br>
                     <label for="hairdryer">Hairdryer
-                        <input type="checkbox" value="" ng-model="hotel.facilties.hairdryer"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.hairdryer"/>
                     </label>
                     <br>
                     <label for="heater">Heater
-                        <input type="checkbox" value="" ng-model="hotel.facilties.heater"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.heater"/>
                     </label>
                     <br>
                     <label for="ironing_facility">Ironing Facility
-                        <input type="checkbox" value="" ng-model="hotel.facilties.ironing_facility"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.ironing_facility"/>
                     </label>
                     <br>
                     <label for="morning_newspaper">Morning Newspaper
-                        <input type="checkbox" value="" ng-model="hotel.facilties.morning_newspaper"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.morning_newspaper"/>
                     </label>
                     <br>
                     <label for="phone">Phone
-                        <input type="checkbox" value="" ng-model="hotel.facilties.phone"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.phone"/>
                     </label>
                     <br>
                     <label for="room_safe">Room Safe
-                        <input type="checkbox" value="" ng-model="hotel.facilties.room_safe"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.room_safe"/>
                     </label>
                     <br>
                     <label for="room_seating_area">Room Seating Area
-                        <input type="checkbox" value="" ng-model="hotel.facilties.room_seating_area"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.room_seating_area"/>
                     </label>
                     <br>
                     <label for="room_slipper">Room Slipper
-                        <input type="checkbox" value="" ng-model="hotel.facilties.room_slipper"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.room_slipper"/>
                     </label>
                     <br>
                     <label for="tv">TV
-                        <input type="checkbox" value="" ng-model="hotel.facilties.tv"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.tv"/>
                     </label>
                     <br>
                     <label for="view">View
-                        <input type="checkbox" value="" ng-model="hotel.facilties.view"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.view"/>
                     </label>
                     <br>
                     <label for="wardrobes_closet">Wardrobes Closet
-                        <input type="checkbox" value="" ng-model="hotel.facilties.wardrobes_closet"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.wardrobes_closet"/>
                     </label>
                     <br>
                     <label for="weighing_machine">Weighing Machine
-                        <input type="checkbox" value="" ng-model="hotel.facilties.weighing_machine"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.weighing_machine"/>
                     </label>
                     <br>
                     <label for="wifi">Wifi
-                        <input type="checkbox" value="" ng-model="hotel.facilties.wifi"/>
+                        <input type="checkbox" value="" ng-model="hotel.facilities.wifi"/>
                     </label>
                     <br>
                     <h3>Deals</h3>
