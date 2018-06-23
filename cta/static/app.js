@@ -87,8 +87,9 @@ angular.module('comparetravel', ['angular.filter'])
 
 .controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
 
-  $scope.hotel = [];
-  $scope.hotelImg=[]; //for all images in the hotel
+  $scope.hotel = {};
+  $scope.hotelImg = []; //for all images in the hotel
+  $scope.ImagesUrl=[];//for one image
 
   var sendPostCall = function(url, data) {
     console.log(data);
@@ -106,12 +107,19 @@ angular.module('comparetravel', ['angular.filter'])
       })
   }
 
-  $scope.createHotel = function(e) {
-    e.preventDefault()
+  $scope.createHotel = function() {
+    // e.preventDefault()
+    if($scope.hotelImg.length){
+
+      $scope.hotel.images=$scope.hotelImg;
+    }
+    else{
+      $scope.hotel.images=$scope.ImagesUrl;
+    }
 
     console.log("$scope.hotel",$scope.hotel);
-    $scope.hotel.push($scope.hotelImg);
-    sendPostCall('/api/v1/hotel', $scope.hotel)
+
+    // sendPostCall('/api/v1/hotel', $scope.hotel)
   }
 
   // $scope.hotel.images = [{
@@ -135,14 +143,14 @@ angular.module('comparetravel', ['angular.filter'])
     
   };
 
-  $scope.addImg=function(ImagesUrl){
-    console.log(ImagesUrl);
-    $scope.hotelimg.push(ImagesUrl);
+  $scope.addImg=function(){
+    console.log("before push",$scope.ImagesUrl);
+    $scope.hotelImg.push($scope.ImagesUrl);
     $scope.ImagesUrl="";
-    console.log(ImagesUrl);
+    console.log("after push",$scope.hotelImg);
 
   }
-
+  
 
 
 
