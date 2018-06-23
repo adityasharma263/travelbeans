@@ -310,7 +310,8 @@
             </div>
             <div class="tab">
                 <h1>Room Details</h1>
-                    <label for="room_type">Room Type:
+                    <label for="room_type">
+                        <h4>Room Type</h4>
                         <div class="radio">
                             <label>
                             <input id="room_type1" type="radio" name="room_type" value="1" ng-model="hotel.room_type"/>Premium
@@ -333,33 +334,8 @@
                         </div>
                     </label>
                     <br>
-                    <label for="bed_type">Bed Type:
-                        <div class="radio">
-                            <label>
-                            <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="hotel.facilities.bed_type"/>Single
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                            <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="hotel.facilities.bed_type"/>Double
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                            <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="hotel.facilities.bed_type"/>Queen
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                            <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="hotel.facilities.bed_type"/>King
-                            </label>
-                        </div>
-                    </label>
-                    <br>
-                    <label for="no_of_bed">No. of Bed:
-                        <input id="no_of_bed" type="number" ng-model="hotel.facilities.no_of_bed"/>
-                    </label>
-                    <br>
+                   
+                    
                     <label for="children">children:
                         <input id="children" type="number" ng-model="hotel.member.children"/>
                     </label>
@@ -371,15 +347,44 @@
                     <label for="total_members">total_members :
                         <input id="status" type="number" ng-model="hotel.member.total_members"/>
                     </label>
-            </div>
-            <div class="tab">
+           
                 <h1>Room Facilities</h1>
+                    
+                    <label for="bed_type">
+                        <h4>Bed Type</h4>
+                        <div class="radio">
+                            <label>
+                                <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="facilities.bed_type"/>Single
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="facilities.bed_type"/>Double
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="facilities.bed_type"/>Queen
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="facilities.bed_type"/>King
+                            </label>
+                        </div>
+                    </label>
+                    <br>
+                    <label for="no_of_bed">No. of Bed:
+                        <input id="no_of_bed" type="number" ng-model="hotel.facilities.no_of_bed"/>
+                    </label>
+                    <br>
+                    <div></div>
                     <label for="ac">AC
                         <input type="checkbox" value="" ng-model="hotel.facilties.ac"/>
                     </label>
                     <br>
                     <label for="balcony">Balcony
-                        <input type="checkbox" value="" ng-model="hotel.facilties.balcony"/>
+                        <input type="checkbox" value="" ng-model="hotel.balcony"/>
                     </label>
                     <br>
                     <label for="bathroom_cosmetics">Bathroom Cosmetics
@@ -399,7 +404,7 @@
                     </label>
                     <br>
                     <label for="breakfast">Breakfast
-                        <input type="checkbox" value="" ng-model="hotel.facilties.breakfast"/>
+                        <input type="checkbox" value="" ng-model="hotel.breakfast"/>
                     </label>
                     <br>>
                     <label for="desk">Desk

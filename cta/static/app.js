@@ -140,6 +140,13 @@ angular.module('comparetravel', ['angular.filter'])
     
   };
 
+  // $scope.addfacilities=function(){
+  //   console.log("before push",$scope.facilities);
+  //   $scope.hotelfacilities.push($scope.facilities);
+  //   delete $scope.facilities;
+  //   console.log("after push",$scope.hotelfacilities);
+
+  // }
   $scope.addImg=function(){
     console.log("before push",$scope.ImagesUrl);
     $scope.hotelImg.push($scope.ImagesUrl);
