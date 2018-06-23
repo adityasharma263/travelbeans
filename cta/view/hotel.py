@@ -41,7 +41,9 @@ def hotel_api():
         "star" : hotel.get("star", None),
         "check_in": datetime.datetime.now(),
         "check_out": datetime.datetime.now(),
-        "status" : hotel.get("status", None)
+        "status" : hotel.get("status", None),
+        "breakfast": hotel.get("breakfast", None),
+        "balcony": hotel.get("ac", None),
         }
         print(hotel_obj)
         post = Hotel(**hotel_obj)
@@ -56,40 +58,37 @@ def hotel_api():
             }
             print(member_obj)
             Member(**member_obj).save()
-        if hotel['facilities']:
-            for facility in hotel['facilities']:
-                facility_obj = {
-                    "hotel_id": facility.get("hotel_id", None),
-                    "ac": facility.get("ac", None),
-                    "bed_type": facility.get("bed_type", None),
-                    "no_of_bed": facility.get("no_of_bed", None),
-                    "breakfast": facility.get("breakfast", None),
-                    "balcony": facility.get("ac", None),
-                    "bathroom_cosmetics": facility.get("bathroom_cosmetics", None),
-                    "bathroom_nightie": facility.get("bathroom_nightie", None),
-                    "bathroom_towels": facility.get("bathroom_towels", None),
-                    "bathroom_with_shower": facility.get("bathroom_with_shower", None),
-                    "desk": facility.get("desk", None),
-                    "electric_kettle": facility.get("electric_kettle", None),
-                    "fan": facility.get("fan", None),
-                    "food_serve_at_room": facility.get("food_serve_at_room", None),
-                    "free_evening_snacks": facility.get("free_evening_snacks", None),
-                    "free_toiletries": facility.get("free_toiletries", None),
-                    "hairdryer": facility.get("hairdryer", None),
-                    "heater": facility.get("heater", None),
-                    "ironing_facility": facility.get("ironing_facility", None),
-                    "morning_newspaper": facility.get("morning_newspaper", None),
-                    "phone": facility.get("phone", None),
-                    "room_safe": facility.get("room_safe", None),
-                    "room_seating_area": facility.get("room_seating_area", None),
-                    "room_slipper": facility.get("room_slipper", None),
-                    "tv": facility.get("tv", None),
-                    "view": facility.get("view", None),
-                    "wardrobes_closet": facility.get("wardrobes_closet", None),
-                    "weighing_machine": facility.get("weighing_machine", None),
-                    "wifi": facility.get("wifi", None)
-                }
-                Facility(**facility_obj).save()
+        facility = hotel.get("facilities", None)
+        facility_obj = {
+            "hotel_id": facility.get("hotel_id", None),
+            "ac": facility.get("ac", None),
+            "bed_type": facility.get("bed_type", None),
+            "no_of_bed": facility.get("no_of_bed", None),
+            "bathroom_cosmetics": facility.get("bathroom_cosmetics", None),
+            "bathroom_nightie": facility.get("bathroom_nightie", None),
+            "bathroom_towels": facility.get("bathroom_towels", None),
+            "bathroom_with_shower": facility.get("bathroom_with_shower", None),
+            "desk": facility.get("desk", None),
+            "electric_kettle": facility.get("electric_kettle", None),
+            "fan": facility.get("fan", None),
+            "food_serve_at_room": facility.get("food_serve_at_room", None),
+            "free_evening_snacks": facility.get("free_evening_snacks", None),
+            "free_toiletries": facility.get("free_toiletries", None),
+            "hairdryer": facility.get("hairdryer", None),
+            "heater": facility.get("heater", None),
+            "ironing_facility": facility.get("ironing_facility", None),
+            "morning_newspaper": facility.get("morning_newspaper", None),
+            "phone": facility.get("phone", None),
+            "room_safe": facility.get("room_safe", None),
+            "room_seating_area": facility.get("room_seating_area", None),
+            "room_slipper": facility.get("room_slipper", None),
+            "tv": facility.get("tv", None),
+            "view": facility.get("view", None),
+            "wardrobes_closet": facility.get("wardrobes_closet", None),
+            "weighing_machine": facility.get("weighing_machine", None),
+            "wifi": facility.get("wifi", None)
+        }
+        Facility(**facility_obj).save()
         amenity = hotel.get("amenities", None)
         amenity_obj = {
             "hotel_id": amenity.get("hotel_id", None),
@@ -148,7 +147,6 @@ def hotel_api():
                     Website(**website_obj).save()
                 print(deal_obj)
                 Deal(**deal_obj).save()
-        # result = HotelSchema().dump(post)
         return jsonify({'result': {'hotel': request.json}, 'message': "Success", 'error': False})
 
 
