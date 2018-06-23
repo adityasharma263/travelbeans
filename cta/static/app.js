@@ -110,6 +110,19 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
 
+  $http({
+    method: 'GET',
+    url: '/api/v1/website' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.websites = response.data.result.hotel;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
   var sendPostCall = function(url, data) {
     console.log(data);
     
