@@ -92,7 +92,7 @@
         <form id="regForm" ng-submit="createHotel()">
             <!-- One "tab" for each step in the form: -->
                    
-            <!-- <div class="tab"> -->
+            <div class="tab">
                 <h1>Hotel Details</h1>
                 <label for="name">Hotel Name: 
                     <input id="name" ng-model="hotel.name" type="text" required/>
@@ -308,11 +308,8 @@
                     </div>
                 </label>
                 </div>
-            <div class="tab">Contact Info:
-                    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
-                    <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
-            </div>
-            <!-- <div class="tab"> -->
+            
+            <div class="tab">
                 <h1>Room Details</h1>
                     <label for="room_type">Room Type:
                         <div class="radio">
@@ -376,7 +373,7 @@
                         <input id="status" type="number" ng-model="hotel.member.total_members"/>
                     </label>
             </div>
-            <!-- <div class="tab"> -->
+            <div class="tab">
                 <h1>Room Facilities</h1>
                     <label for="ac">AC
                         <input type="checkbox" value="" ng-model="hotel.facilties.ac"/>
@@ -482,19 +479,20 @@
                         <input type="checkbox" value="" ng-model="hotel.facilties.wifi"/>
                     </label>
                     <br>
+                    <h3>Deals</h3>
                     <div>
                         <label for="weekend">Weekend :
-                            <input id="weekend" type="checkbox" value="" ng-model="hotel.deals.weekend"/>
+                            <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
                         </label>
                         <br>
                         <label for="wname">Website name: 
-                            <input class="input-text" id="wname" ng-model="hotel.deals.website.website" type="text" required>
+                            <input class="input-text" id="wname" ng-model="deals.website.website" type="text" required>
                         </label>      
                         <br>
                         <label for="price">Price:
-                            <input id="price" type="number" ng-model="hotel.deals.price"/>
+                            <input id="price" type="number" ng-model="deals.price"/>
                         </label>
-                        <button type="button" class="btn btn-default" ng-click=addImg(ImagesUrl)>add more</button>
+                        <button type="button" class="btn btn-default" ng-click=addPrice()>add more deals</button>
                     </div>
                     
             </div>        
