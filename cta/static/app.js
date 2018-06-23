@@ -87,6 +87,8 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotel = {};
   $scope.hotelImg = []; //for all images in the hotel
   $scope.ImagesUrl=[];//for one image
+  $scope.deals=[];
+  $scope.hotelDeals = [];
 
   var sendPostCall = function(url, data) {
     console.log(data);
@@ -152,6 +154,14 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.hotelImg.push($scope.ImagesUrl);
     $scope.ImagesUrl="";
     console.log("after push",$scope.hotelImg);
+
+  }
+
+  $scope.addPrice=function(){
+    console.log("before push",$scope.deals);
+    $scope.hotelDeals.push($scope.deals);
+    delete $scope.deals;
+    console.log("after push",$scope.hotelDeals);
 
   }
   

@@ -483,19 +483,20 @@
                         <input type="checkbox" value="" ng-model="hotel.facilties.wifi"/>
                     </label>
                     <br>
+                    <h3>Deals</h3>
                     <div>
                         <label for="weekend">Weekend :
-                            <input id="weekend" type="checkbox" value="" ng-model="hotel.deals.weekend"/>
+                            <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
                         </label>
                         <br>
                         <label for="wname">Website name: 
-                            <input class="input-text" id="wname" ng-model="hotel.deals.website.website" type="text" required>
+                            <input class="input-text" id="wname" ng-model="deals.website.website" type="text" required>
                         </label>      
                         <br>
                         <label for="price">Price:
-                            <input id="price" type="number" ng-model="hotel.deals.price"/>
+                            <input id="price" type="number" ng-model="deals.price"/>
                         </label>
-                        <button type="button" class="btn btn-default" ng-click=addImg(ImagesUrl)>add more</button>
+                        <button type="button" class="btn btn-default" ng-click=addPrice()>add more deals</button>
                     </div>
                     
             </div>        
