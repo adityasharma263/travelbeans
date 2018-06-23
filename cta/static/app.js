@@ -131,11 +131,12 @@ angular.module('comparetravel', ['angular.filter'])
       url: url,
       data: data
     }).then(function (res) {
+      createToast("'hotel successfully created!!!'","green");
         console.log("res",res);
       },
       // failed callback
       function (req) {
-        alert("Something went wrong!!");
+        createToast("'Something went wrong!!!'","red");
       })
   }
 
@@ -170,9 +171,12 @@ angular.module('comparetravel', ['angular.filter'])
     sendPostCall('/api/v1/hotel', $scope.hotel)
     delete $scope.hotelDeals;
     delete $scope.deals;
-    delete $scope.hotel.Facilities;
+    delete $scope.hotel.facilities;
     delete $scope.hotel.room_type;
     delete $scope.hotel.member;
+    delete $scope.hotel.balcony;
+    delete $scope.hotel.breakfast;
+
 
   }
 
@@ -202,7 +206,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.hotelImg.push($scope.images);
     delete $scope.images.images_url;
     console.log("after push",$scope.hotelImg);
-    createToast("'Image Added'","green");
+    createToast("'Image Added!!'","green");
 
   }
 
@@ -211,7 +215,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.hotelDeals.push($scope.deals);
     delete $scope.deals;
     console.log("after push",$scope.hotelDeals);
-    createToast("'price Added'","green");
+    createToast("'price Added!!'","green");
 
   }
   
