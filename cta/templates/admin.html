@@ -92,7 +92,7 @@
         <form id="regForm" ng-submit="createHotel()">
             <!-- One "tab" for each step in the form: -->
                    
-            <!-- <div class="tab"> -->
+            <div class="tab">
                 <h1>Hotel Details</h1>
                 <label for="name">Hotel Name: 
                     <input id="name" ng-model="hotel.name" type="text" required/>
@@ -307,12 +307,8 @@
                         </label>
                     </div>
                 </label>
-                </div>
-            <div class="tab">Contact Info:
-                    <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
-                    <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
             </div>
-            <!-- <div class="tab"> -->
+            <div class="tab">
                 <h1>Room Details</h1>
                     <label for="room_type">Room Type:
                         <div class="radio">
@@ -376,7 +372,7 @@
                         <input id="status" type="number" ng-model="hotel.member.total_members"/>
                     </label>
             </div>
-            <!-- <div class="tab"> -->
+            <div class="tab">
                 <h1>Room Facilities</h1>
                     <label for="ac">AC
                         <input type="checkbox" value="" ng-model="hotel.facilties.ac"/>
