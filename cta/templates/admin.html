@@ -60,7 +60,9 @@
             #prevBtn {
             background-color: #bbbbbb;
             }
-
+            #submitBtn {
+                display: none;
+            }
             /* Make circles that indicate the steps of the form: */
             .step {
             height: 15px;
@@ -504,6 +506,8 @@
                 <div style="float:right;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                 <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <button type="button"  id="submitBtn" ng-click="createHotel()">submit</button>
+
                 </div>
             </div>
             <!-- Circles which indicates the steps of the form: -->
@@ -529,12 +533,19 @@ function showTab(n) {
   //... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("submitBtn").style.display = "none";
+    document.getElementById("nextBtn").style.display = "inline";
+
+
   } else {
     document.getElementById("prevBtn").style.display = "inline";
+    document.getElementById("submitBtn").style.display = "none";
+
   }
   if (n == (x.length - 1)) {
 
-    document.getElementById("nextBtn").innerHTML = "Submit";
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("submitBtn").style.display = "inline-block";
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
   }

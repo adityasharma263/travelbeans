@@ -107,18 +107,26 @@ angular.module('comparetravel', ['angular.filter'])
   }
 
   $scope.createHotel = function() {
-    // e.preventDefault()
-    if($scope.hotelImg.length){
-
+    console.log("$scope.hotel",$scope.hotel);
+    if($scope.hotelImg.length || $scope.hotelDeals.length){
+      $scope.hotelImg.push($scope.ImagesUrl);
+      $scope.hotelDeals.push($scope.deals);
+      $scope.hotel.deals=$scope.hotelDeals;
       $scope.hotel.images=$scope.hotelImg;
+
     }
     else{
+      console.log("imagesurl",$scope.ImagesUrl);
       $scope.hotel.images=$scope.ImagesUrl;
+      $scope.hotel.deals=$scope.deals;
     }
 
     console.log("$scope.hotel",$scope.hotel);
 
     // sendPostCall('/api/v1/hotel', $scope.hotel)
+    delete $scope.hotelDeals;
+    delete $scope.deals;
+    
   }
 
   // $scope.hotel.images = [{
@@ -142,17 +150,10 @@ angular.module('comparetravel', ['angular.filter'])
     
   };
 
-  // $scope.addfacilities=function(){
-  //   console.log("before push",$scope.facilities);
-  //   $scope.hotelfacilities.push($scope.facilities);
-  //   delete $scope.facilities;
-  //   console.log("after push",$scope.hotelfacilities);
-
-  // }
   $scope.addImg=function(){
     console.log("before push",$scope.ImagesUrl);
     $scope.hotelImg.push($scope.ImagesUrl);
-    $scope.ImagesUrl="";
+    delete $scope.ImagesUrl;
     console.log("after push",$scope.hotelImg);
 
   }
