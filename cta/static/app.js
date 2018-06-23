@@ -83,12 +83,26 @@ angular.module('comparetravel', ['angular.filter'])
 }])
 
 .controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
-
+  var i;
   $scope.hotel = {};
   $scope.hotelImg = []; //for all images in the hotel
   $scope.ImagesUrl=[];//for one image
   $scope.deals=[];
   $scope.hotelDeals = [];
+
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.hotels = response.data.result.hotel;
+      i = $scope.hotels.length;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
 
   var sendPostCall = function(url, data) {
     console.log(data);
@@ -108,6 +122,9 @@ angular.module('comparetravel', ['angular.filter'])
 
   $scope.createHotel = function() {
     // e.preventDefault()
+    i++;
+    $scope.hotel.id = i;
+    console.log("$scope.hotel.id",$scope.hotel.id);
     if($scope.hotelImg.length){
 
       $scope.hotel.images=$scope.hotelImg;
@@ -119,6 +136,7 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("$scope.hotel",$scope.hotel);
 
     // sendPostCall('/api/v1/hotel', $scope.hotel)
+  
   }
 
   // $scope.hotel.images = [{
