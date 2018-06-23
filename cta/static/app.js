@@ -96,7 +96,12 @@ angular.module('comparetravel', ['angular.filter'])
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
       $scope.hotels = response.data.result.hotel;
-      i = $scope.hotels.length;
+      if($scope.hotels.length > 0){
+          i = $scope.hotels.length;
+      }
+      else{
+        i=0;
+      }
       console.log("i===",i);
       // this callback will be called asynchronously
       // when the response is available
