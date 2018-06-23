@@ -110,6 +110,19 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
 
+  $http({
+    method: 'GET',
+    url: '/api/v1/website' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.websites = response.data.result.hotel;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
   var sendPostCall = function(url, data) {
     console.log(data);
     
@@ -130,13 +143,13 @@ angular.module('comparetravel', ['angular.filter'])
     // e.preventDefault()
     i++;
     // $scope.hotel.id = i;
-    // $scope.hotel.deals.hotel = i;
-    // $scope.hotel.facilities.hotel = i;
-    // $scope.hotel.amenities.hotel = i;
-    // $scope.hotel.member.hotel = i;
-    // $scope.hotel.images.hotel = i;
-    // console.log("$scope.hotel.id",$scope.hotel.id);
-    // console.log("$scope.hotel",$scope.hotel);
+    // $scope.hotel.deals.hotel_id = i;
+    // $scope.hotel.facilities.hotel_id = i;
+    // $scope.hotel.amenities.hotel_id = i;
+    // $scope.hotel.member.hotel_id = i;
+    // $scope.hotel.images.hotel_id = i;
+    console.log("$scope.hotel.id",$scope.hotel.id);
+    console.log("$scope.hotel",$scope.hotel);
     
     if($scope.hotelImg.length || $scope.hotelDeals.length){
       $scope.hotelImg.push($scope.images);
