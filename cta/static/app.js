@@ -97,6 +97,7 @@ angular.module('comparetravel', ['angular.filter'])
       // hotelData = response.data.result;
       $scope.hotels = response.data.result.hotel;
       i = $scope.hotels.length;
+      console.log("i===",i);
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -124,6 +125,11 @@ angular.module('comparetravel', ['angular.filter'])
     // e.preventDefault()
     i++;
     $scope.hotel.id = i;
+    $scope.hotel.deals.hotel = i;
+    $scope.hotel.facilities.hotel = i;
+    $scope.hotel.amenities.hotel = i;
+    $scope.hotel.member.hotel = i;
+    $scope.hotel.images.hotel = i;
     console.log("$scope.hotel.id",$scope.hotel.id);
     if($scope.hotelImg.length){
 
