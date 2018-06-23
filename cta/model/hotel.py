@@ -17,7 +17,7 @@ class Hotel(Base):
     check_in = db.Column(db.DateTime(timezone=True), nullable=False)
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
     member = db.relationship('Member', uselist=False, backref='hotel')
-    facilities = db.relationship('Facility', uselist=False, backref='hotel')
+    facilities = db.relationship('Facility', backref='hotel')
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
     images = db.relationship('Image', backref='hotel')
     deals = db.relationship('Deal', backref='hotel')
@@ -123,7 +123,7 @@ class Facility(Base):
     desk = db.Column(db.Boolean, default=False, nullable=True)
     fan = db.Column(db.Boolean, default=False, nullable=True)
     electric_kettle = db.Column(db.Boolean, default=False, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
