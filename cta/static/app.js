@@ -86,7 +86,7 @@ angular.module('comparetravel', ['angular.filter'])
   var i;
   $scope.hotel = {};
   $scope.hotelImg = []; //for all images in the hotel
-  $scope.ImagesUrl=[];//for one image
+  $scope.images=[];//for one image
   $scope.deals=[];
   $scope.hotelDeals = [];
 
@@ -134,15 +134,15 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("$scope.hotel",$scope.hotel);
     
     if($scope.hotelImg.length || $scope.hotelDeals.length){
-      $scope.hotelImg.push($scope.ImagesUrl);
+      $scope.hotelImg.push($scope.images.images_url);
       $scope.hotelDeals.push($scope.deals);
       $scope.hotel.deals=$scope.hotelDeals;
       $scope.hotel.images=$scope.hotelImg;
 
     }
     else{
-      console.log("imagesurl",$scope.ImagesUrl);
-      $scope.hotel.images=$scope.ImagesUrl;
+      console.log("imagesurl",$scope.images.images_url);
+      $scope.hotel.images=$scope.images.images_url;
       $scope.hotel.deals=$scope.deals;
     }
 
@@ -176,9 +176,9 @@ angular.module('comparetravel', ['angular.filter'])
   };
 
   $scope.addImg=function(){
-    console.log("before push",$scope.ImagesUrl);
-    $scope.hotelImg.push($scope.ImagesUrl);
-    delete $scope.ImagesUrl;
+    console.log("before push",$scope.images.images_url);
+    $scope.hotelImg.push($scope.images.images_url);
+    delete $scope.images.images_url;
     console.log("after push",$scope.hotelImg);
 
   }

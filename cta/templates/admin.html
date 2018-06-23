@@ -114,7 +114,7 @@
                 <br>
                 <div>
                     <label for="images">Images: 
-                        <input id="images" ng-model="ImagesUrl" type="text" required>
+                        <input id="images" ng-model="images.images_url" type="text" required>
                     </label> 
                     <br>
                     <button type="button" class="btn btn-default" ng-click=addImg()>add more</button>
@@ -356,22 +356,22 @@
                         <h4>Bed Type</h4>
                         <div class="radio">
                             <label>
-                                <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="facilities.bed_type"/>Single
+                                <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="hotel.facilities.bed_type"/>Single
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="facilities.bed_type"/>Double
+                                <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="hotel.facilities.bed_type"/>Double
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="facilities.bed_type"/>Queen
+                                <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="hotel.facilities.bed_type"/>Queen
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="facilities.bed_type"/>King
+                                <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="hotel.facilities.bed_type"/>King
                             </label>
                         </div>
                     </label>
@@ -408,7 +408,7 @@
                     <label for="breakfast">Breakfast
                         <input type="checkbox" value="" ng-model="hotel.breakfast"/>
                     </label>
-                    <br>>
+                    <br>
                     <label for="desk">Desk
                         <input type="checkbox" value="" ng-model="hotel.facilties.desk"/>
                     </label>
