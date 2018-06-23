@@ -32,7 +32,9 @@
             font-size: 17px;
             border: 1px solid #aaaaaa;
             }
-
+            .box{
+                width: 100%;
+            }
             /* Mark input boxes that gets an error on validation: */
             input.invalid {
             background-color: #ffdddd;
@@ -97,24 +99,24 @@
             <div class="tab">
                 <h1>Hotel Details</h1>
                 <label for="name">Hotel Name: 
-                    <input id="name" ng-model="hotel.name" type="text" required/>
+                    <input class="box" id="name" ng-model="hotel.name" type="text" required/>
                 </label>   
                 <br>
                 <label for="city">City: 
-                    <input id="city" ng-model="hotel.city" type="text" required>
+                    <input id="city" class="box" ng-model="hotel.city" type="text" required>
                 </label>
                 <br> 
                 <label for="address">Address: 
-                    <input id="address" ng-model="hotel.address" type="text" required>
+                    <input id="address" class="box" ng-model="hotel.address" type="text" required>
                 </label>
                 <br> 
                 <label for="desc">Description: 
-                    <input id="desc" ng-model="hotel.desc" type="textarea" required>
+                    <input id="desc" class="box" ng-model="hotel.desc" type="textarea" required>
                 </label> 
                 <br>
                 <div>
                     <label for="images">Images: 
-                        <input id="images" ng-model="images.images_url" type="text" required>
+                        <input id="images" class="box" ng-model="images.images_url" type="text" required>
                     </label> 
                     <br>
                     <button type="button" class="btn btn-default" ng-click=addImg()>add more</button>
@@ -339,15 +341,15 @@
                    
                     
                     <label for="children">children:
-                        <input id="children" type="number" ng-model="hotel.member.children"/>
+                        <input id="children" class="box" type="number" ng-model="hotel.member.children"/>
                     </label>
                     <br>
                     <label for="no_of_adults">no_of_adults:
-                        <input id="no_of_adults" type="number" ng-model="hotel.member.no_of_adults"/>
+                        <input id="no_of_adults" class="box" type="number" ng-model="hotel.member.no_of_adults"/>
                     </label>
                     <br>
                     <label for="total_members">total_members :
-                        <input id="status" type="number" ng-model="hotel.member.total_members"/>
+                        <input id="status" class="box" type="number" ng-model="hotel.member.total_members"/>
                     </label>
            
                 <h1>Room Facilities</h1>
@@ -498,11 +500,11 @@
                         </label>      
                         <br>
                         <label for="url">Hotel Url:
-                            <input id="url" type="url" ng-model="deals.url"/>
+                            <input id="url" class="box" type="url" ng-model="deals.url"/>
                         </label>
                         <br>
-                        <label for="price">Price:
-                            <input id="price" type="number" ng-model="deals.price"/>
+                        <label for="price">Price ₹:
+                            <input id="price" class="box" type="number" ng-model="deals.price"/>
                         </label>
                         <button type="button" class="btn btn-default" ng-click=addPrice()>add more deals</button>
                     </div>

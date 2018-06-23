@@ -146,6 +146,7 @@ angular.module('comparetravel', ['angular.filter'])
     // $scope.hotel.deals.hotel_id = i;
     // $scope.hotel.facilities.hotel_id = i;
     // $scope.hotel.amenities.hotel_id = i;
+   
     // $scope.hotel.member.hotel_id = i;
     // $scope.hotel.images.hotel_id = i;
     console.log("$scope.hotel.id",$scope.hotel.id);
@@ -169,7 +170,10 @@ angular.module('comparetravel', ['angular.filter'])
     sendPostCall('/api/v1/hotel', $scope.hotel)
     delete $scope.hotelDeals;
     delete $scope.deals;
-    
+    delete $scope.hotel.Facilities;
+    delete $scope.hotel.room_type;
+    delete $scope.hotel.member;
+
   }
 
   // $scope.hotel.images = [{
