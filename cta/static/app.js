@@ -129,12 +129,12 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.createHotel = function() {
     // e.preventDefault()
     i++;
-    $scope.hotel.id = i;
-    $scope.hotel.deals.hotel = i;
-    $scope.hotel.facilities.hotel = i;
-    $scope.hotel.amenities.hotel = i;
-    $scope.hotel.member.hotel = i;
-    $scope.hotel.images.hotel = i;
+    // $scope.hotel.id = i;
+    // $scope.hotel.deals.hotel_id = i;
+    // $scope.hotel.facilities.hotel_id = i;
+    // $scope.hotel.amenities.hotel_id = i;
+    // $scope.hotel.member.hotel_id = i;
+    // $scope.hotel.images.hotel_id = i;
     console.log("$scope.hotel.id",$scope.hotel.id);
     console.log("$scope.hotel",$scope.hotel);
     
