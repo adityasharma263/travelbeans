@@ -54,7 +54,7 @@ class HotelSchema(ma.ModelSchema):
     images = ma.Nested(ImageSchema, many=True)
     deals = ma.Nested(DealSchema, many=True)
     member = ma.Nested(MemberSchema, many=False)
-    facilities = ma.Nested(FacilitySchema, many=False)
+    facilities = ma.Nested(FacilitySchema, many=True)
     check_in = ma.Method('check_in_epoch')
     check_out = ma.Method('check_out_epoch')
 

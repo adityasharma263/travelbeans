@@ -10,9 +10,6 @@ angular.module('comparetravel', ['angular.filter'])
 .controller('stayController',["$scope", "$http", function($scope, $http, $filter) {
 
 
-  
-
-
   $scope.hotelData = [];
   $scope.hotels = [];
   $scope.hotel = [];

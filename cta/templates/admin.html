@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -92,7 +92,7 @@
         <form id="regForm" ng-submit="createHotel()">
             <!-- One "tab" for each step in the form: -->
                    
-            <div class="tab">
+            <!-- <div class="tab"> -->
                 <h1>Hotel Details</h1>
                 <label for="name">Hotel Name: 
                     <input id="name" ng-model="hotel.name" type="text" required/>
@@ -186,6 +186,7 @@
                 <br>
                 <label for="Hotel Amenities">
                     <h3>Hotel Amenities</h3>
+<<<<<<< HEAD
                     <div>
                         <label for="Room_cleaning_service">
                             <input  type="checkbox" value="1" ng-model="hotel.amenities.Room_cleaning_service"/>Room Cleaning Service
@@ -311,11 +312,293 @@
             <div class="tab">Contact Info:
                     <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
                     <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+=======
+                        <label>
+                            <input  type="checkbox" value="1" ng-model="hotel.amenities.Room_cleaning_service"/>Room Cleaning Service
+                        </label>
+                    <!-- <br> 
+                        <label for="banquets">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.banquets"/>Banquets
+                        </label>
+                    <br>
+                        <label for="bar">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.bar"/>Bar
+                        </label>
+                    <br>
+                        <label for="child_baby_cot">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.child_baby_cot"/>Child BabyCot
+                        </label>
+                    <br>
+                        <label for="conference_room">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.conference_room"/>Conference Room
+                        </label>
+                    <br>
+                        <label for="doorman">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.doorman"/>Doorman
+                        </label>
+                    <br>
+                        <label for="express_check_in_out">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.express_check_in_out"/>Express Check in Out
+                        </label>
+                    <br>
+                        <label for="gym">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.gym"/>Gym
+                        </label>
+                    <br>
+                        <label for="hairdresser">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.hairdresser"/>Hairdresser
+                        </label>
+                    <br>
+                        <label for="indoor_swimming_pool">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.indoor_swimming_pool"/>Indoor Swimming Pool
+                        </label>
+                    <br>
+                        <label for="laundry_service">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.laundry_service"/>Laundry Service
+                        </label>
+                    <br>
+                        <label for="lift">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.lift"/>Lift
+                        </label>
+                    <br>
+                        <label for="non_smoking_smoking_rooms">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.non_smoking_smoking_rooms"/>Non_Smoking Smoking Rooms
+                        </label>
+                    <br>
+                        <label for="outdoor_swimming_pool">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.outdoor_swimming_pool"/>Outdoor Swimming Pool
+                        </label>
+                    <br>
+                        <label for="pet_allowance">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.pet_allowance"/>Pet Allowance
+                        </label>
+                    <br>
+                        <label for="pool">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.pool"/>Pool
+                        </label>
+                    <br>
+                        <label for="porter_service">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.porter_service"/>Porter Service
+                        </label>
+                    <br>
+                        <label for="restaurant">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.restaurant"/>Restaurant
+                        </label>
+                    <br>
+                        <label for="spa">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.spa"/>SPA
+                        </label>
+                    <br>
+                        <label for="terrace">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.terrace"/>Terrace
+                        </label>
+                    <br>
+                        <label for="twenty_four_hr_reception">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.twenty_four_hr_reception"/>24hr Reception
+                        </label>
+                    <br>
+                        <label for="twenty_four_hr_room_service">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.twenty_four_hr_room_service"/>24hr Room Service
+                        </label>
+                    <br>
+                        <label for="wheelchair_accessible">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.wheelchair_accessible"/>Wheelchair Accessible
+                        </label>
+                    <br>
+                        <label for="wifi_in_lobby">
+                            <input type="checkbox" value="" ng-model="hotel.amenities.wifi_in_lobby"/>Wifi in Lobby
+                        </label> -->
+                    
+                </label>
+            
+>>>>>>> 58ee94d5f66a95ded83df9175866aed8623d9fc4
             </div>
-            <div class="tab">Login Info:
-                <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
-                <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+            <!-- <div class="tab"> -->
+                <h1>Room Details</h1>
+                    <label for="room_type">Room Type:
+                        <div class="radio">
+                            <label>
+                            <input id="room_type1" type="radio" name="room_type" value="1" ng-model="hotel.room_type"/>Premium
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="room_type2" type="radio" name="room_type" value="2" ng-model="hotel.room_type"/>Executive
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="room_type3" type="radio" name="room_type" value="3" ng-model="hotel.room_type"/>Sweet
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="room_type4" type="radio" name="room_type" value="4" ng-model="hotel.room_type"/>Super Deluxe
+                            </label>
+                        </div>
+                    </label>
+                    <br>
+                    <label for="bed_type">Bed Type:
+                        <div class="radio">
+                            <label>
+                            <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="hotel.facilities.bed_type"/>Single
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="hotel.facilities.bed_type"/>Double
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="hotel.facilities.bed_type"/>Queen
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="hotel.facilities.bed_type"/>King
+                            </label>
+                        </div>
+                    </label>
+                    <br>
+                    <label for="no_of_bed">No. of Bed:
+                        <input id="no_of_bed" type="number" ng-model="hotel.facilities.no_of_bed"/>
+                    </label>
+                    <br>
+                    <label for="children">children:
+                        <input id="children" type="number" ng-model="hotel.member.children"/>
+                    </label>
+                    <br>
+                    <label for="no_of_adults">no_of_adults:
+                        <input id="no_of_adults" type="number" ng-model="hotel.member.no_of_adults"/>
+                    </label>
+                    <br>
+                    <label for="total_members">total_members :
+                        <input id="status" type="number" ng-model="hotel.member.total_members"/>
+                    </label>
             </div>
+            <!-- <div class="tab"> -->
+                <h1>Room Facilities</h1>
+                    <label for="ac">AC
+                        <input type="checkbox" value="" ng-model="hotel.facilties.ac"/>
+                    </label>
+                    <br>
+                    <label for="balcony">Balcony
+                        <input type="checkbox" value="" ng-model="hotel.facilties.balcony"/>
+                    </label>
+                    <br>
+                    <label for="bathroom_cosmetics">Bathroom Cosmetics
+                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_cosmetics"/>
+                    </label>
+                    <br>
+                    <label for="bathroom_nightie">Bathroom Nightie
+                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_nightie"/>
+                    </label>
+                  , <br>
+                    <label for="bathroom_towels">Bathroom Towels
+                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_towels"/>
+                    </label>
+                    <br>
+                    <label for="bathroom_with_shower">Bathroom with Shower
+                        <input type="checkbox" value="" ng-model="hotel.facilties.bathroom_with_shower"/>
+                    </label>
+                    <br>
+                    <label for="breakfast">Breakfast
+                        <input type="checkbox" value="" ng-model="hotel.facilties.breakfast"/>
+                    </label>
+                    <br>>
+                    <label for="desk">Desk
+                        <input type="checkbox" value="" ng-model="hotel.facilties.desk"/>
+                    </label>
+                    <br>
+                    <label for="electric_kettle">Electric Kettle
+                        <input type="checkbox" value="" ng-model="hotel.facilties.electric_kettle"/>
+                    </label>
+                    <br>
+                    <label for="fan">Fan
+                        <input type="checkbox" value="" ng-model="hotel.facilties.fan"/>
+                    </label>
+                    <br>
+                    <label for="food_serve_at_room">Food serve at room
+                        <input type="checkbox" value="" ng-model="hotel.facilties.food_serve_at_room"/>
+                    </label>
+                    <br>
+                    <label for="free_evening_snacks">Free Evening Snacks
+                        <input type="checkbox" value="" ng-model="hotel.facilties.free_evening_snacks"/>
+                    </label>
+                    <br>
+                    <label for="free_toiletries">Free Toiletries
+                        <input type="checkbox" value="" ng-model="hotel.facilties.free_toiletries"/>
+                    </label>
+                    <br>
+                    <label for="hairdryer">Hairdryer
+                        <input type="checkbox" value="" ng-model="hotel.facilties.hairdryer"/>
+                    </label>
+                    <br>
+                    <label for="heater">Heater
+                        <input type="checkbox" value="" ng-model="hotel.facilties.heater"/>
+                    </label>
+                    <br>
+                    <label for="ironing_facility">Ironing Facility
+                        <input type="checkbox" value="" ng-model="hotel.facilties.ironing_facility"/>
+                    </label>
+                    <br>
+                    <label for="morning_newspaper">Morning Newspaper
+                        <input type="checkbox" value="" ng-model="hotel.facilties.morning_newspaper"/>
+                    </label>
+                    <br>
+                    <label for="phone">Phone
+                        <input type="checkbox" value="" ng-model="hotel.facilties.phone"/>
+                    </label>
+                    <br>
+                    <label for="room_safe">Room Safe
+                        <input type="checkbox" value="" ng-model="hotel.facilties.room_safe"/>
+                    </label>
+                    <br>
+                    <label for="room_seating_area">Room Seating Area
+                        <input type="checkbox" value="" ng-model="hotel.facilties.room_seating_area"/>
+                    </label>
+                    <br>
+                    <label for="room_slipper">Room Slipper
+                        <input type="checkbox" value="" ng-model="hotel.facilties.room_slipper"/>
+                    </label>
+                    <br>
+                    <label for="tv">TV
+                        <input type="checkbox" value="" ng-model="hotel.facilties.tv"/>
+                    </label>
+                    <br>
+                    <label for="view">View
+                        <input type="checkbox" value="" ng-model="hotel.facilties.view"/>
+                    </label>
+                    <br>
+                    <label for="wardrobes_closet">Wardrobes Closet
+                        <input type="checkbox" value="" ng-model="hotel.facilties.wardrobes_closet"/>
+                    </label>
+                    <br>
+                    <label for="weighing_machine">Weighing Machine
+                        <input type="checkbox" value="" ng-model="hotel.facilties.weighing_machine"/>
+                    </label>
+                    <br>
+                    <label for="wifi">Wifi
+                        <input type="checkbox" value="" ng-model="hotel.facilties.wifi"/>
+                    </label>
+                    <br>
+                    <div>
+                        <label for="weekend">Weekend :
+                            <input id="weekend" type="checkbox" value="" ng-model="hotel.deals.weekend"/>
+                        </label>
+                        <br>
+                        <label for="wname">Website name: 
+                            <input class="input-text" id="wname" ng-model="hotel.deals.website.website" type="text" required>
+                        </label>      
+                        <br>
+                        <label for="price">Price:
+                            <input id="price" type="number" ng-model="hotel.deals.price"/>
+                        </label>
+                        <button type="button" class="btn btn-default" ng-click=addImg(ImagesUrl)>add more</button>
+                    </div>
+                    
+            </div>        
             <div style="overflow:auto;">
                 <div style="float:right;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
