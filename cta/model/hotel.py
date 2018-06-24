@@ -20,9 +20,11 @@ class Hotel(Base):
     balcony = db.Column(db.Boolean, default=False, nullable=True)
     member = db.relationship('Member', uselist=False, backref='hotel')
     facilities = db.relationship('Facility', uselist=False, backref='hotel')
-    amenities = db.relationship('Amenity', uselist=False, backref='hotel')
-    images = db.relationship('Image', backref='hotel')
     deals = db.relationship('Deal', backref='hotel')
+    image_id = db.Column(db.Integer, db.ForeignKey('image.id'))
+    images = db.relationship('Image', foreign_keys=image_id)
+    amenity_id = db.Column(db.Integer, db.ForeignKey('amenity.id'))
+    Amenities = db.relationship('Amenity', foreign_keys=amenity_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,7 +37,6 @@ class Image(Base):
     __tablename__ = 'image'
 
     image_url = db.Column(db.String, default=False, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,7 +71,6 @@ class Amenity(Base):
     wifi_in_lobby = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
 
 
     def __init__(self, *args, **kwargs):
