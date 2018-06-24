@@ -229,11 +229,11 @@
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
                                 <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotels| filter:hotel">
                                 <article class="box">
                                     
                                           <figure class="col-sm-5 col-md-4">
-                                              <a title="" href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="160" alt="" src="./Travelo - Travel, Tour Booking HTML5 Template -Hotels List View_files/1.png"></a>
+                                              <a title="" href="[[hotel.images[0].image_url]]" class="hover-effect popup-gallery"><img width="270" height="160" alt=""></a>
                                           </figure>
                                           
                                           <div class="details col-sm-7 col-md-8">
@@ -264,12 +264,12 @@
                                               
                                               <div>
                                                   <div>
-                                                      <span class="price"><small>[[hotel.prices[0].website.website]]</small>[[hotel.prices[0].price]]</span><center>
+                                                      <span class="price"><small>[[hotel.deals[0].website.website]]</small>[[hotel.deals[0].price]]</span><center>
                                                       <a class="button btn-small green" href="/hotel-list/[[hotel.name]]">View Details</a>
                                                       <a class="button btn-small yellow">More Deals</a>
                                                      
                                                   </div>
-                                                  <div class="amenities" ng-repeat="price in hotel.prices">
+                                                  <div class="amenities" ng-repeat="price in hotel.deals">
                                                           <span class="price"><small>[[price.website.website]]</small>₹[[price.price]]</span>
                                                   </div>
                                                   

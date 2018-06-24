@@ -142,7 +142,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.createHotel = function() {
     // e.preventDefault()
     i++;
-    // $scope.hotel.id = i;
+    $scope.hotel.id = i;
     // $scope.hotel.deals.hotel_id = i;
     // $scope.hotel.facilities.hotel_id = i;
     // $scope.hotel.amenities.hotel_id = i;
@@ -213,3 +213,21 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 }])  
+
+.controller('hotelController', function($scope, $http) {
+  
+    $http({
+      method: 'GET',
+      url: '/api/v1/hotel/'+(location.pathname).substr(7)
+    }).then(function successCallback(response) {
+        $scope.hotelData = response.data.result.hotel;
+        // $scope.eventData.description= $scope.eventData.description.replace("\n", "<br>");
+         
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    });
+      
+  })
