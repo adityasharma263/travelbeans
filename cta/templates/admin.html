@@ -116,7 +116,7 @@
                 <br>
                 <div>
                     <label for="images">Images: 
-                        <input id="images" class="box" ng-model="images.images_url" type="text" required>
+                        <input id="images" class="box" ng-model="images.image_url" type="text" required>
                     </label> 
                     <br>
                     <button type="button" class="btn btn-default" ng-click=addImg()>add more</button>
@@ -494,13 +494,13 @@
                         </label>
                         <br>
                         <label for="wname">Website name: 
-                            <select id="wname" ng-model="deals.website.website">
-                                <option ng-repeat="obj in websites">[[obj.website]]</option>
+                            <select id="wname" ng-model="deals.website_id">
+                                <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
                             </select>
                         </label>      
                         <br>
                         <label for="url">Hotel Url:
-                            <input id="url" class="box" type="url" ng-model="deals.url"/>
+                            <input id="url" class="box" type="text" ng-model="deals.hotel_url"/>
                         </label>
                         <br>
                         <label for="price">Price ₹:

@@ -142,7 +142,7 @@ angular.module('comparetravel', ['angular.filter'])
 
   $scope.createHotel = function() {
     // e.preventDefault()
-    i++;
+    // i++;
     // $scope.hotel.id = i;
     // $scope.hotel.deals.hotel_id = i;
     // $scope.hotel.facilities.hotel_id = i;
@@ -150,27 +150,36 @@ angular.module('comparetravel', ['angular.filter'])
    
     // $scope.hotel.member.hotel_id = i;
     // $scope.hotel.images.hotel_id = i;
-    console.log("$scope.hotel.id",$scope.hotel.id);
-    console.log("$scope.hotel",$scope.hotel);
+    // console.log("$scope.hotel.id",$scope.hotel.id);
+    // console.log("$scope.hotel",$scope.hotel);
     
-    if($scope.hotelImg.length || $scope.hotelDeals.length){
+    // if($scope.hotelImg.length){
       $scope.hotelImg.push($scope.images);
-      $scope.hotelDeals.push($scope.deals);
-      $scope.hotel.deals=$scope.hotelDeals;
       $scope.hotel.images=$scope.hotelImg;
 
-    }
-    else{
-      console.log("imagesurl",$scope.images);
-      $scope.hotel.images=$scope.images
-      $scope.hotel.deals=$scope.deals;
-    }
+    // }
+    // else{
+    //   console.log("imagesurl",$scope.images);
+    //   $scope.hotel.images=$scope.images
+    // }
+
+    // if($scope.hotelDeals.length){
+      $scope.hotelDeals.push($scope.deals);
+      $scope.hotel.deals=$scope.hotelDeals;
+
+    // }
+    // else{
+    //   console.log("deals",$scope.deals);
+
+    //   $scope.hotel.deals=$scope.deals;
+
+    // }
 
     console.log("$scope.hotel",$scope.hotel);
 
     sendPostCall('/api/v1/hotel', $scope.hotel)
-    delete $scope.hotelDeals;
-    delete $scope.deals;
+    $scope.hotelDeals=[];
+    $scope.deals={};
     delete $scope.hotel.facilities;
     delete $scope.hotel.room_type;
     delete $scope.hotel.member;
@@ -204,7 +213,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.addImg=function(){
     console.log("before push",$scope.images);
     $scope.hotelImg.push($scope.images);
-    delete $scope.images.images_url;
+    delete $scope.images.image_url;
     console.log("after push",$scope.hotelImg);
     createToast("'Image Added!!'","green");
 
