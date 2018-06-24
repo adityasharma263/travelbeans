@@ -9,20 +9,13 @@ class Hotel(Base):
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
     rating = db.Column(db.Float, nullable=True)
-    status = db.Column(db.Boolean, default=False, nullable=True)
     city = db.Column(db.String, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     address = db.Column(db.String, nullable=True)
-    room_type = db.Column(db.Integer, nullable=True)
-    check_in = db.Column(db.DateTime(timezone=True), nullable=False)
-    check_out = db.Column(db.DateTime(timezone=True), nullable=False)
-    breakfast = db.Column(db.Boolean, default=False, nullable=True)
-    balcony = db.Column(db.Boolean, default=False, nullable=True)
-    member = db.relationship('Member', uselist=False, backref='hotel')
-    facilities = db.relationship('Facility', uselist=False, backref='hotel')
-    amenities = db.relationship('Amenity', uselist=False, backref='hotel')
     images = db.relationship('Image', backref='hotel')
-    deals = db.relationship('Deal', backref='hotel')
+    rooms = db.relationship('Room', backref='hotel')
+    amenities = db.relationship('Amenity', uselist=False, backref='hotel')
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,11 +24,32 @@ class Hotel(Base):
         return '<name %r>' % self.name
 
 
+class Room(Base):
+    __tablename__ = 'room'
+
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
+    status = db.Column(db.Boolean, default=False, nullable=True)
+    room_type = db.Column(db.Integer, nullable=True)
+    check_in = db.Column(db.DateTime(timezone=True), nullable=False)
+    check_out = db.Column(db.DateTime(timezone=True), nullable=False)
+    breakfast = db.Column(db.Boolean, default=False, nullable=True)
+    balcony = db.Column(db.Boolean, default=False, nullable=True)
+    member = db.relationship('Member', uselist=False, backref='hotel')
+    facilities = db.relationship('Facility', uselist=False, backref='hotel')
+    deals = db.relationship('Deal', backref='hotel')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<room_type %r>' % self.room_type
+
+
 class Image(Base):
     __tablename__ = 'image'
-
-    image_url = db.Column(db.String, default=False, nullable=True)
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
+    image_url = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,6 +60,7 @@ class Image(Base):
 class Amenity(Base):
     __tablename__ = 'amenity'
 
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
     conference_room = db.Column(db.Boolean, default=False, nullable=True)
     express_check_in_out = db.Column(db.Boolean, default=False, nullable=True)
     laundry_service = db.Column(db.Boolean, default=False, nullable=True)
@@ -70,7 +85,6 @@ class Amenity(Base):
     wifi_in_lobby = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
     twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
 
 
     def __init__(self, *args, **kwargs):
@@ -85,7 +99,7 @@ class Member(Base):
     no_of_adults = db.Column(db.Integer, nullable=True)
     children = db.Column(db.Integer, nullable=True)
     total_members = db.Column(db.Integer, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -123,7 +137,7 @@ class Facility(Base):
     desk = db.Column(db.Boolean, default=False, nullable=True)
     fan = db.Column(db.Boolean, default=False, nullable=True)
     electric_kettle = db.Column(db.Boolean, default=False, nullable=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -152,7 +166,7 @@ class Deal(Base):
     price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
     weekend = db.Column(db.Boolean, default=False,nullable=False)
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=False)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
     website = db.relationship('Website', foreign_keys=website_id)
 
