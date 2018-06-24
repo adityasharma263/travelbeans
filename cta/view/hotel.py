@@ -19,8 +19,7 @@ def hotel_api():
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
-        data = request.json
-        hotel = data['hotel']
+        hotel = request.json
         hotel_obj = {
         "id": hotel.get("id", None),
         "name" : hotel.get("name", None),
@@ -34,35 +33,37 @@ def hotel_api():
         post = Hotel(**hotel_obj)
         post.save()
         amenity = hotel.get("amenities", None)
-        amenity_obj = {
-            "hotel_id": hotel_obj['id'],
-            "Room_cleaning_service": amenity.get("Room_cleaning_service", None),
-            "banquets": amenity.get("banquets", None),
-            "bar": amenity.get("bar", None),
-            "child_baby_cot": amenity.get("child_baby_cot", None),
-            "conference_room": amenity.get("conference_room", None),
-            "doorman": amenity.get("doorman", None),
-            "express_check_in_out": amenity.get("express_check_in_out", None),
-            "gym": amenity.get("gym", None),
-            "hairdresser": amenity.get("hairdresser", None),
-            "indoor_swimming_pool": amenity.get("indoor_swimming_pool", None),
-            "laundry_service": amenity.get("laundry_service", None),
-            "lift": amenity.get("lift", None),
-            "non_smoking_smoking_rooms": amenity.get("non_smoking_smoking_rooms", None),
-            "outdoor_swimming_pool": amenity.get("outdoor_swimming_pool", None),
-            "pet_allowance": amenity.get("pet_allowance", None),
-            "pool": amenity.get("pool", None),
-            "porter_service": amenity.get("porter_service", None),
-            "restaurant": amenity.get("restaurant", None),
-            "spa": amenity.get("spa", None),
-            "terrace": amenity.get("terrace", None),
-            "twenty_four_hr_reception": amenity.get("twenty_four_hr_reception", None),
-            "twenty_four_hr_room_service": amenity.get("twenty_four_hr_room_service", None),
-            "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
-            "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
+        if amenity:
+            amenity_obj = {
+                "hotel_id": hotel_obj['id'],
+                "Room_cleaning_service": amenity.get("Room_cleaning_service", None),
+                "banquets": amenity.get("banquets", None),
+                "bar": amenity.get("bar", None),
+                "child_baby_cot": amenity.get("child_baby_cot", None),
+                "conference_room": amenity.get("conference_room", None),
+                "doorman": amenity.get("doorman", None),
+                "express_check_in_out": amenity.get("express_check_in_out", None),
+                "gym": amenity.get("gym", None),
+                "hairdresser": amenity.get("hairdresser", None),
+                "indoor_swimming_pool": amenity.get("indoor_swimming_pool", None),
+                "laundry_service": amenity.get("laundry_service", None),
+                "lift": amenity.get("lift", None),
+                "non_smoking_smoking_rooms": amenity.get("non_smoking_smoking_rooms", None),
+                "outdoor_swimming_pool": amenity.get("outdoor_swimming_pool", None),
+                "pet_allowance": amenity.get("pet_allowance", None),
+                "pool": amenity.get("pool", None),
+                "porter_service": amenity.get("porter_service", None),
+                "restaurant": amenity.get("restaurant", None),
+                "spa": amenity.get("spa", None),
+                "terrace": amenity.get("terrace", None),
+                "twenty_four_hr_reception": amenity.get("twenty_four_hr_reception", None),
+                "twenty_four_hr_room_service": amenity.get("twenty_four_hr_room_service", None),
+                "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
+                "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
 
-        }
-        amenity(**amenity_obj).save()
+            }
+            print(amenity_obj)
+            Amenity(**amenity_obj).save()
         if hotel['images']:
             for image in hotel['images']:
                 image_obj = {

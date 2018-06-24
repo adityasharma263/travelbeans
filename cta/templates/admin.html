@@ -384,43 +384,43 @@
                     <br>
                     <div></div>
                     <label for="ac">AC
-                        <input type="checkbox" value="" ng-model="hotel.facilities.ac"/>
+                        <input type="checkbox" value="1" ng-model="hotel.facilities.ac"/>
                     </label>
                     <br>
                     <label for="balcony">Balcony
-                        <input type="checkbox" value="" ng-model="hotel.balcony"/>
+                        <input type="checkbox" value="2" ng-model="hotel.balcony"/>
                     </label>
                     <br>
                     <label for="bathroom_cosmetics">Bathroom Cosmetics
-                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_cosmetics"/>
+                        <input type="checkbox" value="3" ng-model="hotel.facilities.bathroom_cosmetics"/>
                     </label>
                     <br>
                     <label for="bathroom_nightie">Bathroom Nightie
-                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_nightie"/>
+                        <input type="checkbox" value="4" ng-model="hotel.facilities.bathroom_nightie"/>
                     </label>
                   , <br>
                     <label for="bathroom_towels">Bathroom Towels
-                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_towels"/>
+                        <input type="checkbox" value="5" ng-model="hotel.facilities.bathroom_towels"/>
                     </label>
                     <br>
                     <label for="bathroom_with_shower">Bathroom with Shower
-                        <input type="checkbox" value="" ng-model="hotel.facilities.bathroom_with_shower"/>
+                        <input type="checkbox" value="6" ng-model="hotel.facilities.bathroom_with_shower"/>
                     </label>
                     <br>
                     <label for="breakfast">Breakfast
-                        <input type="checkbox" value="" ng-model="hotel.breakfast"/>
+                        <input type="checkbox" value="7" ng-model="hotel.breakfast"/>
                     </label>
                     <br>
                     <label for="desk">Desk
-                        <input type="checkbox" value="" ng-model="hotel.facilities.desk"/>
+                        <input type="checkbox" value="8" ng-model="hotel.facilities.desk"/>
                     </label>
                     <br>
                     <label for="electric_kettle">Electric Kettle
-                        <input type="checkbox" value="" ng-model="hotel.facilities.electric_kettle"/>
+                        <input type="checkbox" value="9" ng-model="hotel.facilities.electric_kettle"/>
                     </label>
                     <br>
                     <label for="fan">Fan
-                        <input type="checkbox" value="" ng-model="hotel.facilities.fan"/>
+                        <input type="checkbox" value="10" ng-model="hotel.facilities.fan"/>
                     </label>
                     <br>
                     <label for="food_serve_at_room">Food serve at room
@@ -600,6 +600,7 @@ function validateForm() {
   }
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
+
     document.getElementsByClassName("step")[currentTab].className += " finish";
   }
   return valid; // return the valid status
