@@ -133,6 +133,7 @@ def hotel_api():
                 "id": deal.get("id", None),
                 "price" : deal.get("price", None),
                 "weekend" : deal.get("weekend", None),
+                "hotel_url": deal.get("hotel_url", None),
                 "hotel_id" : hotel_obj['id'],
                 "website_id" : deal.get("website_id", None)
                 }

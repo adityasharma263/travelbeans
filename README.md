@@ -18,6 +18,9 @@ compare the top travel website's price
     
 #### upgrade migration
     python manage.py db upgrade
+
+#### seed data
+    python manage.py seed
     
 #### make new migartion for changes in schema
     python manage.py db migrate
