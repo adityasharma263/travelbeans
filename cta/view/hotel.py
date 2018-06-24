@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member
+from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room
 from cta import app
 from flask import jsonify, request
-from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema
+from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
 
 
@@ -11,15 +11,6 @@ import datetime
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        check_in = request.args.get('check_in')
-        check_out = request.args.get('check_out')
-        if check_in and check_out:
-            check_in = datetime.datetime.fromtimestamp(
-                int(check_in)).strftime('%Y-%m-%d %H:%M:%S')
-            check_out = datetime.datetime.fromtimestamp(
-                int(check_out)).strftime('%Y-%m-%d %H:%M:%S')
-            args['check_in'] = check_in
-            args['check_out'] = check_out
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
@@ -35,61 +26,12 @@ def hotel_api():
         "city" : hotel.get("city", None),
         'rating' : hotel.get("rating", None),
         "desc" : hotel.get("desc", None),
-        "room_type" : hotel.get("room_type", None),
         "address" : hotel.get("address", None),
         "star" : hotel.get("star", None),
-        "check_in": datetime.datetime.now(),
-        "check_out": datetime.datetime.now(),
-        "status" : True,
-        "breakfast": hotel.get("breakfast", None),
-        "balcony": hotel.get("ac", None),
         }
         print(hotel_obj)
         post = Hotel(**hotel_obj)
         post.save()
-        member = hotel.get("member", None)
-        if member:
-            member_obj = {
-            "no_of_adults" : member.get("no_of_adults", None),
-            "total_members" : member.get("total_members", None),
-            "children" : member.get("children", None),
-            "hotel_id" : hotel_obj['id'],
-            }
-            print(member_obj)
-            Member(**member_obj).save()
-        facility = hotel.get("facilities", None)
-        if facility:
-            facility_obj = {
-                "hotel_id": hotel_obj['id'],
-                "ac": facility.get("ac", None),
-                "bed_type": facility.get("bed_type", None),
-                "no_of_bed": facility.get("no_of_bed", None),
-                "bathroom_cosmetics": facility.get("bathroom_cosmetics", None),
-                "bathroom_nightie": facility.get("bathroom_nightie", None),
-                "bathroom_towels": facility.get("bathroom_towels", None),
-                "bathroom_with_shower": facility.get("bathroom_with_shower", None),
-                "desk": facility.get("desk", None),
-                "electric_kettle": facility.get("electric_kettle", None),
-                "fan": facility.get("fan", None),
-                "food_serve_at_room": facility.get("food_serve_at_room", None),
-                "free_evening_snacks": facility.get("free_evening_snacks", None),
-                "free_toiletries": facility.get("free_toiletries", None),
-                "hairdryer": facility.get("hairdryer", None),
-                "heater": facility.get("heater", None),
-                "ironing_facility": facility.get("ironing_facility", None),
-                "morning_newspaper": facility.get("morning_newspaper", None),
-                "phone": facility.get("phone", None),
-                "room_safe": facility.get("room_safe", None),
-                "room_seating_area": facility.get("room_seating_area", None),
-                "room_slipper": facility.get("room_slipper", None),
-                "tv": facility.get("tv", None),
-                "view": facility.get("view", None),
-                "wardrobes_closet": facility.get("wardrobes_closet", None),
-                "weighing_machine": facility.get("weighing_machine", None),
-                "wifi": facility.get("wifi", None)
-            }
-            Facility(**facility_obj).save()
-            print(facility_obj)
         amenity = hotel.get("amenities", None)
         if amenity:
             amenity_obj = {
@@ -125,24 +67,105 @@ def hotel_api():
         if hotel['images']:
             for image in hotel['images']:
                 image_obj = {
-                "hotel_id" : hotel_obj['id'],
-                "image_url" : image.get("image_url", None)
+                    "image_url": image.get("image_url", None),
+                    "hotel_id": hotel_obj['id']
                 }
                 print(image_obj)
                 Image(**image_obj).save()
-        if hotel['deals']:
-            for deal in hotel['deals']:
-                deal_obj = {
-                "id": deal.get("id", None),
-                "price" : deal.get("price", None),
-                "weekend" : deal.get("weekend", None),
-                "hotel_url": deal.get("hotel_url", None),
-                "hotel_id" : hotel_obj['id'],
-                "website_id" : deal.get("website_id", None)
+        if hotel['rooms']:
+            for room in hotel['rooms']:
+                room_obj = {
+                    "room_type": hotel.get("room_type", None),
+                    "check_in": datetime.datetime.now(),
+                    "check_out": datetime.datetime.now(),
+                    "status": True,
+                    "breakfast": hotel.get("breakfast", None),
+                    "balcony": hotel.get("ac", None),
+                    "hotel_id": hotel_obj['id']
                 }
-                print(deal_obj)
-                Deal(**deal_obj).save()
+                print(room_obj)
+                Room(**room_obj).save()
+                member = room.get("member", None)
+                if member:
+                    member_obj = {
+                    "no_of_adults" : member.get("no_of_adults", None),
+                    "total_members" : member.get("total_members", None),
+                    "children" : member.get("children", None),
+                    "room_id" : room_obj['room_id'],
+                    }
+                    print(member_obj)
+                    Member(**member_obj).save()
+                facility = room.get("facilities", None)
+                facility_obj = {
+                    "room_id": room_obj['id'],
+                    "ac": facility.get("ac", None),
+                    "bed_type": facility.get("bed_type", None),
+                    "no_of_bed": facility.get("no_of_bed", None),
+                    "bathroom_cosmetics": facility.get("bathroom_cosmetics", None),
+                    "bathroom_nightie": facility.get("bathroom_nightie", None),
+                    "bathroom_towels": facility.get("bathroom_towels", None),
+                    "bathroom_with_shower": facility.get("bathroom_with_shower", None),
+                    "desk": facility.get("desk", None),
+                    "electric_kettle": facility.get("electric_kettle", None),
+                    "fan": facility.get("fan", None),
+                    "food_serve_at_room": facility.get("food_serve_at_room", None),
+                    "free_evening_snacks": facility.get("free_evening_snacks", None),
+                    "free_toiletries": facility.get("free_toiletries", None),
+                    "hairdryer": facility.get("hairdryer", None),
+                    "heater": facility.get("heater", None),
+                    "ironing_facility": facility.get("ironing_facility", None),
+                    "morning_newspaper": facility.get("morning_newspaper", None),
+                    "phone": facility.get("phone", None),
+                    "room_safe": facility.get("room_safe", None),
+                    "room_seating_area": facility.get("room_seating_area", None),
+                    "room_slipper": facility.get("room_slipper", None),
+                    "tv": facility.get("tv", None),
+                    "view": facility.get("view", None),
+                    "wardrobes_closet": facility.get("wardrobes_closet", None),
+                    "weighing_machine": facility.get("weighing_machine", None),
+                    "wifi": facility.get("wifi", None)
+                }
+                Facility(**facility_obj).save()
+                if room['deals']:
+                    for deal in room['deals']:
+                        deal_obj = {
+                        "id": deal.get("id", None),
+                        "price" : deal.get("price", None),
+                        "weekend" : deal.get("weekend", None),
+                        "hotel_url": deal.get("hotel_url", None),
+                        "room_id" : room_obj['id'],
+                        "website_id" : deal.get("website_id", None)
+                        }
+                        print(deal_obj)
+                        Deal(**deal_obj).save()
         return jsonify({'result': {'hotel': request.json}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/room', methods=['GET', 'POST'])
+def room_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        check_in = request.args.get('check_in')
+        check_out = request.args.get('check_out')
+        if check_in and check_out:
+            check_in = datetime.datetime.fromtimestamp(
+                int(check_in)).strftime('%Y-%m-%d %H:%M:%S')
+            check_out = datetime.datetime.fromtimestamp(
+                int(check_out)).strftime('%Y-%m-%d %H:%M:%S')
+            args['check_in'] = check_in
+            args['check_out'] = check_out
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        rooms = Room.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = HotelSchema(many=True).dump(rooms)
+        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = Room(**request.json)
+        post.save()
+        result = AmenitySchema().dump(post)
+        return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/amenity', methods=['GET', 'POST'])
