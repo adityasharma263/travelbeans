@@ -115,7 +115,7 @@ angular.module('comparetravel', ['angular.filter'])
     url: '/api/v1/website' 
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
-      $scope.websites = response.data.result.hotel;
+      $scope.websites = response.data.result.website;
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -132,66 +132,37 @@ angular.module('comparetravel', ['angular.filter'])
       data: data
     }).then(function (res) {
       createToast("'hotel successfully created!!!'","green");
-        console.log("res",res);
+      $scope.hotelDeals=[];
+      $scope.deals={};
+      $scope.images={};
+      $scope.hotelImg=[];
+      delete $scope.hotel.amenities;
+      delete $scope.hotel.facilities;
+      delete $scope.hotel.room_type;
+      delete $scope.hotel.member;
+      delete $scope.hotel.balcony;
+      delete $scope.hotel.breakfast;
       },
       // failed callback
       function (req) {
         createToast("'Something went wrong!!!'","red");
       })
+    
   }
 
   $scope.createHotel = function() {
     // e.preventDefault()
+    
     i++;
     $scope.hotel.id = i;
-    // $scope.hotel.deals.hotel_id = i;
-    // $scope.hotel.facilities.hotel_id = i;
-    // $scope.hotel.amenities.hotel_id = i;
-   
-    // $scope.hotel.member.hotel_id = i;
-    // $scope.hotel.images.hotel_id = i;
-    // console.log("$scope.hotel.id",$scope.hotel.id);
-    // console.log("$scope.hotel",$scope.hotel);
-    
-    // if($scope.hotelImg.length){
-      $scope.hotelImg.push($scope.images);
-      $scope.hotel.images=$scope.hotelImg;
-
-    // }
-    // else{
-    //   console.log("imagesurl",$scope.images);
-    //   $scope.hotel.images=$scope.images
-    // }
-
-    // if($scope.hotelDeals.length){
-      $scope.hotelDeals.push($scope.deals);
-      $scope.hotel.deals=$scope.hotelDeals;
-
-    // }
-    // else{
-    //   console.log("deals",$scope.deals);
-
-    //   $scope.hotel.deals=$scope.deals;
-
-    // }
-
+    $scope.hotelImg.push($scope.images);
+    $scope.hotel.images=$scope.hotelImg;
+    $scope.hotelDeals.push($scope.deals);
+    $scope.hotel.deals=$scope.hotelDeals;
     console.log("$scope.hotel",$scope.hotel);
 
     sendPostCall('/api/v1/hotel', $scope.hotel)
-    $scope.hotelDeals=[];
-    $scope.deals={};
-    delete $scope.hotel.facilities;
-    delete $scope.hotel.room_type;
-    delete $scope.hotel.member;
-    delete $scope.hotel.balcony;
-    delete $scope.hotel.breakfast;
-
-
   }
-
-  // $scope.hotel.images = [{
-  //   value: null
-  // }];
 
   $scope.addInput = function () {
       console.log("new input");
@@ -209,37 +180,25 @@ angular.module('comparetravel', ['angular.filter'])
     $(".js-pop-room").css("top", "50%");
     
   };
-
   $scope.addImg=function(){
-    console.log("before push",$scope.images);
     $scope.hotelImg.push($scope.images);
     delete $scope.images.image_url;
-    console.log("after push",$scope.hotelImg);
     createToast("'Image Added!!'","green");
 
   }
-
   $scope.addPrice=function(){
-    console.log("before push",$scope.deals);
     $scope.hotelDeals.push($scope.deals);
-    delete $scope.deals;
-    console.log("after push",$scope.hotelDeals);
+    $scope.deals={};
     createToast("'price Added!!'","green");
 
   }
-  
 var createToast=function(msg, color){
-  console.log("color",color);
-  console.log("msg",msg);
   var x= document.getElementById("snackbar");
-
   x.innerHTML=msg;
   x.style.backgroundColor=color;
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
-
-
 }])  
 
 .controller('hotelController', function($scope, $http) {
