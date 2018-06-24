@@ -71,6 +71,7 @@ class RoomSchema(ma.ModelSchema):
 class HotelSchema(ma.ModelSchema):
     amenities = ma.Nested(AmenitySchema, many=False)
     images = ma.Nested(ImageSchema, many=True)
+    rooms = ma.Nested(RoomSchema, many=True)
 
     class Meta:
         model = Hotel
