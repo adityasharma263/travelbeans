@@ -41,7 +41,7 @@ def hotel_api():
         "star" : hotel.get("star", None),
         "check_in": datetime.datetime.now(),
         "check_out": datetime.datetime.now(),
-        "status" : hotel.get("status", None),
+        "status" : True,
         "breakfast": hotel.get("breakfast", None),
         "balcony": hotel.get("ac", None),
         }
@@ -54,13 +54,13 @@ def hotel_api():
             "no_of_adults" : member.get("no_of_adults", None),
             "total_members" : member.get("total_members", None),
             "children" : member.get("children", None),
-            "hotel_id" : member.get("hotel_id", None),
+            "hotel_id" : hotel_obj['id'],
             }
             print(member_obj)
             Member(**member_obj).save()
         facility = hotel.get("facilities", None)
         facility_obj = {
-            "hotel_id": facility.get("hotel_id", None),
+            "hotel_id": hotel_obj['id'],
             "ac": facility.get("ac", None),
             "bed_type": facility.get("bed_type", None),
             "no_of_bed": facility.get("no_of_bed", None),
@@ -91,7 +91,7 @@ def hotel_api():
         Facility(**facility_obj).save()
         amenity = hotel.get("amenities", None)
         amenity_obj = {
-            "hotel_id": amenity.get("hotel_id", None),
+            "hotel_id": hotel_obj['id'],
             "Room_cleaning_service": amenity.get("Room_cleaning_service", None),
             "banquets": amenity.get("banquets", None),
             "bar": amenity.get("bar", None),
@@ -122,29 +122,21 @@ def hotel_api():
         if hotel['images']:
             for image in hotel['images']:
                 image_obj = {
-                "hotel_id" : image.get("hotel_id", None),
+                "hotel_id" : hotel_obj['id'],
                 "image_url" : image.get("image_url", None)
                 }
                 print(image_obj)
                 Image(**image_obj).save()
         if hotel['deals']:
             for deal in hotel['deals']:
-                website_dic = deal["website"]
                 deal_obj = {
                 "id": deal.get("id", None),
                 "price" : deal.get("price", None),
                 "weekend" : deal.get("weekend", None),
-                "hotel_id" : deal.get("hotel_id", None),
-                "website_id" : website_dic.get("id", None)
+                "hotel_url": deal.get("hotel_url", None),
+                "hotel_id" : hotel_obj['id'],
+                "website_id" : deal.get("website_id", None)
                 }
-                if Website.query.filter_by(id=website_dic.get("id", None)).first() is None:
-                    website_obj = {
-                    "id": website_dic.get("id", None),
-                    "website" : website_dic.get("website", None),
-                    "logo_image" : website_dic.get("logo_image", None),
-                    }
-                    print(website_obj)
-                    Website(**website_obj).save()
                 print(deal_obj)
                 Deal(**deal_obj).save()
         return jsonify({'result': {'hotel': request.json}, 'message': "Success", 'error': False})
