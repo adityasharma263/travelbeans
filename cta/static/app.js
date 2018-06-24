@@ -83,12 +83,14 @@ angular.module('comparetravel', ['angular.filter'])
 }])
 
 .controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
-  var i;
-  $scope.hotel = {};
-  $scope.hotelImg = []; //for all images in the hotel
-  $scope.images={};//for one image
-  $scope.deals={};
-  $scope.hotelDeals = [];
+  var i ,j;
+  $scope.hotel = {}; // main hotel model
+  $scope.hotelImg = []; //for all images array
+  $scope.images={}; //for one image
+  $scope.deals={}; //for deals
+  $scope.hotelDeals = []; // for all deals array
+  $scope.room={}; //for one room
+  $scope.hotelRooms=[]; // for all room array
 
   $http({
     method: 'GET',
@@ -97,12 +99,25 @@ angular.module('comparetravel', ['angular.filter'])
       // hotelData = response.data.result;
       $scope.hotels = response.data.result.hotel;
       if($scope.hotels.length > 0){
+          console.log("in i",$scope.hotels);
           i = $scope.hotels.length;
+          if(i > 0){
+            console.log("in j",$scope.hotels)
+            var z;
+            z=i-1;
+            j = $scope.hotels[z].rooms.length;
+          }
+          else{
+            j=0;
+          }
       }
       else{
         i=0;
+        j=0;
       }
+      
       console.log("i===",i);
+      console.log("j==",j);
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -132,16 +147,7 @@ angular.module('comparetravel', ['angular.filter'])
       data: data
     }).then(function (res) {
       createToast("'hotel successfully created!!!'","green");
-      $scope.hotelDeals=[];
-      $scope.deals={};
-      $scope.images={};
-      $scope.hotelImg=[];
-      delete $scope.hotel.amenities;
-      delete $scope.hotel.facilities;
-      delete $scope.hotel.room_type;
-      delete $scope.hotel.member;
-      delete $scope.hotel.balcony;
-      delete $scope.hotel.breakfast;
+
       },
       // failed callback
       function (req) {
@@ -154,11 +160,18 @@ angular.module('comparetravel', ['angular.filter'])
     // e.preventDefault()
     
     i++;
+    j++;
+    $scope.room.id = j;
     $scope.hotel.id = i;
     $scope.hotelImg.push($scope.images);
     $scope.hotel.images=$scope.hotelImg;
+
     $scope.hotelDeals.push($scope.deals);
-    $scope.hotel.deals=$scope.hotelDeals;
+    $scope.room.deals=$scope.hotelDeals;
+
+    $scope.hotelRooms.push($scope.room);
+    $scope.hotel.rooms=$scope.hotelRooms;
+
     console.log("$scope.hotel",$scope.hotel);
 
     sendPostCall('/api/v1/hotel', $scope.hotel)
@@ -180,9 +193,22 @@ angular.module('comparetravel', ['angular.filter'])
     $(".js-pop-room").css("top", "50%");
     
   };
+  $scope.addRoom=function(){
+    j++;
+    $scope.room.id = j;
+    $scope.hotelDeals.push($scope.deals);
+    $scope.room.deals=$scope.hotelDeals;
+    $scope.hotelRooms.push($scope.room);
+    createToast("'Room Added!!'","green");
+    $scope.room={};
+    $scope.images={};
+    $scope.hotelDeals=[];
+    $scope.deals={};
+
+  }
   $scope.addImg=function(){
     $scope.hotelImg.push($scope.images);
-    delete $scope.images.image_url;
+    $scope.images={};
     createToast("'Image Added!!'","green");
 
   }
