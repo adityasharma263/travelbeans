@@ -318,22 +318,22 @@
                         <h4>Room Type</h4>
                         <div class="radio">
                             <label>
-                            <input id="room_type1" type="radio" name="room_type" value="1" ng-model="hotel.room_type"/>Premium
+                            <input id="room_type1" type="radio" name="room_type" value="1" ng-model="room.room_type"/>Premium
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type2" type="radio" name="room_type" value="2" ng-model="hotel.room_type"/>Executive
+                            <input id="room_type2" type="radio" name="room_type" value="2" ng-model="room.room_type"/>Executive
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type3" type="radio" name="room_type" value="3" ng-model="hotel.room_type"/>Sweet
+                            <input id="room_type3" type="radio" name="room_type" value="3" ng-model="room.room_type"/>Sweet
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type4" type="radio" name="room_type" value="4" ng-model="hotel.room_type"/>Super Deluxe
+                            <input id="room_type4" type="radio" name="room_type" value="4" ng-model="room.room_type"/>Super Deluxe
                             </label>
                         </div>
                     </label>
@@ -341,179 +341,180 @@
                    
                     
                     <label for="children">children:
-                        <input id="children" class="box" type="number" ng-model="hotel.member.children"/>
+                        <input id="children" class="box" type="number" ng-model="room.member.children"/>
                     </label>
                     <br>
                     <label for="no_of_adults">no_of_adults:
-                        <input id="no_of_adults" class="box" type="number" ng-model="hotel.member.no_of_adults"/>
+                        <input id="no_of_adults" class="box" type="number" ng-model="room.member.no_of_adults"/>
                     </label>
                     <br>
                     <label for="total_members">total_members :
-                        <input id="status" class="box" type="number" ng-model="hotel.member.total_members"/>
+                        <input id="status" class="box" type="number" ng-model="room.member.total_members"/>
                     </label>
            
-                <h1>Room Facilities</h1>
+                <h2>Room Facilities</h2>
                     
-                    <label for="bed_type">
-                        <h4>Bed Type</h4>
-                        <div class="radio">
-                            <label>
-                                <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="hotel.facilities.bed_type"/>Single
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="hotel.facilities.bed_type"/>Double
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="hotel.facilities.bed_type"/>Queen
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="hotel.facilities.bed_type"/>King
-                            </label>
-                        </div>
-                    </label>
-                    <br>
-                    <label for="no_of_bed">No. of Bed:
-                        <input id="no_of_bed" type="number" ng-model="hotel.facilities.no_of_bed"/>
-                    </label>
-                    <br>
-                    <div></div>
-                    <label for="ac">AC
-                        <input type="checkbox" value="1" ng-model="hotel.facilities.ac"/>
-                    </label>
-                    <br>
-                    <label for="balcony">Balcony
-                        <input type="checkbox" value="2" ng-model="hotel.balcony"/>
-                    </label>
-                    <br>
-                    <label for="bathroom_cosmetics">Bathroom Cosmetics
-                        <input type="checkbox" value="3" ng-model="hotel.facilities.bathroom_cosmetics"/>
-                    </label>
-                    <br>
-                    <label for="bathroom_nightie">Bathroom Nightie
-                        <input type="checkbox" value="4" ng-model="hotel.facilities.bathroom_nightie"/>
-                    </label>
-                  , <br>
-                    <label for="bathroom_towels">Bathroom Towels
-                        <input type="checkbox" value="5" ng-model="hotel.facilities.bathroom_towels"/>
-                    </label>
-                    <br>
-                    <label for="bathroom_with_shower">Bathroom with Shower
-                        <input type="checkbox" value="6" ng-model="hotel.facilities.bathroom_with_shower"/>
-                    </label>
-                    <br>
-                    <label for="breakfast">Breakfast
-                        <input type="checkbox" value="7" ng-model="hotel.breakfast"/>
-                    </label>
-                    <br>
-                    <label for="desk">Desk
-                        <input type="checkbox" value="8" ng-model="hotel.facilities.desk"/>
-                    </label>
-                    <br>
-                    <label for="electric_kettle">Electric Kettle
-                        <input type="checkbox" value="9" ng-model="hotel.facilities.electric_kettle"/>
-                    </label>
-                    <br>
-                    <label for="fan">Fan
-                        <input type="checkbox" value="10" ng-model="hotel.facilities.fan"/>
-                    </label>
-                    <br>
-                    <label for="food_serve_at_room">Food serve at room
-                        <input type="checkbox" value="" ng-model="hotel.facilities.food_serve_at_room"/>
-                    </label>
-                    <br>
-                    <label for="free_evening_snacks">Free Evening Snacks
-                        <input type="checkbox" value="" ng-model="hotel.facilities.free_evening_snacks"/>
-                    </label>
-                    <br>
-                    <label for="free_toiletries">Free Toiletries
-                        <input type="checkbox" value="" ng-model="hotel.facilities.free_toiletries"/>
-                    </label>
-                    <br>
-                    <label for="hairdryer">Hairdryer
-                        <input type="checkbox" value="" ng-model="hotel.facilities.hairdryer"/>
-                    </label>
-                    <br>
-                    <label for="heater">Heater
-                        <input type="checkbox" value="" ng-model="hotel.facilities.heater"/>
-                    </label>
-                    <br>
-                    <label for="ironing_facility">Ironing Facility
-                        <input type="checkbox" value="" ng-model="hotel.facilities.ironing_facility"/>
-                    </label>
-                    <br>
-                    <label for="morning_newspaper">Morning Newspaper
-                        <input type="checkbox" value="" ng-model="hotel.facilities.morning_newspaper"/>
-                    </label>
-                    <br>
-                    <label for="phone">Phone
-                        <input type="checkbox" value="" ng-model="hotel.facilities.phone"/>
-                    </label>
-                    <br>
-                    <label for="room_safe">Room Safe
-                        <input type="checkbox" value="" ng-model="hotel.facilities.room_safe"/>
-                    </label>
-                    <br>
-                    <label for="room_seating_area">Room Seating Area
-                        <input type="checkbox" value="" ng-model="hotel.facilities.room_seating_area"/>
-                    </label>
-                    <br>
-                    <label for="room_slipper">Room Slipper
-                        <input type="checkbox" value="" ng-model="hotel.facilities.room_slipper"/>
-                    </label>
-                    <br>
-                    <label for="tv">TV
-                        <input type="checkbox" value="" ng-model="hotel.facilities.tv"/>
-                    </label>
-                    <br>
-                    <label for="view">View
-                        <input type="checkbox" value="" ng-model="hotel.facilities.view"/>
-                    </label>
-                    <br>
-                    <label for="wardrobes_closet">Wardrobes Closet
-                        <input type="checkbox" value="" ng-model="hotel.facilities.wardrobes_closet"/>
-                    </label>
-                    <br>
-                    <label for="weighing_machine">Weighing Machine
-                        <input type="checkbox" value="" ng-model="hotel.facilities.weighing_machine"/>
-                    </label>
-                    <br>
-                    <label for="wifi">Wifi
-                        <input type="checkbox" value="" ng-model="hotel.facilities.wifi"/>
-                    </label>
-                    <br>
-                    <h3>Deals</h3>
-                    <div>
-                        <label for="weekend">Weekend :
-                            <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
+                <label for="bed_type">
+                    <h4>Bed Type</h4>
+                    <div class="radio">
+                        <label>
+                            <input id="bed_type1" type="radio" name="bed_type" value="1" ng-model="room.facilities.bed_type"/>Single
                         </label>
-                        <br>
-                        <label for="wname">Website name: 
-                            <select id="wname" ng-model="deals.website_id">
-                                <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
-                            </select>
-                        </label>      
-                        <br>
-                        <label for="url">Hotel Url:
-                            <input id="url" class="box" type="text" ng-model="deals.hotel_url"/>
-                        </label>
-                        <br>
-                        <label for="price">Price ₹:
-                            <input id="price" class="box" type="number" ng-model="deals.price"/>
-                        </label>
-                        <button type="button" class="btn btn-default" ng-click=addPrice()>add more deals</button>
                     </div>
-                    
+                    <div class="radio">
+                        <label>
+                            <input id="bed_type2" type="radio" name="bed_type" value="2" ng-model="room.facilities.bed_type"/>Double
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="bed_type3" type="radio" name="bed_type" value="3" ng-model="room.facilities.bed_type"/>Queen
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input id="bed_type4" type="radio" name="bed_type" value="4" ng-model="room.facilities.bed_type"/>King
+                        </label>
+                    </div>
+                </label>
+                <br>
+                <label for="no_of_bed">No. of Bed:
+                    <input id="no_of_bed" type="number" ng-model="room.facilities.no_of_bed"/>
+                </label>
+                <br>
+                <div></div>
+                <label for="ac">AC
+                    <input type="checkbox" value="1" ng-model="room.facilities.ac"/>
+                </label>
+                <br>
+                <label for="balcony">Balcony
+                    <input type="checkbox" value="2" ng-model="room.balcony"/>
+                </label>
+                <br>
+                <label for="bathroom_cosmetics">Bathroom Cosmetics
+                    <input type="checkbox" value="3" ng-model="room.facilities.bathroom_cosmetics"/>
+                </label>
+                <br>
+                <label for="bathroom_nightie">Bathroom Nightie
+                    <input type="checkbox" value="4" ng-model="room.facilities.bathroom_nightie"/>
+                </label>
+                , <br>
+                <label for="bathroom_towels">Bathroom Towels
+                    <input type="checkbox" value="5" ng-model="room.facilities.bathroom_towels"/>
+                </label>
+                <br>
+                <label for="bathroom_with_shower">Bathroom with Shower
+                    <input type="checkbox" value="6" ng-model="room.facilities.bathroom_with_shower"/>
+                </label>
+                <br>
+                <label for="breakfast">Breakfast
+                    <input type="checkbox" value="7" ng-model="room.breakfast"/>
+                </label>
+                <br>
+                <label for="desk">Desk
+                    <input type="checkbox" value="8" ng-model="room.facilities.desk"/>
+                </label>
+                <br>
+                <label for="electric_kettle">Electric Kettle
+                    <input type="checkbox" value="9" ng-model="room.facilities.electric_kettle"/>
+                </label>
+                <br>
+                <label for="fan">Fan
+                    <input type="checkbox" value="10" ng-model="room.facilities.fan"/>
+                </label>
+                <br>
+                <label for="food_serve_at_room">Food serve at room
+                    <input type="checkbox" value="" ng-model="room.facilities.food_serve_at_room"/>
+                </label>
+                <br>
+                <label for="free_evening_snacks">Free Evening Snacks
+                    <input type="checkbox" value="" ng-model="room.facilities.free_evening_snacks"/>
+                </label>
+                <br>
+                <label for="free_toiletries">Free Toiletries
+                    <input type="checkbox" value="" ng-model="room.facilities.free_toiletries"/>
+                </label>
+                <br>
+                <label for="hairdryer">Hairdryer
+                    <input type="checkbox" value="" ng-model="room.facilities.hairdryer"/>
+                </label>
+                <br>
+                <label for="heater">Heater
+                    <input type="checkbox" value="" ng-model="room.facilities.heater"/>
+                </label>
+                <br>
+                <label for="ironing_facility">Ironing Facility
+                    <input type="checkbox" value="" ng-model="room.facilities.ironing_facility"/>
+                </label>
+                <br>
+                <label for="morning_newspaper">Morning Newspaper
+                    <input type="checkbox" value="" ng-model="room.facilities.morning_newspaper"/>
+                </label>
+                <br>
+                <label for="phone">Phone
+                    <input type="checkbox" value="" ng-model="room.facilities.phone"/>
+                </label>
+                <br>
+                <label for="room_safe">Room Safe
+                    <input type="checkbox" value="" ng-model="room.facilities.room_safe"/>
+                </label>
+                <br>
+                <label for="room_seating_area">Room Seating Area
+                    <input type="checkbox" value="" ng-model="room.facilities.room_seating_area"/>
+                </label>
+                <br>
+                <label for="room_slipper">Room Slipper
+                    <input type="checkbox" value="" ng-model="room.facilities.room_slipper"/>
+                </label>
+                <br>
+                <label for="tv">TV
+                    <input type="checkbox" value="" ng-model="room.facilities.tv"/>
+                </label>
+                <br>
+                <label for="view">View
+                    <input type="checkbox" value="" ng-model="room.facilities.view"/>
+                </label>
+                <br>
+                <label for="wardrobes_closet">Wardrobes Closet
+                    <input type="checkbox" value="" ng-model="room.facilities.wardrobes_closet"/>
+                </label>
+                <br>
+                <label for="weighing_machine">Weighing Machine
+                    <input type="checkbox" value="" ng-model="room.facilities.weighing_machine"/>
+                </label>
+                <br>
+                <label for="wifi">Wifi
+                    <input type="checkbox" value="" ng-model="room.facilities.wifi"/>
+                </label>
+                <br>
+                <h3>Deals</h3>
+                <div>
+                    <label for="weekend">Weekend :
+                        <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
+                    </label>
+                    <br>
+                    <label for="wname">Website name: 
+                        <select id="wname" ng-model="deals.website_id">
+                            <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
+                        </select>
+                    </label>      
+                    <br>
+                    <label for="url">Hotel Url:
+                        <input id="url" class="box" type="text" ng-model="deals.hotel_url"/>
+                    </label>
+                    <br>
+                    <label for="price">Price ₹:
+                        <input id="price" class="box" type="number" ng-model="deals.price"/>
+                    </label>
+                    <button type="button" class="btn btn-default" ng-click=addPrice()>Add more deals</button>
+                </div>
+                
             </div>        
             <div style="overflow:auto;">
                 <div style="float:right;">
                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                 <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                <button type="button" id="roomBtn" ng-click="addRoom()">Add more room</button>
                 <button type="button"  id="submitBtn" ng-click="createHotel()">submit</button>
 
                 </div>
@@ -542,18 +543,23 @@ function showTab(n) {
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
     document.getElementById("submitBtn").style.display = "none";
+    document.getElementById("roomBtn").style.display = "none";
     document.getElementById("nextBtn").style.display = "inline";
 
 
   } else {
     document.getElementById("prevBtn").style.display = "inline";
     document.getElementById("submitBtn").style.display = "none";
+    document.getElementById("roomBtn").style.display = "none";
+
 
   }
   if (n == (x.length - 1)) {
 
     document.getElementById("nextBtn").style.display = "none";
     document.getElementById("submitBtn").style.display = "inline-block";
+    document.getElementById("roomBtn").style.display = "inline-block";
+
   } else {
     document.getElementById("nextBtn").innerHTML = "Next";
   }

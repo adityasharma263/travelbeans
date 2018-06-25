@@ -75,6 +75,7 @@ def hotel_api():
         if hotel['rooms']:
             for room in hotel['rooms']:
                 room_obj = {
+                    "id": hotel.get("id", None),
                     "room_type": hotel.get("room_type", None),
                     "check_in": datetime.datetime.now(),
                     "check_out": datetime.datetime.now(),
@@ -91,7 +92,7 @@ def hotel_api():
                     "no_of_adults" : member.get("no_of_adults", None),
                     "total_members" : member.get("total_members", None),
                     "children" : member.get("children", None),
-                    "room_id" : room_obj['room_id'],
+                    "room_id" : room_obj['id'],
                     }
                     print(member_obj)
                     Member(**member_obj).save()
