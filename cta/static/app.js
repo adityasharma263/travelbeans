@@ -15,6 +15,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotel = [];
   $scope.rooms = [];
   $scope.room = [];
+  $scope.hotelid = {};
 
   // $location.search=
   
@@ -70,6 +71,10 @@ angular.module('comparetravel', ['angular.filter'])
   }).then(function successCallback(response) {
       // hotelData = response.data.result;
       $scope.hotels = response.data.result.hotel;
+      for(var j=0;j<$scope.hotels.length;j++){
+        $scope.hotelid[$scope.hotels[j].id]= $scope.hotels[j];
+      }
+      console.log("$scope.hotelid",$scope.hotelid);
       console.log("$scope.hotels=====",$scope.hotels);
       // this callback will be called asynchronously
       // when the response is available
