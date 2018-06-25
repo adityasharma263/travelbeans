@@ -103,9 +103,11 @@ angular.module('comparetravel', ['angular.filter'])
           i = $scope.hotels.length;
           if(i > 0){
             console.log("in j",$scope.hotels)
-            var z;
+            var z, k;
             z=i-1;
-            j = $scope.hotels[z].rooms.length;
+            k = $scope.hotels[z].rooms.length;
+            n=k-1;
+            j=$scope.hotels[z].rooms[n].id;
           }
           else{
             j=0;
