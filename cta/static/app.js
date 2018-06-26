@@ -31,8 +31,8 @@ angular.module('comparetravel', ['angular.filter'])
   }
 
   $scope.getHotel = function() {
-    console.log("$location.path",$location.path);
-    $location.path = "/hotel/list";
+    // console.log("$location.path",$location.path);
+    window.open = "/hotel/list";
     console.log("$scope.hotel.city",$scope.hotel.city)
     $http({
       method: 'GET',

@@ -44,7 +44,8 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="../static/css/custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="../static/css/responsive.css">
     
@@ -231,7 +232,7 @@
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
                                 <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in cityid| filter:hotel">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotels| filter:hotel">
                                 <article class="box">
                                     
                                           <figure class="col-sm-5 col-md-4">
@@ -246,11 +247,10 @@
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> [[hotel.address]],[[hotel.city]]</small></h4>
       
                                                       <div class="amenities">
-                                                          <i class="fa fa-cutlery" ng-if="hotel.rooms" aria-hidden="true"></i>
                                                           <i class="fa fa-wifi" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
-                                                          <i class="soap-icon-fork circle"></i>
-                                                          <i class="soap-icon-television circle"></i>
-                                                          <i class="soap-icon-wifi circle"></i>
+                                                          <i class="fa fa-car" aria-hidden="true"></i>
+                                                          <i class="fa fa-heart" aria-hidden="true"></i>
+                                                          <i class="baseline-wc icon-image-preview"></i>
                                                       </div>
                                                       
                                                   </div>
@@ -259,7 +259,7 @@
                                                       <div class="five-stars-container">
                                                           <span class="five-stars" style="width: 80%;"></span>
                                                       </div>
-                                                      <sp	an class="review">270 reviews</span>
+                                                      <span class="review">270 reviews</span>
                                                   </div>
                                                   
                                               </div>
