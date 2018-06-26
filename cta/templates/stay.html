@@ -57,7 +57,8 @@
       <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>   
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>  
 <script type="text/javascript" charset="UTF-8" src="../static/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/stats.js"></script></head>
 <body ng-app="comparetravel">
     <div ng-controller="stayController">
@@ -165,12 +166,12 @@
                     
                     <div class="search-tab-content">
                         <div class="tab-pane fade active in" id="hotels-tab">
-                            <form action="/hotel-list">
+                            <form>
                                 <div class="row">
                                     <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Where</h4>
                                         <label for="destination">Your Destination</label>
-                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="city" placeholder="enter a destination or hotel name">
+                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name">
                                     </div>
                                     
                                     <div class="form-group col-sm-6 col-md-4">
@@ -178,15 +179,12 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <label>Check In</label>
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1528984325753"><img class="ui-datepicker-trigger" src="./Hotels_files/blank.png" alt="" title="">
-                                                </div>
+                                                    <input type="date" ng-model="room.check_in" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy">
                                             </div>
                                             <div class="col-xs-6">
                                                 <label>Check Out</label>
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1528984325754"><img class="ui-datepicker-trigger" src="./Hotels_files/blank.png" alt="" title="">
-                                                </div>
+                                                    <input type="date" ng-model="room.check_out" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy">
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +230,7 @@
                                     
                                     <div class="form-group col-sm-6 col-md-2 fixheight">
                                         <label class="hidden-xs">&nbsp;</label>
-                                        <button type="submit" class="full-width icon-check animated bounce" ng-click="getHotel(city)" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
+                                        <button type="button" class="full-width icon-check animated bounce" ng-click="getHotel()" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
                                     </div>
                                 </div>
                             </form>
