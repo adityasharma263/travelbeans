@@ -21,7 +21,7 @@ def hotel():
     data = HotelSchema(many=True).dump(hotel)
     return render_template('stay.html',hotel=data,per_page=per_page,page=page)
 
-@app.route('/hotel-list', methods=['GET'])
+@app.route('/hotel/list', methods=['GET'])
 def hlist():
     args = request.args.to_dict()
     args.pop('page', None)

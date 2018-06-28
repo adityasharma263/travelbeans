@@ -7,22 +7,32 @@ angular.module('comparetravel', ['angular.filter'])
 
 
 
-.controller('stayController',["$scope", "$http", function($scope, $http, $filter) {
+.controller('stayController',["$scope", "$http", "$location" ,function($scope, $http, $filter, $location) {
 
 
-  $scope.hotelData = [];
-  $scope.hotels = [];
-  $scope.hotel = [];
-  $scope.rooms = [];
-  $scope.room = [];
+  $scope.hotelid = {};// hotel object on the basis of id
+  $scope.hotel = {};
+  $scope.room = {};
+  $scope.cityid = {};
+  $scope.id = [];
 
   // $location.search=
   
-  
+  var jsonToQueryString = function(json) {
+    return '?' +
+      Object.keys(json).map(function(key) {
+        if(json[key]){
+          return encodeURIComponent(key) + '=' +
+            encodeURIComponent(json[key]);
+        } else {
+          return '';
+        }
+      }).join('&');
+  }
 
-  $scope.getHotel = function(city) {
-  
-    $scope.hotel.city = city;
+  $scope.getHotel = function() {
+    // console.log("$location.path",$location.path);
+    window.open = "/hotel/list";
     console.log("$scope.hotel.city",$scope.hotel.city)
     $http({
       method: 'GET',
@@ -31,12 +41,32 @@ angular.module('comparetravel', ['angular.filter'])
         city: $scope.hotel.city
       }
     }).then(function successCallback(response) {
-        // hotelData = response.data.result;
         $scope.hotelData = response.data.result.hotel;
-        console.log("$scope.hotel.city",$scope.hotelData);
-        // this.router.navigate(['/hotel-list'], { queryParams: { city: $scope.hotel.city} });
-        // this callback will be called asynchronously
-        // when the response is available
+        console.log("$scope.hotelData",$scope.hotelData);
+        for(var j=0;j<$scope.hotelData.length;j++){
+          $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
+        }
+        console.log("$scope.cityid",$scope.cityid);
+
+        $scope.room.check_in = Date.parse($scope.room.check_in)/1000;
+        console.log(" $scope.room.check_in ", $scope.room.check_in );
+        $scope.room.check_out = Date.parse($scope.room.check_out)/1000;
+
+        $http({
+          method: 'GET',
+          url: '/api/v1/room?check_in=' + $scope.room.check_in + '&check_out=' + $scope.room.check_out
+        }).then(function successCallback(response) {
+            $scope.rooms = response.data.result.hotel;
+            console.log("$scope.rooms",$scope.rooms);
+            for(var j=0;j<$scope.rooms.length;j++){
+                $scope.id[j] = $scope.rooms[j].hotel_id;
+            }
+            console.log("id",$scope.id);
+          }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        })
+
       }, function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
@@ -44,32 +74,18 @@ angular.module('comparetravel', ['angular.filter'])
      
   } 
 
-  $scope.getroom = function(check_in,check_out) {
-    
-      $scope.hotel.check_in = Date.parse(check_in)/1000;
-      console.log(" $scope.hotel.check_in ", $scope.hotel.check_in );
-      $scope.hotel.check_out = Date.parse(check_out)/1000;
-      $http({
-        method: 'GET',
-        url: '/api/v1/hotel?check_in=' + $scope.hotel.check_in + '&check_out=' + $scope.hotel.check_out
-      }).then(function successCallback(response) {
-          $scope.hotels = response.data.result.hotel;
-          // this.router.navigate(['/hotel-list'], { queryParams: { check_in: 1529379870} ,'check_out' : 1529379870});
-          // this callback will be called asynchronously
-          // when the response is available
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-      })
        
-    } 
+    
 
   $http({
     method: 'GET',
     url: '/api/v1/hotel' 
   }).then(function successCallback(response) {
-      // hotelData = response.data.result;
       $scope.hotels = response.data.result.hotel;
+      for(var j=0;j<$scope.hotels.length;j++){
+        $scope.hotelid[$scope.hotels[j].id]= $scope.hotels[j];
+      }
+      console.log("$scope.hotelid",$scope.hotelid);
       console.log("$scope.hotels=====",$scope.hotels);
       // this callback will be called asynchronously
       // when the response is available

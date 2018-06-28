@@ -43,7 +43,9 @@
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="../static/css/custom.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="../static/css/responsive.css">
     
@@ -60,6 +62,7 @@
     <![endif]-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>
 <script type="text/javascript" charset="UTF-8" src="../static/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/stats.js"></script></head>
 <body ng-app="comparetravel">
     <div ng-controller="stayController"> 
@@ -244,11 +247,9 @@
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> [[hotel.address]],[[hotel.city]]</small></h4>
       
                                                       <div class="amenities">
-                                                          <i class="soap-icon-wifi circle"></i>
-                                                          <i class="soap-icon-fitnessfacility circle"></i>
-                                                          <i class="soap-icon-fork circle"></i>
-                                                          <i class="soap-icon-television circle"></i>
-                                                          <i class="soap-icon-wifi circle"></i>
+                                                          <i class="fa fa-wifi" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
+                                                          <i class="fa fa-car" ng-if="hotel.amenities.parking" aria-hidden="true"></i>
+                                                          <i class="fa fa-heart" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
                                                       </div>
                                                       
                                                   </div>
@@ -257,7 +258,7 @@
                                                       <div class="five-stars-container">
                                                           <span class="five-stars" style="width: 80%;"></span>
                                                       </div>
-                                                      <sp	an class="review">270 reviews</span>
+                                                      <span class="review">270 reviews</span>
                                                   </div>
                                                   
                                               </div>
@@ -266,8 +267,10 @@
                                                   <div>
                                                       <span class="price"><small>[[hotel.deals[0].website.website]]</small>[[hotel.deals[0].price]]</span><center>
                                                       <a class="button btn-small green" href="/hotel-list/[[hotel.name]]">View Details</a>
-                                                      <a class="button btn-small yellow">More Deals</a>
-                                                     
+                                                      <span class="tab">
+                                                      <!-- <a class="button btn-small yellow">More Deals</a> -->
+                                                      <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button>
+                                                      </span>
                                                   </div>
                                                   <div class="amenities" ng-repeat="price in hotel.deals">
                                                           <span class="price"><small>[[price.website.website]]</small>₹[[price.price]]</span>
@@ -278,6 +281,9 @@
       
                                           </div>
                                       </article>
+                                      <div id="deals" class="tabcontent">
+                                            <h3>More Deals</h3>   
+                                      </div>
                             </div>
                             <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" class="uppercase full-width button btn-large">load more listing</a>
                         </div>
@@ -364,9 +370,7 @@
                                 <li class="dribble"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="dribble"><i class="soap-icon-dribble"></i></a></li>
                                 <li class="flickr"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="flickr"><i class="soap-icon-flickr"></i></a></li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
+                      
             </div>
             <div class="bottom gray-area">
                 <div class="container">
@@ -429,6 +433,23 @@
     <!-- load page Javascript -->
     <script type="text/javascript" src="../static/jstheme-scripts.js"></script>
     <script type="text/javascript" src="../static/js/scripts.js"></script>
+
+    <script>
+        function opendeals(evt, deals) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(deals).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
     
     <script type="text/javascript">
         tjq(document).ready(function() {
