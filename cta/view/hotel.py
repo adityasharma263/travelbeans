@@ -158,13 +158,13 @@ def room_api():
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         rooms = Room.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = HotelSchema(many=True).dump(rooms)
-        return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
+        result = RoomSchema(many=True).dump(rooms)
+        return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
     else:
         post = Room(**request.json)
         post.save()
         result = AmenitySchema().dump(post)
-        return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'room': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/amenity', methods=['GET', 'POST'])
