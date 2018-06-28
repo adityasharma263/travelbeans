@@ -12,6 +12,20 @@ from cta.model.hotel import Room
 from cta import ma
 
 
+class WebsiteSchema(ma.ModelSchema):
+
+    class Meta:
+        model = Website
+        exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class DealSchema(ma.ModelSchema):
+    website = ma.Nested(WebsiteSchema, many=False)
+
+    class Meta:
+        model = Deal
+        exclude = ('updated_at', 'created_at')
+
 class AmenitySchema(ma.ModelSchema):
     class Meta:
         model = Amenity
@@ -35,20 +49,6 @@ class FacilitySchema(ma.ModelSchema):
         model = Facility
         exclude = ('updated_at', 'created_at', 'hotel')
 
-
-class WebsiteSchema(ma.ModelSchema):
-
-    class Meta:
-        model = Website
-        exclude = ('updated_at', 'created_at', 'hotel')
-
-
-class DealSchema(ma.ModelSchema):
-    website = ma.Nested(WebsiteSchema, many=False)
-
-    class Meta:
-        model = Deal
-        exclude = ('updated_at', 'created_at')
 
 class RoomSchema(ma.ModelSchema):
     deals = ma.Nested(DealSchema, many=True)
