@@ -158,33 +158,7 @@ angular.module('comparetravel', ['angular.filter'])
     
   }
 
-  $scope.createHotel = function() {
-    // e.preventDefault()
-    
-    i++;
-    j++;
-    $scope.room.id = j;
-    $scope.hotel.id = i;
-    $scope.hotelImg.push($scope.images);
-    $scope.hotel.images=$scope.hotelImg;
-
-    $scope.hotelDeals.push($scope.deals);
-    $scope.room.deals=$scope.hotelDeals;
-
-    $scope.hotelRooms.push($scope.room);
-    $scope.hotel.rooms=$scope.hotelRooms;
-
-    console.log("$scope.hotel",$scope.hotel);
-
-    sendPostCall('/api/v1/hotel', $scope.hotel)
-  }
-
-  $scope.addInput = function () {
-      console.log("new input");
-      $scope.hotel.images.push({
-          value: null
-      });
-  }
+  
 
   $scope.removeInput = function (index) {
       $scope.hotel.images.splice(index, 1);
@@ -197,17 +171,21 @@ angular.module('comparetravel', ['angular.filter'])
   };
   $scope.addRoom=function(){
     j++;
+    console.log("on add room",j);
+
     $scope.room.id = j;
     $scope.hotelDeals.push($scope.deals);
     $scope.room.deals=$scope.hotelDeals;
     $scope.hotelRooms.push($scope.room);
+    console.log("rooms array",$scope.hotelRooms);
     createToast("'Room Added!!'","green");
-    $scope.room={};
     $scope.images={};
     $scope.hotelDeals=[];
-    $scope.deals={};
-
+    $scope.deals.hotel_url="";
+    return j;
   }
+  $scope.room.id =null;
+
   $scope.addImg=function(){
     $scope.hotelImg.push($scope.images);
     $scope.images={};
@@ -226,6 +204,27 @@ var createToast=function(msg, color){
   x.style.backgroundColor=color;
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+$scope.createHotel = function() {
+  // e.preventDefault()
+  
+  i++;
+  j++;
+  console.log("on submit",j);
+  $scope.room.id = j;
+  $scope.hotel.id = i;
+  $scope.hotelImg.push($scope.images);
+  $scope.hotel.images=$scope.hotelImg;
+
+  $scope.hotelDeals.push($scope.deals);
+  $scope.room.deals=$scope.hotelDeals;
+
+  $scope.hotelRooms.push($scope.room);
+  $scope.hotel.rooms=$scope.hotelRooms;
+
+  console.log("$scope.hotel",$scope.hotel);
+
+  // sendPostCall('/api/v1/hotel', $scope.hotel)
 }
 }])  
 
