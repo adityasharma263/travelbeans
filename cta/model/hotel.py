@@ -62,6 +62,8 @@ class Amenity(Base):
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
     conference_room = db.Column(db.Boolean, default=False, nullable=True)
+    parking = db.Column(db.Boolean, default=False, nullable=True)
+    couple_friendly = db.Column(db.Boolean, default=False, nullable=True)
     express_check_in_out = db.Column(db.Boolean, default=False, nullable=True)
     laundry_service = db.Column(db.Boolean, default=False, nullable=True)
     indoor_swimming_pool = db.Column(db.Boolean, default=False, nullable=True)
