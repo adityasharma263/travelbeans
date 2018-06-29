@@ -99,7 +99,6 @@ angular.module('comparetravel', ['angular.filter'])
 }])
 
 .controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
-  var i ,j;
   $scope.hotel = {}; // main hotel model
   $scope.hotelImg = []; //for all images array
   $scope.images={}; //for one image
@@ -107,41 +106,6 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotelDeals = []; // for all deals array
   $scope.room={}; //for one room
   $scope.hotelRooms=[]; // for all room array
-
-  $http({
-    method: 'GET',
-    url: '/api/v1/hotel' 
-  }).then(function successCallback(response) {
-      // hotelData = response.data.result;
-      $scope.hotels = response.data.result.hotel;
-      if($scope.hotels.length > 0){
-          console.log("in i",$scope.hotels);
-          i = $scope.hotels.length;
-          if(i > 0){
-            console.log("in j",$scope.hotels)
-            var z, k;
-            z=i-1;
-            k = $scope.hotels[z].rooms.length;
-            n=k-1;
-            j=$scope.hotels[z].rooms[n].id;
-          }
-          else{
-            j=0;
-          }
-      }
-      else{
-        i=0;
-        j=0;
-      }
-      
-      console.log("i===",i);
-      console.log("j==",j);
-      // this callback will be called asynchronously
-      // when the response is available
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-  })
 
   $http({
     method: 'GET',
@@ -164,6 +128,8 @@ angular.module('comparetravel', ['angular.filter'])
       url: url,
       data: data
     }).then(function (res) {
+      console.log(res);
+      return res;
       createToast("'hotel successfully created!!!'","green");
 
       },
@@ -185,22 +151,24 @@ angular.module('comparetravel', ['angular.filter'])
     $(".js-pop-room").css("top", "50%");
     
   };
-  $scope.addRoom=function(){
-    j++;
-    console.log("on add room",j);
+  onload=function(){
+    window.scrollBy(0, -900);
 
-    $scope.room.id = j;
+  }
+  $scope.createRoom=function(){
+
+    // $scope.room.hotel_id = j;
+    
     $scope.hotelDeals.push($scope.deals);
     $scope.room.deals=$scope.hotelDeals;
-    $scope.hotelRooms.push($scope.room);
-    console.log("rooms array",$scope.hotelRooms);
+    // $scope.hotelRooms.push($scope.room);
+    console.log("rooms array",$scope.room);
+  // sendPostCall('/api/v1/hotel', $scope.hotelRoom)
+
     createToast("'Room Added!!'","green");
-    $scope.images={};
-    $scope.hotelDeals=[];
     $scope.deals.hotel_url="";
-    return j;
+
   }
-  $scope.room.id =null;
 
   $scope.addImg=function(){
     $scope.hotelImg.push($scope.images);
@@ -223,26 +191,21 @@ var createToast=function(msg, color){
 }
 $scope.createHotel = function() {
   // e.preventDefault()
-  
-  i++;
-  j++;
-  console.log("on submit",j);
-  $scope.room.id = j;
-  $scope.hotel.id = i;
+
   $scope.hotelImg.push($scope.images);
   $scope.hotel.images=$scope.hotelImg;
-
-  $scope.hotelDeals.push($scope.deals);
-  $scope.room.deals=$scope.hotelDeals;
-
-  $scope.hotelRooms.push($scope.room);
-  $scope.hotel.rooms=$scope.hotelRooms;
 
   console.log("$scope.hotel",$scope.hotel);
 
   // sendPostCall('/api/v1/hotel', $scope.hotel)
+  // return $scope.j= res.data.result.hotel;
 }
 }])  
+
+
+
+
+
 
 .controller('hotelController', function($scope, $http) {
   
@@ -251,7 +214,6 @@ $scope.createHotel = function() {
       url: '/api/v1/hotel/'+(location.pathname).substr(7)
     }).then(function successCallback(response) {
         $scope.hotelData = response.data.result.hotel;
-        // $scope.eventData.description= $scope.eventData.description.replace("\n", "<br>");
          
         // this callback will be called asynchronously
         // when the response is available
