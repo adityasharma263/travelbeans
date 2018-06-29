@@ -15,22 +15,22 @@ def hotel_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        price_start = request.args.get('price_start', None)
-        price_end = request.args.get('price_end', None)
-        args.pop('price_start', None)
-        args.pop('price_end', None)
-        if price_start:
-            room_list = []
-            hotel_list = []
-            rooms = Deal.query.distinct(Deal.room_id).filter(Deal.price >= price_start, Deal.price <= price_end).all()
-            for index, item in enumerate(rooms):
-                room_list.append(item.room_id)
-            hotels_obj = Room.query.distinct(Room.hotel_id).filter(Room.id.in_(room_list)).all()
-            for index, item in enumerate(hotels_obj):
-                hotel_list.append(item.hotel_id)
-            hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
-        else:
-            hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        # price_start = request.args.get('price_start', None)
+        # price_end = request.args.get('price_end', None)
+        # args.pop('price_start', None)
+        # args.pop('price_end', None)
+        # if price_start:
+        #     room_list = []
+        #     hotel_list = []
+        #     rooms = Deal.query.distinct(Deal.room_id).filter(Deal.price >= price_start, Deal.price <= price_end).all()
+        #     for index, item in enumerate(rooms):
+        #         room_list.append(item.room_id)
+        #     hotels_obj = Room.query.distinct(Room.hotel_id).filter(Room.id.in_(room_list)).all()
+        #     for index, item in enumerate(hotels_obj):
+        #         hotel_list.append(item.hotel_id)
+        #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
+        # else:
+        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
