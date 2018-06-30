@@ -115,9 +115,14 @@
                 </label> 
                 <br>
                 <div>
-                    <label for="images">Images: 
+                
+                    <label for="images">Images url: 
+                        <div style="display:inline-block; background-color: #9a9292; color: white;border-radius: 100%;text-align: center; width: 24px; margin: 12px;">
+                            [[hotelImg.length]]
+                        </div>
                         <input id="images" class="box" ng-model="images.image_url" type="text" required>
                     </label> 
+                    
                     <br>
                     <button type="button" class="btn btn-default" ng-click=addImg()>add more</button>
                 </div>
@@ -125,30 +130,9 @@
                 <label for="rating">Rating:
                     <div class="radio">
                         <label>
-                        <input id="rating1" type="radio" name="rating" value="1" ng-model="hotel.rating"/>1
+                        <input id="rating1" type="number" name="rating" value="" ng-model="hotel.rating"/>
                         </label>
                     </div>
-                    <div class="radio">
-                        <label>
-                        <input id="rating2" type="radio" name="rating" value="2" ng-model="hotel.rating"/>2
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                        <input id="rating3" type="radio" name="rating" value="3" ng-model="hotel.rating"/>3
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                        <input id="rating4" type="radio" name="rating" value="4" ng-model="hotel.rating"/>4
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                        <input id="rating5" type="radio" name="rating" value="5" ng-model="hotel.rating"/>5
-                        </label>
-                    </div>
-                </label>
                 <br>
                 <label for="star">Star:
                     <div class="radio">
@@ -336,6 +320,11 @@
                             <input id="room_type4" type="radio" name="room_type" value="4" ng-model="room.room_type"/>Super Deluxe
                             </label>
                         </div>
+                        <div class="radio">
+                            <label>
+                            <input id="room_type4" type="radio" name="room_type" value="5" ng-model="room.room_type"/>Others
+                            </label>
+                        </div>
                     </label>
                     <br>
                    
@@ -512,10 +501,10 @@
             </div>        
             <div style="overflow:auto;">
                 <div style="float:right;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                <button type="button" id="roomBtn" ng-click="addRoom()">Add more room</button>
-                <button type="button"  id="submitBtn" ng-click="createHotel()">submit</button>
+                <button type="button" id="prevBtn" onclick="">Previous</button>
+                <button type="button" id="nextBtn" onclick="nextPrev(1)" ng-click="createHotel()">Add room</button>
+                <button type="button" id="roomBtn" ng-click="createRoom()">Add more room</button>
+                <button type="button"  id="submitBtn" onclick="window.location.reload()">Next hotel</button>
 
                 </div>
             </div>
@@ -561,7 +550,7 @@ function showTab(n) {
     document.getElementById("roomBtn").style.display = "inline-block";
 
   } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
+    document.getElementById("nextBtn").innerHTML = "Add room";
   }
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)
@@ -572,6 +561,7 @@ function nextPrev(n) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("tab");
   // Exit the function if any field in the current tab is invalid:
+    window.scrollBy(0, -900);
   if (n == 1 && !validateForm()) return false;
   // Hide the current tab:
   console.log("currentTab",x[currentTab]);
