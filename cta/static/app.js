@@ -119,6 +119,28 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+  var sendPostHotel = function(url, data) {
+    console.log(data);
+    
+    $http({
+      method: 'POST',
+      url: url,
+      data: data
+    }).then(function (res) {
+      console.log(res);
+      $scope.j= res.data.result.hotel.id;
+      console.log("j",$scope.j);
+
+      
+      createToast("'hotel successfully created!!!'","green");
+
+      },
+      // failed callback
+      function (req) {
+        createToast("'Something went wrong!!!'","red");
+      })
+    
+  }
 
   var sendPostCall = function(url, data) {
     console.log(data);
@@ -129,7 +151,7 @@ angular.module('comparetravel', ['angular.filter'])
       data: data
     }).then(function (res) {
       console.log(res);
-      return res;
+      
       createToast("'hotel successfully created!!!'","green");
 
       },
@@ -163,7 +185,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.room.deals=$scope.hotelDeals;
     // $scope.hotelRooms.push($scope.room);
     console.log("rooms array",$scope.room);
-  // sendPostCall('/api/v1/room', $scope.room)
+    sendPostCall('/api/v1/room', $scope.room)
 
     createToast("'Room Added!!'","green");
     $scope.deals.hotel_url="";
@@ -197,8 +219,7 @@ $scope.createHotel = function() {
 
   console.log("$scope.hotel",$scope.hotel);
 
-  sendPostCall('/api/v1/hotel', $scope.hotel)
-  // $scope.j= res.data.result.hotel.id;
+  sendPostHotel('/api/v1/hotel', $scope.hotel)
 }
 }])  
 
