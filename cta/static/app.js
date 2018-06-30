@@ -157,13 +157,13 @@ angular.module('comparetravel', ['angular.filter'])
   }
   $scope.createRoom=function(){
 
-    // $scope.room.hotel_id = j;
+    $scope.room.hotel_id = $scope.j;
     
     $scope.hotelDeals.push($scope.deals);
     $scope.room.deals=$scope.hotelDeals;
     // $scope.hotelRooms.push($scope.room);
     console.log("rooms array",$scope.room);
-  // sendPostCall('/api/v1/hotel', $scope.hotelRoom)
+  // sendPostCall('/api/v1/room', $scope.room)
 
     createToast("'Room Added!!'","green");
     $scope.deals.hotel_url="";
@@ -197,8 +197,8 @@ $scope.createHotel = function() {
 
   console.log("$scope.hotel",$scope.hotel);
 
-  // sendPostCall('/api/v1/hotel', $scope.hotel)
-  // return $scope.j= res.data.result.hotel;
+  sendPostCall('/api/v1/hotel', $scope.hotel)
+  // $scope.j= res.data.result.hotel.id;
 }
 }])  
 
