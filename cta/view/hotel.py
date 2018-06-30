@@ -75,9 +75,9 @@ def hotel_api():
             "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
             "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
 
-            }
-            print(amenity_obj)
-            Amenity(**amenity_obj).save()
+        }
+        print(amenity_obj)
+        Amenity(**amenity_obj).save()
         if hotel['images']:
             for image in hotel['images']:
                 image_obj = {

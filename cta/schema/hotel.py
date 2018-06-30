@@ -50,22 +50,6 @@ class FacilitySchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
-<<<<<<< HEAD
-class WebsiteSchema(ma.ModelSchema):
-
-    class Meta:
-        model = Website
-        exclude = ('updated_at', 'created_at', 'hotel')
-
-
-class DealSchema(ma.ModelSchema):
-    website = ma.Nested(WebsiteSchema, many=False)
-    class Meta:
-        model = Deal
-        exclude = ('updated_at', 'created_at')
-
-=======
->>>>>>> backend
 class RoomSchema(ma.ModelSchema):
     deals = ma.Nested(DealSchema, many=True)
     member = ma.Nested(MemberSchema, many=False)
