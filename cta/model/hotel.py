@@ -34,16 +34,16 @@ class Room(Base):
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     balcony = db.Column(db.Boolean, default=False, nullable=True)
-    member = db.relationship('Member', uselist=False, backref='hotel')
-    facilities = db.relationship('Facility', uselist=False, backref='hotel')
-    deals = db.relationship('Deal', backref='hotel')
+    member = db.relationship('Member', uselist=False, backref='room')
+    facilities = db.relationship('Facility', uselist=False, backref='room')
+    deals = db.relationship('Deal', backref='room')
 
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<room_type %r>' % self.room_type
+        return '<hotel_id %r>' % self.hotel_id
 
 
 class Image(Base):
@@ -167,13 +167,13 @@ class Deal(Base):
 
     price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
-    weekend = db.Column(db.Boolean, default=False,nullable=False)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
+    weekend = db.Column(db.Boolean, default=False, nullable=False)
     website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
     website = db.relationship('Website', foreign_keys=website_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<price %r>' % self.price
+        return '<room_id %r>' % self.room_id
