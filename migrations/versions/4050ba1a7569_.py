@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4b05cee801e8
+Revision ID: 4050ba1a7569
 Revises: 
-Create Date: 2018-06-24 20:10:32.881538
+Create Date: 2018-06-28 18:42:31.199049
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4b05cee801e8'
+revision = '4050ba1a7569'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,6 +46,8 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('hotel_id', sa.Integer(), nullable=True),
     sa.Column('conference_room', sa.Boolean(), nullable=True),
+    sa.Column('parking', sa.Boolean(), nullable=True),
+    sa.Column('couple_friendly', sa.Boolean(), nullable=True),
     sa.Column('express_check_in_out', sa.Boolean(), nullable=True),
     sa.Column('laundry_service', sa.Boolean(), nullable=True),
     sa.Column('indoor_swimming_pool', sa.Boolean(), nullable=True),
@@ -106,8 +108,8 @@ def upgrade():
     sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('hotel_url', sa.String(), nullable=True),
     sa.Column('weekend', sa.Boolean(), nullable=False),
-    sa.Column('room_id', sa.Integer(), nullable=True),
     sa.Column('website_id', sa.Integer(), nullable=True),
+    sa.Column('room_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['room_id'], ['room.id'], ),
     sa.ForeignKeyConstraint(['website_id'], ['website.id'], ),
     sa.PrimaryKeyConstraint('id')
