@@ -3,6 +3,24 @@
 <html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Page Title -->
     <title>Trip key</title>
+    <style>
+        .popAlertBox {
+            position: fixed;
+            background: white;
+            top: -50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            transition: 1s all;
+        }
+        .popAlertBox .body {
+        max-height: 600px;
+        overflow: auto;
+
+        }
+        .close-btn{
+            cursor: pointer;
+        }
+    </style>    
     
     <!-- Meta Tags -->
     
@@ -63,9 +81,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
     <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" charset="UTF-8" src="../static/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/stats.js"></script></head>
 <body ng-app="comparetravel">
-    <div ng-controller="stayController"> 
+    <div ng-controller="staylistController"> 
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
@@ -171,20 +190,21 @@
                         <div class="col-sm-4 col-md-3">
                             <!-- <h4 class="search-results-title"><i class="soap-icon-search"></i></h4> -->
                             <div class="toggle-container filters-container">
-                                <!-- <div class="panel style1 arrow-right">
+                                <div class="panel style1 arrow-right">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#price-filter" class="collapsed">Price</a>
                                     </h4>
                                     <div id="price-filter" class="panel-collapse collapse">
                                         <div class="panel-content">
-                                            <div id="price-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 10%; width: 70%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" style="left: 10%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" style="left: 80%;"></a></div>
+                                            <div class="form-group">
+                                                <label>Price</label>
+                                                    <input type="number" ng-model="hotel.price">
+                                            </div>
                                             <br>
-                                            <span class="min-price-label pull-left">$100</span>
-                                            <span class="max-price-label pull-right">$800</span>
-                                            <div class="clearer"></div>
+                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelPrice()">search again</button>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                                 
                                 <div class="panel style1 arrow-right">
                                     <h4 class="panel-title">
@@ -192,11 +212,26 @@
                                     </h4>
                                     <div id="rating-filter" class="panel-collapse collapse filters-container">
                                         <div class="panel-content">
-                                            <div id="rating" class="five-stars-container editable-rating ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min" style="width: 80%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" style="left: 80%;"></a></div>
-                                            <br>
-                                            <small>2458 REVIEWS</small>
+                                            <div class="form-group">
+                                                <label>Rating</label>
+                                                    <input type="number" ng-model="hotel.rating">
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#rating-filter" class="collapsed">User Rating</a>
+                                        </h4>
+                                        <div id="rating-filter" class="panel-collapse collapse filters-container">
+                                            <div class="panel-content">
+                                                <div class="form-group">
+                                                    <label>Rating</label>
+                                                        <input type="number" ng-model="hotel.rating">
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
 
                                 <div class="panel style1 arrow-right">
@@ -205,21 +240,16 @@
                                     </h4>
                                     <div id="modify-search-panel" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                                         <div class="panel-content">
-                                            <form action="/hotel-list">
+                                            <form>
                                                 <div class="form-group">
                                                     <label>check in</label>
-                                                    <div class="datepicker-wrap">
-                                                        <input type="text" ng-model="check_in" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1529322337944"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                    </div>
-                                                </div>
+                                                        <input type="date" ng-model="room.check_in" placeholder="mm/dd/yy">                                                    </div>
                                                 <div class="form-group">
                                                     <label>check out</label>
-                                                    <div class="datepicker-wrap">
-                                                        <input type="text" ng-model="check_out" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1529322337945"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                    </div>
+                                                        <input type="date" ng-model="room.check_out" placeholder="mm/dd/yy">
                                                 </div>
                                                 <br>
-                                                <button class="btn-medium icon-check uppercase full-width" ng-click="getroom(check_in,check_out)">search again</button>
+                                                <button class="btn-medium icon-check uppercase full-width" ng-click="getroom()">search again</button>
                                             </form>
                                         </div>
                                     </div>
@@ -232,7 +262,7 @@
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
                                 <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotels| filter:hotel">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel">
                                 <article class="box">
                                     
                                           <figure class="col-sm-5 col-md-4">
@@ -240,7 +270,6 @@
                                           </figure>
                                           
                                           <div class="details col-sm-7 col-md-8">
-                                          
                                               <div>
                                                   <div>
                                                       <h4 class="box-title">[[hotel.name]]<small>
@@ -251,151 +280,104 @@
                                                           <i class="fa fa-car" ng-if="hotel.amenities.parking" aria-hidden="true"></i>
                                                           <i class="fa fa-heart" ng-if="hotel.amenities.couple_friendly" aria-hidden="true"></i>
                                                       </div>
-                                                      
-                                                  </div>
-                                                  
-                                                  <div>
-                                                      <div class="five-stars-container">
-                                                          <span class="five-stars" style="width: 80%;"></span>
-                                                      </div>
-                                                      <span class="review">270 reviews</span>
-                                                  </div>
-                                                  
+                                                    </div>
+
+                                                   <div>
+                                                       <div class="five-stars-container">
+                                                            <span class="five-stars" style="width: 80%;"></span>
+                                                       </div> 
+
+                                                   </div>
+
                                               </div>
                                               
                                               <div>
                                                   <div>
-                                                      <span class="price"><small>[[hotel.deals[0].website.website]]</small>[[hotel.deals[0].price]]</span><center>
-                                                      <a class="button btn-small green" href="/hotel-list/[[hotel.name]]">View Details</a>
-                                                      <span class="tab">
-                                                      <!-- <a class="button btn-small yellow">More Deals</a> -->
-                                                      <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button>
-                                                      </span>
+                                                      <span class="price"><small>[[hotel.rooms[0].deals[0].website.website]]</small>₹[[hotel.rooms[0].deals[0].price]]</span><center>
+                                                      <a class="button btn-small green" href="">View Details</a>
+                                                        <a class="collapsed button btn-small yellow" href="#tgg4" data-toggle="collapse">More Deals</a> 
+                                                            <div class="toggle-container box">
+                                                                <div class="panel style2"><br>
+                                                                    <div class="panel-collapse collapse" id="tgg4">
+                                                                        <div class="panel-content">
+                                                                         <h4 class="panel-title"> More Deals</h4>
+                                                                         <li>booking.com-500</li> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>  
+                                            
+
+                                                      <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                   </div>
-                                                  <div class="amenities" ng-repeat="price in hotel.deals">
+                                                  <div class="amenities" ng-repeat="price in hotel.rooms[0].deals">
                                                           <span class="price"><small>[[price.website.website]]</small>₹[[price.price]]</span>
-                                                  </div>
-                                                  
-                                                  
+                                                  </div>    
                                               </div>
-      
                                           </div>
                                       </article>
-                                      <div id="deals" class="tabcontent">
-                                            <h3>More Deals</h3>   
-                                      </div>
                             </div>
-                            <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" class="uppercase full-width button btn-large">load more listing</a>
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'room'">
+                                    <article class="box">
+                                        <figure class="col-sm-5 col-md-4">
+                                            <a title="" href="[[deal.roomdata.hoteldata.images[0].image_url]]" class="hover-effect popup-gallery"><img width="270" height="160" alt=""></a>
+                                        </figure>
+                                        
+                                        <div class="details col-sm-7 col-md-8">
+                                            <div>
+                                                <div>
+                                                    <h4 class="box-title">[[deal.roomdata.hoteldata.name]]<small>
+                                                      <i class="fa fa-map-marker" aria-hidden="true"></i> [[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</small></h4>
+    
+                                                    <div class="amenities">
+                                                        <i class="fa fa-wifi" ng-if="deal.roomdata.hoteldata.amenities.wifi_in_lobby" aria-hidden="true"></i>
+                                                        <i class="fa fa-car" ng-if="deal.roomdata.hoteldata.amenities.parking" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" ng-if="deal.roomdata.hoteldata.amenities.couple_friendly" aria-hidden="true"></i>
+                                                    </div>
+                                                  </div>
+
+                                                 <div>
+                                                     <div class="five-stars-container">
+                                                          <span class="five-stars" style="width: 80%;"></span>
+                                                     </div> 
+
+                                                 </div>
+
+                                            </div>
+                                            
+                                            <div>
+                                                <div>
+                                                    <span class="price"><small>[[deal.website.website]]</small>₹[[deal.price]]</span><center>
+                                                    <a class="button btn-small green" href="">View Details</a>
+                                                      <a class="collapsed button btn-small yellow" href="#tgg4" data-toggle="collapse">More Deals</a> 
+                                                          <div class="toggle-container box">
+                                                              <div class="panel style2"><br>
+                                                                  <div class="panel-collapse collapse" id="tgg4">
+                                                                      <div class="panel-content">
+                                                                       <h4 class="panel-title"> More Deals</h4>
+                                                                       <li>booking.com-500</li> 
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>  
+                                          
+
+                                                    <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
+                                                </div>
+                                                <div class="amenities">
+                                                        <span class="price"><small>[[deal.price.website.website]]</small>₹[[deal.price.price]]</span>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            <a href="" class="uppercase full-width button btn-large" ng-click='loadMore()'>load more listing</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <footer id="footer">
-            <div class="footer-wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-3">
-                            <h2>Discover</h2>
-                            <ul class="discover triangle hover row">
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Safety</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">About</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Travelo Picks</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Latest Jobs</a></li>
-                                <li class="active col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Mobile</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Press Releases</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Why Host</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Blog Posts</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Social Connect</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Help Topics</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Site Map</a></li>
-                                <li class="col-xs-6"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Policies</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <h2>Travel News</h2>
-                            <ul class="travel-news">
-                                <li>
-                                    <div class="thumb">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">
-                                            <img src="./list_files/news01.png" alt="" width="63" height="63">
-                                        </a>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="s-title"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Amazing Places</a></h5>
-                                        <p>Purus ac congue arcu cursus ut vitae pulvinar massaidp.</p>
-                                        <span class="date">25 Sep, 2013</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="thumb">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">
-                                            <img src="./list_files/news02.png" alt="" width="63" height="63">
-                                        </a>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="s-title"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Travel Insurance</a></h5>
-                                        <p>Purus ac congue arcu cursus ut vitae pulvinar massaidp.</p>
-                                        <span class="date">24 Sep, 2013</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <h2>Mailing List</h2>
-                            <p>Sign up for our mailing list to get latest updates and offers.</p>
-                            <br>
-                            <div class="icon-check">
-                                <input type="text" class="input-text full-width" placeholder="your email">
-                            </div>
-                            <br>
-                            <span>We respect your privacy</span>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <h2>About Travelo</h2>
-                            <p>Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque.</p>
-                            <br>
-                            <address class="contact-details">
-                                <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
-                                <br>
-                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" class="contact-email">help@travelo.com</a>
-                            </address>
-                            <ul class="social-icons clearfix">
-                                <li class="twitter"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="twitter"><i class="soap-icon-twitter"></i></a></li>
-                                <li class="googleplus"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="googleplus"><i class="soap-icon-googleplus"></i></a></li>
-                                <li class="facebook"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="facebook"><i class="soap-icon-facebook"></i></a></li>
-                                <li class="linkedin"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="linkedin"><i class="soap-icon-linkedin"></i></a></li>
-                                <li class="vimeo"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="vimeo"><i class="soap-icon-vimeo"></i></a></li>
-                                <li class="dribble"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="dribble"><i class="soap-icon-dribble"></i></a></li>
-                                <li class="flickr"><a title="" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" data-toggle="tooltip" data-original-title="flickr"><i class="soap-icon-flickr"></i></a></li>
-                            </ul>
-                      
-            </div>
-            <div class="bottom gray-area">
-                <div class="container">
-                    <div class="logo pull-left">
-                        <a href="http://www.soaptheme.net/html/travelo/index.html" title="Travelo - home">
-                            <img src="../static/images/logo.png" alt="Travelo HTML5 Template">
-                        </a>
-                    </div>
-                    <div class="pull-right">
-                        <a id="back-to-top" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" class="animated" data-animation-type="bounce"><i class="soap-icon-longarrow-up circle"></i></a>
-                    </div>
-                    <div class="copyright pull-right">
-                        <p>© 2014 Travelo</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
-    <div id="style-changer" class="style-changer dark">
-        <div class="style-changer-header">
-            <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#" class="style-toggle open">
-                <i class="fa fa-gear"></i>
-            </a>
-            <h2 class="style-main-title">Customize Travelo</h2>
-        </div>
 
 
     <!-- Javascript -->
@@ -434,21 +416,6 @@
     <script type="text/javascript" src="../static/jstheme-scripts.js"></script>
     <script type="text/javascript" src="../static/js/scripts.js"></script>
 
-    <script>
-        function opendeals(evt, deals) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(deals).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-    </script>
 
     
     <script type="text/javascript">
@@ -480,201 +447,5 @@
 
 
 
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div class="chaser hidden-mobile" style="visibility: visible; display: none;"><div class="container"><h1 class="logo navbar-brand"><a title="Travelo - home" href="http://www.soaptheme.net/html/travelo/index.html"><img alt="" src="../static/images/logo.png"></a></h1><ul class="menu" style="">
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/index.html">Home</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/index.html">Home Layout 1</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage2.html">Home Layout 2</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage3.html">Home Layout 3</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage4.html">Home Layout 4</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage5.html">Home Layout 5</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage6.html">Home Layout 6</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage7.html">Home Layout 7</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage8.html">Home Layout 8</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage9.html">Home Layout 9</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage10.html">Home Layout 10</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/homepage11.html">Home Layout 11</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children active">
-                                <a href="http://www.soaptheme.net/html/travelo/hotel-index.html">Hotels</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/hotel-index.html">Home Hotels</a></li>
-                                    <li class="active"><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html">List View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/hotel-grid-view.html">Grid View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/hotel-block-view.html">Block View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html">Detailed</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/hotel-booking.html">Booking</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/hotel-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/flight-index.html">Flights</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-index.html">Home Flights</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-list-view.html">List View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-grid-view.html">Grid View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-block-view.html">Block View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-detailed.html">Detailed</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-booking.html">Booking</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/flight-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/car-index.html">Cars</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-index.html">Home Cars</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-list-view.html">List View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-grid-view.html">Grid View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-block-view.html">Block View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-detailed.html">Detailed</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-booking.html">Booking</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/car-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/cruise-index.html">Cruises</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-index.html">Home Cruises</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-list-view.html">List View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-grid-view.html">Grid View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-block-view.html">Block View</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-detailed.html">Detailed</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-booking.html">Booking</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/cruise-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/tour-index.html">Tour</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-index.html">Home Tour</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-fancy-package-2column.html">Fancy Packages 2 Column</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-fancy-package-3column.html">Fancy Packages 3 Column</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-fancy-package-4column.html">Fancy Packages 4 Column</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-simple-package-2column.html">Simple Packages 2 Column</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-simple-package-3column.html">Simple Packages 3 Column</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-simple-package-4column.html">Simple Packages 4 Column</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-simple-package-3column.html">Location - Eruope</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-simple-package-4column.html">Location - North America</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-detailed1.html">Detailed 1</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-detailed2.html">Detailed 2</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/tour-booking.html">Booking</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children megamenu-menu">
-                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Pages</a>
-                                <div class="megamenu-wrapper container" data-items-per-column="8" style="left: -903.219px; width: 1170px; display: block;">
-                                    <div class="megamenu-holder">
-                                        <ul class="megamenu">
-                                            <li class="menu-item-has-children megamenu-columns-3" style="width: 42.8571%;">
-                                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Standard Pages</a>
-                                                
-                                            <ul class="sub-menu"><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-aboutus1.html">About Us 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-aboutus2.html">About Us 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-services1.html">Services 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-services2.html">Services 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-4column.html">Gallery 4 Column</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-3column.html">Gallery 3 Column</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-2column.html">Gallery 2 Column</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-fullview.html">Gallery Read</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-rightsidebar.html">Blog Right Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-leftsidebar.html">Blog Left Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-fullwidth.html">Blog Full Width</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-read.html">Blog Read</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-faq1.html">Faq 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-faq2.html">Faq 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-leftsidebar.html">Layouts Left Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-rightsidebar.html">Layouts Right Sidebar</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-twosidebar.html">Layouts Two Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-fullwidth.html">Layouts Full Width</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-contactus1.html">Contact Us 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-contactus2.html">Contact Us 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-contactus3.html">Contact Us 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-travelo-policies.html">Travelo Policies</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-sitemap.html">Site Map</a></li></ul></li></ul></li>
-                                            <li class="menu-item-has-children megamenu-columns-2" style="width: 28.5714%;">
-                                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Extra Pages</a>
-                                                
-                                            <ul class="sub-menu"><li><ul><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-holidays.html">Holidays</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-hotdeals.html">Hot Deals</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-before-you-fly.html">Before You Fly</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html">Inflight Experience</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-things-todo1.html">Things To Do 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-things-todo2.html">Things To Do 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-essentials.html">Travel Essentials</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-stories.html">Travel Stories</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-guide.html">Travel Guide</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-ideas.html">Travel Ideas</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-insurance.html">Travel Insurance</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-group-booking.html">Group Bookings</a></li></ul></li></ul></li>
-                                            <li class="menu-item-has-children megamenu-columns-2" style="width: 28.5714%;">
-                                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Special Pages</a>
-                                                
-                                            <ul class="sub-menu"><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-404-1.html">404 Page 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-404-2.html">404 Page 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-404-3.html">404 Page 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-coming-soon1.html">Coming Soon 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-coming-soon2.html">Coming Soon 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-coming-soon3.html">Coming Soon 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-loading1.html">Loading Page 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-loading2.html">Loading Page 2</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-loading3.html">Loading Page 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-login1.html">Login Page 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-login2.html">Login Page 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-login3.html">Login Page 3</a></li></ul></li></ul></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Shortcodes</a>
-                                <ul>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-tabs.html">Tabs</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-buttons.html">Buttons</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-icon-boxes.html">Icon Boxes</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html">Image &amp; Gallery Styles</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-image-box-styles.html">Image Box Styles</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Listing Styles</a>
-                                        <ul class="left">
-                                            <li><a href="http://www.soaptheme.net/html/travelo/shortcode-listing-style1.html">Listing Style 01</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/shortcode-listing-style2.html">Listing Style 02</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/shortcode-listing-style3.html">Listing Style 03</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-dropdowns.html">Dropdowns</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-pricing-tables.html">Pricing Tables</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-testimonials.html">Testimonials</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-our-team.html">Our Team</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-popup.html">Gallery Popup</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-map-popup.html">Map Popup</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-style-changer.html">Style Changer</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-typography.html">Typography</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/shortcode-animations.html">Animations</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Bonus</a>
-                                <ul class="left">
-                                    <li><a href="http://www.soaptheme.net/html/travelo/dashboard1.html">Dashboard 1</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/dashboard2.html">Dashboard 2</a></li>
-                                    <li><a href="http://www.soaptheme.net/html/travelo/dashboard3.html">Dashboard 3</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Sliders</a>
-                                        <ul class="left">
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider1.html">Slider - Travelo</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider2.html">Slider - Concept</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider3.html">Slider - Promotion</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider4.html">Slider - Snapshots</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider5.html">Slider - Holidays</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider6.html">Slider - Couples</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/slider7.html">Slider - Family</a></li>
-                                            
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">7 Footer Styles</a>
-                                        <ul class="left">
-                                            <li><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Default Style</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/footer-style1.html">Footer Style 1</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/footer-style2.html">Footer Style 2</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/footer-style3.html">Footer Style 3</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/footer-style4.html">Footer Style 4</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/footer-style5.html">Footer Style 5</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/footer-style6.html">Footer Style 6</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">8 Header Styles</a>
-                                        <ul class="left">
-                                            <li><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Default Style</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style1.html">Header Style 1</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style2.html">Header Style 2</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style3.html">Header Style 3</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style4.html">Header Style 4</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style5.html">Header Style 5</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style6.html">Header Style 6</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/header-style7.html">Header Style 7</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">7 Inner Start Styles</a>
-                                        <ul class="left">
-                                            <li><a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">Default Style</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/inner-starts-style1.html">Inner Start Style 1</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/inner-starts-style2.html">Inner Start Style 2</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/inner-starts-style3.html">Inner Start Style 3</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/inner-starts-style4.html">Inner Start Style 4</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/inner-starts-style5.html">Inner Start Style 5</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/inner-starts-style6.html">Inner Start Style 6</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#">3 Search Styles</a>
-                                        <ul class="left">
-                                            <li><a href="http://www.soaptheme.net/html/travelo/search-style1.html">Search Style 1</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/search-style2.html">Search Style 2</a></li>
-                                            <li><a href="http://www.soaptheme.net/html/travelo/search-style3.html">Search Style 3</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul></div></div></div></body></html>
+
+</div></div></body></html>
