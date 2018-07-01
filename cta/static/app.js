@@ -121,24 +121,24 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
 
-  $scope.getHotelRating = function(){
+  // $scope.getHotelRating = function(){
     
-    console.log("$$scope.hotel.rating",$scope.hotel.rating);
+    // console.log("$$scope.hotel.rating",$scope.hotel.rating);
 
-    $http({
-      method: 'GET',
-      url: '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
-    }).then(function successCallback(response) {
-        $scope.hotelData = response.data.result.hotel;
-        console.log("$scope.hotelData",$scope.hotelData);
-        // this callback will be called asynchronously
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
+    // $http({
+    //   method: 'GET',
+    //   url: '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
+    // }).then(function successCallback(response) {
+    //     $scope.hotelData = response.data.result.hotel;
+    //     console.log("$scope.hotelData",$scope.hotelData);
+    //     // this callback will be called asynchronously
+    //     // when the response is available
+    //   }, function errorCallback(response) {
+    //     // called asynchronously if an error occurs
+    //     // or server returns response with an error status.
+    // })
 
-  }
+  // }
   $http({
     method: 'GET',
     url: '/api/v1/room'
