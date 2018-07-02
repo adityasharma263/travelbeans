@@ -267,6 +267,10 @@ def deal_api():
         check_in = request.args.get('check_in')
         check_out = request.args.get('check_out')
         no_of_days = 1
+        price_start = request.args.get('price_start', None)
+        price_end = request.args.get('price_end', None)
+        args.pop('price_start', None)
+        args.pop('price_end', None)
         if check_in and check_out:
             no_of_days = int(check_out) - int(check_in)
             sec = datetime.timedelta(seconds=int(no_of_days))
@@ -299,7 +303,10 @@ def deal_api():
         args.pop('check_out', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        if price_start:
+            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).filter(Deal.price >= price_start, Deal.price <= price_end).all()
+        else:
+            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:
             for deal in result.data:
