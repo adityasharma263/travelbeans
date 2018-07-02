@@ -103,6 +103,7 @@ angular.module('comparetravel', ['angular.filter'])
   }).then(function successCallback(response) {
       $scope.hotelData = response.data.result.hotel;
       console.log("$scope.hotelData",$scope.hotelData);
+      console.log("...",$scope.hotelData[0].images[0].image_url);
       for(var j=0;j<$scope.hotelData.length;j++){
         $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
       }
@@ -169,7 +170,7 @@ angular.module('comparetravel', ['angular.filter'])
 
     $http({
       method: 'GET',
-      url: '/api/v1/deal?price=' + $scope.hotel.price
+      url: '/api/v1/deal?price_start=' + $scope.hotel.start_price + '&price_end=5' + $scope.hotel.end_price
     }).then(function successCallback(response) {
         $scope.deals = response.data.result.deal;
         for(var j=0; j<$scope.deals.length; j++){
@@ -247,7 +248,7 @@ angular.module('comparetravel', ['angular.filter'])
     }).then(function (res) {
       console.log(res);
       
-      createToast("'hotel successfully created!!!'","green");
+      // createToast("'hotel successfully created!!!'","green");
 
       },
       // failed callback
@@ -283,7 +284,7 @@ angular.module('comparetravel', ['angular.filter'])
     sendPostCall('/api/v1/room', $scope.room)
 
     createToast("'Room Added!!'","green");
-    $scope.deals.hotel_url="";
+    // $scope.deals.hotel_url="";
 
   }
 

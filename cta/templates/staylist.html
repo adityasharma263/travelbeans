@@ -266,10 +266,13 @@
                                 <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel | limitTo:limit">
+                                <!-- <div ng-repeat="room in hotel.rooms">
+                                <div ng-if="[[room.room_type]]==1 && ![[room.breakfast]]"> -->
+                                            
                                 <article class="box">
                                     
                                           <figure class="col-sm-5 col-md-4">
-                                              <a title="" href="[[hotel.images[0].image_url]]" class="hover-effect popup-gallery"><img width="270" height="160" alt=""></a>
+                                              <a title="" href="[[hotel.images[0].image_url]]" class="hover-effect popup-gallery"><img style="height:150px" src="[[hotel.images[0].image_url]]" width="270" height="160" alt=""></a>
                                           </figure>
                                           
                                           <div class="details col-sm-7 col-md-8">
@@ -301,7 +304,7 @@
                                                       <a class="button btn-small green" href="">View Details</a>
                                                         <a class="button btn-small yellow" ng-click="show()">More Deals</a> 
                                                             
-                                            
+                                                      
 
                                                       <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                   </div>
@@ -317,17 +320,18 @@
                                            <span class="col-md-3" ng-if="[[room.room_type]]==2">Executive</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==3">Sweet</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
-                                           <span ng-repeat="deal in room.deals">
+                                           <!-- <span ng-repeat="deal in room.deals"> -->
                                            <span class="col-md-3"><img src="deal.website.logo_image"></span>
                                               <span class="col-md-4"><a class="button btn-mini green">View Details</a>
                                               <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
                                            <span class="price">₹[[deal.price]]</span>
-                                              </span>
+                                              <!-- </span> -->
                                            
                                           </div>
 
                                       </article>
-
+                                <!-- </div>
+                                </div> -->
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'room'">
                                     <article class="box">

@@ -5,6 +5,7 @@ from cta import app
 from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
+from itertools import cycle
 
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
@@ -35,14 +36,13 @@ def hotel_api():
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
         hotel = request.json
-        print(hotel,"********************")
         hotel_obj = {
-        "name" : hotel.get("name", None),
-        "city" : hotel.get("city", None),
-        'rating' : hotel.get("rating", None),
-        "desc" : hotel.get("desc", None),
-        "address" : hotel.get("address", None),
-        "star" : hotel.get("star", None),
+        "name": hotel.get("name", None),
+        "city": hotel.get("city", None),
+        'rating': hotel.get("rating", None),
+        "desc": hotel.get("desc", None),
+        "address": hotel.get("address", None),
+        "star": hotel.get("star", None),
         }
         print(hotel_obj)
         post = Hotel(**hotel_obj)
@@ -94,15 +94,6 @@ def hotel_api():
 def room_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        check_in = request.args.get('check_in')
-        check_out = request.args.get('check_out')
-        if check_in and check_out:
-            check_in = datetime.datetime.fromtimestamp(
-                int(check_in)).strftime('%Y-%m-%d %H:%M:%S')
-            check_out = datetime.datetime.fromtimestamp(
-                int(check_out)).strftime('%Y-%m-%d %H:%M:%S')
-            args['check_in'] = check_in
-            args['check_out'] = check_out
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
@@ -274,12 +265,53 @@ def website_api():
 def deal_api():
     if request.method == 'GET':
         args = request.args.to_dict()
+        check_in = request.args.get('check_in')
+        check_out = request.args.get('check_out')
+        no_of_days = 1
+        price_start = request.args.get('price_start', None)
+        price_end = request.args.get('price_end', None)
+        args.pop('price_start', None)
+        args.pop('price_end', None)
+        if check_in and check_out:
+            no_of_days = int(check_out) - int(check_in)
+            sec = datetime.timedelta(seconds=int(no_of_days))
+            d = datetime.datetime(1, 1, 1) + sec
+            no_of_days = d.day - 1
+            check_in = datetime.datetime.fromtimestamp(
+                int(check_in)).weekday()
+            check_out = datetime.datetime.fromtimestamp(
+                int(check_out)).weekday()
+            a = [0, 1, 2, 3, 4, 5, 6]
+            pool = cycle(a)
+            start = False
+            days = []
+            weekend = False
+            for i, val in enumerate(pool):
+                if val == check_out and start and i == no_of_days:
+                    break
+                if start:
+                    days.append(val)
+                if val == check_in:
+                    start = True
+                    days.append(val)
+            for day in days:
+                if day == 5 or 6:
+                    weekend = True
+            args['weekend'] = weekend
         args.pop('page', None)
         args.pop('per_page', None)
+        args.pop('check_in', None)
+        args.pop('check_out', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        if price_start:
+            price = Deal.query.filter_by(**args).filter(Deal.price >= price_start, Deal.price <= price_end).all()
+        else:
+            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = DealSchema(many=True).dump(price)
+        if no_of_days >= 1:
+            for deal in result.data:
+                deal['price'] = deal["price"] * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
