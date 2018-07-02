@@ -217,8 +217,10 @@
                                     <div id="price-filter" class="panel-collapse collapse">
                                         <div class="panel-content">
                                             <div class="form-group">
-                                                <label>Price</label>
-                                                    <input type="number" ng-model="hotel.price">
+                                                <label>Start Price</label>
+                                                    <input type="number" ng-model="hotel.start_price">
+                                                <label>End Price</label>
+                                                    <input type="number" ng-model="hotel.end_price">
                                             </div>
                                             <br>
                                             <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelPrice()">search again</button>
@@ -359,17 +361,7 @@
                                                 <div>
                                                     <span class="price"><small>[[deal.website.website]]</small>₹[[deal.price]]</span><center>
                                                     <a class="button btn-small green" href="">View Details</a>
-                                                      <a class="collapsed button btn-small yellow" href="#tgg4" data-toggle="collapse">More Deals</a> 
-                                                          <div class="toggle-container box">
-                                                              <div class="panel style2"><br>
-                                                                  <div class="panel-collapse collapse" id="tgg4">
-                                                                      <div class="panel-content">
-                                                                       <h4 class="panel-title"> More Deals</h4>
-                                                                       <li>booking.com-500</li> 
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-                                                          </div>  
+                                                    <a class="button btn-small yellow" ng-click="show()">More Deals</a>    
                                           
 
                                                     <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
@@ -379,6 +371,22 @@
                                                 </div>    
                                             </div>
                                         </div>
+
+                                        <div ng-show="myVar">
+                                                <div class="row" ng-repeat="room in hotel.rooms">
+                                               <span class="col-md-3" ng-if="[[room.room_type]]==1">Premium</span>
+                                               <span class="col-md-3" ng-if="[[room.room_type]]==2">Executive</span>
+                                               <span class="col-md-3" ng-if="[[room.room_type]]==3">Sweet</span>
+                                               <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
+                                               <span ng-repeat="deal in room.deals">
+                                               <span class="col-md-3"><img src="deal.website.logo_image"></span>
+                                                  <span class="col-md-4"><a class="button btn-mini green">View Details</a>
+                                                  <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
+                                               <span class="price">₹[[deal.price]]</span>
+                                                  </span>
+                                               
+                                              </div>
+
                                     </article>
                                 </div>
                             <a href="" class="uppercase full-width button btn-large" ng-click='loadMore()'>load more listing</a>

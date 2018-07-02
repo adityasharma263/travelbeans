@@ -15,6 +15,7 @@ angular.module('comparetravel', ['angular.filter'])
 
  // $location.search=
   
+ 
   var jsonToQueryString = function(json) {
     return '?' +
       Object.keys(json).map(function(key) {
