@@ -327,10 +327,60 @@
                                       </article>
 
                             </div>
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'room'">
+                                    <article class="box">
+                                        <figure class="col-sm-5 col-md-4">
+                                            <a title="" href="[[deal.roomdata.hoteldata.images[0].image_url]]" class="hover-effect popup-gallery"><img width="270" height="160" alt=""></a>
+                                        </figure>
+                                        
+                                        <div class="details col-sm-7 col-md-8">
+                                            <div>
+                                                <div>
+                                                    <h4 class="box-title">[[deal.roomdata.hoteldata.name]]<small>
+                                                      <i class="fa fa-map-marker" aria-hidden="true"></i> [[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</small></h4>
+    
+                                                    <div class="amenities">
+                                                        <i class="fa fa-wifi" ng-if="deal.roomdata.hoteldata.amenities.wifi_in_lobby" aria-hidden="true"></i>
+                                                        <i class="fa fa-car" ng-if="deal.roomdata.hoteldata.amenities.parking" aria-hidden="true"></i>
+                                                        <i class="fa fa-heart" ng-if="deal.roomdata.hoteldata.amenities.couple_friendly" aria-hidden="true"></i>
+                                                    </div>
+                                                  </div>
 
-                            
+                                                 <div>
+                                                     <div class="five-stars-container">
+                                                          <span class="five-stars" style="width: 80%;"></span>
+                                                     </div> 
 
+                                                 </div>
 
+                                            </div>
+                                            
+                                            <div>
+                                                <div>
+                                                    <span class="price"><small>[[deal.website.website]]</small>₹[[deal.price]]</span><center>
+                                                    <a class="button btn-small green" href="">View Details</a>
+                                                      <a class="collapsed button btn-small yellow" href="#tgg4" data-toggle="collapse">More Deals</a> 
+                                                          <div class="toggle-container box">
+                                                              <div class="panel style2"><br>
+                                                                  <div class="panel-collapse collapse" id="tgg4">
+                                                                      <div class="panel-content">
+                                                                       <h4 class="panel-title"> More Deals</h4>
+                                                                       <li>booking.com-500</li> 
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>  
+                                          
+
+                                                    <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
+                                                </div>
+                                                <div class="amenities">
+                                                        <span class="price"><small>[[deal.price.website.website]]</small>₹[[deal.price.price]]</span>
+                                                </div>    
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
                             <a href="" class="uppercase full-width button btn-large" ng-click='loadMore()'>load more listing</a>
                         </div>
                     </div>

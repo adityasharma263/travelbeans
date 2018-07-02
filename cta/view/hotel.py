@@ -35,6 +35,7 @@ def hotel_api():
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
         hotel = request.json
+        print(hotel,"********************")
         hotel_obj = {
         "name" : hotel.get("name", None),
         "city" : hotel.get("city", None),
@@ -86,7 +87,7 @@ def hotel_api():
                 }
                 print(image_obj)
                 Image(**image_obj).save()
-        return jsonify({'result': {'hotel': request.json}, 'message': "Success", 'error': False})
+        return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/room', methods=['GET', 'POST'])
@@ -110,8 +111,7 @@ def room_api():
         result = RoomSchema(many=True).dump(rooms)
         return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
     else:
-        data = request.json
-        room = data['room']
+        room = request.json
         room_obj = {
             "room_type": room.get("room_type", None),
             "check_in": datetime.datetime.now(),
