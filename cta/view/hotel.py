@@ -266,13 +266,12 @@ def deal_api():
         args = request.args.to_dict()
         check_in = request.args.get('check_in')
         check_out = request.args.get('check_out')
-        no_of_days = int(check_out) - int(check_in)
-        sec = datetime.timedelta(seconds=int(no_of_days))
-        d = datetime.datetime(1, 1, 1) + sec
-        print("DAYS:HOURS:MIN:SEC")
-        print(d.day - 1)
-        no_of_days = d.day - 1
+        no_of_days = 1
         if check_in and check_out:
+            no_of_days = int(check_out) - int(check_in)
+            sec = datetime.timedelta(seconds=int(no_of_days))
+            d = datetime.datetime(1, 1, 1) + sec
+            no_of_days = d.day - 1
             check_in = datetime.datetime.fromtimestamp(
                 int(check_in)).weekday()
             check_out = datetime.datetime.fromtimestamp(
@@ -293,7 +292,6 @@ def deal_api():
             for day in days:
                 if day == 5 or 6:
                     weekend = True
-            print(weekend)
             args['weekend'] = weekend
         args.pop('page', None)
         args.pop('per_page', None)
@@ -303,6 +301,9 @@ def deal_api():
         per_page = int(request.args.get('per_page', 10))
         price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = DealSchema(many=True).dump(price)
+        if no_of_days >= 1:
+            for deal in result.data:
+                deal['price'] = deal["price"] * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
