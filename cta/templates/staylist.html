@@ -263,7 +263,7 @@
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
                                 <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel | limitTo:limit">
                                 <article class="box">
                                     
                                           <figure class="col-sm-5 col-md-4">
@@ -274,7 +274,8 @@
                                               <div>
                                                   <div>
                                                       <h4 class="box-title">[[hotel.name]]<small>
-                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> [[hotel.address]],[[hotel.city]]</small></h4>
+                                                        <a class="popup-map" href="#" data-box="48.856614, 2.352222">
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> [[hotel.address]],[[hotel.city]]</a></small></h4>
       
                                                       <div class="amenities">
                                                           <i class="fa fa-wifi" ng-if="hotel.amenities.wifi_in_lobby" aria-hidden="true"></i>
@@ -296,7 +297,7 @@
                                                   <div>
                                                       <span class="price"><small>[[hotel.rooms[0].deals[0].website.website]]</small>₹[[hotel.rooms[0].deals[0].price]]</span><center>
                                                       <a class="button btn-small green" href="">View Details</a>
-                                                        <a class="button btn-small yellow">More Deals</a> 
+                                                        <a class="button btn-small yellow" ng-click="show()">More Deals</a> 
                                                             
                                             
 
@@ -307,7 +308,24 @@
                                                   </div>    
                                               </div>
                                           </div>
+
+                                          <div ng-show="myVar">
+                                            <div class="row" ng-repeat="room in hotel.rooms">
+                                           <span class="col-md-3" ng-if="[[room.room_type]]==1">Premium</span>
+                                           <span class="col-md-3" ng-if="[[room.room_type]]==2">Executive</span>
+                                           <span class="col-md-3" ng-if="[[room.room_type]]==3">Sweet</span>
+                                           <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
+                                           <span ng-repeat="deal in room.deals">
+                                           <span class="col-md-3"><img src="deal.website.logo_image"></span>
+                                              <span class="col-md-4"><a class="button btn-mini green">View Details</a>
+                                              <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
+                                           <span class="price">₹[[deal.price]]</span>
+                                              </span>
+                                           
+                                          </div>
+
                                       </article>
+
                             </div>
 
                             

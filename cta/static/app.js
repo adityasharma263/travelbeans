@@ -66,6 +66,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.id = [];
   $scope.hotel = {};
   $scope.limit= 10;
+  $scope.myVar= false;
   
   // loadMore function
   $scope.loadMore = function() {
@@ -81,6 +82,15 @@ angular.module('comparetravel', ['angular.filter'])
   };
 
   $(".close-btn").click(closePopUp);
+
+  $scope.show = function() {
+    if($scope.myVar==false){
+      $scope.myVar = true;
+    }
+    else{
+      $scope.myVar = false;
+    }
+  }
 
   $http({
     method: 'GET',
