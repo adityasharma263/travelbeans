@@ -20,6 +20,15 @@
         .close-btn{
             cursor: pointer;
         }
+        .label {
+            color: white;
+            padding: 8px;
+        }
+        .success {background-color: #4CAF50;} /* Green */
+        .info {background-color: #2196F3;} /* Blue */
+        .warning {background-color: #ff9800;} /* Orange */
+        .danger {background-color: #f44336;} /* Red */ 
+        .other {background-color: #e7e7e7; color: black;} /* Gray */ 
     </style>    
     
     <!-- Meta Tags -->
@@ -199,13 +208,13 @@
                                                 <form>
                                                     <div class="form-group">
                                                         <label>check in</label>
-                                                            <input type="date" ng-model="room.check_in" placeholder="mm/dd/yy">                                                    </div>
+                                                            <input type="date" ng-model="hotel.check_in" placeholder="mm/dd/yy">                                                    </div>
                                                     <div class="form-group">
                                                         <label>check out</label>
-                                                            <input type="date" ng-model="room.check_out" placeholder="mm/dd/yy">
+                                                            <input type="date" ng-model="hotel.check_out" placeholder="mm/dd/yy">
                                                     </div>
                                                     <br>
-                                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getroom()">search again</button>
+                                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelweek()">search again</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -235,21 +244,20 @@
                                     <div id="rating-filter" class="panel-collapse collapse filters-container">
                                         <div class="panel-content">
                                             <div class="form-group">
-                                                <label>
-                                                    <input id="rating1" type="radio" name="rating" value="0" ng-model="hotel.rating"/>0+
-                                                </label>
-                                                <label>
-                                                    <input id="rating2" type="radio" name="rating" value="5" ng-model="hotel.rating"/>5+
-                                                </label>
-                                                <label>
-                                                    <input id="rating3" type="radio" name="rating" value="7" ng-model="hotel.rating"/>7+
-                                                </label>
-                                                <label>
-                                                    <input id="rating4" type="radio" name="rating" value="8" ng-model="hotel.rating"/>8+
-                                                </label>
-                                                <label>
-                                                    <input id="rating5" type="radio" name="rating" value="9" ng-model="hotel.rating"/>9+
-                                                </label>
+                                                <input id="rating1" type="radio" name="rating" value="9" ng-model="hotel.rating"/>
+                                                <label class="label success">9+</label>
+                                                <br>
+                                                <input id="rating2" type="radio" name="rating" value="8" ng-model="hotel.rating"/>
+                                                <label class="label info">8+</label>
+                                                <br>
+                                                <input id="rating3" type="radio" name="rating" value="7" ng-model="hotel.rating"/>
+                                                <label class="label warning">7+</label>
+                                                <br>
+                                                <input id="rating4" type="radio" name="rating" value="8" ng-model="hotel.rating"/>
+                                                <label class="label danger">5+</label>
+                                                <br>
+                                                <input id="rating5" type="radio" name="rating" value="9" ng-model="hotel.rating"/>
+                                                <label class="label other">0+</label>
                                             </div>
                                             <br>
                                             <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button>
@@ -264,8 +272,20 @@
                                         <div id="star-filter" class="panel-collapse collapse filters-container">
                                             <div class="panel-content">
                                                 <div class="form-group">
-                                                    <label>
-                                                        <input id="star1" type="radio" name="star" value="1" ng-model="hotel.star"/>1
+                                                    <label>1<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <input id="star1" type="radio" name="star" value="1" ng-model="hotel.star"/>
+                                                    </label>
+                                                    <br>
+                                                    <label>3<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <input id="star2" type="radio" name="star" value="3" ng-model="hotel.star"/>
+                                                    </label>
+                                                    <br>
+                                                    <label>5<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <input id="star3" type="radio" name="star" value="5" ng-model="hotel.star"/>
+                                                    </label>
+                                                    <br>
+                                                    <label>7<i class="fa fa-star" aria-hidden="true"></i>
+                                                        <input id="star4" type="radio" name="star" value="7" ng-model="hotel.star"/>
                                                     </label>
                                                 </div>
                                             </div>

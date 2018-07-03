@@ -33,8 +33,10 @@ def hotel_api():
         #         hotel_list.append(item.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
         # else:
-        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page)\
-            .filter(Hotel.rating >= rating).all()
+        if rating:
+            hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
+        else:        
+            hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -307,7 +309,7 @@ def deal_api():
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         if price_start and price_end:
-            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page)\
+            price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
             price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()

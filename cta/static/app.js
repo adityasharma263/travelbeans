@@ -166,11 +166,39 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
   $scope.getHotelPrice = function(){
-    
+    console.log("......");
 
     $http({
       method: 'GET',
-      url: '/api/v1/deal?price_start=' + $scope.hotel.start_price + '&price_end=5' + $scope.hotel.end_price
+      url: '/api/v1/deal?price_start=' + $scope.hotel.start_price + '&price_end=' + $scope.hotel.end_price
+    }).then(function successCallback(response) {
+        $scope.deals = response.data.result.deal;
+        for(var j=0; j<$scope.deals.length; j++){
+          $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
+          $scope.deals[j].roomdata=$scope.roomobj;
+          $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
+          $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
+
+        }
+        console.log("deals array",$scope.deals);
+        // this callback will be called asynchronously
+
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+    
+  }
+
+  $scope.getHotelweek = function(){
+    
+    $scope.hotel.check_in = Date.parse($scope.hotel.check_in)/1000;
+    $scope.hotel.check_out = Date.parse($scope.hotel.check_out)/1000;
+    console.log("$scope.hotel.check_in",$scope.hotel.check_in);
+    $http({
+      method: 'GET',
+      url: '/api/v1/deal?check_in=' + $scope.hotel.check_in + '&check_out=' + $scope.hotel.check_out
     }).then(function successCallback(response) {
         $scope.deals = response.data.result.deal;
         for(var j=0; j<$scope.deals.length; j++){
