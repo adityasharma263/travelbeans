@@ -14,6 +14,8 @@ class Hotel(Base):
     address = db.Column(db.String, nullable=True)
     images = db.relationship('Image', backref='hotel')
     rooms = db.relationship('Room', backref='hotel')
+    latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
+    longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
 
 
@@ -30,6 +32,7 @@ class Room(Base):
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
     status = db.Column(db.Boolean, default=False, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
+    default_room_type = db.Column(db.Integer, nullable=True)
     check_in = db.Column(db.DateTime(timezone=True), nullable=False)
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
