@@ -235,9 +235,24 @@
                                     <div id="rating-filter" class="panel-collapse collapse filters-container">
                                         <div class="panel-content">
                                             <div class="form-group">
-                                                <label>Rating</label>
-                                                    <input type="number" ng-model="hotel.rating">
+                                                <label>
+                                                    <input id="rating1" type="radio" name="rating" value="0" ng-model="hotel.rating"/>0+
+                                                </label>
+                                                <label>
+                                                    <input id="rating2" type="radio" name="rating" value="5" ng-model="hotel.rating"/>5+
+                                                </label>
+                                                <label>
+                                                    <input id="rating3" type="radio" name="rating" value="7" ng-model="hotel.rating"/>7+
+                                                </label>
+                                                <label>
+                                                    <input id="rating4" type="radio" name="rating" value="8" ng-model="hotel.rating"/>8+
+                                                </label>
+                                                <label>
+                                                    <input id="rating5" type="radio" name="rating" value="9" ng-model="hotel.rating"/>9+
+                                                </label>
                                             </div>
+                                            <br>
+                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button>
                                         </div>
                                     </div>
                                 </div>

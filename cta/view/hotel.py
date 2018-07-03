@@ -273,10 +273,12 @@ def deal_api():
         args.pop('price_start', None)
         args.pop('price_end', None)
         if check_in and check_out:
+            print("*************",check_in)
             no_of_days = int(check_out) - int(check_in)
             sec = datetime.timedelta(seconds=int(no_of_days))
             d = datetime.datetime(1, 1, 1) + sec
             no_of_days = d.day - 1
+            print("++++++++++++",no_of_days)
             check_in = datetime.datetime.fromtimestamp(
                 int(check_in)).weekday()
             check_out = datetime.datetime.fromtimestamp(
@@ -298,6 +300,7 @@ def deal_api():
                 if day == 5 or 6:
                     weekend = True
             args['weekend'] = weekend
+            print("))))))))))",weekend)
         args.pop('page', None)
         args.pop('per_page', None)
         args.pop('check_in', None)
@@ -307,6 +310,7 @@ def deal_api():
         if price_start:
             price = Deal.query.filter_by(**args).filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
+            print("@@@@@@@@@@@@@@")
             price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:
