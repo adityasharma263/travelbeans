@@ -14,6 +14,8 @@ def hotel_api():
         args = request.args.to_dict()
         args.pop('page', None)
         args.pop('per_page', None)
+        rating = request.args.get('rating')
+        args.pop('rating', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         # price_start = request.args.get('price_start', None)
@@ -31,7 +33,8 @@ def hotel_api():
         #         hotel_list.append(item.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
         # else:
-        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page)\
+            .filter(Hotel.rating >= rating).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -75,7 +78,6 @@ def hotel_api():
             "twenty_four_hr_room_service": amenity.get("twenty_four_hr_room_service", None),
             "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
             "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
-
         }
         print(amenity_obj)
         Amenity(**amenity_obj).save()
@@ -273,12 +275,10 @@ def deal_api():
         args.pop('price_start', None)
         args.pop('price_end', None)
         if check_in and check_out:
-            print("*************",check_in)
             no_of_days = int(check_out) - int(check_in)
             sec = datetime.timedelta(seconds=int(no_of_days))
             d = datetime.datetime(1, 1, 1) + sec
             no_of_days = d.day - 1
-            print("++++++++++++",no_of_days)
             check_in = datetime.datetime.fromtimestamp(
                 int(check_in)).weekday()
             check_out = datetime.datetime.fromtimestamp(
@@ -289,28 +289,27 @@ def deal_api():
             days = []
             weekend = False
             for i, val in enumerate(pool):
-                if val == check_out and start and i == no_of_days:
+                if start and val == check_out and len(days) == no_of_days:
                     break
                 if start:
                     days.append(val)
-                if val == check_in:
+                if val == check_in and start is False:
                     start = True
                     days.append(val)
             for day in days:
                 if day == 5 or 6:
                     weekend = True
             args['weekend'] = weekend
-            print("))))))))))",weekend)
         args.pop('page', None)
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        if price_start:
-            price = Deal.query.filter_by(**args).filter(Deal.price >= price_start, Deal.price <= price_end).all()
+        if price_start and price_end:
+            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page)\
+                .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
-            print("@@@@@@@@@@@@@@")
             price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:

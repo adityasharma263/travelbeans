@@ -13,5 +13,4 @@ class SeedData(Command):
 
     def add_website(self):
         for w in Websites:
-            print(w)
             Website(website=w).save()
