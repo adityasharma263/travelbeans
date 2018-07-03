@@ -14,6 +14,8 @@ def hotel_api():
         args = request.args.to_dict()
         args.pop('page', None)
         args.pop('per_page', None)
+        rating = request.args.get('rating')
+        args.pop('rating', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         # price_start = request.args.get('price_start', None)
@@ -31,7 +33,7 @@ def hotel_api():
         #         hotel_list.append(item.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
         # else:
-        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).filter(Hotel.rating >= rating).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -75,7 +77,6 @@ def hotel_api():
             "twenty_four_hr_room_service": amenity.get("twenty_four_hr_room_service", None),
             "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
             "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
-
         }
         amenity(**amenity_obj).save()
         if hotel['images']:
@@ -303,8 +304,9 @@ def deal_api():
         args.pop('check_out', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        if price_start:
-            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).filter(Deal.price >= price_start, Deal.price <= price_end).all()
+        if price_start and price_end:
+            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page)\
+                .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
             price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = DealSchema(many=True).dump(price)
