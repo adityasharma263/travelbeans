@@ -33,7 +33,8 @@ def hotel_api():
         #         hotel_list.append(item.hotel_id)
         #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
         # else:
-        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).filter(Hotel.rating >= rating).all()
+        hotels = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page)\
+            .filter(Hotel.rating >= rating).all()
         result = HotelSchema(many=True).dump(hotels)
         return jsonify({'result': {'hotel': result.data}, 'message': "Success", 'error': False})
     else:
@@ -277,6 +278,7 @@ def deal_api():
             sec = datetime.timedelta(seconds=int(no_of_days))
             d = datetime.datetime(1, 1, 1) + sec
             no_of_days = d.day - 1
+            print(no_of_days,"++++++++++++++++++++++++")
             check_in = datetime.datetime.fromtimestamp(
                 int(check_in)).weekday()
             check_out = datetime.datetime.fromtimestamp(
@@ -287,11 +289,12 @@ def deal_api():
             days = []
             weekend = False
             for i, val in enumerate(pool):
-                if val == check_out and start and i == no_of_days:
+                if start and val == check_out and len(days) == no_of_days:
+                    print(len(days),"no_days","***************************88")
                     break
                 if start:
                     days.append(val)
-                if val == check_in:
+                if val == check_in and start is False:
                     start = True
                     days.append(val)
             for day in days:
