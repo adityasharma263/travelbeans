@@ -233,7 +233,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.showRoom=false;
 
   $scope.hideRoom=function(){
-    
+    delete $scope.room.default_room_type;
     $scope.showRoom=false;
   }
   $scope.showDefaultRoom=function(){
@@ -271,7 +271,7 @@ angular.module('comparetravel', ['angular.filter'])
       function (req) {
         createToast("'Something went wrong!!!'","red");
         
-        // setTimeout(function(){ location.reload(); }, 3000);
+        setTimeout(function(){ location.reload(); }, 1000);
 
       })
     

@@ -32,7 +32,7 @@ class Room(Base):
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
     status = db.Column(db.Boolean, default=False, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
-    default_room_type = db.Column(db.Integer, nullable=True)
+    other_room_type = db.Column(db.String, nullable=True)
     check_in = db.Column(db.DateTime(timezone=True), nullable=False)
     check_out = db.Column(db.DateTime(timezone=True), nullable=False)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
@@ -52,7 +52,7 @@ class Room(Base):
 class Image(Base):
     __tablename__ = 'image'
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
-    image_url = db.Column(db.String, default=False, nullable=True)
+    image_url = db.Column(db.String, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

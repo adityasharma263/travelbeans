@@ -47,6 +47,8 @@ def hotel_api():
         'rating': hotel.get("rating", None),
         "desc": hotel.get("desc", None),
         "address": hotel.get("address", None),
+        "longitude": hotel.get("longitude", None),
+        "latitude": hotel.get("latitude", None),
         "star": hotel.get("star", None),
         }
         print(hotel_obj)
@@ -57,6 +59,8 @@ def hotel_api():
         amenity_obj = {
             "hotel_id": hotel_result.data['id'],
             "Room_cleaning_service": amenity.get("Room_cleaning_service", None),
+            "parking": amenity.get("parking", None),
+            "couple_friendly": amenity.get("couple_friendly", None),
             "banquets": amenity.get("banquets", None),
             "bar": amenity.get("bar", None),
             "child_baby_cot": amenity.get("child_baby_cot", None),
@@ -109,6 +113,7 @@ def room_api():
         room = request.json
         room_obj = {
             "room_type": room.get("room_type", None),
+            "other_room_type": room.get("default_room_type", None),
             "check_in": datetime.datetime.now(),
             "check_out": datetime.datetime.now(),
             "status": True,
