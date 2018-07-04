@@ -230,7 +230,15 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotelDeals = []; // for all deals array
   $scope.room={}; //for one room
   $scope.hotelRooms=[]; // for all room array
+  $scope.showRoom=false;
 
+  $scope.hideRoom=function(){
+    
+    $scope.showRoom=false;
+  }
+  $scope.showDefaultRoom=function(){
+    $scope.showRoom=true;
+  }
   $http({
     method: 'GET',
     url: '/api/v1/website' 
@@ -262,6 +270,9 @@ angular.module('comparetravel', ['angular.filter'])
       // failed callback
       function (req) {
         createToast("'Something went wrong!!!'","red");
+        
+        // setTimeout(function(){ location.reload(); }, 3000);
+
       })
     
   }
