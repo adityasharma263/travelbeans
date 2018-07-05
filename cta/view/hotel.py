@@ -51,7 +51,6 @@ def hotel_api():
         "latitude": hotel.get("latitude", None),
         "star": hotel.get("star", None),
         }
-        print(hotel_obj)
         post = Hotel(**hotel_obj)
         post.save()
         hotel_result = HotelSchema().dump(post)
@@ -85,7 +84,6 @@ def hotel_api():
             "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
             "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
         }
-        print(amenity_obj)
         Amenity(**amenity_obj).save()
         if hotel['images']:
             for image in hotel['images']:
@@ -93,7 +91,6 @@ def hotel_api():
                     "image_url": image.get("image_url", None),
                     "hotel_id": hotel_result.data['id']
                 }
-                print(image_obj)
                 Image(**image_obj).save()
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
@@ -121,7 +118,6 @@ def room_api():
             "balcony": room.get("ac", None),
             "hotel_id": room.get("hotel_id", None)
         }
-        print(room_obj)
         post = Room(**room_obj)
         post.save()
         room_result = RoomSchema().dump(post)
@@ -133,7 +129,6 @@ def room_api():
                 "children": member.get("children", None),
                 "room_id": room_result.data['id'],
             }
-            print(member_obj)
             Member(**member_obj).save()
         facility = room.get("facilities", None)
         facility_obj = {
@@ -175,7 +170,6 @@ def room_api():
                     "room_id": room_result.data['id'],
                     "website_id": deal.get("website_id", None)
                 }
-                print(deal_obj)
                 Deal(**deal_obj).save()
         return jsonify({'result': {'room': request.json}, 'message': "Success", 'error': False})
 
