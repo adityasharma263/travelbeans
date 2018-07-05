@@ -6,7 +6,7 @@ from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
 from itertools import cycle
-import json
+import simplejson as json
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
@@ -18,21 +18,6 @@ def hotel_api():
         args.pop('rating', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        # price_start = request.args.get('price_start', None)
-        # price_end = request.args.get('price_end', None)
-        # args.pop('price_start', None)
-        # args.pop('price_end', None)
-        # if price_start:
-        #     room_list = []
-        #     hotel_list = []
-        #     rooms = Deal.query.distinct(Deal.room_id).filter(Deal.price >= price_start, Deal.price <= price_end).all()
-        #     for index, item in enumerate(rooms):
-        #         room_list.append(item.room_id)
-        #     hotels_obj = Room.query.distinct(Room.hotel_id).filter(Room.id.in_(room_list)).all()
-        #     for index, item in enumerate(hotels_obj):
-        #         hotel_list.append(item.hotel_id)
-        #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
-        # else:
         if rating:
             hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
         else:        
@@ -93,8 +78,6 @@ def hotel_api():
                     "hotel_id": hotel_result.data['id']
                 }
                 Image(**image_obj).save()
-        hotel_result.data['latitude'] = hotel_obj.get('latitude')
-        hotel_result.data['longitude'] = hotel_obj.get('longitude')
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
 
