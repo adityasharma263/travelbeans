@@ -32,7 +32,7 @@ def hlist():
     data = HotelSchema(many=True).dump(hotel)
     return render_template('staylist.html',hotel=data,per_page=per_page,page=page)    
 
-@app.route('/home', methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
     
     return render_template('index.html')
@@ -42,7 +42,7 @@ def admin():
     
     return render_template('admin.html')    
 
-@app.route('/hotel-list/<string:name>', methods=['GET'])
+@app.route('/hotel/detail/<string:name>', methods=['GET'])
 def stay_id(name):
     hotel = Hotel.query.filter_by(name=name).first()
     if not hotel:

@@ -351,10 +351,10 @@ $scope.createHotel = function() {
   
     $http({
       method: 'GET',
-      url: '/api/v1/hotel/'+(location.pathname).substr(7)
+      url: '/api/v1/'+(location.pathname)
     }).then(function successCallback(response) {
         $scope.hotelData = response.data.result.hotel;
-         
+         console.log("hoteldata",$scope.hotelData);
         // this callback will be called asynchronously
         // when the response is available
       }, function errorCallback(response) {
