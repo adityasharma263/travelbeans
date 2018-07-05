@@ -243,8 +243,8 @@ angular.module('comparetravel', ['angular.filter'])
     method: 'GET',
     url: '/api/v1/website' 
   }).then(function successCallback(response) {
-      // hotelData = response.data.result;
       $scope.websites = response.data.result.website;
+
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -252,7 +252,6 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
   var sendPostHotel = function(url, data) {
-    console.log(data);
     
     $http({
       method: 'POST',
@@ -261,8 +260,6 @@ angular.module('comparetravel', ['angular.filter'])
     }).then(function (res) {
       console.log(res);
       $scope.j= res.data.result.hotel.id;
-      console.log("j",$scope.j);
-
       
       createToast("'Hotel successfully created!!!'","green");
 
@@ -278,7 +275,6 @@ angular.module('comparetravel', ['angular.filter'])
   }
 
   var sendPostCall = function(url, data) {
-    console.log(data);
     
     $http({
       method: 'POST',
@@ -342,7 +338,6 @@ var createToast=function(msg, color){
 $scope.createHotel = function() {
   $scope.hotelImg.push($scope.images);
   $scope.hotel.images=$scope.hotelImg;
-  console.log("$scope.hotel",$scope.hotel);
   sendPostHotel('/api/v1/hotel', $scope.hotel)
 }
 }])  
