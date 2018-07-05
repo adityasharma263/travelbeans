@@ -6,7 +6,7 @@ from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
 from itertools import cycle
-
+import json
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
@@ -47,8 +47,8 @@ def hotel_api():
         'rating': hotel.get("rating", None),
         "desc": hotel.get("desc", None),
         "address": hotel.get("address", None),
-        "longitude": hotel.get("longitude", None),
-        "latitude": hotel.get("latitude", None),
+        "longitude": json.dumps(hotel.get("longitude", None)),
+        "latitude": json.dumps(hotel.get("latitude", None)),
         "star": hotel.get("star", None),
         }
         print(hotel_obj)
