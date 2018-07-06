@@ -6,7 +6,7 @@ from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
 from itertools import cycle
-import json
+import simplejson as json
 
 @app.route('/api/v1/hotel', methods=['GET', 'POST'])
 def hotel_api():
@@ -18,21 +18,6 @@ def hotel_api():
         args.pop('rating', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        # price_start = request.args.get('price_start', None)
-        # price_end = request.args.get('price_end', None)
-        # args.pop('price_start', None)
-        # args.pop('price_end', None)
-        # if price_start:
-        #     room_list = []
-        #     hotel_list = []
-        #     rooms = Deal.query.distinct(Deal.room_id).filter(Deal.price >= price_start, Deal.price <= price_end).all()
-        #     for index, item in enumerate(rooms):
-        #         room_list.append(item.room_id)
-        #     hotels_obj = Room.query.distinct(Room.hotel_id).filter(Room.id.in_(room_list)).all()
-        #     for index, item in enumerate(hotels_obj):
-        #         hotel_list.append(item.hotel_id)
-        #     hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(hotel_list)).offset((page - 1) * per_page).limit(per_page).all()
-        # else:
         if rating:
             hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
         else:        
@@ -51,7 +36,6 @@ def hotel_api():
         "latitude": json.dumps(hotel.get("latitude", None)),
         "star": hotel.get("star", None),
         }
-        print(hotel_obj)
         post = Hotel(**hotel_obj)
         post.save()
         hotel_result = HotelSchema().dump(post)
@@ -86,7 +70,6 @@ def hotel_api():
                 "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
                 "wifi_in_lobby": amenity.get("wifi_in_lobby", None)
             }
-            print(amenity_obj)
             Amenity(**amenity_obj).save()
         if hotel.get("images"):
             for image in hotel['images']:
@@ -94,10 +77,7 @@ def hotel_api():
                     "image_url": image.get("image_url", None),
                     "hotel_id": hotel_result.data['id']
                 }
-                print(image_obj)
                 Image(**image_obj).save()
-        hotel_result.data['latitude'] = hotel_obj.get('latitude')
-        hotel_result.data['longitude'] = hotel_obj.get('longitude')
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
 
@@ -124,7 +104,6 @@ def room_api():
             "balcony": room.get("ac", None),
             "hotel_id": room.get("hotel_id", None)
         }
-        print(room_obj)
         post = Room(**room_obj)
         post.save()
         room_result = RoomSchema().dump(post)
@@ -136,7 +115,6 @@ def room_api():
                 "children": member.get("children", None),
                 "room_id": room_result.data['id'],
             }
-            print(member_obj)
             Member(**member_obj).save()
         facility = room.get("facilities", None)
         if facility:
@@ -170,7 +148,7 @@ def room_api():
                 "wifi": facility.get("wifi", None)
             }
             Facility(**facility_obj).save()
-        if room['deals']:
+        if room.get('deals'):
             for deal in room['deals']:
                 deal_obj = {
                     "price": deal.get("price", None),
@@ -179,7 +157,6 @@ def room_api():
                     "room_id": room_result.data['id'],
                     "website_id": deal.get("website_id", None)
                 }
-                print(deal_obj)
                 Deal(**deal_obj).save()
         return jsonify({'result': {'room': request.json}, 'message': "Success", 'error': False})
 

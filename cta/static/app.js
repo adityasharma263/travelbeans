@@ -243,8 +243,8 @@ angular.module('comparetravel', ['angular.filter'])
     method: 'GET',
     url: '/api/v1/website' 
   }).then(function successCallback(response) {
+      // hotelData = response.data.result;
       $scope.websites = response.data.result.website;
-
       // this callback will be called asynchronously
       // when the response is available
     }, function errorCallback(response) {
@@ -252,6 +252,7 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
   var sendPostHotel = function(url, data) {
+    console.log(data);
     
     $http({
       method: 'POST',
@@ -260,8 +261,10 @@ angular.module('comparetravel', ['angular.filter'])
     }).then(function (res) {
       console.log(res);
       $scope.j= res.data.result.hotel.id;
+      console.log("j",$scope.j);
+
       
-      createToast("'Hotel successfully created!!!'","green");
+      createToast("'hotel successfully created!!!'","green");
 
       },
       // failed callback
@@ -275,12 +278,16 @@ angular.module('comparetravel', ['angular.filter'])
   }
 
   var sendPostCall = function(url, data) {
+    console.log(data);
     
     $http({
       method: 'POST',
       url: url,
       data: data
     }).then(function (res) {
+      console.log(res);
+      
+      // createToast("'hotel successfully created!!!'","green");
 
       },
       // failed callback
@@ -308,10 +315,15 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.createRoom=function(){
 
     $scope.room.hotel_id = $scope.j;
+    
     $scope.hotelDeals.push($scope.deals);
     $scope.room.deals=$scope.hotelDeals;
+    // $scope.hotelRooms.push($scope.room);
+    console.log("rooms array",$scope.room);
     sendPostCall('/api/v1/room', $scope.room)
+
     createToast("'Room Added!!'","green");
+    // $scope.deals.hotel_url="";
     $scope.hotelDeals=[];
 
   }
@@ -336,8 +348,13 @@ var createToast=function(msg, color){
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 $scope.createHotel = function() {
+  // e.preventDefault()
+
   $scope.hotelImg.push($scope.images);
   $scope.hotel.images=$scope.hotelImg;
+
+  console.log("$scope.hotel",$scope.hotel);
+
   sendPostHotel('/api/v1/hotel', $scope.hotel)
 }
 }])  
@@ -347,14 +364,17 @@ $scope.createHotel = function() {
 
 
 
-.controller('hotelController', function($scope, $http) {
-  
+.controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
+  console.log("working");
+  $scope.hotelData={};
     $http({
       method: 'GET',
-      url: '/api/v1/'+(location.pathname)
+      url: '/api/v1/hotel'+(location.search)
     }).then(function successCallback(response) {
-        $scope.hotelData = response.data.result.hotel;
-         console.log("hoteldata",$scope.hotelData);
+        for(var i=0;i<response.data.result.hotel.length; i++){
+          $scope.hotelData= response.data.result.hotel[i];
+        }
+        console.log("hotel",$scope.hotelData);
         // this callback will be called asynchronously
         // when the response is available
       }, function errorCallback(response) {
@@ -362,4 +382,4 @@ $scope.createHotel = function() {
         // or server returns response with an error status.
     });
       
-  })
+}])

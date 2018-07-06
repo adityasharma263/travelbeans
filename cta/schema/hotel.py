@@ -10,7 +10,8 @@ from cta.model.hotel import Deal
 from cta.model.hotel import Website
 from cta.model.hotel import Room
 from cta import ma
-
+import json
+import decimal
 
 class WebsiteSchema(ma.ModelSchema):
 
@@ -72,6 +73,7 @@ class HotelSchema(ma.ModelSchema):
     amenities = ma.Nested(AmenitySchema, many=False)
     images = ma.Nested(ImageSchema, many=True)
     rooms = ma.Nested(RoomSchema, many=True)
+
 
     class Meta:
         model = Hotel
