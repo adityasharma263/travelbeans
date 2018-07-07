@@ -241,7 +241,6 @@
                                                       <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
                                                     </div>
                                                       <input type="submit" data-inline="true" value="Submit">
-                                                      <p>The range slider can be useful for allowing users to select a specific price range when browsing products.</p>
                                                 </form>
 
                                             <div class="form-group">
@@ -357,7 +356,7 @@
                                               </div>
                                               
                                               <div>
-                                                  <div>
+                                                  <div ng-if="[[hotel.rooms.room_type]]==1">
                                                       <span class="price"><small>[[hotel.rooms[0].deals[0].website.website]]</small>₹[[hotel.rooms[0].deals[0].price]]</span><center>
                                                       <a class="button btn-small green" href="">View Details</a>
                                                         <a class="button btn-small yellow" ng-click="show()">More Deals</a> 
@@ -366,7 +365,7 @@
 
                                                       <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                   </div>
-                                                  <div class="amenities" ng-repeat="price in hotel.rooms[0].deals">
+                                                  <div class="amenities" ng-repeat="price in hotel.rooms[0].deals | limitTo:3 ">
                                                           <span class="price"><small>[[price.website.website]]</small>₹[[price.price]]</span>
                                                   </div>    
                                               </div>
@@ -374,17 +373,18 @@
 
                                           <div ng-show="myVar">
                                             <div class="row" ng-repeat="room in hotel.rooms">
+                                           <span ng-repeat="deal in room.deals">
+
                                            <span class="col-md-3" ng-if="[[room.room_type]]==1">Premium</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==2">Executive</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==3">Sweet</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
-                                           <!-- <span ng-repeat="deal in room.deals"> -->
-                                           <!-- <span class="col-md-3"><img src="deal.website.logo_image"></span>
+                                           <span class="col-md-3"><img src="deal.website.logo_image"></span>
                                               <span class="col-md-4"><a class="button btn-mini green">View Details</a>
                                               <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
-                                           <span class="price">₹[[deal.price]]</span> -->
-                                              <!-- </span> -->
-                                           
+                                           <span class="price">₹[[deal.price]]</span>
+                                            
+                                           </span>
                                           </div>
 
                                       </article>
