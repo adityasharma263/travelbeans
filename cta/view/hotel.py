@@ -15,8 +15,8 @@ def hotel_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
-        page = int(request.args.get('page'))
-        per_page = int(request.args.get('per_page'))
+        page = int(request.args.get('page', None))
+        per_page = int(request.args.get('per_page', None))
         if rating:
             hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
         elif page:
