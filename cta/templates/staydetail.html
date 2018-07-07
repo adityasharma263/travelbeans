@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/static/css/jquery.bxslider.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/static/css/flexslider.css" media="screen">
+    
     <!-- Main Style -->
     <link id="main-style" rel="stylesheet" href="/static/css/style.css">
     <script type="text/javascript">
@@ -58,14 +59,10 @@
     <link rel="stylesheet" href="/static/css/responsive.css">
     
     <link rel="stylesheet" type="text/css" href="/static/css/ie.css" />
-    <script src="https://code.angularjs.org/1.5.0/angular-animate.min.js"></script>
-    <script src="https://code.angularjs.org/1.5.0/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
-    <script type='text/javascript' src="/static/js/jquerystar.js"></script>
+    
 <script type="text/javascript" charset="UTF-8" src="/static/js/common.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/util.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/map.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/geometry.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/streetview.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/stats.js.download"></script><style type="text/css">.gm-style {
         font: 400 11px Roboto, Arial, sans-serif;
         text-decoration: none;
@@ -821,9 +818,9 @@
                                     <!-- <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
                                     <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Availability</a></li>
                                     <li class="active" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
-                                    <li class="" ><a  data-ng-href="#hotel-reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li>
-                                    <li ><a href="#hotel-faqa" data-toggle="tab">FAQs</a></li>
-                                    <li ><a  href="#hotel-things-todo" data-toggle="tab">Things to Do</a></li>
+                                    <!-- <li class="" ><a  data-ng-href="#hotel-reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li> -->
+                                    <!-- <li ><a href="#hotel-faqa" data-toggle="tab">FAQs</a></li> -->
+                                    <!-- <li ><a  href="#hotel-things-todo" data-toggle="tab">Things to Do</a></li> -->
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane fade" id="hotel-description">
@@ -838,7 +835,7 @@
                                             <div class="col-sm-7 col-lg-8 table-cell testimonials">
                                                 <div class="testimonial style1">
                                                     
-                                                <div class="testimonial-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="width: 600%; transition-duration: 0.6s; transform: translate3d(-946px, 0px, 0px);">
+                                                <!-- <div class="testimonial-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="width: 600%; transition-duration: 0.6s; transform: translate3d(-946px, 0px, 0px);">
                                                         <li class="" style="width: 473px; float: left; display: block; height: 173px;">
                                                             <p class="description">Always enjoyed my stay with Hilton Hotel and Resorts, top class room service and rooms have great outside views and luxury assessories. Thanks for great experience.</p>
                                                             <div class="author clearfix">
@@ -860,7 +857,8 @@
                                                                 <h5 class="name">Jessica Brown<small>guest</small></h5>
                                                             </div>
                                                         </li>
-                                                    </ul></div><ol class="testimonial-control-nav testimonial-control-paging"><li><a class="">1</a></li><li><a class="">2</a></li><li><a class="testimonial-active">3</a></li></ol></div>
+                                                    </ul></div> -->
+                                                    <ol class="testimonial-control-nav testimonial-control-paging"><li><a class="">1</a></li><li><a class="">2</a></li><li><a class="testimonial-active">3</a></li></ol></div>
                                             </div>
                                         </div>
                                         <div class="long-description">
@@ -933,7 +931,7 @@
                                                     <label class="visible-md visible-lg">&nbsp;</label>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <button data-animation-duration="1" data-animation-type="bounce" class="full-width icon-check animated bounce" type="submit" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
+                                                            <button ng-click="newLocation()" data-animation-duration="1" data-animation-type="bounce" class="full-width icon-check animated bounce" type="submit" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -941,40 +939,45 @@
                                         </form>
                                         <h2>Available Rooms</h2>
                                         <div class="room-list listing-style3 hotel">
-                                            <article class="box">
+                                            <article class="box" ng-repeat="room in roomData.hotelData.rooms | limitTo:limit">
                                                 <figure class="col-sm-4 col-md-3">
-                                                    <a class="hover-effect popup-gallery" href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" title=""><img width="230" height="161" src="./Detailed View_files/1.png" alt=""></a>
+                                                    <a class="hover-effect popup-gallery" href="" title=""><img width="230" height="161" src="[[room.image_url]]" alt=""></a>
                                                 </figure>
                                                 <div class="details col-xs-12 col-sm-8 col-md-9">
                                                     <div>
                                                         <div>
                                                             <div class="box-title">
-                                                                <h4 class="title">Standard Family Room</h4>
+                                                                <h4 class="title" ng-if="[[room.room_type]]==1">Premium</h4>
+                                                                <h4 class="title" ng-if="[[room.room_type]]==2">Executive</h4>
+                                                                <h4 class="title" ng-if="[[room.room_type]]==3">Sweet</h4>
+                                                                <h4 class="title" ng-if="[[room.room_type]]==4">Super_Deluxe</h4>
+                                                                <h4 class="title" ng-if="[[room.room_type]]==5">[[room.other_room_type]]</h4>
+
                                                                 <dl class="description">
                                                                     <dt>Max Guests:</dt>
-                                                                    <dd>3 persons</dd>
+                                                                    <dd>[[room.member.total_members]]</dd>
                                                                 </dl>
                                                             </div>
                                                             <div class="amenities">
-                                                                <i class="soap-icon-wifi circle"></i>
-                                                                <i class="soap-icon-fitnessfacility circle"></i>
-                                                                <i class="soap-icon-fork circle"></i>
-                                                                <i class="soap-icon-television circle"></i>
+                                                                <i class="soap-icon-wifi circle" ng-show="room.facilities.wifi"></i>
+                                                                <!-- <i class="soap-icon-fitnessfacility circle" ng-show="room.facilities.wifi"></i> -->
+                                                                <i class="soap-icon-fork circle" ng-show="room.facilities.free_evening_snacks"></i>
+                                                                <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i>
                                                             </div>
                                                         </div>
                                                         <div class="price-section">
-                                                            <span class="price"><small>PER/NIGHT</small>$121</span>
+                                                            <span class="price" ><small> Mini. PER/NIGHT</small>₹ [[(room.deals | orderBy:'price')[0].price]]</span>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p>
                                                         <div class="action-section">
-                                                            <a href="http://www.soaptheme.net/html/travelo/hotel-booking.html" title="" class="button btn-small full-width text-center">BOOK NOW</a>
+                                                            <a href="" title="" class="button btn-small full-width text-center">BOOK NOW</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </article>
-                                            <article class="box">
+                                            <!-- <article class="box">
                                                 <figure class="col-sm-4 col-md-3">
                                                     <a class="hover-effect popup-gallery" href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" title=""><img width="230" height="161" src="./Detailed View_files/2.png" alt=""></a>
                                                 </figure>
@@ -1072,8 +1075,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </article>
-                                            <a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#" class="load-more button full-width btn-large fourty-space">LOAD MORE ROOMS</a>
+                                            </article> -->
+                                            <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreRooms()">LOAD MORE ROOMS</a>
                                         </div>
                                         
                                     </div>
@@ -1423,7 +1426,7 @@
                                             
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="hotel-things-todo">
+                                    <!-- <div class="tab-pane fade" id="hotel-things-todo">
                                         <h2>Things to Do</h2>
                                         <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
                                         <div class="activities image-box style2 innerstyle">
@@ -1476,7 +1479,7 @@
                                                 </div>
                                             </article>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="tab-pane fade" id="hotel-write-review">
                                         <div class="main-rating table-wrapper full-width hidden-table-sms intro">
                                             <article class="image-box box hotel listing-style1 photo table-cell col-sm-4">
@@ -1584,15 +1587,14 @@
                                 <div class="details">
                                     <h2 class="box-title">[[roomData.hotelData.name]]<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">[[roomData.hotelData.city]]</span></small></h2>
                                     <span class="price clearfix">
-                                        <small class="pull-left">avg/night</small>
-                                        <span class="pull-right">$620</span>
+                                        <small class="pull-left">Mni. avg/night</small>
+                                        <span class="pull-right">₹ [[(roomData.deals | orderBy:'price')[0].price]]</span>
                                     </span>
-                                    <jk-rating-stars rating="secondRate" read-only="readOnly" ></jk-rating-stars>
-                                    <div style="width: 100px">{{secondRate}} Stars</div>
-                                        <!-- <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="4 stars"><span class="five-stars" style="width: 80%;"></span></div> -->
+                                    <div class="feedback clearfix">
+                                        <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="1 stars"><span class="five-stars" style="width: 80%;"></span></div>
                                         <span class="review pull-right">270 reviews</span>
                                     </div>
-                                    <p class="description">[[roomData.hotelData.desc]]</p>
+                                    <p class="description">[[ roomData.hotelData.desc | limitTo: 200 ]][[roomData.hotelData.desc.length > 200 ? '...' : '']]</p>
                                     <a class="button yellow full-width uppercase btn-small">Book Now</a>
                                 </div>
                             </article>

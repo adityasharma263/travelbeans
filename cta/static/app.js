@@ -1,4 +1,4 @@
-angular.module('comparetravel', ['angular.filter','ngMaterial', 'jkAngularRatingStars'])
+angular.module('comparetravel', ['angular.filter'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
@@ -369,13 +369,21 @@ $scope.createHotel = function() {
 
   $scope.roomData={};
   $scope.hotels={};
-  $scope.firstRate = 0;
-  $scope.secondRate = 3;
-  $scope.readOnly = true;
-  $scope.onItemRating = function(rating){
-    alert('On Rating: ' + rating);
-  };
+  // $scope.firstRate = 0;
+  // $scope.secondRate = 3;
+  // $scope.readOnly = true;
+  // $scope.onItemRating = function(rating){
+  //   alert('On Rating: ' + rating);
+  // };
+  $scope.limit=10;
 
+  $scope.loadMoreRooms = function() {
+    $scope.limit =   $scope.limit + 10;
+  }
+  $scope.newLocation=function(){
+    window.open('/hotel/list','_self');
+
+  }
   $http({
     method: 'GET',
     url: '/api/v1/hotel'
@@ -387,13 +395,13 @@ $scope.createHotel = function() {
         $scope.hotels[$scope.hotelsData[j].id]= $scope.hotelsData[j];
       }
       console.log("$scope.hotels",$scope.hotels);
-
+      getrooms();
 
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
-
+var getrooms=function(){
   $http({
     method: 'GET',
     url: '/api/v1/room'+(location.search)
@@ -401,6 +409,7 @@ $scope.createHotel = function() {
       for(var i=0; i<response.data.result.rooms.length; i++){
         $scope.roomData= response.data.result.rooms[i];
       }
+      
       $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
       $scope.roomData.hotelData=$scope.hotelobj;
 
@@ -413,5 +422,7 @@ $scope.createHotel = function() {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   });
+}
+
       
 }])
