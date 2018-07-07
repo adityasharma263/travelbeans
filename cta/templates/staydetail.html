@@ -752,10 +752,10 @@
                                                 <li ng-repeat="image in roomData.hotelData.images" class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
-                                        <ol class="flex-control-nav flex-control-paging">
+                                        <!-- <ol class="flex-control-nav flex-control-paging">
                                             <li><a class="flex-active">1</a></li>
                                             <li><a class="">2</a></li>
-                                        </ol>
+                                        </ol> -->
                                         <ul class="flex-direction-nav">
                                             <li><a class="flex-prev" href="#">Previous</a></li>
                                             <li><a class="flex-next" href="#">Next</a></li>
@@ -818,7 +818,7 @@
                                     <!-- <li class="" ><a data-ng-href="#hotel-description" data-toggle="tab" aria-expanded="false">More Deals</a></li> -->
                                     <li class="" ><a data-ng-href="#hotel-availability" data-toggle="tab" aria-expanded="false">Availability</a></li>
                                     <li class="active" ><a data-ng-href="#hotel-amenities" data-toggle="tab" aria-expanded="true">Amenities</a></li>
-                                    <!-- <li class="" ><a  data-ng-href="#hotel-reviews" data-toggle="tab" aria-expanded="false">Reviews</a></li> -->
+                                    <li class="" ><a  data-ng-href="#hotel-moredeals" data-toggle="tab" aria-expanded="false">More Deals</a></li>
                                     <!-- <li ><a href="#hotel-faqa" data-toggle="tab">FAQs</a></li> -->
                                     <!-- <li ><a  href="#hotel-things-todo" data-toggle="tab">Things to Do</a></li> -->
                                 </ul>
@@ -866,6 +866,58 @@
                                            <p>[[roomData.hotelData.desc]]</p>
                                         </div>
                                     </div>
+                                    <div class="tab-pane fade" id="hotel-moredeals">
+                                        <h2>Available Deals</h2>
+                                        <div class="room-list listing-style3 hotel">
+                                            <div ng-repeat="room in roomData.hotelData.rooms | limitTo:deallimit">
+                                                <article class="box card" ng-repeat="deal in room.deals " >
+                                                    <hr>
+
+                                                    <figure class="col-sm-4 col-md-3">
+                                                        <a class="hover-effect popup-gallery" href="" title=""><img width="230" height="161" src="[[deal.website.logo_image]]" alt=""></a>
+                                                    </figure>
+                                                    <div class="details col-xs-12 col-sm-8 col-md-9">
+                                                        <div>
+                                                            <div>
+                                                                <div class="box-title">
+                                                                    <h4 class="title" ng-if="[[deal.dealsRoom.room_type]]==1">Premium</h4>
+                                                                    <h4 class="title" ng-if="[[deal.dealsRoom.room_type]]==2">Executive</h4>
+                                                                    <h4 class="title" ng-if="[[deal.dealsRoom.room_type]]==3">Sweet</h4>
+                                                                    <h4 class="title" ng-if="[[deal.dealsRoom.room_type]]==4">Super_Deluxe</h4>
+                                                                    <h4 class="title" ng-if="[[deal.dealsRoom.room_type]]==5">[[room.other_room_type]]</h4>
+
+                                                                    <!-- <dl class="description">
+                                                                        <dt>Max Guests:</dt>
+                                                                        <dd>[[deal.dealsRoom.member.total_members]]</dd>
+                                                                    </dl> -->
+                                                                </div>
+                                                                <!-- <div class="amenities">
+                                                                    <i class="soap-icon-wifi circle" ng-show="room.facilities.wifi"></i>
+                                                                    <i class="soap-icon-fitnessfacility circle" ng-show="room.facilities.wifi"></i> -->
+                                                                    <!-- <i class="soap-icon-fork circle" ng-show="room.facilities.free_evening_snacks"></i> -->
+                                                                    <!-- <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i> -->
+                                                                <!-- </div> -->
+                                                            </div>
+                                                            <div class="price-section">
+                                                                <span class="price" ><small>PER/NIGHT</small>₹ [[deal.price]]</span>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            
+                                                            <div class="action-section">
+                                                                <a href="[[deal.hotel_url]]" title="" class="button btn-small  text-center">BOOK NOW</a>
+                                                                <a ng-click="showDetail(deal.room)" title="" class="button btn-small  text-center">View Detail</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                           
+                                            <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE ROOMS</a>
+                                        </div>
+                                        
+                                    </div>
+  
                                     <div class="tab-pane fade" id="hotel-availability">
                                         <form>
                                             <div class="update-search clearfix">

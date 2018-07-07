@@ -369,6 +369,7 @@ $scope.createHotel = function() {
 
   $scope.roomData={};
   $scope.hotels={};
+  $scope.roomobj={};
   // $scope.firstRate = 0;
   // $scope.secondRate = 3;
   // $scope.readOnly = true;
@@ -376,13 +377,21 @@ $scope.createHotel = function() {
   //   alert('On Rating: ' + rating);
   // };
   $scope.limit=10;
+  $scope.deallimit=1;
 
   $scope.loadMoreRooms = function() {
     $scope.limit =   $scope.limit + 10;
   }
+  $scope.loadMoreDeals = function() {
+    $scope.deallimit =   $scope.deallimit + 1;
+  }
   $scope.newLocation=function(){
     window.open('/hotel/list','_self');
 
+  }
+  $scope.showDetail=function(roomid){
+    window.open('/hotel/detail?id='+roomid,'_self');
+    
   }
   $http({
     method: 'GET',
@@ -401,6 +410,7 @@ $scope.createHotel = function() {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+
 var getrooms=function(){
   $http({
     method: 'GET',
@@ -412,7 +422,11 @@ var getrooms=function(){
       
       $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
       $scope.roomData.hotelData=$scope.hotelobj;
-
+      for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
+        for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
+          $scope.roomData.hotelData.rooms[j].deals[k].dealsRoom=$scope.roomData.hotelData.rooms[j]
+        }
+      }
       console.log("roomData",$scope.roomData);
       
 
