@@ -6,7 +6,6 @@ from cta.model.base import Base
 class Restaurant(Base):
     __tablename__ = 'restaurant'
 
-
     name = db.Column(db.String)
     rating = db.Column(db.Float, nullable=True)
     city = db.Column(db.String, nullable=True)
