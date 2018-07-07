@@ -13,12 +13,10 @@ import simplejson as json
 def hotel_api():
     if request.method == 'GET':
         args = request.args.to_dict()
-        args.pop('page', None)
-        args.pop('per_page', None)
         rating = request.args.get('rating')
         args.pop('rating', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
+        page = int(request.args.get('page'))
+        per_page = int(request.args.get('per_page'))
         if rating:
             hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
         elif page:

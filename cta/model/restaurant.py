@@ -40,30 +40,7 @@ class Amenity(Base):
     __tablename__ = 'amenity'
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
-    conference_room = db.Column(db.Boolean, default=False, nullable=True)
-    express_check_in_out = db.Column(db.Boolean, default=False, nullable=True)
-    laundry_service = db.Column(db.Boolean, default=False, nullable=True)
-    indoor_swimming_pool = db.Column(db.Boolean, default=False, nullable=True)
-    outdoor_swimming_pool = db.Column(db.Boolean, default=False, nullable=True)
-    porter_service = db.Column(db.Boolean, default=False, nullable=True)
-    Room_cleaning_service = db.Column(db.Boolean, default=False, nullable=True)
-    terrace = db.Column(db.Boolean, default=False, nullable=True)
-    child_baby_cot = db.Column(db.Boolean, default=False, nullable=True)
-    wheelchair_accessible = db.Column(db.Boolean, default=False, nullable=True)
-    doorman = db.Column(db.Boolean, default=False, nullable=True)
-    hairdresser = db.Column(db.Boolean, default=False, nullable=True)
-    banquets = db.Column(db.Boolean, default=False, nullable=True)
-    non_smoking_smoking_rooms = db.Column(db.Boolean, default=False, nullable=True)
-    pet_allowance = db.Column(db.Boolean, default=False, nullable=True)
-    lift = db.Column(db.Boolean, default=False, nullable=True)
-    bar = db.Column(db.Boolean, default=False, nullable=True)
-    gym = db.Column(db.Boolean, default=False, nullable=True)
-    pool = db.Column(db.Boolean, default=False, nullable=True)
-    restaurant = db.Column(db.Boolean, default=False, nullable=True)
-    spa = db.Column(db.Boolean, default=False, nullable=True)
-    wifi_in_lobby = db.Column(db.Boolean, default=False, nullable=True)
-    twenty_four_hr_reception = db.Column(db.Boolean, default=False, nullable=True)
-    twenty_four_hr_room_service = db.Column(db.Boolean, default=False, nullable=True)
+
 
 
     def __init__(self, *args, **kwargs):
@@ -73,14 +50,45 @@ class Amenity(Base):
         return '<pool %r>' % self.pool
 
 
-class Image(Base):
-    __tablename__ = 'image'
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
-    image_url = db.Column(db.String, default=False, nullable=True)
-    image_type = db.Column(db.Integer, nullable=True)
+class Categories(Base):
+    __tablename__ = 'categories'
+    category = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<image_url %r>' % self.image_url
+        return '<category %r>' % self.category
+
+
+class Cuisines(Base):
+    __tablename__ = 'cuisines'
+    cuisine = db.Column(db.String, default=False, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<cuisine %r>' % self.cuisine
+
+
+class Cuisines(Base):
+    __tablename__ = 'cuisines'
+    cuisine = db.Column(db.String, default=False, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<cuisine %r>' % self.cuisine
+
+
+class Collections(Base):
+    __tablename__ = 'Collections'
+    collection = db.Column(db.String, default=False, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<collection %r>' % self.collection
