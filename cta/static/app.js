@@ -1,4 +1,4 @@
-angular.module('comparetravel', ['angular.filter'])
+angular.module('comparetravel', ['angular.filter','ngMaterial', 'jkAngularRatingStars'])
 .config(['$interpolateProvider', function($interpolateProvider ,$locationProvider) {
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
@@ -369,6 +369,12 @@ $scope.createHotel = function() {
 
   $scope.roomData={};
   $scope.hotels={};
+  $scope.firstRate = 0;
+  $scope.secondRate = 3;
+  $scope.readOnly = true;
+  $scope.onItemRating = function(rating){
+    alert('On Rating: ' + rating);
+  };
 
   $http({
     method: 'GET',

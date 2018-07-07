@@ -35,7 +35,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/static/css/jquery.bxslider.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/static/css/flexslider.css" media="screen">
-    
     <!-- Main Style -->
     <link id="main-style" rel="stylesheet" href="/static/css/style.css">
     <script type="text/javascript">
@@ -59,11 +58,14 @@
     <link rel="stylesheet" href="/static/css/responsive.css">
     
     <link rel="stylesheet" type="text/css" href="/static/css/ie.css" />
-    
+    <script src="https://code.angularjs.org/1.5.0/angular-animate.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <script type='text/javascript' src="/static/js/jquerystar.js"></script>
-    
 <script type="text/javascript" charset="UTF-8" src="/static/js/common.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/util.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/map.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/geometry.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/streetview.js.download"></script><script type="text/javascript" charset="UTF-8" src="./Detailed View_files/stats.js.download"></script><style type="text/css">.gm-style {
         font: 400 11px Roboto, Arial, sans-serif;
         text-decoration: none;
@@ -1585,19 +1587,8 @@
                                         <small class="pull-left">avg/night</small>
                                         <span class="pull-right">$620</span>
                                     </span>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="star-rating">
-                                                    <span class="fa fa-star-o" data-rating="1"></span>
-                                                    <span class="fa fa-star-o" data-rating="2"></span>
-                                                    <span class="fa fa-star-o" data-rating="3"></span>
-                                                    <span class="fa fa-star-o" data-rating="4"></span>
-                                                    <span class="fa fa-star-o" data-rating="5"></span>
-                                                    <input type="hidden" name="whatever1" class="rating-value" value="3">
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <jk-rating-stars rating="secondRate" read-only="readOnly" ></jk-rating-stars>
+                                    <div style="width: 100px">{{secondRate}} Stars</div>
                                         <!-- <div title="" class="five-stars-container" data-toggle="tooltip" data-placement="bottom" data-original-title="4 stars"><span class="five-stars" style="width: 80%;"></span></div> -->
                                         <span class="review pull-right">270 reviews</span>
                                     </div>
