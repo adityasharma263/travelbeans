@@ -127,6 +127,18 @@
                     <button type="button" class="btn btn-default" ng-click=addImg()>add more</button>
                 </div>
                 <br>
+                <div> 
+                    <h4>For Maps : </h4>
+                    <br>
+                    <label for="desc">Longitude: 
+                        <input id="desc" class="box" ng-model="hotel.longitude" step="any" type="number" required>
+                    </label> 
+                    <br>
+                    <label for="desc">Latitude: 
+                        <input id="desc" class="box" ng-model="hotel.latitude" type="number" step="any" required>
+                    </label>
+                </div> 
+                <br>
                 <label for="rating">Rating:
                     <div class="radio">
                         <label>
@@ -182,6 +194,16 @@
                     <div>
                         <label for="banquets">
                             <input type="checkbox" value="2" ng-model="hotel.amenities.banquets"/>Banquets
+                        </label>
+                    </div>
+                    <div>
+                        <label for=" couple_friendly">
+                            <input type="checkbox"  ng-model="hotel.amenities. couple_friendly"/> Couple Friendly
+                        </label>
+                    </div>
+                    <div>
+                        <label for="parking">
+                            <input type="checkbox"  ng-model="hotel.amenities.parking"/>Parking 
                         </label>
                     </div>
                     <div>
@@ -303,27 +325,30 @@
                         <h4>Room Type</h4>
                         <div class="radio">
                             <label>
-                            <input id="room_type1" type="radio" name="room_type" value="1" ng-model="room.room_type"/>Premium
+                            <input id="room_type1" type="radio" name="room_type" value="1" ng-click="hideRoom()" ng-model="room.room_type"/>Premium
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type2" type="radio" name="room_type" value="2" ng-model="room.room_type"/>Executive
+                            <input id="room_type2" type="radio" name="room_type" value="2" ng-click="hideRoom()" ng-model="room.room_type"/>Executive
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type3" type="radio" name="room_type" value="3" ng-model="room.room_type"/>Sweet
+                            <input id="room_type3" type="radio" name="room_type" value="3" ng-click="hideRoom()" ng-model="room.room_type"/>Sweet
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type4" type="radio" name="room_type" value="4" ng-model="room.room_type"/>Super Deluxe
+                            <input id="room_type4" type="radio" name="room_type" value="4" ng-click="hideRoom()" ng-model="room.room_type"/>Super Deluxe
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type4" type="radio" name="room_type" value="5" ng-model="room.room_type"/>Others
+                            <input id="room_type4" type="radio" name="room_type" value="5" ng-click="showDefaultRoom()" ng-model="room.room_type"/>others
+                            </label>
+                            <label ng-show="showRoom" for="default">Room Type:
+                                <input id="room_type4" class="box" type="text" ng-model="room.default_room_type"/>
                             </label>
                         </div>
                     </label>
@@ -478,6 +503,11 @@
                 </label>
                 <br>
                 <h3>Deals</h3>
+                <label for="deals">No of deals added: 
+                    <div style="display:inline-block; background-color: #9a9292; color: white;border-radius: 100%;text-align: center; width: 24px; margin: 12px;">
+                        [[hotelDeals.length]]
+                    </div>
+                </label>
                 <div>
                     <label for="weekend">Weekend :
                         <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
