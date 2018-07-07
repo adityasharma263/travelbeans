@@ -366,20 +366,46 @@ $scope.createHotel = function() {
 
 .controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
   console.log("working");
-  $scope.hotelData={};
-    $http({
-      method: 'GET',
-      url: '/api/v1/hotel'+(location.search)
-    }).then(function successCallback(response) {
-        for(var i=0;i<response.data.result.hotel.length; i++){
-          $scope.hotelData= response.data.result.hotel[i];
-        }
-        console.log("hotel",$scope.hotelData);
-        // this callback will be called asynchronously
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    });
+
+  $scope.roomData={};
+  $scope.hotels={};
+
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel'
+  }).then(function successCallback(response) {
+      $scope.hotelsData = response.data.result.hotel;
+      console.log("$scope.hotelsData",$scope.hotelsData);
+      for(var j=0;j<$scope.hotelsData.length;j++){
+        
+        $scope.hotels[$scope.hotelsData[j].id]= $scope.hotelsData[j];
+      }
+      console.log("$scope.hotels",$scope.hotels);
+
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
+  $http({
+    method: 'GET',
+    url: '/api/v1/room'+(location.search)
+  }).then(function successCallback(response) {
+      for(var i=0; i<response.data.result.rooms.length; i++){
+        $scope.roomData= response.data.result.rooms[i];
+      }
+      $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
+      $scope.roomData.hotelData=$scope.hotelobj;
+
+      console.log("roomData",$scope.roomData);
+      
+
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  });
       
 }])

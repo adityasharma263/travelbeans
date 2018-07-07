@@ -733,7 +733,7 @@
                                             
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides " style="width: 3000%;">
-                                                <li ng-repeat="image in hotelData.images"  style="width: 870px; float: left; display: block;" ><img src="[[image.image_url]]" alt="" draggable="false"></li>
+                                                <li ng-repeat="image in roomData.hotelData.images"  style="width: 870px; float: left; display: block;" ><img src="[[image.image_url]]" alt="" draggable="false"></li>
                                             </ul>
                                         </div>
                                             <!-- <ol class="flex-control-nav flex-control-paging">
@@ -749,7 +749,7 @@
                                             
                                         <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
 
-                                                <li ng-repeat="image in hotelData.images" class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                                <li ng-repeat="image in roomData.hotelData.images" class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
                                         <ol class="flex-control-nav flex-control-paging">
@@ -827,9 +827,9 @@
                                         <div class="intro table-wrapper full-width hidden-table-sms">
                                             <div class="col-sm-5 col-lg-4 features table-cell">
                                                 <ul>
-                                                    <li><label>hotel type:</label>[[hotelData.star]] star</li>
-                                                    <li><label>City:</label>[[hotelData.city]]</li>
-                                                    <li><label>Address:</label>[[hotelData.address]]</li>
+                                                    <li><label>hotel type:</label>[[roomData.hotelData.star]] star</li>
+                                                    <li><label>City:</label>[[roomData.hotelData.city]]</li>
+                                                    <li><label>Address:</label>[[roomData.hotelData.address]]</li>
                                                 </ul>
                                             </div>
                                             <div class="col-sm-7 col-lg-8 table-cell testimonials">
@@ -861,8 +861,8 @@
                                             </div>
                                         </div>
                                         <div class="long-description">
-                                            <h2>About [[hotelData.name]]</h2>
-                                           <p>[[hotelData.desc]]</p>
+                                            <h2>About [[roomData.hotelData.name]]</h2>
+                                           <p>[[roomData.hotelData.desc]]</p>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="hotel-availability">
@@ -1079,86 +1079,86 @@
                                         
                                         <p> All of These Facilities are Confined to The Room</p>
                                         <ul class="amenities clearfix style1">
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.tv">
                                                 <div class="icon-box style1"><i class="soap-icon-swimming"></i>Television</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
+                                            </li> -->
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
+                                                <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Electric Kettle </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
-                                                <div class="icon-box style1"><i class="soap-icon-coffee"></i>Coffee / Tea Eectric Ketle</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.ac">
                                                 <div class="icon-box style1"><i class="soap-icon-aircon"></i>Air Conditioning</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.electric_kettle">
                                                 <div class="icon-box style1"><i class="soap-icon-fitnessfacility"></i>Bathroom with bathtub</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            </li> -->
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_with_shower">
                                                 <div class="icon-box style1"><i class="soap-icon-fridge"></i>Bathroom with shower</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            </li> -->
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            </li> -->
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.desk">
                                                 <div class="icon-box style1"><i class="soap-icon-entertainment"></i>Desk</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.hairdryer">
                                                 <div class="icon-box style1"><i class="soap-icon-securevault"></i>Hairdryer</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_safe">
                                                 <div class="icon-box style1"><i class="soap-icon-pickanddrop"></i>Room safe</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            </li> -->
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.food_serve_at_room">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Food Serve at Room</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_cosmetics">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Bathroom Cosmetics</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_nightie">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Bathroom Nightie</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.ironing_facility">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Ironing Facility</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.weighing_machine">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Weighing Machine</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wardrobes_closet">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Wardrobes / Closet</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.view">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>View </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_seating_area">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Room Seating Area</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_slipper">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Room Slipper</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Free Toiletrees</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_toiletrees">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Wake-Up Service </div>
-                                            </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            </li> -->
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.morning_newspaper">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Morning Newspaper </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_towels">
                                                 <div class="icon-box style1"><i class="soap-icon-pets"></i>Bathroom Towels </div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6">
-                                                <div class="icon-box style1"><i class="soap-icon-pets"></i>Free Evening Fruits </div>
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.free_evening_snacks">
+                                                <div class="icon-box style1"><i class="soap-icon-pets"></i>Free Evening Snacks </div>
                                             </li>
                                             
                                         </ul>
@@ -1166,85 +1166,85 @@
                                         
                                         <h2>Hotel Amenities</h2>
                                         <ul class="amenities clearfix style2">
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.twenty_four_hr_room_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
                                                 <div class="icon-box style2"><i class="soap-icon-wifi circle"></i>24/7 Room Service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.twenty_four_hr_reception">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_reception">
                                                 <div class="icon-box style2"><i class="soap-icon-swimming circle"></i>24/7 reception</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.twenty_four_hr_room_service">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
                                                 <div class="icon-box style2"><i class="soap-icon-television circle"></i>Business Center</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.parking">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.parking">
                                                 <div class="icon-box style2"><i class="soap-icon-coffee circle"></i>Car Park</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.conference_rooms">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.conference_rooms">
                                                 <div class="icon-box style2"><i class="soap-icon-aircon circle"></i>Conference Rooms</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.express_check_in_out">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.express_check_in_out">
                                                 <div class="icon-box style2"><i class="soap-icon-fitnessfacility circle"></i>Express check-in / out</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.bar">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.bar">
                                                 <div class="icon-box style2"><i class="soap-icon-fridge circle"></i>Hotel bar</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.lift">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.lift">
                                                 <div class="icon-box style2"><i class="soap-icon-winebar circle"></i>Elevator in Building</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.laundry_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.laundry_service">
                                                 <div class="icon-box style2"><i class="soap-icon-smoking circle"></i>Laundry service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.indoor_swimming_pool">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.indoor_swimming_pool">
                                                 <div class="icon-box style2"><i class="soap-icon-entertainment circle"></i>Indoor swimming pool</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.outdoor_swimming_pool">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.outdoor_swimming_pool">
                                                 <div class="icon-box style2"><i class="soap-icon-securevault circle"></i>Outdoor swimming pool</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.porter_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.porter_service">
                                                 <div class="icon-box style2"><i class="soap-icon-pickanddrop circle"></i>Porter service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.restaurant">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.restaurant">
                                                 <div class="icon-box style2"><i class="soap-icon-phone circle"></i>Restaurant</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.Room_cleaning_service">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.Room_cleaning_service">
                                                 <div class="icon-box style2"><i class="soap-icon-pets circle"></i>Room Cleaning Service</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.terrace">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.terrace">
                                                 <div class="icon-box style2"><i class="soap-icon-playplace circle"></i>Terrace</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.pool">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.pool">
                                                 <div class="icon-box style2"><i class="soap-icon-breakfast circle"></i>Towels at the pool / beach</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.spa">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.spa">
                                                 <div class="icon-box style2"><i class="soap-icon-parking circle"></i>Wellness centre/Spa</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.wiFi_in_lobby">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.wiFi_in_lobby">
                                                 <div class="icon-box style2"><i class="soap-icon-conference circle"></i>WiFi in lobby</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.child_baby_cot">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.child_baby_cot">
                                                 <div class="icon-box style2"><i class="soap-icon-fireplace circle"></i>Child/Baby cot</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.wheelchair_accessible">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.wheelchair_accessible">
                                                 <div class="icon-box style2"><i class="soap-icon-handicapaccessiable circle"></i>Wheelchair Accessible</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.doorman">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.doorman">
                                                 <div class="icon-box style2"><i class="soap-icon-doorman circle"></i>Doorman</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.gym">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.gym">
                                                 <div class="icon-box style2"><i class="soap-icon-tub circle"></i>Gym</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.hairdresser">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.hairdresser">
                                                 <div class="icon-box style2"><i class="soap-icon-elevator circle"></i>Hairdresser</div>
                                             </li>
-                                            <!-- <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.twenty_four_hr_room_service">
+                                            <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.twenty_four_hr_room_service">
                                                 <div class="icon-box style2"><i class="soap-icon-star circle"></i>Banquets</div>
                                             </li> -->
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.non_smoking_smoking_rooms">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.non_smoking_smoking_rooms">
                                                 <div class="icon-box style2"><i class="soap-icon-star circle"></i>Non-Smoking / Smoking Rooms</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.pet_allowance">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.pet_allowance">
                                                 <div class="icon-box style2"><i class="soap-icon-star circle"></i>Pets Allowence</div>
                                             </li>
-                                            <li class="col-md-4 col-sm-6" ng-show="hotelData.amenities.banquets">
+                                            <li class="col-md-4 col-sm-6" ng-show="roomData.hotelData.amenities.banquets">
                                                 <div class="icon-box style2"><i class="soap-icon-star circle"></i>Banquets</div>
                                             </li>
                                         </ul>
