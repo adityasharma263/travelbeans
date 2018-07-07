@@ -32,6 +32,7 @@ def hotel_api():
         hotel_obj = {
         "name": hotel.get("name", None),
         "city": hotel.get("city", None),
+        "category": hotel.get("category", None),
         'rating': hotel.get("rating", None),
         "desc": hotel.get("desc", None),
         "address": hotel.get("address", None),
@@ -100,6 +101,7 @@ def room_api():
         room_obj = {
             "room_type": room.get("room_type", None),
             "other_room_type": room.get("default_room_type", None),
+            "image_url": room.get("image_url", None),
             "check_in": datetime.datetime.now(),
             "check_out": datetime.datetime.now(),
             "status": True,
