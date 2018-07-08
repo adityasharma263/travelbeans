@@ -72,6 +72,8 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.roomobj={};
   $scope.hotelobj={};
   $scope.deals=[];
+  $scope.min= 0;
+  $scope.max= 0;
   
   // loadMore function
   $scope.loadMore = function() {
@@ -162,6 +164,21 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
       }
     }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+  $http({
+    method: 'GET',
+    url: '/api/v1/deal'
+  }).then(function successCallback(response) {
+
+      $scope.dealdata = response.data.result.deal;
+      console.log(" $scope.dealdata", $scope.dealdata);
+      $scope.min = Math.min.apply(Math,$scope.dealdata.map(function(item){return item.price;}));
+      console.log("$scope.min",$scope.min);
+      $scope.max= Math.max.apply(Math,$scope.dealdata.map(function(item){return item.price;}));
+      console.log("$scope.max",$scope.max);
+      }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
