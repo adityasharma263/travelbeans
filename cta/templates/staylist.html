@@ -204,6 +204,9 @@
                             <!-- <h4 class="search-results-title"><i class="soap-icon-search"></i></h4> -->
                             <div class="toggle-container filters-container">
                                 <div class="panel style1 arrow-right">
+                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {}">Clear filter</button> 
+                                </div> 
+                                <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#modify-search-panel" class="collapsed" aria-expanded="false">Modify Search</a>
                                         </h4>
@@ -244,10 +247,14 @@
                                                 </form>
 
                                             <div class="form-group">
+                                                <!-- <div data-role="rangeslider">
+                                                        <label for="price-max">Max Price:</label>
+                                                        <input type="range" ng-model="hotel.end_price" id="price-max" value="" min="hotel.start_price" max="hotel.max_price"> -->
                                                 <label>Start Price</label>
                                                     <input type="number" ng-model="hotel.start_price">
                                                 <label>End Price</label>
                                                     <input type="number" ng-model="hotel.end_price">
+                                                <!-- </div>     -->
                                             </div>
                                             <br>
                                             <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelPrice()">search again</button>
@@ -311,9 +318,7 @@
                                 </div>
 
                                 
-                                <div class="panel style1 arrow-right">
-                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {}">Clear filter</button> 
-                                </div>     
+                                    
 
                             </div>
                         </div>
@@ -347,8 +352,8 @@
                                                     </div>
 
                                                    <div>
-                                                       <div class="five-stars-container">
-                                                            <span class="five-stars" style="width: 80%;"></span>
+                                                       <div>
+                                                            <span style="width:10px; height:10px"><img src="../static/images/star.png"></span>
                                                        </div> 
 
                                                    </div>
@@ -356,7 +361,7 @@
                                               </div>
                                               
                                               <div>
-                                                  <div ng-if="[[hotel.rooms.room_type]]==1">
+                                                  <div>
                                                       <span class="price"><small>[[hotel.rooms[0].deals[0].website.website]]</small>₹[[hotel.rooms[0].deals[0].price]]</span><center>
                                                       <a class="button btn-small green" href="">View Details</a>
                                                         <a class="button btn-small yellow" ng-click="show()">More Deals</a> 
@@ -379,14 +384,14 @@
                                            <span class="col-md-3" ng-if="[[room.room_type]]==2">Executive</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==3">Sweet</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
+                                           <span class="col-md-3" ng-if="[[room.room_type]]==5">[[room.other_room_type]]</span>
                                            <span class="col-md-3"><img src="deal.website.logo_image"></span>
-                                              <span class="col-md-4"><a class="button btn-mini green">View Details</a>
-                                              <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
+                                              <span class="col-md-4"><a class="button btn-mini orange">View Details</a>
+                                              <a class="button btn-mini dark-blue1" href="[[deal.hotel_url]]">Book Now</a></span>
                                            <span class="price">₹[[deal.price]]</span>
                                             
                                            </span>
                                           </div>
-
                                       </article>
                                 <!-- </div>
                                 </div> -->
