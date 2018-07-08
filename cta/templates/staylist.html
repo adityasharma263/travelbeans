@@ -91,7 +91,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
     <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>
     <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" charset="UTF-8" src="../static/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="../static/js/stats.js"></script></head>
+<script type="text/javascript" charset="UTF-8" src="../static/js/common.js"></script>
+<script type="text/javascript" charset="UTF-8" src="../static/js/util.js"></script>
+<script type="text/javascript" charset="UTF-8" src="../static/js/stats.js"></script>
+
+</head>
 <body ng-app="comparetravel">
     <div ng-controller="staylistController"> 
     <div id="page-wrapper">
@@ -200,6 +204,9 @@
                             <!-- <h4 class="search-results-title"><i class="soap-icon-search"></i></h4> -->
                             <div class="toggle-container filters-container">
                                 <div class="panel style1 arrow-right">
+                                        <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {}">Clear filter</button> 
+                                </div> 
+                                <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#modify-search-panel" class="collapsed" aria-expanded="false">Modify Search</a>
                                         </h4>
@@ -220,16 +227,34 @@
                                         </div>
                                 </div>
                                 <div class="panel style1 arrow-right">
+
+                                        
+
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#price-filter" class="collapsed">Price</a>
                                     </h4>
                                     <div id="price-filter" class="panel-collapse collapse">
                                         <div class="panel-content">
+
+                                                <form>
+                                                    <div data-role="rangeslider">
+                                                      <label for="price-min">Min Price:</label>
+                                                      <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                                                      <label for="price-max">Max Price:</label>
+                                                      <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+                                                    </div>
+                                                      <input type="submit" data-inline="true" value="Submit">
+                                                </form>
+
                                             <div class="form-group">
+                                                <!-- <div data-role="rangeslider">
+                                                        <label for="price-max">Max Price:</label>
+                                                        <input type="range" ng-model="hotel.end_price" id="price-max" value="" min="hotel.start_price" max="hotel.max_price"> -->
                                                 <label>Start Price</label>
                                                     <input type="number" ng-model="hotel.start_price">
                                                 <label>End Price</label>
                                                     <input type="number" ng-model="hotel.end_price">
+                                                <!-- </div>     -->
                                             </div>
                                             <br>
                                             <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelPrice()">search again</button>
@@ -253,10 +278,10 @@
                                                 <input id="rating3" type="radio" name="rating" value="7" ng-model="hotel.rating"/>
                                                 <label class="label warning">7+</label>
                                                 <br>
-                                                <input id="rating4" type="radio" name="rating" value="8" ng-model="hotel.rating"/>
+                                                <input id="rating4" type="radio" name="rating" value="5" ng-model="hotel.rating"/>
                                                 <label class="label danger">5+</label>
                                                 <br>
-                                                <input id="rating5" type="radio" name="rating" value="9" ng-model="hotel.rating"/>
+                                                <input id="rating5" type="radio" name="rating" value="0" ng-model="hotel.rating"/>
                                                 <label class="label other">0+</label>
                                             </div>
                                             <br>
@@ -293,6 +318,7 @@
                                 </div>
 
                                 
+                                    
 
                             </div>
                         </div>
@@ -326,8 +352,8 @@
                                                     </div>
 
                                                    <div>
-                                                       <div class="five-stars-container">
-                                                            <span class="five-stars" style="width: 80%;"></span>
+                                                       <div>
+                                                            <span style="width:10px; height:10px"><img src="../static/images/star.png"></span>
                                                        </div> 
 
                                                    </div>
@@ -344,7 +370,7 @@
 
                                                       <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                   </div>
-                                                  <div class="amenities" ng-repeat="price in hotel.rooms[0].deals">
+                                                  <div class="amenities" ng-repeat="price in hotel.rooms[0].deals | limitTo:3 ">
                                                           <span class="price"><small>[[price.website.website]]</small>₹[[price.price]]</span>
                                                   </div>    
                                               </div>
@@ -352,19 +378,20 @@
 
                                           <div ng-show="myVar">
                                             <div class="row" ng-repeat="room in hotel.rooms">
+                                           <span ng-repeat="deal in room.deals">
+
                                            <span class="col-md-3" ng-if="[[room.room_type]]==1">Premium</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==2">Executive</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==3">Sweet</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
-                                           <!-- <span ng-repeat="deal in room.deals"> -->
+                                           <span class="col-md-3" ng-if="[[room.room_type]]==5">[[room.other_room_type]]</span>
                                            <span class="col-md-3"><img src="deal.website.logo_image"></span>
-                                              <span class="col-md-4"><a class="button btn-mini green">View Details</a>
-                                              <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
+                                              <span class="col-md-4"><a class="button btn-mini orange">View Details</a>
+                                              <a class="button btn-mini dark-blue1" href="[[deal.hotel_url]]">Book Now</a></span>
                                            <span class="price">₹[[deal.price]]</span>
-                                              <!-- </span> -->
-                                           
+                                            
+                                           </span>
                                           </div>
-
                                       </article>
                                 <!-- </div>
                                 </div> -->
