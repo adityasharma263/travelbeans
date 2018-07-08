@@ -365,8 +365,6 @@ $scope.createHotel = function() {
 
 
 .controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
-  console.log("working");
-
   $scope.roomData={};
   $scope.hotels={};
   $scope.roomobj={};
