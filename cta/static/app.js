@@ -398,8 +398,6 @@ $scope.createHotel = function() {
 
 
 .controller('hotelController',["$scope", "$http", function($scope, $http, $filter) {
-  console.log("working");
-
   $scope.roomData={};
   $scope.hotels={};
   $scope.roomobj={};
@@ -411,6 +409,37 @@ $scope.createHotel = function() {
   // };
   $scope.limit=10;
   $scope.deallimit=1;
+
+  var showDivs=function(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    
+    var dots = document.getElementsByClassName("demo");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+        dots[i].style.opacity="1";
+
+    }
+    x[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " w3-opacity-off";
+  }
+  var slideIndex = 1;
+  
+  var plusDivs=function(n) {
+      showDivs(slideIndex += n);
+  }
+  
+  $scope.currentDiv=function(n) {
+      console.log("n",n);
+      showDivs(slideIndex = n);
+  }
+  
+ 
 
   $scope.loadMoreRooms = function() {
     $scope.limit =   $scope.limit + 10;
