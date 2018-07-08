@@ -38,7 +38,6 @@ class Image(Base):
 
 class Amenity(Base):
     __tablename__ = 'amenity'
-
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
 
 
@@ -92,3 +91,14 @@ class Collections(Base):
 
     def __repr__(self):
         return '<collection %r>' % self.collection
+
+
+class dishes(Base):
+    __tablename__ = 'dishes'
+    dish = db.Column(db.String, default=False, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<dish %r>' % self.dish
