@@ -8,14 +8,18 @@ class Restaurant(Base):
 
     name = db.Column(db.String)
     rating = db.Column(db.Float, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
     city = db.Column(db.String, nullable=True)
     phone = db.Column(db.String, nullable=True, unique=True)
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     address = db.Column(db.String, nullable=True)
-    images = db.relationship('Image', backref='hotel')
-    amenities = db.relationship('Amenity', uselist=False, backref='hotel')
-
+    restaurant_type = db.Column(db.Integer, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    images = db.relationship('Image', backref='restaurant')
+    amenities = db.relationship('Amenity', uselist=False, backref='restaurant')
+    catogaries = db.relationship('catogary', uselist=False, backref='restaurant')
+    association = db.relationship('Association', backref='restaurant')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,6 +30,7 @@ class Restaurant(Base):
 
 class Image(Base):
     __tablename__ = 'image'
+
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     image_url = db.Column(db.String, default=False, nullable=True)
     image_type = db.Column(db.Integer, nullable=True)
@@ -36,11 +41,41 @@ class Image(Base):
     def __repr__(self):
         return '<image_url %r>' % self.image_url
 
+
 class Amenity(Base):
     __tablename__ = 'amenity'
+
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
-
-
+    home_delivery = db.Column(db.Boolean, default=False, nullable=True)
+    private_dining_area_available = db.Column(db.Boolean, default=False, nullable=True)
+    kid_friendly = db.Column(db.Boolean, default=False, nullable=True)
+    table_reservation_required = db.Column(db.Boolean, default=False, nullable=True)
+    table_booking_recommended = db.Column(db.Boolean, default=False, nullable=True)
+    wheelchair_accessible = db.Column(db.Boolean, default=False, nullable=True)
+    buffet = db.Column(db.Boolean, default=False, nullable=True)
+    wifi = db.Column(db.Boolean, default=False, nullable=True)
+    live_entertainment = db.Column(db.Boolean, default=False, nullable=True)
+    live_music = db.Column(db.Boolean, default=False, nullable=True)
+    live_sports_screening = db.Column(db.Boolean, default=False, nullable=True)
+    valet_parking = db.Column(db.Boolean, default=False, nullable=True)
+    parking = db.Column(db.Boolean, default=False, nullable=True)
+    group_meal = db.Column(db.Boolean, default=False, nullable=True)
+    smoking_area = db.Column(db.Boolean, default=False, nullable=True)
+    desserts_and_bakes = db.Column(db.Boolean, default=False, nullable=True)
+    full_bar_available = db.Column(db.Boolean, default=False, nullable=True)
+    serves_jain_food = db.Column(db.Boolean, default=False, nullable=True)
+    vegetarian_only = db.Column(db.Boolean, default=False, nullable=True)
+    serves_non_veg = db.Column(db.Boolean, default=False, nullable=True)
+    nightlife = db.Column(db.Boolean, default=False, nullable=True)
+    city_view = db.Column(db.Boolean, default=False, nullable=True)
+    brunch = db.Column(db.Boolean, default=False, nullable=True)
+    sunday_roast = db.Column(db.Boolean, default=False, nullable=True)
+    gastro_Pub = db.Column(db.Boolean, default=False, nullable=True)
+    beer = db.Column(db.Boolean, default=False, nullable=True)
+    outdoor_seating = db.Column(db.Boolean, default=False, nullable=True)
+    takeaway = db.Column(db.Boolean, default=False, nullable=True)
+    alcohol = db.Column(db.Boolean, default=False, nullable=True)
+    seating = db.Column(db.Boolean, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,9 +84,21 @@ class Amenity(Base):
         return '<pool %r>' % self.pool
 
 
-class Categories(Base):
-    __tablename__ = 'categories'
-    category = db.Column(db.String, default=False, nullable=True)
+class Category(Base):
+    __tablename__ = 'category'
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
+    breakfast = db.Column(db.Boolean, default=False, nullable=True)
+    lunch = db.Column(db.Boolean, default=False, nullable=True)
+    dinner = db.Column(db.Boolean, default=False, nullable=True)
+    cafe = db.Column(db.Boolean, default=False, nullable=True)
+    lounge = db.Column(db.Boolean, default=False, nullable=True)
+    family = db.Column(db.Boolean, default=False, nullable=True)
+    bars = db.Column(db.Boolean, default=False, nullable=True)
+    nightlife = db.Column(db.Boolean, default=False, nullable=True)
+    street_stalls = db.Column(db.Boolean, default=False, nullable=True)
+    pocket_friendly = db.Column(db.Boolean, default=False, nullable=True)
+    diet = db.Column(db.Boolean, default=False, nullable=True)
+    luxury = db.Column(db.Boolean, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -62,17 +109,7 @@ class Categories(Base):
 
 class Cuisines(Base):
     __tablename__ = 'cuisines'
-    cuisine = db.Column(db.String, default=False, nullable=True)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<cuisine %r>' % self.cuisine
-
-
-class Cuisines(Base):
-    __tablename__ = 'cuisines'
     cuisine = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
@@ -83,9 +120,10 @@ class Cuisines(Base):
 
 
 class Collections(Base):
-    __tablename__ = 'Collections'
-    collection = db.Column(db.String, default=False, nullable=True)
+    __tablename__ = 'collections'
 
+    collection = db.Column(db.String, default=False, nullable=True)
+    image = db.Column(db.String, default=False, nullable=True)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -93,12 +131,31 @@ class Collections(Base):
         return '<collection %r>' % self.collection
 
 
-class dishes(Base):
+class Dishes(Base):
     __tablename__ = 'dishes'
+
     dish = db.Column(db.String, default=False, nullable=True)
+    image = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
         return '<dish %r>' % self.dish
+
+class Association(Base):
+    __tablename__ = 'association'
+
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=False)
+    dish_id = db.Column(db.Integer, db.ForeignKey('dishes.id'), unique=False)
+    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), unique=False)
+    cuisine_id = db.Column(db.Integer, db.ForeignKey('cuisines.id'), unique=False)
+    dish = db.relationship('dishes', foreign_keys=dish_id)
+    collection = db.relationship('collections', foreign_keys=collection_id)
+    cuisine = db.relationship('cuisines', foreign_keys=cuisine_id)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<restaurant_id %r>' % self.restaurant_id
