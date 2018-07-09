@@ -250,7 +250,7 @@
                                             <div class="form-group">
                                                 <div data-role="rangeslider">
                                                         <label for="price-max">Max Price:</label>
-                                                        <input type="range" min="[[min]]" max="[[max]]" value="max" ng-model="hotel.end_price" id="price-max">
+                                                        <input type="range" min="[[min]]" max="[[max]]" value="max"  id="price-max">
                                                         <p>Value: <span id="">[[max]]</span></p>
 
                                                         <!-- <script>
@@ -392,8 +392,8 @@
                                               
                                               <div>
                                                   <div>
-                                                      <span class="price"><small>[[hotel.rooms[0].deals[0].website.website]]</small>₹[[hotel.rooms[0].deals[0].price]]</span><center>
-                                                      <a class="button btn-small green" href="">View Details</a>
+                                                      <span class="price"><small>[[room.deals[0].website.website]]</small>₹[[room.deals[0].price]]</span><center>
+                                                      <a class="button btn-small green"  ng-click="showDetail(room.id)">View Details</a>
                                                         <a class="button btn-small yellow" ng-click="show()">More Deals</a> 
                                                             
                                                       
@@ -416,7 +416,7 @@
                                            <span class="col-md-3" ng-if="[[room.room_type]]==4">Super_Deluxe</span>
                                            <span class="col-md-3" ng-if="[[room.room_type]]==5">[[room.other_room_type]]</span>
                                            <span class="col-md-3"><img src="deal.website.logo_image"></span>
-                                              <span class="col-md-4"><a class="button btn-mini orange">View Details</a>
+                                              <span class="col-md-4"><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Details</a>
                                               <a class="button btn-mini dark-blue1" href="[[deal.hotel_url]]">Book Now</a></span>
                                            <span class="price">₹[[deal.price]]</span>
                                             
