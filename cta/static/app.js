@@ -72,8 +72,8 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.roomobj={};
   $scope.hotelobj={};
   $scope.deals=[];
-  $scope.min= 0;
-  $scope.max= 0;
+  // $scope.min= 0;
+  // $scope.max= 0;
   // $scope.max_price= 0;
   
   // loadMore function
