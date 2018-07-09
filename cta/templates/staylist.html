@@ -250,19 +250,9 @@
                                             <div class="form-group">
                                                 <div data-role="rangeslider">
                                                         <label for="price-max">Max Price:</label>
-                                                        <input type="range" min="[[min]]" max="[[max]]" value="max"  id="price-max">
-                                                        <p>Value: <span id="">[[max]]</span></p>
+                                                        <input type="range" min="[[min]]" max="[[max]]" value="max" ng-model="hotel.end_price" id="price-max">
+                                                        <p>Value: <span>[[hotel.end_price]]</span></p>
 
-                                                        <!-- <script>
-                                                            var slider = document.getElementById("price-max");
-                                                            var output = document.getElementById("demo");
-                                                            output.innerHTML = slider.value;
-                                                            console.log("slider.value",slider.value);
-                                                            
-                                                            slider.oninput = function() {
-                                                                output.innerHTML = this.value;
-                                                            }
-                                                        </script> -->
                                                 <!-- <label>Start Price</label>
                                                     <input type="number" ng-model="hotel.start_price">
                                                 <label>End Price</label>
