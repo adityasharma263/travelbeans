@@ -74,6 +74,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.deals=[];
   $scope.min= 0;
   $scope.max= 0;
+  // $scope.max_price= 0;
   
   // loadMore function
   $scope.loadMore = function() {
@@ -182,12 +183,12 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+  
   $scope.getHotelPrice = function(){
-    console.log("......");
-
+    console.log("$scope.hotel.end_price",$scope.hotel.end_price);
     $http({
       method: 'GET',
-      url: '/api/v1/deal?price_start=' + $scope.hotel.start_price + '&price_end=' + $scope.hotel.end_price
+      url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
     }).then(function successCallback(response) {
         $scope.deals = response.data.result.deal;
         for(var j=0; j<$scope.deals.length; j++){
@@ -206,6 +207,21 @@ angular.module('comparetravel', ['angular.filter'])
         // or server returns response with an error status.
     })
     
+  }
+
+  $scope.checkErr = function(){
+    $scope.errMessage = '';
+    $scope.curDate = new Date();
+    
+    if(new Date($scope.hotel.check_in) > new Date($scope.hotel.check_out)){
+      $scope.errMessage = 'End Date should be greater than start date';
+      return false;
+    }
+    if(new Date($scope.hotel.check_in) < $scope.curDate){
+       $scope.errMessage = 'Start date should not be before today.';
+       return false;
+    }
+
   }
 
   $scope.getHotelweek = function(){

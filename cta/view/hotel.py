@@ -20,7 +20,7 @@ def hotel_api():
         if rating:
             hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
         elif page:
-            hotels = Hotel.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(per_page).all()
+            hotels = Hotel.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         else:
             hotels = Hotel.query.filter_by(**args).all()
         result = HotelSchema(many=True).dump(hotels)

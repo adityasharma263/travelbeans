@@ -218,8 +218,9 @@
                                                             <input type="date" ng-model="hotel.check_in" placeholder="mm/dd/yy">                                                    </div>
                                                     <div class="form-group">
                                                         <label>check out</label>
-                                                            <input type="date" ng-model="hotel.check_out" placeholder="mm/dd/yy">
+                                                            <input type="date" ng-model="hotel.check_out" ng-change="checkErr()" placeholder="mm/dd/yy">
                                                     </div>
+                                                    <span style="color:red">[[errMessage]]</span>
                                                     <br>
                                                     <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelweek()">search again</button>
                                                 </form>
@@ -236,7 +237,7 @@
                                     <div id="price-filter" class="panel-collapse collapse">
                                         <div class="panel-content">
 
-                                                <form>
+                                                <!-- <form>
                                                     <div data-role="rangeslider">
                                                       <label for="price-min">Min Price:</label>
                                                       <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
@@ -244,17 +245,28 @@
                                                       <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
                                                     </div>
                                                       <input type="submit" data-inline="true" value="Submit">
-                                                </form>
+                                                </form> -->
 
                                             <div class="form-group">
-                                                <!-- <div data-role="rangeslider">
+                                                <div data-role="rangeslider">
                                                         <label for="price-max">Max Price:</label>
-                                                        <input type="range" ng-model="hotel.end_price" id="price-max" value="" min="hotel.start_price" max="hotel.max_price"> -->
-                                                <label>Start Price</label>
+                                                        <input type="range" min="[[min]]" max="[[max]]" value="" id="price-max">
+                                                        <p>Value: <span id="demo"></span></p>
+                                                        <script>
+                                                            var slider = document.getElementById("price-max");
+                                                            var output = document.getElementById("demo");
+                                                            output.innerHTML = slider.value;
+                                                            console.log("slider.value",slider.value);
+                                                            
+                                                            slider.oninput = function() {
+                                                                output.innerHTML = this.value;
+                                                            }
+                                                        </script>
+                                                <!-- <label>Start Price</label>
                                                     <input type="number" ng-model="hotel.start_price">
                                                 <label>End Price</label>
-                                                    <input type="number" ng-model="hotel.end_price">
-                                                <!-- </div>     -->
+                                                    <input type="number" ng-model="hotel.end_price"> -->
+                                                </div>    
                                             </div>
                                             <br>
                                             <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelPrice()">search again</button>
@@ -285,7 +297,7 @@
                                                 <label class="label other">0+</label>
                                             </div>
                                             <br>
-                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button>
+                                            <!-- <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -328,10 +340,10 @@
                                 <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel | limitTo:limit">
-                                <!-- <div ng-repeat="room in hotel.rooms">
-                                <div ng-if="[[room.room_type]]==1 && ![[room.breakfast]]"> -->
+                                <div ng-repeat="room in hotel.rooms">
+                                <!-- <div ng-if="[[room.room_type]]==1 && ![[room.breakfast]]"> -->
                                             
-                                <article class="box">
+                                <article class="box" ng-if="[[room.room_type]]==1">
                                     
                                           <figure class="col-sm-5 col-md-4">
                                               <a title="" href="[[hotel.images[0].image_url]]" class="hover-effect popup-gallery"><img style="height:150px" src="[[hotel.images[0].image_url]]" width="270" height="160" alt=""></a>
@@ -352,10 +364,27 @@
                                                     </div>
 
                                                    <div>
-                                                       <div>
-                                                            <span style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       <div ng-if="[[hotel.star]]==1">
+                                                            <span ng-repeat="i in [1]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
                                                        </div> 
-
+                                                       <div ng-if="[[hotel.star]]==2">
+                                                            <span ng-repeat="i in [1,2]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       </div>
+                                                       <div ng-if="[[hotel.star]]==3">
+                                                            <span ng-repeat="i in [1,2,3]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       </div>
+                                                       <div ng-if="[[hotel.star]]==4">
+                                                            <span ng-repeat="i in [1,2,3,4]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       </div>
+                                                       <div ng-if="[[hotel.star]]==5">
+                                                            <span ng-repeat="i in [1,2,3,4,5]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       </div>
+                                                       <div ng-if="[[hotel.star]]==6">
+                                                            <span ng-repeat="i in [1,2,3,4,5,6]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       </div>
+                                                       <div ng-if="[[hotel.star]]==7">
+                                                            <span ng-repeat="i in [1,2,3,4,5,6,7]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                       </div>
                                                    </div>
 
                                               </div>
@@ -393,8 +422,8 @@
                                            </span>
                                           </div>
                                       </article>
-                                <!-- </div>
-                                </div> -->
+                                </div>
+                                <!-- </div> -->
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'room'">
                                     <article class="box">
@@ -415,13 +444,29 @@
                                                     </div>
                                                   </div>
 
-                                                 <div>
-                                                     <div class="five-stars-container">
-                                                          <span class="five-stars" style="width: 80%;"></span>
-                                                     </div> 
-
-                                                 </div>
-
+                                                  <div>
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==1">
+                                                         <span ng-repeat="i in [1]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div> 
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==2">
+                                                         <span ng-repeat="i in [1,2]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div>
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==3">
+                                                         <span ng-repeat="i in [1,2,3]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div>
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==4">
+                                                         <span ng-repeat="i in [1,2,3,4]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div>
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==5">
+                                                         <span ng-repeat="i in [1,2,3,4,5]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div>
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==6">
+                                                         <span ng-repeat="i in [1,2,3,4,5,6]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div>
+                                                    <div ng-if="[[deal.roomdata.hoteldata.star]]==7">
+                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                             
                                             <div>
