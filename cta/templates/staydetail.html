@@ -736,7 +736,7 @@
                                         <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
                                             
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                            <ul class="slides " style="width: 3000%;">
+                                            <ul class="slides " style="width: 3000%; transition-duration: 0.6s;">
                                                 <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style="width: 870px; float: left; display: block;" ><img src="[[image.image_url]]" alt="" draggable="false"></li>
                                             </ul>
                                         </div>
@@ -751,9 +751,8 @@
                                         </div>
                                         <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
                                             
-                                        <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-
-                                                <li  class="demo w3-opacity w3-hover-opacity-off" ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images" class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                        <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides" style="width: 2600%; ">
+                                                <li  class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images" class="" style=" transform:translate3d(0px, 0px, 0px); transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
                                         <!-- <ol class="flex-control-nav flex-control-paging">
@@ -761,8 +760,8 @@
                                             <li><a class="">2</a></li>
                                         </ol> -->
                                         <ul class="flex-direction-nav">
-                                            <li><a class="flex-prev" href="#">Previous</a></li>
-                                            <li><a class="flex-next" href="#">Next</a></li>
+                                            <li><a class="flex-prev" >Previous</a></li>
+                                            <li><a class="flex-next" >Next</a></li>
                                         </ul>
                                         </div>
                                     </div>
