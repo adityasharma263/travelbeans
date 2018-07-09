@@ -288,7 +288,9 @@ def deal_api():
                     start = True
                     days.append(val)
             for day in days:
-                if day == 5 or 6:
+                if day == 5:
+                    weekend = True
+                elif day == 6:
                     weekend = True
             args['weekend'] = weekend
         args.pop('page', None)
