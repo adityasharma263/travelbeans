@@ -91,6 +91,11 @@ angular.module('comparetravel', ['angular.filter'])
 
   $(".close-btn").click(closePopUp);
 
+  $scope.showDetail=function(roomid){
+    window.open('/hotel/detail?id='+roomid,'_self');
+    
+  }
+
   $scope.show = function() {
     if($scope.myVar==false){
       $scope.myVar = true;
