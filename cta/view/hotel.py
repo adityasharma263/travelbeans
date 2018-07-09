@@ -297,13 +297,13 @@ def deal_api():
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
+        # page = int(request.args.get('page', 1))
+        # per_page = int(request.args.get('per_page', 10))
         if price_start and price_end:
             price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
-            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+            price = Deal.query.filter_by(**args).all()
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:
             for deal in result.data:
