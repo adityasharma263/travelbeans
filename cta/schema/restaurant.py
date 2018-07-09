@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.hotel import Hotel
-from cta.model.hotel import Image
-from cta.model.hotel import Facility
-from cta.model.hotel import Member
-from cta.schema.base import safe_execute
-from cta.model.hotel import Amenity
-from cta.model.hotel import Deal
-from cta.model.hotel import Website
-from cta.model.hotel import Room
+from cta.model.restaurant import Restaurant, RestaurantAmenity, RestaurantImage
+
 from cta import ma
 
 
@@ -25,6 +18,7 @@ class DealSchema(ma.ModelSchema):
     class Meta:
         model = Deal
         exclude = ('updated_at', 'created_at')
+
 
 class AmenitySchema(ma.ModelSchema):
     class Meta:

@@ -18,7 +18,7 @@ class Restaurant(Base):
     featured = db.Column(db.Boolean, default=False, nullable=True)
     images = db.relationship('Image', backref='restaurant')
     amenities = db.relationship('Amenity', uselist=False, backref='restaurant')
-    catogaries = db.relationship('catogary', uselist=False, backref='restaurant')
+    categories = db.relationship('Category', uselist=False, backref='restaurant')
     association = db.relationship('Association', backref='restaurant')
 
     def __init__(self, *args, **kwargs):
@@ -28,8 +28,8 @@ class Restaurant(Base):
         return '<name %r>' % self.name
 
 
-class Image(Base):
-    __tablename__ = 'image'
+class RestaurantImage(Base):
+    __tablename__ = 'restaurant_image'
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     image_url = db.Column(db.String, default=False, nullable=True)
@@ -42,8 +42,8 @@ class Image(Base):
         return '<image_url %r>' % self.image_url
 
 
-class Amenity(Base):
-    __tablename__ = 'amenity'
+class RestaurantAmenity(Base):
+    __tablename__ = 'restaurant_amenity'
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
     home_delivery = db.Column(db.Boolean, default=False, nullable=True)
