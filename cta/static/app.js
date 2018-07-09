@@ -415,15 +415,7 @@ $scope.createHotel = function() {
   $scope.limit=10;
   $scope.deallimit=1;
 
-  $( ".flex-next" ).click(function() {
-    console.log("working");
-    if (  $( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)") ){
-      $(".demo").css("transform","translate3d(-333px, 0px, 0px)");
-    } else {
-      console.log("else");
-      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-    }
-  });
+ 
   
   var showDivs=function(n) {
     var i;
@@ -516,5 +508,23 @@ var getrooms=function(){
   });
 }
 
+$( ".flex-next" ).click(function() {
+
+  if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) ){
+
+    $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+  } else {
+    $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+  }
+});
+
+$( ".flex-prev" ).click(function() {
+
+  if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") ){
+    $(".demo").css("transform","translate3d(0px, 0px, 0px)");
+  } else {
+    $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+  }
+});
       
 }])
