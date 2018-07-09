@@ -406,33 +406,33 @@ $scope.createHotel = function() {
   $scope.roomData={};
   $scope.hotels={};
   $scope.roomobj={};
-  // $scope.firstRate = 0;
-  // $scope.secondRate = 3;
-  // $scope.readOnly = true;
-  // $scope.onItemRating = function(rating){
-  //   alert('On Rating: ' + rating);
-  // };
   $scope.limit=10;
   $scope.deallimit=1;
 
- 
+  
   
   var showDivs=function(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
     
     var dots = document.getElementsByClassName("demo");
+
     if (n > x.length) {slideIndex = 1}
     if (n < 1) {slideIndex = x.length}
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-        dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
+      dots[i].style.opacity = 0.5;
+      dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
+      dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+      dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
 
 
     }
+    dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
+    dots[slideIndex-1].style.opacity = 1;
+    
     x[slideIndex-1].style.display = "block";
     dots[slideIndex-1].className += "w3-opacity-off";
   }
@@ -443,7 +443,6 @@ $scope.createHotel = function() {
   }
   
   $scope.currentDiv=function(n) {
-      console.log("n",n);
       showDivs(slideIndex = n);
   }
   
@@ -468,12 +467,10 @@ $scope.createHotel = function() {
     url: '/api/v1/hotel'
   }).then(function successCallback(response) {
       $scope.hotelsData = response.data.result.hotel;
-      console.log("$scope.hotelsData",$scope.hotelsData);
       for(var j=0;j<$scope.hotelsData.length;j++){
         
         $scope.hotels[$scope.hotelsData[j].id]= $scope.hotelsData[j];
       }
-      console.log("$scope.hotels",$scope.hotels);
       getrooms();
 
     }, function errorCallback(response) {
@@ -497,7 +494,6 @@ var getrooms=function(){
           $scope.roomData.hotelData.rooms[j].deals[k].dealsRoom=$scope.roomData.hotelData.rooms[j]
         }
       }
-      console.log("roomData",$scope.roomData);
       
 
       // this callback will be called asynchronously
@@ -513,7 +509,8 @@ $( ".flex-next" ).click(function() {
   if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) ){
 
     $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-  } else {
+  } 
+  else if($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") ) {
     $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
   }
 });
@@ -522,7 +519,8 @@ $( ".flex-prev" ).click(function() {
 
   if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") ){
     $(".demo").css("transform","translate3d(0px, 0px, 0px)");
-  } else {
+  } 
+  else {
     $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
   }
 });
