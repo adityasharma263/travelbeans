@@ -72,8 +72,8 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.roomobj={};
   $scope.hotelobj={};
   $scope.deals=[];
-  $scope.min= 0;
-  $scope.max= 0;
+  // $scope.min= 0;
+  // $scope.max= 0;
   // $scope.max_price= 0;
   
   // loadMore function
@@ -90,6 +90,11 @@ angular.module('comparetravel', ['angular.filter'])
   };
 
   $(".close-btn").click(closePopUp);
+
+  $scope.showDetail=function(roomid){
+    window.open('/hotel/detail?id='+roomid,'_self');
+    
+  }
 
   $scope.show = function() {
     if($scope.myVar==false){
@@ -410,6 +415,16 @@ $scope.createHotel = function() {
   $scope.limit=10;
   $scope.deallimit=1;
 
+  $( ".flex-next" ).click(function() {
+    console.log("working");
+    if (  $( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)") ){
+      $(".demo").css("transform","translate3d(-333px, 0px, 0px)");
+    } else {
+      console.log("else");
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+  
   var showDivs=function(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
@@ -422,11 +437,12 @@ $scope.createHotel = function() {
     }
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-        dots[i].style.opacity="1";
+        dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
+
 
     }
     x[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " w3-opacity-off";
+    dots[slideIndex-1].className += "w3-opacity-off";
   }
   var slideIndex = 1;
   
