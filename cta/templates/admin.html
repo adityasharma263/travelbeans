@@ -113,6 +113,9 @@
                 <label for="desc">Description: 
                     <input id="desc" class="box" ng-model="hotel.desc" type="textarea" required>
                 </label> 
+                <label for="category">Category: 
+                    <input id="category" class="box" ng-model="hotel.category" type="text" required>
+                </label> 
                 <br>
                 <div>
                 
@@ -354,7 +357,9 @@
                     </label>
                     <br>
                    
-                    
+                    <label for="image">Room Image Url:
+                        <input id="image" class="box" type="text" ng-model="room.image_url"/>
+                    </label>
                     <label for="children">children:
                         <input id="children" class="box" type="number" ng-model="room.member.children"/>
                     </label>
