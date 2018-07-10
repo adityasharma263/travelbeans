@@ -159,20 +159,7 @@ angular.module('comparetravel', ['angular.filter'])
     })
 
   }
-  $http({
-    method: 'GET',
-    url: '/api/v1/room'
-  }).then(function successCallback(response) {
 
-      $scope.roomdata = response.data.result.rooms;
-      console.log("roomdata",$scope.roomdata);
-      for(var j=0;j<$scope.roomdata.length;j++){
-        $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
-      }
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-  })
   $http({
     method: 'GET',
     url: '/api/v1/deal'
@@ -188,6 +175,22 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+
+  $http({
+    method: 'GET',
+    url: '/api/v1/room'
+  }).then(function successCallback(response) {
+
+      $scope.roomdata = response.data.result.rooms;
+      console.log("roomdata",$scope.roomdata);
+      for(var j=0;j<$scope.roomdata.length;j++){
+        $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
+      }
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+ 
   
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
