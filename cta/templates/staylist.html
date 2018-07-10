@@ -328,7 +328,7 @@
                         <div class="col-sm-8 col-md-9">     
                             <div class="sort-by-section clearfix">
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
-                                <p><input class="input-text full-width" type="text" ng-model="hotel"></p>
+                                <p><input class="input-text full-width" type="text" ng-model="hotel" placeholder="search by keyword"></p>
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel | limitTo:limit">
                                 <div ng-repeat="room in hotel.rooms">
@@ -344,6 +344,7 @@
                                               <div>
                                                   <div>
                                                       <h4 class="box-title">[[hotel.name]]<small>
+                                                        
                                                         <a class="popup-map" href="#" data-box="48.856614, 2.352222">
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> [[hotel.address]],[[hotel.city]]</a></small></h4>
       
@@ -408,7 +409,7 @@
                                            <span class="col-md-3"><img src="deal.website.logo_image"></span>
                                               <span class="col-md-4"><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Details</a>
                                               <a class="button btn-mini dark-blue1" href="[[deal.hotel_url]]">Book Now</a></span>
-                                           <span class="price">₹[[deal.price]]</span>
+                                           <span class=>₹[[deal.price]]</span>
                                             
                                            </span>
                                           </div>
@@ -427,7 +428,8 @@
                                             <div>
                                                 <div>
                                                     <h4 class="box-title">[[deal.roomdata.hoteldata.name]]<small>
-                                                      <i class="fa fa-map-marker" aria-hidden="true"></i> [[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</small></h4>
+                                                      <a class="popup-map" href="#" data-box="48.856614, 2.352222">
+                                                      <i class="fa fa-map-marker" aria-hidden="true"></i> [[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</a></small></h4>
     
                                                     <div class="amenities">
                                                         <i class="fa fa-wifi" ng-if="deal.roomdata.hoteldata.amenities.wifi_in_lobby" aria-hidden="true"></i>
@@ -438,32 +440,32 @@
 
                                                   <div>
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==1">
-                                                         <span ng-repeat="i in [1]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div> 
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==2">
-                                                         <span ng-repeat="i in [1,2]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1,2]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div>
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==3">
-                                                         <span ng-repeat="i in [1,2,3]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1,2,3]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div>
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==4">
-                                                         <span ng-repeat="i in [1,2,3,4]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1,2,3,4]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div>
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==5">
-                                                         <span ng-repeat="i in [1,2,3,4,5]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1,2,3,4,5]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div>
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==6">
-                                                         <span ng-repeat="i in [1,2,3,4,5,6]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1,2,3,4,5,6]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div>
                                                     <div ng-if="[[deal.roomdata.hoteldata.star]]==7">
-                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]" style="width:10px; height:10px"><img src="../static/images/star.png"></span>
+                                                         <span ng-repeat="i in [1,2,3,4,5,6,7]" style="width:10px; height:10px"><img style="width:12px" src="../static/images/star.png"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                             <div>
                                                 <div>
-                                                    <span class="price"><small>[[deal.website.website]]</small>₹[[deal.price]]</span><center>
+                                                    <span class="price"><a href="[[deal.hotel_url]]"><small>[[deal.website.website]]</small>₹[[deal.price]]</a></span><center>
                                                     <a class="button btn-small green" ng-click="showDetail(room.id)">View Details</a>
                                                     <a class="button btn-small yellow" ng-click="show()">More Deals</a>    
                                           
@@ -471,7 +473,7 @@
                                                     <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                 </div>
                                                 <div class="amenities" ng-repeat="price in room.deals | limitTo:3 ">
-                                                        <span class="price"><small>[[price.website.website]]</small>₹[[price.price]]</span>
+                                                        <span class="price"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                 </div>    
                                             </div>
                                         </div>
@@ -479,17 +481,17 @@
                                         <div ng-show="myVar">
                                                 <div class="row" ng-repeat="rm in deal.roomdata.hoteldata.rooms">
                                                 <span ng-repeat="deal in rm.deals">
-                                               <span class="col-md-3" ng-if="[[rm.room_type]]==1">Premium</span>
-                                               <span class="col-md-3" ng-if="[[rm.room_type]]==2">Executive</span>
-                                               <span class="col-md-3" ng-if="[[rm.room_type]]==3">Sweet</span>
-                                               <span class="col-md-3" ng-if="[[rm.room_type]]==4">Super_Deluxe</span>
-                                               <span class="col-md-3" ng-if="[[rm.room_type]]==5">[[rm.other_room_type]]</span>
+                                               <span class="col-md-4" ng-if="[[rm.room_type]]==1">Premium</span>
+                                               <span class="col-md-4" ng-if="[[rm.room_type]]==2">Executive</span>
+                                               <span class="col-md-4" ng-if="[[rm.room_type]]==3">Sweet</span>
+                                               <span class="col-md-4" ng-if="[[rm.room_type]]==4">Super_Deluxe</span>
+                                               <span class="col-md-4" ng-if="[[rm.room_type]]==5">[[rm.other_room_type]]</span>
                                                
                                                <span class="col-md-3"><img src="deal.website.logo_image"></span>
-                                                  <span class="col-md-4"><a class="button btn-mini green" ng-click="showDetail(deal.room)">View Details</a>
-                                                  <a class="button btn-mini red" href="[[deal.hotel_url]]">Book Now</a></span>
-                                               <span class="price">₹[[deal.price]]</span>
-                                                  </span>
+                                                  <span class="col-md-3"><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Details</a></span>
+                                                  <!-- <a class="button btn-mini dark-blue1" href="[[deal.hotel_url]]">Book Now</a></span> -->
+                                               <span class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                                
                                                
                                               </div>
 
