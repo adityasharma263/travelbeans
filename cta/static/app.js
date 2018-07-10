@@ -30,6 +30,7 @@ angular.module('comparetravel', ['angular.filter'])
 
   $scope.getHotel = function() {
     // console.log("$location.path",$location.path);
+    $scope.hotel.city = $scope.hotel.city.toLowerCase();
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
     window.open($scope.location + "/list?city="+ $scope.hotel.city);
@@ -293,6 +294,7 @@ angular.module('comparetravel', ['angular.filter'])
       // or server returns response with an error status.
   })
   var sendPostHotel = function(url, data) {
+    $scope.hotel.city = $scope.hotel.city.toLowerCase();
     console.log(data);
     
     $http({
