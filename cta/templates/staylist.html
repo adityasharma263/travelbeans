@@ -472,14 +472,14 @@
 
                                                     <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                 </div>
-                                                <div class="amenities" ng-repeat="price in room.deals | limitTo:3 ">
+                                                <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 ">
                                                         <span class="price"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                 </div>    
                                             </div>
                                         </div>
 
                                         <div ng-show="myVar">
-                                                <div class="row" ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                                <!-- <div class="row" ng-repeat="rm in deal.roomdata.hoteldata.rooms">
                                                 <span ng-repeat="deal in rm.deals">
                                                <span class="col-md-4" ng-if="[[rm.room_type]]==1">Premium</span>
                                                <span class="col-md-4" ng-if="[[rm.room_type]]==2">Executive</span>
@@ -488,10 +488,27 @@
                                                <span class="col-md-4" ng-if="[[rm.room_type]]==5">[[rm.other_room_type]]</span>
                                                
                                                <span class="col-md-3"><img src="deal.website.logo_image"></span>
-                                                  <span class="col-md-3"><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Details</a></span>
+                                                  <span class="col-md-3"><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Details</a></span> -->
                                                   <!-- <a class="button btn-mini dark-blue1" href="[[deal.hotel_url]]">Book Now</a></span> -->
-                                               <span class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span>
+                                               <!-- <span class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span> -->
                                                 
+
+                                               <table class="table table-hover" ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                                
+                                                <tbody ng-repeat="deal in rm.deals">
+                                                  <tr>
+                                                    <td><img src="deal.website.logo_image"></td>
+                                                    <td ng-if="[[rm.room_type]]==1">Premium</td>
+                                                    <td ng-if="[[rm.room_type]]==2">Executive</td>
+                                                    <td ng-if="[[rm.room_type]]==3">Sweet</td>
+                                                    <td ng-if="[[rm.room_type]]==4">Super_Deluxe</td>
+                                                    <td ng-if="[[rm.room_type]]==5">[[rm.other_room_type]]</td>
+                                                    <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Details</a></td>
+                                                    <td class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></td>
+                                                  </tr>
+                                                 
+                                                </tbody>
+                                              </table>
                                                
                                               </div>
 

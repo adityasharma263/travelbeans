@@ -6,6 +6,61 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Page Title -->
     <title>Trip key</title>
+
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          font: 16px Arial;  
+        }
+        .autocomplete {
+          /*the container must be positioned relative:*/
+          position: relative;
+          display: inline-block;
+        }
+        input {
+          border: 1px solid transparent;
+          background-color: #f1f1f1;
+          padding: 10px;
+          font-size: 16px;
+        }
+        input[type=text] {
+          background-color: #f1f1f1;
+          width: 100%;
+        }
+        input[type=submit] {
+          background-color: DodgerBlue;
+          color: #fff;
+          cursor: pointer;
+        }
+        .autocomplete-items {
+          position: absolute;
+          border: 1px solid #d4d4d4;
+          border-bottom: none;
+          border-top: none;
+          z-index: 99;
+          /*position the autocomplete items to be the same width as the container:*/
+          top: 100%;
+          left: 0;
+          right: 0;
+        }
+        .autocomplete-items div {
+          padding: 10px;
+          cursor: pointer;
+          background-color: #fff; 
+          border-bottom: 1px solid #d4d4d4; 
+        }
+        .autocomplete-items div:hover {
+          /*when hovering an item:*/
+          background-color: #e9e9e9; 
+        }
+        .autocomplete-active {
+          /*when navigating through the items using the arrow keys:*/
+          background-color: DodgerBlue !important; 
+          color: #ffffff; 
+        }
+        </style>
     
     <!-- Meta Tags -->
 
@@ -153,26 +208,35 @@
 
         </header>
         <section id="content">
-            <div class="search-box-wrapper">
+            <div class="search-box-wrapper" style="background-image:url('../static/images/hotelhome.jpg'); height: 250px; margin-top: 25px">
                 <div class="search-box container">
-                    <ul class="search-tabs clearfix">
-                        <li class="active"><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#hotels-tab" data-toggle="tab">HOTELS</a></li>
-                    </ul>
-                    <div class="visible-mobile">
-                        <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
-                            <li class="active" style="float: none; list-style: none; position: absolute; width: 100px; z-index: 50; display: block;"><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#hotels-tab">HOTELS</a></li>
-                        </ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev disabled" href="http://www.soaptheme.net/html/travelo/hotel-index.html">Prev</a><a class="bx-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html">Next</a></div></div></div>
-                    </div>
                     
                     <div class="search-tab-content">
                         <div class="tab-pane fade active in" id="hotels-tab">
-                            <form>
-                                <div class="row">
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <h4 class="title">Where</h4>
-                                        <label for="destination">Your Destination</label>
-                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name">[[hotel.city | lowercase]]
+                            <form autocomplete="off">
+                                    <div class="autocomplete" style="width:300px;">
+                                        <label for="destination">Your Destination
+                                          <input id="destination" type="text" ng-keyup="search()" ng-model="hotel.city" placeholder="Hotel or City">
+                                        </label>
                                     </div>
+                                    
+
+                                    
+
+
+
+                                <div class="row">
+                                    <!-- <div class="form-group col-sm-6 col-md-3">
+                                        <h4 class="title">Where</h4>
+                                        <label for="destination">Your Destination -->
+                                        <!-- <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name"> -->
+                                   
+                                        <!-- <select id="destination" ng-model="hotel.city">
+                                            <option ng-repeat="obj in hotels" value="[[obj.city]]">[[obj.city]]</option>
+                                        </select>
+                                        </label>
+                                   
+                                    </div> -->
                                     
                                     <!-- <div class="form-group col-sm-6 col-md-4">
                                         <h4 class="title">When</h4>
@@ -241,7 +305,7 @@
                 </div>
             </div>
             
-            <div class="section">
+            <div class="section" style="padding-top: 20px">
                 <div class="container">
 
                         <h2>Travelers Choice of Hotels</h2>
@@ -252,7 +316,7 @@
                                 <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
                                     <article class="box">
                                         <figure>
-                                            <a href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="161" alt="" src="./Hotels_files/1.png" draggable="false"></a>
+                                            <a href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" class="hover-effect popup-gallery"><img style="height:150px"  alt="" src="[[hotel.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
                                             <span class="price">
