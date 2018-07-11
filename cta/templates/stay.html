@@ -60,6 +60,15 @@
           background-color: DodgerBlue !important; 
           color: #ffffff; 
         }
+        .search-bar-icon {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 40px;
+            height: 100%;
+            float: left;
+            margin-top: -1px;
+            color: #6d6d6d;
+        }
         </style>
     
     <!-- Meta Tags -->
@@ -95,6 +104,7 @@
     <link rel="stylesheet" href="../static/css/updates.css">
 
     <!-- Custom Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/css/custom.css">
     
     <!-- Responsive Styles -->
@@ -216,11 +226,13 @@
                             <div style="text-align:center">
                             <form autocomplete="off">
                                     <div class="autocomplete">
-                                        <label for="destination"><strong>Search</strong>
+                                        <label for="destination"><button type="button"><strong>Search</strong></button>
                                           <input id="destination" type="text" style="width:570px; margin-top:30px;" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
                                         </label>
+
                                     </div>
-                                    <div >
+                                    <button type="button" ng-click="getHotel()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    <div>
                                         <div class="row">
                                             <div class="col-sm-6">
                                         <table class="table table-hover " style="background-color:white">
@@ -314,7 +326,7 @@
                                     
                                     <div class="form-group col-sm-6 col-md-2 fixheight">
                                         <label class="hidden-xs">&nbsp;</label>
-                                        <button type="button" class="full-width icon-check animated bounce" ng-click="getHotel()" data-animation-type="bounce" data-animation-duration="1" style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
+                                        <!-- <button type="button" ng-click="getHotel()">SEARCH NOW</button> -->
                                     </div>
                                 </div>
                             </form>

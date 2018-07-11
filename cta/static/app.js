@@ -116,6 +116,7 @@ angular.module('comparetravel', ['angular.filter'])
   // $scope.min= 0;
   // $scope.max= 0;
   // $scope.max_price= 0;
+
   
   // loadMore function
   $scope.loadMore = function() {
