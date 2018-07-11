@@ -113,12 +113,38 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.roomobj={};
   $scope.hotelobj={};
   $scope.deals=[];
+  $scope.imagesData={};
   // $scope.min= 0;
   // $scope.max= 0;
   // $scope.max_price= 0;
 
-  
+   // Get the modal
+  //  var mymodal= ;
+  //  console.log("modal",mymodal);
+   // Get the image and insert it inside the modal - use its "alt" text as a caption
+  //  var img = document.getElementById('myImg');
+  //  var modalImg = document.getElementById("img01");
+   var captionText = document.getElementById("caption");
+   
+  // $scope.myimg = function(){
+  //   document.getElementById('myModal').style.display = "block";
+  //   document.getElementById("img01").src = document.getElementById('myImg').src;
+  //   // captionText.innerHTML = this.alt;
+  //  }
+   
+   // Get the <span> element that closes the modal
+   var span = document.getElementsByClassName("close")[0];
+   
+   // When the user clicks on <span> (x), close the modal
+  //  span.onclick = function() { 
+  //      modal.style.display = "none";
+  //  }
+  $scope.openGallery= function(data){
+    $scope.imagesData=data;
+    console.log("$scope.images",$scope.images)
+  }
   // loadMore function
+
   $scope.loadMore = function() {
     $scope.limit =   $scope.limit + 10;
   }
