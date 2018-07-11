@@ -2,6 +2,7 @@
 
 from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room
 from cta import app
+from sqlalchemy import or_
 from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
@@ -244,7 +245,7 @@ def website_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        web = Website.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        web = Website.query.filter_by(**args).all()
         result = WebsiteSchema(many=True).dump(web)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
     else:
@@ -315,3 +316,20 @@ def deal_api():
         post.save()
         result = DealSchema().dump(post)
         return jsonify({'result': {'deal': result.data}, 'message': 'Success', 'error': False})
+
+
+@app.route('/hotel/search', methods=['GET', 'POST'])
+def hotel_search():
+    search = request.json
+    search = search['search']
+    cities = []
+    names = []
+    hotel_cities = Hotel.query.filter(Hotel.city.like('%'+ search + '%')).order_by(Hotel.city).all()
+    for hotel_city in hotel_cities:
+        cities.append(hotel_city.city)
+    hotel_names = Hotel.query.filter(Hotel.name.like('%'+ search + '%')).order_by(Hotel.name).all()
+    for hotel_name in hotel_names:
+        names.append(hotel_name.name)
+    cities = list(set(cities))
+    names =  list(set(names))
+    return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})

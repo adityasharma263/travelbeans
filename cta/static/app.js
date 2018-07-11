@@ -12,9 +12,30 @@ angular.module('comparetravel', ['angular.filter'])
 
   $scope.hotelid = {};// hotel object on the basis of id
   $scope.hotel = {};
+  $scope.myVar = false;
+  var searchKey = '';
+
+
 
  // $location.search=
-  
+
+   $scope.result = function(data,status){
+    $scope.hotel.search = data;
+    searchKey = status;
+    console.log("$scope.hotel.search",$scope.hotel.search);
+    console.log("$status",status);
+
+   }
+
+   $scope.show = function() {
+    console.log("........");
+    if($scope.myVar==false){
+      $scope.myVar = true;
+    }
+    else{
+      $scope.myVar = false;
+    }
+  }
  
   var jsonToQueryString = function(json) {
     return '?' +
@@ -30,14 +51,33 @@ angular.module('comparetravel', ['angular.filter'])
 
   $scope.getHotel = function() {
     // console.log("$location.path",$location.path);
-    $scope.hotel.city = $scope.hotel.city.toLowerCase();
+    console.log("status",searchKey);
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
-    window.open($scope.location + "/list?city="+ $scope.hotel.city);
+    console.log($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search);
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search);
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
-       
+  $scope.search = function()  {
+    $scope.hotel.search = $scope.hotel.search.toLowerCase();
+    console.log("$scope.hotel",$scope.hotel);
+  $http({
+    method: 'POST',
+    url: '/hotel/search',
+    data: $scope.hotel
+
+  }).then(function successCallback(response){
+  console.log("response",response.data.result);
+      $scope.cities = response.data.result.cities;
+      $scope.names = response.data.result.names;
+      console.log("ye h",$scope.cities,response.data.result.names);
+
+  })
+
+}
+
+
     
 
   $http({
