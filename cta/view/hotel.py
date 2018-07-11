@@ -307,7 +307,8 @@ def deal_api():
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:
             for deal in result.data:
-                deal['price'] = deal["price"] * no_of_days
+                if deal['price']:
+                    deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
