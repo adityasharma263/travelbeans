@@ -606,13 +606,13 @@ if(window.screen.availWidth <=440){
       return i;
     } 
   
-    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
+    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==1)){
   
       $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
       i++;
       return i;
     } 
-    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==2)){
+    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==2)){
   
       $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
       i++;
