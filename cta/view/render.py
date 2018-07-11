@@ -46,3 +46,7 @@ def stay_id():
         # return render_template('404.html'), 404
     data = HotelSchema().dump(hotel).data
     return render_template('staydetail.html', hotel=data)
+
+@app.route('hotel/image', methods=['GET'])
+def home():
+    return render_template('hotel_image.html')
