@@ -157,6 +157,7 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
       }
       console.log("$scope.cityid",$scope.cityid);
+      loadRoom();
 
       // $scope.room.check_in = Date.parse($scope.room.check_in)/1000;
       // console.log(" $scope.room.check_in ", $scope.room.check_in );
@@ -181,6 +182,26 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+var loadRoom=function(){
+  $http({
+    method: 'GET',
+    url: '/api/v1/room'
+  }).then(function successCallback(response) {
+
+      $scope.roomdata = response.data.result.rooms;
+      console.log("roomdata",$scope.roomdata);
+      for(var j=0;j<$scope.roomdata.length;j++){
+        $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
+      }
+      loadDeals();
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+}
+
+  
 
   $scope.getHotelRating = function(){
     
@@ -200,7 +221,8 @@ angular.module('comparetravel', ['angular.filter'])
     })
 
   }
-
+  
+loadDeals=function(){
   $http({
     method: 'GET',
     url: '/api/v1/deal'
@@ -212,29 +234,45 @@ angular.module('comparetravel', ['angular.filter'])
       console.log("$scope.min",$scope.min);
       $scope.max= Math.max.apply(Math,$scope.dealdata.map(function(item){return item.price;}));
       console.log("$scope.max",$scope.max);
+      loadPrice();
       }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
-
+}
+ var loadPrice=function(){
+   $scope.hotelData=[];
+  $scope.deals=[];
   $http({
     method: 'GET',
-    url: '/api/v1/room'
+    url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.max
   }).then(function successCallback(response) {
+      $scope.deals = response.data.result.deal;
+      console.log("$scope.deals",$scope.deals);
+      for(var j=0; j<$scope.deals.length; j++){
+        $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
+        $scope.deals[j].roomdata=$scope.roomobj;
+        $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
+        $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
 
-      $scope.roomdata = response.data.result.rooms;
-      console.log("roomdata",$scope.roomdata);
-      for(var j=0;j<$scope.roomdata.length;j++){
-        $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
       }
+      console.log("deals array",$scope.deals);
+      // this callback will be called asynchronously
+
+      // when the response is available
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+ }
+
+  
  
   
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
+    $scope.hotelData=[];
+    $scope.deals=[];
     $http({
       method: 'GET',
       url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
