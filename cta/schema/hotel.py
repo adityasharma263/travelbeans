@@ -26,6 +26,7 @@ class DealSchema(ma.ModelSchema):
         model = Deal
         exclude = ('updated_at', 'created_at')
 
+
 class AmenitySchema(ma.ModelSchema):
     class Meta:
         model = Amenity

@@ -14,11 +14,11 @@ class Restaurant(Base):
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     address = db.Column(db.String, nullable=True)
-    restaurant_type = db.Column(db.Integer, nullable=True)
+    Category = db.Column(db.Integer, nullable=True)
     featured = db.Column(db.Boolean, default=False, nullable=True)
-    images = db.relationship('Image', backref='restaurant')
-    amenities = db.relationship('Amenity', uselist=False, backref='restaurant')
-    categories = db.relationship('Category', uselist=False, backref='restaurant')
+    images = db.relationship('RestaurantImage', backref='restaurant')
+    amenities = db.relationship('RestaurantAmenity', uselist=False, backref='restaurant')
+    tags = db.relationship('Tag', uselist=False, backref='restaurant')
     association = db.relationship('Association', backref='restaurant')
 
     def __init__(self, *args, **kwargs):
@@ -84,8 +84,8 @@ class RestaurantAmenity(Base):
         return '<pool %r>' % self.pool
 
 
-class Category(Base):
-    __tablename__ = 'category'
+class Tag(Base):
+    __tablename__ = 'tag'
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     lunch = db.Column(db.Boolean, default=False, nullable=True)
@@ -107,8 +107,8 @@ class Category(Base):
         return '<category %r>' % self.category
 
 
-class Cuisines(Base):
-    __tablename__ = 'cuisines'
+class Cuisine(Base):
+    __tablename__ = 'cuisine'
 
     cuisine = db.Column(db.String, default=False, nullable=True)
 
@@ -119,11 +119,12 @@ class Cuisines(Base):
         return '<cuisine %r>' % self.cuisine
 
 
-class Collections(Base):
-    __tablename__ = 'collections'
+class Collection(Base):
+    __tablename__ = 'collection'
 
     collection = db.Column(db.String, default=False, nullable=True)
     image = db.Column(db.String, default=False, nullable=True)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -131,8 +132,8 @@ class Collections(Base):
         return '<collection %r>' % self.collection
 
 
-class Dishes(Base):
-    __tablename__ = 'dishes'
+class Dish(Base):
+    __tablename__ = 'dish'
 
     dish = db.Column(db.String, default=False, nullable=True)
     image = db.Column(db.String, default=False, nullable=True)
@@ -147,12 +148,12 @@ class Association(Base):
     __tablename__ = 'association'
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=False)
-    dish_id = db.Column(db.Integer, db.ForeignKey('dishes.id'), unique=False)
-    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), unique=False)
-    cuisine_id = db.Column(db.Integer, db.ForeignKey('cuisines.id'), unique=False)
-    dish = db.relationship('dishes', foreign_keys=dish_id)
-    collection = db.relationship('collections', foreign_keys=collection_id)
-    cuisine = db.relationship('cuisines', foreign_keys=cuisine_id)
+    dish_id = db.Column(db.Integer, db.ForeignKey('dish.id'), unique=False)
+    collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'), unique=False)
+    cuisine_id = db.Column(db.Integer, db.ForeignKey('cuisine.id'), unique=False)
+    dishes = db.relationship('Dish', foreign_keys=dish_id)
+    collections = db.relationship('Collection', foreign_keys=collection_id)
+    cuisines = db.relationship('Cuisine', foreign_keys=cuisine_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

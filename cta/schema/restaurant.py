@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 
 from cta.model.restaurant import Restaurant, RestaurantAmenity, RestaurantImage,\
-    Category, Collections, Cuisines, Association
+    Tag, Collection, Cuisine, Association, Dish
 from cta import ma
 
 
-class CategorySchema(ma.ModelSchema):
+class TagSchema(ma.ModelSchema):
     class Meta:
-        model = Category
+        model = Tag
         exclude = ('updated_at', 'created_at')
 
 
-class CollectionsSchema(ma.ModelSchema):
+class CollectionSchema(ma.ModelSchema):
     class Meta:
-        model = Collections
+        model = Collection
+        exclude = ('updated_at', 'created_at')
+
+
+class DishSchema(ma.ModelSchema):
+    class Meta:
+        model = Dish
         exclude = ('updated_at', 'created_at')
 
 
@@ -29,19 +35,28 @@ class RestaurantImageSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at')
 
 
-class CuisinesSchema(ma.ModelSchema):
+class CuisineSchema(ma.ModelSchema):
     class Meta:
-        model = Cuisines
+        model = Cuisine
         exclude = ('updated_at', 'created_at')
 
 
 class AssociationSchema(ma.ModelSchema):
+    dishes = ma.Nested(DishSchema, many=False)
+    collections = ma.Nested(CollectionSchema, many=False)
+    cuisines = ma.Nested(CuisineSchema, many=False)
+
     class Meta:
         model = Association
         exclude = ('updated_at', 'created_at')
 
 
 class RestaurantSchema(ma.ModelSchema):
+    amenities = ma.Nested(RestaurantAmenitySchema, many=False)
+    images = ma.Nested(RestaurantImageSchema, many=True)
+    tags = ma.Nested(TagSchema, many=False)
+    association = ma.Nested(AssociationSchema, many=True)
+
     class Meta:
         model = Restaurant
         exclude = ('updated_at', 'created_at')
