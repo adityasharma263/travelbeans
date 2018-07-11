@@ -245,7 +245,7 @@ def website_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        web = Website.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        web = Website.query.filter_by(**args).all()
         result = WebsiteSchema(many=True).dump(web)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
     else:
