@@ -37,7 +37,20 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
-       
+  $scope.search = function()  {   
+  $http({
+    method: 'POST',
+    url: '/hotel/search'
+
+  }).then(function successCallback(response){
+      $scope.cities = response.data.result.cities;
+      $scope.names = response.data.result.names;
+
+  })
+
+}
+
+
     
 
   $http({
