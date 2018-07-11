@@ -170,8 +170,14 @@
                                 <div class="row">
                                     <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Where</h4>
-                                        <label for="destination">Your Destination</label>
-                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name">
+                                        <label for="destination">Your Destination
+                                        <!-- <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name"> -->
+                                   
+                                        <select id="destination" ng-model="hotel.city">
+                                            <option ng-repeat="obj in hotels" value="[[obj.city]]">[[obj.city]]</option>
+                                        </select>
+                                        </label>
+                                   
                                     </div>
                                     
                                     <!-- <div class="form-group col-sm-6 col-md-4">
