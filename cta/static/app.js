@@ -240,6 +240,7 @@ angular.module('comparetravel', ['angular.filter'])
       url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
     }).then(function successCallback(response) {
         $scope.deals = response.data.result.deal;
+        console.log("$scope.deals",$scope.deals);
         for(var j=0; j<$scope.deals.length; j++){
           $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
           $scope.deals[j].roomdata=$scope.roomobj;
