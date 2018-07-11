@@ -324,10 +324,10 @@ def hotel_search():
     search = search['search']
     cities = []
     names = []
-    hotel_cities = Hotel.query.filter(Hotel.city.like('%' + search + '%')).order_by(Hotel.city).all()
+    hotel_cities = Hotel.query.filter(Hotel.city.like('%'+ search + '%')).order_by(Hotel.city).all()
     for hotel_city in hotel_cities:
         cities.append(hotel_city.city)
-    hotel_names = Hotel.query.filter(Hotel.name.like('%' + search + '%')).order_by(Hotel.name).all()
+    hotel_names = Hotel.query.filter(Hotel.name.like('%'+ search + '%')).order_by(Hotel.name).all()
     for hotel_name in hotel_names:
         names.append(hotel_name.name)
     cities = list(set(cities))

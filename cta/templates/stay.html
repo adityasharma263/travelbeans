@@ -213,13 +213,33 @@
                     
                     <div class="search-tab-content">
                         <div class="tab-pane fade active in" id="hotels-tab">
+                            <div style="text-align:center">
                             <form autocomplete="off">
-                                    <div class="autocomplete" style="width:300px;">
-                                        <label for="destination">Your Destination
-                                          <input id="destination" type="text" ng-keyup="search()" ng-model="hotel.city" placeholder="Hotel or City">
+                                    <div class="autocomplete">
+                                        <label for="destination"><strong>Search</strong>
+                                          <input id="destination" type="text" style="width:570px; margin-top:30px;" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
                                         </label>
                                     </div>
-                                    
+                                    <div >
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                        <table class="table table-hover " style="background-color:white">
+
+                                                <tbody>
+                                                  <tr ng-repeat="city in cities">
+                                                    <td ng-click="result([[city]],'city')">[[city]]</td>
+
+                                                  </tr>
+                                                  <tr ng-repeat="name in names">
+                                                    <td ng-click="result([[name]],'name')">[[name]]</td>
+
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                     
 
