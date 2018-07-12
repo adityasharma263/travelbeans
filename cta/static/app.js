@@ -366,9 +366,10 @@ if(window.screen.availWidth <=440){
       console.log("key1",key1);
       $scope.hotelData = response.data.result.hotel;
       console.log("$scope.hotelData",$scope.hotelData);
-      $scope.city = $scope.hotelData[0].city;
+      
       if(key1[0]=="name"){
         console.log("123");
+        $scope.city = $scope.hotelData[0].city;
         $http({
           method: 'GET',
           url: '/api/v1/hotel?city=' + $scope.city
