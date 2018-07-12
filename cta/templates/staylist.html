@@ -319,11 +319,10 @@
                                                 </form> -->
 
                                             <div class="form-group">
-                                                <div data-role="rangeslider">
-                                                        <label for="price-max">Max Price:</label>
+                                                <div >
+                                                        <label>Max Price:</label>
                                                         <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.end_price" >
                                                         <p>Value: <span>[[hotel.end_price]]</span></p>
-
                                                 <!-- <label>Start Price</label>
                                                     <input type="number" ng-model="hotel.start_price">
                                                 <label>End Price</label>
@@ -503,14 +502,49 @@
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title">Modal Header</h4>
                                                         </div> -->
-                                                        <div class="modal-body">
+                                                        <!-- <div class="modal-body">
                                                         <img  style="height:150px" src="[[imagesData.images[0].image_url]]" alt="Travel Beans">
 
                                                         <p>Some text in the modal.</p>
-                                                        </div>
+                                                        </div> -->
                                                         <!-- <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div> -->
+
+                                                        <div id="photos-tab" class="tab-pane fade active in">
+                                                            <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
+                                                                
+                                                            <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                                                <ul class="slides " style="width: 30000%; transition-duration: 0.6s;">
+                                                                    <li class="mySlides" ng-repeat="image in imagesData.images"  style=" float: left; display: block;" ><img src="[[image.image_url]]" alt="" draggable="false"></li>
+                                                                </ul>
+                                                            </div>
+                                                                <!-- <ol class="flex-control-nav flex-control-paging">
+                                                                    <li><a class="">1</a></li>
+                                                                    <li><a class="">2</a></li>
+                                                                    <li><a class="flex-active">3</a></li>
+                                                                </ol><ul class="flex-direction-nav">
+                                                                    <li><a class="flex-prev" href="#">Previous</a></li>
+                                                                    <li><a class="flex-next" href="#">Next</a></li>
+                                                                </ul> -->
+                                                            </div>
+                                                            <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
+                                                                
+                                                            <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 2600%; ">
+                                                                    <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in imagesData.images" class="" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img class="img"  src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                                                </ul>
+                                                            </div>
+                                                            <!-- <ol class="flex-control-nav flex-control-paging">
+                                                                <li><a class="flex-active">1</a></li>
+                                                                <li><a class="">2</a></li>
+                                                            </ol> -->
+                                                            <ul class="flex-direction-nav">
+                                                                <li><a class="flex-prev" >Previous</a></li>
+                                                                <li><a class="flex-next"  >Next</a></li>
+                                                            </ul>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     
                                                     </div>
@@ -524,9 +558,49 @@
                                             <div>
                                                 <div>
                                                     <h4 class="box-title">[[deal.roomdata.hoteldata.name]]<small>
-                                                      <a class="popup-map" href="#" data-box="48.856614, 2.352222">
-                                                      <i class="fa fa-map-marker" aria-hidden="true"></i> [[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</a></small></h4>
-    
+                                                      <i class="fa fa-map-marker" aria-hidden="true"></i> <span id="latitude" ng-click="openGallery(deal.roomdata.hoteldata)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[deal.roomdata.hoteldata.latitude]]"  data-longitude ='[[deal.roomdata.hoteldata.longitude]]'>[[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</span></small></h4>
+                                                        
+                                                      <div class="modal fade" id="mapModal" role="dialog">
+                                                        <div class="modal-dialog">
+                                                        
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <!-- <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Modal Header</h4>
+                                                            </div> -->
+                                                            <div class="modal-body">
+                                                                <i class="fa fa-map-marker"></i>
+                                                                <span id="longitude" data-latitude = "[[imagesData.latitude]]"  data-longitude ='[[imagesData.longitude]]'>[[imagesData.city]]</span>
+                                                                
+                                                                <div id="map" style="height:354px">
+                            
+                                                                    <script>
+                                                                        var latitude=(document.getElementById('longitude').getAttribute("data-latitude"))
+                                                                        var longitude=(document.getElementById('longitude').getAttribute("data-longitude"))
+                                                                            function myMap() {
+                                                                                var mapOptions = {
+                                                                                    center: new google.maps.LatLng(latitude, longitude),
+                                                                                    zoom: 10,
+                                                                                    mapTypeId: google.maps.MapTypeId.HYBRID
+                                                                                }
+                                                                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                                                                            }
+                                                                            </script>
+                                                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqAYwriRL9E10XOlQWuDnYDmV8y0IaAXY&callback=myMap"></script> 
+                                     
+                                                                </div>
+
+                                                            <p>Some text in the modal.</p>
+                                                            </div>
+                                                            <!-- <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div> -->
+                                                        </div>
+                                                        
+                                                        </div>
+                                                    </div>
+
                                                     <div class="amenities">
                                                         <i class="fa fa-wifi" ng-if="deal.roomdata.hoteldata.amenities.wifi_in_lobby" aria-hidden="true"></i>
                                                         <i class="fa fa-car" ng-if="deal.roomdata.hoteldata.amenities.parking" aria-hidden="true"></i>
@@ -593,7 +667,7 @@
                                                 
                                                 <tbody ng-repeat="deal in rm.deals">
                                                   <tr>
-                                                    <td><img src="deal.website.logo_image"></td>
+                                                    <td><img src="[[deal.website.logo_image]]"></td>
                                                     <td ng-if="[[rm.room_type]]==1">Premium</td>
                                                     <td ng-if="[[rm.room_type]]==2">Executive</td>
                                                     <td ng-if="[[rm.room_type]]==3">Sweet</td>
@@ -672,14 +746,14 @@
         //     });
         //     tjq(".min-price-label").html( "$" + tjq("#price-range").slider( "values", 0 ));
         //     tjq(".max-price-label").html( "$" + tjq("#price-range").slider( "values", 1 ));
-            
+
             // tjq("#rating").slider({
             //     range: "min",
             //     value: 40,
             //     min: 0,
             //     max: 50,
             //     slide: function( event, ui ) {
-                    
+
             //     }
             // });
         // });

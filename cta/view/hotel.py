@@ -84,6 +84,24 @@ def hotel_api():
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
 
 
+@app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
+def hotel_id(id):
+    if request.method == 'PUT':
+        print(request.json)
+        put = Hotel.query.filter_by(id=id).update(request.json)
+        if put:
+            Hotel.update_db()
+            hotels = Hotel.query.filter_by(id=id).first()
+            result = RoomSchema(many=False).dump(hotels)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        hotel = Hotel.query.filter_by(id=id).first()
+        if not hotel:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        hotel.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+
+
 @app.route('/api/v1/room', methods=['GET', 'POST'])
 def room_api():
     if request.method == 'GET':
