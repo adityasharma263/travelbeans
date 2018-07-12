@@ -4,7 +4,7 @@ __author__ = 'aditya'
 from cta.model.hotel import Hotel
 from cta import app
 from cta.schema.hotel import HotelSchema
-from flask import request, jsonify, render_template
+from flask import request, render_template
 
 
 @app.route('/', methods=['GET'])
@@ -21,7 +21,7 @@ def hotel():
     page = int(request.args.get('page', 1))
     hotel = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
     data = HotelSchema(many=True).dump(hotel)
-    return render_template('stay.html',hotel=data,per_page=per_page,page=page)
+    return render_template('stay.html', hotel=data, per_page=per_page, page=page)
 
 
 @app.route('/hotel/list', methods=['GET'])
@@ -30,7 +30,7 @@ def hotel_list():
 
 
 @app.route('/hotel/detail', methods=['GET'])
-def hotel_id():
+def hotel_detail_id():
     return render_template('staydetail.html')
 
 
