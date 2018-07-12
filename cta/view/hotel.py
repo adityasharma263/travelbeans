@@ -2,6 +2,7 @@
 
 from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room
 from cta import app
+from sqlalchemy import or_
 from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
@@ -288,27 +289,47 @@ def deal_api():
                     start = True
                     days.append(val)
             for day in days:
-                if day == 5 or 6:
+                if day == 5:
+                    weekend = True
+                elif day == 6:
                     weekend = True
             args['weekend'] = weekend
         args.pop('page', None)
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
+        # page = int(request.args.get('page', 1))
+        # per_page = int(request.args.get('per_page', 10))
         if price_start and price_end:
             price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
-            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+            price = Deal.query.filter_by(**args).all()
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:
             for deal in result.data:
-                deal['price'] = deal["price"] * no_of_days
+                if deal['price']:
+                    deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
         post.save()
         result = DealSchema().dump(post)
         return jsonify({'result': {'deal': result.data}, 'message': 'Success', 'error': False})
+
+
+@app.route('/hotel/search', methods=['GET', 'POST'])
+def hotel_search():
+    search = request.json
+    search = search['search']
+    cities = []
+    names = []
+    hotel_cities = Hotel.query.filter(Hotel.city.like('%' + search + '%')).order_by(Hotel.city).all()
+    for hotel_city in hotel_cities:
+        cities.append(hotel_city.city)
+    hotel_names = Hotel.query.filter(Hotel.name.like('%' + search + '%')).order_by(Hotel.name).all()
+    for hotel_name in hotel_names:
+        names.append(hotel_name.name)
+    cities = list(set(cities))
+    names =  list(set(names))
+    return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})

@@ -6,6 +6,61 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Page Title -->
     <title>Trip key</title>
+
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          font: 16px Arial;  
+        }
+        .autocomplete {
+          /*the container must be positioned relative:*/
+          position: relative;
+          display: inline-block;
+        }
+        input {
+          border: 1px solid transparent;
+          background-color: #f1f1f1;
+          padding: 10px;
+          font-size: 16px;
+        }
+        input[type=text] {
+          background-color: #f1f1f1;
+          width: 100%;
+        }
+        input[type=submit] {
+          background-color: DodgerBlue;
+          color: #fff;
+          cursor: pointer;
+        }
+        .autocomplete-items {
+          position: absolute;
+          border: 1px solid #d4d4d4;
+          border-bottom: none;
+          border-top: none;
+          z-index: 99;
+          /*position the autocomplete items to be the same width as the container:*/
+          top: 100%;
+          left: 0;
+          right: 0;
+        }
+        .autocomplete-items div {
+          padding: 10px;
+          cursor: pointer;
+          background-color: #fff; 
+          border-bottom: 1px solid #d4d4d4; 
+        }
+        .autocomplete-items div:hover {
+          /*when hovering an item:*/
+          background-color: #e9e9e9; 
+        }
+        .autocomplete-active {
+          /*when navigating through the items using the arrow keys:*/
+          background-color: DodgerBlue !important; 
+          color: #ffffff; 
+        }
+        </style>
     
     <!-- Meta Tags -->
 
@@ -153,26 +208,35 @@
 
         </header>
         <section id="content">
-            <div class="search-box-wrapper">
+            <div class="search-box-wrapper" style="background-image:url('../static/images/hotelhome.jpg'); height: 250px; margin-top: 25px">
                 <div class="search-box container">
-                    <ul class="search-tabs clearfix">
-                        <li class="active"><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#hotels-tab" data-toggle="tab">HOTELS</a></li>
-                    </ul>
-                    <div class="visible-mobile">
-                        <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
-                            <li class="active" style="float: none; list-style: none; position: absolute; width: 100px; z-index: 50; display: block;"><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#hotels-tab">HOTELS</a></li>
-                        </ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev disabled" href="http://www.soaptheme.net/html/travelo/hotel-index.html">Prev</a><a class="bx-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html">Next</a></div></div></div>
-                    </div>
                     
                     <div class="search-tab-content">
                         <div class="tab-pane fade active in" id="hotels-tab">
-                            <form>
-                                <div class="row">
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <h4 class="title">Where</h4>
-                                        <label for="destination">Your Destination</label>
-                                        <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name">
+                            <form autocomplete="off">
+                                    <div class="autocomplete" style="width:300px;">
+                                        <label for="destination">Your Destination
+                                          <input id="destination" type="text" ng-keyup="search()" ng-model="hotel.city" placeholder="Hotel or City">
+                                        </label>
                                     </div>
+                                    
+
+                                    
+
+
+
+                                <div class="row">
+                                    <!-- <div class="form-group col-sm-6 col-md-3">
+                                        <h4 class="title">Where</h4>
+                                        <label for="destination">Your Destination -->
+                                        <!-- <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name"> -->
+                                   
+                                        <!-- <select id="destination" ng-model="hotel.city">
+                                            <option ng-repeat="obj in hotels" value="[[obj.city]]">[[obj.city]]</option>
+                                        </select>
+                                        </label>
+                                   
+                                    </div> -->
                                     
                                     <!-- <div class="form-group col-sm-6 col-md-4">
                                         <h4 class="title">When</h4>
@@ -241,83 +305,48 @@
                 </div>
             </div>
             
-            <div class="section">
+            <div class="section" style="padding-top: 20px">
                 <div class="container">
-                    <h2>Travelling Products</h2>
-                    <div class="block image-carousel style2 flexslider" data-animation="slide" data-item-width="270" data-item-margin="30">
-                        
-                    <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides image-box listing-style2" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-300px, 0px, 0px);">
-                            <li style="width: 270px; float: left; display: block;">
-                                <article class="box">
-                                    <figure>
-                                            <a href="https://www.amazon.in/gp/product/B075DJ1FQD/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B075DJ1FQD&linkCode=as2&tag=vibhugupta-21&linkId=47b547e6efa114f1f3d0bbc06fa2df93" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B075DJ1FQD&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>   
-                                    </figure>
-                                    <div class="details">
-                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
-                                        <h4 class="box-title">Travel Luggage Organizer, Packing Cubes Set, SGM Set of 6 Travel Storage Packing Bags and Compression Pouches With Shoe Bag</h4>
-                                        <!-- <label class="price-wrapper">
-                                            <span class="price-per-unit">$322</span>avg/night
-                                        </label> -->
-                                    </div>
-                                </article>
-                            </li>
-                            <li style="width: 270px; float: left; display: block;">
-                                <article class="box">
-                                    <figure>
-                                        <a href="https://www.amazon.in/gp/product/B073JYQNQQ/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B073JYQNQQ&linkCode=as2&tag=vibhugupta-21&linkId=a0d6f33b8ef23ac4bcc858734bb6d165" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B073JYQNQQ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
-                                    </figure>
-                                    <div class="details">
-                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
-                                        <h4 class="box-title">3G Polyester Set Of 3 Softsided Blue Luggage Set</h4>
-                                        <!-- <label class="price-wrapper">
-                                            <span class="price-per-unit">$620</span>avg/night
-                                        </label> -->
-                                    </div>
-                                </article>
-                            </li>
-                            <li style="width: 270px; float: left; display: block;">
-                                <article class="box">
-                                    <figure>
-                                        <a href="https://www.amazon.in/gp/product/B01KUV0PVC/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B01KUV0PVC&linkCode=as2&tag=vibhugupta-21&linkId=4f38bf07348f494415797bd251453a01" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B01KUV0PVC&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
-                                    </figure>
-                                    <div class="details">
-                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
-                                        <h4 class="box-title">knomo Tech Knomad Air Leather Portable Organizer</h4>
-                                        <!-- <label class="price-wrapper">
-                                            <span class="price-per-unit">$170</span>avg/night
-                                        </label> -->
-                                    </div>
-                                </article>
-                            </li>
-                            <li style="width: 270px; float: left; display: block;">
-                                <article class="box">
-                                    <figure>
-                                        <a href="https://www.amazon.in/gp/product/B01EUQKR2U/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B01EUQKR2U&linkCode=as2&tag=vibhugupta-21&linkId=d5c083e7675fcd5faa94389b7062ffa0" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B01EUQKR2U&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
-                                    </figure>
-                                    <div class="details">
-                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
-                                        <h4 class="box-title">Jockey Men's Cotton Shorts (8901326123560_9426_Large_Navy and Seaport Teal)</h4>
-                                        <!-- <label class="price-wrapper">
-                                            <span class="price-per-unit">$120</span>avg/night
-                                        </label> -->
-                                    </div>
-                                </article>
-                            </li>
-                            <li style="width: 270px; float: left; display: block;">
-                                <article class="box">
-                                    <figure>
-                                        <a href="https://www.amazon.in/gp/product/B00VQ6R9OW/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B00VQ6R9OW&linkCode=as2&tag=vibhugupta-21&linkId=4c4724e6c097729d8be21fd19b5f0740" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B00VQ6R9OW&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
-                                    </figure>
-                                    <div class="details">
-                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
-                                        <h4 class="box-title">Khadi Herbal Mini All Purpose Travel Kit (Domestic)</h4>
-                                        <!-- <label class="price-wrapper">
-                                            <span class="price-per-unit">$322</span>avg/night
-                                        </label> -->
-                                    </div>
-                                </article>
-                            </li>
-                        </ul></div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Previous</a></li><li><a class="flex-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Next</a></li></ul></div>
+
+                        <h2>Travelers Choice of Hotels</h2>
+                        <div class="image-carousel style2 flexslider" data-animation="slide" data-item-width="270" data-item-margin="30">
+                            
+                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                            <ul class="slides image-box hotel listing-style1" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-300px, 0px, 0px);">
+                                <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
+                                    <article class="box">
+                                        <figure>
+                                            <a href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" class="hover-effect popup-gallery"><img style="height:150px"  alt="" src="[[hotel.images[0].image_url]]"></a>
+                                        </figure>
+                                        <div class="details">
+                                            <span class="price">
+                                                <small>avg/night</small>
+                                                ₹[[hotel.deals[0].price]]
+                                            </span>
+                                            <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
+                                            <div class="feedback">
+                                                <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
+                                                <span class="review">270 reviews</span>
+                                            </div>
+                                            
+                                            <div class="action">
+                                                <a class="button btn-small" href="[[hotel.deals[0].hotel_url]]">SELECT</a>
+                                                <a class="button btn-small yellow popup-map" href="http://www.soaptheme.net/html/travelo/hotel-index.html#" data-box="48.856614, 2.352222">VIEW ON MAP</a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                                
+                                    <ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li>
+                                        <li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav">
+                                            <li><a class="flex-prev" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Previous</a></li>
+                                            <li><a class="flex-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Next</a></li></ul>
+                        </div>
+
+
                     
 					
 					
@@ -437,39 +466,81 @@
                         </div>
                     </div>
                     
-                    <h2>Travelers Choice of Hotels</h2>
-                    <div class="image-carousel style2 flexslider" data-animation="slide" data-item-width="270" data-item-margin="30">
+                    <h2>Travelling Products</h2>
+                    <div class="block image-carousel style2 flexslider" data-animation="slide" data-item-width="270" data-item-margin="30">
                         
-                    <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                        <ul class="slides image-box hotel listing-style1" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-300px, 0px, 0px);">
-                            <li ng-repeat="hotel in hotels" style="width: 270px; float: left; display: block;">
+                    <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides image-box listing-style2" style="width: 1000%; transition-duration: 0.6s; transform: translate3d(-300px, 0px, 0px);">
+                            <li style="width: 270px; float: left; display: block;">
                                 <article class="box">
                                     <figure>
-                                        <a href="http://www.soaptheme.net/html/travelo/ajax/slideshow-popup.html" class="hover-effect popup-gallery"><img width="270" height="161" alt="" src="./Hotels_files/1.png" draggable="false"></a>
+                                            <a href="https://www.amazon.in/gp/product/B075DJ1FQD/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B075DJ1FQD&linkCode=as2&tag=vibhugupta-21&linkId=47b547e6efa114f1f3d0bbc06fa2df93" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B075DJ1FQD&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>   
                                     </figure>
                                     <div class="details">
-                                        <span class="price">
-                                            <small>avg/night</small>
-                                            ₹[[hotel.deals[0].price]]
-                                        </span>
-                                        <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
-                                        <div class="feedback">
-                                            <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
-                                            <span class="review">270 reviews</span>
-                                        </div>
-                                        
-                                        <div class="action">
-                                            <a class="button btn-small" href="[[hotel.deals[0].hotel_url]]">SELECT</a>
-                                            <a class="button btn-small yellow popup-map" href="http://www.soaptheme.net/html/travelo/hotel-index.html#" data-box="48.856614, 2.352222">VIEW ON MAP</a>
-                                        </div>
+                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
+                                        <h4 class="box-title">Travel Luggage Organizer, Packing Cubes Set, SGM Set of 6 Travel Storage Packing Bags and Compression Pouches With Shoe Bag</h4>
+                                        <!-- <label class="price-wrapper">
+                                            <span class="price-per-unit">$322</span>avg/night
+                                        </label> -->
                                     </div>
                                 </article>
                             </li>
-                        </ul>
-						
-					</div>
-							
-										<ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Previous</a></li><li><a class="flex-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Next</a></li></ul></div>
+                            <li style="width: 270px; float: left; display: block;">
+                                <article class="box">
+                                    <figure>
+                                        <a href="https://www.amazon.in/gp/product/B073JYQNQQ/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B073JYQNQQ&linkCode=as2&tag=vibhugupta-21&linkId=a0d6f33b8ef23ac4bcc858734bb6d165" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B073JYQNQQ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
+                                        <h4 class="box-title">3G Polyester Set Of 3 Softsided Blue Luggage Set</h4>
+                                        <!-- <label class="price-wrapper">
+                                            <span class="price-per-unit">$620</span>avg/night
+                                        </label> -->
+                                    </div>
+                                </article>
+                            </li>
+                            <li style="width: 270px; float: left; display: block;">
+                                <article class="box">
+                                    <figure>
+                                        <a href="https://www.amazon.in/gp/product/B01KUV0PVC/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B01KUV0PVC&linkCode=as2&tag=vibhugupta-21&linkId=4f38bf07348f494415797bd251453a01" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B01KUV0PVC&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
+                                        <h4 class="box-title">knomo Tech Knomad Air Leather Portable Organizer</h4>
+                                        <!-- <label class="price-wrapper">
+                                            <span class="price-per-unit">$170</span>avg/night
+                                        </label> -->
+                                    </div>
+                                </article>
+                            </li>
+                            <li style="width: 270px; float: left; display: block;">
+                                <article class="box">
+                                    <figure>
+                                        <a href="https://www.amazon.in/gp/product/B01EUQKR2U/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B01EUQKR2U&linkCode=as2&tag=vibhugupta-21&linkId=d5c083e7675fcd5faa94389b7062ffa0" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B01EUQKR2U&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
+                                        <h4 class="box-title">Jockey Men's Cotton Shorts (8901326123560_9426_Large_Navy and Seaport Teal)</h4>
+                                        <!-- <label class="price-wrapper">
+                                            <span class="price-per-unit">$120</span>avg/night
+                                        </label> -->
+                                    </div>
+                                </article>
+                            </li>
+                            <li style="width: 270px; float: left; display: block;">
+                                <article class="box">
+                                    <figure>
+                                        <a href="https://www.amazon.in/gp/product/B00VQ6R9OW/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B00VQ6R9OW&linkCode=as2&tag=vibhugupta-21&linkId=4c4724e6c097729d8be21fd19b5f0740" class="hover-effect popup-gallery"><img src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B00VQ6R9OW&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=vibhugupta-21" alt="" width="270" height="160" draggable="false"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <a title="View all" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html" class="pull-right button uppercase">select</a>
+                                        <h4 class="box-title">Khadi Herbal Mini All Purpose Travel Kit (Domestic)</h4>
+                                        <!-- <label class="price-wrapper">
+                                            <span class="price-per-unit">$322</span>avg/night
+                                        </label> -->
+                                    </div>
+                                </article>
+                            </li>
+                        </ul></div><ol class="flex-control-nav flex-control-paging"><li><a class="">1</a></li><li><a class="flex-active">2</a></li></ol><ul class="flex-direction-nav"><li><a class="flex-prev" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Previous</a></li><li><a class="flex-next" href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Next</a></li></ul></div>
 				
 				</div>
 				
