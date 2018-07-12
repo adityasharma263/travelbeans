@@ -438,7 +438,7 @@ var loadRoom=function(){
   
 
   $scope.getHotelRating = function(){
-    
+    $scope.deals=[];
     console.log("$$scope.hotel.rating",$scope.hotel.rating);
 
     $http({
