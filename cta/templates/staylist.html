@@ -502,11 +502,11 @@
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title">Modal Header</h4>
                                                         </div> -->
-                                                        <div class="modal-body">
+                                                        <!-- <div class="modal-body">
                                                         <img  style="height:150px" src="[[imagesData.images[0].image_url]]" alt="Travel Beans">
 
                                                         <p>Some text in the modal.</p>
-                                                        </div>
+                                                        </div> -->
                                                         <!-- <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div> -->
@@ -667,7 +667,7 @@
                                                 
                                                 <tbody ng-repeat="deal in rm.deals">
                                                   <tr>
-                                                    <td><img src="deal.website.logo_image"></td>
+                                                    <td><img src="[[deal.website.logo_image]]"></td>
                                                     <td ng-if="[[rm.room_type]]==1">Premium</td>
                                                     <td ng-if="[[rm.room_type]]==2">Executive</td>
                                                     <td ng-if="[[rm.room_type]]==3">Sweet</td>

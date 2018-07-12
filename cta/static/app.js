@@ -142,6 +142,190 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.imagesData=data;
     console.log("$scope.images",$scope.imagesData);
   }
+
+  var showDivs=function(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    
+    var dots = document.getElementsByClassName("demo");
+
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].style.opacity = 0.5;
+      dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
+      dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+      dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
+
+
+    }
+    dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
+    dots[slideIndex-1].style.opacity = 1;
+    
+    x[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += "w3-opacity-off";
+  }
+  var slideIndex = 1;
+  
+  var plusDivs=function(n) {
+      showDivs(slideIndex += n);
+  }
+  
+  $scope.currentDiv=function(n) {
+      showDivs(slideIndex = n);
+  }
+
+  //++++++++++++++++++++++++++++
+  var i=0;
+if(window.screen.availWidth >=440){
+  console.log(window.screen.availWidth);
+  $( ".flex-next" ).click(function() {
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
+    }
+  });
+  
+  $( ".flex-prev" ).click(function() {
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+}
+if(window.screen.availWidth <=440){
+  console.log(window.screen.availWidth);
+
+  $( ".flex-next" ).click(function() {
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==2)){
+  
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==3)){
+  
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==4)){
+  
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==5)){
+  
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==6)){
+  
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==7)){
+  
+      $(".demo").css("transform","translate3d(-2000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
+    }
+  });
+  
+  $( ".flex-prev" ).click(function() {
+  
+    if ($( ".demo" ).css( "transform","translate3d(-2000px, 0px, 0px)") && (i==7)){
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)") && (i==6)){
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)") && (i==5)){
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)") && (i==4)){
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)") && (i==3)){
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+}
+
+//+++++++++++
   // loadMore function
 
   $scope.loadMore = function() {
