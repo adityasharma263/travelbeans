@@ -116,6 +116,7 @@ angular.module('comparetravel', ['angular.filter'])
   // $scope.min= 0;
   // $scope.max= 0;
   // $scope.max_price= 0;
+
   
   // loadMore function
   $scope.loadMore = function() {
@@ -152,11 +153,12 @@ angular.module('comparetravel', ['angular.filter'])
   }).then(function successCallback(response) {
       $scope.hotelData = response.data.result.hotel;
       console.log("$scope.hotelData",$scope.hotelData);
-      console.log("...",$scope.hotelData[0].images[0].image_url);
+//      console.log("...",$scope.hotelData[0].images[0].image_url);
       for(var j=0;j<$scope.hotelData.length;j++){
         $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
       }
       console.log("$scope.cityid",$scope.cityid);
+      loadRoom();
 
       // $scope.room.check_in = Date.parse($scope.room.check_in)/1000;
       // console.log(" $scope.room.check_in ", $scope.room.check_in );
@@ -181,6 +183,26 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+var loadRoom=function(){
+  $http({
+    method: 'GET',
+    url: '/api/v1/room'
+  }).then(function successCallback(response) {
+
+      $scope.roomdata = response.data.result.rooms;
+      console.log("roomdata",$scope.roomdata);
+      for(var j=0;j<$scope.roomdata.length;j++){
+        $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
+      }
+      loadDeals();
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+}
+
+  
 
   $scope.getHotelRating = function(){
     
@@ -200,7 +222,8 @@ angular.module('comparetravel', ['angular.filter'])
     })
 
   }
-
+  
+loadDeals=function(){
   $http({
     method: 'GET',
     url: '/api/v1/deal'
@@ -212,29 +235,45 @@ angular.module('comparetravel', ['angular.filter'])
       console.log("$scope.min",$scope.min);
       $scope.max= Math.max.apply(Math,$scope.dealdata.map(function(item){return item.price;}));
       console.log("$scope.max",$scope.max);
+      loadPrice();
       }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
-
+}
+ var loadPrice=function(){
+   $scope.hotelData=[];
+  $scope.deals=[];
   $http({
     method: 'GET',
-    url: '/api/v1/room'
+    url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.max
   }).then(function successCallback(response) {
+      $scope.deals = response.data.result.deal;
+      console.log("$scope.deals",$scope.deals);
+      for(var j=0; j<$scope.deals.length; j++){
+        $scope.roomobj=$scope.roomPrice[$scope.deals[j].room];
+        $scope.deals[j].roomdata=$scope.roomobj;
+        $scope.hotelobj=$scope.cityid[$scope.deals[j].roomdata.hotel];
+        $scope.deals[j].roomdata.hoteldata=$scope.hotelobj;
 
-      $scope.roomdata = response.data.result.rooms;
-      console.log("roomdata",$scope.roomdata);
-      for(var j=0;j<$scope.roomdata.length;j++){
-        $scope.roomPrice[$scope.roomdata[j].id]= $scope.roomdata[j];
       }
+      console.log("deals array",$scope.deals);
+      // this callback will be called asynchronously
+
+      // when the response is available
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+ }
+
+  
  
   
   $scope.getHotelPrice = function(){
     console.log("$scope.hotel.end_price",$scope.hotel.end_price);
+    $scope.hotelData=[];
+    $scope.deals=[];
     $http({
       method: 'GET',
       url: '/api/v1/deal?price_start=' + $scope.min + '&price_end=' + $scope.hotel.end_price
@@ -549,44 +588,157 @@ var getrooms=function(){
       // or server returns response with an error status.
   });
 }
+
+
+
+/************************ slider jquery section  ************************************** */
 var i=0;
-$( ".flex-next" ).click(function() {
-  if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
+if(window.screen.availWidth >=440){
+  console.log(window.screen.availWidth);
+  $( ".flex-next" ).click(function() {
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
+    }
+  });
+  
+  $( ".flex-prev" ).click(function() {
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+}
+if(window.screen.availWidth <=440){
+  console.log(window.screen.availWidth);
 
-    $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-    i++;
-    return i;
-  } 
+  $( ".flex-next" ).click(function() {
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==2)){
+  
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==3)){
+  
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==4)){
+  
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==5)){
+  
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==6)){
+  
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==7)){
+  
+      $(".demo").css("transform","translate3d(-2000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
+    }
+  });
+  
+  $( ".flex-prev" ).click(function() {
+  
+    if ($( ".demo" ).css( "transform","translate3d(-2000px, 0px, 0px)") && (i==7)){
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)") && (i==6)){
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)") && (i==5)){
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)") && (i==4)){
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)") && (i==3)){
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+}
+/************************************************************************************************/
 
-  if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
 
-    $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
-    i++;
-    return i;
-  } 
-  else {
-    $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-    i=0;
-    return i;
-  }
-});
 
-$( ".flex-prev" ).click(function() {
-
-  if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
-    $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-    i--;
-    return i;
-  } 
-
-  if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
-    $(".demo").css("transform","translate3d(0px, 0px, 0px)");
-    i--;
-    return i;
-  } 
-  else {
-    $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-  }
-});
-      
 }])
