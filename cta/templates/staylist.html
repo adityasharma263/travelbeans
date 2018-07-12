@@ -319,11 +319,10 @@
                                                 </form> -->
 
                                             <div class="form-group">
-                                                <div data-role="rangeslider">
-                                                        <label for="price-max">Max Price:</label>
+                                                <div >
+                                                        <label>Max Price:</label>
                                                         <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.end_price" >
                                                         <p>Value: <span>[[hotel.end_price]]</span></p>
-
                                                 <!-- <label>Start Price</label>
                                                     <input type="number" ng-model="hotel.start_price">
                                                 <label>End Price</label>
@@ -747,14 +746,14 @@
         //     });
         //     tjq(".min-price-label").html( "$" + tjq("#price-range").slider( "values", 0 ));
         //     tjq(".max-price-label").html( "$" + tjq("#price-range").slider( "values", 1 ));
-            
+
             // tjq("#rating").slider({
             //     range: "min",
             //     value: 40,
             //     min: 0,
             //     max: 50,
             //     slide: function( event, ui ) {
-                    
+
             //     }
             // });
         // });
