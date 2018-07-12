@@ -400,15 +400,44 @@ loadDeals=function(){
   $scope.hotelDeals = []; // for all deals array
   $scope.room={}; //for one room
   $scope.hotelRooms=[]; // for all room array
-  $scope.showRoom=false;
+  $scope.updateHotelDetail=false;
+  $scope.roomDetail=false;
+  $scope.hotelDetail=true;
+  $scope.hotelData=[]; // hotel data for update 
 
-  $scope.hideRoom=function(){
-    delete $scope.room.default_room_type;
-    $scope.showRoom=false;
+  $scope.showCreate=function(){
+    $scope.updateHotelDetail=false;
+    $scope.hotelDetail=true;
   }
-  $scope.showDefaultRoom=function(){
-    $scope.showRoom=true;
+  $scope.showUpdate=function(){
+    $scope.updateHotelDetail=true;
+    $scope.hotelDetail=false;
   }
+  $scope.editHotelData=function(data){
+    $scope.hotels=data;
+
+  }
+  $scope.editImg=function(url,index){
+    $scope.imageUrl=url;
+    $scope.imgIndex=index;
+
+  }
+  $scope.updateImage=function(){
+    $scope.hotels.images[$scope.imgIndex].image_url=$scope.imageUrl;
+    createToast("Image Updated!!!","green");
+  }
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.hotelsData = response.data.result.hotel;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
   $http({
     method: 'GET',
     url: '/api/v1/website' 
@@ -520,6 +549,8 @@ var createToast=function(msg, color){
 }
 $scope.createHotel = function() {
   // e.preventDefault()
+  $scope.hotelDetail=false;
+  $scope.roomDetail=true;
 
   $scope.hotelImg.push($scope.images);
   $scope.hotel.images=$scope.hotelImg;
