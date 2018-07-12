@@ -140,7 +140,7 @@ angular.module('comparetravel', ['angular.filter'])
   //  }
   $scope.openGallery= function(data){
     $scope.imagesData=data;
-    console.log("$scope.images",$scope.images)
+    console.log("$scope.images",$scope.imagesData);
   }
   // loadMore function
 
