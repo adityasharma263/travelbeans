@@ -538,6 +538,12 @@ loadDeals=function(){
   $scope.checkErr = function(){
     $scope.errMessage = '';
     $scope.curDate = new Date();
+
+    var check_in = $scope.hotel.check_in;
+    console.log("check in",check_in);
+    if($scope.hotel.check_in == null){
+       $scope.hotel.check_in = check_in;
+    }
     
     if(new Date($scope.hotel.check_in) > new Date($scope.hotel.check_out)){
       $scope.errMessage = 'End Date should be greater than start date';
@@ -553,11 +559,6 @@ loadDeals=function(){
   $scope.getHotelweek = function(){
    
     $scope.hotel.check_in = Date.parse($scope.hotel.check_in)/1000;
-    var check_in = $scope.hotel.check_in;
-    console.log("check in",check_in);
-    if($scope.hotel.check_in == null){
-
-    }
     $scope.hotel.check_out = Date.parse($scope.hotel.check_out)/1000;
     console.log("$scope.hotel.check_in",$scope.hotel.check_in);
     $http({
