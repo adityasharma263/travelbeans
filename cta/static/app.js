@@ -107,6 +107,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.id = [];
   $scope.hotel = {};
   $scope.limit= 10;
+  $scope.lim= 5;
   $scope.myVar= false;
   $scope.roomPrice={};
   $scope.roomobj={};
@@ -183,14 +184,14 @@ angular.module('comparetravel', ['angular.filter'])
 if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
-    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
   
       $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
       i++;
       return i;
     } 
   
-    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
+    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==1)){
   
       $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
       i++;
@@ -332,6 +333,10 @@ if(window.screen.availWidth <=440){
     $scope.limit =   $scope.limit + 10;
   }
 
+  $scope.loadmoredeals = function() {
+    $scope.lim =   $scope.lim + 5;
+  }
+
   var closePopUp = function() {
     $(".popAlertBox").css("top", "-110%");
   }
@@ -438,7 +443,6 @@ var loadRoom=function(){
   
 
   $scope.getHotelRating = function(){
-    $scope.deals=[];
     console.log("$$scope.hotel.rating",$scope.hotel.rating);
 
     $http({
@@ -547,8 +551,13 @@ loadDeals=function(){
   }
 
   $scope.getHotelweek = function(){
-    
+   
     $scope.hotel.check_in = Date.parse($scope.hotel.check_in)/1000;
+    var check_in = $scope.hotel.check_in;
+    console.log("check in",check_in);
+    if($scope.hotel.check_in == null){
+
+    }
     $scope.hotel.check_out = Date.parse($scope.hotel.check_out)/1000;
     console.log("$scope.hotel.check_in",$scope.hotel.check_in);
     $http({

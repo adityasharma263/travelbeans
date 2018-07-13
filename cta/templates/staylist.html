@@ -286,7 +286,8 @@
                                                 <form>
                                                     <div class="form-group">
                                                         <label>check in</label>
-                                                            <input type="date" ng-model="hotel.check_in" placeholder="mm/dd/yy">                                                    </div>
+                                                            <input type="date" ng-model="hotel.check_in" placeholder="mm/dd/yy">                                                  
+                                                    </div>
                                                     <div class="form-group">
                                                         <label>check out</label>
                                                             <input type="date" ng-model="hotel.check_out" ng-change="checkErr()" placeholder="mm/dd/yy">
@@ -483,6 +484,7 @@
                                             
                                            </span>
                                           </div>
+                                          </div>
                                       </article>
                                 </div>
                                 <!-- </div> -->
@@ -539,8 +541,8 @@
                                                                 <li><a class="">2</a></li>
                                                             </ol> -->
                                                             <ul class="flex-direction-nav">
-                                                                <li><a class="flex-prev" >Previous</a></li>
-                                                                <li><a class="flex-next"  >Next</a></li>
+                                                                <li><a class="flex-prev">Previous</a></li>
+                                                                <li><a class="flex-next">Next</a></li>
                                                             </ul>
                                                             </div>
                                                         </div>
@@ -586,7 +588,7 @@
                                                                                 }
                                                                             var map = new google.maps.Map(document.getElementById("map"), mapOptions);
                                                                             }
-                                                                            </script>
+                                                                    </script>
                                                                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqAYwriRL9E10XOlQWuDnYDmV8y0IaAXY&callback=myMap"></script> 
                                      
                                                                 </div>
@@ -663,10 +665,10 @@
                                                <!-- <span class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></span> -->
                                                 
 
-                                               <table class="table table-hover" ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                               <table class="table table-hover">
                                                 
-                                                <tbody ng-repeat="deal in rm.deals">
-                                                  <tr>
+                                                <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                                  <tr ng-repeat="deal in rm.deals | limitTo:lim ">
                                                     <td><img src="[[deal.website.logo_image]]"></td>
                                                     <td ng-if="[[rm.room_type]]==1">Premium</td>
                                                     <td ng-if="[[rm.room_type]]==2">Executive</td>
@@ -677,7 +679,11 @@
                                                     <td class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></td>
                                                   </tr>
                                                  
+                                                  <tr>
+                                                     <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
+                                                  </tr>
                                                 </tbody>
+                                               
                                               </table>
                                                
                                               </div>
