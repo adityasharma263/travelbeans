@@ -596,10 +596,11 @@ loadDeals=function(){
   $scope.hotelRooms=[]; // for all room array
   $scope.updateHotelDetail=false;
   $scope.updateRoomDetail=false;
-  
   $scope.roomDetail=false;
   $scope.hotelDetail=true;
-  $scope.hotelData=[]; // hotel data for update 
+  $scope.UpdateImages={}; //image data for update
+  $scope.hotelData={}; // hotel data for update 
+  $scope.amenitiesData={}; // hotel amenities for update
 
   $scope.showCreate=function(){
     $scope.updateHotelDetail=false;
@@ -612,7 +613,7 @@ loadDeals=function(){
   }
   $scope.editHotelData=function(data){
     $scope.hotels=data;
-
+    $scope.hotelImages=data.images;
   }
   $scope.editRoomsData=function(data){
     $scope.rooms=data;
@@ -634,8 +635,28 @@ loadDeals=function(){
 
   }
   $scope.updateImage=function(){
-    $scope.hotels.images[$scope.imgIndex].image_url=$scope.imageUrl;
+    
+    $scope.hotelImages[$scope.imgIndex].image_url=$scope.imageUrl;
+    $scope.UpdateImages.image_url=$scope.imageUrl;
+    $scope.UpdateImages.hotel_id=$scope.hotels.id;
+    sendPutCall('/api/v1/images', $scope.UpdateImages);
     createToast("Image Updated!!!","green");
+  }
+  $scope.updateHotel=function(){
+    $scope.hotelData=$scope.hotels;
+    $scope.amenitiesData.amenities=$scope.hotels.amenities;
+    $scope.amenitiesData.hotel_id=$scope.hotels.id;
+    delete $scope.hotelData.images;
+    delete $scope.hotelData.rooms;
+    delete $scope.hotelData.amenities;
+    sendPutCall('/api/v1/hotel', $scope.hotelData);
+    sendPutCall('/api/v1/amenities', $scope.amenitiesData);
+    
+    createToast("Hotel Updated!!!","green");
+
+
+
+
   }
   $http({
     method: 'GET',
@@ -693,6 +714,25 @@ loadDeals=function(){
     
     $http({
       method: 'POST',
+      url: url,
+      data: data
+    }).then(function (res) {
+      console.log(res);
+      
+      // createToast("'hotel successfully created!!!'","green");
+
+      },
+      // failed callback
+      function (req) {
+        createToast("'Something went wrong!!!'","red");
+      })
+    
+  }
+  var sendPutCall = function(url, data) {
+    console.log(data);
+    
+    $http({
+      method: 'PUT',
       url: url,
       data: data
     }).then(function (res) {

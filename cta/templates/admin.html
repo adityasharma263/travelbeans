@@ -57,7 +57,7 @@
                                             <br>
                                             <label class="control-label " for="image_url">images  </label>
                                             <div style="max-height: 100px; overflow-y: scroll;" class="col-sm-12">
-                                                <div ng-repeat="img in hotels.images" class="col-sm-2">          
+                                                <div ng-repeat="img in hotelImages" class="col-sm-2">          
                                                     <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img.image_url,$index)" src="[[img.image_url]]" >
                                                     <div></div>
                                                 </div>
