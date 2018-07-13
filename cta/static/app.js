@@ -586,6 +586,8 @@ loadDeals=function(){
   $scope.room={}; //for one room
   $scope.hotelRooms=[]; // for all room array
   $scope.updateHotelDetail=false;
+  $scope.updateRoomDetail=false;
+  
   $scope.roomDetail=false;
   $scope.hotelDetail=true;
   $scope.hotelData=[]; // hotel data for update 
@@ -597,9 +599,24 @@ loadDeals=function(){
   $scope.showUpdate=function(){
     $scope.updateHotelDetail=true;
     $scope.hotelDetail=false;
+    $scope.updateRoomDetail=false;
   }
   $scope.editHotelData=function(data){
     $scope.hotels=data;
+
+  }
+  $scope.editRoomsData=function(data){
+    $scope.rooms=data;
+
+  }
+  $scope.editDealData=function(data){
+    $scope.deal=data;
+  }
+  $scope.editRooms=function(data){
+    $scope.updateRoomDetail=true;
+    $scope.updateHotelDetail=false;
+    $scope.Rooms=data;
+
 
   }
   $scope.editImg=function(url,index){
