@@ -27,14 +27,14 @@
                             
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                <h4 class="modal-title">Update Hotel</h4>
+                                <h4 class="modal-title">Update Hotel Amenities </h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                         <div class="form-group">
-                                            <label class="control-label" for="name">Hotel Name: </label>
+                                            <!-- <label class="control-label" for="name">Hotel Name: </label>
                                             <div class=""> 
                                                 <input  class="form-control" id="name" ng-model="hotels.name" type="text" required>
                                             </div>
@@ -99,8 +99,8 @@
                                                 <label>
                                                     <input id="star7" type="radio" name="star" value="7" ng-model="hotels.star" ng-checked="hotels.star==7?true:false"/>7
                                                 </label>
-                                            </div>
-                                            <h3>Hotel Amenities :</h3>
+                                            </div> -->
+                                            
                     
                                                 <label for="Hotel Amenities">
                                                 <div>
@@ -239,7 +239,7 @@
                                 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateHotel()">update</button>
+                                    <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateAmenities()">update</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                                 
@@ -566,7 +566,7 @@
                                 <div  class="container" style="max-height: 500px;overflow-y: scroll;">
                                     <div ng-repeat="data in hotelsData  | filter : searchText" >
                                     [[data.name]] 
-                                    <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Hotel</button>
+                                    <!-- <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Amenities</button> -->
                                     <button class="btn" ng-click="editRooms(data)">Edit Hotel's Room</button>
 
                                     <hr>
@@ -581,10 +581,9 @@
                         <br>
                         <label class="control-label col-sm-2"for="name">Search [[Rooms.name]]'s rooms (for Update):</label>
                         <div class="col-sm-10">
-                            <input class="form-control" data-toggle="dropdown" ng-model="searchText" placeholder="enter search term here">
-                                <div  class="container" style="max-height: 500px;overflow-y: scroll;">
-                                    <div ng-repeat="data in Rooms.rooms  | filter : searchText" >
-                                    [[data.other_room_type]] 
+                                <div  class="container">
+                                    <div ng-repeat="data in hotels.rooms ">
+                                    [[data.room_type]] 
                                     <button class="btn" data-toggle="modal" data-target="#roomModal" ng-click="editRoomsData(data)">Edit Room</button>
 
                                     <hr>
