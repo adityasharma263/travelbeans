@@ -62,9 +62,9 @@ class Image(Base):
     def __repr__(self):
         return '<image_url %r>' % self.image_url
 
+
 class Amenity(Base):
     __tablename__ = 'amenity'
-
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
     conference_room = db.Column(db.Boolean, default=False, nullable=True)
     parking = db.Column(db.Boolean, default=False, nullable=True)
@@ -99,6 +99,7 @@ class Amenity(Base):
 
     def __repr__(self):
         return '<pool %r>' % self.pool
+
 
 class Member(Base):
     __tablename__ = 'member'
