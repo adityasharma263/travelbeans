@@ -560,7 +560,7 @@
                                                 <div>
                                                     <div>
                                                         <h4 class="box-title">[[deal.roomdata.hoteldata.name]]<small>
-                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> <span id="latitude" ng-click="openGallery(deal.roomdata.hoteldata)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[deal.roomdata.hoteldata.latitude]]"  data-longitude ='[[deal.roomdata.hoteldata.longitude]]'>[[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</span></small></h4>
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> <span id="latitude" ng-click="openMap(deal.roomdata.hoteldata)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[deal.roomdata.hoteldata.latitude]]"  data-longitude ='[[deal.roomdata.hoteldata.longitude]]'>[[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</span></small></h4>
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
@@ -573,23 +573,11 @@
                                                                 </div> -->
                                                                 <div class="modal-body">
                                                                     <i class="fa fa-map-marker"></i>
-                                                                    <span id="longitude" data-latitude = "[[imagesData.latitude]]"  data-longitude ='[[imagesData.longitude]]'>[[imagesData.city]]</span>
+                                                                    <span id="longitude" data-latitude = "[[mapData.latitude]]"  data-longitude ='[[mapData.longitude]]'>[[mapData.city]]</span>
                                                                     
                                                                     <div id="map" style="height:354px">
                                 
-                                                                        <script>
-                                                                            var latitude=(document.getElementById('longitude').getAttribute("data-latitude"))
-                                                                            var longitude=(document.getElementById('longitude').getAttribute("data-longitude"))
-                                                                                function myMap() {
-                                                                                    var mapOptions = {
-                                                                                        center: new google.maps.LatLng(latitude, longitude),
-                                                                                        zoom: 10,
-                                                                                        mapTypeId: google.maps.MapTypeId.HYBRID
-                                                                                    }
-                                                                                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                                                                                }
-                                                                        </script>
-                                                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqAYwriRL9E10XOlQWuDnYDmV8y0IaAXY&callback=myMap"></script> 
+                                                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg-3eaCM5LOJXDjY6cMBASoAnREc4-R58&callback=myMap"></script> 
                                         
                                                                     </div>
 

@@ -143,6 +143,22 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.imagesData=data;
     console.log("$scope.images",$scope.imagesData);
   }
+  $scope.openMap= function(data){
+    $scope.mapData=data;
+    console.log("$scope.mapData",$scope.mapData);
+    console.log("$scope.mapData.latitude",$scope.mapData.latitude);
+    $scope.myMap();
+  }
+  $scope.myMap = function () {
+    var mapOptions = {
+        center: new google.maps.LatLng($scope.mapData.latitude, $scope.mapData.longitude),
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    }
+  console.log("mapOptions",mapOptions);  
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+console.log("map",map);
+}
 
   var showDivs=function(n) {
     var i;
