@@ -651,6 +651,7 @@ loadDeals=function(){
   $scope.showRoomDetail=false;
   $scope.roomDetail=false;
   $scope.hotelDetail=true;
+  $scope.updateRoomDetail=false;
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
@@ -670,9 +671,14 @@ loadDeals=function(){
     $scope.facilities=data.facilities;
     $scope.member=data.member;
     $scope.roomDeals=data.deals;
+    $scope.updateRoomDetail=true;
+    $scope.showRoomDetail=false;
 
   }
-  
+  $scope.gotoHotelDetail=function(){
+    $scope.updateRoomDetail=false;
+    $scope.showRoomDetail=true;
+  }
   $scope.editDealData=function(data){
     $scope.deal=data;
   }

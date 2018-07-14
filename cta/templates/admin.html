@@ -252,7 +252,7 @@
                 <div class="container">
                    
                     <!-- The Modal -->
-                    <div class="modal" id="roomModal">
+                    <div class="modal" id="">
                             <div class="modal-dialog">
                             <div class="modal-content">
                             
@@ -739,13 +739,105 @@
                                         <span class="title" ng-if="[[data.room_type]]==4">Deluxe</span>
                                         <span class="title" ng-if="[[data.room_type]]==5">Super Deluxe</span>
                                         <span class="title" ng-if="[[data.room_type]]==6">Presidential Sweet</span>
-                                    <button class="btn" data-toggle="modal" data-target="#roomModal" ng-click="editRoomsData(data)">Edit Room</button>
+                                    <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
                                     <hr>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
+                    <form ng-show="updateRoomDetail" class="form-horizontal" >
+                        <div  class="form-group" >
+                            <br>
+                            <button class="btn btn-defalut" ng-click="gotoHotelDetail()">Go Back</button>
+                            <br>
+                            <h2>Update Room(For: [[hotels.name]]) </h2>
+                            <hr>
+                            <h3>Room Type:</h3>
+                            <label for="room_type" style="margin-left:185px; ">
+                                <div class="radio">
+                                    <label>
+                                    <input id="room_type1" type="radio" name="room_type" value="1" ng-model="rooms.room_type" ng-checked="rooms.room_type==1?true:false"/>Premium
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                    <input id="room_type2" type="radio" name="room_type" value="2" ng-model="rooms.room_type" ng-checked="rooms.room_type==2?true:false"/>Executive
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                    <input id="room_type3" type="radio" name="room_type" value="3"  ng-model="rooms.room_type" ng-checked="rooms.room_type==3?true:false"/>Sweet
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                    <input id="room_type4" type="radio" name="room_type" value="4"  ng-model="rooms.room_type" ng-checked="rooms.room_type==4?true:false"/>Deluxe
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                    <input id="room_type4" type="radio" name="room_type" value="5"  ng-model="rooms.room_type" ng-checked="rooms.room_type==5?true:false"/>Super Deluxe
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                    <input id="room_type4" type="radio" name="room_type" value="6"  ng-model="rooms.room_type" ng-checked="rooms.room_type==6?true:false"/>Presidential Sweet
+                                    </label>
+                                </div>
+                                <br>
+                            </label>
+                        </div>
+                                
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="default">Default Room Type:</label>
+                            <div class="col-sm-10">          
+                                <input id="room_type4" class="form-control" type="text" ng-model="rooms.sother_room_type" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"  for="image">Room Image Url:  </label>
+                            <div class="col-sm-10">          
+                                <input  class="form-control" id="name"  type="text" ng-model="rooms.image_url" required>
+                            </div>
+                        </div>
+                        <div class="form-group">        
+                            <div class="col-sm-offset-8 col-sm-8">
+                                <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="updateRoom()">Update Room</button>
+                            </div>
+                        </div>
+                    
+                        <h3>Deals:</h3>
+                        <div class="form-group " style="margin-left: 185px;">
+                            <label for="breakfast">Breakfast
+                                <input type="checkbox"  ng-model="rooms.breakfast"/>
+                            </label>
+                            <br>
+                            <label for="balcony">Balcony
+                                <input type="checkbox"  ng-model="rooms.balcony"/>
+                            </label>
+                            <br>
+                            <label class="control-label"for="name">Search deals (for Update):</label>
+                            <div >
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchDeals" placeholder="enter search term here">
+                                    <div  class="container" style="max-height: 100px;overflow-y: scroll;">
+                                        <div style="margin-bottom: 5px;" ng-repeat="data in roomDeals  | filter : searchDeals" >
+                                            Price ₹: [[data.price]] 
+                                            <button class="btn" data-toggle="modal" data-target="#dealModal" ng-click="editDealData(data)">Edit deal</button>
+                                            <br>
+                                        </div>
+                                    </div>
+        
+                            </div>
+
+                        </div>
+                        <div class="form-group">        
+                            <div class="col-sm-offset-8 col-sm-8">
+                                <button class="btn" data-toggle="modal" data-target="#facilitiesModal"  >Edit Facilities</button>
+                                <button class="btn" data-toggle="modal" data-target="#membersModal"  >Edit Members</button>
+                            </div>
+                        </div>
                     </form>
                     <form class="form-horizontal" ng-submit="createHotel()">
                         <div ng-show="hotelDetail">
