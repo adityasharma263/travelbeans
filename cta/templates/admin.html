@@ -328,29 +328,38 @@
                         <h4>Room Type</h4>
                         <div class="radio">
                             <label>
-                            <input id="room_type1" type="radio" name="room_type" value="1" ng-click="hideRoom()" ng-model="room.room_type"/>Premium
+                            <input id="room_type1" type="radio" name="room_type" value="1" ng-model="room.room_type"/>Premium
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type2" type="radio" name="room_type" value="2" ng-click="hideRoom()" ng-model="room.room_type"/>Executive
+                            <input id="room_type2" type="radio" name="room_type" value="2" ng-model="room.room_type"/>Executive
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type3" type="radio" name="room_type" value="3" ng-click="hideRoom()" ng-model="room.room_type"/>Sweet
+                            <input id="room_type3" type="radio" name="room_type" value="3"  ng-model="room.room_type"/>Sweet
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type4" type="radio" name="room_type" value="4" ng-click="hideRoom()" ng-model="room.room_type"/>Super Deluxe
+                            <input id="room_type4" type="radio" name="room_type" value="4"  ng-model="room.room_type"/>Deluxe
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                            <input id="room_type4" type="radio" name="room_type" value="5" ng-click="showDefaultRoom()" ng-model="room.room_type"/>others
+                            <input id="room_type4" type="radio" name="room_type" value="5"  ng-model="room.room_type"/>Super Deluxe
                             </label>
-                            <label ng-show="showRoom" for="default">Room Type:
+                        </div>
+                        <div class="radio">
+                            <label>
+                            <input id="room_type4" type="radio" name="room_type" value="6"  ng-model="room.room_type"/>Presidential Sweet
+                            </label>
+                        </div>
+                        <br>
+                        
+                        <div>
+                            <label for="default">Default Room Type:
                                 <input id="room_type4" class="box" type="text" ng-model="room.default_room_type"/>
                             </label>
                         </div>
@@ -407,10 +416,7 @@
                     <input type="checkbox" value="1" ng-model="room.facilities.ac"/>
                 </label>
                 <br>
-                <label for="balcony">Balcony
-                    <input type="checkbox" value="2" ng-model="room.balcony"/>
-                </label>
-                <br>
+                
                 <label for="bathroom_cosmetics">Bathroom Cosmetics
                     <input type="checkbox" value="3" ng-model="room.facilities.bathroom_cosmetics"/>
                 </label>
@@ -426,11 +432,7 @@
                 <label for="bathroom_with_shower">Bathroom with Shower
                     <input type="checkbox" value="6" ng-model="room.facilities.bathroom_with_shower"/>
                 </label>
-                <br>
-                <label for="breakfast">Breakfast
-                    <input type="checkbox" value="7" ng-model="room.breakfast"/>
-                </label>
-                <br>
+               
                 <label for="desk">Desk
                     <input type="checkbox" value="8" ng-model="room.facilities.desk"/>
                 </label>
@@ -514,6 +516,14 @@
                     </div>
                 </label>
                 <div>
+                    <label for="breakfast">Breakfast
+                        <input type="checkbox" value="7" ng-model="room.breakfast"/>
+                    </label>
+                    <br>
+                    <label for="balcony">Balcony
+                        <input type="checkbox" value="2" ng-model="room.balcony"/>
+                    </label>
+                    <br>
                     <label for="weekend">Weekend :
                         <input id="weekend" type="checkbox" value="" ng-model="deals.weekend"/>
                     </label>
