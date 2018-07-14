@@ -667,15 +667,18 @@ loadDeals=function(){
   
   $scope.editRoomsData=function(data){
     $scope.rooms=data;
+    $scope.facilities=data.facilities;
+    $scope.member=data.member;
     $scope.roomDeals=data.deals;
 
   }
+  
   $scope.editDealData=function(data){
     $scope.deal=data;
   }
   $scope.editHotel=function(data){
     $scope.hotels=data;
-    $scope.hotelAmenities=data.amenities
+    $scope.hotelAmenities=data.amenities;
     $scope.hotelImages=data.images;
     $scope.hotelRooms=data.rooms;
     $scope.showRoomDetail=true;
@@ -687,17 +690,17 @@ loadDeals=function(){
   $scope.editAmenities=function(){
    console.log('scope.hotels',$scope.hotelAmenities); 
   }
-  $scope.editImg=function(url,index){
-    $scope.imageUrl=url;
+  $scope.editImg=function(data,index){
+    $scope.imageData=data;
+    // $scope.imagedata=data.id;
     $scope.imgIndex=index;
 
   }
   $scope.updateImage=function(){
     
-    $scope.hotelImages[$scope.imgIndex].image_url=$scope.imageUrl;
-    $scope.UpdateImages.image_url=$scope.imageUrl;
-    $scope.UpdateImages.hotel_id=$scope.hotels.id;
-    sendPutCall('/api/v1/images/'+$scope.hotels.id, $scope.UpdateImages);
+    $scope.hotelImages[$scope.imgIndex].image_url=$scope.imageData.image_url;
+    $scope.imageData.hotel_id=$scope.hotels.id;
+    sendPutCall('/api/v1/image/'+$scope.imageData.id, $scope.imageData);
     createToast("Image Updated!!!","green");
   }
   $scope.updateHotel=function(){
@@ -707,26 +710,45 @@ loadDeals=function(){
     delete $scope.hotelData.rooms;
     delete $scope.hotelData.amenities;
     sendPutCall('/api/v1/hotel/'+$scope.hotelData.id, $scope.hotelData);
-    
     createToast("Hotel Detail Updated!!!","green");
   }
   $scope.updateAmenities=function(){
-
-    $scope.amenitiesData.amenities=$scope.hotelAmenities;
-    $scope.amenitiesData.hotel_id=$scope.hotels.id;
-    sendPutCall('/api/v1/amenities/'+$scope.amenitiesData.hotel_id, $scope.amenitiesData);
+    $scope.hotelAmenities.hotel_id=$scope.hotels.id;
+    sendPutCall('/api/v1/amenity/'+$scope.hotelAmenities.id, $scope.hotelAmenities);
     createToast("Hotel Amenities Updated!!!","green");
   
   }
   $scope.updateRoom=function(){
-    $scope.rooms.room_id=$scope.$scope.rooms.id;
-    delete $scope.rooms.deals
-    sendPutCall('/api/v1/rooms/'+$scope.rooms.room_id, $scope.rooms);
+    $scope.rooms.hotel_id=$scope.hotels.id;
+    delete $scope.rooms.member;
+    delete $scope.rooms.check_in;
+    delete $scope.rooms.check_out;
+    delete $scope.rooms.facilities;
+    delete $scope.rooms.deals;
+    delete $scope.rooms.hotel;
+    sendPutCall('/api/v1/room/'+$scope.rooms.id, $scope.rooms);
     createToast("Room Updated!!!","green");
   }
+  $scope.updateFacilities=function(){
+    $scope.facilities.room_id=$scope.rooms.id;
+    delete $scope.facilities.room;
+    sendPutCall('/api/v1/facility/'+$scope.facilities.id, $scope.facilities);
+    createToast("Facilities Updated!!!","green");
+  }
+  $scope.updateMembers=function(){
+    $scope.member.room_id=$scope.rooms.id;
+    delete $scope.member.room;
+    sendPutCall('/api/v1/member/'+$scope.member.id, $scope.member);
+    createToast("Members Updated!!!","green");
+  }
   $scope.updateDeal=function(){
-    $scope.deal.hotel_id=$scope.hotels.id;
-    sendPutCall('/api/v1/deal/'+$scope.deal.hotel_id, $scope.deal);
+
+    $scope.deal.room_id=$scope.rooms.id;
+    delete $scope.deal.room;
+    delete $scope.deal.website;
+
+    console.log('$scope.deal',$scope.deal);
+    sendPutCall('/api/v1/deal/'+$scope.deal.id, $scope.deal);
     createToast("Deal Updated!!!","green");
     
   }
