@@ -656,8 +656,8 @@ loadDeals=function(){
   $scope.amenitiesData={}; // hotel amenities for update
 
   $scope.showCreate=function(){
-    $scope.updateHotelDetail=false;
     $scope.hotelDetail=true;
+    $scope.showHotelDetail=false;
   }
   $scope.showUpdate=function(){
     $scope.showHotelDetail=true;
