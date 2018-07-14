@@ -667,7 +667,7 @@
 
                                                <table class="table table-hover">
                                                 
-                                                <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                                <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms ">
                                                   <tr ng-repeat="deal in rm.deals | limitTo:lim ">
                                                     <td><img src="[[deal.website.logo_image]]"></td>
                                                     <td ng-if="[[rm.room_type]]==1">Premium</td>
