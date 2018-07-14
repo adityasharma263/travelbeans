@@ -697,20 +697,24 @@ loadDeals=function(){
   }
   $scope.updateHotel=function(){
     $scope.hotelData=$scope.hotels;
-    $scope.amenitiesData.amenities=$scope.hotels.amenities;
-    $scope.amenitiesData.hotel_id=$scope.hotels.id;
+    
     delete $scope.hotelData.images;
     delete $scope.hotelData.rooms;
     delete $scope.hotelData.amenities;
     sendPutCall('/api/v1/hotel', $scope.hotelData);
-    sendPutCall('/api/v1/amenities', $scope.amenitiesData);
     
-    createToast("Hotel Updated!!!","green");
-
-
-
-
+    createToast("Hotel Detail Updated!!!","green");
   }
+  $scope.updateAmenities=function(){
+
+    $scope.amenitiesData.amenities=$scope.hotels.amenities;
+    $scope.amenitiesData.hotel_id=$scope.hotels.id;
+    sendPutCall('/api/v1/amenities', $scope.amenitiesData);
+    createToast("Hotel Amenities Updated!!!","green");
+  
+  }
+
+
   $http({
     method: 'GET',
     url: '/api/v1/hotel' 
