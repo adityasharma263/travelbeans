@@ -656,8 +656,8 @@ loadDeals=function(){
   $scope.amenitiesData={}; // hotel amenities for update
 
   $scope.showCreate=function(){
-    $scope.updateHotelDetail=false;
     $scope.hotelDetail=true;
+    $scope.showHotelDetail=false;
   }
   $scope.showUpdate=function(){
     $scope.showHotelDetail=true;
@@ -675,6 +675,7 @@ loadDeals=function(){
   }
   $scope.editHotel=function(data){
     $scope.hotels=data;
+    $scope.hotelAmenities=data.amenities
     $scope.hotelImages=data.images;
     $scope.hotelRooms=data.rooms;
     $scope.showRoomDetail=true;
@@ -682,6 +683,9 @@ loadDeals=function(){
     // $scope.Rooms=data;
 
 
+  }
+  $scope.editAmenities=function(){
+   console.log('scope.hotels',$scope.hotelAmenities); 
   }
   $scope.editImg=function(url,index){
     $scope.imageUrl=url;
@@ -708,7 +712,7 @@ loadDeals=function(){
   }
   $scope.updateAmenities=function(){
 
-    $scope.amenitiesData.amenities=$scope.hotels.amenities;
+    $scope.amenitiesData.amenities=$scope.hotelAmenities;
     $scope.amenitiesData.hotel_id=$scope.hotels.id;
     sendPutCall('/api/v1/amenities/'+$scope.amenitiesData.hotel_id, $scope.amenitiesData);
     createToast("Hotel Amenities Updated!!!","green");
