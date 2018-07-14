@@ -719,9 +719,9 @@ loadDeals=function(){
   
   }
   $scope.updateRoom=function(){
-    $scope.rooms.hotel_id=$scope.hotels.id;
+    $scope.rooms.room_id=$scope.$scope.rooms.id;
     delete $scope.rooms.deals
-    sendPutCall('/api/v1/room/'+$scope.rooms.hotel_id, $scope.rooms);
+    sendPutCall('/api/v1/rooms/'+$scope.rooms.room_id, $scope.rooms);
     createToast("Room Updated!!!","green");
   }
   $scope.updateDeal=function(){
