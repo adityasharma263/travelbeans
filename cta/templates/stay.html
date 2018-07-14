@@ -96,9 +96,9 @@
             
             <div class="main-header">
                 
-                <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                <!-- <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
                     Mobile Menu Toggle
-                </a>
+                </a> -->
 
                 <div class="container">
                     <!-- <h1 class="logo navbar-brand">
@@ -155,16 +155,16 @@
 
         </header>
         <section id="content">
-            <div class="search-box-wrapper" style="background-image:url('../static/images/hotelhome.jpg'); height: 250px; margin-top: 25px">
+            <div class="search-box-wrapper" style="background-image:url('../static/images/hotelhome.jpg'); height: 350px; margin-top: 25px">
                 <div class="search-box container">
                     
                     <div class="search-tab-content">
                         <div class='col-sm-6' id="hotels-tab">
                             
                             <form autocomplete="off" class='navbar-form'>
-                                    <div class='input-group'>
+                                    <div class='input-group' style="width:93%">
                                         <!-- <label for="destination"><button type="button"><strong>Search</strong></button> -->
-                                          <input class='form-control' id="destination" type="text" style="width:570px; margin-top:30px;" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
+                                          <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
                                           <span class="input-group-btn">
                                             <button type='submit' class='btn btn-default' ng-click="getHotel()">
                                               <span ><i class="fa fa-search" aria-hidden="true"></i></span>
@@ -176,7 +176,7 @@
                                     <!-- <button type="button" ng-click="getHotel()"><i class="fa fa-search" aria-hidden="true"></i></button> -->
                                     <div>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                         <table class="table table-hover " style="background-color:white">
 
                                                 <tbody>
@@ -279,7 +279,7 @@
                 </div>
             </div>
             
-            <div class="section" style="padding-top: 100px">
+            <div class="section" style="margin-top: 136px; background-color:#f5f5f5">
                 <div class="container">
 
                         <h2>Travelers Choice of Hotels</h2>
@@ -298,15 +298,15 @@
                                                 ₹[[hotel.deals[0].price]]
                                             </span>
                                             <h4 class="box-title">[[hotel.name]]<small>[[hotel.city]]</small></h4>
-                                            <div class="feedback">
+                                            <!-- <div class="feedback">
                                                 <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="4 stars"><span style="width: 80%;" class="five-stars"></span></div>
                                                 <span class="review">270 reviews</span>
-                                            </div>
+                                            </div> -->
                                             
-                                            <div class="action">
+                                            <!-- <div class="action">
                                                 <a class="button btn-small" href="[[hotel.deals[0].hotel_url]]">SELECT</a>
                                                 <a class="button btn-small yellow popup-map" href="http://www.soaptheme.net/html/travelo/hotel-index.html#" data-box="48.856614, 2.352222">VIEW ON MAP</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </article>
                                 </li>
