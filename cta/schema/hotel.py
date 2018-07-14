@@ -10,8 +10,7 @@ from cta.model.hotel import Deal
 from cta.model.hotel import Website
 from cta.model.hotel import Room
 from cta import ma
-import json
-import decimal
+
 
 class WebsiteSchema(ma.ModelSchema):
 
@@ -26,6 +25,7 @@ class DealSchema(ma.ModelSchema):
     class Meta:
         model = Deal
         exclude = ('updated_at', 'created_at')
+
 
 class AmenitySchema(ma.ModelSchema):
     class Meta:
