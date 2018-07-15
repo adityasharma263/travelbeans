@@ -7,6 +7,7 @@ py3env/
 /py3env/*
 db_dump/
 config.cfg
+.vscode/
 
 
 # OS generated files #
