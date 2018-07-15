@@ -38,4 +38,21 @@ def hotel_detail_id():
 def admin():
     return render_template('admin.html')    
 
+@app.route('/hotel/detail', methods=['GET'])
+def stay_id():
+    # hotel = Hotel.query.filter_by(id=id).first()
+    # if not hotel:
+        # return render_template('404.html'), 404
+    data = HotelSchema().dump(hotel).data
+    return render_template('staydetail.html', hotel=data)
 
+#======================== Restaurant Section ============================
+
+@app.route("/restaurant" , methods=['GET'])
+def restaurant():
+    return render_template("restaurant/Home Page With Chefs Recipies.html")
+
+
+@app.route("/restaurant/search" , methods=['GET'])
+def restaurant_search():
+    return render_template("restaurant/SERP Resturants.html")
