@@ -100,13 +100,14 @@ angular.module('comparetravel', ['angular.filter'])
 //  }
 }])
 
-.controller('staylistController',["$scope", "$http", function($scope, $http, $filter) {
+.controller('staylistController',["$scope", "$http", function($scope, $http) {
 
   $scope.room = {};
   $scope.cityid = {};
   $scope.id = [];
   $scope.hotel = {};
   $scope.limit= 10;
+  $scope.lim= 5;
   $scope.myVar= false;
   $scope.roomPrice={};
   $scope.roomobj={};
@@ -142,21 +143,217 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.imagesData=data;
     console.log("$scope.images",$scope.imagesData);
   }
+  $scope.openMap= function(data){
+    $scope.mapData=data;
+    console.log("$scope.mapData",$scope.mapData);
+    console.log("$scope.mapData.latitude",$scope.mapData.latitude);
+    $scope.myMap();
+  }
+  $scope.myMap = function () {
+    var mapOptions = {
+        center: new google.maps.LatLng($scope.mapData.latitude, $scope.mapData.longitude),
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.HYBRID
+    }
+  console.log("mapOptions",mapOptions);  
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+console.log("map",map);
+}
+
+  var showDivs=function(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    
+    var dots = document.getElementsByClassName("demo");
+
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].style.opacity = 0.5;
+      dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
+      dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+      dots[i].className = dots[i].className.replace(".image-carousel.style1 .slides", ".image-carousel.style1 .slidesactive");
+
+
+    }
+    dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
+    dots[slideIndex-1].style.opacity = 1;
+    
+    x[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += "w3-opacity-off";
+  }
+  var slideIndex = 1;
+  
+  var plusDivs=function(n) {
+      showDivs(slideIndex += n);
+  }
+  
+  $scope.currentDiv=function(n) {
+      showDivs(slideIndex = n);
+  }
+
+  //++++++++++++++++++++++++++++
+  var i=0;
+if(window.screen.availWidth >=440){
+  console.log(window.screen.availWidth);
+  $( ".flex-next" ).click(function() {
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
+    }
+  });
+  
+  $( ".flex-prev" ).click(function() {
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+}
+if(window.screen.availWidth <=440){
+  console.log(window.screen.availWidth);
+
+  $( ".flex-next" ).click(function() {
+    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==0)){
+  
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+  
+    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==1)){
+  
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 10) && (i==2)){
+  
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==3)){
+  
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==4)){
+  
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==5)){
+  
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==6)){
+  
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    if (($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)")) && ($scope.imagesData.images.length >= 20) && (i==7)){
+  
+      $(".demo").css("transform","translate3d(-2000px, 0px, 0px)");
+      i++;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      i=0;
+      return i;
+    }
+  });
+  
+  $( ".flex-prev" ).click(function() {
+  
+    if ($( ".demo" ).css( "transform","translate3d(-2000px, 0px, 0px)") && (i==7)){
+      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+  
+    if ($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)") && (i==6)){
+      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)") && (i==5)){
+      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)") && (i==4)){
+      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)") && (i==3)){
+      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)") && (i==2)){
+      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
+      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      i--;
+      return i;
+    } 
+    else {
+      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    }
+  });
+}
+
+//+++++++++++
   // loadMore function
 
   $scope.loadMore = function() {
     $scope.limit =   $scope.limit + 10;
   }
 
-  var closePopUp = function() {
-    $(".popAlertBox").css("top", "-110%");
+  $scope.loadmoredeals = function() {
+    $scope.lim =   $scope.lim + 5;
   }
 
-  $scope.openModal = function() {
-    $(".js-pop-deals").css("top", "50%");
-  };
 
-  $(".close-btn").click(closePopUp);
 
   $scope.showDetail=function(roomid){
     window.open('/hotel/detail?id='+roomid,'_self');
@@ -171,7 +368,7 @@ angular.module('comparetravel', ['angular.filter'])
       $scope.myVar = false;
     }
   }
-
+  
   $http({
     method: 'GET',
     url: '/api/v1/hotel'+document.location.search
@@ -182,26 +379,26 @@ angular.module('comparetravel', ['angular.filter'])
       console.log("key1",key1);
       $scope.hotelData = response.data.result.hotel;
       console.log("$scope.hotelData",$scope.hotelData);
-      $scope.city = $scope.hotelData[0].city;
       if(key1[0]=="name"){
-        console.log("123");
-        $http({
-          method: 'GET',
-          url: '/api/v1/hotel?city=' + $scope.city
-        }).then(function successCallback(response) {
-      
-            $scope.newhotels = response.data.result.hotel;
-            console.log("$scope.newhotels",$scope.newhotels);
-            for(var j=0;j<$scope.newhotels.length;j++){
-              $scope.hotelData.push($scope.newhotels[j]);
-            }
-            console.log("new",$scope.hotelData);
-          }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        })
+          console.log("123");
+          $scope.city = $scope.hotelData[0].city;
+          $http({
+            method: 'GET',
+            url: '/api/v1/hotel?city=' + $scope.city
+          }).then(function successCallback(response) {
         
-      }
+              $scope.newhotels = response.data.result.hotel;
+              console.log("$scope.newhotels",$scope.newhotels);
+              for(var j=0;j<$scope.newhotels.length;j++){
+                $scope.hotelData.push($scope.newhotels[j]);
+              }
+              console.log("new",$scope.hotelData);
+            }, function errorCallback(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+          })
+          
+        }
       for(var j=0;j<$scope.hotelData.length;j++){
         $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
       }
@@ -231,6 +428,67 @@ angular.module('comparetravel', ['angular.filter'])
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
+
+  // $http({
+  //   method: 'GET',
+  //   url: '/api/v1/hotel'+document.location.search
+  // }).then(function successCallback(response) {
+  //     var str = document.location.search;
+  //     var key = str.split("?");
+  //     var key1 = key[1].split("=");
+  //     console.log("key1",key1);
+  //     $scope.hotelData = response.data.result.hotel;
+  //     console.log("$scope.hotelData",$scope.hotelData);
+      
+  //     if(key1[0]=="name"){
+  //       console.log("123");
+  //       $scope.city = $scope.hotelData[0].city;
+  //       $http({
+  //         method: 'GET',
+  //         url: '/api/v1/hotel?city=' + $scope.city
+  //       }).then(function successCallback(response) {
+      
+  //           $scope.newhotels = response.data.result.hotel;
+  //           console.log("$scope.newhotels",$scope.newhotels);
+  //           for(var j=0;j<$scope.newhotels.length;j++){
+  //             $scope.hotelData.push($scope.newhotels[j]);
+  //           }
+  //           console.log("new",$scope.hotelData);
+  //         }, function errorCallback(response) {
+  //           // called asynchronously if an error occurs
+  //           // or server returns response with an error status.
+  //       })
+        
+  //     }
+  //     for(var j=0;j<$scope.hotelData.length;j++){
+  //       $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
+  //     }
+  //     console.log("$scope.cityid",$scope.cityid);
+  //     loadRoom();
+
+  //     // $scope.room.check_in = Date.parse($scope.room.check_in)/1000;
+  //     // console.log(" $scope.room.check_in ", $scope.room.check_in );
+  //     // $scope.room.check_out = Date.parse($scope.room.check_out)/1000;
+
+  //     // $http({
+  //     //   method: 'GET',
+  //     //   url: '/api/v1/room?check_in=' + $scope.room.check_in + '&check_out=' + $scope.room.check_out
+  //     // }).then(function successCallback(response) {
+  //     //     $scope.rooms = response.data.result.hotel;
+  //     //     console.log("$scope.rooms",$scope.rooms);
+  //     //     for(var j=0;j<$scope.rooms.length;j++){
+  //     //         $scope.id[j] = $scope.rooms[j].hotel_id;
+  //     //     }
+  //     //     console.log("id",$scope.id);
+  //     //   }, function errorCallback(response) {
+  //     //     // called asynchronously if an error occurs
+  //     //     // or server returns response with an error status.
+  //     // })
+
+  //   }, function errorCallback(response) {
+  //     // called asynchronously if an error occurs
+  //     // or server returns response with an error status.
+  // })
 var loadRoom=function(){
   $http({
     method: 'GET',
@@ -253,7 +511,6 @@ var loadRoom=function(){
   
 
   $scope.getHotelRating = function(){
-    
     console.log("$$scope.hotel.rating",$scope.hotel.rating);
 
     $http({
@@ -290,7 +547,7 @@ loadDeals=function(){
   })
 }
  var loadPrice=function(){
-   $scope.hotelData=[];
+  $scope.hotelData=[];
   $scope.deals=[];
   $http({
     method: 'GET',
@@ -349,6 +606,12 @@ loadDeals=function(){
   $scope.checkErr = function(){
     $scope.errMessage = '';
     $scope.curDate = new Date();
+
+    var check_in = $scope.hotel.check_in;
+    console.log("check in",check_in);
+    if($scope.hotel.check_in == undefined){
+       $scope.hotel.check_in = check_in;
+    }
     
     if(new Date($scope.hotel.check_in) > new Date($scope.hotel.check_out)){
       $scope.errMessage = 'End Date should be greater than start date';
@@ -362,7 +625,7 @@ loadDeals=function(){
   }
 
   $scope.getHotelweek = function(){
-    
+   
     $scope.hotel.check_in = Date.parse($scope.hotel.check_in)/1000;
     $scope.hotel.check_out = Date.parse($scope.hotel.check_out)/1000;
     console.log("$scope.hotel.check_in",$scope.hotel.check_in);
@@ -400,15 +663,131 @@ loadDeals=function(){
   $scope.hotelDeals = []; // for all deals array
   $scope.room={}; //for one room
   $scope.hotelRooms=[]; // for all room array
-  $scope.showRoom=false;
+  $scope.showHotelDetail=false;
+  $scope.showRoomDetail=false;
+  $scope.roomDetail=false;
+  $scope.hotelDetail=true;
+  $scope.updateRoomDetail=false;
+  $scope.UpdateImages={}; //image data for update
+  $scope.hotelData={}; // hotel data for update 
+  $scope.amenitiesData={}; // hotel amenities for update
 
-  $scope.hideRoom=function(){
-    delete $scope.room.default_room_type;
-    $scope.showRoom=false;
+  $scope.showCreate=function(){
+    $scope.hotelDetail=true;
+    $scope.showHotelDetail=false;
   }
-  $scope.showDefaultRoom=function(){
-    $scope.showRoom=true;
+  $scope.showUpdate=function(){
+    $scope.showHotelDetail=true;
+    $scope.hotelDetail=false;
+    $scope.showRoomDetail=false;
   }
+  
+  $scope.editRoomsData=function(data){
+    $scope.rooms=data;
+    $scope.facilities=data.facilities;
+    $scope.member=data.member;
+    $scope.roomDeals=data.deals;
+    $scope.updateRoomDetail=true;
+    $scope.showRoomDetail=false;
+
+  }
+  $scope.gotoHotelDetail=function(){
+    $scope.updateRoomDetail=false;
+    $scope.showRoomDetail=true;
+  }
+  $scope.editDealData=function(data){
+    $scope.deal=data;
+  }
+  $scope.editHotel=function(data){
+    $scope.hotels=data;
+    $scope.hotelAmenities=data.amenities;
+    $scope.hotelImages=data.images;
+    $scope.hotelRooms=data.rooms;
+    $scope.showRoomDetail=true;
+    $scope.showHotelDetail=false;
+    // $scope.Rooms=data;
+
+
+  }
+  $scope.editAmenities=function(){
+   console.log('scope.hotels',$scope.hotelAmenities); 
+  }
+  $scope.editImg=function(data,index){
+    $scope.imageData=data;
+    // $scope.imagedata=data.id;
+    $scope.imgIndex=index;
+
+  }
+  $scope.updateImage=function(){
+    
+    $scope.hotelImages[$scope.imgIndex].image_url=$scope.imageData.image_url;
+    $scope.imageData.hotel_id=$scope.hotels.id;
+    sendPutCall('/api/v1/image/'+$scope.imageData.id, $scope.imageData);
+    createToast("Image Updated!!!","green");
+  }
+  $scope.updateHotel=function(){
+    $scope.hotelData=$scope.hotels;
+    
+    delete $scope.hotelData.images;
+    delete $scope.hotelData.rooms;
+    delete $scope.hotelData.amenities;
+    sendPutCall('/api/v1/hotel/'+$scope.hotelData.id, $scope.hotelData);
+    createToast("Hotel Detail Updated!!!","green");
+  }
+  $scope.updateAmenities=function(){
+    $scope.hotelAmenities.hotel_id=$scope.hotels.id;
+    sendPutCall('/api/v1/amenity/'+$scope.hotelAmenities.id, $scope.hotelAmenities);
+    createToast("Hotel Amenities Updated!!!","green");
+  
+  }
+  $scope.updateRoom=function(){
+    $scope.rooms.hotel_id=$scope.hotels.id;
+    delete $scope.rooms.member;
+    delete $scope.rooms.check_in;
+    delete $scope.rooms.check_out;
+    delete $scope.rooms.facilities;
+    delete $scope.rooms.deals;
+    delete $scope.rooms.hotel;
+    sendPutCall('/api/v1/room/'+$scope.rooms.id, $scope.rooms);
+    createToast("Room Updated!!!","green");
+  }
+  $scope.updateFacilities=function(){
+    $scope.facilities.room_id=$scope.rooms.id;
+    delete $scope.facilities.room;
+    sendPutCall('/api/v1/facility/'+$scope.facilities.id, $scope.facilities);
+    createToast("Facilities Updated!!!","green");
+  }
+  $scope.updateMembers=function(){
+    $scope.member.room_id=$scope.rooms.id;
+    delete $scope.member.room;
+    sendPutCall('/api/v1/member/'+$scope.member.id, $scope.member);
+    createToast("Members Updated!!!","green");
+  }
+  $scope.updateDeal=function(){
+
+    $scope.deal.room_id=$scope.rooms.id;
+    delete $scope.deal.room;
+    delete $scope.deal.website;
+
+    console.log('$scope.deal',$scope.deal);
+    sendPutCall('/api/v1/deal/'+$scope.deal.id, $scope.deal);
+    createToast("Deal Updated!!!","green");
+    
+  }
+
+
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel' 
+  }).then(function successCallback(response) {
+      // hotelData = response.data.result;
+      $scope.hotelsData = response.data.result.hotel;
+      // this callback will be called asynchronously
+      // when the response is available
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
   $http({
     method: 'GET',
     url: '/api/v1/website' 
@@ -453,6 +832,25 @@ loadDeals=function(){
     
     $http({
       method: 'POST',
+      url: url,
+      data: data
+    }).then(function (res) {
+      console.log(res);
+      
+      // createToast("'hotel successfully created!!!'","green");
+
+      },
+      // failed callback
+      function (req) {
+        createToast("'Something went wrong!!!'","red");
+      })
+    
+  }
+  var sendPutCall = function(url, data) {
+    console.log(data);
+    
+    $http({
+      method: 'PUT',
       url: url,
       data: data
     }).then(function (res) {
@@ -520,6 +918,8 @@ var createToast=function(msg, color){
 }
 $scope.createHotel = function() {
   // e.preventDefault()
+  $scope.hotelDetail=false;
+  $scope.roomDetail=true;
 
   $scope.hotelImg.push($scope.images);
   $scope.hotel.images=$scope.hotelImg;
