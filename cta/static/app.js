@@ -139,10 +139,15 @@ angular.module('comparetravel', ['angular.filter'])
   //  span.onclick = function() { 
   //      modal.style.display = "none";
   //  }
+
+  //for image pop up
   $scope.openGallery= function(data){
     $scope.imagesData=data;
     console.log("$scope.images",$scope.imagesData);
   }
+
+  //for map pop up
+
   $scope.openMap= function(data){
     $scope.mapData=data;
     console.log("$scope.mapData",$scope.mapData);
@@ -159,6 +164,8 @@ angular.module('comparetravel', ['angular.filter'])
 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 console.log("map",map);
 }
+
+//slide images
 
   var showDivs=function(n) {
     var i;
@@ -354,12 +361,13 @@ if(window.screen.availWidth <=440){
   }
 
 
-
+//for detail page
   $scope.showDetail=function(roomid){
     window.open('/hotel/detail?id='+roomid,'_self');
     
   }
 
+//for more deals tab  
   $scope.show = function() {
     if($scope.myVar==false){
       $scope.myVar = true;
@@ -380,7 +388,6 @@ if(window.screen.availWidth <=440){
       $scope.hotelData = response.data.result.hotel;
       console.log("$scope.hotelData",$scope.hotelData);
       if(key1[0]=="name"){
-          console.log("123");
           $scope.city = $scope.hotelData[0].city;
           $http({
             method: 'GET',
@@ -404,91 +411,11 @@ if(window.screen.availWidth <=440){
       }
       console.log("$scope.cityid",$scope.cityid);
       loadRoom();
-
-      // $scope.room.check_in = Date.parse($scope.room.check_in)/1000;
-      // console.log(" $scope.room.check_in ", $scope.room.check_in );
-      // $scope.room.check_out = Date.parse($scope.room.check_out)/1000;
-
-      // $http({
-      //   method: 'GET',
-      //   url: '/api/v1/room?check_in=' + $scope.room.check_in + '&check_out=' + $scope.room.check_out
-      // }).then(function successCallback(response) {
-      //     $scope.rooms = response.data.result.hotel;
-      //     console.log("$scope.rooms",$scope.rooms);
-      //     for(var j=0;j<$scope.rooms.length;j++){
-      //         $scope.id[j] = $scope.rooms[j].hotel_id;
-      //     }
-      //     console.log("id",$scope.id);
-      //   }, function errorCallback(response) {
-      //     // called asynchronously if an error occurs
-      //     // or server returns response with an error status.
-      // })
-
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   })
 
-  // $http({
-  //   method: 'GET',
-  //   url: '/api/v1/hotel'+document.location.search
-  // }).then(function successCallback(response) {
-  //     var str = document.location.search;
-  //     var key = str.split("?");
-  //     var key1 = key[1].split("=");
-  //     console.log("key1",key1);
-  //     $scope.hotelData = response.data.result.hotel;
-  //     console.log("$scope.hotelData",$scope.hotelData);
-      
-  //     if(key1[0]=="name"){
-  //       console.log("123");
-  //       $scope.city = $scope.hotelData[0].city;
-  //       $http({
-  //         method: 'GET',
-  //         url: '/api/v1/hotel?city=' + $scope.city
-  //       }).then(function successCallback(response) {
-      
-  //           $scope.newhotels = response.data.result.hotel;
-  //           console.log("$scope.newhotels",$scope.newhotels);
-  //           for(var j=0;j<$scope.newhotels.length;j++){
-  //             $scope.hotelData.push($scope.newhotels[j]);
-  //           }
-  //           console.log("new",$scope.hotelData);
-  //         }, function errorCallback(response) {
-  //           // called asynchronously if an error occurs
-  //           // or server returns response with an error status.
-  //       })
-        
-  //     }
-  //     for(var j=0;j<$scope.hotelData.length;j++){
-  //       $scope.cityid[$scope.hotelData[j].id]= $scope.hotelData[j];
-  //     }
-  //     console.log("$scope.cityid",$scope.cityid);
-  //     loadRoom();
-
-  //     // $scope.room.check_in = Date.parse($scope.room.check_in)/1000;
-  //     // console.log(" $scope.room.check_in ", $scope.room.check_in );
-  //     // $scope.room.check_out = Date.parse($scope.room.check_out)/1000;
-
-  //     // $http({
-  //     //   method: 'GET',
-  //     //   url: '/api/v1/room?check_in=' + $scope.room.check_in + '&check_out=' + $scope.room.check_out
-  //     // }).then(function successCallback(response) {
-  //     //     $scope.rooms = response.data.result.hotel;
-  //     //     console.log("$scope.rooms",$scope.rooms);
-  //     //     for(var j=0;j<$scope.rooms.length;j++){
-  //     //         $scope.id[j] = $scope.rooms[j].hotel_id;
-  //     //     }
-  //     //     console.log("id",$scope.id);
-  //     //   }, function errorCallback(response) {
-  //     //     // called asynchronously if an error occurs
-  //     //     // or server returns response with an error status.
-  //     // })
-
-  //   }, function errorCallback(response) {
-  //     // called asynchronously if an error occurs
-  //     // or server returns response with an error status.
-  // })
 var loadRoom=function(){
   $http({
     method: 'GET',
@@ -507,26 +434,6 @@ var loadRoom=function(){
       // or server returns response with an error status.
   })
 }
-
-  
-
-  $scope.getHotelRating = function(){
-    console.log("$$scope.hotel.rating",$scope.hotel.rating);
-
-    $http({
-      method: 'GET',
-      url: '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
-    }).then(function successCallback(response) {
-        $scope.hotelData = response.data.result.hotel;
-        console.log("$scope.hotelData",$scope.hotelData);
-        // this callback will be called asynchronously
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
-
-  }
   
 loadDeals=function(){
   $http({
@@ -650,6 +557,46 @@ loadDeals=function(){
         // or server returns response with an error status.
     })
     
+  }
+
+  $scope.getHotelRating = function(){
+    console.log("$$scope.hotel.rating",$scope.hotel.rating);
+    $scope.hotelData=[];
+    $scope.deals=[];
+
+    $http({
+      method: 'GET',
+      url: '/api/v1/hotel' + document.location.search + '&rating=' + $scope.hotel.rating
+    }).then(function successCallback(response) {
+        $scope.hotelData = response.data.result.hotel;
+        console.log("$scope.hotelData",$scope.hotelData);
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+
+  }
+
+  $scope.getHotelStar = function(){
+    console.log("$$scope.hotel.star",$scope.hotel.star);
+    $scope.hotelData=[];
+    $scope.deals=[];
+
+    $http({
+      method: 'GET',
+      url: '/api/v1/hotel' + document.location.search + '&star=' + $scope.hotel.star
+    }).then(function successCallback(response) {
+        $scope.hotelData = response.data.result.hotel;
+        console.log("$scope.hotelData",$scope.hotelData);
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+
   }
 
 
