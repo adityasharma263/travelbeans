@@ -2,28 +2,31 @@
 __author__ = 'aditya'
 
 from cta import app
-from flask import render_template
+from flask import render_template, request
+import requests
 
 
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
-########## HOTEL
+
+#======================== HOTEL ============================
+
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
-    return render_template('stay.html')
+    return render_template('hotel.html')
 
 
 @app.route('/hotel/list', methods=['GET'])
 def hotel_list():
-    return render_template('stay_list.html')
+    return render_template('hotel_list.html')
 
 
-@app.route('/hotel/detail/<int:id>', methods=['GET'])
-def hotel_detail(id):
-    return render_template('stay_detail.html')
+@app.route('/hotel/<hotel_id>', methods=['GET'])
+def hotel_detail(hotel_id):
+    return render_template('hotel_detail.html')
 
 
 @app.route('/admin/hotel', methods=['GET'])
@@ -31,3 +34,24 @@ def admin():
     return render_template('admin_hotel.html')
 
 
+#======================== RESTAURANT ============================
+
+
+@app.route("/restaurant", methods=['GET'])
+def restaurant():
+    return render_template("restaurant/restaurant.html")
+
+
+@app.route("/restaurant/search", methods=['GET'])
+def restaurant_search():
+    restaurant_api_url = str(app.config["SERVER_HOST"]) + ":" + str(app.config["SERVER_PORT"]) + "api/v1/restaurant"
+    args = request.args.to_dict()
+    restaurant_data = requests.get(url=restaurant_api_url, params=args).json()
+    return render_template("restaurant/restaurant_search.html", restaurant_detail=restaurant_data)
+
+
+@app.route("/restaurant/<restaurant_id>")
+def restaurant_detail(restaurant_id):
+    restaurant_api_url = str(app.config["SERVER_HOST"]) + ":" + str(app.config["SERVER_PORT"]) + "api/v1/restaurant"
+    restaurant_data = requests.get(url=restaurant_api_url, params={id: restaurant_id}).json()
+    return render_template("restaurant/restaurant_detail.html", restaurant_detail=restaurant_data)
