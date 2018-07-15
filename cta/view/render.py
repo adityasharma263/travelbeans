@@ -55,8 +55,8 @@ def restaurant():
 
 @app.route("/restaurant/search" , methods=['GET'])
 def restaurant_search():
-    restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant"
-    restaurant_filter = {}
+    restaurant_api_url = "http://localhost:5001/api/v1/restaurant"
+    restaurant_filter = request.args
     # fetching restaurent data from api
     restaurant_request = requests.get(url=restaurant_api_url, params=restaurant_filter)
     # get json data from the api
@@ -67,5 +67,8 @@ def restaurant_search():
 
 @app.route("/restaurant/<restaurant_id>")
 def restaurant_details(restaurant_id):
+    single_restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant?id="+restaurant_id
+    
+
 
     return ""
