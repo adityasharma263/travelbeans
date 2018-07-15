@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://www.soaptheme.net/html/travelo/hotel-index.html -->
-<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Page Title -->
     <title>Trip key</title>
     <style>
@@ -143,8 +145,7 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="/css/responsive.css">
     
@@ -254,7 +255,9 @@
                                     </div>
                                 </div>
                             </li>
-                            
+                        </ul>
+                    </nav>        
+                </div>            
             </div>
         </header>
         <div class="page-title-container">
@@ -273,7 +276,6 @@
                 <div id="main">
                     <div class="row">
                         <div class="col-sm-4 col-md-3">
-                            <!-- <h4 class="search-results-title"><i class="soap-icon-search"></i></h4> -->
                             <div class="toggle-container filters-container">
                                 <div class="panel style1 arrow-right">
                                         <button class="btn-medium icon-check uppercase full-width" ng-click="hotel = {}">Clear filter</button> 
@@ -310,25 +312,12 @@
                                     <div id="price-filter" class="panel-collapse collapse">
                                         <div class="panel-content">
 
-                                                <!-- <form>
-                                                    <div data-role="rangeslider">
-                                                      <label for="price-min">Min Price:</label>
-                                                      <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                                                      <label for="price-max">Max Price:</label>
-                                                      <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
-                                                    </div>
-                                                      <input type="submit" data-inline="true" value="Submit">
-                                                </form> -->
-
                                             <div class="form-group">
                                                 <div >
                                                         <label>Max Price:</label>
                                                         <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.end_price" >
                                                         <p>Value: <span>[[hotel.end_price]]</span></p>
-                                                <!-- <label>Start Price</label>
-                                                    <input type="number" ng-model="hotel.start_price">
-                                                <label>End Price</label>
-                                                    <input type="number" ng-model="hotel.end_price"> -->
+                                             
                                                 </div>    
                                             </div>
                                             <br>
@@ -373,19 +362,19 @@
                                             <div class="panel-content">
                                                 <div class="form-group">
                                                     <label>1<i class="fa fa-star" aria-hidden="true"></i>
-                                                        <input id="star1" type="radio" name="star" value="1" ng-model="hotel.star"/>
+                                                        <input id="star1" type="radio" name="star" value="1" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                     </label>
                                                     <br>
                                                     <label>3<i class="fa fa-star" aria-hidden="true"></i>
-                                                        <input id="star2" type="radio" name="star" value="3" ng-model="hotel.star"/>
+                                                        <input id="star2" type="radio" name="star" value="3" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                     </label>
                                                     <br>
                                                     <label>5<i class="fa fa-star" aria-hidden="true"></i>
-                                                        <input id="star3" type="radio" name="star" value="5" ng-model="hotel.star"/>
+                                                        <input id="star3" type="radio" name="star" value="5" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                     </label>
                                                     <br>
                                                     <label>7<i class="fa fa-star" aria-hidden="true"></i>
-                                                        <input id="star4" type="radio" name="star" value="7" ng-model="hotel.star"/>
+                                                        <input id="star4" type="radio" name="star" value="7" ng-click="getHotelStar()" ng-model="hotel.star"/>
                                                     </label>
                                                 </div>
                                             </div>
