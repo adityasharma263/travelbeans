@@ -46,6 +46,7 @@ def stay_id():
     data = HotelSchema().dump(hotel).data
     return render_template('staydetail.html', hotel=data)
 
+#======================== Restaurant Section ============================
 
 @app.route("/restaurant" , methods=['GET'])
 def restaurant():
