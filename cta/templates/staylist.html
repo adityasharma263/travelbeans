@@ -402,7 +402,7 @@
                                 <h4 class="sort-by-title block-sm">Search results by:</h4>
                                 <p><input class="input-text full-width" type="text" ng-model="hotel" placeholder="search by keyword"></p>
                             </div>
-                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData| filter:hotel | limitTo:limit">
+                            <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData">
                                 <div ng-repeat="room in hotel.rooms">
                                 <!-- <div ng-if="[[room.room_type]]==1 && ![[room.breakfast]]"> -->
                                             
