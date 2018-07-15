@@ -16,22 +16,22 @@ def home():
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
-    return render_template('hotel.html')
+    return render_template('hotel/hotel.html')
 
 
 @app.route('/hotel/list', methods=['GET'])
 def hotel_list():
-    return render_template('hotel_list.html')
+    return render_template('hotel/hotel_list.html')
 
 
 @app.route('/hotel/<hotel_id>', methods=['GET'])
 def hotel_detail(hotel_id):
-    return render_template('hotel_detail.html')
+    return render_template('hotel/hotel_detail.html')
 
 
 @app.route('/admin/hotel', methods=['GET'])
 def admin():
-    return render_template('admin_hotel.html')
+    return render_template('hotel/admin_hotel.html')
 
 
 #======================== RESTAURANT ============================
