@@ -5,7 +5,7 @@ from cta.model.hotel import Hotel
 from cta import app
 from cta.schema.hotel import HotelSchema
 from flask import request, render_template
-
+import requests
 
 @app.route('/', methods=['GET'])
 def home():
@@ -55,4 +55,8 @@ def restaurant():
 
 @app.route("/restaurant/search" , methods=['GET'])
 def restaurant_search():
-    return render_template("restaurant/SERP Resturants.html")
+    restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant"
+    restaurant_filter = {}
+    restaurant_request = requests.get(url=restaurant_api_url, params=restaurant_filter)
+    restaurant_data = restaurant_request.json()
+    return render_template("restaurant/SERP Resturants.html", restaurant_details=restaurant_data)

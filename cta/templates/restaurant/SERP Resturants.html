@@ -877,6 +877,31 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="block">
+                        <div class="row image-box style10">
+
+                            {% for restaurant in restaurant_details.result.restaurants %}
+                            <div class="col-md-4">
+                                <article class="box">
+                                    <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
+                                        <a class="hover-effect" title="" href=""><img width="370" height="132" alt="" src="{{restaurant['images'][0]['image_url'] }}"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <a href="#" class="button">MORE</a>
+                                        <h4 class="box-title">{{ restaurant.name }}<br><small>{{ restaurant.city }}</small></h4>
+                                    </div>
+                                </article>
+                            </div>
+
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+
+
+
 				
 			
         </section>
