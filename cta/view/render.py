@@ -57,6 +57,15 @@ def restaurant():
 def restaurant_search():
     restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant"
     restaurant_filter = {}
+    # fetching restaurent data from api
     restaurant_request = requests.get(url=restaurant_api_url, params=restaurant_filter)
+    # get json data from the api
     restaurant_data = restaurant_request.json()
+    #render jinja template and pass restaurant_data as restaurant_details and acccess with in the template
+    # we can access restaurant data as restaurant_details
     return render_template("restaurant/SERP Resturants.html", restaurant_details=restaurant_data)
+
+@app.route("/restaurant/<restaurant_id>")
+def restaurant_details(restaurant_id):
+
+    return ""
