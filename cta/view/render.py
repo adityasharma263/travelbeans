@@ -9,26 +9,12 @@ from flask import request, jsonify, render_template
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
-    args = request.args.to_dict()
-    args.pop('page', None)
-    args.pop('per_page', None)
-    per_page = int(request.args.get('per_page', 10))
-    page = int(request.args.get('page', 1))
-    hotel = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-    data = HotelSchema(many=True).dump(hotel)
-    return render_template('stay.html',hotel=data,per_page=per_page,page=page)
+    return render_template('stay.html')
 
 
 @app.route('/hotel/list', methods=['GET'])
 def hlist():
-    args = request.args.to_dict()
-    args.pop('page', None)
-    args.pop('per_page', None)
-    per_page = int(request.args.get('per_page', 10))
-    page = int(request.args.get('page', 1))
-    hotel = Hotel.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-    data = HotelSchema(many=True).dump(hotel)
-    return render_template('staylist.html',hotel=data,per_page=per_page,page=page)    
+    return render_template('staylist.html')
 
 
 @app.route('/', methods=['GET'])
