@@ -1,11 +1,15 @@
 #-*- coding: utf-8 -*-
 __author__ = 'aditya'
 
-from cta.model.hotel import Hotel
 from cta import app
-from cta.schema.hotel import HotelSchema
-from flask import request, jsonify, render_template
+from flask import render_template
 
+
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html')
+
+########## HOTEL
 
 @app.route('/hotel', methods=['GET'])
 def hotel():
@@ -13,24 +17,17 @@ def hotel():
 
 
 @app.route('/hotel/list', methods=['GET'])
-def hlist():
-    return render_template('staylist.html')
+def hotel_list():
+    return render_template('stay_list.html')
 
 
-@app.route('/', methods=['GET'])
-def home():
-    return render_template('index.html')
+@app.route('/hotel/detail/<int:id>', methods=['GET'])
+def hotel_detail(id):
+    return render_template('stay_detail.html')
 
 
-@app.route('/admin', methods=['GET'])
+@app.route('/admin/hotel', methods=['GET'])
 def admin():
-    return render_template('admin.html')    
+    return render_template('admin_hotel.html')
 
 
-@app.route('/hotel/detail/<string:name>', methods=['GET'])
-def stay_id(name):
-    hotel = Hotel.query.filter_by(name=name).first()
-    if not hotel:
-        return render_template('404.html'), 404
-    data = HotelSchema().dump(hotel).data
-    return render_template('staydetail.html', hotel=data)

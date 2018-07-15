@@ -6,8 +6,9 @@ flask-marshmallow==0.8.0
 Flask-Migrate==2.0.4
 Flask-SQLAlchemy==1.0
 BeautifulSoup4==4.6.0
-psycopg2==2.6.2
 SQLAlchemy==1.0.13
 marshmallow-sqlalchemy==0.13.1
 numpy==1.13.1
 simplejson==3.16.0
+xlrd==1.1.0
+psycopg2>=2.6.2

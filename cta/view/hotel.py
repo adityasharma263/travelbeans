@@ -2,6 +2,7 @@
 
 from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room
 from cta import app
+from sqlalchemy import or_
 from flask import jsonify, request
 from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
 import datetime
@@ -81,6 +82,24 @@ def hotel_api():
                 }
                 Image(**image_obj).save()
         return jsonify({'result': {'hotel': hotel_result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/hotel/<int:id>', methods=['PUT', 'DELETE'])
+def hotel_id(id):
+    if request.method == 'PUT':
+        print(request.json)
+        put = Hotel.query.filter_by(id=id).update(request.json)
+        if put:
+            Hotel.update_db()
+            hotels = Hotel.query.filter_by(id=id).first()
+            result = RoomSchema(many=False).dump(hotels)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        hotel = Hotel.query.filter_by(id=id).first()
+        if not hotel:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        hotel.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
 
 
 @app.route('/api/v1/room', methods=['GET', 'POST'])
@@ -164,6 +183,23 @@ def room_api():
         return jsonify({'result': {'room': request.json}, 'message': "Success", 'error': False})
 
 
+@app.route('/api/v1/room/<int:id>', methods=['PUT', 'DELETE'])
+def room_id(id):
+    if request.method == 'PUT':
+        put = Room.query.filter_by(id=id).update(request.json)
+        if put:
+            Room.update_db()
+            s = Room.query.filter_by(id=id).first()
+            result = RoomSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        rooms = Room.query.filter_by(id=id).first()
+        if not rooms:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        Room.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+
+
 @app.route('/api/v1/amenity', methods=['GET', 'POST'])
 def amenity_api():
     if request.method == 'GET':
@@ -180,6 +216,24 @@ def amenity_api():
         post.save()
         result = AmenitySchema().dump(post)
         return jsonify({'result': {'amenities': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/amenity/<int:id>', methods=['PUT', 'DELETE'])
+def amenity_id(id):
+    if request.method == 'PUT':
+        put = Amenity.query.filter_by(id=id).update(request.json)
+        if put:
+            Amenity.update_db()
+            s = Amenity.query.filter_by(id=id).first()
+            result = AmenitySchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        amenities= Amenity.query.filter_by(id=id).first()
+        if not amenities:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        Amenity.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+
 
 
 @app.route('/api/v1/images', methods=['GET', 'POST'])
@@ -200,6 +254,23 @@ def image_api():
         return jsonify({'result': {'image': result.data}, 'message': "Success", 'error': False})
 
 
+@app.route('/api/v1/image/<int:id>', methods=['PUT', 'DELETE'])
+def image_id(id):
+    if request.method == 'PUT':
+        put = Image.query.filter_by(id=id).update(request.json)
+        if put:
+            Image.update_db()
+            s = Image.query.filter_by(id=id).first()
+            result = ImageSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        images = Image.query.filter_by(id=id).first()
+        if not images:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        Image.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+
+
 @app.route('/api/v1/member', methods=['GET', 'POST'])
 def member_api():
     if request.method == 'GET':
@@ -217,6 +288,22 @@ def member_api():
         result = MemberSchema().dump(post)
         return jsonify({'result': {'member': result.data}, 'message': "Success", 'error': False})
 
+
+@app.route('/api/v1/member/<int:id>', methods=['PUT', 'DELETE'])
+def member_id(id):
+    if request.method == 'PUT':
+        put = Member.query.filter_by(id=id).update(request.json)
+        if put:
+            Member.update_db()
+            s = Member.query.filter_by(id=id).first()
+            result = MemberSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        members = Member.query.filter_by(id=id).first()
+        if not members:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        Member.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
 
 @app.route('/api/v1/facility', methods=['GET', 'POST'])
 def facility_api():
@@ -236,6 +323,24 @@ def facility_api():
         return jsonify({'result': {'facilities': result.data}, 'message': "Success", 'error': False})
 
 
+@app.route('/api/v1/facility/<int:id>', methods=['PUT', 'DELETE'])
+def facility_id(id):
+    if request.method == 'PUT':
+        print(request.json)
+        put = Facility.query.filter_by(id=id).update(request.json)
+        if put:
+            Facility.update_db()
+            s = Facility.query.filter_by(id=id).first()
+            result = FacilitySchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        data = Facility.query.filter_by(id=id).first()
+        if not data:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        Facility.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+
+
 @app.route('/api/v1/website', methods=['GET', 'POST'])
 def website_api():
     if request.method == 'GET':
@@ -244,7 +349,7 @@ def website_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        web = Website.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        web = Website.query.filter_by(**args).all()
         result = WebsiteSchema(many=True).dump(web)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
     else:
@@ -288,27 +393,64 @@ def deal_api():
                     start = True
                     days.append(val)
             for day in days:
-                if day == 5 or 6:
+                if day == 5:
+                    weekend = True
+                elif day == 6:
                     weekend = True
             args['weekend'] = weekend
         args.pop('page', None)
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
+        # page = int(request.args.get('page', 1))
+        # per_page = int(request.args.get('per_page', 10))
         if price_start and price_end:
             price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
-            price = Deal.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+            price = Deal.query.filter_by(**args).all()
         result = DealSchema(many=True).dump(price)
         if no_of_days >= 1:
             for deal in result.data:
-                deal['price'] = deal["price"] * no_of_days
+                if deal['price']:
+                    deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
         post.save()
         result = DealSchema().dump(post)
         return jsonify({'result': {'deal': result.data}, 'message': 'Success', 'error': False})
+
+
+@app.route('/api/v1/deal/<int:id>', methods=['PUT', 'DELETE'])
+def deal_id(id):
+    if request.method == 'PUT':
+        put = Deal.query.filter_by(id=id).update(request.json)
+        if put:
+            Deal.update_db()
+            data = Deal.query.filter_by(id=id).first()
+            result = DealSchema(many=False).dump(data)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        data = Deal.query.filter_by(id=id).first()
+        if not data:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
+        Deal.commit()
+        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+
+
+@app.route('/hotel/search', methods=['GET', 'POST'])
+def hotel_search():
+    search = request.json
+    search = search['search']
+    cities = []
+    names = []
+    hotel_cities = Hotel.query.filter(Hotel.city.like('%' + search + '%')).order_by(Hotel.city).all()
+    for hotel_city in hotel_cities:
+        cities.append(hotel_city.city)
+    hotel_names = Hotel.query.filter(Hotel.name.like('%' + search + '%')).order_by(Hotel.name).all()
+    for hotel_name in hotel_names:
+        names.append(hotel_name.name)
+    cities = list(set(cities))
+    names = list(set(names))
+    return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})
