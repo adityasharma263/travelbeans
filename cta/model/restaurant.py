@@ -104,7 +104,7 @@ class Tag(Base):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<category %r>' % self.category
+        return '<restaurant_id %r>' % self.restaurant_id
 
 
 class Cuisine(Base):
