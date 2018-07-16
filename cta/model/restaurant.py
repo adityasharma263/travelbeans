@@ -14,7 +14,7 @@ class Restaurant(Base):
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     address = db.Column(db.String, nullable=True)
-    Category = db.Column(db.Integer, nullable=True)
+    category = db.Column(db.Integer, nullable=True)
     featured = db.Column(db.Boolean, default=False, nullable=True)
     images = db.relationship('RestaurantImage', backref='restaurant')
     amenities = db.relationship('RestaurantAmenity', uselist=False, backref='restaurant')
