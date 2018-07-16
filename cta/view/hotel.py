@@ -110,7 +110,7 @@ def room_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        rooms = Room.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        rooms = Room.query.filter_by(**args).all()
         result = RoomSchema(many=True).dump(rooms)
         return jsonify({'result': {'rooms': result.data}, 'message': "Success", 'error': False})
     else:
