@@ -13,3 +13,6 @@ PASSWORD='root'
 PORT = 5432
 SQLALCHEMY_DATABASE_URI= 'postgresql://postgres:root@localhost/test'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+#variables
+DOMAIN_URL = 'http://localhost:5001'
