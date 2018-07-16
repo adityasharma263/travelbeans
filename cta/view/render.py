@@ -67,8 +67,9 @@ def restaurant_search():
 
 @app.route("/restaurant/<restaurant_id>")
 def restaurant_details(restaurant_id):
-    single_restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant?id="+restaurant_id
+    single_restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant/"+restaurant_id
     
+
 
 
     return ""
