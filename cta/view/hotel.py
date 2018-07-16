@@ -402,8 +402,6 @@ def deal_api():
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
-        # page = int(request.args.get('page', 1))
-        # per_page = int(request.args.get('per_page', 10))
         if price_start and price_end:
             price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
