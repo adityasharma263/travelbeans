@@ -395,7 +395,7 @@
                                 <div ng-repeat="room in hotel.rooms">
                                 <!-- <div ng-if="[[room.room_type]]==1 && ![[room.breakfast]]"> -->
                                             
-                                <article class="box" ng-if="[[room.room_type]]==1">
+                                <article class="box" ng-if="[[room.room_type]]==1" ng-if="[[room.breakfast]]">
                                     
                                         <figure class="col-sm-5 col-md-4">
                                                 <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px" src="[[hotel.images[0].image_url]]" alt="Travel Beans">
