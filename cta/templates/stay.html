@@ -99,16 +99,26 @@
             
             <div class="main-header">
                 
-                <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                <!-- <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle collapsed" aria-expanded="false">
                     Mobile Menu Toggle
+                </a> -->
+                <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                   <i class="fa fa-bars"></i>
                 </a>
 
+
                 <div class="container">
-                    <!-- <h1 class="logo navbar-brand">
+                     <!-- <h1 class="logo navbar-brand">
                         <a href="http://www.soaptheme.net/html/travelo/index.html" title="Travelo - home">
                             <img src="../static/images/logo.png" alt="Travelo HTML5 Template">
                         </a>
                     </h1> -->
+                    <h1 class="logo navbar-brand">
+                        <a href="index.html" title="Travelo - home">
+                            <img src="images/logo.png" alt="Travelo HTML5 Template">
+                        </a>
+                    </h1>
+                    
                     
                     <nav id="main-menu" role="navigation">
                         <ul class="menu">
@@ -154,13 +164,12 @@
                         </ul>
                     </nav>
                 </div>
-                </div>
-                <div>
-                <nav id="mobile-menu-01" class="mobile-menu collapse" style="margin-top:66px;"> 
+                
+                <nav id="mobile-menu-01" class="mobile-menu collapse" aria-expanded="false" style="height: 0px;">
                     <ul id="mobile-primary-menu" class="menu">
                         <li class="menu-item-has-children">
-                            <a href="index.html">Home</a>
-                            <ul>
+                            <a href="index.html">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                            <ul id="mobile-menu-submenu-item-0" class="collapse">
                                 <li><a href="index.html">Home Layout 1</a></li>
                                 <li><a href="homepage2.html">Home Layout 2</a></li>
                                 <li><a href="homepage3.html">Home Layout 3</a></li>
@@ -174,21 +183,21 @@
                                 <li><a href="homepage11.html">Home Layout 11</a></li>
                             </ul>
                         </li>
-                        <li class="menu-item-has-children">
-                            <a href="hotel-index.html">Hotels</a>
-                            <ul>
+                        <li class="menu-item-has-children active">
+                            <a href="hotel-index.html">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
+                            <ul id="mobile-menu-submenu-item-1" class="collapse">
                                 <li><a href="hotel-index.html">Home Hotels</a></li>
                                 <li><a href="hotel-list-view.html">List View</a></li>
                                 <li><a href="hotel-grid-view.html">Grid View</a></li>
                                 <li><a href="hotel-block-view.html">Block View</a></li>
-                                <li><a href="hotel-detailed.html">Detailed</a></li>
+                                <li class="active"><a href="hotel-detailed.html">Detailed</a></li>
                                 <li><a href="hotel-booking.html">Booking</a></li>
                                 <li><a href="hotel-thankyou.html">Thank You</a></li>
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="flight-index.html">Flights</a>
-                            <ul>
+                            <a href="flight-index.html">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
+                            <ul id="mobile-menu-submenu-item-2" class="collapse">
                                 <li><a href="flight-index.html">Home Flights</a></li>
                                 <li><a href="flight-list-view.html">List View</a></li>
                                 <li><a href="flight-grid-view.html">Grid View</a></li>
@@ -199,8 +208,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="car-index.html">Cars</a>
-                            <ul>
+                            <a href="car-index.html">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
+                            <ul id="mobile-menu-submenu-item-3" class="collapse">
                                 <li><a href="car-index.html">Home Cars</a></li>
                                 <li><a href="car-list-view.html">List View</a></li>
                                 <li><a href="car-grid-view.html">Grid View</a></li>
@@ -211,8 +220,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="cruise-index.html">Cruises</a>
-                            <ul>
+                            <a href="cruise-index.html">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
+                            <ul id="mobile-menu-submenu-item-4" class="collapse">
                                 <li><a href="cruise-index.html">Home Cruises</a></li>
                                 <li><a href="cruise-list-view.html">List View</a></li>
                                 <li><a href="cruise-grid-view.html">Grid View</a></li>
@@ -223,8 +232,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="tour-index.html">Tour</a>
-                            <ul>
+                            <a href="tour-index.html">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
+                            <ul id="mobile-menu-submenu-item-5" class="collapse">
                                 <li><a href="tour-index.html">Home Tour</a></li>
                                 <li><a href="tour-fancy-package-2column.html">Fancy Packages 2 Column</a></li>
                                 <li><a href="tour-fancy-package-3column.html">Fancy Packages 3 Column</a></li>
@@ -240,8 +249,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Pages</a>
-                            <ul>
+                            <a href="#">Pages</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-6"></button>
+                            <ul id="mobile-menu-submenu-item-6" class="collapse">
                                 <li class="menu-item-has-children">
                                     <a href="#">Standard Pages</a>
                                     <ul>
@@ -307,8 +316,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Shortcodes</a>
-                            <ul>
+                            <a href="#">Shortcodes</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-7"></button>
+                            <ul id="mobile-menu-submenu-item-7" class="collapse">
                                 <li><a href="shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
                                 <li><a href="shortcode-tabs.html">Tabs</a></li>
                                 <li><a href="shortcode-buttons.html">Buttons</a></li>
@@ -335,8 +344,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Bonus</a>
-                            <ul>
+                            <a href="#">Bonus</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-8"></button>
+                            <ul id="mobile-menu-submenu-item-8" class="collapse">
                                 <li><a href="dashboard1.html">Dashboard 1</a></li>
                                 <li><a href="dashboard2.html">Dashboard 2</a></li>
                                 <li><a href="dashboard3.html">Dashboard 3</a></li>
@@ -409,7 +418,7 @@
                         <li><a href="#">MY ACCOUNT</a></li>
                         <li class="ribbon language menu-color-skin">
                             <a href="#" data-toggle="collapse">ENGLISH</a>
-                            <ul class="menu mini">
+                            <ul class="menu mini" style="">
                                 <li><a href="#" title="Dansk">Dansk</a></li>
                                 <li><a href="#" title="Deutsch">Deutsch</a></li>
                                 <li class="active"><a href="#" title="English">English</a></li>
@@ -429,7 +438,7 @@
                         <li><a href="#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
                         <li class="ribbon currency menu-color-skin">
                             <a href="#">USD</a>
-                            <ul class="menu mini">
+                            <ul class="menu mini" style="">
                                 <li><a href="#" title="AUD">AUD</a></li>
                                 <li><a href="#" title="BRL">BRL</a></li>
                                 <li class="active"><a href="#" title="USD">USD</a></li>
@@ -446,15 +455,16 @@
                             </ul>
                         </li>
                     </ul>
+                    
                 </nav>
-
-        </div>
+            </div>
+                
 
         </header>
-        <section id="content">
-            <div class="search-box-wrapper" style="background-image:url('../static/images/hotelhome.jpg'); height: 350px; margin-top: 25px">
-                <section>
-                <div class="search-box container">
+        <section id="">
+            <div class="search-box-wrapper" style="background-image:url('../static/images/hotelhome.jpg'); height: 350px;">
+                <section id="content" style="background-image:url('../static/images/hotelhome.jpg'); height: 350px;">
+                <!-- <div class="search-box container">
                     
                     <div class="search-tab-content">
                         <div class='col-sm-6' id="hotels-tab">
@@ -462,17 +472,17 @@
                             <form autocomplete="off" class='navbar-form'>
                                     <div class='input-group' style="width:93%">
                                         <!-- <label for="destination"><button type="button"><strong>Search</strong></button> -->
-                                          <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
+                                          <!-- <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
                                           <span class="input-group-btn">
                                             <button type='submit' class='btn btn-default' ng-click="getHotel()">
                                               <span ><i class="fa fa-search" aria-hidden="true"></i></span>
                                             </button>
-                                          </span>  
+                                          </span>   -->
                                         <!-- </label> -->
 
-                                    </div>
+                                    <!-- </div> -->
                                     <!-- <button type="button" ng-click="getHotel()"><i class="fa fa-search" aria-hidden="true"></i></button> -->
-                                    <div>
+                                    <!-- <div>
                                         <div class="row">
                                             <div class="col-sm-12">
                                         <table class="table table-hover " style="background-color:white">
@@ -497,7 +507,7 @@
 
 
 
-                                <div class="row">
+                                <div class="row"> -->
                                     <!-- <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Where</h4>
                                         <label for="destination">Your Destination -->
@@ -563,11 +573,11 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    
+<!--                                     
                                     <div class="form-group col-sm-6 col-md-2 fixheight">
-                                        <label class="hidden-xs">&nbsp;</label>
+                                        <label class="hidden-xs">&nbsp;</label> -->
                                         <!-- <button type="button" ng-click="getHotel()">SEARCH NOW</button> -->
-                                    </div>
+                                    <!-- </div>
                                 </div>
                             </form>
                         
@@ -575,10 +585,470 @@
                         
                     </div>
                 </div>
-            </div>
+            </div>  -->
+        
+               
+                <div class="search-box-wrapper style2">
+                    <div class="search-box container">
+                        <ul class="search-tabs clearfix">
+                            <li class="advanced-search visible-lg"><a href="http://www.soaptheme.net/html/travelo/search-style3.html#advanced-search-tab" data-toggle="tab"><span></span></a></li>
+                        </ul>
+                        <div class="visible-mobile">
+                            <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
+                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"></li>
+                            </ul></div></div>
+                        </div>
+                        
+                        <div class="search-tab-content">
+                            <div class="tab-pane fade active in" id="hotels-tab">
+                                <form action="http://www.soaptheme.net/html/travelo/hotel-list-view.html" method="post">
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="form-group col-sm-7 col-md-7">
+                                            <input type="text" class="input-text full-width" placeholder="Rome, Paris, New York...">
+                                        </div>
+                                        
+                                                <div class="col-xs-5">
+                                                    <button type="submit" class="full-width">SEARCH NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="flight-and-hotel-tab">
+                                <form action="http://www.soaptheme.net/html/travelo/flight-list-view.html" method="post">
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Leaving From (city, distirct or specific airpot)">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Going To (city, distirct or specific airpot)">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="Departing On" id="dp1531576577505"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">anytime</option>
+                                                            <option value="2">morning</option>
+                                                        </select><span class="custom-select full-width">anytime</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="Arriving On" id="dp1531576577506"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">anytime</option>
+                                                            <option value="2">morning</option>
+                                                        </select><span class="custom-select full-width">anytime</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Adults</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Adults</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Kids</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Kids</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Promo Code">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Infants</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Infants</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 pull-right">
+                                                    <button class="full-width">SERACH NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="cars-tab">
+                                <form action="http://www.soaptheme.net/html/travelo/car-list-view.html" method="post">
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Pick Up (city, distirct or specific airpot)">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Drop Off (city, distirct or specific airpot)">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <div class="datepicker-wrap">
+                                                            <input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="Pick-Up Date / Time" id="dp1531576577507"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="selector">
+                                                            <select class="full-width">
+                                                                <option value="1">anytime</option>
+                                                                <option value="2">morning</option>
+                                                            </select><span class="custom-select full-width">anytime</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <div class="datepicker-wrap">
+                                                            <input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="Drop-Off Date / Time" id="dp1531576577508"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="selector">
+                                                            <select class="full-width">
+                                                                <option value="1">anytime</option>
+                                                                <option value="2">morning</option>
+                                                            </select><span class="custom-select full-width">anytime</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Adults</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Adults</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Kids</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Kids</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Promo Code">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">select a car type</option>
+                                                            <option value="economy">Economy</option>
+                                                            <option value="compact">Compact</option>
+                                                        </select><span class="custom-select full-width">select a car type</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <button class="full-width">SERACH NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="cruises-tab">
+                                <form action="http://www.soaptheme.net/html/travelo/cruise-list-view.html" method="post">
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="enter a destination or hotel name">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" class="input-text full-width hasDatepicker" placeholder="Departure Date" id="dp1531576577509"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">select cruise length</option>
+                                                            <option value="1">1-2 Nights</option>
+                                                            <option value="2">3-4 Nights</option>
+                                                        </select><span class="custom-select full-width">select cruise length</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">select cruise line</option>
+                                                            <option>Azamara Club Cruises</option>
+                                                            <option>Carnival Cruise Lines</option>
+                                                            <option>Celebrity Cruises</option>
+                                                            <option>Costa Cruise Lines</option>
+                                                            <option>Cruise &amp; Maritime Voyages</option>
+                                                            <option>Crystal Cruises</option>
+                                                            <option>Cunard Line Ltd.</option>
+                                                            <option>Disney Cruise Line</option>
+                                                            <option>Holland America Line</option>
+                                                            <option>Hurtigruten Cruise Line</option>
+                                                            <option>MSC Cruises</option>
+                                                            <option>Norwegian Cruise Line</option>
+                                                            <option>Oceania Cruises</option>
+                                                            <option>Orion Expedition Cruises</option>
+                                                            <option>P&amp;O Cruises</option>
+                                                            <option>Paul Gauguin Cruises</option>
+                                                            <option>Peter Deilmann Cruises</option>
+                                                            <option>Princess Cruises</option>
+                                                            <option>Regent Seven Seas Cruises</option>
+                                                            <option>Royal Caribbean International</option>
+                                                            <option>Seabourn Cruise Line</option>
+                                                            <option>Silversea Cruises</option>
+                                                            <option>Star Clippers</option>
+                                                            <option>Swan Hellenic Cruises</option>
+                                                            <option>Thomson Cruises</option>
+                                                            <option>Viking River Cruises</option>
+                                                            <option>Windstar Cruises</option>
+                                                        </select><span class="custom-select full-width">select cruise line</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <button class="full-width">SEARCH NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="flight-status-tab">
+                                <form action="http://www.soaptheme.net/html/travelo/flight-list-view.html" method="post">
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Leaving From (enter a city or place name)">
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Going To (enter a city or place name)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="form-group">
+                                                <div class="datepicker-wrap">
+                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="Departure Date" id="dp1531576577510"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Flight Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button class="full-width">SEARCH NOW</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="online-checkin-tab">
+                                <form>
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Leaving From (enter a city or place name)">
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Going To (enter a city or place name)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="form-group">
+                                                <div class="datepicker-wrap">
+                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="Departure Date" id="dp1531576577511"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="enter your full name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button class="full-width">SEARCH NOW</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="advanced-search-tab">
+                                <form>
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Leaving From (city, distirct or specific airpot)">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="input-text full-width" placeholder="Going To (city, distirct or specific airpot)">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="Departing On" id="dp1531576577512"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">anytime</option>
+                                                            <option value="2">morning</option>
+                                                        </select><span class="custom-select full-width">anytime</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-6">
+                                                    <div class="datepicker-wrap">
+                                                        <input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="Arriving On" id="dp1531576577513"><img class="ui-datepicker-trigger" src="./Hotel Search Bar_files/blank.png" alt="" title="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="1">anytime</option>
+                                                            <option value="2">morning</option>
+                                                        </select><span class="custom-select full-width">anytime</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group row">
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Adults</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Adults</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Kids</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Kids</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <input type="text" class="input-text full-width" placeholder="Promo Code">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-3">
+                                                    <div class="selector">
+                                                        <select class="full-width">
+                                                            <option value="">Infants</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                        </select><span class="custom-select full-width">Infants</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 pull-right">
+                                                    <button class="full-width">SERACH NOW</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
         </section>
         <section>
-            <div class="section" style="margin-top: 136px; background-color:#f5f5f5">
+            <div class="section" style="background-color:#f5f5f5">
                 <div class="container">
 
                         <h2>Travelers Choice of Hotels</h2>
@@ -1502,9 +1972,9 @@
                                         <img src="./Footer Hotel_files/logo.png" alt="Travelo HTML5 Template">
                                     </a>
                                 </div>
-                                <div class="pull-right">
+                                <!-- <div class="pull-right">
                                     <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce" style="animation-duration: 1s; visibility: visible;"><i class="soap-icon-longarrow-up circle"></i></a>
-                                </div>
+                                </div> -->
                                 <div class="copyright pull-right">
                                     <p>© 2018 Travel Beans</p>
                                 </div>
@@ -1558,7 +2028,10 @@
     <!-- load page Javascript -->
     <script type="text/javascript" src="../static/js/theme-scripts.js"></script>
     <script type="text/javascript" src="../static/js/scripts.js"></script>
-    
+    <!-- for bottom to top scroller -->
+    <script type="text/javascript" src="../static/js/top-scroller.js"></script>
+
+
     <script type="text/javascript">
         tjq(document).ready(function() {
             tjq('.revolution-slider').revolution(
@@ -1627,7 +2100,9 @@
     </script>
 
 
-
+<button onclick="topFunction()" id="upBtn" title="Go to top">
+    <i class="fa fa-chevron-up"></i>
+</button>
 
 </div>
 </body>
