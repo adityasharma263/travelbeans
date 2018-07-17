@@ -894,13 +894,15 @@ $scope.createHotel = function() {
   var showDivs=function(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
+    var y = document.getElementsByClassName("slides");
+
     
     var dots = document.getElementsByClassName("demo");
 
     if (n > x.length) {slideIndex = 1}
     if (n < 1) {slideIndex = x.length}
     for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
+      x[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
       dots[i].style.opacity = 0.5;
@@ -914,6 +916,17 @@ $scope.createHotel = function() {
     dots[slideIndex-1].style.opacity = 1;
     
     x[slideIndex-1].style.display = "block";
+    // console.log("slideIndex",slideIndex);
+    // if(slideIndex > 2){
+    //   // var tx=-870;
+    //   // console.log("tx",tx);
+    //   // var txx=tx*slideIndex;
+    //   $(".slider").css("transform","translate3d(var(--tx), 0px, 0px)");
+
+    // }
+    // else{
+    //   $(".slider").css("transform","translate3d(-870px, 0px, 0px)");
+    // }
     dots[slideIndex-1].className += "w3-opacity-off";
   }
   var slideIndex = 1;
@@ -959,9 +972,12 @@ $scope.createHotel = function() {
   })
 
 var getrooms=function(){
+  $scope.roomData={};
+  var search =location.pathname;
+  var id = search.split("/");
   $http({
     method: 'GET',
-    url: '/api/v1/room'+(location.search)
+    url: '/api/v1/room?id='+id[2]
   }).then(function successCallback(response) {
       for(var i=0; i<response.data.result.rooms.length; i++){
         $scope.roomData= response.data.result.rooms[i];
