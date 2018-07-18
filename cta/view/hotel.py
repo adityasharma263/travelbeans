@@ -117,7 +117,7 @@ def room_api():
         room = request.json
         room_obj = {
             "room_type": room.get("room_type", None),
-            "other_room_type": room.get("default_room_type", None),
+            "other_room_type": room.get("other_room_type", None),
             "image_url": room.get("image_url", None),
             "check_in": datetime.datetime.now(),
             "check_out": datetime.datetime.now(),
@@ -402,8 +402,6 @@ def deal_api():
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
-        # page = int(request.args.get('page', 1))
-        # per_page = int(request.args.get('per_page', 10))
         if price_start and price_end:
             price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
@@ -445,12 +443,10 @@ def hotel_search():
     search = search['search']
     cities = []
     names = []
-    hotel_cities = Hotel.query.filter(Hotel.city.like('%' + search + '%')).order_by(Hotel.city).all()
+    hotel_cities = Hotel.query.distinct(Hotel.city).filter(Hotel.city.like('%' + search + '%')).order_by(Hotel.city).all()
     for hotel_city in hotel_cities:
         cities.append(hotel_city.city)
-    hotel_names = Hotel.query.filter(Hotel.name.like('%' + search + '%')).order_by(Hotel.name).all()
+    hotel_names = Hotel.query.distinct(Hotel.name).filter(Hotel.name.like('%' + search + '%')).order_by(Hotel.name).all()
     for hotel_name in hotel_names:
         names.append(hotel_name.name)
-    cities = list(set(cities))
-    names = list(set(names))
     return jsonify({'result': {'cities': cities, "names": names}, 'message': "Success", 'error': False})

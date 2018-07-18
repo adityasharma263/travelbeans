@@ -44,14 +44,21 @@ def restaurant():
 
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
-    restaurant_api_url = str(app.config["SERVER_HOST"]) + ":" + str(app.config["SERVER_PORT"]) + "api/v1/restaurant"
-    args = request.args.to_dict()
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
+    args = request.args
     restaurant_data = requests.get(url=restaurant_api_url, params=args).json()
-    return render_template("restaurant/restaurant_search.html", restaurant_detail=restaurant_data)
+    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data)
 
 
-@app.route("/restaurant/<restaurant_id>")
+@app.route("/restaurant/<restaurant_id>", methods=['GET'])
 def restaurant_detail(restaurant_id):
-    restaurant_api_url = str(app.config["SERVER_HOST"]) + ":" + str(app.config["SERVER_PORT"]) + "api/v1/restaurant"
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
     restaurant_data = requests.get(url=restaurant_api_url, params={id: restaurant_id}).json()
     return render_template("restaurant/restaurant_detail.html", restaurant_detail=restaurant_data)
+
+
+#=========================== CABS =======================================
+
+@app.route("/cab", methods=['GET'])
+def cab():
+    return render_template("cab/cab.html")
