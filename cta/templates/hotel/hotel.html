@@ -56,6 +56,14 @@
     <![endif]-->
     
     
+   <script>
+  function clearCoor() {
+    document.getElementById("demo").style.display = "none";
+}
+function myFunction(e) {
+    document.getElementById("demo").style.display="block"
+}
+   </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -99,16 +107,26 @@
             
             <div class="main-header">
                 
-                <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                <!-- <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle collapsed" aria-expanded="false">
                     Mobile Menu Toggle
+                </a> -->
+                <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                   <i class="fa fa-bars"></i>
                 </a>
 
+
                 <div class="container">
-                    <!-- <h1 class="logo navbar-brand">
+                     <!-- <h1 class="logo navbar-brand">
                         <a href="http://www.soaptheme.net/html/travelo/index.html" title="Travelo - home">
                             <img src="/images/logo.png" alt="Travelo HTML5 Template">
                         </a>
                     </h1> -->
+                    <h1 class="logo navbar-brand">
+                        <a href="index.html" title="Travelo - home">
+                            <img src="images/logo.png" alt="Travelo HTML5 Template">
+                        </a>
+                    </h1>
+                    
                     
                     <nav id="main-menu" role="navigation">
                         <ul class="menu">
@@ -154,13 +172,12 @@
                         </ul>
                     </nav>
                 </div>
-                </div>
-                <div>
-                <nav id="mobile-menu-01" class="mobile-menu collapse" style="margin-top:66px;"> 
+                
+                <nav id="mobile-menu-01" class="mobile-menu collapse" aria-expanded="false" style="height: 0px;">
                     <ul id="mobile-primary-menu" class="menu">
                         <li class="menu-item-has-children">
-                            <a href="index.html">Home</a>
-                            <ul>
+                            <a href="index.html">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                            <ul id="mobile-menu-submenu-item-0" class="collapse">
                                 <li><a href="index.html">Home Layout 1</a></li>
                                 <li><a href="homepage2.html">Home Layout 2</a></li>
                                 <li><a href="homepage3.html">Home Layout 3</a></li>
@@ -174,21 +191,21 @@
                                 <li><a href="homepage11.html">Home Layout 11</a></li>
                             </ul>
                         </li>
-                        <li class="menu-item-has-children">
-                            <a href="hotel-index.html">Hotels</a>
-                            <ul>
+                        <li class="menu-item-has-children active">
+                            <a href="hotel-index.html">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
+                            <ul id="mobile-menu-submenu-item-1" class="collapse">
                                 <li><a href="hotel-index.html">Home Hotels</a></li>
                                 <li><a href="hotel-list-view.html">List View</a></li>
                                 <li><a href="hotel-grid-view.html">Grid View</a></li>
                                 <li><a href="hotel-block-view.html">Block View</a></li>
-                                <li><a href="hotel-detailed.html">Detailed</a></li>
+                                <li class="active"><a href="hotel-detailed.html">Detailed</a></li>
                                 <li><a href="hotel-booking.html">Booking</a></li>
                                 <li><a href="hotel-thankyou.html">Thank You</a></li>
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="flight-index.html">Flights</a>
-                            <ul>
+                            <a href="flight-index.html">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
+                            <ul id="mobile-menu-submenu-item-2" class="collapse">
                                 <li><a href="flight-index.html">Home Flights</a></li>
                                 <li><a href="flight-list-view.html">List View</a></li>
                                 <li><a href="flight-grid-view.html">Grid View</a></li>
@@ -199,8 +216,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="car-index.html">Cars</a>
-                            <ul>
+                            <a href="car-index.html">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
+                            <ul id="mobile-menu-submenu-item-3" class="collapse">
                                 <li><a href="car-index.html">Home Cars</a></li>
                                 <li><a href="car-list-view.html">List View</a></li>
                                 <li><a href="car-grid-view.html">Grid View</a></li>
@@ -211,8 +228,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="cruise-index.html">Cruises</a>
-                            <ul>
+                            <a href="cruise-index.html">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
+                            <ul id="mobile-menu-submenu-item-4" class="collapse">
                                 <li><a href="cruise-index.html">Home Cruises</a></li>
                                 <li><a href="cruise-list-view.html">List View</a></li>
                                 <li><a href="cruise-grid-view.html">Grid View</a></li>
@@ -223,8 +240,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="tour-index.html">Tour</a>
-                            <ul>
+                            <a href="tour-index.html">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
+                            <ul id="mobile-menu-submenu-item-5" class="collapse">
                                 <li><a href="tour-index.html">Home Tour</a></li>
                                 <li><a href="tour-fancy-package-2column.html">Fancy Packages 2 Column</a></li>
                                 <li><a href="tour-fancy-package-3column.html">Fancy Packages 3 Column</a></li>
@@ -240,8 +257,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Pages</a>
-                            <ul>
+                            <a href="#">Pages</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-6"></button>
+                            <ul id="mobile-menu-submenu-item-6" class="collapse">
                                 <li class="menu-item-has-children">
                                     <a href="#">Standard Pages</a>
                                     <ul>
@@ -307,8 +324,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Shortcodes</a>
-                            <ul>
+                            <a href="#">Shortcodes</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-7"></button>
+                            <ul id="mobile-menu-submenu-item-7" class="collapse">
                                 <li><a href="shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
                                 <li><a href="shortcode-tabs.html">Tabs</a></li>
                                 <li><a href="shortcode-buttons.html">Buttons</a></li>
@@ -335,8 +352,8 @@
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="#">Bonus</a>
-                            <ul>
+                            <a href="#">Bonus</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-8"></button>
+                            <ul id="mobile-menu-submenu-item-8" class="collapse">
                                 <li><a href="dashboard1.html">Dashboard 1</a></li>
                                 <li><a href="dashboard2.html">Dashboard 2</a></li>
                                 <li><a href="dashboard3.html">Dashboard 3</a></li>
@@ -409,7 +426,7 @@
                         <li><a href="#">MY ACCOUNT</a></li>
                         <li class="ribbon language menu-color-skin">
                             <a href="#" data-toggle="collapse">ENGLISH</a>
-                            <ul class="menu mini">
+                            <ul class="menu mini" style="">
                                 <li><a href="#" title="Dansk">Dansk</a></li>
                                 <li><a href="#" title="Deutsch">Deutsch</a></li>
                                 <li class="active"><a href="#" title="English">English</a></li>
@@ -429,7 +446,7 @@
                         <li><a href="#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
                         <li class="ribbon currency menu-color-skin">
                             <a href="#">USD</a>
-                            <ul class="menu mini">
+                            <ul class="menu mini" style="">
                                 <li><a href="#" title="AUD">AUD</a></li>
                                 <li><a href="#" title="BRL">BRL</a></li>
                                 <li class="active"><a href="#" title="USD">USD</a></li>
@@ -446,33 +463,34 @@
                             </ul>
                         </li>
                     </ul>
+                    
                 </nav>
-
-        </div>
+            </div>
+                
 
         </header>
-        <section id="content">
-            <div class="search-box-wrapper" style="background-image:url('/images/hotelhome.jpg'); height: 350px; margin-top: 25px">
-                <section>
-                <div class="search-box container">
+        <section id="">
+            <div class="search-box-wrapper" style="background-image:url('/images/hotelhome.jpg'); height: 350px;">
+                <section id="content" style="background-image:url('/images/hotelhome.jpg'); height: 350px;">
+                <!-- <div class="search-box container">
                     
                     <div class="search-tab-content">
                         <div class='col-sm-6' id="hotels-tab">
                             
                             <form autocomplete="off" class='navbar-form'>
                                     <div class='input-group' style="width:93%">
-                                        <!-- <label for="destination"><button type="button"><strong>Search</strong></button> -->
-                                          <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="search()" ng-model="hotel.search" placeholder="Hotel or City">
+                                         <label for="destination"><button type="button"><strong>Search</strong></button> -->
+                                          <!-- <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
                                           <span class="input-group-btn">
                                             <button type='submit' class='btn btn-default' ng-click="getHotel()">
                                               <span ><i class="fa fa-search" aria-hidden="true"></i></span>
                                             </button>
-                                          </span>  
+                                          </span>   -->
                                         <!-- </label> -->
 
-                                    </div>
+                                    <!-- </div> -->
                                     <!-- <button type="button" ng-click="getHotel()"><i class="fa fa-search" aria-hidden="true"></i></button> -->
-                                    <div>
+                                    <!-- <div>
                                         <div class="row">
                                             <div class="col-sm-12">
                                         <table class="table table-hover " style="background-color:white">
@@ -497,7 +515,7 @@
 
 
 
-                                <div class="row">
+                                <div class="row"> -->
                                     <!-- <div class="form-group col-sm-6 col-md-3">
                                         <h4 class="title">Where</h4>
                                         <label for="destination">Your Destination -->
@@ -563,11 +581,11 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    
+<!--                                     
                                     <div class="form-group col-sm-6 col-md-2 fixheight">
-                                        <label class="hidden-xs">&nbsp;</label>
+                                        <label class="hidden-xs">&nbsp;</label> -->
                                         <!-- <button type="button" ng-click="getHotel()">SEARCH NOW</button> -->
-                                    </div>
+                                    <!-- </div>
                                 </div>
                             </form>
                         
@@ -575,10 +593,102 @@
                         
                     </div>
                 </div>
-            </div>
+            </div>  -->
+        
+               
+                <div class="search-box-wrapper style2">
+                    <div class="search-box container">
+                        <ul class="search-tabs clearfix">
+                            <li class="advanced-search visible-lg">
+                                <a href="http://www.soaptheme.net/html/travelo/search-style3.html#advanced-search-tab" data-toggle="tab">
+                                    <span></span></a></li>
+                        </ul>
+                        <div class="visible-mobile">
+                            <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;">
+                                <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
+                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"></li>
+                            </ul>
+                        </div>
+                    </div>
+                        </div>
+                        
+                        <div class="search-tab-content">
+                            <div class="tab-pane fade active in" id="hotels-tab" onmousemove="myFunction(event)" onmouseout="clearCoor()">
+                                <form autocomplete="off">
+                                    <h4 class="title">Where do you want to go?</h4>
+                                    <div class="row">
+                                        <div class="form-group col-sm-7 col-md-7">
+                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" onmousemove="myFunction(event)" onmouseout="clearCoor()"  ng-model="hotel.search" placeholder="CITY OR HOTEL NAME">
+                                            <div class="row" id="demo">
+                                                    <div class="col-sm-12">
+                                                <table class="table table-hover " style="background-color:white">
+        
+                                                        <tbody>
+                                                          <tr ng-repeat="city in cities">
+                                                            <td ng-click="result([[city]],'city')">[[city]]</td>
+        
+                                                          </tr>
+                                                          <tr ng-repeat="name in names">
+                                                            <td ng-click="result([[name]],'name')">[[name]]</td>
+        
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                                <div class="col-xs-5">
+                                                    <button type="submit" class="full-width"  ng-click="getHotel()">SEARCH NOW</button>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row">
+                                                    <div class="col-sm-12">
+                                                <table class="table table-hover " style="background-color:white">
+        
+                                                        <tbody>
+                                                          <tr ng-repeat="city in cities">
+                                                            <td ng-click="result([[city]],'city')">[[city]]</td>
+        
+                                                          </tr>
+                                                          <tr ng-repeat="name in names">
+                                                            <td ng-click="result([[name]],'name')">[[name]]</td>
+        
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                </div> -->
+        
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- <div class="container"> 
+                    <div class="row">
+                            <div class="col-sm-12">
+                        <table class="table table-hover " style="background-color:white">
+
+                                <tbody>
+                                  <tr ng-repeat="city in cities">
+                                    <td ng-click="result([[city]],'city')">[[city]]</td>
+
+                                  </tr>
+                                  <tr ng-repeat="name in names">
+                                    <td ng-click="result([[name]],'name')">[[name]]</td>
+
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+    
         </section>
         <section>
-            <div class="section" style="margin-top: 136px; background-color:#f5f5f5">
+            <div class="section" style="background-color:#f5f5f5">
                 <div class="container">
 
                         <h2>Travelers Choice of Hotels</h2>
@@ -1502,9 +1612,9 @@
                                         <img src="./Footer Hotel_files/logo.png" alt="Travelo HTML5 Template">
                                     </a>
                                 </div>
-                                <div class="pull-right">
+                                <!-- <div class="pull-right">
                                     <a id="back-to-top" href="" class="animated bounce" data-animation-type="bounce" style="animation-duration: 1s; visibility: visible;"><i class="soap-icon-longarrow-up circle"></i></a>
-                                </div>
+                                </div> -->
                                 <div class="copyright pull-right">
                                     <p>© 2018 Travel Beans</p>
                                 </div>
@@ -1521,7 +1631,11 @@
         
     </div>
     
-    
+    <script>
+     document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+      });
+    </script>
 
     <!-- Javascript -->
     <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
@@ -1556,9 +1670,12 @@
     <script type="text/javascript" src="/js/waypoints.min.js"></script>
 
     <!-- load page Javascript -->
-    <script type="text/javascript" src="/js/theme-scripts.js"></script>
-    <script type="text/javascript" src="/js/scripts.js"></script>
-    
+    <script type="text/javascript" src="../static/js/theme-scripts.js"></script>
+    <script type="text/javascript" src="../static/js/scripts.js"></script>
+    <!-- for bottom to top scroller -->
+    <script type="text/javascript" src="../static/js/top-scroller.js"></script>
+
+
     <script type="text/javascript">
         tjq(document).ready(function() {
             tjq('.revolution-slider').revolution(
@@ -1627,7 +1744,9 @@
     </script>
 
 
-
+<button onclick="topFunction()" id="upBtn" title="Go to top">
+    <i class="fa fa-chevron-up"></i>
+</button>
 
 </div>
 </body>
