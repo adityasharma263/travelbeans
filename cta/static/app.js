@@ -894,16 +894,14 @@ $scope.createHotel = function() {
   var showDivs=function(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
-    var y = document.getElementsByClassName("slides");
 
+    // var tx = document.getElementsByClassName("slider");
     
     var dots = document.getElementsByClassName("demo");
 
     if (n > x.length) {slideIndex = 1}
     if (n < 1) {slideIndex = x.length}
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
+    
     for (i = 0; i < dots.length; i++) {
       dots[i].style.opacity = 0.5;
       dots[i].getElementsByClassName("img")[0].style.opacity = 0.5;
@@ -915,18 +913,16 @@ $scope.createHotel = function() {
     dots[slideIndex-1].getElementsByClassName("img")[0].style.opacity = 1;
     dots[slideIndex-1].style.opacity = 1;
     
-    x[slideIndex-1].style.display = "block";
-    // console.log("slideIndex",slideIndex);
-    // if(slideIndex > 2){
-    //   // var tx=-870;
-    //   // console.log("tx",tx);
-    //   // var txx=tx*slideIndex;
-    //   $(".slider").css("transform","translate3d(var(--tx), 0px, 0px)");
+    if(window.screen.availWidth >=440){
 
-    // }
-    // else{
-    //   $(".slider").css("transform","translate3d(-870px, 0px, 0px)");
-    // }
+      var transform=-870*(slideIndex-1);
+    }
+    if(window.screen.availWidth <=440){
+      var transform=-370*(slideIndex-1);
+    
+    }
+    document.body.style.setProperty('--tx',transform+'px');
+    $(".slider").css("transform","translate3d(var(--tx), 0px, 0px)");
     dots[slideIndex-1].className += "w3-opacity-off";
   }
   var slideIndex = 1;
@@ -952,7 +948,7 @@ $scope.createHotel = function() {
 
   }
   $scope.showDetail=function(roomid){
-    window.open('/hotel/detail?id='+roomid,'_self');
+    window.open('/hotel/'+roomid,'_self');
     
   }
   $http({
@@ -1008,14 +1004,14 @@ if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
     if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
-  
+      // $scope.currentDiv(11);
       $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
       i++;
       return i;
     } 
   
     if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
-  
+      // $scope.currentDiv(21);
       $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
       i++;
       return i;
