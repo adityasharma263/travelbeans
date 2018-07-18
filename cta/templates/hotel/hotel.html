@@ -22,14 +22,14 @@
     <!-- Current Page Styles -->
     <link rel="stylesheet" type="text/css" href="/css/settings.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css" media="screen">
-    <link id="main-style" rel="stylesheet" href="/css/style-dark-blue.css">    
     <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
+    <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
     
     
     <!-- Main Style -->
     <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var mainStyle = "style.css";
         if (typeof localStorage != "undefined") {
             var colorSkin = localStorage.getItem("colorSkin");
@@ -38,7 +38,7 @@
             }
         }
         document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
-    </script>
+    </script> -->
     
     <!-- Updated Styles -->
     <link rel="stylesheet" href="/css/updates.css">
@@ -462,7 +462,7 @@
                             <form autocomplete="off" class='navbar-form'>
                                     <div class='input-group' style="width:93%">
                                         <!-- <label for="destination"><button type="button"><strong>Search</strong></button> -->
-                                          <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
+                                          <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="search()" ng-model="hotel.search" placeholder="Hotel or City">
                                           <span class="input-group-btn">
                                             <button type='submit' class='btn btn-default' ng-click="getHotel()">
                                               <span ><i class="fa fa-search" aria-hidden="true"></i></span>

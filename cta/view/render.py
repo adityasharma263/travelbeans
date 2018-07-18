@@ -55,3 +55,10 @@ def restaurant_detail(restaurant_id):
     restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
     restaurant_data = requests.get(url=restaurant_api_url, params={id: restaurant_id}).json()
     return render_template("restaurant/restaurant_detail.html", restaurant_detail=restaurant_data)
+
+
+#=========================== CABS =======================================
+
+@app.route("/cab", methods=['GET'])
+def cab():
+    return render_template("cab/cab.html")
