@@ -57,12 +57,12 @@
     
     
    <script>
-  function clearCoor() {
-    document.getElementById("demo").style.display = "none";
-}
-function myFunction(e) {
-    document.getElementById("demo").style.display="block"
-}
+    function clearCoor() {
+        document.getElementById("demo").style.display = "none";
+    }
+    function myFunction(e) {
+        document.getElementById("demo").style.display="block"
+    }
    </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -72,7 +72,7 @@ function myFunction(e) {
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
     <script type="text/javascript" src="http://code.angularjs.org/1.2.1/angular-route.js"></script>  
-<script type="text/javascript" charset="UTF-8" src="/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="/js/stats.js"></script></head>
+    <script type="text/javascript" charset="UTF-8" src="/js/common.js"></script><script type="text/javascript" charset="UTF-8" src="/js/util.js"></script><script type="text/javascript" charset="UTF-8" src="/js/stats.js"></script></head>
 <body ng-app="comparetravel">
     <div ng-controller="stayController">
     <div id="page-wrapper">
@@ -111,7 +111,7 @@ function myFunction(e) {
                     Mobile Menu Toggle
                 </a> -->
                 <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
-                   <i class="fa fa-bars"></i>
+        
                 </a>
 
 
@@ -123,7 +123,7 @@ function myFunction(e) {
                     </h1> -->
                     <h1 class="logo navbar-brand">
                         <a href="index.html" title="Travelo - home">
-                            <img src="images/logo.png" alt="Travelo HTML5 Template">
+                            <img src="" alt="Travelo HTML5 Template">
                         </a>
                     </h1>
                     
@@ -176,85 +176,26 @@ function myFunction(e) {
                 <nav id="mobile-menu-01" class="mobile-menu collapse" aria-expanded="false" style="height: 0px;">
                     <ul id="mobile-primary-menu" class="menu">
                         <li class="menu-item-has-children">
-                            <a href="index.html">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
-                            <ul id="mobile-menu-submenu-item-0" class="collapse">
-                                <li><a href="index.html">Home Layout 1</a></li>
-                                <li><a href="homepage2.html">Home Layout 2</a></li>
-                                <li><a href="homepage3.html">Home Layout 3</a></li>
-                                <li><a href="homepage4.html">Home Layout 4</a></li>
-                                <li><a href="homepage5.html">Home Layout 5</a></li>
-                                <li><a href="homepage6.html">Home Layout 6</a></li>
-                                <li><a href="homepage7.html">Home Layout 7</a></li>
-                                <li><a href="homepage8.html">Home Layout 8</a></li>
-                                <li><a href="homepage9.html">Home Layout 9</a></li>
-                                <li><a href="homepage10.html">Home Layout 10</a></li>
-                                <li><a href="homepage11.html">Home Layout 11</a></li>
-                            </ul>
+                            <a href="/home">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
                         </li>
                         <li class="menu-item-has-children active">
-                            <a href="hotel-index.html">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
-                            <ul id="mobile-menu-submenu-item-1" class="collapse">
-                                <li><a href="hotel-index.html">Home Hotels</a></li>
-                                <li><a href="hotel-list-view.html">List View</a></li>
-                                <li><a href="hotel-grid-view.html">Grid View</a></li>
-                                <li><a href="hotel-block-view.html">Block View</a></li>
-                                <li class="active"><a href="hotel-detailed.html">Detailed</a></li>
-                                <li><a href="hotel-booking.html">Booking</a></li>
-                                <li><a href="hotel-thankyou.html">Thank You</a></li>
-                            </ul>
+                            <a href="/hotel">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
+                           
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="flight-index.html">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
-                            <ul id="mobile-menu-submenu-item-2" class="collapse">
-                                <li><a href="flight-index.html">Home Flights</a></li>
-                                <li><a href="flight-list-view.html">List View</a></li>
-                                <li><a href="flight-grid-view.html">Grid View</a></li>
-                                <li><a href="flight-block-view.html">Block View</a></li>
-                                <li><a href="flight-detailed.html">Detailed</a></li>
-                                <li><a href="flight-booking.html">Booking</a></li>
-                                <li><a href="flight-thankyou.html">Thank You</a></li>
-                            </ul>
+                            <a href="/flight">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
+                            
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="car-index.html">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
-                            <ul id="mobile-menu-submenu-item-3" class="collapse">
-                                <li><a href="car-index.html">Home Cars</a></li>
-                                <li><a href="car-list-view.html">List View</a></li>
-                                <li><a href="car-grid-view.html">Grid View</a></li>
-                                <li><a href="car-block-view.html">Block View</a></li>
-                                <li><a href="car-detailed.html">Detailed</a></li>
-                                <li><a href="car-booking.html">Booking</a></li>
-                                <li><a href="car-thankyou.html">Thank You</a></li>
-                            </ul>
+                            <a href="/cab">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
+                            
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="cruise-index.html">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
-                            <ul id="mobile-menu-submenu-item-4" class="collapse">
-                                <li><a href="cruise-index.html">Home Cruises</a></li>
-                                <li><a href="cruise-list-view.html">List View</a></li>
-                                <li><a href="cruise-grid-view.html">Grid View</a></li>
-                                <li><a href="cruise-block-view.html">Block View</a></li>
-                                <li><a href="cruise-detailed.html">Detailed</a></li>
-                                <li><a href="cruise-booking.html">Booking</a></li>
-                                <li><a href="cruise-thankyou.html">Thank You</a></li>
-                            </ul>
+                            <a href="/cruise">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="tour-index.html">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
-                            <ul id="mobile-menu-submenu-item-5" class="collapse">
-                                <li><a href="tour-index.html">Home Tour</a></li>
-                                <li><a href="tour-fancy-package-2column.html">Fancy Packages 2 Column</a></li>
-                                <li><a href="tour-fancy-package-3column.html">Fancy Packages 3 Column</a></li>
-                                <li><a href="tour-fancy-package-4column.html">Fancy Packages 4 Column</a></li>
-                                <li><a href="tour-simple-package-2column.html">Simple Packages 2 Column</a></li>
-                                <li><a href="tour-simple-package-3column.html">Simple Packages 3 Column</a></li>
-                                <li><a href="tour-simple-package-4column.html">Simple Packages 4 Column</a></li>
-                                <li><a href="tour-simple-package-3column.html">Location - Eruope</a></li>
-                                <li><a href="tour-simple-package-4column.html">Location - North America</a></li>
-                                <li><a href="tour-detailed1.html">Detailed 1</a></li>
-                                <li><a href="tour-detailed2.html">Detailed 2</a></li>
-                                <li><a href="tour-booking.html">Booking</a></li>
-                            </ul>
+                            <a href="/tour">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
+                    
                         </li>
                         <li class="menu-item-has-children">
                             <a href="#">Pages</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-6"></button>
