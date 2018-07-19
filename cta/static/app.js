@@ -616,6 +616,7 @@ loadDeals=function(){
   $scope.roomDetail=false;
   $scope.hotelDetail=true;
   $scope.updateRoomDetail=false;
+  $scope.addRoomDetail=false;
   $scope.UpdateImages={}; //image data for update
   $scope.hotelData={}; // hotel data for update 
   $scope.amenitiesData={}; // hotel amenities for update
@@ -642,6 +643,7 @@ loadDeals=function(){
   $scope.gotoHotelDetail=function(){
     $scope.updateRoomDetail=false;
     $scope.showRoomDetail=true;
+    $scope.addRoomDetail=false;
   }
   $scope.editDealData=function(data){
     $scope.deal=data;
@@ -721,6 +723,25 @@ loadDeals=function(){
     sendPutCall('/api/v1/deal/'+$scope.deal.id, $scope.deal);
     createToast("Deal Updated!!!","green");
     
+  }
+  $scope.addRoom=function(){
+
+    $scope.room.hotel_id = $scope.hotels.id;
+    
+    $scope.hotelDeals.push($scope.deals);
+    $scope.room.deals=$scope.hotelDeals;
+    // $scope.hotelRooms.push($scope.room);
+    console.log("rooms array",$scope.room);
+    sendPostCall('/api/v1/room', $scope.room)
+
+    createToast("'Room Added!!'","green");
+    // $scope.deals.hotel_url="";
+    $scope.hotelDeals=[];
+
+  }
+  $scope.showAddRoom=function(){
+    $scope.showRoomDetail=false;
+    $scope.addRoomDetail=true;
   }
 
 
@@ -844,6 +865,7 @@ loadDeals=function(){
     $scope.hotelDeals=[];
 
   }
+  
 
   $scope.addImg=function(){
     $scope.hotelImg.push($scope.images);
