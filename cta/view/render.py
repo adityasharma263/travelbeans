@@ -62,3 +62,7 @@ def restaurant_detail(restaurant_id):
 @app.route("/cab", methods=['GET'])
 def cab():
     return render_template("cab/cab.html")
+
+@app.route('/admin/cab', methods=['GET'])
+def cab_admin():
+    return render_template('cab/admin_cab.html')    
