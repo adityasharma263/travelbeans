@@ -955,8 +955,11 @@ $scope.createHotel = function() {
   }
   
   $scope.currentDiv=function(n) {
-      showDivs(slideIndex = n);
+    console.log("n",n);
+    showDivs(slideIndex = n);
   }
+
+
   
  
 
@@ -1011,8 +1014,6 @@ var getrooms=function(){
       }
       
 
-      // this callback will be called asynchronously
-      // when the response is available
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
@@ -1027,20 +1028,25 @@ if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
     if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
-      // $scope.currentDiv(11);
       $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      $scope.currentDiv(11);
+
       i++;
       return i;
     } 
   
     if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
-      // $scope.currentDiv(21);
       $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
+      $scope.currentDiv(21);
+
       i++;
       return i;
     } 
     else {
+
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      $scope.currentDiv(1);
+
       i=0;
       return i;
     }
@@ -1050,27 +1056,34 @@ if(window.screen.availWidth >=440){
   
     if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
       $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
+      $scope.currentDiv(11);
       i--;
       return i;
     } 
   
     if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
       $(".demo").css("transform","translate3d(0px, 0px, 0px)");
+      $scope.currentDiv(1);
       i--;
       return i;
     } 
     else {
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      $scope.currentDiv(1);
     }
   });
+
 }
+
 if(window.screen.availWidth <=440){
+
   console.log(window.screen.availWidth);
 
   $( ".flex-next" ).click(function() {
     if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
   
       $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      $scope.currentDiv(4);
       i++;
       return i;
     } 
@@ -1078,47 +1091,63 @@ if(window.screen.availWidth <=440){
     if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==1)){
   
       $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      $scope.currentDiv(7);
+
       i++;
       return i;
     } 
     if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==2)){
   
-      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+      $(".demo").css("transform","translate3d(-720px, 0px, 0px)");
+      $scope.currentDiv(10);
+
       i++;
       return i;
     } 
-    if (($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==3)){
+    if (($( ".demo" ).css( "transform","translate3d(-720px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==3)){
   
-      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+      $(".demo").css("transform","translate3d(-960px, 0px, 0px)");
+      $scope.currentDiv(13);
+
       i++;
       return i;
     } 
-    if (($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==4)){
+    if (($( ".demo" ).css( "transform","translate3d(-960px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==4)){
   
-      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+      $(".demo").css("transform","translate3d(-1200px, 0px, 0px)");
+      $scope.currentDiv(16);
+
       i++;
       return i;
     } 
-    if (($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==5)){
+    if (($( ".demo" ).css( "transform","translate3d(-1200px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==5)){
   
-      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+      $(".demo").css("transform","translate3d(-1440px, 0px, 0px)");
+      $scope.currentDiv(19);
+
       i++;
       return i;
     } 
-    if (($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==6)){
+    if (($( ".demo" ).css( "transform","translate3d(-1440px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==6)){
   
-      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+      $(".demo").css("transform","translate3d(-1680px, 0px, 0px)");
+      $scope.currentDiv(22);
+
       i++;
       return i;
     } 
-    if (($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==7)){
+    if (($( ".demo" ).css( "transform","translate3d(-1680px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==7)){
   
-      $(".demo").css("transform","translate3d(-2000px, 0px, 0px)");
+      $(".demo").css("transform","translate3d(-1920px, 0px, 0px)");
+      $scope.currentDiv(25);
+
       i++;
       return i;
     } 
     else {
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      $scope.currentDiv(1);
+
       i=0;
       return i;
     }
@@ -1126,46 +1155,63 @@ if(window.screen.availWidth <=440){
   
   $( ".flex-prev" ).click(function() {
   
-    if ($( ".demo" ).css( "transform","translate3d(-2000px, 0px, 0px)") && (i==7)){
-      $(".demo").css("transform","translate3d(-1760px, 0px, 0px)");
+    if ($( ".demo" ).css( "transform","translate3d(-1920px, 0px, 0px)") && (i==7)){
+      $(".demo").css("transform","translate3d(-1680px, 0px, 0px)");
+      $scope.currentDiv(22);
+
       i--;
       return i;
     } 
   
-    if ($( ".demo" ).css( "transform","translate3d(-1760px, 0px, 0px)") && (i==6)){
-      $(".demo").css("transform","translate3d(-1480px, 0px, 0px)");
+    if ($( ".demo" ).css( "transform","translate3d(-1680px, 0px, 0px)") && (i==6)){
+      $(".demo").css("transform","translate3d(-1440px, 0px, 0px)");
+      $scope.currentDiv(19);
+
       i--;
       return i;
     } 
-    if ($( ".demo" ).css( "transform","translate3d(-1480px, 0px, 0px)") && (i==5)){
-      $(".demo").css("transform","translate3d(-1240px, 0px, 0px)");
+    if ($( ".demo" ).css( "transform","translate3d(-1440px, 0px, 0px)") && (i==5)){
+      $(".demo").css("transform","translate3d(-1200px, 0px, 0px)");
+      $scope.currentDiv(16);
+
       i--;
       return i;
     } 
-    if ($( ".demo" ).css( "transform","translate3d(-1240px, 0px, 0px)") && (i==4)){
-      $(".demo").css("transform","translate3d(-1000px, 0px, 0px)");
+    if ($( ".demo" ).css( "transform","translate3d(-1200px, 0px, 0px)") && (i==4)){
+      $(".demo").css("transform","translate3d(-960px, 0px, 0px)");
+      $scope.currentDiv(13);
+
       i--;
       return i;
     } 
-    if ($( ".demo" ).css( "transform","translate3d(-1000px, 0px, 0px)") && (i==3)){
-      $(".demo").css("transform","translate3d(-760px, 0px, 0px)");
+    if ($( ".demo" ).css( "transform","translate3d(-960px, 0px, 0px)") && (i==3)){
+      $(".demo").css("transform","translate3d(-720px, 0px, 0px)");
+      $scope.currentDiv(10);
+
       i--;
       return i;
     } 
-    if ($( ".demo" ).css( "transform","translate3d(-760px, 0px, 0px)") && (i==2)){
+    if ($( ".demo" ).css( "transform","translate3d(-720px, 0px, 0px)") && (i==2)){
       $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
+      $scope.currentDiv(7);
+
       i--;
       return i;
     } 
     if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
       $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
+      $scope.currentDiv(4);
+
       i--;
       return i;
     } 
     else {
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+      $scope.currentDiv(1);
+
     }
   });
+
 }
 /************************************************************************************************/
 
