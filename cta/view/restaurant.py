@@ -48,9 +48,10 @@ def restaurant_api():
             restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
             for restaurant_obj in restaurant_list:
                 rating_restaurant_id.append(restaurant_obj.id)
-        if dish or collection or cuisine or rating:
+        if collection and cuisine and rating and dish
             common_id = list(set(cuisine_restaurant_id).intersection(collection_restaurant_id))
             common_id = list(set(dish_restaurant_id).intersection(common_id))
+            common_id = list(set(rating_restaurant_id).intersection(common_id))
             restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(common_id)).all()
         elif page:
             restaurants = Restaurant.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
