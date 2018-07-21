@@ -14,9 +14,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotel = {};
   $scope.myVar = false;
   var searchKey = '';
-  $scope.clearCoor = function () {
-    document.getElementById("demo").style.display = "none";
-}
+
   
  // $location.search=
 
@@ -55,7 +53,7 @@ angular.module('comparetravel', ['angular.filter'])
     console.log("status",searchKey);
     $scope.location=document.location.href;
     console.log("$scope.location",$scope.location);
-    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search);
+    window.open($scope.location + "/list?" +searchKey+ "=" + $scope.hotel.search,'_self');
     console.log("$scope.hotel.city",$scope.hotel.city)     
   } 
 
@@ -363,10 +361,10 @@ if(window.screen.availWidth <=440){
 
 
 //for detail page
-  $scope.showDetail=function(roomid){
-    window.open('/hotel/detail?id='+roomid,'_self');
-    
-  }
+$scope.showDetail=function(roomid){
+  window.open('/hotel/'+roomid,'_self');
+  
+}
 
 //for more deals tab  
   $scope.show = function() {

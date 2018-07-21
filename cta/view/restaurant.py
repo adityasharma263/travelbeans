@@ -143,6 +143,12 @@ def restaurant_association_api():
         args = request.args.to_dict()
         args.pop('page', None)
         args.pop('per_page', None)
+        # collection = request.args.get('collection')
+        # args.pop('collection', None)
+        # rating = request.args.get('rating')
+        # args.pop('rating', None)
+        # rating = request.args.get('rating')
+        # args.pop('rating', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         data = Association.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
@@ -153,6 +159,7 @@ def restaurant_association_api():
         post.save()
         result = AssociationSchema().dump(post)
         return jsonify({'result': {'association': result.data}, 'message': "Success", 'error': False})
+
 
 @app.route('/api/v1/restaurant/search', methods=['GET', 'POST'])
 def restaurant_search_api():
