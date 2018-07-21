@@ -695,7 +695,7 @@
                                     <div ng-repeat="deal in room.deals | orderBy : 'price'">
                                         <article class="box" ng-if="[[room.room_type]]==1">
                                             <figure class="col-sm-5 col-md-4">
-                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px" src="[[hotel.images[0].image_url]]" alt="Travel Beans">
+                                                <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="[[hotel.images[0].image_url]]" alt="Travel Beans">
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="myModal" role="dialog">
                                                     <div class="modal-dialog">
@@ -801,8 +801,8 @@
                                                         <a class="button btn-small green" ng-click="showDetail(room.id)">View Detail</a>
                                                         <a class="button btn-small yellow" data-toggle="collapse" data-target="#[[hotel.id]]">More Deals</a>                                            
                                                     </div>
-                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 ">
-                                                            <span class="price"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
+                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float:left">
+                                                            <span class="price" style="text-align: left"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                     </div>    
                                                 </div>
                                             </div>
@@ -811,7 +811,7 @@
                                                     
                                                         
 
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover" style="border-top: 0px solid #ddd">
                                                         
                                                         <tbody ng-repeat="rm in hotel.rooms">
                                                         <tr ng-repeat="deal in rm.deals | limitTo:lim ">
@@ -843,7 +843,7 @@
                                         
                                         <article class="box" ng-if="[[room.room_type]]==1">
                                             <figure class="col-sm-5 col-md-4">
-                                                    <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(deal.roomdata.hoteldata)" style="height:150px" src="[[deal.roomdata.hoteldata.images[0].image_url]]" alt="Travel Beans">
+                                                    <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(deal.roomdata.hoteldata)" style="height:150px; cursor: pointer" src="[[deal.roomdata.hoteldata.images[0].image_url]]" alt="Travel Beans">
                                                     <!-- Modal -->
                                                     <div class="modal fade" id="myModal" role="dialog">
                                                         <div class="modal-dialog">
@@ -956,8 +956,8 @@
 
                                                         <!-- <button class="button btn-small yellow" class="tablinks" onclick="opendeals(event, 'deals')">More Deals</button> -->
                                                     </div>
-                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 ">
-                                                            <span class="price"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
+                                                    <div class="amenities" ng-repeat="price in room.deals | orderBy : 'price' | unique:'website.website'| limitTo:3 " style="float: left;">
+                                                            <span class="price" style="text-align: left"><a href="[[price.hotel_url]]"><small>[[price.website.website]]</small>₹[[price.price]]</a></span>
                                                     </div>    
                                                 </div>
                                             </div>
@@ -968,7 +968,7 @@
 
                                                 <table class="table table-hover">
                                                     
-                                                    <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                                    <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" style="border-top: 0px solid #ddd;">
                                                     <tr ng-repeat="deal in rm.deals | limitTo:lim ">
                                                         <td><img src="[[deal.website.logo_image]]"></td>
                                                         <td ng-if="[[rm.room_type]]==1">Premium</td>
