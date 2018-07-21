@@ -67,4 +67,8 @@ def cab():
 def cab_admin():
     return render_template('cab/admin_cab.html')   
 
+@app.route('/cab/list', methods=['GET'])
+def cab_list():
+    return render_template('cab/cab_list.html')    
+
    
