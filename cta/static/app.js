@@ -949,13 +949,13 @@ $scope.createHotel = function() {
     dots[slideIndex-1].className += "w3-opacity-off";
   }
   var slideIndex = 1;
+
   
   var plusDivs=function(n) {
       showDivs(slideIndex += n);
   }
   
   $scope.currentDiv=function(n) {
-    console.log("n",n);
     showDivs(slideIndex = n);
   }
 
@@ -1023,53 +1023,56 @@ var getrooms=function(){
 
 
 /************************ slider jquery section  ************************************** */
-var i=0;
+var i=1;
 if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
-    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
-      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-      $scope.currentDiv(11);
+    var totalSlides=($scope.roomData.hotelData.images.length)/10;
+    var onSlideImage = (slideIndex+1)%10
 
-      i++;
-      return i;
-    } 
-  
-    if (($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==1)){
-      $(".demo").css("transform","translate3d(-1582px, 0px, 0px)");
-      $scope.currentDiv(21);
+    if(onSlideImage==1){
+      if (totalSlides>i){
+        var transform=-800*i;
+        document.body.style.setProperty('--txx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+        $scope.currentDiv((i*10)+1);
 
-      i++;
-      return i;
-    } 
-    else {
-
+        i++;
+        return i;
+      } 
+    }
+    else if(totalSlides< i) {
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
       $scope.currentDiv(1);
-
-      i=0;
+      i=1;
       return i;
     }
+    else{
+      slideIndex++;
+      $scope.currentDiv(slideIndex);
+      return slideIndex;
+    }
+    
   });
   
   $( ".flex-prev" ).click(function() {
-  
-    if ($( ".demo" ).css( "transform","translate3d(-1582px, 0px, 0px)") && (i==2)){
-      $(".demo").css("transform","translate3d(-791px, 0px, 0px)");
-      $scope.currentDiv(11);
-      i--;
-      return i;
-    } 
-  
-    if ($( ".demo" ).css( "transform","translate3d(-791px, 0px, 0px)") && (i==1)){
-      $(".demo").css("transform","translate3d(0px, 0px, 0px)");
-      $scope.currentDiv(1);
-      i--;
-      return i;
-    } 
-    else {
-      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-      $scope.currentDiv(1);
+    var backSlideImage = (slideIndex)%10
+    if (backSlideImage==1){
+      if(1<i){
+        i--;
+        var transform =-800*(i-1);
+        document.body.style.setProperty('--txx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+        $scope.currentDiv(i*10);
+        return i;
+      }
+     
+    }else{
+      if(slideIndex>1){
+        slideIndex--;
+        $scope.currentDiv(slideIndex);
+        return slideIndex;
+      }
     }
   });
 
@@ -1077,138 +1080,54 @@ if(window.screen.availWidth >=440){
 
 if(window.screen.availWidth <=440){
 
-  console.log(window.screen.availWidth);
-
   $( ".flex-next" ).click(function() {
-    if (($( ".demo" ).css( "transform","translate3d(0px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==0)){
-  
-      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
-      $scope.currentDiv(4);
-      i++;
-      return i;
-    } 
-  
-    if (($( ".demo" ).css( "transform","translate3d(-240px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==1)){
-  
-      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
-      $scope.currentDiv(7);
+    console.log(window.screen.availWidth);
+    var totalSlides=($scope.roomData.hotelData.images.length)/3;
+    var onSlideImage = (slideIndex+1)%3
 
-      i++;
-      return i;
-    } 
-    if (($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 10) && (i==2)){
-  
-      $(".demo").css("transform","translate3d(-720px, 0px, 0px)");
-      $scope.currentDiv(10);
+    if(onSlideImage==1){
+      if (totalSlides>i){
+        var transform=-240*i;
+        document.body.style.setProperty('--stx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
+        $scope.currentDiv((i*3)+1);
 
-      i++;
-      return i;
-    } 
-    if (($( ".demo" ).css( "transform","translate3d(-720px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==3)){
-  
-      $(".demo").css("transform","translate3d(-960px, 0px, 0px)");
-      $scope.currentDiv(13);
-
-      i++;
-      return i;
-    } 
-    if (($( ".demo" ).css( "transform","translate3d(-960px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==4)){
-  
-      $(".demo").css("transform","translate3d(-1200px, 0px, 0px)");
-      $scope.currentDiv(16);
-
-      i++;
-      return i;
-    } 
-    if (($( ".demo" ).css( "transform","translate3d(-1200px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==5)){
-  
-      $(".demo").css("transform","translate3d(-1440px, 0px, 0px)");
-      $scope.currentDiv(19);
-
-      i++;
-      return i;
-    } 
-    if (($( ".demo" ).css( "transform","translate3d(-1440px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==6)){
-  
-      $(".demo").css("transform","translate3d(-1680px, 0px, 0px)");
-      $scope.currentDiv(22);
-
-      i++;
-      return i;
-    } 
-    if (($( ".demo" ).css( "transform","translate3d(-1680px, 0px, 0px)")) && ($scope.roomData.hotelData.images.length >= 20) && (i==7)){
-  
-      $(".demo").css("transform","translate3d(-1920px, 0px, 0px)");
-      $scope.currentDiv(25);
-
-      i++;
-      return i;
-    } 
-    else {
+        i++;
+        return i;
+      } 
+    }
+    else if(totalSlides< i) {
       $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
       $scope.currentDiv(1);
-
-      i=0;
+      i=1;
       return i;
+    }
+    else{
+      slideIndex++;
+      $scope.currentDiv(slideIndex);
+      return slideIndex;
     }
   });
   
   $( ".flex-prev" ).click(function() {
-  
-    if ($( ".demo" ).css( "transform","translate3d(-1920px, 0px, 0px)") && (i==7)){
-      $(".demo").css("transform","translate3d(-1680px, 0px, 0px)");
-      $scope.currentDiv(22);
 
-      i--;
-      return i;
-    } 
-  
-    if ($( ".demo" ).css( "transform","translate3d(-1680px, 0px, 0px)") && (i==6)){
-      $(".demo").css("transform","translate3d(-1440px, 0px, 0px)");
-      $scope.currentDiv(19);
-
-      i--;
-      return i;
-    } 
-    if ($( ".demo" ).css( "transform","translate3d(-1440px, 0px, 0px)") && (i==5)){
-      $(".demo").css("transform","translate3d(-1200px, 0px, 0px)");
-      $scope.currentDiv(16);
-
-      i--;
-      return i;
-    } 
-    if ($( ".demo" ).css( "transform","translate3d(-1200px, 0px, 0px)") && (i==4)){
-      $(".demo").css("transform","translate3d(-960px, 0px, 0px)");
-      $scope.currentDiv(13);
-
-      i--;
-      return i;
-    } 
-    if ($( ".demo" ).css( "transform","translate3d(-960px, 0px, 0px)") && (i==3)){
-      $(".demo").css("transform","translate3d(-720px, 0px, 0px)");
-      $scope.currentDiv(10);
-
-      i--;
-      return i;
-    } 
-    if ($( ".demo" ).css( "transform","translate3d(-720px, 0px, 0px)") && (i==2)){
-      $(".demo").css("transform","translate3d(-480px, 0px, 0px)");
-      $scope.currentDiv(7);
-
-      i--;
-      return i;
-    } 
-    if ($( ".demo" ).css( "transform","translate3d(-480px, 0px, 0px)") && (i==1)){
-      $(".demo").css("transform","translate3d(-240px, 0px, 0px)");
-      $scope.currentDiv(4);
-
-      i--;
-      return i;
-    } 
-    else {
-      $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
-      $scope.currentDiv(1);
-
+    var backSlideImage = (slideIndex)%3
+    if (backSlideImage==1){
+      if(1<i){
+        i--;
+        var transform =-240*(i-1);
+        document.body.style.setProperty('--stx',transform+'px');
+        $(".demo").css("transform","translate3d(var(--stx), 0px, 0px)");
+        $scope.currentDiv(i*3);
+        return i;
+      }
+     
+    }else{
+      if(slideIndex>1){
+        slideIndex--;
+        $scope.currentDiv(slideIndex);
+        return slideIndex;
+      }
     }
   });
 
