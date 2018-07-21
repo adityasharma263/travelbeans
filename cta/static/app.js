@@ -910,7 +910,7 @@ $scope.createHotel = function() {
   $scope.limit=10;
   $scope.deallimit=1;
 
-  
+  window.onresize = function(){ location.reload(); }
   
   var showDivs=function(n) {
     var i;
