@@ -1022,12 +1022,52 @@ var getrooms=function(){
 
 /************************ slider jquery section  ************************************** */
 var i=1;
+// var j=1;
 if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
+    
     var totalSlides=($scope.roomData.hotelData.images.length)/10;
     var onSlideImage = (slideIndex+1)%10
+    // var lastSlides=totalSlides.toString().split(".")[1]+1;
+    // if(onSlideImage==1){
+    //   if ((totalSlides-1)>i){
+    //     var transform=-800*i;
+    //     document.body.style.setProperty('--txx',transform+'px');
+    //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+    //     $scope.currentDiv((i*10)+1);
 
+    //     i++;
+    //     return i;
+    //   } 
+    //   else if(((lastSlides)>j)&&((totalSlides-1)<i)){
+    //     console.log("2nd if");
+    //     var transform=-(80*j+(800*(i-1)));
+    //     console.log("transform",transform);
+    //     document.body.style.setProperty('--txx',transform+'px');
+    //     $(".demo").css("transform","translate3d(var(--txx), 0px, 0px)");
+    //     $scope.currentDiv((i*10)+1);
+  
+    //     j++;
+    //     return j;
+  
+    //   }
+     
+    // }
+    // else if(lastSlides < j) {
+    //   console.log("3 rd if");
+    //   $(".demo").css("transform","translate3d(0px, 0px, 0px)" );
+    //   $scope.currentDiv(1);
+    //   j=1;
+    //   i=1;
+    //   return i;
+    //   return j;
+    // }
+    // else{
+    //   slideIndex++;
+    //   $scope.currentDiv(slideIndex);
+    //   return slideIndex;
+    // }
     if(onSlideImage==1){
       if (totalSlides>i){
         var transform=-800*i;
