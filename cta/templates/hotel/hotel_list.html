@@ -739,7 +739,7 @@
                                                         <h4 class="box-title">[[hotel.name]]<small>
                                                             
                                                         <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                                                        <span id="latitude" ng-click="openMap(hotel)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.address]],[[hotel.city]]</span></small></h4>
+                                                        <span id="latitude" style="cursor:pointer" ng-click="openMap(hotel)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[hotel.latitude]]"  data-longitude ='[[hotel.longitude]]'>[[hotel.address]],[[hotel.city]]</span></small></h4>
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
@@ -807,7 +807,7 @@
                                                 </div>
                                             </div>
 
-                                                <div id="[[hotel.id]]" class="collapse">
+                                                <div id="[[hotel.id]]" class="collapse" style="transition:2s">
                                                     
                                                         
 
@@ -889,7 +889,7 @@
                                                 <div>
                                                     <div>
                                                         <h4 class="box-title">[[deal.roomdata.hoteldata.name]]<small>
-                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> <span id="latitude" ng-click="openMap(deal.roomdata.hoteldata)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[deal.roomdata.hoteldata.latitude]]"  data-longitude ='[[deal.roomdata.hoteldata.longitude]]'>[[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</span></small></h4>
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i> <span id="latitude" style="cursor:pointer" ng-click="openMap(deal.roomdata.hoteldata)" data-toggle="modal" data-target="#mapModal" data-latitude = "[[deal.roomdata.hoteldata.latitude]]"  data-longitude ='[[deal.roomdata.hoteldata.longitude]]'>[[deal.roomdata.hoteldata.address]],[[deal.roomdata.hoteldata.city]]</span></small></h4>
                                                             
                                                         <div class="modal fade" id="mapModal" role="dialog">
                                                             <div class="modal-dialog">
@@ -962,7 +962,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="[[deal.roomdata.hoteldata.id]]" class="collapse">
+                                            <div id="[[deal.roomdata.hoteldata.id]]" class="collapse" style="transition:2s">
                                                  
                                                     
 
