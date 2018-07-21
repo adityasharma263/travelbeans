@@ -840,7 +840,6 @@
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'roomdata.hotel' | limitTo:limit">
                                     <div ng-repeat="room in deal.roomdata.hoteldata.rooms">
-                                        
                                         <article class="box" ng-if="[[room.room_type]]==1">
                                             <figure class="col-sm-5 col-md-4">
                                                     <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(deal.roomdata.hoteldata)" style="height:150px; cursor: pointer" src="[[deal.roomdata.hoteldata.images[0].image_url]]" alt="Travel Beans">
