@@ -693,7 +693,7 @@
                             <div class="hotel-list listing-style3 hotel" ng-repeat="hotel in hotelData | limitTo:limit">
                                 <div ng-repeat="room in hotel.rooms">
                                     <div ng-repeat="deal in room.deals | orderBy : 'price'">
-                                        <article class="box" ng-if="[[room.room_type]]==1">
+                                        <article class="box" ng-if="[[room.room_type]]==1 && [[room.breakfast]]=='false' && [[room.balcony]]=='false'">
                                             <figure class="col-sm-5 col-md-4">
                                                 <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(hotel)" style="height:150px; cursor: pointer" src="[[hotel.images[0].image_url]]" alt="Travel Beans">
                                                 <!-- Modal -->
@@ -840,7 +840,7 @@
                             </div>
                             <div class="hotel-list listing-style3 hotel" ng-repeat="deal in deals | unique:'roomdata.hotel' | limitTo:limit">
                                     <div ng-repeat="room in deal.roomdata.hoteldata.rooms">
-                                        <article class="box" ng-if="[[room.room_type]]==1">
+                                        <article class="box" ng-if="[[room.room_type]]==1 && [[room.breakfast]]=='false' && [[room.balcony]]=='false'">
                                             <figure class="col-sm-5 col-md-4">
                                                     <img data-toggle="modal" data-target="#myModal" ng-click="openGallery(deal.roomdata.hoteldata)" style="height:150px; cursor: pointer" src="[[deal.roomdata.hoteldata.images[0].image_url]]" alt="Travel Beans">
                                                     <!-- Modal -->
