@@ -55,3 +55,9 @@ def restaurant_detail(restaurant_id):
     restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
     restaurant_data = requests.get(url=restaurant_api_url, params={id: restaurant_id}).json()
     return render_template("restaurant/restaurant_detail.html", restaurant_detail=restaurant_data)
+
+@app.route("/restaurant/search/suggestion", methods=["GET"])
+def restaurant_search_sugg():
+    args = request.args
+    
+    return ""
