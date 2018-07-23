@@ -745,7 +745,7 @@
                                         <div class="photo-gallery style1" data-animation="slide" data-sync="#photos-tab .image-carousel">
                                             
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
-                                            <ul class="slides " style="width: 30000%; transition-duration: 0.6s;">
+                                            <ul class="slides slider" style="width: 4000%; transition-duration: 0.6s;">
                                                 <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style=" float: left; display: block;" ><img src="[[image.image_url]]" alt="" draggable="false"></li>
                                             </ul>
                                         </div>
@@ -760,7 +760,7 @@
                                         </div>
                                         <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
                                             
-                                        <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 2600%; ">
+                                        <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 3000%; ">
                                                 <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images" class="" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img class="img"  src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
