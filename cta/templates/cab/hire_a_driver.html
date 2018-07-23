@@ -1,0 +1,523 @@
+<section id="content" class="gray-area">
+<div class="container">
+        <div id="main">
+                <div class="sort-by-section clearfix">
+                        <div class="search-tab-content">
+                                <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
+                                <form action="car-list-view.html" method="post">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h4 class="title">Where</h4>
+                                            <div class="form-group">
+                                                <label>Pick Up</label>
+                                                <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Drop Off</label>
+                                                <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <h4 class="title">When</h4>
+                                            <div class="form-group">
+                                                <label>Pick-Up Date / Time</label>
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <div class="datepicker-wrap">
+                                                            <input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1532023224428"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="selector">
+                                                            <select class="full-width">
+                                                                <option value="1">anytime</option>
+                                                                <option value="2">morning</option>
+                                                            </select><span class="custom-select full-width">anytime</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Drop-Off Date / Time</label>
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <div class="datepicker-wrap">
+                                                            <input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1532023224429"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="selector">
+                                                            <select class="full-width">
+                                                                <option value="1">anytime</option>
+                                                                <option value="2">morning</option>
+                                                            </select><span class="custom-select full-width">anytime</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit" class="full-width" style="margin-top: 100px">SEARCH NOW</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                    </div>                        
+        <div class="row" style="margin-top:15px;">
+            <div class="col-sm-4 col-md-3">
+                <h4 class="search-results-title"><i class="soap-icon-search"></i><b>627</b> results found.</h4>
+                <div class="toggle-container filters-container">
+                        <div class="panel style1 arrow-right">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#cartype-filter" class="collapsed">Type of car</a>
+                                </h4>
+                                <div id="cartype-filter" class="panel-collapse collapse filters-container">
+                                    <div class="panel-content">
+                                        <ul class="check-square filters-option">
+                                            <li><a href="#">Full Size<small>(10)</small></a></li>
+                                            <li><a href="#">Compact<small>(82)</small></a></li>
+                                            <li class="active"><a href="#">Economy<small>(127)</small></a></li>
+                                            <li><a href="#">Luxury / Premium<small>(22)</small></a></li>
+                                            <li><a href="#">Mini Car<small>(38)</small></a></li>
+                                            <li><a href="#">Van / Minivan<small>(39)</small></a></li>
+                                            <li><a href="#">Exotic / Special<small>(72)</small></a></li>
+                                        </ul>
+                                        <a class="button btn-mini">MORE</a>
+                                    </div>
+                                </div>
+                            </div>
+                    <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
+                            </h4>
+                            <div id="price-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <div id="price-range"></div>
+                                    <br />
+                                    <span class="min-price-label pull-left"></span>
+                                    <span class="max-price-label pull-right"></span>
+                                    <div class="clearer"></div>
+                                </div><!-- end content -->
+                            </div>
+                        </div>
+                        <div class="panel style1 arrow-right">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="Base-Fare-filter" class="collapsed">Base Fare</a>
+                                </h4>
+                                <div id="Base-Fare-filter" class="panel-collapse collapse">
+                                    <div class="panel-content">
+                                        <div id="price-range"></div>
+                                        <br />
+                                        <span class="min-price-label pull-left"></span>
+                                        <span class="max-price-label pull-right"></span>
+                                        <div class="clearer"></div>
+                                    </div><!-- end content -->
+                                </div>
+                            </div>
+                            <div class="panel style1 arrow-right">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#Free-Km-filter" class="collapsed">Free Km</a>
+                                    </h4>
+                                    <div id="Free-Km-filter" class="panel-collapse collapse">
+                                        <div class="panel-content">
+                                            <div id="price-range"></div>
+                                            <br />
+                                            <span class="min-price-label pull-left"></span>
+                                            <span class="max-price-label pull-right"></span>
+                                            <div class="clearer"></div>
+                                        </div><!-- end content -->
+                                    </div>
+                                </div>
+                                <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#Air-Condition-filter" class="collapsed">Air Condition</a>
+                                        </h4>
+                                        <div id="Air-Condition-filter" class="panel-collapse collapse">
+                                            <div class="panel-content">
+                                                <div id="price-range"></div>
+                                                <br />
+                                                <span class="min-price-label pull-left"></span>
+                                                <span class="max-price-label pull-right"></span>
+                                                <div class="clearer"></div>
+                                            </div><!-- end content -->
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#Seater-filter" class="collapsed">Seater</a>
+                                            </h4>
+                                            <div id="Seater-filter" class="panel-collapse collapse">
+                                                <div class="panel-content">
+                                                    <div id="price-range"></div>
+                                                    <br />
+                                                    <span class="min-price-label pull-left"></span>
+                                                    <span class="max-price-label pull-right"></span>
+                                                    <div class="clearer"></div>
+                                                </div><!-- end content -->
+                                            </div>
+                                        </div>
+                                        <div class="panel style1 arrow-right">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#price-filter" class="collapsed">Fuel Type</a>
+                                                </h4>
+                                                <div id="Fuel Type-filter" class="panel-collapse collapse">
+                                                    <div class="panel-content">
+                                                        <div id="price-range"></div>
+                                                        <br />
+                                                        <span class="min-price-label pull-left"></span>
+                                                        <span class="max-price-label pull-right"></span>
+                                                        <div class="clearer"></div>
+                                                    </div><!-- end content -->
+                                                </div>
+                                            </div>
+                                            <div class="panel style1 arrow-right">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" href="#price-filter" class="collapsed">Transmission</a>
+                                                    </h4>
+                                                    <div id="Transmission-filter" class="panel-collapse collapse">
+                                                        <div class="panel-content">
+                                                            <div id="price-range"></div>
+                                                            <br />
+                                                            <span class="min-price-label pull-left"></span>
+                                                            <span class="max-price-label pull-right"></span>
+                                                            <div class="clearer"></div>
+                                                        </div><!-- end content -->
+                                                    </div>
+                                                </div>
+                                                <div class="panel style1 arrow-right">
+                                                        <h4 class="panel-title">
+                                                            <a data-toggle="collapse" href="#Baggage-Allowance-filter" class="collapsed">Baggage Allowance</a>
+                                                        </h4>
+                                                        <div id="Baggage-Allowance-filter" class="panel-collapse collapse">
+                                                            <div class="panel-content">
+                                                                <div id="price-range"></div>
+                                                                <br />
+                                                                <span class="min-price-label pull-left"></span>
+                                                                <span class="max-price-label pull-right"></span>
+                                                                <div class="clearer"></div>
+                                                            </div><!-- end content -->
+                                                        </div>
+                                                    </div>
+                    
+                    <div class="panel style1 arrow-right">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#Doorstep-Delivery-filter" class="collapsed">Doorstep Delivery</a>
+                        </h4>
+                        <div id="Doorstep-Delivery-filter" class="panel-collapse collapse filters-container">
+                            <div class="panel-content">
+                                <ul class="check-square filters-option">
+                                    <li><a href="#">Full Size<small>(10)</small></a></li>
+                                    <li><a href="#">Compact<small>(82)</small></a></li>
+                                    <li class="active"><a href="#">Economy<small>(127)</small></a></li>
+                                    <li><a href="#">Luxury / Premium<small>(22)</small></a></li>
+                                    <li><a href="#">Mini Car<small>(38)</small></a></li>
+                                    <li><a href="#">Van / Minivan<small>(39)</small></a></li>
+                                    <li><a href="#">Exotic / Special<small>(72)</small></a></li>
+                                </ul>
+                                <a class="button btn-mini">MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel style1 arrow-right">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#With-Without-Fuel-filter" class="collapsed">With / Without Fuel</a>
+                        </h4>
+                        <div id="With-Without-Fuel-filter" class="panel-collapse collapse">
+                            <div class="panel-content">
+                                <ul class="check-square filters-option">
+                                    <li><a href="#">Fox Rent A Car<small>(08)</small></a></li>
+                                    <li><a href="#">Payless<small>(32)</small></a></li>
+                                    <li class="active"><a href="#">Ez rent a car<small>(227)</small></a></li>
+                                    <li><a href="#">Thrifty<small>(22)</small></a></li>
+                                    <li><a href="#">Enterprise<small>(18)</small></a></li>
+                                    <li><a href="#">Alamo<small>(29)</small></a></li>
+                                    <li><a href="#">Dollar<small>(12)</small></a></li>
+                                </ul>
+                                <a class="button btn-mini">MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel style1 arrow-right">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#Fuel-Capacit-filter" class="collapsed">Fuel Capacity </a>
+                        </h4>
+                        <div id="Fuel-Capacity-filter" class="panel-collapse collapse">
+                            <div class="panel-content">
+                                <ul class="check-square filters-option">
+                                    <li><a href="#">Passenger Quantity</a></li>
+                                    <li class="active"><a href="#">Satellite Navigation</a></li>
+                                    <li class="active"><a href="#">Air Conditioning</a></li>
+                                    <li><a href="#">Doors</a></li>
+                                    <li><a href="#">Diesel Vehicle</a></li>
+                                </ul>
+                                <a class="button btn-mini">MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel style1 arrow-right">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#Verified-Driver-panel" class="collapsed">Verified Driver</a>
+                        </h4>
+                        <div id="Verified-Driver-panel" class="panel-collapse collapse">
+                            <div class="panel-content">
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label>pickup from</label>
+                                        <input type="text" class="input-text full-width" placeholder="city, district, or specific airpot" value="" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>pick-up date</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" name="date_from" class="input-text full-width" placeholder="mm/dd/yy" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>drop-off date</label>
+                                        <div class="datepicker-wrap">
+                                            <input type="text" name="date_to" class="input-text full-width" placeholder="mm/dd/yy" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <button class="btn-medium icon-check uppercase full-width">search again</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-9">        
+                <div class="car-list listing-style3 car" style="margin-top:0px">
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/7.png"></span>
+                        </figure>
+                        <div class="details col-xs-9 clearfix">
+                            <div class="col-sm-8">
+                                <div class="clearfix">
+                                    <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                    <div class="logo">
+                                        <img src="images/cars/logo/1.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="amenities">
+                                    <ul>
+                                        <li><i class="soap-icon-user circle"></i>4</li>
+                                        <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                        <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                        <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                        <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+<!-- 
+                                        <li><i class="soap-icon-suitcase circle"></i>Seater</li>
+                                        <li><i class="soap-icon-aircon circle"></i>Fuel Type</li>
+                                        <li><i class="soap-icon-fueltank circle"></i>Transmission</li>
+                                        <li><i class="soap-icon-fmstereo circle"></i>Baggage Allowance</li>
+                                        <li><i class="soap-icon-suitcase circle"></i>Doorstep Delivery</li>
+                                        <li><i class="soap-icon-aircon circle"></i>With / Without Fuel</li>
+                                        <li><i class="soap-icon-fueltank circle"></i>Fuel Capacity </li>
+                                        <li><i class="soap-icon-fmstereo circle"></i>Verified Driver</li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                    <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                            </div>
+                            <div class="action col-xs-6 col-sm-2">
+                                <span class="price"><small>per day</small>$45.39</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/10.png"></span>
+                        </figure>
+                        <div class="details col-xs-9 clearfix">
+                                <div class="col-sm-8">
+                                    <div class="clearfix">
+                                        <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                        <div class="logo">
+                                            <img src="images/cars/logo/1.png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="amenities">
+                                        <ul>
+                                            <li><i class="soap-icon-user circle"></i>4</li>
+                                            <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                            <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                            <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                            <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                        <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                                </div>
+                                <div class="action col-xs-6 col-sm-2">
+                                    <span class="price"><small>per day</small>$45.39</span>
+                                </div>
+                            </div>
+                    </article>
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/9.png"></span>
+                        </figure>
+                        <div class="details col-xs-9 clearfix">
+                                <div class="col-sm-8">
+                                    <div class="clearfix">
+                                        <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                        <div class="logo">
+                                            <img src="images/cars/logo/1.png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="amenities">
+                                        <ul>
+                                            <li><i class="soap-icon-user circle"></i>4</li>
+                                            <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                            <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                            <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                            <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                        <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                                </div>
+                                <div class="action col-xs-6 col-sm-2">
+                                    <span class="price"><small>per day</small>$45.39</span>
+                                </div>
+                            </div>
+                    </article>
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/11.png"></span>
+                        </figure>
+                        <div class="details col-xs-9 clearfix">
+                                <div class="col-sm-8">
+                                    <div class="clearfix">
+                                        <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                        <div class="logo">
+                                            <img src="images/cars/logo/1.png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="amenities">
+                                        <ul>
+                                            <li><i class="soap-icon-user circle"></i>4</li>
+                                            <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                            <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                            <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                            <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                        <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                                </div>
+                                <div class="action col-xs-6 col-sm-2">
+                                    <span class="price"><small>per day</small>$45.39</span>
+                                </div>
+                            </div>
+                    </article>
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/12.png"></span>
+                        </figure>
+                        <div class="details col-xs-9 clearfix">
+                                <div class="col-sm-8">
+                                    <div class="clearfix">
+                                        <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                        <div class="logo">
+                                            <img src="images/cars/logo/1.png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="amenities">
+                                        <ul>
+                                            <li><i class="soap-icon-user circle"></i>4</li>
+                                            <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                            <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                            <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                            <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                        <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                                </div>
+                                <div class="action col-xs-6 col-sm-2">
+                                    <span class="price"><small>per day</small>$45.39</span>
+                                </div>
+                            </div>
+                    </article>
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/13.png"></span>
+                        </figure>
+                        <div class="details col-xs-9 clearfix">
+                                <div class="col-sm-8">
+                                    <div class="clearfix">
+                                        <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                        <div class="logo">
+                                            <img src="images/cars/logo/1.png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="amenities">
+                                        <ul>
+                                            <li><i class="soap-icon-user circle"></i>4</li>
+                                            <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                            <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                            <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                            <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                        <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                                </div>
+                                <div class="action col-xs-6 col-sm-2">
+                                    <span class="price"><small>per day</small>$45.39</span>
+                                </div>
+                            </div>
+                    </article>
+                    <article class="box">
+                        <figure class="col-xs-3">
+                            <span><img width="189" height="120" alt="" src="images/cars/14.png"></span>
+                        </figure>
+                         <div class="details col-xs-9 clearfix">
+                                <div class="col-sm-8">
+                                    <div class="clearfix">
+                                        <h4 class="box-title">Economy Car<small>bmw mini</small></h4>
+                                        <div class="logo">
+                                            <img src="images/cars/logo/1.png" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="amenities">
+                                        <ul>
+                                            <li><i class="soap-icon-user circle"></i>4</li>
+                                            <li><i class="soap-icon-suitcase circle"></i>3</li>
+                                            <li><i class="soap-icon-aircon circle"></i>AC</li>
+                                            <li><i class="soap-icon-fueltank circle"></i>12</li>
+                                            <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                        <a class="button btn-small yellow" style="padding:0 8px;" data-target="">More Deals</a>
+                                </div>
+                                <div class="action col-xs-6 col-sm-2">
+                                    <span class="price"><small>per day</small>$45.39</span>
+                                </div>
+                            </div>
+                    </article>
+                
+                   
+                 
+                   
+                </div>
+                <a href="#" class="button uppercase full-width btn-large">load more listings</a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
