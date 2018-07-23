@@ -18,8 +18,10 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -ms-overflow-style: scrollbar;
-    oveflow-y: scroll
+    overflow-y: scroll
 }
+
+
 
 iframe,img {
     border: 0

@@ -55,19 +55,15 @@ def restaurant_api():
             restaurant_list = Association.query.filter(Association.dish_id == dish_id).all()
             for restaurant_obj in restaurant_list:
                 dish_restaurant_id.append(restaurant_obj.restaurant_id)
-            restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(dish_restaurant_id)).all()
-            
-        elif rating:
-            restaurants = Restaurant.query.filter(Restaurant.rating >= rating).all()
-            # for restaurant_obj in restaurant_list:
-            #     rating_restaurant_id.append(restaurant_obj.id)
-            # restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(rating_restaurant_id)).all()
-            
-        # if collection and cuisine and rating and dish:
-        #     common_id = list(set(cuisine_restaurant_id).intersection(collection_restaurant_id))
-        #     common_id = list(set(dish_restaurant_id).intersection(common_id))
-        #     common_id = list(set(rating_restaurant_id).intersection(common_id))
-            # restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(common_id)).all()
+        if rating:
+            restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
+            for restaurant_obj in restaurant_list:
+                rating_restaurant_id.append(restaurant_obj.id)
+        if collection and cuisine and rating and dish:
+            common_id = list(set(cuisine_restaurant_id).intersection(collection_restaurant_id))
+            common_id = list(set(dish_restaurant_id).intersection(common_id))
+            common_id = list(set(rating_restaurant_id).intersection(common_id))
+            restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(common_id)).all()
         elif page:
             restaurants = Restaurant.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         else:
