@@ -14,7 +14,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotel = {};
   $scope.myVar = false;
   $scope.resp = false;
-  var searchKey = '';
+  var searchKey = 'city';
 
   
  // $location.search=
