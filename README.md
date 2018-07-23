@@ -14,7 +14,7 @@ compare the top travel website's price
     source venv/bin/activate
     
 #### install requirements
-    pip3 install -r requirements/default.txt
+    pip3 install -r requirement.txt
     
 #### upgrade migration
     python manage.py db upgrade
