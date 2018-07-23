@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from cta.model.restaurant import Restaurant, RestaurantAmenity, RestaurantImage,\
-    Tag, Collection, Cuisine, Association, Dish
+    Menu, Collection, Cuisine, Association, Dish
 
 
 
 from cta import ma
 
 
-class TagSchema(ma.ModelSchema):
+class MenuSchema(ma.ModelSchema):
     class Meta:
-        model = Tag
+        model = Menu
         exclude = ('updated_at', 'created_at')
 
 
@@ -57,7 +57,7 @@ class AssociationSchema(ma.ModelSchema):
 class RestaurantSchema(ma.ModelSchema):
     amenities = ma.Nested(RestaurantAmenitySchema, many=False)
     images = ma.Nested(RestaurantImageSchema, many=True)
-    tags = ma.Nested(TagSchema, many=False)
+    menus = ma.Nested(MenuSchema, many=False)
     association = ma.Nested(AssociationSchema, many=True)
 
     class Meta:
