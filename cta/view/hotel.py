@@ -408,12 +408,11 @@ def deal_api():
         else:
             price = Deal.query.filter_by(**args).all()
         result = DealSchema(many=True).dump(price)
-        if no_of_days >= 1:
-            for deal in result.data:
-                if deal["room"]:
-                    deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
-                if deal['price']:
-                    deal['price'] = int(deal["price"]) * no_of_days
+        for deal in result.data:
+            if deal["room"]:
+                deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
+            if no_of_days >= 1 and deal['price']:
+                deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
