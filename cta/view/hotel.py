@@ -370,6 +370,8 @@ def deal_api():
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
+        hotel_id = request.args.get('hotel_id', None)
+        args.pop('hotel_id', None)
         if check_in and check_out:
             no_of_days = int(check_out) - int(check_in)
             sec = datetime.timedelta(seconds=int(no_of_days))
@@ -402,18 +404,24 @@ def deal_api():
         args.pop('per_page', None)
         args.pop('check_in', None)
         args.pop('check_out', None)
-        if price_start and price_end:
+        hotel_room_id = []
+        price = []
+        if hotel_id:
+            rooms_list = Room.query.filter(Room.hotel_id == hotel_id).all()
+            for room_obj in rooms_list:
+                hotel_room_id.append(room_obj.id)
+                price = Deal.query.filter_by(**args).filter(Deal.room_id.in_(hotel_room_id)).all()
+        elif price_start and price_end:
             price = Deal.query.filter_by(**args)\
                 .filter(Deal.price >= price_start, Deal.price <= price_end).all()
         else:
             price = Deal.query.filter_by(**args).all()
         result = DealSchema(many=True).dump(price)
-        if no_of_days >= 1:
-            for deal in result.data:
-                if deal["room"]:
-                    deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
-                if deal['price']:
-                    deal['price'] = int(deal["price"]) * no_of_days
+        for deal in result.data:
+            # if deal["room"]:
+            #     deal["hotel_id"] = Room.query.filter(Room.id == deal["room"]).first().hotel_id
+            if no_of_days >= 1 and deal['price']:
+                deal['price'] = int(deal["price"]) * no_of_days
         return jsonify({'result': {'deal': result.data}, 'message': "Success", 'error': False})
     else:
         post = Deal(**request.json)
