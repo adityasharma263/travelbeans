@@ -78,6 +78,12 @@ angular.module('comparetravel', ['angular.filter'])
       else{
         $scope.resp = false;
       }
+      if($scope.cities.length==0 && $scope.names.length!=0){
+         searchKey = 'name';
+      }
+      if($scope.cities.length!=0 && $scope.names.length==0){
+        searchKey = 'city';
+     }
 
   })
 
