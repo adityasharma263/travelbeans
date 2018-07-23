@@ -13,6 +13,7 @@ angular.module('comparetravel', ['angular.filter'])
   $scope.hotelid = {};// hotel object on the basis of id
   $scope.hotel = {};
   $scope.myVar = false;
+  $scope.resp = false;
   var searchKey = '';
 
   
@@ -70,6 +71,19 @@ angular.module('comparetravel', ['angular.filter'])
       $scope.cities = response.data.result.cities;
       $scope.names = response.data.result.names;
       console.log("ye h",$scope.cities,response.data.result.names);
+      if($scope.cities.length==0 && $scope.names.length==0){
+         $scope.resp = true;
+
+      }
+      else{
+        $scope.resp = false;
+      }
+      if($scope.cities.length==0 && $scope.names.length!=0){
+         searchKey = 'name';
+      }
+      if($scope.cities.length!=0 && $scope.names.length==0){
+        searchKey = 'city';
+     }
 
   })
 
@@ -769,6 +783,7 @@ loadDeals=function(){
   })
   var sendPostHotel = function(url, data) {
     $scope.hotel.city = $scope.hotel.city.toLowerCase();
+    $scope.hotel.name = $scope.hotel.name.toLowerCase();
     console.log(data);
     
     $http({
