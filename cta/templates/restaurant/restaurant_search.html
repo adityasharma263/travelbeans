@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <!-- saved from url=(0074)http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html -->
-<html class=" js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
-<!--<![endif]-->
+<html ng-app="restaurantApp" class=" js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Page Title -->
-    <title>Travelo - Travel, Tour Booking HTML5 Template</title>
 
-    <!-- Meta Tags -->
+    <title>Travelo - Travel, Tour Booking HTML5 Template</title>
 
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Travelo - Travel, Tour Booking HTML5 Template">
@@ -17,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="http://www.soaptheme.net/html/travelo/favicon.ico" type="image/x-icon">
 
-    <!-- Theme Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/bootstrap.min.css">
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/font-awesome.min.css">
     <link href="/Home Page With Chefs Recipies_files/css" rel="stylesheet" type="text/css">
@@ -25,28 +21,22 @@
 
     <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-orange.css">
 
-    <!-- Updated Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/updates.css">
 
-    <!-- Custom Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/custom.css">
 
-    <!-- Responsive Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/responsive.css">
 
-    <!-- CSS for IE -->
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" type="text/css" href="css/ie.css" />
-    <![endif]-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
+    <script type="text/javascript">
+        var DOMAIN_URL = "{{config['DOMAIN_URL']}}";
+    </script>
+    <script type="text/javascript" src="/restaurant_js/app.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
-    <![endif]-->
 </head>
 
-<body>
+<body ng-controller="searchController">
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="main-header">
@@ -1414,7 +1404,6 @@
 
 
         <section id="content">
-
             <div class="banner imagebg-container" style="height: 150px; background-image: url(https://ferepaketo.gr/upload/1478076860-food-banneraki.jpg);">
                 <div class="container">
                     <h2 class="med-caption">We're Bring You The Best Taste ,
@@ -1567,71 +1556,131 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="filter-container">
-                        <h2>Filters</h2>
-                        <div class="book-table-filter">
-                            <a href="http://localhost:5001/restaurant/search?book_a_table=true">
-                                <input id="book_table" type="checkbox">
-                                <label for="book_table">Book a table</label>
-                            </a>
-                        </div>
+            <div class="container">
+                <div class="row ">
+                    <div class="col-sm-3 ">
+                        <div class="filter-container card">
+                            <h2>Filters</h2>
+                            <!-- <div class="collection-filter">
+                            <h3>Collection</h3>
+                            <span ng-repeat="collection_name in collection">
+                                <input type="radio" name="collection" ng-model="$parent.radioValue" value="[[collection_name.collection]]" ng-change="getFilterRestaurant('collection',collection_name.collection)">[[collection_name.collection]]
+                                </br>
+                            </span>
 
-                        <div class="order-online-filter">
-                            <input type="checkbox" name="order_online" id="order-online">
-                            <label for="order-online">Order online</label>
-                        </div>
+                        </div> -->
+                            <hr>
+                            <div class="order-online-filter">
+                                <h3>Cuisine</h3>
+                                <span ng-repeat="cuisine_name in cuisine">
+                                    <input type="radio" name="cuisine" ng-model="$parent.radioValue" value="[[cuisine_name.cuisine]]" ng-change="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
+                                    <br>
+                                </span>
+                            </div>
 
-                        <div class="book-a-party-filter">
-                            <input type="checkbox" name="book_a_party" id="book-a-party">
-                            <label for="book-a-party">Book a party</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-
-
-                    <div class="">
-                        <div class="">
-
-                            <h2>Popular Resturants</h2>
-
-                            <div class="">
-                                <div class="row image-box style10">
-
-                                    {% for restaurant in restaurant_details.result.restaurants %}
-                                    <div class="col-md-4">
-                                        <article class="box">
-                                            <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
-                                                <a class="hover-effect" title="" href="#">
-                                                    <img class="img-responsive" alt="" src="{{restaurant['images'][0]['image_url'] }}">
-                                                </a>
-                                            </figure>
-                                            <div class="details">
-                                                <a href="/restaurant/{{restaurant.id}}" class="button">MORE</a>
-                                                <h4 class="box-title">{{ restaurant.name }}
-                                                    <br>
-                                                    <small>{{ restaurant.city }}</small>
-                                                </h4>
-                                            </div>
-                                        </article>
-                                    </div>
-
-                                    {% endfor %}
-
-                                </div>
+                            <div class="book-a-party-filter">
+                                <h3>Dish</h3>
+                                <span ng-repeat="dish_name in dish">
+                                    <input type="radio" name="dish" ng-model="$parent.radioValue" value="[[dish_name.dish]]" ng-change="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
+                                    <br>
+                                </span>
                             </div>
 
 
+                            <div class="book-a-party-filter">
+                                <h3>More filters</h3>
+                                <span ng-repeat="amenities_name in amenities">
+                                    <input type="radio" name="amenities" ng-model="$parent.radioValue" value="[[amenities_name.amenities]]" ng-change="getFilterRestaurant('amenities',amenities_name.amenities)"> [[amenities_name.amenities]]
+                                    <br>
+                                </span>
+                            </div>
+
                         </div>
                     </div>
+                    <div class="col-sm-6">
+
+
+                        <div class="">
+                            <div class="">
+
+                                <h2>Popular Resturants</h2>
+
+                                <div class="">
+                                    <div class="row image-box style2 add-clearfix">
+
+                                        <div class="col-md-12" ng-repeat="restaurant in restaurants">
+                                            <article class="box">
+                                                <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
+                                                    <a class="hover-effect" title="" href="#">
+                                                        <img class="img-responsive" alt="" ng-src="[[restaurant.images[0].image_url]]">
+                                                    </a>
+                                                </figure>
+                                                <div class="details">
+
+                                                    <div class="pull-right rating-container">
+                                                        <strong>[[ restaurant.rating ]] <i class="fa fa-star" aria-hidden="true"></i></strong>
+                                                    </div>
+                                                    <h2 class="box-title" style="font-size:24px">
+                                                        <strong>[[ restaurant.name ]]</strong>
+                                                    </h2>
+
+                                                    <div>
+                                                        <small>
+                                                            <strong>[[ restaurant.city ]]</strong>
+                                                        </small>
+                                                    </div>
+                                                    <div class="restaurant-address">
+                                                        [[restaurant.address]]
+                                                    </div>
+
+                                                    <div class="restaurant-details">
+                                                        <span class="detail-title">Cuisines : </span>
+                                                        <span ng-repeat="association in restaurant.association">
+                                                            <strong>[[association.cuisines.cuisine]]
+                                                                <span ng-if="$index != restaurant.association.length - 1">,</span>
+                                                            </strong>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="restaurant-details">
+                                                        <span class="detail-title">Cost for two : </span>
+                                                        <span>
+                                                            <strong>₹500</strong>
+                                                        </span>
+                                                        <!-- <span ng-repeat="association in restaurant.association">
+                                                         <strong>[[association.cuisines.cuisine]] <span ng-if="$index != restaurant.association.length - 1" >,</span></strong>
+                                                     </span> -->
+                                                    </div>
+
+                                                    <div class="btn-group btn-group-justified">
+                                                        <a href="tel:[[restaurant.phone]]" class="btn btn-primary">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i> call</a>
+                                                        <a href="#" class="btn btn-default">
+                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</a>
+
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col-md-12" ng-show="!restaurants.length">
+                                            <article class="box" >
+                                                No RESTAURANT FOUND! :(
+                                            </article>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+
+                    </div>
+
                 </div>
-
-                <div class="col-sm-3">
-
-                </div>
-
             </div>
 
         </section>

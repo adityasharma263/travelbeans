@@ -12,13 +12,10 @@
         }
         @media only screen and (max-width: 440px) {
             .mySlides {
-                width: 410px;
+                width: 370px;
             }
                 
         }
-        /* @media only screen and (max-width: 760px) {
-            .mySlides {
-                width: 684px;
-            }
-                
-        } */
+        :root {
+            --tx: -870px;
+          }
