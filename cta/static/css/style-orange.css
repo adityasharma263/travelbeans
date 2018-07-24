@@ -10,9 +10,16 @@
         .mySlides{
             width: 870px;
         }
+        .img{
+            max-height: 210px;
+        }
         @media only screen and (max-width: 440px) {
             .mySlides {
                 width: 370px;
+            }
+            .img{
+                max-height: 513px;
+
             }
                 
         }
