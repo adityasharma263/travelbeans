@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="restaurantApp" class=" js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Page Title -->
@@ -20,7 +21,7 @@
     <link href="/Home Page With Chefs Recipies_files/css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/animate.min.css">
 
-    
+
     <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-orange.css">
 
     <!-- Updated Styles -->
@@ -33,7 +34,7 @@
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/responsive.css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
     <script type="text/javascript" src="/restaurant_js/app.js"></script>
 </head>
 
@@ -400,12 +401,10 @@
                             <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="collapse">ENGLISH</a>
                         </li>
                         <li>
-                            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-login"
-                                class="soap-popupbox">LOGIN</a>
+                            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-login" class="soap-popupbox">LOGIN</a>
                         </li>
                         <li>
-                            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-signup"
-                                class="soap-popupbox">SIGNUP</a>
+                            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-signup" class="soap-popupbox">SIGNUP</a>
                         </li>
                         <li class="ribbon currency menu-color-skin">
                             <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">USD</a>
@@ -471,7 +470,8 @@
                             <i class="soap-icon-letter"></i>Sign up with Email</a>
                     </div>
                     <p class="description">By signing up, I agree to Travelo's Terms of Service, Privacy Policy, Guest Refund olicy, and Host Guarantee
-                        Terms.</p>
+                        Terms.
+                    </p>
                 </div>
                 <div class="email-signup">
                     <form>
@@ -506,8 +506,7 @@
                 </div>
                 <div class="seperator"></div>
                 <p>Already a Travelo member?
-                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-login"
-                        class="goto-login soap-popupbox">Login</a>
+                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-login" class="goto-login soap-popupbox">Login</a>
                 </p>
             </div>
             <div id="travelo-login" class="travelo-login-box travelo-box">
@@ -538,8 +537,7 @@
                 </form>
                 <div class="seperator"></div>
                 <p>Don't have an account?
-                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-signup"
-                        class="goto-signup soap-popupbox">Sign up</a>
+                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#travelo-signup" class="goto-signup soap-popupbox">Sign up</a>
                 </p>
             </div>
         </header>
@@ -606,19 +604,32 @@
                                 <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
                                 <form action="" method="post">
                                     <div class="row">
-                                        <div class="form-group col-sm-6 col-md-6">
+                                        <div class="form-group col-sm-6 col-md-6 z-index-10">
                                             <h4 class="title">Trip Keys Resturants</h4>
                                             <label>Search for a Perfect Dinning</label>
-                                            <input type="text" class="input-text full-width" placeholder="Search Resturant , Cusine or Dishes" ng-model="searchValue"  ng-change="searchQuery()">
+                                            <input type="text" id="search-input" class="input-text full-width" placeholder="Search Resturant , Cusine or Dishes" ng-model="searchQueryValue"
+                                                ng-change="searchQuery(searchQueryValue)">
+                                        </div>
+                                        
+                                        <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion">
+                                            <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
+                                                <li ng-repeat="searchResult in searchValue">
+                                                    <a href="#">
+                                                        <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
 
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
+                                        <div class="form-group col-sm-6 col-md-2 fixheight z-index-10">
                                             <label class="hidden-xs">&nbsp;</label>
                                             <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1"
                                                 style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
                                         </div>
+
                                     </div>
                                 </form>
+                                <div id="overlay-box"></div>
                             </div>
                         </div>
 
@@ -1044,8 +1055,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/1(5).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/1(5).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1060,8 +1070,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/2(3).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/2(3).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1076,8 +1085,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/3(3).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/3(3).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1092,8 +1100,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/4(2).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/4(2).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1108,8 +1115,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/5(2).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/5(2).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1124,8 +1130,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/6(2).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/6(2).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1140,8 +1145,7 @@
                                         <article class="box">
                                             <figure>
                                                 <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" title="" class="hover-effect yellow">
-                                                    <img src="/Resturants Icons_files/1(5).png" alt="" width="170" height="161"
-                                                        draggable="false">
+                                                    <img src="/Resturants Icons_files/1(5).png" alt="" width="170" height="161" draggable="false">
                                                 </a>
                                             </figure>
                                             <div class="details">
@@ -1334,8 +1338,8 @@
                                 <article class="box">
                                     <figure>
                                         <a href="#" title="">
-                                            <img src="https://img.delicious.com.au/HDjTJLZ4/h506-w759-cfill/del/2017/07/butter-chicken-48618-2.jpg"
-                                                alt="" width="370" height="161" />
+                                            <img src="https://img.delicious.com.au/HDjTJLZ4/h506-w759-cfill/del/2017/07/butter-chicken-48618-2.jpg" alt="" width="370"
+                                                height="161" />
                                         </a>
                                         <figcaption>
                                             <h3 class="caption-title">Butter Chicken</h3>
@@ -1553,64 +1557,55 @@
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/1(6).png" alt="" width="124" height="88"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -62px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/1(6).png" alt="" width="124" height="88" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -62px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/2(4).png" alt="" width="124" height="88"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -62px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/2(4).png" alt="" width="124" height="88" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -62px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/3(4).png" alt="" width="124" height="88"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -62px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/3(4).png" alt="" width="124" height="88" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -62px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/4(3).png" alt="" width="142" height="102"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -71px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/4(3).png" alt="" width="142" height="102" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -71px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/5(3).png" alt="" width="136" height="98"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -68px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/5(3).png" alt="" width="136" height="98" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -68px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/6(3).png" alt="" width="126" height="90"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -63px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/6(3).png" alt="" width="126" height="90" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -63px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/7(1).png" alt="" width="236" height="91"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -118px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/7(1).png" alt="" width="236" height="91" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -118px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/8(1).png" alt="" width="212" height="81"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -106px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/8(1).png" alt="" width="212" height="81" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -106px;">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="http://www.soaptheme.net/html/travelo/shortcode-gallery-styles.html#" class="middle-block middle-block-auto-height"
                                         style="position: relative; height: 80px;">
-                                        <img class="middle-item" src="/Resturants Icons_files/9(1).png" alt="" width="210" height="81"
-                                            style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -105px;">
+                                        <img class="middle-item" src="/Resturants Icons_files/9(1).png" alt="" width="210" height="81" style="position: absolute; top: 50%; margin-top: -40px; left: 50%; margin-left: -105px;">
                                     </a>
                                 </li>
                             </ul>
@@ -1766,7 +1761,8 @@
                         <div class="col-sm-6 col-md-3">
                             <h2>About Travelo</h2>
                             <p>Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore
-                                elerisque.</p>
+                                elerisque.
+                            </p>
                             <br>
                             <address class="contact-details">
                                 <span class="contact-phone">
@@ -1776,44 +1772,37 @@
                             </address>
                             <ul class="social-icons clearfix">
                                 <li class="twitter">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="twitter">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="twitter">
                                         <i class="soap-icon-twitter"></i>
                                     </a>
                                 </li>
                                 <li class="googleplus">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="googleplus">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="googleplus">
                                         <i class="soap-icon-googleplus"></i>
                                     </a>
                                 </li>
                                 <li class="facebook">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="facebook">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="facebook">
                                         <i class="soap-icon-facebook"></i>
                                     </a>
                                 </li>
                                 <li class="linkedin">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="linkedin">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="linkedin">
                                         <i class="soap-icon-linkedin"></i>
                                     </a>
                                 </li>
                                 <li class="vimeo">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="vimeo">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="vimeo">
                                         <i class="soap-icon-vimeo"></i>
                                     </a>
                                 </li>
                                 <li class="dribble">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="dribble">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="dribble">
                                         <i class="soap-icon-dribble"></i>
                                     </a>
                                 </li>
                                 <li class="flickr">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#"
-                                        data-toggle="tooltip" data-original-title="flickr">
+                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="flickr">
                                         <i class="soap-icon-flickr"></i>
                                     </a>
                                 </li>
