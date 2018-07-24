@@ -260,12 +260,12 @@ def restaurant_search_api():
         if restaurant_menu.startswith(search):
             menus.append(restaurant_menu)
     obj = {
-    "cities": list(cities),
-    "cuisines": list(cuisines),
-    "collections": list(collections),
-    "dishes": list(dishes),
-    "menus": list(set(menus)),
-    "names": list(names)
+    "city": list(cities),
+    "cuisine": list(cuisines),
+    "collection": list(collections),
+    "dishe": list(dishes),
+    "menu": list(set(menus)),
+    "name": list(names)
     }
     return jsonify({'result': obj, 'message': "Success", 'error': False})
 
