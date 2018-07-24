@@ -1560,41 +1560,45 @@
                 <div class="row ">
                     <div class="col-sm-3 ">
                         <div class="filter-container card">
+                            <a type="button" class="navbar-toggle collapsed btn btn-default" data-toggle="collapse" data-target="#filter-menu" aria-expanded="false">
+                                <i class="fa fa-bars"></i>
+                            </a>
                             <h2>Filters</h2>
-                            <!-- <div class="collection-filter">
-                            <h3>Collection</h3>
-                            <span ng-repeat="collection_name in collection">
-                                <input type="radio" name="collection" ng-model="$parent.radioValue" value="[[collection_name.collection]]" ng-change="getFilterRestaurant('collection',collection_name.collection)">[[collection_name.collection]]
-                                </br>
-                            </span>
-
-                        </div> -->
                             <hr>
-                            <div class="order-online-filter">
-                                <h3>Cuisine</h3>
-                                <span ng-repeat="cuisine_name in cuisine">
-                                    <input type="radio" name="cuisine" ng-model="$parent.radioValue" value="[[cuisine_name.cuisine]]" ng-change="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
-                                    <br>
-                                </span>
+                            <div id="filter-menu" class="collapse navbar-collapse">
+                                <div class="cuisine-filter">
+                                    <h3>Cuisine</h3>
+                                    <span ng-repeat="cuisine_name in cuisine">
+                                        <input type="radio" name="cuisine" ng-model="$parent.radioValue" value="[[cuisine_name.cuisine]]" ng-change="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
+                                        <br>
+                                    </span>
+                                </div>
+
+                                <div class="dish-filter">
+                                    <h3>Dish</h3>
+                                    <span ng-repeat="dish_name in dish">
+                                        <input type="radio" name="dish" ng-model="$parent.radioValue" value="[[dish_name.dish]]" ng-change="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
+                                        <br>
+                                    </span>
+                                </div>
+
+                                <div class="menu-filter">
+                                    <h3>Menu</h3>
+                                    <span ng-repeat="(tag_name, tag_value) in tag">
+                                        <input type="radio" name="tag" ng-model="$parent.radioValue" value="[[tag_name]]" ng-change="amenityAndTagFilter('tag',tag_name)"> [[tag_name]]
+                                        <br>
+                                    </span>
+                                </div>
+
+
+                                <div class="book-a-party-filter">
+                                    <h3>More filters</h3>
+                                    <span ng-repeat="(amenities_name, amenities_value) in amenities">
+                                        <input type="radio" name="amenities" ng-model="$parent.radioValue" value="[[amenities_name]]" ng-change="amenityAndTagFilter('amenity',amenities_name)"> [[amenities_name]]
+                                        <br>
+                                    </span>
+                                </div>
                             </div>
-
-                            <div class="book-a-party-filter">
-                                <h3>Dish</h3>
-                                <span ng-repeat="dish_name in dish">
-                                    <input type="radio" name="dish" ng-model="$parent.radioValue" value="[[dish_name.dish]]" ng-change="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
-                                    <br>
-                                </span>
-                            </div>
-
-
-                            <div class="book-a-party-filter">
-                                <h3>More filters</h3>
-                                <span ng-repeat="amenities_name in amenities">
-                                    <input type="radio" name="amenities" ng-model="$parent.radioValue" value="[[amenities_name.amenities]]" ng-change="getFilterRestaurant('amenities',amenities_name.amenities)"> [[amenities_name.amenities]]
-                                    <br>
-                                </span>
-                            </div>
-
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -1618,7 +1622,9 @@
                                                 <div class="details">
 
                                                     <div class="pull-right rating-container">
-                                                        <strong>[[ restaurant.rating ]] <i class="fa fa-star" aria-hidden="true"></i></strong>
+                                                        <strong>[[ restaurant.rating ]]
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                        </strong>
                                                     </div>
                                                     <h2 class="box-title" style="font-size:24px">
                                                         <strong>[[ restaurant.name ]]</strong>
@@ -1663,8 +1669,10 @@
                                             </article>
                                         </div>
                                         <div class="col-md-12" ng-show="!restaurants.length">
-                                            <article class="box" >
-                                                No RESTAURANT FOUND! :(
+                                            <article class="box" style="height:200px">
+                                                <div class="no-restaurant">
+                                                    NO RESTAURANT FOUND! :(
+                                                </div>
                                             </article>
                                         </div>
 
