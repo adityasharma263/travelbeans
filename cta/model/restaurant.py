@@ -137,6 +137,7 @@ class Dish(Base):
     __tablename__ = 'dish'
 
     dish = db.Column(db.String, default=False, nullable=True)
+    dish_type = db.Column(db.Integer, nullable=True)
     half_price = db.Column(db.Integer, nullable=True)
     full_price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
