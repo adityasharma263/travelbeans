@@ -19,6 +19,10 @@ def restaurant_api():
         args.pop('rating', None)
         cuisine = request.args.get('cuisine')
         args.pop('cuisine', None)
+        menu = request.args.get('menu')
+        args.pop('menu', None)
+        amenity = request.args.get('amenity')
+        args.pop('amenity', None)
         collection = request.args.get('collection')
         args.pop('collection', None)
         dish = request.args.get('dish')
@@ -34,6 +38,8 @@ def restaurant_api():
         dish_restaurant_id = []
         rating_restaurant_id = []
         price_restaurant_id = []
+        menu_restaurant_id =[]
+        amenity_restaurant_id = []
         common_id = []
         if cuisine:
             cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
@@ -50,6 +56,14 @@ def restaurant_api():
             restaurant_list = Association.query.filter(Association.dish_id == dish_id).all()
             for restaurant_obj in restaurant_list:
                 dish_restaurant_id.append(restaurant_obj.restaurant_id)
+        if menu:
+            restaurant_list = Menu.query.filter(getattr(Menu, menu).is_(True)).all()
+            for restaurant_obj in restaurant_list:
+                menu_restaurant_id.append(restaurant_obj.restaurant_id)
+        if amenity:
+            restaurant_list = RestaurantAmenity.query.filter(getattr(RestaurantAmenity, amenity).is_(True)).all()
+            for restaurant_obj in restaurant_list:
+                amenity_restaurant_id.append(restaurant_obj.restaurant_id)
         if rating:
             restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
             for restaurant_obj in restaurant_list:
@@ -63,7 +77,9 @@ def restaurant_api():
             "collection": collection_restaurant_id,
             "dish": dish_restaurant_id,
             "price": price_restaurant_id,
-            "rating": rating_restaurant_id
+            "rating": rating_restaurant_id,
+            "amenity": amenity_restaurant_id,
+            "menu": menu_restaurant_id
         }
         for key, value in obj.items():
             if value:
