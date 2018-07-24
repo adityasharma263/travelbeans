@@ -1,4 +1,40 @@
-/*
- * Title:   Custom Style File
- * Author:  http://themeforest.net/user/soaptheme 
- */
+.filter-container{
+    padding : 0 10px;
+}
+
+.card{
+    background: #FFF;
+    box-shadow: none;
+    margin: 1rem 0;
+    padding: 1em;
+    border-radius: .28571429rem;
+    border: 1px solid #e7e7e7;
+}
+hr{
+    border-color: #dddada;
+}
+
+.restaurant-address{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.restaurant-details{
+    font-size: 1.1666em;
+    line-height: 1.1428em;
+    color : #5e5d5d;
+    margin: 0 0 15px;
+}
+.detail-title{
+    color: #646464;
+}
+
+.rating-container{
+    background-color: #5BA829;
+    border-radius: 10px;
+    padding: 5px;
+    color:#fff;
+    font-weight: 700;
+    
+}

@@ -8,6 +8,7 @@ class Restaurant(Base):
 
     name = db.Column(db.String)
     rating = db.Column(db.Float, nullable=True)
+    price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     city = db.Column(db.String, nullable=True)
     phone = db.Column(db.String, nullable=True, unique=True)
@@ -18,7 +19,7 @@ class Restaurant(Base):
     featured = db.Column(db.Boolean, default=False, nullable=True)
     images = db.relationship('RestaurantImage', backref='restaurant')
     amenities = db.relationship('RestaurantAmenity', uselist=False, backref='restaurant')
-    tags = db.relationship('Tag', uselist=False, backref='restaurant')
+    menus = db.relationship('Menu', uselist=False, backref='restaurant')
     association = db.relationship('Association', backref='restaurant')
 
     def __init__(self, *args, **kwargs):
@@ -84,8 +85,8 @@ class RestaurantAmenity(Base):
         return '<pool %r>' % self.pool
 
 
-class Tag(Base):
-    __tablename__ = 'tag'
+class Menu(Base):
+    __tablename__ = 'menu'
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     lunch = db.Column(db.Boolean, default=False, nullable=True)
@@ -136,6 +137,10 @@ class Dish(Base):
     __tablename__ = 'dish'
 
     dish = db.Column(db.String, default=False, nullable=True)
+    dish_type = db.Column(db.Integer, nullable=True)
+    half_price = db.Column(db.Integer, nullable=True)
+    full_price = db.Column(db.Integer, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
     image = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
