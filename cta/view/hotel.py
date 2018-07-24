@@ -16,11 +16,62 @@ def hotel_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
+        check_in = request.args.get('check_in')
+        check_out = request.args.get('check_out')
+        price_start = request.args.get('price_start', None)
+        price_end = request.args.get('price_end', None)
+        args.pop('price_start', None)
+        args.pop('price_end', None)
         page = request.args.get('page', None)
         per_page = request.args.get('per_page', None)
-        if rating:
+        hotel_room_id = []
+        price_hotel_list = []
+        weekend_hotel_list = []
+        if check_in and check_out:
+            no_of_days = int(check_out) - int(check_in)
+            sec = datetime.timedelta(seconds=int(no_of_days))
+            d = datetime.datetime(1, 1, 1) + sec
+            no_of_days = d.day - 1
+            check_in = datetime.datetime.fromtimestamp(
+                int(check_in)).weekday()
+            check_out = datetime.datetime.fromtimestamp(
+                int(check_out)).weekday()
+            a = [0, 1, 2, 3, 4, 5, 6]
+            pool = cycle(a)
+            start = False
+            days = []
+            weekend = False
+            for i, val in enumerate(pool):
+                if start and val == check_out and len(days) == no_of_days:
+                    break
+                if start:
+                    days.append(val)
+                if val == check_in and start is False:
+                    start = True
+                    days.append(val)
+            for day in days:
+                if day == 5:
+                    weekend = True
+                elif day == 6:
+                    weekend = True
+            deals_list = Deal.query.filter(Deal.weekend == weekend).all()
+            for deal_obj in deals_list:
+                hotel_room_id.append(deal_obj.room_id)
+            room_list = Room.query.filter(Room.id.in_(hotel_room_id)).all()
+            for room_obj in room_list:
+                weekend_hotel_list.append(room_obj.hotel_id)
+            hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(weekend_hotel_list)).all()
+        elif price_start and price_end:
+            deals_list = Deal.query.filter(Deal.price >= price_start, Deal.price <= price_end).all()
+            for deal_obj in deals_list:
+                hotel_room_id.append(deal_obj.room_id)
+            room_list = Room.query.filter(Room.id.in_(hotel_room_id)).all()
+            for room_obj in room_list:
+                price_hotel_list.append(room_obj.hotel_id)
+            hotels = Hotel.query.filter_by(**args).filter(Hotel.id.in_(price_hotel_list)).all()
+        elif rating:
             hotels = Hotel.query.filter_by(**args).filter(Hotel.rating >= rating).all()
-        elif page:
+        elif page and per_page:
             hotels = Hotel.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         else:
             hotels = Hotel.query.filter_by(**args).all()
