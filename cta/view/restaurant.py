@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.restaurant import RestaurantImage, Restaurant, RestaurantAmenity, Tag,\
+from cta.model.restaurant import RestaurantImage, Restaurant, RestaurantAmenity, Menu,\
     Cuisine, Collection, Association, Dish
 from cta import app
-from flask_graphql import GraphQLView
 from flask import jsonify, request
 from cta.schema.restaurant import RestaurantSchema, RestaurantImageSchema,\
-    RestaurantAmenitySchema, CuisineSchema, CollectionSchema, AssociationSchema, TagSchema, DishSchema
+    RestaurantAmenitySchema, CuisineSchema, CollectionSchema, AssociationSchema, MenuSchema, DishSchema
 import datetime
 from itertools import cycle
 import simplejson as json
@@ -24,6 +23,10 @@ def restaurant_api():
         dish = request.args.get('dish')
         args.pop('dish', None)
         args.pop('rating', None)
+        price_start = request.args.get('price_start', None)
+        price_end = request.args.get('price_end', None)
+        args.pop('price_start', None)
+        args.pop('price_end', None)
         page = request.args.get('page', None)
         per_page = request.args.get('per_page', None)
         cuisine_restaurant_id = []
@@ -32,34 +35,28 @@ def restaurant_api():
         rating_restaurant_id = []
         if cuisine:
             cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
-            print(cuisine_id)
-            
             restaurant_list = Association.query.filter(Association.cuisine_id == cuisine_id).all()
             for restaurant_obj in restaurant_list:
                 cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
             restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(cuisine_restaurant_id)).all()
-            
         elif collection:
             collection_id = Collection.query.filter(Collection.collection == collection).first().id
-            print(collection_id)
-            
             restaurant_list = Association.query.filter(Association.collection_id == collection_id).all()
             for restaurant_obj in restaurant_list:
                 collection_restaurant_id.append(restaurant_obj.restaurant_id)
             restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(collection_restaurant_id)).all()
-            
         elif dish:
-            print(dish)
             dish_id = Dish.query.filter(Dish.dish == dish).first().id
-            print(dish_id)
             restaurant_list = Association.query.filter(Association.dish_id == dish_id).all()
             for restaurant_obj in restaurant_list:
                 dish_restaurant_id.append(restaurant_obj.restaurant_id)
-        if rating:
-            restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
-            for restaurant_obj in restaurant_list:
-                rating_restaurant_id.append(restaurant_obj.id)
-        if collection and cuisine and rating and dish:
+            restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(dish_restaurant_id)).all()
+        elif rating:
+            restaurants = Restaurant.query.filter(Restaurant.rating >= rating).all()
+        elif price_start and price_end:
+            restaurants = Restaurant.query.filter_by(**args)\
+                .filter(Restaurant.price >= price_start, Restaurant.price <= price_end).all()
+        elif collection and cuisine and rating and dish:
             common_id = list(set(cuisine_restaurant_id).intersection(collection_restaurant_id))
             common_id = list(set(dish_restaurant_id).intersection(common_id))
             common_id = list(set(rating_restaurant_id).intersection(common_id))
@@ -67,7 +64,6 @@ def restaurant_api():
         elif page:
             restaurants = Restaurant.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         else:
-            print("else")
             restaurants = Restaurant.query.filter_by(**args).all()
         result = RestaurantSchema(many=True).dump(restaurants)
         return jsonify({'result': {'restaurants': result.data}, 'message': "Success", 'error': False})
@@ -109,22 +105,22 @@ def restaurant_image_api():
         return jsonify({'result': {'image': result.data}, 'message': "Success", 'error': False})
 
 
-@app.route('/api/v1/restaurant/tag', methods=['GET', 'POST'])
-def restaurant_tag_api():
+@app.route('/api/v1/restaurant/menu', methods=['GET', 'POST'])
+def restaurant_menu_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        data = Tag.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = TagSchema(many=True).dump(data)
-        return jsonify({'result': {'tag': result.data}, 'message': "Success", 'error': False})
+        data = Menu.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = MenuSchema(many=True).dump(data)
+        return jsonify({'result': {'menu': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Tag(**request.json)
+        post = Menu(**request.json)
         post.save()
-        result = TagSchema().dump(post)
-        return jsonify({'result': {'tag': result.data}, 'message': "Success", 'error': False})
+        result = MenuSchema().dump(post)
+        return jsonify({'result': {'menu': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/cuisine', methods=['GET', 'POST'])
@@ -187,12 +183,6 @@ def restaurant_association_api():
         args = request.args.to_dict()
         args.pop('page', None)
         args.pop('per_page', None)
-        # collection = request.args.get('collection')
-        # args.pop('collection', None)
-        # rating = request.args.get('rating')
-        # args.pop('rating', None)
-        # rating = request.args.get('rating')
-        # args.pop('rating', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
         data = Association.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
@@ -214,7 +204,7 @@ def restaurant_search_api():
     cuisines = []
     collections = []
     dishes = []
-    tags = []
+    menus = []
     restaurant_cities = Restaurant.query.distinct(Restaurant.city).filter(Restaurant.city.like('%' + search + '%')).order_by(Restaurant.city).all()
     for restaurant_city in restaurant_cities:
         cities.append(restaurant_city.city)
@@ -230,17 +220,18 @@ def restaurant_search_api():
     restaurant_dishes = Dish.query.distinct(Dish.dish).filter(Dish.dish.like('%' + search + '%')).order_by(Dish.dish).all()
     for restaurant_dish in restaurant_dishes:
         dishes.append(restaurant_dish.dish)
-    restaurant_tags = ['dinner', 'cafe', 'breakfast', 'street_stalls', 'bars', 'lounge', 'diet', 'luxury', 'lunch', 'family',
+    restaurant_menus = ['dinner', 'cafe', 'breakfast', 'street_stalls', 'bars', 'lounge', 'diet', 'luxury', 'lunch', 'family',
                   'nightlife', 'pocket_friendly']
-    for restaurant_tag in restaurant_tags:
-        if restaurant_tag.startswith(search):
-            tags.append(restaurant_tag)
+    for restaurant_menu in restaurant_menus:
+        if restaurant_menu.startswith(search):
+            menus.append(restaurant_menu)
     obj = {
     "cities": list(cities),
     "cuisines": list(cuisines),
     "collections": list(collections),
     "dishes": list(dishes),
-    "tags": list(set(tags)),
+    "menus": list(set(menus)),
     "names": list(names)
     }
     return jsonify({'result': obj, 'message': "Success", 'error': False})
+
