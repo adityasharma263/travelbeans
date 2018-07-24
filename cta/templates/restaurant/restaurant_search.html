@@ -1584,8 +1584,8 @@
 
                                 <div class="menu-filter">
                                     <h3>Menu</h3>
-                                    <span ng-repeat="(tag_name, tag_value) in tag">
-                                        <input type="radio" name="tag" ng-model="$parent.radioValue" value="[[tag_name]]" ng-change="amenityAndTagFilter('tag',tag_name)"> [[tag_name]]
+                                    <span ng-repeat="(menu_name, menu_value) in menu">
+                                        <input type="radio" name="menu" ng-model="$parent.radioValue" value="[[menu_name]]" ng-change="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
                                         <br>
                                     </span>
                                 </div>
@@ -1594,7 +1594,7 @@
                                 <div class="book-a-party-filter">
                                     <h3>More filters</h3>
                                     <span ng-repeat="(amenities_name, amenities_value) in amenities">
-                                        <input type="radio" name="amenities" ng-model="$parent.radioValue" value="[[amenities_name]]" ng-change="amenityAndTagFilter('amenity',amenities_name)"> [[amenities_name]]
+                                        <input type="radio" name="amenities" ng-model="$parent.radioValue" value="[[amenities_name]]" ng-change="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
                                         <br>
                                     </span>
                                 </div>
@@ -1651,7 +1651,7 @@
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cost for two : </span>
                                                         <span>
-                                                            <strong>₹500</strong>
+                                                            <strong>₹[[ restaurant.price ]]</strong>
                                                         </span>
                                                         <!-- <span ng-repeat="association in restaurant.association">
                                                          <strong>[[association.cuisines.cuisine]] <span ng-if="$index != restaurant.association.length - 1" >,</span></strong>

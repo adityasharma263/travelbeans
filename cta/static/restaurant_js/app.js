@@ -5,16 +5,46 @@ var app = angular.module("restaurantApp", ['angular.filter'])
   }])
 
 
-  .controller("restaurantController", ["$scope", "$http", function ($scope, $http) {
+  .controller("restaurantController", ["$scope", "$http", '$sce', function ($scope, $http, $sce) {
 
 
-    $scope.searchQuery = function () {
+    var searchSuggestionDiv = document.getElementById("search-suggestion");
+    var overlayBox = document.getElementById("overlay-box");
+    $scope.searchSuggestion = {};
 
-      if ($scope.searchValue.length == 3) {
-        $http.get("")
-      }
-
+    overlayBox.onclick = function (){
+      searchSuggestionDiv.style.display = "none";
+      overlayBox.style.display = "none";
     }
+
+    $scope.searchQuery = function (query) {
+
+      console.log(query);
+
+
+
+      if (query.length >= 2) {
+        $http.post("/api/v1/restaurant/search", { search: query })
+          .then(function (response) {
+            searchSuggestionDiv.style.display = "block";
+            overlayBox.style.display = "block";
+            console.log(response.data.result);
+            $scope.searchSuggestion = response.data.result;
+          }, function (err) {
+            console.log(err);
+          });
+      } else {
+        searchSuggestionDiv.style.display = "none";
+        overlayBox.style.display = "none";
+      }
+    }
+
+    $scope.highlight = function (text, search) {
+      if (!search) {
+        return $sce.trustAsHtml(text);
+      }
+      return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
+    };
 
 
 
@@ -38,7 +68,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         for (i in allRestaurants) {
           restaurantStructure[allRestaurants[i].id] = allRestaurants[i];
         };
-        
+
       }, function (err) {
         console.log(err);
       });
@@ -74,10 +104,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       });
 
 
-    $http.get("/api/v1/restaurant/tag")
+    $http.get("/api/v1/restaurant/menu")
       .then(function (res) {
-        $scope.tag = res.data.result.tag[0];
-        console.log("$scope.tag =",$scope.tag);
+        $scope.menu = res.data.result.menu[0];
+        console.log("$scope.tag =", $scope.menu);
       }, function (err) {
         console.log(err);
       });
@@ -111,15 +141,15 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       var filter = {}
       filter[filterValue] = true;
 
-      var filterTypeResponse={
-        tag : "tag",
-        amenity : "amenities"
+      var filterTypeResponse = {
+        tag: "tag",
+        amenity: "amenities"
       }
 
-      $http.get("/api/v1/restaurant/"+filterType, { params: filter })
+      $http.get("/api/v1/restaurant/" + filterType, { params: filter })
         .then(function (res) {
           var amenitiesAndTagFilterResponse = res.data.result[filterTypeResponse[filterType]];
-          
+
           var restaurant = [];
           for (i in amenitiesAndTagFilterResponse) {
             restaurant.push(restaurantStructure[amenitiesAndTagFilterResponse[i].restaurant])
