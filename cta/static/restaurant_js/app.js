@@ -51,7 +51,9 @@ var app = angular.module("restaurantApp", ['angular.filter'])
   }])
   .controller("searchController", ["$scope", "$http", function ($scope, $http) {
 
-    var restaurantStructure = {}
+    var restaurantStructure = {};
+
+    $scope.serverSideRender = true;
 
     $http.get("/api/v1/restaurant/cuisine")
       .then(function (res) {
@@ -130,6 +132,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       $http.get("/api/v1/restaurant", { params: filter })
         .then(function (res) {
           $scope.restaurants = res.data.result.restaurants;
+          $scope.serverSideRender = false;
+          
         }, function (err) {
           console.log(err);
         });
@@ -156,6 +160,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
           }
 
           $scope.restaurants = restaurant;
+          $scope.serverSideRender = false;
 
         }, function (err) {
           console.log(err);

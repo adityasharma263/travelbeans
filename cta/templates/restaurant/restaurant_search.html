@@ -1449,7 +1449,7 @@
                                         <div class="form-group col-sm-6 col-md-6">
                                             <h4 class="title">Trip Keys Resturants</h4>
                                             <label>Search for a Perfect Dinning</label>
-                                            <input type="text" class="input-text full-width" placeholder="Search Resturant , Cusine or Dishes ">
+                                            <input type="text" class="input-text full-width" placeholder="Search Resturant , Cusine or Dishes " {% if searched_value%} value="{{ searched_value }}" {% endif %}>
                                         </div>
 
                                         <div class="form-group col-sm-6 col-md-2 fixheight">
@@ -1612,7 +1612,7 @@
                                 <div class="">
                                     <div class="row image-box style2 add-clearfix">
 
-                                        <div class="col-md-12" ng-repeat="restaurant in restaurants">
+                                        <div class="col-md-12" ng-repeat="restaurant in restaurants" ng-if="!serverSideRender">
                                             <article class="box">
                                                 <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
                                                     <a class="hover-effect" title="" href="#">
@@ -1668,6 +1668,70 @@
                                                 </div>
                                             </article>
                                         </div>
+                                        {% for restaurant in restaurant_details %}
+                                        <div class="col-md-12" ng-if="serverSideRender">
+                                            <article class="box">
+                                                <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
+                                                    <a class="hover-effect" title="" href="#">
+                                                        <img class="img-responsive" alt="" src="{{restaurant.images[0].image_url}}">
+                                                    </a>
+                                                </figure>
+                                                <div class="details">
+
+                                                    <div class="pull-right rating-container">
+                                                        <strong>{{ restaurant.rating }}
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                        </strong>
+                                                    </div>
+                                                    <h2 class="box-title" style="font-size:24px">
+                                                        <strong>{{ restaurant.name }}</strong>
+                                                    </h2>
+
+                                                    <div>
+                                                        <small>
+                                                            <strong> {{restaurant.city}} </strong>
+                                                        </small>
+                                                    </div>
+                                                    <div class="restaurant-address">
+                                                        {{restaurant.address}}
+                                                    </div>
+
+                                                    <div class="restaurant-details">
+                                                        <span class="detail-title">Cuisines : </span>
+                                                        {% for  association in restaurant.association %}
+                                                        <span>
+                                                            <strong>{{association.cuisines.cuisine}}
+                                                                {% if loop.index != restaurant.association|length %}
+                                                                <span ng-if="$index != restaurant.association.length - 1">,</span>
+                                                                {% endif %}
+                                                            </strong>
+                                                        </span>
+                                                        {% endfor %}
+                                                    </div>
+
+                                                    <div class="restaurant-details">
+                                                        <span class="detail-title">Cost for two : </span>
+                                                        <span>
+                                                            <strong>₹ {{restaurant.price}}</strong>
+                                                        </span>
+                                                        <!-- <span ng-repeat="association in restaurant.association">
+                                                         <strong>association.cuisines.cuisine]] <span ng-if="$index != restaurant.association.length - 1" >,</span></strong>
+                                                     </span> -->
+                                                    </div>
+
+                                                    <div class="btn-group btn-group-justified">
+                                                        <a href="tel:{{restaurant.phone}}" class="btn btn-primary">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i> call</a>
+                                                        <a href="#" class="btn btn-default">
+                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</a>
+
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        {% endfor %}
+
+
                                         <div class="col-md-12" ng-show="!restaurants.length">
                                             <article class="box" style="height:200px">
                                                 <div class="no-restaurant">

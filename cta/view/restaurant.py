@@ -263,7 +263,7 @@ def restaurant_search_api():
     "city": list(cities),
     "cuisine": list(cuisines),
     "collection": list(collections),
-    "dishe": list(dishes),
+    "dish": list(dishes),
     "menu": list(set(menus)),
     "name": list(names)
     }
