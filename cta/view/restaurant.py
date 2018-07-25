@@ -41,37 +41,67 @@ def restaurant_api():
         menu_restaurant_id =[]
         amenity_restaurant_id = []
         common_id = []
+        is_filter = 0
         if cuisine:
-            cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
-            restaurant_list = Association.query.filter(Association.cuisine_id == cuisine_id).all()
-            for restaurant_obj in restaurant_list:
-                cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter = 1
+            try:
+                cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
+                restaurant_list = Association.query.filter(Association.cuisine_id == cuisine_id).all()
+                for restaurant_obj in restaurant_list:
+                    cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                collection_restaurant_id = []
         if collection:
-            collection_id = Collection.query.filter(Collection.collection == collection).first().id
-            restaurant_list = Association.query.filter(Association.collection_id == collection_id).all()
-            for restaurant_obj in restaurant_list:
-                collection_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter =1
+            try:
+                collection_id = Collection.query.filter(Collection.collection == collection).first().id
+                restaurant_list = Association.query.filter(Association.collection_id == collection_id).all()
+                for restaurant_obj in restaurant_list:
+                    collection_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                collection_restaurant_id = []
         if dish:
-            dish_id = Dish.query.filter(Dish.dish == dish).first().id
-            restaurant_list = Association.query.filter(Association.dish_id == dish_id).all()
-            for restaurant_obj in restaurant_list:
-                dish_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter = 1
+            try:
+                dish_id = Dish.query.filter(Dish.dish == dish).first().id
+                restaurant_list = Association.query.filter(Association.dish_id == dish_id).all()
+                for restaurant_obj in restaurant_list:
+                    dish_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                dish_restaurant_id = []
         if menu:
-            restaurant_list = Menu.query.filter(getattr(Menu, menu).is_(True)).all()
-            for restaurant_obj in restaurant_list:
-                menu_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter = 1
+            try:
+                restaurant_list = Menu.query.filter(getattr(Menu, menu).is_(True)).all()
+                for restaurant_obj in restaurant_list:
+                    menu_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                menu_restaurant_id = []
         if amenity:
-            restaurant_list = RestaurantAmenity.query.filter(getattr(RestaurantAmenity, amenity).is_(True)).all()
-            for restaurant_obj in restaurant_list:
-                amenity_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter = 1
+            try:
+                restaurant_list = RestaurantAmenity.query.filter(getattr(RestaurantAmenity, amenity).is_(True)).all()
+                for restaurant_obj in restaurant_list:
+                    amenity_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                amenity_restaurant_id = []
         if rating:
-            restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
-            for restaurant_obj in restaurant_list:
-                rating_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter = 1
+            try:
+                restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
+                for restaurant_obj in restaurant_list:
+                    rating_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                rating_restaurant_id = []
+
         if price_start and price_end:
-            restaurant_list = Restaurant.query.filter(Restaurant.price >= price_start, Restaurant.price <= price_end).all()
-            for restaurant_obj in restaurant_list:
-                price_restaurant_id.append(restaurant_obj.restaurant_id)
+            is_filter = 1
+            try:
+                restaurant_list = Restaurant.query.filter(Restaurant.price >= price_start, Restaurant.price <= price_end).all()
+                for restaurant_obj in restaurant_list:
+                    price_restaurant_id.append(restaurant_obj.restaurant_id)
+            except:
+                price_restaurant_id = []
         obj = {
             "cuisine": cuisine_restaurant_id,
             "collection": collection_restaurant_id,
@@ -88,7 +118,7 @@ def restaurant_api():
                 else:
                     common_id = list(set(common_id).intersection(value))
 
-        if common_id:
+        if is_filter:
             if page and per_page:
                 restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(common_id))\
                     .offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
@@ -263,7 +293,7 @@ def restaurant_search_api():
     "city": list(cities),
     "cuisine": list(cuisines),
     "collection": list(collections),
-    "dishe": list(dishes),
+    "dish": list(dishes),
     "menu": list(set(menus)),
     "name": list(names)
     }
