@@ -77,6 +77,10 @@ def cab_admin():
 
 @app.route('/cab/list', methods=['GET'])
 def cab_list():
-    return render_template('cab/cab_list.html')    
+    return render_template('cab/cab_list.html')   
+    
+@app.route('/cab/detail', methods=['GET'])
+def cab_detail():
+    return render_template('cab/cab_detail.html')   
 
    
