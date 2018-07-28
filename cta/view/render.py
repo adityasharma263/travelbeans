@@ -45,7 +45,6 @@ def restaurant():
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
     restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
-    restaurant_api_url = "http://demo7014540.mockable.io/api/v1/resturant"    
     args = request.args
     restaurant_data = requests.get(url=restaurant_api_url, params=args).json()
     return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data)
@@ -63,7 +62,6 @@ def restaurant_search_sugg():
     args = request.args
     search_query = args.get("q")
     suggestion = requests.post(app.config["DOMAIN_URL"]+"/api/v1/restaurant/search", json={"search" : search_query}).json()
-    print(suggestion)
     return suggestion
 
 
@@ -82,7 +80,10 @@ def cab_admin():
 
 @app.route('/cab/list', methods=['GET'])
 def cab_list():
-    return render_template('cab/cab_list.html')   
+    cab_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/cab"
+    args = request.args
+    cab_data = requests.get(url=cab_api_url, params=args).json()
+    return render_template('cab/cab_list.html', cab_details=cab_data)
 
 
 @app.route('/cab/detail', methods=['GET'])
