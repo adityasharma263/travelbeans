@@ -38,7 +38,7 @@ hr{
     font-weight: 700;
     
 }
-#search-input{
+.search-input-text{
     z-index: 10;
 }
 
@@ -75,7 +75,7 @@ hr{
     position: fixed;
     top: 0;
     left: 0;
-    background: #00000059;
+    background: #0000003f;
     display: none;
 }
 
@@ -144,4 +144,12 @@ hr{
     left: 86px;
     
 }
+}
+
+.filter{
+    padding-top:10px;
+    margin-bottom: 0;
+}
+.filter legend{
+    margin-bottom: 5px
 }
