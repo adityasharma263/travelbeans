@@ -7,7 +7,7 @@ class Restaurant(Base):
     __tablename__ = 'restaurant'
 
     name = db.Column(db.String)
-    rating = db.Column(db.Float, nullable=True)
+    rating = db.Column(db.DECIMAL, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     city = db.Column(db.String, nullable=True)

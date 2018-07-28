@@ -8,7 +8,7 @@ class Hotel(Base):
 
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
-    rating = db.Column(db.Float, nullable=True)
+    rating = db.Column(db.DECIMAL, nullable=True)
     city = db.Column(db.String, nullable=True)
     category = db.Column(db.String, nullable=True)
     desc = db.Column(db.Text, nullable=True)

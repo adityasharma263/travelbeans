@@ -90,7 +90,7 @@ def restaurant_api():
             try:
                 restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
                 for restaurant_obj in restaurant_list:
-                    rating_restaurant_id.append(restaurant_obj.restaurant_id)
+                    rating_restaurant_id.append(restaurant_obj.id)
             except:
                 rating_restaurant_id = []
 
@@ -99,7 +99,7 @@ def restaurant_api():
             try:
                 restaurant_list = Restaurant.query.filter(Restaurant.price >= price_start, Restaurant.price <= price_end).all()
                 for restaurant_obj in restaurant_list:
-                    price_restaurant_id.append(restaurant_obj.restaurant_id)
+                    price_restaurant_id.append(restaurant_obj.id)
             except:
                 price_restaurant_id = []
         obj = {
