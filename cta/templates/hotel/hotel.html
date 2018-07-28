@@ -80,27 +80,30 @@
             <div class="topnav hidden-xs">
                 <div class="container">
                     <ul class="quick-menu pull-left">
-                        <li><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#">MY ACCOUNT</a></li>
+                        
+						<li class="ribbon currency">
+                            <a href="" title="">INR</a>
+                            <ul class="menu mini left">
+                            </ul>
+                        </li>
                         <li class="ribbon">
-                            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#">English</a>
+                            <a href="">English</a>
                             <ul class="menu mini">
-                                <li><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#" title="Hindi">Hindi</a></li>
-                                <li class="active"><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#" title="English">English</a></li>
-                                
+                            </ul>
+                        </li>
+						<li class="ribbon">
+                            <a href="">India</a>
+                            <ul class="menu mini">
                             </ul>
                         </li>
                     </ul>
                     <ul class="quick-menu pull-right">
-                        <li><a href="http://themeforest.net/item/travelo-responsive-travel-booking-site-template/8346649?ref=SoapTheme" class="button yellow btn-small" style="height: 30px; font-size: 1em;"><i class="soap-icon-shopping"></i> PURCHASE</a></li>
-                        <li><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#travelo-login" class="soap-popupbox">LOGIN</a></li>
-                        <li><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
-                        <li class="ribbon currency">
-                            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#" title="">USD</a>
-                            <ul class="menu mini left">
-                                <li class="active"><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#" title="USD">USD</a></li>
-                                <li><a href="http://www.soaptheme.net/html/travelo/hotel-index.html#" title="INR">INR</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
+						<i class="soap-icon-shopping"></i> SIGN UP</a></li>
+                        <li><a href="travelo-login" class="soap-popupbox">LOGIN</a></li>
+						<li><a href="">Business CAPITAL</a></li>
+                        <li><a href="travelo-signup" class="soap-popupbox">Customer Care</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -412,130 +415,9 @@
         </header>
         <section id="">
             <div class="search-box-wrapper" style="background-image:url('/images/hotelhome.jpg'); height: 350px;">
-                <section id="content" style="background-image:url('/images/hotelhome.jpg'); height: 350px;">
+                <!-- <section id="content" style="background-image:url('/images/hotelhome.jpg'); height: 350px;">
 
-                <!-- <div class="search-box container">
-                    
-                    <div class="search-tab-content">
-                        <div class='col-sm-6' id="hotels-tab">
-                            
-                            <form autocomplete="off" class='navbar-form'>
-                                    <div class='input-group' style="width:93%">
-                                         <label for="destination"><button type="button"><strong>Search</strong></button> -->
-                                          <!-- <input class='form-control' id="destination" style="margin-top:34px;" type="text" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Hotel or City">
-                                          <span class="input-group-btn">
-                                            <button type='submit' class='btn btn-default' ng-click="getHotel()">
-                                              <span ><i class="fa fa-search" aria-hidden="true"></i></span>
-                                            </button>
-                                          </span>   -->
-                                        <!-- </label> -->
-
-                                    <!-- </div> -->
-                                    <!-- <button type="button" ng-click="getHotel()"><i class="fa fa-search" aria-hidden="true"></i></button> -->
-                                    <!-- <div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                        <table class="table table-hover " style="background-color:white">
-
-                                                <tbody>
-                                                  <tr ng-repeat="city in cities">
-                                                    <td ng-click="result([[city]],'city')">[[city]]</td>
-
-                                                  </tr>
-                                                  <tr ng-repeat="name in names">
-                                                    <td ng-click="result([[name]],'name')">[[name]]</td>
-
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    
-
-
-
-                                <div class="row"> -->
-                                    <!-- <div class="form-group col-sm-6 col-md-3">
-                                        <h4 class="title">Where</h4>
-                                        <label for="destination">Your Destination -->
-                                        <!-- <input id="destination" type="text" class="form-control input-text full-width" ng-model="hotel.city" placeholder="enter a destination or hotel name"> -->
-                                   
-                                        <!-- <select id="destination" ng-model="hotel.city">
-                                            <option ng-repeat="obj in hotels" value="[[obj.city]]">[[obj.city]]</option>
-                                        </select>
-                                        </label>
-                                   
-                                    </div> -->
-                                    
-                                    <!-- <div class="form-group col-sm-6 col-md-4">
-                                        <h4 class="title">When</h4>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Check In</label>
-                                                    <input type="date" ng-model="room.check_in" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy">
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Check Out</label>
-                                                    <input type="date" ng-model="room.check_out" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy">
-                                                
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    
-                                    <!-- <div class="form-group col-sm-6 col-md-3">
-                                        <h4 class="title">Who</h4>
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <label for="room">Rooms</label>
-                                                <div class="selector">
-                                                    <select id="room" class="full-width" ng-model="hotel.rooms.room_type">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <label>Adults</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <label>Kids</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-<!--                                     
-                                    <div class="form-group col-sm-6 col-md-2 fixheight">
-                                        <label class="hidden-xs">&nbsp;</label> -->
-                                        <!-- <button type="button" ng-click="getHotel()">SEARCH NOW</button> -->
-                                    <!-- </div>
-                                </div>
-                            </form>
-                        
-                        
-                        
-                    </div>
-                </div>
-            </div>  -->
+                
         
                
                 <div class="search-box-wrapper style2">
@@ -591,51 +473,100 @@
                                                     <button type="submit" class="full-width"  ng-click="getHotel()">SEARCH NOW</button>
                                                 </div>
                                             </div>
-                                            <!-- <div class="row">
-                                                    <div class="col-sm-12">
-                                                <table class="table table-hover " style="background-color:white">
-        
-                                                        <tbody>
-                                                          <tr ng-repeat="city in cities">
-                                                            <td ng-click="result([[city]],'city')">[[city]]</td>
-        
-                                                          </tr>
-                                                          <tr ng-repeat="name in names">
-                                                            <td ng-click="result([[name]],'name')">[[name]]</td>
-        
-                                                          </tr>
-                                                        </tbody>
-                                                      </table>
-                                                    </div>
-                                                </div> -->
+                                           
         
                                 </form>
                             </div>
                             
                         </div>
                     </div>
-                    <!-- <div class="container"> 
-                    <div class="row">
-                            <div class="col-sm-12">
-                        <table class="table table-hover " style="background-color:white">
-
-                                <tbody>
-                                  <tr ng-repeat="city in cities">
-                                    <td ng-click="result([[city]],'city')">[[city]]</td>
-
-                                  </tr>
-                                  <tr ng-repeat="name in names">
-                                    <td ng-click="result([[name]],'name')">[[name]]</td>
-
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                 </div>
     
+        </section> -->
+
+
+        <section id="content" class="tour">
+            <div id="slideshow" class="slideshow-bg full-screen" style="height: 415px;">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Campsite-Daytime-Travel-Beans-Unique-Places-To-Stay.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations-TB.jpg);"></div>
+                        </li>
+                        <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotel-And-Accomodations.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Hotels-In-India-Travel-Beans.jpg);"></div>
+                        </li>
+                    </ul>
+                </div>
+				
+				
+                <div class="container">
+                    <div class="table-wrapper full-width">
+                        <div class="table-cell">
+                            <div class="heading box">
+                                <h1 class="title">#TB Hotels</h1>
+                                <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
+                            </div>
+                            <div class="search-box">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-8 form-group">
+                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" onmousemove="myFunction(event)" onmouseout="clearCoor()"  ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
+                                        
+                                            <div class="row" id="demo">
+                                                <div class="col-sm-12">
+                                            <table class="table table-hover " style="background-color:white">
+    
+                                                    <tbody>
+                                                      <tr ng-repeat="city in cities">
+                                                        <td ng-click="result([[city]],'city')">[[city]]</td>
+    
+                                                      </tr>
+                                                      <tr ng-repeat="name in names">
+                                                        <td ng-click="result([[name]],'name')">[[name]]</td>
+    
+                                                      </tr>
+                                                      <tr ng-if="resp">
+                                                          <td>No result found</td>
+                                                      </tr>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                            
+                                            <div class="col-sm-4 form-group">
+                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1" ng-click="getHotel()">Search Now</button>
+                                            </div>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="text-center">
+                                <a href="" class="button btn-medium yellow uppercase">View All Collections</a>
+                                &nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+			</div>
+			
+            
         </section>
+
+
         <section>
             <div class="section" style="background-color:#f5f5f5">
                 <div class="container">
