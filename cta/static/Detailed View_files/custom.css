@@ -2,3 +2,18 @@
  * Title:   Custom Style File
  * Author:  http://themeforest.net/user/soaptheme 
  */
+.pos-ab {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.image-stack{
+    bottom: 0;
+    right: 0;
+}
+.mr15 {
+     margin-right: 15px;
+}
+.mb15{
+    margin-bottom: 15px
+}

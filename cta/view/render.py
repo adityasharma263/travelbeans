@@ -71,6 +71,11 @@ def restaurant_search_sugg():
     print(suggestion)
     return suggestion
 
+@app.route("/admin/restaurant", methods=["GET"])
+def admin_restaurant():
+    return render_template("restaurant/restaurant_dashboard.html")
+
+
 
 #=========================== CABS =======================================
 
