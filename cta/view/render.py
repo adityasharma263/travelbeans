@@ -55,8 +55,11 @@ def restaurant_search():
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
 def restaurant_detail(restaurant_id):
-    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant?id="+restaurant_id
-    restaurant_data = requests.get(url=restaurant_api_url).json()
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant?id="+str(restaurant_id)
+    restaurant_data = requests.get(url=restaurant_api_url).json()['result']['restaurants'][0]
+    if restaurant_data['amenities']:
+        restaurant_data['amenities'].pop("id", None)
+        restaurant_data['amenities'].pop("restaurant", None)
     return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data)
 
 @app.route("/restaurant/search/suggestion", methods=["GET"])

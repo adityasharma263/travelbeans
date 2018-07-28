@@ -1444,13 +1444,16 @@
                         <div id="search" class="tab-pane fade active in">
                             <div class="search-tab-content">
                                 <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
-                                <form action="" method="post">
+                                <form action="/restaurant/search" method="get">
                                     <div class="row">
                                         <div class="form-group col-sm-6 col-md-6">
                                             <h4 class="title">Trip Keys Resturants</h4>
                                             <label>Search for a Perfect Dinning</label>
-                                            <input type="text" class="input-text full-width" placeholder="Search Resturant , Cusine or Dishes " {% if searched_value%} value="{{ searched_value }}" {% endif %}>
+                                            <input type="text" class="input-text full-width search-input-text" placeholder="Search for a Dish" ng-model="searchQueryValue"
+                                                ng-change="searchQuery(searchQueryValue)">
                                         </div>
+
+
 
                                         <div class="form-group col-sm-6 col-md-2 fixheight">
                                             <label class="hidden-xs">&nbsp;</label>
@@ -1459,6 +1462,17 @@
                                         </div>
                                     </div>
                                 </form>
+
+                                <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion" ng-init="searchQueryValue = '{{ searched_value }}'">
+                                    <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
+                                        <li ng-repeat="searchResult in searchValue">
+                                            <a href="{{config['DOMAIN_URL']}}/restaurant/search?[[searchType]]=[[searchResult]]">
+                                                <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="overlay-box"></div>
                             </div>
                         </div>
 
@@ -1471,7 +1485,9 @@
                                         <div class="form-group col-sm-6 col-md-6">
                                             <h4 class="title">Order Online</h4>
                                             <label>Hungry ? Worry Not , We'll Get Your Order Placed</label>
-                                            <input type="text" class="input-text full-width" placeholder="Tell Us ! What are You Hungry For ?">
+
+                                            <input type="text" class="input-text full-width search-input-text" placeholder="Tell Us ! What are You Hungry For ?" ng-model="searchQueryValue"
+                                                ng-change="searchQuery(searchQueryValue)">
                                         </div>
 
                                         <div class="form-group col-sm-6 col-md-2 fixheight">
@@ -1566,37 +1582,56 @@
                             <h2>Filters</h2>
                             <hr>
                             <div id="filter-menu" class="collapse navbar-collapse">
-                                <div class="cuisine-filter">
-                                    <h3>Cuisine</h3>
-                                    <span ng-repeat="cuisine_name in cuisine">
-                                        <input type="radio" name="cuisine" ng-model="$parent.radioValue" value="[[cuisine_name.cuisine]]" ng-change="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
-                                        <br>
-                                    </span>
+                                <div class="cuisine filter">
+                                    <fieldset>
+                                        <legend>Cuisine</legend>
+                                        <span ng-repeat="cuisine_name in cuisine">
+                                            <input type="radio" name="cuisine" value="[[cuisine_name.cuisine]]" ng-click="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
+                                            <br>
+                                        </span>
+                                    </fieldset>
                                 </div>
 
-                                <div class="dish-filter">
+                                <div class="pricing filter ">
+                                    <fieldset>
+                                        <legend>Price</legend>
+
+                                        <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price" >
+                                        <span>price range:
+                                            <span>[[filter.price]]</span>
+                                        </span>
+                                        <br>
+                                    </fieldset>
+                                </div>
+
+                                <!-- <div class="dish-filter">
                                     <h3>Dish</h3>
                                     <span ng-repeat="dish_name in dish">
-                                        <input type="radio" name="dish" ng-model="$parent.radioValue" value="[[dish_name.dish]]" ng-change="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
+                                        <input type="radio" name="dish" value="[[dish_name.dish]]" ng-click="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
                                         <br>
                                     </span>
-                                </div>
+                                </div> -->
 
-                                <div class="menu-filter">
-                                    <h3>Menu</h3>
+                                <div class="menu filter">
+                                    <fieldset >
+                                    <legend>Menu</legend>
                                     <span ng-repeat="(menu_name, menu_value) in menu">
-                                        <input type="radio" name="menu" ng-model="$parent.radioValue" value="[[menu_name]]" ng-change="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
+                                        <input type="radio" name="menu" value="[[menu_name]]" ng-click="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
                                         <br>
                                     </span>
+                                </fieldset>
                                 </div>
 
 
-                                <div class="book-a-party-filter">
-                                    <h3>More filters</h3>
+                                <div class="book-a-party filter">
+                                    <fieldset>
+                                    <legend>More filters</legend>
                                     <span ng-repeat="(amenities_name, amenities_value) in amenities">
-                                        <input type="radio" name="amenities" ng-model="$parent.radioValue" value="[[amenities_name]]" ng-change="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
+                                        <input type="radio" name="amenities" value="[[amenities_name]]" ng-click="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
                                         <br>
                                     </span>
+
+                                </fieldset>
                                 </div>
                             </div>
                         </div>
@@ -1615,7 +1650,7 @@
                                         <div class="col-md-12" ng-repeat="restaurant in restaurants" ng-if="!serverSideRender">
                                             <article class="box">
                                                 <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
-                                                    <a class="hover-effect" title="" href="#">
+                                                    <a class="hover-effect" title="" href="/restaurant/[[restaurant.id]]">
                                                         <img class="img-responsive" alt="" ng-src="[[restaurant.images[0].image_url]]">
                                                     </a>
                                                 </figure>
@@ -1627,7 +1662,9 @@
                                                         </strong>
                                                     </div>
                                                     <h2 class="box-title" style="font-size:24px">
-                                                        <strong>[[ restaurant.name ]]</strong>
+                                                        <strong>
+                                                            <a href="/restaurant/[[restaurant.id]]">[[ restaurant.name ]]</a>
+                                                        </strong>
                                                     </h2>
 
                                                     <div>
@@ -1672,7 +1709,7 @@
                                         <div class="col-md-12" ng-if="serverSideRender">
                                             <article class="box">
                                                 <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
-                                                    <a class="hover-effect" title="" href="#">
+                                                    <a class="hover-effect" title="" href="/restaurant/{{restaurant.id}}">
                                                         <img class="img-responsive" alt="" src="{{restaurant.images[0].image_url}}">
                                                     </a>
                                                 </figure>
@@ -1684,7 +1721,9 @@
                                                         </strong>
                                                     </div>
                                                     <h2 class="box-title" style="font-size:24px">
-                                                        <strong>{{ restaurant.name }}</strong>
+                                                        <strong>
+                                                            <a href="/restaurant/{{restaurant.id}}">{{ restaurant.name }}</a>
+                                                        </strong>
                                                     </h2>
 
                                                     <div>
@@ -1698,10 +1737,10 @@
 
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cuisines : </span>
-                                                        {% for  association in restaurant.association %}
+                                                        {% for association in restaurant.association %}
                                                         <span>
-                                                            <strong>{{association.cuisines.cuisine}}
-                                                                {% if loop.index != restaurant.association|length %}
+                                                            <strong>{{association.cuisines.cuisine}} {% if loop.index != restaurant.association|length
+                                                                %}
                                                                 <span ng-if="$index != restaurant.association.length - 1">,</span>
                                                                 {% endif %}
                                                             </strong>
@@ -1749,6 +1788,7 @@
                     </div>
 
                     <div class="col-sm-3">
+
 
                     </div>
 
