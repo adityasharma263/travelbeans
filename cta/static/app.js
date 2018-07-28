@@ -1237,3 +1237,16 @@ if(window.screen.availWidth <=440){
 
 
 }])
+
+
+
+.controller('adminCabController',["$scope", "$http", function($scope, $http, $filter) {
+  $scope.cab = {}; // main cab model
+  $scope.createCab = function() {
+  // e.preventDefault()
+  console.log("$scope.cab",$scope.cab);
+
+}
+}])  
+
+

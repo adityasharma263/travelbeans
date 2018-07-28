@@ -519,11 +519,12 @@
                             <div class="search-box">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group">
-                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" onmousemove="myFunction(event)" onmouseout="clearCoor()"  ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
+                                        <div class="col-sm-4 col-md-8 form-group" onmousemove="myFunction(event)" onmouseout="clearCoor()">
+                                            <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
                                         
                                             <div class="row" id="demo">
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-12"> 
+                                                    <div style="max-height:100px; overflow-y:scroll; margin-right:0px;">
                                             <table class="table table-hover " style="background-color:white">
     
                                                     <tbody>
@@ -540,6 +541,7 @@
                                                       </tr>
                                                     </tbody>
                                                   </table>
+                                                </div>
                                                 </div>
                                             </div>
                                         

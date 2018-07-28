@@ -13,7 +13,8 @@
     </head>
     <link rel="stylesheet" href="css/admin.css">
 
-<body ng-app="">
+<body ng-app="comparetravel">
+     <div ng-controller="adminCabController">
         <div class="container">
                  <ul class="nav nav-tabs">
                   <li class="active"><a data-toggle="tab" href="#home">monthly rental</a></li>
@@ -26,7 +27,7 @@
               
                 <div class="tab-content">
                   <div id="home" class="tab-pane fade in active">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" ng-submit="createCab()">
                     <div>
                         <br>
                         <!-- <button class="btn btn-defalut" ng-click="hideShow()">create</button> -->
@@ -44,7 +45,7 @@
                                 <input  class="form-control" id="name" ng-model="cab.name" type="text" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="control-label col-sm-2" for="city">City : </label>
                             <div class="col-sm-10"> 
                                 <input  class="form-control" id="name" ng-model="cab.city" type="text" required>
@@ -85,7 +86,7 @@
                             <div class="col-sm-10">          
                                 <input  class="form-control" id="name" ng-model="cab.Drop_Date" type="textarea" required>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Price ">Price : </label>
                             <div class="col-sm-10">          
@@ -231,7 +232,7 @@
                             </div>
                             </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="images.image_url" type="text">
+                                <input  class="form-control" id="name"  ng-model="cab.images.image_url" type="text">
                             </div>
                         </div>
                         <div class="form-group">        
@@ -239,7 +240,7 @@
                                 <button type="button" class="btn btn-primary" ng-click=addImg()>add more</button>
                             </div>
                         </div>
-                        <h4>For Maps : </h4>
+                        <!-- <h4>For Maps : </h4>
 
                         <div class="form-group">
                             <label class="control-label col-sm-2" >Longitude:  </label>
@@ -258,8 +259,8 @@
                             <div class="radio col-sm-10">
                                 <input class="form-control" id="rating1" type="number" name="rating" step="any"  ng-model="cab.rating"/>
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label class="control-label col-sm-2" for="star">Star: </label>
                             <div class="radio">
                                 <label>
@@ -283,7 +284,7 @@
                                     <input id="star7" type="radio" name="star" value="7" ng-model="cab.star"/>7
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         <h3>Cab Amenities :</h3>
                         <div class="form-group" style="margin-left:160px">
 
@@ -297,133 +298,44 @@
                                 <label for="Seater">
                                     <input type="checkbox" value="2" ng-model="cab.amenities.Seater"/>Seater
                                 </label>
-                            </div>
+                            </div> 
                             <div>
                                 <label for="Fuel_Type">
-                                    <input type="checkbox"  ng-model="cab.amenities.Fuel_Type"/> Fuel Type
+                                    <input type="checkbox" value="3" ng-model="cab.amenities.Fuel_Type"/> Fuel Type
                                 </label>
                             </div>
                             <div>
                                 <label for="Transmission">
-                                    <input type="checkbox"  ng-model="cab.amenities.Transmission"/>Transmission
+                                    <input type="checkbox" value="4"  ng-model="cab.amenities.Transmission"/>Transmission
                                 </label>
                             </div>
                             <div>
                                 <label for="Baggage_Allowance">
-                                    <input type="checkbox" value="3" ng-model="cab.amenities.Baggage_Allowance"/>Baggage Allowance
+                                    <input type="checkbox" value="5" ng-model="cab.amenities.Baggage_Allowance"/>Baggage Allowance
                                 </label>
                             </div>
                             <div>
                                 <label for="Doorstep_Delivery">
-                                    <input type="checkbox" value="4" ng-model="cab.amenities.Doorstep_Delivery"/>Doorstep Delivery
+                                    <input type="checkbox" value="6" ng-model="cab.amenities.Doorstep_Delivery"/>Doorstep Delivery
                                 </label>
                             </div>
                             <div>
                                 <label for="With_Without Fuel">
-                                    <input type="checkbox" value="4" ng-model="cab.amenities.With_Without Fuel"/>With / Without Fuel
+                                    <input type="checkbox" value="7" ng-model="cab.amenities.With_Without_Fuel"/>With / Without Fuel
                                 </label>
                             </div>
                             <div>
                                 <label for="Fuel_Capacity">
-                                    <input type="checkbox" value="5" ng-model="cab.amenities.Fuel_Capacity"/>Fuel Capacity 
+                                    <input type="checkbox" value="8" ng-model="cab.amenities.Fuel_Capacity"/>Fuel Capacity 
                                 </label>
                             </div>
-                            <!-- <div>
-                                <label for="express_check_in_out">
-                                    <input type="checkbox" value="6" ng-model="cab.amenities.express_check_in_out"/>Express Check in Out
-                                </label>
-                            </div>
-                            <div>
-                                <label for="gym">
-                                    <input type="checkbox" value="7" ng-model="cab.amenities.gym"/>Gym
-                                </label>
-                            </div>
-                            <div>
-                                <label for="hairdresser">
-                                    <input type="checkbox" value="8" ng-model="cab.amenities.hairdresser"/>Hairdresser
-                                </label>
-                            </div>
-                            <div>
-                                <label for="indoor_swimming_pool">
-                                    <input type="checkbox" value="9" ng-model="cab.amenities.indoor_swimming_pool"/>Indoor Swimming Pool
-                                </label>
-                            </div>
-                            <div>
-                                <label for="laundry_service">
-                                    <input type="checkbox" value="10" ng-model="cab.amenities.laundry_service"/>Laundry Service
-                                </label>
-                            </div>
-                            <div>
-                                <label for="lift">
-                                    <input type="checkbox" value="11" ng-model="cab.amenities.lift"/>Lift
-                                </label>
-                            </div>
-                            <div>
-                                <label for="non_smoking_smoking_rooms">
-                                    <input type="checkbox" value="14" ng-model="cab.amenities.non_smoking_smoking_rooms"/>Non_Smoking Smoking Rooms
-                                </label>
-                            </div>
-                            <div>
-                                <label for="outdoor_swimming_pool">
-                                    <input type="checkbox" value="13" ng-model="cab.amenities.outdoor_swimming_pool"/>Outdoor Swimming Pool
-                                </label>
-                            </div>
-                            <div>
-                                <label for="pet_allowance">
-                                    <input type="checkbox" value="14" ng-model="cab.amenities.pet_allowance"/>Pet Allowance
-                                </label>
-                            </div>
-                            <div>
-                                <label for="pool">
-                                    <input type="checkbox" value="15" ng-model="cab.amenities.pool"/>Pool
-                                </label>
-                            </div>
-                            <div>
-                                <label for="porter_service">
-                                    <input type="checkbox" value="16" ng-model="cab.amenities.porter_service"/>Porter Service
-                                </label>
-                            </div>
-                            <div>
-                                <label for="restaurant">
-                                    <input type="checkbox" value="17" ng-model="cab.amenities.restaurant"/>Restaurant
-                                </label>
-                            </div>
-                            <div>
-                                <label for="spa">
-                                    <input type="checkbox" value="18" ng-model="cab.amenities.spa"/>SPA
-                                </label>
-                            </div>
-                            <div>
-                                <label for="terrace">
-                                    <input type="checkbox" value="19" ng-model="cab.amenities.terrace"/>Terrace
-                                </label>
-                            </div>
-                            <div>
-                                <label for="twenty_four_hr_reception">
-                                    <input type="checkbox" value="20" ng-model="cab.amenities.twenty_four_hr_reception"/>24hr Reception
-                                </label>
-                            </div>
-                            <div>
-                                <label for="twenty_four_hr_room_service">
-                                    <input type="checkbox" value="21" ng-model="cab.amenities.twenty_four_hr_room_service"/>24hr Room Service
-                                </label>
-                            </div>
-                            <div>
-                                <label for="wheelchair_accessible">
-                                    <input type="checkbox" value="22" ng-model="cab.amenities.wheelchair_accessible"/>Wheelchair Accessible
-                                </label>
-                            </div>
-                            <div>
-                                <label for="wifi_in_lobby">
-                                    <input type="checkbox" value="23" ng-model="cab.amenities.wifi_in_lobby"/>Wifi in Lobby
-                                </label>
-                            </div> -->
-                        </label>
-                        </div>
+                            
+                            </label>
+                        </div>                                  
                         
                         <div class="form-group">        
                         <div class="col-sm-offset-8 col-sm-8">
-                            <button type="submit" class="btn btn-success">Add Room</button>
+                            <button type="submit" class="btn btn-success">Add Cab</button>
     
                         </div>
                         </div>
@@ -2578,6 +2490,6 @@
     
 <script type="text/javascript" src="/app.js"></script>
 
-
+</div>
 </body>
 </html>
