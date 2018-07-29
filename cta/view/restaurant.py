@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from cta.model.restaurant import RestaurantImage, Restaurant, RestaurantAmenity, Menu,\
-    Cuisine, Collection, Association, Dish
+    Cuisine, Collection, RestaurantAssociation, Dish
 from cta import app
 from flask import jsonify, request
 from cta.schema.restaurant import RestaurantSchema, RestaurantImageSchema,\
-    RestaurantAmenitySchema, CuisineSchema, CollectionSchema, AssociationSchema, MenuSchema, DishSchema
+    RestaurantAmenitySchema, CuisineSchema, CollectionSchema, RestaurantAssociationSchema, MenuSchema, DishSchema
 import datetime
 from itertools import cycle
 import simplejson as json
@@ -46,16 +46,16 @@ def restaurant_api():
             is_filter = 1
             try:
                 cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
-                restaurant_list = Association.query.filter(Association.cuisine_id == cuisine_id).all()
+                restaurant_list = RestaurantAssociation.query.filter(RestaurantAssociation.cuisine_id == cuisine_id).all()
                 for restaurant_obj in restaurant_list:
                     cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
             except:
                 collection_restaurant_id = []
         if collection:
-            is_filter =1
+            is_filter = 1
             try:
                 collection_id = Collection.query.filter(Collection.collection == collection).first().id
-                restaurant_list = Association.query.filter(Association.collection_id == collection_id).all()
+                restaurant_list = RestaurantAssociation.query.filter(RestaurantAssociation.collection_id == collection_id).all()
                 for restaurant_obj in restaurant_list:
                     collection_restaurant_id.append(restaurant_obj.restaurant_id)
             except:
@@ -63,8 +63,7 @@ def restaurant_api():
         if dish:
             is_filter = 1
             try:
-                dish_id = Dish.query.filter(Dish.dish == dish).first().id
-                restaurant_list = Association.query.filter(Association.dish_id == dish_id).all()
+                restaurant_list = Dish.query.filter(Dish.dish == dish).all()
                 for restaurant_obj in restaurant_list:
                     dish_restaurant_id.append(restaurant_obj.restaurant_id)
             except:
@@ -131,6 +130,97 @@ def restaurant_api():
                 restaurants = Restaurant.query.filter_by(**args).all()
         result = RestaurantSchema(many=True).dump(restaurants)
         return jsonify({'result': {'restaurants': result.data}, 'message': "Success", 'error': False})
+    else:
+        restaurant = request.json
+        restaurant_obj = {
+            "name": restaurant.get("name", None),
+            "city": restaurant.get("city", None),
+            "category": restaurant.get("category", None),
+            'rating': Restaurant.get("rating", None),
+            "desc": restaurant.get("desc", None),
+            "address": restaurant.get("address", None),
+            "longitude": json.dumps(restaurant.get("longitude", None)),
+            "latitude": json.dumps(restaurant.get("latitude", None)),
+            "featured": restaurant.get("featured", None),
+            "phone": restaurant.get("phone", None),
+            "price": restaurant.get("price", None),
+        }
+        post = Restaurant(**restaurant_obj)
+        post.save()
+        restaurant_result = RestaurantSchema().dump(post)
+        if restaurant.get("menu"):
+            menu = restaurant.get("menu", None)
+            menu_obj = {
+                "restaurant_id": restaurant_result.data['id'],
+                "breakfast": menu.get("breakfast", None),
+                "lunch": menu.get("lunch", None),
+                "dinner": menu.get("dinner", None),
+                "cafe": menu.get("cafe", None),
+                "lounge": menu.get("lounge", None),
+                "family": menu.get("family", None),
+                "bars": menu.get("bars", None),
+                "nightlife": menu.get("nightlife", None),
+                "street_stalls": menu.get("street_stalls", None),
+                "pocket_friendly": menu.get("pocket_friendly", None),
+                "diet": menu.get("diet", None),
+                "luxury": menu.get("luxury", None),
+            }
+            Menu(**menu_obj).save()
+        if restaurant.get("restaurant_images"):
+            for image in restaurant['restaurant_images']:
+                image_obj = {
+                    "image_url": image.get("image_url", None),
+                    "image_type": image.get("image_type", None),
+                    "restaurant_id": restaurant_result.data['id']
+                }
+                RestaurantImage(**image_obj).save()
+        if restaurant.get("dishes"):
+            for dish in restaurant['dishes']:
+                dish_obj = {
+                    "dish": dish.get("dish", None),
+                    "dish_type": dish.get("dish_type", None),
+                    "full_price": dish.get("full_price", None),
+                    "half_price": dish.get("half_price", None),
+                    "desc": dish.get("desc", None),
+                    "image": dish.get("image", None),
+                    "restaurant_id": restaurant_result.data['id']
+                }
+                Dish(**dish_obj).save()
+        if restaurant.get("association"):
+            for association in restaurant['association']:
+                if association.get("cuisines"):
+                    cuisines = association.get("cuisines")
+                    if cuisines.get("cuisine_id"):
+                        cuisine_id = cuisines.get("cuisine_id")
+                    else:
+                        cuisine_obj = {
+                                "cuisine": cuisines.get("cuisine", None),
+                            }
+                        post = Cuisine(**cuisine_obj).save()
+                        post.save()
+                        cuisine_result = CuisineSchema().dump(post)
+                        cuisine_id = cuisine_result.data['id']
+                if association.get("collections"):
+                    collections = association.get("collections")
+                    if collections.get("collection_id"):
+                        collection_id = collections.get("collection_id")
+                    else:
+                        collection_obj = {
+                                "collection": collections.get("collection", None),
+                                "image": collections.get("image", None),
+                            }
+                        post = Collection(**collection_obj).save()
+                        post.save()
+                        collection_result = CollectionSchema().dump(post)
+                        collection_id = collection_result.data['id']
+                if association.get("cuisines") or association.get("collections"):
+                    association_obj = {
+                        "restaurant_id": restaurant_result.data['id'],
+                        "cuisine_id": cuisine_id,
+                        "collection_id": collection_id,
+                    }
+                    RestaurantAssociation(**association_obj).save()
+        return jsonify({'result': {'restaurant': restaurant}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/amenity', methods=['GET', 'POST'])
@@ -249,13 +339,13 @@ def restaurant_association_api():
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 10))
-        data = Association.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = AssociationSchema(many=True).dump(data)
+        data = RestaurantAssociation.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = RestaurantAssociationSchema(many=True).dump(data)
         return jsonify({'result': {'association': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Association(**request.json)
+        post = RestaurantAssociation(**request.json)
         post.save()
-        result = AssociationSchema().dump(post)
+        result = RestaurantAssociationSchema().dump(post)
         return jsonify({'result': {'association': result.data}, 'message': "Success", 'error': False})
 
 

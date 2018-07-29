@@ -259,7 +259,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     $http.get("/api/v1/restaurant/cuisine")
     .then(function (res) {
-      $scope.cuisine = res.data.result.cuisine;
+    $scope.cuisine = res.data.result.cuisine;
     }, function (err) {
       console.log(err);
     });

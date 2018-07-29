@@ -13,7 +13,6 @@ class Cab(Base):
     desc = db.Column(db.Text, nullable=True)
     bookings = db.relationship('CabBooking', backref='cab')
     images = db.relationship('CabImage', backref='cab')
-    invoices = db.relationship('CabInvoice', backref='cab')
     amenities = db.relationship('CabAmenity', uselist=False, backref='cab')
 
     def __init__(self, *args, **kwargs):
@@ -26,7 +25,7 @@ class Cab(Base):
 class CabBooking(Base):
     __tablename__ = 'cab_booking'
 
-    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'), unique=True)
+    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
     one_way = db.Column(db.Boolean, default=False, nullable=True)
     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
     drop_time = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -35,7 +34,7 @@ class CabBooking(Base):
     drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
     pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
     pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
-    invoices = db.relationship('CabInvoice', backref='cab_booking')
+    invoices = db.relationship('CabInvoice', uselist=False, backref='cab_booking')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -72,8 +71,6 @@ class CabAmenity(Base):
     chauffeur = db.Column(db.Boolean, default=False, nullable=True)
     verified_driver = db.Column(db.Boolean, default=False, nullable=True)
 
-
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -84,8 +81,7 @@ class CabAmenity(Base):
 class CabInvoice(Base):
     __tablename__ = 'cab_invoice'
 
-    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
-    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'))
+    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=True)
     slab = db.Column(db.Integer, nullable=True)
     driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
     car_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
@@ -109,7 +105,7 @@ class CabInvoice(Base):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<cab_id %r>' % self.cab_id
+        return '<booking_id %r>' % self.booking_id
 
 
 class CabTax(Base):

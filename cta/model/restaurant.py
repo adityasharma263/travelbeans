@@ -18,9 +18,10 @@ class Restaurant(Base):
     category = db.Column(db.Integer, nullable=True)
     featured = db.Column(db.Boolean, default=False, nullable=True)
     images = db.relationship('RestaurantImage', backref='restaurant')
+    dishes = db.relationship('Dish', backref='restaurant')
     amenities = db.relationship('RestaurantAmenity', uselist=False, backref='restaurant')
     menus = db.relationship('Menu', uselist=False, backref='restaurant')
-    association = db.relationship('Association', backref='restaurant')
+    association = db.relationship('RestaurantAssociation', backref='restaurant')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -136,6 +137,7 @@ class Collection(Base):
 class Dish(Base):
     __tablename__ = 'dish'
 
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     dish = db.Column(db.String, default=False, nullable=True)
     dish_type = db.Column(db.Integer, nullable=True)
     half_price = db.Column(db.Integer, nullable=True)
@@ -149,14 +151,12 @@ class Dish(Base):
     def __repr__(self):
         return '<dish %r>' % self.dish
 
-class Association(Base):
-    __tablename__ = 'association'
+class RestaurantAssociation(Base):
+    __tablename__ = 'restaurant_association'
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=False)
-    dish_id = db.Column(db.Integer, db.ForeignKey('dish.id'), unique=False)
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'), unique=False)
     cuisine_id = db.Column(db.Integer, db.ForeignKey('cuisine.id'), unique=False)
-    dishes = db.relationship('Dish', foreign_keys=dish_id)
     collections = db.relationship('Collection', foreign_keys=collection_id)
     cuisines = db.relationship('Cuisine', foreign_keys=cuisine_id)
 
