@@ -17,3 +17,7 @@
 .mb15{
     margin-bottom: 15px
 }
+
+.restaurant-image{
+    width: 55px !important;
+}

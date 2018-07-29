@@ -36,72 +36,191 @@
 
             <div class="row">
                 <div class="col-sm-6">
-                    <form action="/action_page.php">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="email" class="form-control">
+                    <!-- <form> -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="email" class="form-control">
 
-                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Rating</label>
-                                    <input type="number" class="form-control" step="any">
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rating</label>
+                                <input type="number" class="form-control" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="number" class="form-control" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Latitude</label>
+                                <input type="number" class="form-control" step="any">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Longitude</label>
+                                <input type="number" class="form-control" step="any">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <!-- <select>
+                                        <option value disabled>-- select category --</option>
+                                        <option value=""></option>
+                                    </select> -->
+
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true">
+                                        Select Category
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li ng-repeat="category in categories">
+                                            <a href="#">[[category]]</a>
+                                        </li>
+
+
+                                    </ul>
                                 </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <label>Amenity</label>
+                        <div class="row">
+
+                            <div class="col-sm-4 panel" ng-repeat=" (amenity_key, amenity_value) in  amenities">
+
+                                <label>
+                                    [[amenity_key]]
+                                    <input type="checkbox" ng-model="restaurantData.amenities[amenity_key]" ng-true-value="true" ng-false-value="false">
+                                </label>
                             </div>
                         </div>
 
+                    </fieldset>
+
+                    <div class="panel">
+                        <div class="form-group">
+                            <h4>Collection</h4>
+                            <select class="">
+                                <option value disabled selected> -- Select Collection --</option>
+                                <option value="collectionData.id" ng-repeat=" collectionData in  collection">[[collectionData.collection]]</option>
+
+                                <!-- <label>
+                                    [[col.collection]]
+                                    <input type="checkbox" ng-model="restaurantData.amenities" ng-true-value="true" ng-false-value="false">
+                                </label> -->
+                            </select>
+                        </div>
 
                         <div class="form-group">
-                            <label>Description</label>
-                            <textarea class="form-control"></textarea>
+
+                            <h4>Cuisine</h4>
+                            <select>
+                                <option value disabled selected> -- Select Collection --</option>
+                                <option value="cuisineData.id" ng-repeat=" cuisineData in  cuisine">[[cuisineData.collection]]</option>
+                            </select>
+
+
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>City</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="number" class="form-control" step="any">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Latitude</label>
-                                    <input type="number" class="form-control" step="any">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Longitude</label>
-                                    <input type="number" class="form-control" step="any">
-                                </div>
-                            </div>
-                        </div>
-
-                        
 
 
 
 
 
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        <label>is featured? (sponsored restaurant shown at home page)</label>
+                        <input type="checkbox">
+                    </div>
+
+
+
+
+
+
+
+
+                    <button class="btn btn-default" ng-click="this[functionCalling]()">[[functionCalling]]</button>
+                    <button class="btn btn-default" ng-click="functionCalling = 'Add'" ng-show="functionCalling == 'Update'">Cancel</button>
+                    <!-- </form> -->
                 </div>
 
                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="search" placeholder="search hotels...">
+                    </div>
 
-
+                    <div class="row">
+                        <div class="col-sm-4" ng-repeat="restaurant in restaurants | filter: search">
+                            <div class="thumbnail">
+                                <img ng-src="[[restaurant.images[0].image_url]]" alt="">
+                                <div class="caption">
+                                    <h4>[[restaurant.name]]</h4>
+                                    <p>
+                                        <span>location :
+                                            <span>[[restaurant.city]]</span>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-primary" role="button" ng-click="$parent.functionCalling = 'Update';">Edit</button>
+                                        <button class="btn btn-default" role="button" ng-click="deleteHotel()">Delete</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
