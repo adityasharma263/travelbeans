@@ -81,8 +81,8 @@ class CabAmenity(Base):
 class CabInvoice(Base):
     __tablename__ = 'cab_invoice'
 
-    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'))
-    website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'))
+    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=False)
+    website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'), unique=False)
     websites = db.relationship('CabWebsite', foreign_keys=website_id)
     slab = db.Column(db.Integer, nullable=True)
     driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
