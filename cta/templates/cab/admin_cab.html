@@ -15,6 +15,7 @@
 
 <body ng-app="comparetravel">
      <div ng-controller="adminCabController">
+            <div id="snackbar"></div>
         <div class="container">
                  <ul class="nav nav-tabs">
                   <li class="active"><a data-toggle="tab" href="#home">monthly rental</a></li>
@@ -90,139 +91,139 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Price ">Price : </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Price" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Price" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Total_Hours">Total Hours: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Total_Hours" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Total_Hours" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Total_Days">Total Days: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Total_Days" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Total_Days" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Outstation_Interstate">Outstation / Interstate: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Outstation_Interstate" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Outstation_Interstate" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="One_Way_Round_Trip">One Way / Round Trip: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.One_Way_Round_Trip" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.One_Way_Round_Trip" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Base_Fare">Base Fare: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Base_Fare" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Base_Fare" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Base_Fare_Weekday">Base Fare Weekday: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Base_Fare_Weekday" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Base_Fare_Weekday" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Base_Fare_Weekend">Base Fare Weekend: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Base_Fare_Weekend" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Base_Fare_Weekend" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Base_Fare_Peak_Season">Base Fare Peak Season: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Base_Fare_Peak_Season" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Base_Fare_Peak_Season" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Km_Restriction">Km Restriction: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Km_Restriction" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Km_Restriction" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Cost_Excess_Km">Cost / Excess Km: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Cost_Excess_Km" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Cost_Excess_Km" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Cost_Excess_Hour">Cost / Excess Hour: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Cost_Excess_Hour" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Cost_Excess_Hour" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Distance_Between_Locations">Distance Between Locations: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Distance_Between_Locations" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Distance_Between_Locations" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="GST">GST: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.GST" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.GST" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="CGST">CGST: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.CGST" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.CGST" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="SGST">SGST: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.SGST" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.SGST" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Driver_Allowance_Charge_Day ">Driver Allowance Charge / Day : </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Driver_Allowance_Charge_Day " type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Driver_Allowance_Charge_Day " type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Night_Time_Allowance_Charges ">Night Time Allowance Charges : </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Night_Time_Allowance_Charges" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Night_Time_Allowance_Charges" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Free_Km">Free Km: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Free_Km" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Free_Km" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Free_Km_Fare">Free Km Fare: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Free_Km_Fare" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Free_Km_Fare" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="Pickup_Spots">Pickup Spots: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="cab.Pickup_Spots" type="textarea" required>
+                                <input  class="form-control" id="name" ng-model="cab.Pickup_Spots" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Cancelation_charges">Cancelation charges: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Cancelation_charges" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Cancelation_charges" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="Slabs ">Slabs: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.Slabs" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="cab.Slabs" type="number" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -232,7 +233,7 @@
                             </div>
                             </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="cab.images.image_url" type="text">
+                                <input  class="form-control" id="name"  ng-model="cab.images.image_url" type="url">
                             </div>
                         </div>
                         <div class="form-group">        
@@ -320,7 +321,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label for="With_Without Fuel">
+                                <label for="With_Without_Fuel">
                                     <input type="checkbox" value="7" ng-model="cab.amenities.With_Without_Fuel"/>With / Without Fuel
                                 </label>
                             </div>
@@ -2488,7 +2489,7 @@
               
 
     
-<script type="text/javascript" src="/app.js"></script>
+              <script type="text/javascript" src="/cab_js/app.js"></script>
 
 </div>
 </body>
