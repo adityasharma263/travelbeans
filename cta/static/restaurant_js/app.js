@@ -49,9 +49,13 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
   }])
-  .controller("searchController", ["$scope", "$http", function ($scope, $http) {
+  .controller("searchController", ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
 
-    var restaurantStructure = {}
+    var restaurantStructure = {};
+    var filter = {};
+    $scope.filter = {};
+
+    $scope.serverSideRender = true;
 
     $http.get("/api/v1/restaurant/cuisine")
       .then(function (res) {
@@ -65,6 +69,12 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       .then(function (res) {
         $scope.restaurants = res.data.result.restaurants;
         var allRestaurants = $scope.restaurants;
+        $scope.min_price = Math.min.apply(Math,$scope.restaurants.map(function(item){return item.price;}));
+        $scope.max_price = Math.max.apply(Math,$scope.restaurants.map(function(item){return item.price;}));  
+        $scope.price_filter = $scope.max_price;
+        $scope.filter.price = $scope.max_price;
+        
+        console.log($scope.min_price, $scope.max_price, $scope.price_filter);   
         for (i in allRestaurants) {
           restaurantStructure[allRestaurants[i].id] = allRestaurants[i];
         };
@@ -107,6 +117,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $http.get("/api/v1/restaurant/menu")
       .then(function (res) {
         $scope.menu = res.data.result.menu[0];
+        delete $scope.menu.id;
+        delete $scope.menu.restaurant; 
         console.log("$scope.tag =", $scope.menu);
       }, function (err) {
         console.log(err);
@@ -125,37 +137,42 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     $scope.getFilterRestaurant = function (filterName, filterValue) {
 
-      var filter = {}
+      
       filter[filterName] = filterValue;
+
       $http.get("/api/v1/restaurant", { params: filter })
         .then(function (res) {
           $scope.restaurants = res.data.result.restaurants;
+          $scope.serverSideRender = false;
+          console.log($scope.restaurants);
+          
         }, function (err) {
           console.log(err);
         });
 
     }
 
-    $scope.amenityAndTagFilter = function (filterType, filterValue) {
+    $scope.amenityAndMenuFilter = function (filterType, filterValue) {
 
       var filter = {}
       filter[filterValue] = true;
 
       var filterTypeResponse = {
-        tag: "tag",
+        menu: "menu",
         amenity: "amenities"
       }
 
       $http.get("/api/v1/restaurant/" + filterType, { params: filter })
         .then(function (res) {
-          var amenitiesAndTagFilterResponse = res.data.result[filterTypeResponse[filterType]];
+          var amenitiesAndMenuFilterResponse = res.data.result[filterTypeResponse[filterType]];
 
           var restaurant = [];
-          for (i in amenitiesAndTagFilterResponse) {
-            restaurant.push(restaurantStructure[amenitiesAndTagFilterResponse[i].restaurant])
+          for (i in amenitiesAndMenuFilterResponse) {
+            restaurant.push(restaurantStructure[amenitiesAndMenuFilterResponse[i].restaurant])
           }
 
           $scope.restaurants = restaurant;
+          $scope.serverSideRender = false;
 
         }, function (err) {
           console.log(err);
@@ -164,4 +181,364 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     }
 
+
+
+    var searchSuggestionDiv = document.getElementById("search-suggestion");
+    var overlayBox = document.getElementById("overlay-box");
+    $scope.searchSuggestion = {};
+
+    overlayBox.onclick = function (){
+      searchSuggestionDiv.style.display = "none";
+      overlayBox.style.display = "none";
+    }
+
+    $scope.searchQuery = function (query) {
+
+      console.log(query);
+
+
+
+      if (query.length >= 2) {
+        $http.post("/api/v1/restaurant/search", { search: query })
+          .then(function (response) {
+            searchSuggestionDiv.style.display = "block";
+            overlayBox.style.display = "block";
+            console.log(response.data.result);
+            $scope.searchSuggestion = response.data.result;
+          }, function (err) {
+            console.log(err);
+          });
+      } else {
+        searchSuggestionDiv.style.display = "none";
+        overlayBox.style.display = "none";
+      }
+    }
+
+    $scope.highlight = function (text, search) {
+      if (!search) {
+        return $sce.trustAsHtml(text);
+      }
+      return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
+    };
+
+
+
   }])
+
+
+
+
+  var Locations = [
+    'Abu',
+    'Agartala',
+    'Ahmedabad',
+    'Aizawl',
+    'Ajmer',
+    'Allahabad',
+    'Almora',
+    'Along',
+    'Alwar',
+    'Amarnath',
+    'Ambala',
+    'Amboli',
+    'Amritsar',
+    'Andaman',
+    'Andhra Pradesh',
+    'Araku',
+    'Arunachal Pradesh',
+    'Assam',
+    'Auli',
+    'Aurangabad',
+    'Badrinath',
+    'Bagan',
+    'Bagdogra',
+    'Bakkhali',
+    'Bali',
+    'Bandhavgarh',
+    'Bandipur',
+    'Bangalore',
+    'Banjar',
+    'Barot',
+    'Batala',
+    'Bhandardara',
+    'Bhangarh',
+    'Bharatpur',
+    'Bhatinda',
+    'Bhimashankar',
+    'Bhimtal',
+    'Bhopal',
+    'Bihar',
+    'Bikaner',
+    'Bir-Billing',
+    'Bundi',
+    'Chail',
+    'Chalakudy',
+    'Chamba',
+    'Champawat',
+    'Chandigarh',
+    'Chattisgarh',
+    'Cherrapunji',
+    'Chikhaldara',
+    'Chikmagalur',
+    'Chitkul',
+    'Chittorgarh',
+    'Chumathang',
+    'Coimbatore',
+    'Coonoor',
+    'Coorg',
+    'Corbett',
+    'Dadra and Nagar Haveli',
+    'Dalhousie',
+    'Daman',
+    'Daman and Diu',
+    'Dandeli',
+    'Daranghati',
+    'Darjeeling',
+    'Dehradun',
+    'Delhi',
+    'Devprayag',
+    'Dhana',
+    'Dhanaulti',
+    'Dharamshala',
+    'Dibrugarh',
+    'Digha',
+    'Dimapur',
+    'Diu',
+    'Dudhwa',
+    'Dwarka',
+    'Faridabad',
+    'GHNP',
+    'Gangotri',
+    'Gangtok',
+    'Gaya',
+    'Ghaziabad',
+    'Gir',
+    'Goa',
+    'Gokarna',
+    'Gopalpur',
+    'Gorakhpur',
+    'Gujarat',
+    'Gulmarg',
+    'Guntakal',
+    'Guptkashi',
+    'Gurdaspur',
+    'Gurgaon',
+    'Guwahati',
+    'Haflong',
+    'Hampi',
+    'Hanoi',
+    'Haridwar',
+    'Haryana',
+    'Himachal Pradesh',
+    'Hogenakkal',
+    'Hoshiarpur',
+    'Hunder',
+    'Igatpuri',
+    'Imphal',
+    'Indore',
+    'Itanagar',
+    'Jabalpur',
+    'Jagdalpur',
+    'Jaisalmer',
+    'Jakarta',
+    'Jalandhar',
+    'Jammu and Kashmir',
+    'Jharkhand',
+    'Jodhpur',
+    'Jorhat',
+    'Joshimath',
+    'Junagadh',
+    'Junnar',
+    'Kalimpong',
+    'Kamshet',
+    'Kanatal',
+    'Kanchipuram',
+    'Kangra',
+    'Kanyakumari',
+    'Kargil',
+    'Karjat',
+    'Karnaprayag',
+    'Karnataka',
+    'Karsog',
+    'Kasauli',
+    'Kashid',
+    'Kasol',
+    'Katra',
+    'Kaza',
+    'Kaziranga',
+    'Kedarnath',
+    'Kerala',
+    'Keylong',
+    'Khajjiar',
+    'Khajuraho',
+    'Khandala',
+    'Kharapathar',
+    'Khimsar',
+    'Kochi',
+    'Kodaikanal',
+    'Kohima',
+    'Kolad',
+    'Kollam',
+    'Konark',
+    'Kota',
+    'Kovalam',
+    'Kozhikode',
+    'Kudremukha',
+    'Kufri',
+    'Kullu',
+    'Kumarakom',
+    'Kumbhalgarh',
+    'Kurnool',
+    'Kurseong',
+    'Kurukshetra',
+    'Kutch',
+    'Lachung',
+    'Lakshadweep',
+    'Lamayuru',
+    'Lambasingi',
+    'Lansdowne',
+    'Lavasa',
+    'Leh',
+    'Likir',
+    'Lohajung',
+    'Lonar',
+    'Lucknow',
+    'Ludhiana',
+    'Madhya Pradesh',
+    'Madurai',
+    'Mahabaleshwar',
+    'Mahabalipuram',
+    'Maharashtra',
+    'Male',
+    'Malvan',
+    'Manali',
+    'Mandarmani',
+    'Mandi',
+    'Mandu',
+    'Manipur',
+    'Maredumilli',
+    'Matheran',
+    'Mathura',
+    'Mawlynnong',
+    'Mawsynram',
+    'Mcleodganj',
+    'Meghalaya',
+    'Mizoram',
+    'Mohali',
+    'Mukteshwar',
+    'Mumbai',
+    'Munnar',
+    'Mussoorie',
+    'Mysore',
+    'Nagaland',
+    'Naggar',
+    'Nagpur',
+    'Nainital',
+    'Nandaprayag',
+    'Nandi',
+    'Narkanda',
+    'Nashik',
+    'Naukuchiatal',
+    'Neemrana',
+    'Nelliyampathy',
+    'Netarhat',
+    'Noida',
+    'Nongstoin',
+    'Odisha',
+    'Orchha',
+    'Osian',
+    'Pahalgam',
+    'Palakkad',
+    'Palampur',
+    'Palanpur',
+    'Panchgani',
+    'Panna',
+    'Pasighat',
+    'Pathankot',
+    'Patiala',
+    'Patna',
+    'Patnitop',
+    'Pattaya',
+    'Peermade',
+    'Pelling',
+    'Periyar',
+    'Pithoragarh',
+    'Pondicherry',
+    'Pune',
+    'Punjab',
+    'Puri',
+    'Pushkar',
+    'Raipur',
+    'Rajaji',
+    'Rajasthan',
+    'Rajgir',
+    'Rajkot',
+    'Rameswaram',
+    'Ramtek',
+    'Ranchi',
+    'Ranikhet',
+    'Ranthambore',
+    'Ratnagiri',
+    'Ravangla',
+    'Rudraprayag',
+    'Sagar',
+    'Samui',
+    'Sanchi',
+    'Sangli',
+    'Saputara',
+    'Sariska',
+    'Seoni',
+    'Shillong',
+    'Shimla',
+    'Shirdi',
+    'Shivanasamundram',
+    'Shoghi',
+    'Shravanabelagola',
+    'Sikkim',
+    'Silchar',
+    'Siliguri',
+    'Similipal',
+    'Singalila',
+    'Sirmaur',
+    'Solan',
+    'Sonamarg',
+    'Sonipat',
+    'Srinagar',
+    'Sundarbans',
+    'Surat',
+    'Tamenglong',
+    'Tamil Nadu',
+    'Tanakpur',
+    'Tarkarli',
+    'Tatapani',
+    'Tawang',
+    'Telangana',
+    'Tezpur',
+    'Thanjavur',
+    'Thenmala',
+    'Thiruvananthapuram',
+    'Tiruchirappalli',
+    'Tirupati',
+    'Tiruvannamalai',
+    'Tripura',
+    'Tura',
+    'Udaipur',
+    'Ujjain',
+    'Unakoti',
+    'Uttar Pradesh',
+    'Uttarakhand',
+    'Uttarkashi',
+    'Vadodara',
+    'Vagamon',
+    'Varkala',
+    'Visakhapatnam',
+    'Vishnuprayag',
+    'Vrindavan',
+    'Wayanad',
+    'West Bengal',
+    'Yamunotri',
+    'Yelagiri',
+    'Yousmarg',
+    'Zirakpur',
+    'Ziro',
+    ]
