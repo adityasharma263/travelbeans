@@ -20,9 +20,10 @@
     <link rel="stylesheet" href="/css/animate.min.css">
     
     <!-- Current Page Styles -->
+    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
+
     <link rel="stylesheet" type="text/css" href="/css/settings.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
     <!-- <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen"> -->
     <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
     
@@ -100,9 +101,9 @@
                     <ul class="quick-menu pull-right">
                         <li><a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
 						<i class="soap-icon-shopping"></i> SIGN UP</a></li>
-                        <li><a href="travelo-login" class="soap-popupbox">LOGIN</a></li>
+                        <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
 						<li><a href="">Business CAPITAL</a></li>
-                        <li><a href="travelo-signup" class="soap-popupbox">Customer Care</a></li>
+                        <li><a href="#travelo-signup" class="soap-popupbox">Customer Care</a></li>
 
                     </ul>
                 </div>
@@ -487,25 +488,27 @@
 
 
         <section id="content" class="tour">
-            <div id="slideshow" class="slideshow-bg full-screen" style="height: 541px;">
+            <div id="slideshow" class="slideshow-bg" style="height: 541px;">
                 <div class="flexslider">
-                    <ul class="slides">
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Campsite-Daytime-Travel-Beans-Unique-Places-To-Stay.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations-TB.jpg);"></div>
-                        </li>
-                        <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotel-And-Accomodations.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Hotels-In-India-Travel-Beans.jpg);"></div>
-                        </li>
-                    </ul>
+                    
+                        <ul class="slides">
+                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                                <div class="slidebg" style="background-image: url(images/hotel_home/Campsite-Daytime-Travel-Beans-Unique-Places-To-Stay.jpg);"></div>
+                            </li>
+                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                                <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations-TB.jpg);"></div>
+                            </li>
+                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                                <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotel-And-Accomodations.jpg);"></div>
+                            </li>
+                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                                <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations.jpg);"></div>
+                            </li>
+                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative;display: block; transition: opacity 0.6s ease; z-index: 1;">
+                                <div class="slidebg" style="background-image: url(images/hotel_home/Hotels-In-India-Travel-Beans.jpg);"></div>
+                            </li>
+                        </ul>
+                    
                 </div>
 				
 				
@@ -1580,7 +1583,17 @@
     <!-- for bottom to top scroller -->
     <script type="text/javascript" src="/js/top-scroller.js"></script>
 
-
+    
+    <script type="text/javascript">
+        tjq("#slideshow .flexslider").flexslider({
+            animation: "fade",
+            controlNav: false,
+            animationLoop: true,
+            directionNav: false,
+            slideshow: true,
+            slideshowSpeed: 5000
+        });
+    </script>
     <script type="text/javascript">
         tjq(document).ready(function() {
             tjq('.revolution-slider').revolution(
@@ -1647,7 +1660,16 @@
             });
         });
     </script>
-
+  <script type="text/javascript">
+    tjq("#slideshow .flexslider").flexslider({
+        animation: "fade",
+        controlNav: false,
+        animationLoop: true,
+        directionNav: false,
+        slideshow: true,
+        slideshowSpeed: 5000
+    });
+</script>
 
 <button onclick="topFunction()" id="upBtn" title="Go to top">
     <i class="fa fa-chevron-up"></i>
