@@ -139,7 +139,7 @@ class Dish(Base):
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     dish = db.Column(db.String, default=False, nullable=True)
-    dish_type = db.Column(db.Integer, nullable=True)
+    dish_type = db.Column(db.String, nullable=True)
     half_price = db.Column(db.Integer, nullable=True)
     full_price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
