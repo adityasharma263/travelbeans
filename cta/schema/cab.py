@@ -36,7 +36,7 @@ class CabBookingSchema(ma.ModelSchema):
 
 
 class CabSchema(ma.ModelSchema):
-    booking = ma.Nested(CabBookingSchema, many=True)
+    bookings = ma.Nested(CabBookingSchema, many=True)
     amenities = ma.Nested(CabAmenitySchema, many=False)
     images = ma.Nested(CabImageSchema, many=True)
 
