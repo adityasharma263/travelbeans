@@ -30,16 +30,15 @@ class CabInvoiceSchema(ma.ModelSchema):
 
 class CabBookingSchema(ma.ModelSchema):
     invoices = ma.Nested(CabInvoiceSchema, many=False)
-
     class Meta:
         model = CabBooking
         exclude = ('updated_at', 'created_at')
 
 
 class CabSchema(ma.ModelSchema):
+    booking = ma.Nested(CabBookingSchema, many=True)
     amenities = ma.Nested(CabAmenitySchema, many=False)
     images = ma.Nested(CabImageSchema, many=True)
-    booking = ma.Nested(CabBookingSchema, many=True)
 
     class Meta:
         model = Cab

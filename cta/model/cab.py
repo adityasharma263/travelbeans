@@ -25,7 +25,7 @@ class Cab(Base):
 class CabBooking(Base):
     __tablename__ = 'cab_booking'
 
-    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'), unique=True)
+    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
     one_way = db.Column(db.Boolean, default=False, nullable=True)
     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
     drop_time = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -81,7 +81,7 @@ class CabAmenity(Base):
 class CabInvoice(Base):
     __tablename__ = 'cab_invoice'
 
-    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'))
+    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=True)
     slab = db.Column(db.Integer, nullable=True)
     driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
     car_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
