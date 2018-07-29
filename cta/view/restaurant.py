@@ -189,28 +189,37 @@ def restaurant_api():
         if restaurant.get("association"):
             for association in restaurant['association']:
                 if association.get("cuisines"):
-                    cuisine = association.get("cuisines")
-                    cuisine_obj = {
-                            "cuisine": cuisine.get("cuisine", None),
-                        }
-                    post = Cuisine(**cuisine_obj).save()
-                    post.save()
-                    cuisine_result = CuisineSchema().dump(post)
+                    cuisines = association.get("cuisines")
+                    if cuisines.get("cuisine_id"):
+                        cuisine_id = cuisines.get("cuisine_id")
+                    else:
+                        cuisine_obj = {
+                                "cuisine": cuisines.get("cuisine", None),
+                            }
+                        post = Cuisine(**cuisine_obj).save()
+                        post.save()
+                        cuisine_result = CuisineSchema().dump(post)
+                        cuisine_id = cuisine_result.data['id']
                 if association.get("collections"):
-                    collection = association.get("collections")
-                    collection_obj = {
-                            "collection": collection.get("collection", None),
-                            "image": collection.get("image", None),
-                        }
-                    post = Collection(**collection_obj).save()
-                    post.save()
-                    collection_result = CollectionSchema().dump(post)
-                association_obj = {
-                    "restaurant_id": restaurant_result.data['id'],
-                    "cuisine_id": cuisine_result.data['id'],
-                    "collection_id": collection_result.data['id']
-                }
-                RestaurantAssociation(**association_obj).save()
+                    collections = association.get("collections")
+                    if collections.get("collection_id"):
+                        collection_id = collections.get("collection_id")
+                    else:
+                        collection_obj = {
+                                "collection": collections.get("collection", None),
+                                "image": collections.get("image", None),
+                            }
+                        post = Collection(**collection_obj).save()
+                        post.save()
+                        collection_result = CollectionSchema().dump(post)
+                        collection_id = collection_result.data['id']
+                if association.get("cuisines") or association.get("collections"):
+                    association_obj = {
+                        "restaurant_id": restaurant_result.data['id'],
+                        "cuisine_id": cuisine_id,
+                        "collection_id": collection_id,
+                    }
+                    RestaurantAssociation(**association_obj).save()
         return jsonify({'result': {'restaurant': restaurant}, 'message': "Success", 'error': False})
 
 
