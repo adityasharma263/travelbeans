@@ -57,6 +57,7 @@ def restaurant_detail(restaurant_id):
     restaurant_data = requests.get(url=restaurant_api_url).json()
     return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data)
 
+
 @app.route("/restaurant/search/suggestion", methods=["GET"])
 def restaurant_search_sugg():
     args = request.args
@@ -65,22 +66,25 @@ def restaurant_search_sugg():
     print(suggestion)
     return suggestion
 
+
 #=========================== CABS =======================================
+
 
 @app.route("/cab", methods=['GET'])
 def cab():
     return render_template("cab/cab.html")
 
+
 @app.route('/admin/cab', methods=['GET'])
 def cab_admin():
     return render_template('cab/admin_cab.html')   
 
+
 @app.route('/cab/list', methods=['GET'])
 def cab_list():
     return render_template('cab/cab_list.html')   
-    
+
+
 @app.route('/cab/detail', methods=['GET'])
 def cab_detail():
-    return render_template('cab/cab_detail.html')   
-
-   
+    return render_template('cab/cab_detail.html')
