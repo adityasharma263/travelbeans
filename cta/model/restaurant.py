@@ -72,7 +72,7 @@ class RestaurantAmenity(Base):
     city_view = db.Column(db.Boolean, default=False, nullable=True)
     brunch = db.Column(db.Boolean, default=False, nullable=True)
     sunday_roast = db.Column(db.Boolean, default=False, nullable=True)
-    gastro_Pub = db.Column(db.Boolean, default=False, nullable=True)
+    gastro_pub = db.Column(db.Boolean, default=False, nullable=True)
     beer = db.Column(db.Boolean, default=False, nullable=True)
     outdoor_seating = db.Column(db.Boolean, default=False, nullable=True)
     takeaway = db.Column(db.Boolean, default=False, nullable=True)
