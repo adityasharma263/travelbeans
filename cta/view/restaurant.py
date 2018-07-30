@@ -136,7 +136,7 @@ def restaurant_api():
             "name": restaurant.get("name", None),
             "city": restaurant.get("city", None),
             "category": restaurant.get("category", None),
-            'rating': Restaurant.get("rating", None),
+            'rating': restaurant.get("rating", None),
             "desc": restaurant.get("desc", None),
             "address": restaurant.get("address", None),
             "longitude": json.dumps(restaurant.get("longitude", None)),
@@ -148,8 +148,44 @@ def restaurant_api():
         post = Restaurant(**restaurant_obj)
         post.save()
         restaurant_result = RestaurantSchema().dump(post)
-        if restaurant.get("menu"):
-            menu = restaurant.get("menu", None)
+        if restaurant.get("amenities"):
+            amenity = restaurant.get("amenities", None)
+            amenity_obj = {
+                "restaurant_id": restaurant_result.data['id'],
+                "home_delivery": amenity.get("home_delivery", None),
+                "private_dining_area_available": amenity.get("private_dining_area_available", None),
+                "kid_friendly": amenity.get("kid_friendly", None),
+                "table_reservation_required": amenity.get("table_reservation_required", None),
+                "table_booking_recommended": amenity.get("table_booking_recommended", None),
+                "wheelchair_accessible": amenity.get("wheelchair_accessible", None),
+                "buffet": amenity.get("buffet", None),
+                "wifi": amenity.get("wifi", None),
+                "live_entertainment": amenity.get("live_entertainment", None),
+                "live_music": amenity.get("live_music", None),
+                "live_sports_screening": amenity.get("live_sports_screening", None),
+                "valet_parking": amenity.get("valet_parking_available", None),
+                "parking": amenity.get("parking", None),
+                "group_meal": amenity.get("group_meal", None),
+                "smoking_area": amenity.get("smoking_area", None),
+                "desserts_and_bakes": amenity.get("desserts_and_bakes", None),
+                "full_bar_available": amenity.get("full_bar_available", None),
+                "serves_jain_food": amenity.get("serves_jain_food", None),
+                "vegetarian_only": amenity.get("vegetarian_only", None),
+                "serves_non_veg": amenity.get("serves_non_veg", None),
+                "nightlife": amenity.get("nightlife", None),
+                "city_view": amenity.get("city_view", None),
+                "brunch": amenity.get("brunch", None),
+                "sunday_roast": amenity.get("sunday_roast", None),
+                "gastro_pub": amenity.get("gastro_pub", None),
+                "beer": amenity.get("beer", None),
+                "outdoor_seating": amenity.get("outdoor_seating", None),
+                "takeaway": amenity.get("takeaway", None),
+                "alcohol": amenity.get("alcohol", None),
+                "seating": amenity.get("seating", None),
+            }
+            RestaurantAmenity(**amenity_obj).save()
+        if restaurant.get("menus"):
+            menu = restaurant.get("menus", None)
             menu_obj = {
                 "restaurant_id": restaurant_result.data['id'],
                 "breakfast": menu.get("breakfast", None),
@@ -166,8 +202,8 @@ def restaurant_api():
                 "luxury": menu.get("luxury", None),
             }
             Menu(**menu_obj).save()
-        if restaurant.get("restaurant_images"):
-            for image in restaurant['restaurant_images']:
+        if restaurant.get("images"):
+            for image in restaurant['images']:
                 image_obj = {
                     "image_url": image.get("image_url", None),
                     "image_type": image.get("image_type", None),

@@ -34,7 +34,7 @@ class CabBooking(Base):
     drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
     pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
     pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
-    invoices = db.relationship('CabInvoice', uselist=False, backref='cab_booking')
+    invoices = db.relationship('CabInvoice', backref='cab_booking')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -81,7 +81,9 @@ class CabAmenity(Base):
 class CabInvoice(Base):
     __tablename__ = 'cab_invoice'
 
-    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=True)
+    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=False)
+    website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'), unique=False)
+    websites = db.relationship('CabWebsite', foreign_keys=website_id)
     slab = db.Column(db.Integer, nullable=True)
     driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
     car_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
@@ -121,3 +123,16 @@ class CabTax(Base):
 
     def __repr__(self):
         return '<cab_id %r>' % self.cab_id
+
+
+class CabWebsite(Base):
+    __tablename__ = 'cab_website'
+
+    website = db.Column(db.String)
+    logo_image = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<website %r>' % self.website
