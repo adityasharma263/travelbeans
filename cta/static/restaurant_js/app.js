@@ -241,17 +241,25 @@ var app = angular.module("restaurantApp", ['angular.filter'])
   .controller("dashboarController", ["$scope", "$http", function ($scope, $http) {
 
     $scope.restaurantData = {
-      association: []
+      association: [{
+
+        "collections": {
+
+        },
+        "cuisines": {
+
+        }
+      }]
     };
 
-    $scope.association = [{
-      "collection": {
+    // $scope.association = [{
+    //   "collection": {
 
-      },
-      "cuisine": {
+    //   },
+    //   "cuisine": {
 
-      }
-    }];
+    //   }
+    // }];
 
 
     $scope.image_types = {
@@ -260,7 +268,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       3: "Menu"
     }
 
-    $scope.restaurantData.restaurant_images = [
+    $scope.restaurantData.images = [
       {
 
         "image_type": null,
@@ -296,34 +304,9 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       $scope.restaurantData.dishes.push(moreDishes);
     };
 
-
-    $http.get("/api/v1/restaurant/collection")
-      .then(function (res) {
-        $scope.collection = res.data.result.collection;
-      }, function (err) {
-        console.log(err);
-      });
-
-    $http.get("/api/v1/restaurant/cuisine")
-      .then(function (res) {
-        $scope.cuisine = res.data.result.cuisine;
-      }, function (err) {
-        console.log(err);
-      });
-
-
     $http.get("/api/v1/restaurant")
       .then(function (res) {
         $scope.restaurants = res.data.result.restaurants;
-      }, function (err) {
-        console.log(err);
-      });
-
-    $http.get("/api/v1/restaurant/amenity")
-      .then(function (res) {
-        $scope.amenities = res.data.result.amenities[0];
-        delete $scope.amenities.id;
-        delete $scope.amenities.restaurant;
       }, function (err) {
         console.log(err);
       });
@@ -359,8 +342,41 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         "image_url": ""
       }
 
-      $scope.restaurantData.restaurant_images.push(addImages);
+      $scope.restaurantData.images.push(addImages);
     };
+
+    $scope.amenities = {
+      "alcohol": null, 
+      "beer": null, 
+      "brunch": null, 
+      "buffet": null, 
+      "city_view": null, 
+      "desserts_and_bakes": null, 
+      "full_bar_available": null, 
+      "gastro_pub": null, 
+      "group_meal": null, 
+      "home_delivery": true,
+      "kid_friendly": true, 
+      "live_entertainment": null, 
+      "live_music": true, 
+      "live_sports_screening": null, 
+      "nightlife": null, 
+      "outdoor_seating": null, 
+      "parking": null, 
+      "private_dining_area_available": true, 
+      "seating": null, 
+      "serves_jain_food": null, 
+      "serves_non_veg": null, 
+      "smoking_area": null, 
+      "sunday_roast": null, 
+      "table_booking_recommended": null, 
+      "table_reservation_required": null, 
+      "takeaway": null, 
+      "valet_parking": null, 
+      "vegetarian_only": null, 
+      "wheelchair_accessible": null, 
+      "wifi": true
+    }
 
     $scope.categories = [
       "bistro",
