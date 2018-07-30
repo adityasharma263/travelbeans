@@ -235,34 +235,81 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     };
   }])
-  // ============= Dashboard Controler =====================
+
+  // ============= Dashboard Controller =====================
+
   .controller("dashboarController", ["$scope", "$http", function ($scope, $http) {
 
-    $scope.restaurantData = {};
+    $scope.restaurantData = {
+      association: []
+    };
 
     $scope.association = [{
-      "collection":{
+      "collection": {
 
       },
-      "cuisine":{
+      "cuisine": {
 
       }
-    }]
+    }];
+
+
+    $scope.image_types = {
+      1: "Ambience",
+      2: "Food",
+      3: "Menu"
+    }
+
+    $scope.restaurantData.restaurant_images = [
+      {
+
+        "image_type": null,
+        "image_url": ""
+      }
+    ]
+
+
+    $scope.restaurantData.dishes = [
+      {
+        "desc": "",
+        "dish": "",
+        "dish_type": null,
+        "full_price": null,
+        "half_price": null,
+        "image": "",
+
+      }
+    ]
+
+    $scope.addMoreDish = function () {
+
+      var moreDishes = {
+        "desc": "",
+        "dish": "",
+        "dish_type": null,
+        "full_price": null,
+        "half_price": null,
+        "image": "",
+
+      }
+
+      $scope.restaurantData.dishes.push(moreDishes);
+    };
 
 
     $http.get("/api/v1/restaurant/collection")
-    .then(function (res) {
-      $scope.collection = res.data.result.collection;
-    }, function (err) {
-      console.log(err);
-    });
+      .then(function (res) {
+        $scope.collection = res.data.result.collection;
+      }, function (err) {
+        console.log(err);
+      });
 
     $http.get("/api/v1/restaurant/cuisine")
-    .then(function (res) {
-    $scope.cuisine = res.data.result.cuisine;
-    }, function (err) {
-      console.log(err);
-    });
+      .then(function (res) {
+        $scope.cuisine = res.data.result.cuisine;
+      }, function (err) {
+        console.log(err);
+      });
 
 
     $http.get("/api/v1/restaurant")
@@ -275,7 +322,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $http.get("/api/v1/restaurant/amenity")
       .then(function (res) {
         $scope.amenities = res.data.result.amenities[0];
-
+        delete $scope.amenities.id;
+        delete $scope.amenities.restaurant;
       }, function (err) {
         console.log(err);
       });
@@ -283,21 +331,20 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $scope.functionCalling = "Add";
 
     $scope.Add = function () {
-
+      // $scope.restaurantData.dishes = $scope.dishes;
       console.log($scope.restaurantData);
 
-      return;
-      $http.post("/api/v1/resturant", $scope.restaurantData)
+      // return;
+      $http.post("/api/v1/restaurant", $scope.restaurantData)
         .then(function (res) {
-          $scope.restaurants.push(res.data.result.restaurant);
-          delete $scope.amenities.id;
-          delete $scope.amenities.restaurant;
+          // $scope.restaurants.push(res.data.result.restaurant);
+          console.log(res);
         }, function (err) {
           console.log(err);
         })
     }
     $scope.Update = function () {
-      $http.put("/api/v1/resturant", {})
+      $http.put("/api/v1/restaurant", {})
 
 
 
@@ -305,48 +352,73 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     }
 
 
-$scope.categories = [
-  "bistro",
-  "ethnic",
-  "fine_dining ",
-  "trattoria ",
-  "teppanyaki_ya ",
-  "osteria",
-  "drive_in ",
-  "drive_thru",
-  "pizzeria ",
-  "taverna",
-  "fast_casual ",
-  "pop_up",
-  "Café",
-  "iner",
-  "ramen_ya ",
-  "teahouse ",
-  "fast_food",
-  "buffet",
-  "cafeteria ",
-  "luncheonette ",
-  "tapas_bar",
-  "steakhouse ",
-  "all_you_can_eat_restaurant ",
-  "kosher",
-  "dinner_in_the_Sky ",
-  "dark_restaurant ",
-  "a_la_carte ",
-  "gastropub ",
-  "brasserie ",
-  "chiringuito",
-  "food_truck",
-  "churrascaria",
-  "food_court",
-  "restrobars",
-  "street_stalls",
-  "theme_resturants",
-  "coffee_shop",
-  "coffee_house",
-  "cabaret",
-  "tea_shop",
-]
+    $scope.addMoreRestaurantImages = function () {
+      var addImages = {
+
+        "image_type": null,
+        "image_url": ""
+      }
+
+      $scope.restaurantData.restaurant_images.push(addImages);
+    };
+
+    $scope.categories = [
+      "bistro",
+      "ethnic",
+      "fine_dining ",
+      "trattoria ",
+      "teppanyaki_ya ",
+      "osteria",
+      "drive_in ",
+      "drive_thru",
+      "pizzeria ",
+      "taverna",
+      "fast_casual ",
+      "pop_up",
+      "Café",
+      "iner",
+      "ramen_ya ",
+      "teahouse ",
+      "fast_food",
+      "buffet",
+      "cafeteria ",
+      "luncheonette ",
+      "tapas_bar",
+      "steakhouse ",
+      "all_you_can_eat_restaurant ",
+      "kosher",
+      "dinner_in_the_Sky ",
+      "dark_restaurant ",
+      "a_la_carte ",
+      "gastropub ",
+      "brasserie ",
+      "chiringuito",
+      "food_truck",
+      "churrascaria",
+      "food_court",
+      "restrobars",
+      "street_stalls",
+      "theme_resturants",
+      "coffee_shop",
+      "coffee_house",
+      "cabaret",
+      "tea_shop",
+    ]
+
+    $scope.menu = [
+      "bars",
+      "breakfast",
+      "cafe",
+      "diet",
+      "dinner",
+      "family",
+      "lounge",
+      "lunch",
+      "luxury",
+      "nightlife",
+      "pocket_friendly",
+      "street_stalls"
+    ]
 
 
 
