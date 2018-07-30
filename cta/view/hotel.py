@@ -143,7 +143,7 @@ def hotel_id(id):
         if put:
             Hotel.update_db()
             hotels = Hotel.query.filter_by(id=id).first()
-            result = RoomSchema(many=False).dump(hotels)
+            result = HotelSchema(many=False).dump(hotels)
             return jsonify({'result': result.data, "status": "Success", 'error': False})
     else:
         hotel = Hotel.query.filter_by(id=id).first()
