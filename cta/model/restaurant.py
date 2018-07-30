@@ -151,6 +151,7 @@ class Dish(Base):
     def __repr__(self):
         return '<dish %r>' % self.dish
 
+
 class RestaurantAssociation(Base):
     __tablename__ = 'restaurant_association'
 
