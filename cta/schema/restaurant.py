@@ -17,15 +17,18 @@ class CollectionSchema(ma.ModelSchema):
         model = Collection
         exclude = ('updated_at', 'created_at')
 
+
 class DishSchema(ma.ModelSchema):
     class Meta:
         model = Dish
         exclude = ('updated_at', 'created_at')
 
+
 class RestaurantAmenitySchema(ma.ModelSchema):
     class Meta:
         model = RestaurantAmenity
         exclude = ('updated_at', 'created_at')
+
 
 class RestaurantImageSchema(ma.ModelSchema):
     class Meta:

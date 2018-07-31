@@ -1596,21 +1596,14 @@
                                     <fieldset>
                                         <legend>Price</legend>
 
-                                        <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price" >
+                                        <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price">
                                         <span>price range:
                                             <span>[[filter.price]]</span>
                                         </span>
+                                        <span><button class="btn btn-secondary pull-right" ng-click="priceFilter(filter.price)">Apply</button></span>
                                         <br>
                                     </fieldset>
                                 </div>
-
-                                <!-- <div class="dish-filter">
-                                    <h3>Dish</h3>
-                                    <span ng-repeat="dish_name in dish">
-                                        <input type="radio" name="dish" value="[[dish_name.dish]]" ng-click="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
-                                        <br>
-                                    </span>
-                                </div> -->
 
                                 <div class="menu filter">
                                     <fieldset >
@@ -1650,8 +1643,8 @@
                                         <div class="col-md-12" ng-repeat="restaurant in restaurants" ng-if="!serverSideRender">
                                             <article class="box">
                                                 <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
-                                                    <a class="hover-effect" title="" href="/restaurant/[[restaurant.id]]">
-                                                        <img class="img-responsive" alt="" ng-src="[[restaurant.images[0].image_url]]">
+                                                    <a class="hover-effect" href="/restaurant/[[restaurant.id]]">
+                                                        <img class="img-responsive restaurant-image" alt="" ng-src="[[restaurant.images[0].image_url]]">
                                                     </a>
                                                 </figure>
                                                 <div class="details">
