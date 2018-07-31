@@ -238,7 +238,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
   // ============= Dashboard Controller =====================
 
-  .controller("dashboarController", ["$scope", "$http", function ($scope, $http) {
+  .controller("dashboarController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
 
     $scope.restaurantData = {
       association: [{
@@ -322,7 +322,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         .then(function (res) {
           // $scope.restaurants.push(res.data.result.restaurant);
           console.log(res);
+          alert("Restaurant added!");
         }, function (err) {
+          alert("Error =>\n"+err);
+          
           console.log(err);
         })
     }
@@ -344,6 +347,15 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
       $scope.restaurantData.images.push(addImages);
     };
+
+
+    function getQueryStringValue (key) {  
+      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    }
+
+
+
+
 
     $scope.amenities = {
       "alcohol": null, 

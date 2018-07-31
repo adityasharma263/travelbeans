@@ -48,9 +48,12 @@ def restaurant_search():
     args = request.args.to_dict()
     restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
     searched_value = ''
+    searched_key  = ''
     if args:
         searched_value = list(args.values())[0]
-    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value)
+        searched_key = list(args.keys())[0]
+    print(searched_key)
+    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value, searched_key=searched_key)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
