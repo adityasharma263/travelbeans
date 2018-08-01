@@ -29,7 +29,7 @@ class CabImageSchema(ma.ModelSchema):
 
 
 class CabInvoiceSchema(ma.ModelSchema):
-    websites = ma.Nested(CabWebsiteSchema, many=False)
+    website = ma.Nested(CabWebsiteSchema, many=False)
 
     class Meta:
         model = CabInvoice
@@ -37,7 +37,7 @@ class CabInvoiceSchema(ma.ModelSchema):
 
 
 class CabBookingSchema(ma.ModelSchema):
-    invoices = ma.Nested(CabInvoiceSchema, many=False)
+    invoices = ma.Nested(CabInvoiceSchema, many=True)
 
     class Meta:
         model = CabBooking

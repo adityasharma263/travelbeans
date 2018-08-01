@@ -8,6 +8,8 @@ class Restaurant(Base):
 
     name = db.Column(db.String)
     rating = db.Column(db.DECIMAL, nullable=True)
+    nearest_metro_station = db.Column(db.String)
+    especially = db.Column(db.Text, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     city = db.Column(db.String, nullable=True)
@@ -72,7 +74,7 @@ class RestaurantAmenity(Base):
     city_view = db.Column(db.Boolean, default=False, nullable=True)
     brunch = db.Column(db.Boolean, default=False, nullable=True)
     sunday_roast = db.Column(db.Boolean, default=False, nullable=True)
-    gastro_Pub = db.Column(db.Boolean, default=False, nullable=True)
+    gastro_pub = db.Column(db.Boolean, default=False, nullable=True)
     beer = db.Column(db.Boolean, default=False, nullable=True)
     outdoor_seating = db.Column(db.Boolean, default=False, nullable=True)
     takeaway = db.Column(db.Boolean, default=False, nullable=True)
@@ -150,6 +152,7 @@ class Dish(Base):
 
     def __repr__(self):
         return '<dish %r>' % self.dish
+
 
 class RestaurantAssociation(Base):
     __tablename__ = 'restaurant_association'

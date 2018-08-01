@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e2622962140b
+Revision ID: 7ff3a07f92a5
 Revises: 
-Create Date: 2018-07-29 17:32:32.738826
+Create Date: 2018-07-31 12:07:46.252940
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e2622962140b'
+revision = '7ff3a07f92a5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,6 +30,15 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_cab_id'), 'cab', ['id'], unique=False)
+    op.create_table('cab_website',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
+    sa.Column('website', sa.String(), nullable=True),
+    sa.Column('logo_image', sa.String(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_cab_website_id'), 'cab_website', ['id'], unique=False)
     op.create_table('collection',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
@@ -182,7 +191,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('restaurant_id', sa.Integer(), nullable=True),
     sa.Column('dish', sa.String(), nullable=True),
-    sa.Column('dish_type', sa.Integer(), nullable=True),
+    sa.Column('dish_type', sa.String(), nullable=True),
     sa.Column('half_price', sa.Integer(), nullable=True),
     sa.Column('full_price', sa.Integer(), nullable=True),
     sa.Column('desc', sa.Text(), nullable=True),
@@ -252,7 +261,7 @@ def upgrade():
     sa.Column('city_view', sa.Boolean(), nullable=True),
     sa.Column('brunch', sa.Boolean(), nullable=True),
     sa.Column('sunday_roast', sa.Boolean(), nullable=True),
-    sa.Column('gastro_Pub', sa.Boolean(), nullable=True),
+    sa.Column('gastro_pub', sa.Boolean(), nullable=True),
     sa.Column('beer', sa.Boolean(), nullable=True),
     sa.Column('outdoor_seating', sa.Boolean(), nullable=True),
     sa.Column('takeaway', sa.Boolean(), nullable=True),
@@ -309,6 +318,7 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.Column('booking_id', sa.Integer(), nullable=True),
+    sa.Column('website_id', sa.Integer(), nullable=True),
     sa.Column('slab', sa.Integer(), nullable=True),
     sa.Column('driver_night_allowance_charge', sa.DECIMAL(), nullable=True),
     sa.Column('car_night_allowance_charge', sa.DECIMAL(), nullable=True),
@@ -327,8 +337,8 @@ def upgrade():
     sa.Column('distance', sa.DECIMAL(), nullable=True),
     sa.Column('total_fare', sa.DECIMAL(), nullable=True),
     sa.ForeignKeyConstraint(['booking_id'], ['cab_booking.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('booking_id')
+    sa.ForeignKeyConstraint(['website_id'], ['cab_website.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_cab_invoice_id'), 'cab_invoice', ['id'], unique=False)
     op.create_table('deal',
@@ -453,6 +463,8 @@ def downgrade():
     op.drop_table('cuisine')
     op.drop_index(op.f('ix_collection_id'), table_name='collection')
     op.drop_table('collection')
+    op.drop_index(op.f('ix_cab_website_id'), table_name='cab_website')
+    op.drop_table('cab_website')
     op.drop_index(op.f('ix_cab_id'), table_name='cab')
     op.drop_table('cab')
     # ### end Alembic commands ###
