@@ -248,6 +248,8 @@ def restaurant_api():
                     else:
                         collection_obj = {
                                 "collection": collections.get("collection", None),
+                                "featured": collections.get("featured", None),
+                                "desc": collections.get("desc", None),
                                 "image": collections.get("image", None),
                             }
                         post = Collection(**collection_obj)
