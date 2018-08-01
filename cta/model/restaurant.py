@@ -8,6 +8,8 @@ class Restaurant(Base):
 
     name = db.Column(db.String)
     rating = db.Column(db.DECIMAL, nullable=True)
+    nearest_metro_station = db.Column(db.String)
+    especially = db.Column(db.Text, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     city = db.Column(db.String, nullable=True)
