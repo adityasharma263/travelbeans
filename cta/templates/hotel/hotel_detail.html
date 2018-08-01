@@ -860,7 +860,7 @@
                                         <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
                                             
                                         <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 3000%; ">
-                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images" class="" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img   src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images"  style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img  class="img" src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
                                         <!-- <ol class="flex-control-nav flex-control-paging">
@@ -985,32 +985,29 @@
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
                                             <div ng-repeat="room in roomData.hotelData.rooms | limitTo:deallimit">
-                                                <article class="box card" ng-repeat="deal in room.deals " >
-                                                    <hr>
-
+                                                <article class="card" ng-repeat="deal in room.deals " >
                                                     <figure class="col-sm-4 col-md-3">
-                                                        <a href="" title=""><img width="230" height="161" src="[[deal.website.logo_image]]" alt=""></a>
+                                                        <a href="[[deal.hotel_url]]" target="_blank" title=""><img src="[[deal.website.logo_image]]" alt=""></a>
                                                     </figure>
-                                                    <div class="details col-xs-12 col-sm-8 col-md-9">
-                                                        <!-- <div> -->
-                                                            <!-- <div class="box-title">
-                                                                <h4 class="title" >[[room.other_room_type]]</h4>
-                                                                <a href="[[deal.hotel_url]]" title="" class="button btn-small  text-center">BOOK NOW</a>
-                                                                <a ng-click="showDetail(deal.room)" title="" class="button btn-small  text-center">View Detail</a>
-                                                                <span class="price" ><small>PER/NIGHT</small>₹ [[deal.price]]</span>
-                                                            </div> -->
-                                                    
+                                                    <div class="col-xs-12 col-sm-8 col-md-9">
                                                             <div clas="row">
-                                                                <div class="col-sm-2">
+                                                                <div class="col-md-3">
                                                                     <p>[[room.other_room_type]]</p>
                                                                 </div>
-                                                                <div class="col-sm-2"><a href="[[deal.hotel_url]]" title="" class="button btn-small  text-center">BOOK NOW</a></div>
-                                                                <div class="col-sm-2"><a ng-click="showDetail(deal.room)" title="" class="button btn-small  text-center">View Detail</a></div>
-                                                                <div class="col-sm-2 price"><small>PER/NIGHT</small>₹ [[deal.price]]</div>
+                                                                <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div>
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-2"><a ng-click="showDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div>
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-1" >
+                                                                    <div class="price">
+                                                                        <small>PER/NIGHT</small>₹ [[deal.price]]
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         <!-- </div> -->
                                                     </div>
                                                 </article>
+                                                <br>
                                             </div>
                                            
                                             <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE ROOMS</a>

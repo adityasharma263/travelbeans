@@ -843,6 +843,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-2" for="address">Phone No.: </label>
+                            <div class="col-sm-10">          
+                                <input  class="form-control"  ng-model="hotels.phone"  type="number" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-sm-2"  for="desc">Description: </label>
                             <div class="col-sm-10">          
                                 <input  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required>
@@ -1052,6 +1058,12 @@
                                 <label class="control-label col-sm-2" for="address">Address: </label>
                                 <div class="col-sm-10">          
                                     <input  class="form-control"  ng-model="hotel.address"  type="textarea" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="address">Phone No.: </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control"  ng-model="hotel.phone"  type="textarea" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1385,7 +1397,7 @@
                             <label for="bathroom_nightie">Bathroom Nightie
                                 <input type="checkbox" value="4" ng-model="room.facilities.bathroom_nightie"/>
                             </label>
-                            , <br>
+                            <br>
                             <label for="bathroom_towels">Bathroom Towels
                                 <input type="checkbox" value="5" ng-model="room.facilities.bathroom_towels"/>
                             </label>
@@ -1393,7 +1405,7 @@
                             <label for="bathroom_with_shower">Bathroom with Shower
                                 <input type="checkbox" value="6" ng-model="room.facilities.bathroom_with_shower"/>
                             </label>
-                        
+                            <br>
                             <label for="desk">Desk
                                 <input type="checkbox" value="8" ng-model="room.facilities.desk"/>
                             </label>
