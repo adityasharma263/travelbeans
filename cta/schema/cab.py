@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabInvoice, CabTax, CabWebsite
+from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabWebsite
 from cta import ma
 
 
@@ -28,16 +28,17 @@ class CabImageSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at')
 
 
-class CabInvoiceSchema(ma.ModelSchema):
+class CabDealSchema(ma.ModelSchema):
     website = ma.Nested(CabWebsiteSchema, many=False)
+    tax = ma.Nested(CabTaxSchema, many=False)
 
     class Meta:
-        model = CabInvoice
+        model = CabDeal
         exclude = ('updated_at', 'created_at')
 
 
 class CabBookingSchema(ma.ModelSchema):
-    invoices = ma.Nested(CabInvoiceSchema, many=True)
+    deals = ma.Nested(CabDealSchema, many=True)
 
     class Meta:
         model = CabBooking

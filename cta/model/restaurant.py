@@ -127,6 +127,8 @@ class Collection(Base):
     __tablename__ = 'collection'
 
     collection = db.Column(db.String, default=False, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
     image = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
