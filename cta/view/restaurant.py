@@ -135,6 +135,8 @@ def restaurant_api():
         restaurant_obj = {
             "name": restaurant.get("name", None),
             "city": restaurant.get("city", None),
+            "nearest_metro_station": restaurant.get("nearest_metro_station", None),
+            "especially": restaurant.get("especially", None),
             "category": restaurant.get("category", None),
             'rating': restaurant.get("rating", None),
             "desc": restaurant.get("desc", None),
@@ -228,11 +230,13 @@ def restaurant_api():
                     cuisines = association.get("cuisines")
                     if cuisines.get("cuisine_id"):
                         cuisine_id = cuisines.get("cuisine_id")
+                        print(cuisine_id)
                     else:
                         cuisine_obj = {
                                 "cuisine": cuisines.get("cuisine", None),
                             }
-                        post = Cuisine(**cuisine_obj).save()
+                        print(cuisine_obj)
+                        post = Cuisine(**cuisine_obj)
                         post.save()
                         cuisine_result = CuisineSchema().dump(post)
                         cuisine_id = cuisine_result.data['id']
@@ -245,7 +249,7 @@ def restaurant_api():
                                 "collection": collections.get("collection", None),
                                 "image": collections.get("image", None),
                             }
-                        post = Collection(**collection_obj).save()
+                        post = Collection(**collection_obj)
                         post.save()
                         collection_result = CollectionSchema().dump(post)
                         collection_id = collection_result.data['id']
