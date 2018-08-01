@@ -46,11 +46,12 @@ def restaurant_api():
             is_filter = 1
             try:
                 cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
+
                 restaurant_list = RestaurantAssociation.query.filter(RestaurantAssociation.cuisine_id == cuisine_id).all()
                 for restaurant_obj in restaurant_list:
                     cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
             except:
-                collection_restaurant_id = []
+                cuisine_restaurant_id = []
         if collection:
             is_filter = 1
             try:
