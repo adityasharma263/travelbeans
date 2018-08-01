@@ -972,8 +972,14 @@ $scope.createHotel = function() {
   $scope.limit=10;
   $scope.deallimit=1;
 
-  window.onresize = function(){ location.reload(); }
-  
+  // window.onresize = function(){ location.reload(); }
+  $scope.openHome=function(){
+    window.open('/','_self');
+
+  }
+  $scope.openHotel=function(){
+    window.open('/hotel','_self');
+  }
   var showDivs=function(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
