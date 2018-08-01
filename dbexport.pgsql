@@ -298,7 +298,8 @@ CREATE TABLE public.cab_invoice (
     initial_km_fare numeric,
     cancellation_charges numeric,
     distance numeric,
-    total_fare numeric
+    total_fare numeric,
+    website_id integer
 );
 
 
@@ -363,6 +364,43 @@ ALTER TABLE public.cab_tax_id_seq OWNER TO priyanka;
 --
 
 ALTER SEQUENCE public.cab_tax_id_seq OWNED BY public.cab_tax.id;
+
+
+--
+-- Name: cab_website; Type: TABLE; Schema: public; Owner: priyanka
+--
+
+CREATE TABLE public.cab_website (
+    id integer NOT NULL,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone,
+    website character varying,
+    logo_image character varying
+);
+
+
+ALTER TABLE public.cab_website OWNER TO priyanka;
+
+--
+-- Name: cab_website_id_seq; Type: SEQUENCE; Schema: public; Owner: priyanka
+--
+
+CREATE SEQUENCE public.cab_website_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cab_website_id_seq OWNER TO priyanka;
+
+--
+-- Name: cab_website_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: priyanka
+--
+
+ALTER SEQUENCE public.cab_website_id_seq OWNED BY public.cab_website.id;
 
 
 --
@@ -486,13 +524,13 @@ CREATE TABLE public.dish (
     id integer NOT NULL,
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
+    restaurant_id integer,
     dish character varying,
-    image character varying,
-    "desc" text,
-    full_price integer,
-    half_price integer,
     dish_type integer,
-    restaurant_id integer
+    half_price integer,
+    full_price integer,
+    "desc" text,
+    image character varying
 );
 
 
@@ -592,13 +630,14 @@ CREATE TABLE public.hotel (
     updated_at timestamp with time zone,
     name character varying,
     star integer,
-    rating double precision,
+    rating numeric,
+    phone character varying,
     city character varying,
+    category character varying,
     "desc" text,
     address character varying,
     latitude double precision,
-    longitude double precision,
-    category character varying
+    longitude double precision
 );
 
 
@@ -759,16 +798,16 @@ CREATE TABLE public.restaurant (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     name character varying,
-    rating double precision,
+    rating numeric,
+    price integer,
     "desc" text,
     city character varying,
     phone character varying,
     latitude double precision,
     longitude double precision,
     address character varying,
-    featured boolean,
     category integer,
-    price integer
+    featured boolean
 );
 
 
@@ -949,12 +988,12 @@ CREATE TABLE public.room (
     hotel_id integer,
     status boolean,
     room_type integer,
+    image_url character varying,
+    other_room_type character varying,
     check_in timestamp with time zone NOT NULL,
     check_out timestamp with time zone NOT NULL,
     breakfast boolean,
-    balcony boolean,
-    other_room_type character varying,
-    image_url character varying
+    balcony boolean
 );
 
 
@@ -1069,6 +1108,13 @@ ALTER TABLE ONLY public.cab_tax ALTER COLUMN id SET DEFAULT nextval('public.cab_
 
 
 --
+-- Name: cab_website id; Type: DEFAULT; Schema: public; Owner: priyanka
+--
+
+ALTER TABLE ONLY public.cab_website ALTER COLUMN id SET DEFAULT nextval('public.cab_website_id_seq'::regclass);
+
+
+--
 -- Name: collection id; Type: DEFAULT; Schema: public; Owner: priyanka
 --
 
@@ -1178,7 +1224,7 @@ ALTER TABLE ONLY public.website ALTER COLUMN id SET DEFAULT nextval('public.webs
 --
 
 COPY public.alembic_version (version_num) FROM stdin;
-4fd2e1e7317e
+7d58800f4200
 \.
 
 
@@ -1187,15 +1233,6 @@ COPY public.alembic_version (version_num) FROM stdin;
 --
 
 COPY public.amenity (id, created_at, updated_at, hotel_id, conference_room, parking, couple_friendly, express_check_in_out, laundry_service, indoor_swimming_pool, outdoor_swimming_pool, porter_service, "Room_cleaning_service", terrace, child_baby_cot, wheelchair_accessible, doorman, hairdresser, banquets, non_smoking_smoking_rooms, pet_allowance, lift, bar, gym, pool, restaurant, spa, wifi_in_lobby, twenty_four_hr_reception, twenty_four_hr_room_service) FROM stdin;
-36	2018-07-18 14:06:50.946038+05:30	2018-07-18 14:06:50.946038+05:30	36	f	f	f	f	t	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	t	f	f	f	t
-37	2018-07-18 14:40:24.841845+05:30	2018-07-18 14:57:20.931506+05:30	37	f	f	f	f	t	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	f	f	f	t	t
-38	2018-07-18 15:06:21.426407+05:30	2018-07-18 15:06:21.426407+05:30	38	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	t	t	t
-39	2018-07-18 15:34:06.758224+05:30	2018-07-18 15:34:06.758224+05:30	39	f	t	f	f	t	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	f	f	t	t	t
-40	2018-07-18 16:01:03.04508+05:30	2018-07-18 16:01:03.04508+05:30	40	f	t	f	f	f	f	t	f	f	f	f	f	f	f	f	f	f	f	t	f	f	t	f	f	t	t
-41	2018-07-18 16:28:03.381878+05:30	2018-07-18 16:28:03.381878+05:30	41	f	t	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	t	t
-43	2018-07-18 17:56:25.917418+05:30	2018-07-18 17:56:25.917418+05:30	43	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	f	f	f	t
-44	2018-07-18 18:19:40.518175+05:30	2018-07-18 18:19:40.518175+05:30	44	f	f	f	f	t	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f
-42	2018-07-18 17:08:25.553165+05:30	2018-07-18 17:08:25.553165+05:30	42	f	t	t	f	t	f	t	f	f	f	f	f	f	f	f	f	f	t	t	t	f	f	f	t	t	t
 \.
 
 
@@ -1239,8 +1276,8 @@ COPY public.cab_image (id, created_at, updated_at, cab_id, image_url) FROM stdin
 -- Data for Name: cab_invoice; Type: TABLE DATA; Schema: public; Owner: priyanka
 --
 
-COPY public.cab_invoice (id, created_at, updated_at, booking_id, slab, driver_night_allowance_charge, car_night_allowance_charge, total_hours, base_fare, base_fare_weekend, base_fare_peak_season, base_fare_with_fuel, different_pickup_drop_point_charge, km_restriction, fare_exceeded_per_hr, fare_exceeded_per_km, initial_km, initial_km_fare, cancellation_charges, distance, total_fare) FROM stdin;
-1	2018-07-29 12:31:13.053769+05:30	2018-07-29 12:31:13.053769+05:30	1	2	2	2	2	2	2	2	2	2	2	2	2	2	2	2	2	2
+COPY public.cab_invoice (id, created_at, updated_at, booking_id, slab, driver_night_allowance_charge, car_night_allowance_charge, total_hours, base_fare, base_fare_weekend, base_fare_peak_season, base_fare_with_fuel, different_pickup_drop_point_charge, km_restriction, fare_exceeded_per_hr, fare_exceeded_per_km, initial_km, initial_km_fare, cancellation_charges, distance, total_fare, website_id) FROM stdin;
+1	2018-07-29 12:31:13.053769+05:30	2018-07-29 12:31:13.053769+05:30	1	2	2	2	2	2	2	2	2	2	2	2	2	2	2	2	2	2	1
 \.
 
 
@@ -1250,6 +1287,15 @@ COPY public.cab_invoice (id, created_at, updated_at, booking_id, slab, driver_ni
 
 COPY public.cab_tax (id, created_at, updated_at, invoice_id, gst, s_gst, c_gst) FROM stdin;
 1	2018-07-29 12:31:43.544563+05:30	2018-07-29 12:31:43.544563+05:30	1	2	2	2
+\.
+
+
+--
+-- Data for Name: cab_website; Type: TABLE DATA; Schema: public; Owner: priyanka
+--
+
+COPY public.cab_website (id, created_at, updated_at, website, logo_image) FROM stdin;
+1	\N	\N	gcfgdgcefgdfhv	cghscgdsfhvvh
 \.
 
 
@@ -1276,20 +1322,6 @@ COPY public.cuisine (id, created_at, updated_at, cuisine) FROM stdin;
 --
 
 COPY public.deal (id, created_at, updated_at, price, hotel_url, weekend, website_id, room_id) FROM stdin;
-97	2018-07-18 15:13:00.345159+05:30	2018-07-18 15:13:00.345159+05:30	1562	https://www.makemytrip.com/mmthtl/site/hotels/review?hotelAvailabilityCriteria.hotelRef.id=201710052206526890&searchType=E&roomStayQualifier=2e0e&hotelAvailabilityCriteria.stayDateRange.start=09%2F03%2F2018&hotelAvailabilityCriteria.stayDateRange.end=09%2F04%2F2018&countryCode=IN&searchCountryCode=IN&searchCityCode=DEL&cbKey=08926a56-04be-4477-b689-9af9acc31516&newDetail=true&forkEnabled=true&suppDetail=INGO&payMode=PAS&roomCriteria=2e0e-~45000355094-~-~990000871770%3AMSE%3A1120%3AMSE%3AINGO&s_id=1531906790849	f	85	36
-98	2018-07-18 15:13:00.353235+05:30	2018-07-18 15:13:00.353235+05:30	1292	https://www.goibibo.com/hotels/hotel-booking/v1/?hc=6838731367150923659&code=getsetgo&v=v3&ci=20180903&co=20180904&rm_cnf_lst=[{%22ofc%22:%22%22,%22fwdParams%22:{%22ts%22:%222018-07-18T15:11:00%22,%22vhid%22:%226838731367150923659%22,%22ps%22:%221725|1725|207%22},%22rtc%22:%2245000355094%22,%22cnf%22:%222_0%22,%22rpc%22:%22990000871770%22,%22r%22:1,%22v%22:%22v3%22,%22pm%22:1,%22sd_code%22:%22%22}]&sb=0&vcid=2820046943342890302&selection=reco-noncart&metaPartner=trivago&metaPrice=989	f	67	36
-99	2018-07-18 15:16:51.643685+05:30	2018-07-18 15:16:51.643685+05:30	1400	https://www.expedia.co.in/HotelCheckout?tripid=c85fc7dd-4184-4437-99f9-cc0f41adecd6&c=0f46495a-2aed-40ce-88ff-65de18ae2638	f	64	37
-100	2018-07-18 15:38:15.220607+05:30	2018-07-18 15:38:15.220607+05:30	2537	https://secure.booking.com/book.html?hotel_id=2119790&aid=344371&label=metatrivago-hotel-2119790_xqdz-92dd3a9cb055f0ce847d74298e6325e9_los-1_nrm-1_gstadt-2_gstkid-0_curr-inr_lang-en&lang=en-gb&sid=5a25487d8a5821c8ea009b54136351ff&room1=A%2CA&error_url=%2Fhotel%2Fin%2Ffabhotel-ascot-international.en-gb.html%3Faid%3D344371%3Blabel%3Dmetatrivago-hotel-2119790_xqdz-92dd3a9cb055f0ce847d74298e6325e9_los-1_nrm-1_gstadt-2_gstkid-0_curr-inr_lang-en%3Bsid%3D5a25487d8a5821c8ea009b54136351ff%3B&hostname=www.booking.com&stage=1&checkin=2018-09-03&interval=1&children_extrabeds=&hp_visits_num=1&rt_pos_selected=1&rt_pos_selected_within_room=1&rt_num_blocks=1&rt_num_rooms=1&from_source=hotel&nr_rooms_lightbox_211979001_116152760_2_1_0=1&nr_rooms_211979001_116152760_2_1_0=1	f	57	38
-101	2018-07-18 15:40:32.852391+05:30	2018-07-18 15:40:32.852391+05:30	2671	https://www.fabhotels.com/checkout/review	f	65	39
-102	2018-07-18 15:42:08.708001+05:30	2018-07-18 15:42:08.708001+05:30	3017	https://www.cleartrip.com/hotels/itinerary/75fa974e03-c0ed-4f03-af1f-4273e9fefabc/review	f	60	40
-103	2018-07-18 16:31:41.487493+05:30	2018-07-18 16:31:41.487493+05:30	3026	https://www.expedia.co.in/HotelCheckout?tripid=5bc07993-a525-4f8b-8e4f-90f5560c2f6a&c=df6bc81e-112b-4e02-893f-d4421e56d2e2	f	64	41
-104	2018-07-18 16:34:31.455851+05:30	2018-07-18 16:34:31.455851+05:30	3399	https://www.expedia.co.in/HotelCheckout?tripid=93480e78-ea8b-4b55-8f28-4af54e54f3e8&c=203ee08d-522b-4aca-bc2c-03340899acc1	f	64	42
-105	2018-07-18 17:10:59.930178+05:30	2018-07-18 17:10:59.930178+05:30	3038	https://www.makemytrip.com/mmthtl/site/hotels/review?hotelAvailabilityCriteria.hotelRef.id=200701111636512510&searchType=E&roomStayQualifier=2e0e&hotelAvailabilityCriteria.stayDateRange.start=07%2F24%2F2018&hotelAvailabilityCriteria.stayDateRange.end=07%2F25%2F2018&countryCode=IN&searchCountryCode=IN&searchCityCode=CCU&cbKey=6371395d-4265-4afe-b99e-812f4c7b69a4&newDetail=true&forkEnabled=true&suppDetail=INGO&payMode=PAS&roomCriteria=2e0e-~45000009314-~-~990000301880%3AMSE%3A1120%3AMSE%3AINGO&s_id=1531914021710	f	85	43
-106	2018-07-18 17:12:33.469528+05:30	2018-07-18 17:12:33.469528+05:30	3992	https://www.makemytrip.com/mmthtl/site/hotels/review?hotelAvailabilityCriteria.hotelRef.id=200701111636512510&searchType=E&roomStayQualifier=2e0e&hotelAvailabilityCriteria.stayDateRange.start=07%2F24%2F2018&hotelAvailabilityCriteria.stayDateRange.end=07%2F25%2F2018&countryCode=IN&searchCountryCode=IN&searchCityCode=CCU&cbKey=6371395d-4265-4afe-b99e-812f4c7b69a4&newDetail=true&forkEnabled=true&suppDetail=INGO&payMode=PAS&roomCriteria=2e0e-~45000009316-~-~990000011942%3AMSE%3A1120%3AMSE%3AINGO&s_id=1531914119294	f	85	44
-107	2018-07-18 17:14:05.055194+05:30	2018-07-18 17:14:05.055194+05:30	6162	https://www.makemytrip.com/mmthtl/site/hotels/review?hotelAvailabilityCriteria.hotelRef.id=200701111636512510&searchType=E&roomStayQualifier=2e0e&hotelAvailabilityCriteria.stayDateRange.start=07%2F24%2F2018&hotelAvailabilityCriteria.stayDateRange.end=07%2F25%2F2018&countryCode=IN&searchCountryCode=IN&searchCityCode=CCU&cbKey=6371395d-4265-4afe-b99e-812f4c7b69a4&newDetail=true&forkEnabled=true&suppDetail=INGO&payMode=PAS&roomCriteria=2e0e-~45000009315-~-~990000011941%3AMSE%3A1120%3AMSE%3AINGO&s_id=1531914223428	f	85	45
-108	2018-07-18 17:18:40.301768+05:30	2018-07-18 17:18:40.301768+05:30	4656	https://www.expedia.co.in/HotelCheckout?tripid=07b0160f-e97d-4d8c-b3dd-75cbfe3d7996&c=e295696e-8c53-471a-8477-42ac80f94a9c	f	64	46
-109	2018-07-18 17:18:40.307923+05:30	2018-07-18 17:18:40.307923+05:30	5664	https://www.expedia.co.in/HotelCheckout?tripid=ff09f45e-0152-47af-a960-6e0613878382&c=785d990b-2363-4dbf-934f-8b03a6cd731c	f	64	46
-110	2018-07-18 17:58:06.383366+05:30	2018-07-18 17:58:06.383366+05:30	1643	https://www.makemytrip.com/mmthtl/site/hotels/review?hotelAvailabilityCriteria.hotelRef.id=200704182012455596&searchType=E&roomStayQualifier=2e0e&hotelAvailabilityCriteria.stayDateRange.start=07%2F24%2F2018&hotelAvailabilityCriteria.stayDateRange.end=07%2F25%2F2018&countryCode=IN&searchCountryCode=IN&searchCityCode=CCU&cbKey=17214d05-ff18-4a0b-92e0-4028c7825a3d&newDetail=true&forkEnabled=true&suppDetail=INGO&payMode=PAS&roomCriteria=2e0e-~45000006926-~-~990000008457%3AMSE%3A1120%3AMSE%3AINGO&s_id=1531916872475	f	85	47
 \.
 
 
@@ -1297,8 +1329,8 @@ COPY public.deal (id, created_at, updated_at, price, hotel_url, weekend, website
 -- Data for Name: dish; Type: TABLE DATA; Schema: public; Owner: priyanka
 --
 
-COPY public.dish (id, created_at, updated_at, dish, image, "desc", full_price, half_price, dish_type, restaurant_id) FROM stdin;
-1	2018-07-18 18:12:49.550956+05:30	2018-07-18 18:12:49.550956+05:30	digi	uyg	\N	\N	\N	\N	\N
+COPY public.dish (id, created_at, updated_at, restaurant_id, dish, dish_type, half_price, full_price, "desc", image) FROM stdin;
+1	2018-07-18 18:12:49.550956+05:30	2018-07-18 18:12:49.550956+05:30	\N	digi	\N	\N	\N	\N	uyg
 \.
 
 
@@ -1307,18 +1339,6 @@ COPY public.dish (id, created_at, updated_at, dish, image, "desc", full_price, h
 --
 
 COPY public.facility (id, created_at, updated_at, bed_type, no_of_bed, bathroom_with_shower, bathroom_nightie, wardrobes_closet, room_slipper, morning_newspaper, food_serve_at_room, ironing_facility, view, free_toiletries, bathroom_towels, bathroom_cosmetics, weighing_machine, room_seating_area, free_evening_snacks, ac, hairdryer, wifi, tv, phone, room_safe, heater, desk, fan, electric_kettle, room_id) FROM stdin;
-36	2018-07-18 15:13:00.338556+05:30	2018-07-18 15:13:00.338556+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	t	f	f	f	f	f	f	36
-37	2018-07-18 15:16:51.639398+05:30	2018-07-18 15:16:51.639398+05:30	4	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	t	f	f	f	f	f	f	37
-38	2018-07-18 15:38:15.214501+05:30	2018-07-18 15:38:15.214501+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	t	t	t	f	f	t	t	t	38
-39	2018-07-18 15:40:32.848786+05:30	2018-07-18 15:40:32.848786+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	t	t	t	f	f	t	t	t	39
-40	2018-07-18 15:42:08.70413+05:30	2018-07-18 15:42:08.70413+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	t	t	t	f	f	t	t	t	40
-41	2018-07-18 16:31:41.477735+05:30	2018-07-18 16:31:41.477735+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	f	f	f	t	t	t	41
-42	2018-07-18 16:34:31.449664+05:30	2018-07-18 16:34:31.449664+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	f	f	f	t	t	t	42
-43	2018-07-18 17:10:59.924721+05:30	2018-07-18 17:10:59.924721+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	t	f	f	t	f	t	43
-44	2018-07-18 17:12:33.46406+05:30	2018-07-18 17:12:33.46406+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	t	f	f	t	f	t	44
-45	2018-07-18 17:14:05.047871+05:30	2018-07-18 17:14:05.047871+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	t	f	f	t	f	t	45
-46	2018-07-18 17:18:40.295453+05:30	2018-07-18 17:18:40.295453+05:30	2	1	t	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	f	t	f	f	t	f	t	46
-47	2018-07-18 17:58:06.37646+05:30	2018-07-18 17:58:06.37646+05:30	2	1	f	f	f	f	f	f	f	f	f	f	f	f	f	f	t	f	f	t	f	f	f	f	f	f	47
 \.
 
 
@@ -1326,16 +1346,16 @@ COPY public.facility (id, created_at, updated_at, bed_type, no_of_bed, bathroom_
 -- Data for Name: hotel; Type: TABLE DATA; Schema: public; Owner: priyanka
 --
 
-COPY public.hotel (id, created_at, updated_at, name, star, rating, city, "desc", address, latitude, longitude, category) FROM stdin;
-43	2018-07-18 17:56:25.902145+05:30	2018-07-18 17:56:25.902145+05:30	The Floatel	3	7.40000000000000036	kolkata	The Floatel is an eco-friendly property that is floating on the Hooghly River and is a five-minute walk from Millennium Park in the heart of Kolkata, India.  The hotel features 49 rooms, all of which include cable television, a safe, and a private bathroom with 24-hour running hot water. The hotel's suites come with a separate living room.  Amenities at the property include complimentary Wi-Fi, laundry services, on-site parking, and banquet facilities. The property has a swimming pool, fitness centre, and spa as well.  Breakfast is included in the cost of the room at The Floatel. The property has a multicuisine restaurant that is open 24 hours per day called The Bridge and a bar with an open terrace called The Anchorage.  The property is under 700 metres from Eden Gardens, a cricket ground built in the 19th century, and about one-and-a-half kilometres from a major shopping area called Satyanarayan Park A.C. Market.	9/10 Kolkata Jetty, Strand Road	88.3397482999999966	22.569901999999999	luxury hotels
-36	2018-07-18 14:06:50.93085+05:30	2018-07-18 14:35:50.862249+05:30	FabHotel Marble Arch	3	8.5	delhi	Designed to meet the needs of business as well as leisure travelers, FabHotel Marble Arch offers simple rooms equipped with all essential amenities and backed by a team of professionals promising a hassle-free stay.  FabHotel Marble Arch, conveniently located on Pusa Lane, is one of the most preferred budget hotels in Karol Bagh. This budget hotel is in the vicinity of major city landmarks such as Sir Ganga Ram Hospital (240 m), Hanuman Mandir (550 m), Janki Devi Memorial College (550 m), Jhandewalan Devi Mandir (1.8 km), Connaught Place (3.2 km) and Talkatora Indoor Stadium (3.8 km).  All rooms at FabHotel Marble Arch are air-conditioned and come with television, tea/coffee maker and intercom. Private washrooms have a constant supply of hot/cold water and complimentary toiletries. Room service, front desk, round-the-clock security, power backup, and pick up and drop (on chargeable basis) are some of the additional facilities offered at this economy hotel in Karol Bagh.  Guests can relish mouth-watering dishes at the hotel’s restaurant. Alternatively, they can choose to dine out at the nearby restaurants and cafes like Karim’s, Art of Spices, Bikanervala Angan, Raffles Restaurant.	Plot No-8/6, W.E.A., Opposite Metro Pillar 88, Pusa Lane, Karol Bagh	77.1904332999999951	28.6451540000000016	premium hotel
-37	2018-07-18 14:40:24.826083+05:30	2018-07-18 14:40:24.826083+05:30	Metro View	3	7.79999999999999982	delhi	Hotel Metro View is situated right in the heart of New Delhi in Karol Bagh with shopping streets enveloping the property. We have a marvelous rooftop with refreshing views where you can either order a snack or a full meal from our in house Dine-In. Alternatively you may eat in the restaurant or order room service which is available 24-hours. High speed Wi-Fi & Internet connectivity throughout the property keeps you a step ahead always, not to mention that fast and seamless connectivity can help you do business, plan your trip, make necessary last minute adjustments, video chat with loved ones or simply entertain yourselves online.   Ours is a 3-star hotel which offers services and quality at prices unmatched, we strive hard to achieve levels of excellence which will bring you back to us time and again. The Hotel offers a environment which is friendly and we go the extra mile to let our guests feel fully comfortable and satisfied in serenity. Saying we are the quintessence of the 3-Star hospitality industry would not be an exaggeration.  The reception is open 24-hours to cater to your needs, we are at your service always!	17A/3, W.E.A., Karol Bagh	77.1873709999999988	28.6451020000000014	premium hotel
-38	2018-07-18 15:06:21.410466+05:30	2018-07-18 15:06:21.410466+05:30	Golden Oasis	2	7	delhi	Hotel Golden Oasis is located in Chandi Wali Street of Main Bazaar Road, Pahar Ganj. Situated just 5 minutes' walk away from New Delhi Railway Station and the nearest Metro Station, Hotel offers a distinguishing location advantage for all its guests. The hotel features 39 air-conditioned and well-ventilated guest rooms and hygienic bathrooms that combine comfort, style, elegance and the latest technology. These details along with its central location near Connaught Place & Railway Station make Golden Oasis an ideal place; both for leisure and business travelers.	901 Chandi Wali Street, Main Bazaar Road, Pahar Ganj	77.2126604000000043	28.6418169999999996	premium hotels
-39	2018-07-18 15:34:06.742352+05:30	2018-07-18 15:34:06.742352+05:30	FabHotel Ascot	3	8.19999999999999929	mumbai	Located near Mumbai Airport, FabHotel Ascot International provides the most affordable accommodation for frequent flyers and corporate travelers. FabHotel Ascot International is a budget hotel situated on Andheri Kurla Road in the Sakinaka locality of Andheri East. It is mostly preferred by business travelers due to its close proximity to several commercial complexes and industrial estates.Prominent landmarks near the hotel include Crescent Business Park (550 m), Logitech Park (700 m), Excom House (700 m), Accenture (800 m), Akruti Orchid Park (900 m), Times Square (950 m), Hyde Park (1.2 km), Prime Corporate Park (2.3 km), Ansa Industrial Estate (2.9 km), Powai (3.7 km), TCS (3.9 km), Neelkanth Business Park (4 km), SEEPZ (4.2 km), Deloitte (4.6 km), Nomura (4.7 km), and IIT (5.7 km). Easy accessibility from these landmarks makes the hotel one of the preferred budget hotels in Mumbai.Guests can consult doctors at Paramount Hospital, Axon Hospital and Seven Hills Hospital in case any medical assistance is required. For shopping and entertainment purposes, guests can head to Fashion Street (1 km) and Carnival BIG Cinemas Sangam.	3rd Floor, DilKap Center, Andheri Kurla Road	72.8828735999999964	19.1013407000000015	premium hotel
-40	2018-07-18 16:01:03.029465+05:30	2018-07-18 16:20:44.42664+05:30	Kohinoor Continental	4	7.90000000000000036	mumbai	Kohinoor Continental is conveniently located in the commercial hub of Mumbai on Andheri-Kurla Road.The is located 2KMS from Mumbai International Airport( CSIA). There is a total of 137 elegantly designed rooms classified into 118 Superior Rooms, 17 Premium Rooms and 2 Suites with contemporary chic decor and soft lighting. The basic room amenities offered by Hotel Kohinoor Continental includes flat screen TV, separate sitting area, mini bar, in-room safe, stationary kit, tea/coffee maker, iron, ironing board, Wi-Fi connectivity and individually controlled air-conditioning.There is a fitness centreas well as an outdoor swimming pool for those who want to maintain their fitness regime while travelling. An art gallery, travel desk, doctor on call, airport transfers and event spaces are other hotel facilities. The Solitaire is a multi-cuisine specialty restaurant. There isa coffee shop as well as The Beryl Club, the exclusive bar in the hotel where the guests can enjoy a drink and finger food.	International Airport Zone, Andheri Kurla Road, Andheri East	72.8657666000000006	19.1122730999999995	premium hotels
-41	2018-07-18 16:28:03.366089+05:30	2018-07-18 16:28:03.366089+05:30	FabHotel Hyson	3	8.69999999999999929	mumbai	With its warm hospitality, personalized services and sophisticated ambience, FabHotel Hyson International never fails to please guests. FabHotel Hyson International is strategically located at Mahakali Caves Road and is one of the best budget hotels in Mumbai due to its proximity to various corporate offices, commercial complexes, and tourist attractions. Patrons can enjoy a pleasant stay at this hotel with a wide range of modern facilities, including complimentary breakfast and Wi-Fi. Room service, 24-hour front desk, elevator, parking, round-the-clock security and doctor-on-call are the other conveniences offered here that make for a comfortable stay.  For accommodation, the hotel features capacious and spotlessly clean rooms equipped with various amenities such as AC, television, mini bar and tea/coffee maker. Attached bathrooms come with towels and complimentary toiletries.  Unmatched hospitality together with modern amenities is what defines this budget hotel in Mumbai. Each room in FabHotel Hyson International is provided with a wide menu of food from which guests can place an order as per their choice.	201/202 Brahans Business Park, 16 - A Mahal Estate	72.8605689999999981	19.1223495999999997	premium hotel
-44	2018-07-18 18:19:40.502843+05:30	2018-07-18 18:19:40.502843+05:30	Greens Residency	2	7.59999999999999964	bengaluru	Greens Residency located at No 118, Nawab Hyderali Khan Road, Ayyappa Temple	No 118, Nawab Hyderali Khan Road, Ayyappa Temple	77.5755259000000024	12.9595500000000001	premium hotels
-42	2018-07-18 17:08:25.537485+05:30	2018-07-18 17:08:25.537485+05:30	The Peerless Inn	5	7.59999999999999964	kolkata	The Peerless Inn Kolkata is centrally located in the Chowringhee district of Kolkata. It features 168 rooms and suites and is just a short stroll from Esplanade Metro station and the delightful Maidan park.  The rooms, decorated with soothing earth colours, provide a king-size or two single beds, and a private bathroom with a shower and bath. Creature comforts include a television, a minibar and a tea/coffee maker.  The hotel’s conference and banqueting facilities can accommodate up to 350 attendees. A fitness centre is also available and Wi-Fi access is provided throughout the hotel.  The Peerless Inn Kolkata offers a good choice of on-site eateries: Aaheli serves tasty Bengali cuisine and Oceanic is the destination for seafood. The Tea Lounge features gourmet cakes and Ego is home to retro Asian dishes.  Both in Maidan park and within a mile and a half, Eden Gardens is where guests enjoy watching the Indian national team play cricket and Victoria Memorial Hall is a beautiful tribute to Queen Victoria.	12, J.l. Nehru Road	88.3492066999999963	22.5625408999999983	luxury hotels
+COPY public.hotel (id, created_at, updated_at, name, star, rating, phone, city, category, "desc", address, latitude, longitude) FROM stdin;
+43	2018-07-18 17:56:25.902145+05:30	2018-07-18 17:56:25.902145+05:30	The Floatel	3	7.40000000000000036	\N	kolkata	luxury hotels	The Floatel is an eco-friendly property that is floating on the Hooghly River and is a five-minute walk from Millennium Park in the heart of Kolkata, India.  The hotel features 49 rooms, all of which include cable television, a safe, and a private bathroom with 24-hour running hot water. The hotel's suites come with a separate living room.  Amenities at the property include complimentary Wi-Fi, laundry services, on-site parking, and banquet facilities. The property has a swimming pool, fitness centre, and spa as well.  Breakfast is included in the cost of the room at The Floatel. The property has a multicuisine restaurant that is open 24 hours per day called The Bridge and a bar with an open terrace called The Anchorage.  The property is under 700 metres from Eden Gardens, a cricket ground built in the 19th century, and about one-and-a-half kilometres from a major shopping area called Satyanarayan Park A.C. Market.	9/10 Kolkata Jetty, Strand Road	88.3397482999999966	22.569901999999999
+36	2018-07-18 14:06:50.93085+05:30	2018-07-18 14:35:50.862249+05:30	FabHotel Marble Arch	3	8.5	\N	delhi	premium hotel	Designed to meet the needs of business as well as leisure travelers, FabHotel Marble Arch offers simple rooms equipped with all essential amenities and backed by a team of professionals promising a hassle-free stay.  FabHotel Marble Arch, conveniently located on Pusa Lane, is one of the most preferred budget hotels in Karol Bagh. This budget hotel is in the vicinity of major city landmarks such as Sir Ganga Ram Hospital (240 m), Hanuman Mandir (550 m), Janki Devi Memorial College (550 m), Jhandewalan Devi Mandir (1.8 km), Connaught Place (3.2 km) and Talkatora Indoor Stadium (3.8 km).  All rooms at FabHotel Marble Arch are air-conditioned and come with television, tea/coffee maker and intercom. Private washrooms have a constant supply of hot/cold water and complimentary toiletries. Room service, front desk, round-the-clock security, power backup, and pick up and drop (on chargeable basis) are some of the additional facilities offered at this economy hotel in Karol Bagh.  Guests can relish mouth-watering dishes at the hotel’s restaurant. Alternatively, they can choose to dine out at the nearby restaurants and cafes like Karim’s, Art of Spices, Bikanervala Angan, Raffles Restaurant.	Plot No-8/6, W.E.A., Opposite Metro Pillar 88, Pusa Lane, Karol Bagh	77.1904332999999951	28.6451540000000016
+37	2018-07-18 14:40:24.826083+05:30	2018-07-18 14:40:24.826083+05:30	Metro View	3	7.79999999999999982	\N	delhi	premium hotel	Hotel Metro View is situated right in the heart of New Delhi in Karol Bagh with shopping streets enveloping the property. We have a marvelous rooftop with refreshing views where you can either order a snack or a full meal from our in house Dine-In. Alternatively you may eat in the restaurant or order room service which is available 24-hours. High speed Wi-Fi & Internet connectivity throughout the property keeps you a step ahead always, not to mention that fast and seamless connectivity can help you do business, plan your trip, make necessary last minute adjustments, video chat with loved ones or simply entertain yourselves online.   Ours is a 3-star hotel which offers services and quality at prices unmatched, we strive hard to achieve levels of excellence which will bring you back to us time and again. The Hotel offers a environment which is friendly and we go the extra mile to let our guests feel fully comfortable and satisfied in serenity. Saying we are the quintessence of the 3-Star hospitality industry would not be an exaggeration.  The reception is open 24-hours to cater to your needs, we are at your service always!	17A/3, W.E.A., Karol Bagh	77.1873709999999988	28.6451020000000014
+38	2018-07-18 15:06:21.410466+05:30	2018-07-18 15:06:21.410466+05:30	Golden Oasis	2	7	\N	delhi	premium hotels	Hotel Golden Oasis is located in Chandi Wali Street of Main Bazaar Road, Pahar Ganj. Situated just 5 minutes' walk away from New Delhi Railway Station and the nearest Metro Station, Hotel offers a distinguishing location advantage for all its guests. The hotel features 39 air-conditioned and well-ventilated guest rooms and hygienic bathrooms that combine comfort, style, elegance and the latest technology. These details along with its central location near Connaught Place & Railway Station make Golden Oasis an ideal place; both for leisure and business travelers.	901 Chandi Wali Street, Main Bazaar Road, Pahar Ganj	77.2126604000000043	28.6418169999999996
+39	2018-07-18 15:34:06.742352+05:30	2018-07-18 15:34:06.742352+05:30	FabHotel Ascot	3	8.19999999999999929	\N	mumbai	premium hotel	Located near Mumbai Airport, FabHotel Ascot International provides the most affordable accommodation for frequent flyers and corporate travelers. FabHotel Ascot International is a budget hotel situated on Andheri Kurla Road in the Sakinaka locality of Andheri East. It is mostly preferred by business travelers due to its close proximity to several commercial complexes and industrial estates.Prominent landmarks near the hotel include Crescent Business Park (550 m), Logitech Park (700 m), Excom House (700 m), Accenture (800 m), Akruti Orchid Park (900 m), Times Square (950 m), Hyde Park (1.2 km), Prime Corporate Park (2.3 km), Ansa Industrial Estate (2.9 km), Powai (3.7 km), TCS (3.9 km), Neelkanth Business Park (4 km), SEEPZ (4.2 km), Deloitte (4.6 km), Nomura (4.7 km), and IIT (5.7 km). Easy accessibility from these landmarks makes the hotel one of the preferred budget hotels in Mumbai.Guests can consult doctors at Paramount Hospital, Axon Hospital and Seven Hills Hospital in case any medical assistance is required. For shopping and entertainment purposes, guests can head to Fashion Street (1 km) and Carnival BIG Cinemas Sangam.	3rd Floor, DilKap Center, Andheri Kurla Road	72.8828735999999964	19.1013407000000015
+40	2018-07-18 16:01:03.029465+05:30	2018-07-18 16:20:44.42664+05:30	Kohinoor Continental	4	7.90000000000000036	\N	mumbai	premium hotels	Kohinoor Continental is conveniently located in the commercial hub of Mumbai on Andheri-Kurla Road.The is located 2KMS from Mumbai International Airport( CSIA). There is a total of 137 elegantly designed rooms classified into 118 Superior Rooms, 17 Premium Rooms and 2 Suites with contemporary chic decor and soft lighting. The basic room amenities offered by Hotel Kohinoor Continental includes flat screen TV, separate sitting area, mini bar, in-room safe, stationary kit, tea/coffee maker, iron, ironing board, Wi-Fi connectivity and individually controlled air-conditioning.There is a fitness centreas well as an outdoor swimming pool for those who want to maintain their fitness regime while travelling. An art gallery, travel desk, doctor on call, airport transfers and event spaces are other hotel facilities. The Solitaire is a multi-cuisine specialty restaurant. There isa coffee shop as well as The Beryl Club, the exclusive bar in the hotel where the guests can enjoy a drink and finger food.	International Airport Zone, Andheri Kurla Road, Andheri East	72.8657666000000006	19.1122730999999995
+41	2018-07-18 16:28:03.366089+05:30	2018-07-18 16:28:03.366089+05:30	FabHotel Hyson	3	8.69999999999999929	\N	mumbai	premium hotel	With its warm hospitality, personalized services and sophisticated ambience, FabHotel Hyson International never fails to please guests. FabHotel Hyson International is strategically located at Mahakali Caves Road and is one of the best budget hotels in Mumbai due to its proximity to various corporate offices, commercial complexes, and tourist attractions. Patrons can enjoy a pleasant stay at this hotel with a wide range of modern facilities, including complimentary breakfast and Wi-Fi. Room service, 24-hour front desk, elevator, parking, round-the-clock security and doctor-on-call are the other conveniences offered here that make for a comfortable stay.  For accommodation, the hotel features capacious and spotlessly clean rooms equipped with various amenities such as AC, television, mini bar and tea/coffee maker. Attached bathrooms come with towels and complimentary toiletries.  Unmatched hospitality together with modern amenities is what defines this budget hotel in Mumbai. Each room in FabHotel Hyson International is provided with a wide menu of food from which guests can place an order as per their choice.	201/202 Brahans Business Park, 16 - A Mahal Estate	72.8605689999999981	19.1223495999999997
+44	2018-07-18 18:19:40.502843+05:30	2018-07-18 18:19:40.502843+05:30	Greens Residency	2	7.59999999999999964	\N	bengaluru	premium hotels	Greens Residency located at No 118, Nawab Hyderali Khan Road, Ayyappa Temple	No 118, Nawab Hyderali Khan Road, Ayyappa Temple	77.5755259000000024	12.9595500000000001
+42	2018-07-18 17:08:25.537485+05:30	2018-07-18 17:08:25.537485+05:30	The Peerless Inn	5	7.59999999999999964	\N	kolkata	luxury hotels	The Peerless Inn Kolkata is centrally located in the Chowringhee district of Kolkata. It features 168 rooms and suites and is just a short stroll from Esplanade Metro station and the delightful Maidan park.  The rooms, decorated with soothing earth colours, provide a king-size or two single beds, and a private bathroom with a shower and bath. Creature comforts include a television, a minibar and a tea/coffee maker.  The hotel’s conference and banqueting facilities can accommodate up to 350 attendees. A fitness centre is also available and Wi-Fi access is provided throughout the hotel.  The Peerless Inn Kolkata offers a good choice of on-site eateries: Aaheli serves tasty Bengali cuisine and Oceanic is the destination for seafood. The Tea Lounge features gourmet cakes and Ego is home to retro Asian dishes.  Both in Maidan park and within a mile and a half, Eden Gardens is where guests enjoy watching the Indian national team play cricket and Victoria Memorial Hall is a beautiful tribute to Queen Victoria.	12, J.l. Nehru Road	88.3492066999999963	22.5625408999999983
 \.
 
 
@@ -1380,18 +1400,6 @@ COPY public.image (id, created_at, updated_at, hotel_id, image_url) FROM stdin;
 --
 
 COPY public.member (id, created_at, updated_at, no_of_adults, children, total_members, room_id) FROM stdin;
-36	2018-07-18 15:13:00.304916+05:30	2018-07-18 15:13:00.304916+05:30	2	0	2	36
-37	2018-07-18 15:16:51.611004+05:30	2018-07-18 15:16:51.611004+05:30	2	0	2	37
-38	2018-07-18 15:38:15.177819+05:30	2018-07-18 15:38:15.177819+05:30	2	0	2	38
-39	2018-07-18 15:40:32.833292+05:30	2018-07-18 15:40:32.833292+05:30	2	0	2	39
-40	2018-07-18 15:42:08.687678+05:30	2018-07-18 15:42:08.687678+05:30	2	0	2	40
-41	2018-07-18 16:31:41.441312+05:30	2018-07-18 16:31:41.441312+05:30	2	0	2	41
-42	2018-07-18 16:34:31.419949+05:30	2018-07-18 16:34:31.419949+05:30	2	0	2	42
-43	2018-07-18 17:10:59.903538+05:30	2018-07-18 17:10:59.903538+05:30	2	0	2	43
-44	2018-07-18 17:12:33.439314+05:30	2018-07-18 17:12:33.439314+05:30	2	0	2	44
-45	2018-07-18 17:14:05.016747+05:30	2018-07-18 17:14:05.016747+05:30	2	0	2	45
-46	2018-07-18 17:18:40.269952+05:30	2018-07-18 17:18:40.269952+05:30	2	0	2	46
-47	2018-07-18 17:58:06.345203+05:30	2018-07-18 17:58:06.345203+05:30	2	0	2	47
 \.
 
 
@@ -1407,8 +1415,8 @@ COPY public.menu (id, created_at, updated_at, restaurant_id, breakfast, lunch, d
 -- Data for Name: restaurant; Type: TABLE DATA; Schema: public; Owner: priyanka
 --
 
-COPY public.restaurant (id, created_at, updated_at, name, rating, "desc", city, phone, latitude, longitude, address, featured, category, price) FROM stdin;
-1	2018-07-18 18:07:02.232656+05:30	2018-07-18 18:07:02.232656+05:30	res	2	du	delhi	9897888888	2	2	vggug	f	2	\N
+COPY public.restaurant (id, created_at, updated_at, name, rating, price, "desc", city, phone, latitude, longitude, address, category, featured) FROM stdin;
+1	2018-07-18 18:07:02.232656+05:30	2018-07-18 18:07:02.232656+05:30	res	2	\N	du	delhi	9897888888	2	2	vggug	2	f
 \.
 
 
@@ -1442,19 +1450,19 @@ COPY public.restaurant_image (id, created_at, updated_at, restaurant_id, image_u
 -- Data for Name: room; Type: TABLE DATA; Schema: public; Owner: priyanka
 --
 
-COPY public.room (id, created_at, updated_at, hotel_id, status, room_type, check_in, check_out, breakfast, balcony, other_room_type, image_url) FROM stdin;
-37	2018-07-18 15:16:51.595483+05:30	2018-07-18 15:16:51.595483+05:30	38	t	1	2018-07-18 15:16:51.592495+05:30	2018-07-18 15:16:51.592513+05:30	t	f	DELUXE ROOM	https://images.trvl-media.com/hotels/21000000/20970000/20969800/20969706/cf643fec_z.jpg
-39	2018-07-18 15:40:32.829217+05:30	2018-07-18 15:40:32.829217+05:30	39	t	1	2018-07-18 15:40:32.826453+05:30	2018-07-18 15:40:32.826479+05:30	t	f	Deluxe Room	https://t-ec.bstatic.com/xdata/images/hotel/square200/86275699.jpg?k=9223be4c4b015151e58d4a34519c15a102c281d4ba3e973cb2b4bd9f03648a6a&o=
-40	2018-07-18 15:42:08.671829+05:30	2018-07-18 15:42:08.671829+05:30	39	t	1	2018-07-18 15:42:08.670109+05:30	2018-07-18 15:42:08.670122+05:30	t	f	Deluxe Room	https://t-ec.bstatic.com/xdata/images/hotel/square200/86275699.jpg?k=9223be4c4b015151e58d4a34519c15a102c281d4ba3e973cb2b4bd9f03648a6a&o=
-42	2018-07-18 16:34:31.410255+05:30	2018-07-18 16:34:31.410255+05:30	41	t	2	2018-07-18 16:34:31.407966+05:30	2018-07-18 16:34:31.407993+05:30	t	f	Executive Room	https://images.trvl-media.com/hotels/20000000/19080000/19072200/19072151/ad62c4ee_l.jpg
-43	2018-07-18 17:10:59.890234+05:30	2018-07-18 17:10:59.890234+05:30	42	t	1	2018-07-18 17:10:59.886951+05:30	2018-07-18 17:10:59.886972+05:30	f	f	Superior Room	https://r1imghtlak.mmtcdn.com/l9of9o0p5p1018pc0s21k8fi000p.jpg?&downsize=800:*&crop=800:490;0,19&output-format=jpg
-44	2018-07-18 17:12:33.422654+05:30	2018-07-18 17:12:33.422654+05:30	42	t	2	2018-07-18 17:12:33.418789+05:30	2018-07-18 17:12:33.418811+05:30	t	f	Premier Room	https://r1imghtlak.mmtcdn.com/8b0b0624377111e5b1b3001ec9b85d13.jfif?&downsize=800:*&crop=800:490;0,24&output-format=jpg
-45	2018-07-18 17:14:05.00084+05:30	2018-07-18 17:14:05.00084+05:30	42	t	3	2018-07-18 17:14:04.998918+05:30	2018-07-18 17:14:04.998932+05:30	t	f	Suite	https://r1imghtlak.mmtcdn.com/6j0p0r0av90q70rahanc48gn005c.jpg?&downsize=800:*&crop=800:490;0,19&output-format=jpg
-46	2018-07-18 17:18:40.254103+05:30	2018-07-18 17:18:40.254103+05:30	42	t	1	2018-07-18 17:18:40.251896+05:30	2018-07-18 17:18:40.251927+05:30	t	f	Superior Room	https://images.trvl-media.com/hotels/2000000/1070000/1066400/1066383/1066383_55_l.jpg
-36	2018-07-18 15:13:00.269366+05:30	2018-07-18 15:13:00.269366+05:30	38	t	1	2018-07-18 15:13:00.261064+05:30	2018-07-18 15:13:00.261083+05:30	f	f	DELUXE ROOM	https://r1imghtlak.mmtcdn.com/ee1db456b0a411e7905c0a209fbd0127.jpg?&downsize=800:*&crop=800:490;0,21&output-format=jpg
-38	2018-07-18 15:38:15.161643+05:30	2018-07-18 15:38:15.161643+05:30	39	t	1	2018-07-18 15:38:15.158797+05:30	2018-07-18 15:38:15.158819+05:30	f	f	Deluxe Room	https://t-ec.bstatic.com/xdata/images/hotel/square200/86275699.jpg?k=9223be4c4b015151e58d4a34519c15a102c281d4ba3e973cb2b4bd9f03648a6a&o=
-41	2018-07-18 16:31:41.425607+05:30	2018-07-18 16:31:41.425607+05:30	41	t	1	2018-07-18 16:31:41.42345+05:30	2018-07-18 16:31:41.423459+05:30	f	f	Deluxe Room	https://images.trvl-media.com/hotels/20000000/19080000/19072200/19072151/ad62c4ee_l.jpg
-47	2018-07-18 17:58:06.330647+05:30	2018-07-18 17:58:06.330647+05:30	43	t	1	2018-07-18 17:58:06.329466+05:30	2018-07-18 17:58:06.329476+05:30	f	f	Sunrise	https://r1imghtlak.mmtcdn.com/gc29knnm4l65v1edfsikbf9i0040.jpg?&downsize=800:*&crop=800:490;0,19&output-format=jpg
+COPY public.room (id, created_at, updated_at, hotel_id, status, room_type, image_url, other_room_type, check_in, check_out, breakfast, balcony) FROM stdin;
+37	2018-07-18 15:16:51.595483+05:30	2018-07-18 15:16:51.595483+05:30	38	t	1	https://images.trvl-media.com/hotels/21000000/20970000/20969800/20969706/cf643fec_z.jpg	DELUXE ROOM	2018-07-18 15:16:51.592495+05:30	2018-07-18 15:16:51.592513+05:30	t	f
+39	2018-07-18 15:40:32.829217+05:30	2018-07-18 15:40:32.829217+05:30	39	t	1	https://t-ec.bstatic.com/xdata/images/hotel/square200/86275699.jpg?k=9223be4c4b015151e58d4a34519c15a102c281d4ba3e973cb2b4bd9f03648a6a&o=	Deluxe Room	2018-07-18 15:40:32.826453+05:30	2018-07-18 15:40:32.826479+05:30	t	f
+40	2018-07-18 15:42:08.671829+05:30	2018-07-18 15:42:08.671829+05:30	39	t	1	https://t-ec.bstatic.com/xdata/images/hotel/square200/86275699.jpg?k=9223be4c4b015151e58d4a34519c15a102c281d4ba3e973cb2b4bd9f03648a6a&o=	Deluxe Room	2018-07-18 15:42:08.670109+05:30	2018-07-18 15:42:08.670122+05:30	t	f
+42	2018-07-18 16:34:31.410255+05:30	2018-07-18 16:34:31.410255+05:30	41	t	2	https://images.trvl-media.com/hotels/20000000/19080000/19072200/19072151/ad62c4ee_l.jpg	Executive Room	2018-07-18 16:34:31.407966+05:30	2018-07-18 16:34:31.407993+05:30	t	f
+43	2018-07-18 17:10:59.890234+05:30	2018-07-18 17:10:59.890234+05:30	42	t	1	https://r1imghtlak.mmtcdn.com/l9of9o0p5p1018pc0s21k8fi000p.jpg?&downsize=800:*&crop=800:490;0,19&output-format=jpg	Superior Room	2018-07-18 17:10:59.886951+05:30	2018-07-18 17:10:59.886972+05:30	f	f
+44	2018-07-18 17:12:33.422654+05:30	2018-07-18 17:12:33.422654+05:30	42	t	2	https://r1imghtlak.mmtcdn.com/8b0b0624377111e5b1b3001ec9b85d13.jfif?&downsize=800:*&crop=800:490;0,24&output-format=jpg	Premier Room	2018-07-18 17:12:33.418789+05:30	2018-07-18 17:12:33.418811+05:30	t	f
+45	2018-07-18 17:14:05.00084+05:30	2018-07-18 17:14:05.00084+05:30	42	t	3	https://r1imghtlak.mmtcdn.com/6j0p0r0av90q70rahanc48gn005c.jpg?&downsize=800:*&crop=800:490;0,19&output-format=jpg	Suite	2018-07-18 17:14:04.998918+05:30	2018-07-18 17:14:04.998932+05:30	t	f
+46	2018-07-18 17:18:40.254103+05:30	2018-07-18 17:18:40.254103+05:30	42	t	1	https://images.trvl-media.com/hotels/2000000/1070000/1066400/1066383/1066383_55_l.jpg	Superior Room	2018-07-18 17:18:40.251896+05:30	2018-07-18 17:18:40.251927+05:30	t	f
+36	2018-07-18 15:13:00.269366+05:30	2018-07-18 15:13:00.269366+05:30	38	t	1	https://r1imghtlak.mmtcdn.com/ee1db456b0a411e7905c0a209fbd0127.jpg?&downsize=800:*&crop=800:490;0,21&output-format=jpg	DELUXE ROOM	2018-07-18 15:13:00.261064+05:30	2018-07-18 15:13:00.261083+05:30	f	f
+38	2018-07-18 15:38:15.161643+05:30	2018-07-18 15:38:15.161643+05:30	39	t	1	https://t-ec.bstatic.com/xdata/images/hotel/square200/86275699.jpg?k=9223be4c4b015151e58d4a34519c15a102c281d4ba3e973cb2b4bd9f03648a6a&o=	Deluxe Room	2018-07-18 15:38:15.158797+05:30	2018-07-18 15:38:15.158819+05:30	f	f
+41	2018-07-18 16:31:41.425607+05:30	2018-07-18 16:31:41.425607+05:30	41	t	1	https://images.trvl-media.com/hotels/20000000/19080000/19072200/19072151/ad62c4ee_l.jpg	Deluxe Room	2018-07-18 16:31:41.42345+05:30	2018-07-18 16:31:41.423459+05:30	f	f
+47	2018-07-18 17:58:06.330647+05:30	2018-07-18 17:58:06.330647+05:30	43	t	1	https://r1imghtlak.mmtcdn.com/gc29knnm4l65v1edfsikbf9i0040.jpg?&downsize=800:*&crop=800:490;0,19&output-format=jpg	Sunrise	2018-07-18 17:58:06.329466+05:30	2018-07-18 17:58:06.329476+05:30	f	f
 \.
 
 
@@ -1565,6 +1573,13 @@ SELECT pg_catalog.setval('public.cab_invoice_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.cab_tax_id_seq', 1, false);
+
+
+--
+-- Name: cab_website_id_seq; Type: SEQUENCE SET; Schema: public; Owner: priyanka
+--
+
+SELECT pg_catalog.setval('public.cab_website_id_seq', 1, true);
 
 
 --
@@ -1761,6 +1776,14 @@ ALTER TABLE ONLY public.cab_tax
 
 
 --
+-- Name: cab_website cab_website_pkey; Type: CONSTRAINT; Schema: public; Owner: priyanka
+--
+
+ALTER TABLE ONLY public.cab_website
+    ADD CONSTRAINT cab_website_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: collection collection_pkey; Type: CONSTRAINT; Schema: public; Owner: priyanka
 --
 
@@ -1806,6 +1829,14 @@ ALTER TABLE ONLY public.facility
 
 ALTER TABLE ONLY public.facility
     ADD CONSTRAINT facility_room_id_key UNIQUE (room_id);
+
+
+--
+-- Name: hotel hotel_phone_key; Type: CONSTRAINT; Schema: public; Owner: priyanka
+--
+
+ALTER TABLE ONLY public.hotel
+    ADD CONSTRAINT hotel_phone_key UNIQUE (phone);
 
 
 --
@@ -1970,6 +2001,13 @@ CREATE INDEX ix_cab_tax_id ON public.cab_tax USING btree (id);
 
 
 --
+-- Name: ix_cab_website_id; Type: INDEX; Schema: public; Owner: priyanka
+--
+
+CREATE INDEX ix_cab_website_id ON public.cab_website USING btree (id);
+
+
+--
 -- Name: ix_collection_id; Type: INDEX; Schema: public; Owner: priyanka
 --
 
@@ -2112,6 +2150,14 @@ ALTER TABLE ONLY public.cab_image
 
 ALTER TABLE ONLY public.cab_invoice
     ADD CONSTRAINT cab_invoice_booking_id_fkey FOREIGN KEY (booking_id) REFERENCES public.cab_booking(id);
+
+
+--
+-- Name: cab_invoice cab_invoice_website_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: priyanka
+--
+
+ALTER TABLE ONLY public.cab_invoice
+    ADD CONSTRAINT cab_invoice_website_id_fkey FOREIGN KEY (website_id) REFERENCES public.cab_website(id);
 
 
 --
