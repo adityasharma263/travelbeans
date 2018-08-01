@@ -120,7 +120,6 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         $scope.menu = res.data.result.menu[0];
         delete $scope.menu.id;
         delete $scope.menu.restaurant;
-        console.log("$scope.tag =", $scope.menu);
       }, function (err) {
         console.log(err);
       });
@@ -311,6 +310,20 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         console.log(err);
       });
 
+    $http.get("/api/v1/restaurant/cuisine")
+      .then(function (res) {
+        $scope.cuisine = res.data.result.cuisine;
+      }, function (err) {
+        console.log(err);
+      });
+
+    $http.get("/api/v1/restaurant/collection")
+      .then(function (res) {
+        $scope.collection = res.data.result.collection;
+      }, function (err) {
+        console.log(err);
+      });
+
     $scope.functionCalling = "Add";
 
     $scope.Add = function () {
@@ -324,14 +337,30 @@ var app = angular.module("restaurantApp", ['angular.filter'])
           console.log(res);
           alert("Restaurant added!");
         }, function (err) {
-          alert("Error =>\n"+err);
-          
+          alert("Error =>\n" + err);
+
           console.log(err);
         })
     }
     $scope.Update = function () {
       $http.put("/api/v1/restaurant", {})
 
+
+
+
+    }
+
+    $scope.getMenubyId = function (restaurantId, restaurantName) {
+
+      $scope.restaurantName = restaurantName;
+
+      $http.get("/api/v1/restaurant/dish?restaurant_id=" + restaurantId)
+        .then(function (res) {
+          $scope.restaurantDish = res.data.result.dish;
+         },
+         function (err) {
+           console.log(err);
+          })
 
 
 
@@ -349,8 +378,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     };
 
 
-    function getQueryStringValue (key) {  
-      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    function getQueryStringValue(key) {
+      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
     }
 
 
@@ -358,35 +387,35 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
     $scope.amenities = {
-      "alcohol": null, 
-      "beer": null, 
-      "brunch": null, 
-      "buffet": null, 
-      "city_view": null, 
-      "desserts_and_bakes": null, 
-      "full_bar_available": null, 
-      "gastro_pub": null, 
-      "group_meal": null, 
+      "alcohol": null,
+      "beer": null,
+      "brunch": null,
+      "buffet": null,
+      "city_view": null,
+      "desserts_and_bakes": null,
+      "full_bar_available": null,
+      "gastro_pub": null,
+      "group_meal": null,
       "home_delivery": true,
-      "kid_friendly": true, 
-      "live_entertainment": null, 
-      "live_music": true, 
-      "live_sports_screening": null, 
-      "nightlife": null, 
-      "outdoor_seating": null, 
-      "parking": null, 
-      "private_dining_area_available": true, 
-      "seating": null, 
-      "serves_jain_food": null, 
-      "serves_non_veg": null, 
-      "smoking_area": null, 
-      "sunday_roast": null, 
-      "table_booking_recommended": null, 
-      "table_reservation_required": null, 
-      "takeaway": null, 
-      "valet_parking": null, 
-      "vegetarian_only": null, 
-      "wheelchair_accessible": null, 
+      "kid_friendly": true,
+      "live_entertainment": null,
+      "live_music": true,
+      "live_sports_screening": null,
+      "nightlife": null,
+      "outdoor_seating": null,
+      "parking": null,
+      "private_dining_area_available": true,
+      "seating": null,
+      "serves_jain_food": null,
+      "serves_non_veg": null,
+      "smoking_area": null,
+      "sunday_roast": null,
+      "table_booking_recommended": null,
+      "table_reservation_required": null,
+      "takeaway": null,
+      "valet_parking": null,
+      "vegetarian_only": null,
+      "wheelchair_accessible": null,
       "wifi": true
     }
 
