@@ -1040,7 +1040,7 @@ $scope.createHotel = function() {
 
   }
   $scope.showDetail=function(roomid){
-    window.open('/hotel/'+roomid,'_self');
+    window.open('/hotel/'+roomid);
     
   }
   $http({

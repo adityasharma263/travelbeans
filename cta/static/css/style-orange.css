@@ -35,3 +35,10 @@
             --txx:-800px;
             --stx:-240px;
           }
+          .hotelrating{
+            display: block;
+            font-size: 5em;
+            color: #2d3e52;
+            font-weight: 300;
+            line-height: 1.25em;
+          }
