@@ -1652,29 +1652,29 @@
                                                 <div class="details">
 
                                                     <div class="pull-right rating-container">
-                                                        <strong>[[ restaurant.rating ]]
+                                                        <strong ng-cloak >[[ restaurant.rating ]]
                                                             <i class="fa fa-star" aria-hidden="true"></i>
                                                         </strong>
                                                     </div>
                                                     <h2 class="box-title" style="font-size:24px">
                                                         <strong>
-                                                            <a href="/restaurant/[[restaurant.id]]">[[ restaurant.name ]]</a>
+                                                            <a href="/restaurant/[[restaurant.id]]" ng-cloak>[[ restaurant.name ]]</a>
                                                         </strong>
                                                     </h2>
 
                                                     <div>
                                                         <small>
-                                                            <strong>[[ restaurant.city ]]</strong>
+                                                            <strong ng-cloak>[[ restaurant.city ]]</strong>
                                                         </small>
                                                     </div>
-                                                    <div class="restaurant-address">
+                                                    <div class="restaurant-address" ng-cloak>
                                                         [[restaurant.address]]
                                                     </div>
 
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cuisines : </span>
                                                         <span ng-repeat="association in restaurant.association">
-                                                            <strong>[[association.cuisines.cuisine]]
+                                                            <strong ng-cloak>[[association.cuisines.cuisine]]
                                                                 <span ng-if="$index != restaurant.association.length - 1">,</span>
                                                             </strong>
                                                         </span>
@@ -1683,7 +1683,7 @@
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cost for two : </span>
                                                         <span>
-                                                            <strong>₹[[ restaurant.price ]]</strong>
+                                                            <strong ng-cloak>₹[[ restaurant.price ]]</strong>
                                                         </span>
                                                         <!-- <span ng-repeat="association in restaurant.association">
                                                          <strong>[[association.cuisines.cuisine]] <span ng-if="$index != restaurant.association.length - 1" >,</span></strong>
