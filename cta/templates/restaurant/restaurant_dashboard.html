@@ -42,14 +42,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" ng-model="restaurantData.name" ng-required="true" >
+                                <input type="text" class="form-control" ng-model="restaurantData.name" ng-required="true">
 
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Rating</label>
-                                <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true" >
+                                <label>Rating(out of 5.0)</label>
+                                <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
                             </div>
                         </div>
                     </div>
@@ -57,20 +57,20 @@
 
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" ng-model="restaurantData.desc" ng-required="true" ></textarea>
+                        <textarea class="form-control" ng-model="restaurantData.desc" ng-required="true"></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>City</label>
-                                <input type="text" class="form-control" ng-model="restaurantData.city" ng-required="true" >
+                                <input type="text" class="form-control" ng-model="restaurantData.city" ng-required="true">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Phone</label>
-                                <input type="number" class="form-control" step="any" ng-model="restaurantData.phone" ng-required="true" >
+                                <input type="number" class="form-control" step="any" ng-model="restaurantData.phone" ng-required="true">
                             </div>
                         </div>
                     </div>
@@ -79,27 +79,45 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Latitude</label>
-                                <input type="number" class="form-control" step="any" ng-model="restaurantData.latitude" ng-required="true" >
+                                <input type="number" class="form-control" step="any" ng-model="restaurantData.latitude" ng-required="true">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Longitude</label>
-                                <input type="number" class="form-control" step="any" ng-model="restaurantData.longitude" ng-required="true" >
+                                <input type="number" class="form-control" step="any" ng-model="restaurantData.longitude" ng-required="true">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Address</label>
-                        <textarea class="form-control" ng-model="restaurantData.address" ng-required="true" ></textarea>
+                        <textarea class="form-control" ng-model="restaurantData.address" ng-required="true"></textarea>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Nearest Metro Station</label>
+                                <input type="text" class="form-control" ng-model="restaurantData.nearest_metro_station" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Especially</label>
+                                <input type="text" class="form-control" ng-model="restaurantData.especially">
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Category</label>
                                 <br>
-                                <select ng-model="restaurantData.category"  ng-required="true" >
+                                <select ng-model="restaurantData.category" ng-required="true">
                                     <option value disabled>-- select category --</option>
                                     <option value="[[$index+1]]" ng-repeat="category in categories">[[category]]</option>
                                 </select>
@@ -127,7 +145,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Price for two</label>
-                                <input type="number" class="form-control" ng-model="restaurantData.price"  ng-required="true" >
+                                <input type="number" class="form-control" ng-model="restaurantData.price" ng-required="true">
                             </div>
                         </div>
                     </div>
@@ -156,13 +174,13 @@
                                 <div class="form-group">
                                     <h4>Collection</h4>
                                     <div ng-show="!addNewCollection">
-                                        <select ng-model="association.collections.collection_id" >
+                                        <select ng-model="association.collections.collection_id">
                                             <option value disabled selected> -- Select Collection --</option>
                                             <!-- <option value ng-click="addNewCollection = true">Add new collection</option> -->
                                             <option value="[[collectionData.id]]" ng-repeat=" collectionData in  collection">[[collectionData.collection]]</option>
                                         </select>
                                         or
-                                        <button class="btn btn-default" ng-click="addNewCollection = true">Add Collection</button>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCollection = true">Add Collection</button>
                                     </div>
                                     <div ng-show="addNewCollection">
                                         <label>Collection name</label>
@@ -170,7 +188,7 @@
                                         <label>Image</label>
                                         <input type="text" ng-model="association.collections.image" class="form-control">
 
-                                        <button class="btn btn-default" ng-click="addNewCollection= false;">cancel</button>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCollection= false;">cancel</button>
 
                                     </div>
                                 </div>
@@ -180,19 +198,19 @@
                                 <div class="form-group">
 
                                     <h4>Cuisine</h4>
-                                    <div ng-show="!addNewCuisine">
+                                    <div ng-if="!addNewCuisine">
                                         <select ng-model="association.cuisines.cuisine_id">
                                             <option value disabled selected> -- Select Cuisine --</option>
                                             <option value="[[cuisineData.id]]" ng-repeat=" cuisineData in  cuisine">[[cuisineData.cuisine]]</option>
                                         </select>
                                         or
-                                        <button class="btn btn-default" ng-click="addNewCuisine = true">Add Cuisine</button>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCuisine = true">Add Cuisine</button>
                                     </div>
 
-                                    <div ng-show="addNewCuisine">
+                                    <div ng-if="addNewCuisine">
                                         <label>Cuisine name</label>
                                         <input type="text" ng-model="association.cuisines.cuisine" class="form-control">
-                                        <button class="btn btn-default" ng-click="addNewCuisine= false;">cancel</button>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCuisine = false;">cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +239,7 @@
                                 <div class="col-sm-6">
                                     <label>Image Type</label>
                                     <br>
-                                    <select ng-model="imageData.image_type" ng-required="true" >
+                                    <select ng-model="imageData.image_type" ng-required="true">
                                         <option value disabled>Select image type for restaurant</option>
                                         <option value="[[image_enum]]" ng-repeat="(image_enum, image_type) in image_types">[[image_type]]</option>
                                     </select>
@@ -229,7 +247,7 @@
                                 <div class="col-sm-6">
                                     <span>
                                         URL
-                                        <input type="text" ng-model="imageData.image_url" class="form-control" ng-required="true" >
+                                        <input type="text" ng-model="imageData.image_url" class="form-control" ng-required="true">
                                         <img class="img-responsive img-thumbnail img-small50" ng-show="imageData.image_url" src="[[imageData.image_url]]" alt="[[imageData.image_url]]">
                                     </span>
                                 </div>
@@ -257,7 +275,7 @@
                                 <div class="form-group">
                                     <label>
                                         Name
-                                        <input type="text" class="form-control" ng-model="dish.dish"  ng-required="true" >
+                                        <input type="text" class="form-control" ng-model="dish.dish" ng-required="true">
                                     </label>
                                 </div>
 
@@ -265,13 +283,13 @@
                             <div class="col-sm-4">
                                 <label>
                                     Half Price
-                                    <input type="number" class="form-control" ng-model="dish.half_price"  ng-required="true" >
+                                    <input type="number" class="form-control" ng-model="dish.half_price" ng-required="true">
                                 </label>
                             </div>
                             <div class="col-sm-4">
                                 <label>
                                     Full Price
-                                    <input type="number" class="form-control" ng-model="dish.full_price" ng-required="true" >
+                                    <input type="number" class="form-control" ng-model="dish.full_price" ng-required="true">
                                 </label>
                             </div>
 
@@ -282,19 +300,19 @@
                                     Category
                                     <br>
                                 </label>
-                                <input class="form-control" ng-model="dish.dish_type"  ng-required="true" />
+                                <input class="form-control" ng-model="dish.dish_type" ng-required="true" />
                             </div>
                             <div class="col-sm-6">
                                 <label>
                                     Images
                                 </label>
-                                <input type="text" class="form-control" ng-model="dish.image" ng-required="true" >
+                                <input type="text" class="form-control" ng-model="dish.image" ng-required="true">
                             </div>
                         </div>
                         <label>
                             Description
                         </label>
-                        <textarea class="form-control" ng-model="dish.desc" ng-required="true" ></textarea>
+                        <textarea class="form-control" ng-model="dish.desc" ng-required="true"></textarea>
 
                     </div>
                     <button class="btn btn-default" ng-click="addMoreDish()">Add More Dish</button>
