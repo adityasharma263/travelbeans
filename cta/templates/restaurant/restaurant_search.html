@@ -1764,8 +1764,8 @@
                             <div>
                                 <h4>Price Comparison</h4>
                             </div>
-                            <a href="">
-                                <div class="panel" ng-repeat="restaurant in restaurants | orderBy: '-'">
+                            <a href="/restaurant/[[restaurant.id]]"  ng-repeat="restaurant in restaurants | orderBy: '-'">
+                                <div class="panel">
                                     <span ng-bind="restaurant.name+' -'">loading...</span>
                                     <strong ng-bind="restaurant.price">loading...</strong>
                                 </div>
