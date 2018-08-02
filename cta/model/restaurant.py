@@ -8,6 +8,8 @@ class Restaurant(Base):
 
     name = db.Column(db.String)
     rating = db.Column(db.DECIMAL, nullable=True)
+    nearest_metro_station = db.Column(db.String)
+    especially = db.Column(db.Text, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     city = db.Column(db.String, nullable=True)
@@ -72,7 +74,7 @@ class RestaurantAmenity(Base):
     city_view = db.Column(db.Boolean, default=False, nullable=True)
     brunch = db.Column(db.Boolean, default=False, nullable=True)
     sunday_roast = db.Column(db.Boolean, default=False, nullable=True)
-    gastro_Pub = db.Column(db.Boolean, default=False, nullable=True)
+    gastro_pub = db.Column(db.Boolean, default=False, nullable=True)
     beer = db.Column(db.Boolean, default=False, nullable=True)
     outdoor_seating = db.Column(db.Boolean, default=False, nullable=True)
     takeaway = db.Column(db.Boolean, default=False, nullable=True)
@@ -125,6 +127,8 @@ class Collection(Base):
     __tablename__ = 'collection'
 
     collection = db.Column(db.String, default=False, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
     image = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
@@ -139,7 +143,7 @@ class Dish(Base):
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     dish = db.Column(db.String, default=False, nullable=True)
-    dish_type = db.Column(db.Integer, nullable=True)
+    dish_type = db.Column(db.String, nullable=True)
     half_price = db.Column(db.Integer, nullable=True)
     full_price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
@@ -150,6 +154,7 @@ class Dish(Base):
 
     def __repr__(self):
         return '<dish %r>' % self.dish
+
 
 class RestaurantAssociation(Base):
     __tablename__ = 'restaurant_association'

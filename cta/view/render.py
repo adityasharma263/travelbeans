@@ -39,7 +39,8 @@ def admin():
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant():
-    return render_template("restaurant/restaurant.html")
+    collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
+    return render_template("restaurant/restaurant.html", collections=collections)
 
 
 @app.route("/restaurant/search", methods=['GET'])
@@ -48,9 +49,12 @@ def restaurant_search():
     args = request.args.to_dict()
     restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
     searched_value = ''
+    searched_key  = ''
     if args:
         searched_value = list(args.values())[0]
-    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value)
+        searched_key = list(args.keys())[0]
+    print(searched_key)
+    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value, searched_key=searched_key)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
@@ -68,7 +72,6 @@ def restaurant_search_sugg():
     args = request.args
     search_query = args.get("q")
     suggestion = requests.post(app.config["DOMAIN_URL"]+"/api/v1/restaurant/search", json={"search" : search_query}).json()
-    print(suggestion)
     return suggestion
 
 @app.route("/admin/restaurant", methods=["GET"])
@@ -92,7 +95,10 @@ def cab_admin():
 
 @app.route('/cab/list', methods=['GET'])
 def cab_list():
-    return render_template('cab/cab_list.html')   
+    cab_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/cab"
+    args = request.args
+    cab_data = requests.get(url=cab_api_url, params=args).json()
+    return render_template('cab/cab_list.html', cab_details=cab_data)
 
 
 @app.route('/cab/detail', methods=['GET'])

@@ -9673,7 +9673,7 @@ ul.search-tabs li.active a {
 }
 
 .detailed-logo figure {
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
     text-align: center;
     padding: 20px 0
 }

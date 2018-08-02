@@ -1466,7 +1466,7 @@
                                 <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion" ng-init="searchQueryValue = '{{ searched_value }}'">
                                     <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
                                         <li ng-repeat="searchResult in searchValue">
-                                            <a href="{{config['DOMAIN_URL']}}/restaurant/search?[[searchType]]=[[searchResult]]">
+                                            <a ng-cloak href="{{config['DOMAIN_URL']}}/restaurant/search?[[searchType]]=[[searchResult]]">
                                                 <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
                                             </a>
                                         </li>
@@ -1585,7 +1585,7 @@
                                 <div class="cuisine filter">
                                     <fieldset>
                                         <legend>Cuisine</legend>
-                                        <span ng-repeat="cuisine_name in cuisine">
+                                        <span ng-cloak ng-repeat="cuisine_name in cuisine">
                                             <input type="radio" name="cuisine" value="[[cuisine_name.cuisine]]" ng-click="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
                                             <br>
                                         </span>
@@ -1596,42 +1596,37 @@
                                     <fieldset>
                                         <legend>Price</legend>
 
-                                        <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price" >
+                                        <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price">
                                         <span>price range:
-                                            <span>[[filter.price]]</span>
+                                            <span ng-cloak>[[filter.price]]</span>
+                                        </span>
+                                        <span>
+                                            <button class="btn btn-secondary pull-right" ng-click="priceFilter(filter.price)">Apply</button>
                                         </span>
                                         <br>
                                     </fieldset>
                                 </div>
 
-                                <!-- <div class="dish-filter">
-                                    <h3>Dish</h3>
-                                    <span ng-repeat="dish_name in dish">
-                                        <input type="radio" name="dish" value="[[dish_name.dish]]" ng-click="getFilterRestaurant('dish',dish_name.dish)"> [[dish_name.dish]]
-                                        <br>
-                                    </span>
-                                </div> -->
-
                                 <div class="menu filter">
-                                    <fieldset >
-                                    <legend>Menu</legend>
-                                    <span ng-repeat="(menu_name, menu_value) in menu">
-                                        <input type="radio" name="menu" value="[[menu_name]]" ng-click="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
-                                        <br>
-                                    </span>
-                                </fieldset>
+                                    <fieldset>
+                                        <legend>Menu</legend>
+                                        <span ng-cloak ng-repeat="(menu_name, menu_value) in menu">
+                                            <input type="radio" name="menu" value="[[menu_name]]" ng-click="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
+                                            <br>
+                                        </span>
+                                    </fieldset>
                                 </div>
 
 
                                 <div class="book-a-party filter">
                                     <fieldset>
-                                    <legend>More filters</legend>
-                                    <span ng-repeat="(amenities_name, amenities_value) in amenities">
-                                        <input type="radio" name="amenities" value="[[amenities_name]]" ng-click="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
-                                        <br>
-                                    </span>
+                                        <legend>More filters</legend>
+                                        <span ng-repeat="(amenities_name, amenities_value) in amenities" ng-cloak>
+                                            <input type="radio" name="amenities" value="[[amenities_name]]" ng-click="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
+                                            <br>
+                                        </span>
 
-                                </fieldset>
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
@@ -1650,36 +1645,36 @@
                                         <div class="col-md-12" ng-repeat="restaurant in restaurants" ng-if="!serverSideRender">
                                             <article class="box">
                                                 <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
-                                                    <a class="hover-effect" title="" href="/restaurant/[[restaurant.id]]">
-                                                        <img class="img-responsive" alt="" ng-src="[[restaurant.images[0].image_url]]">
+                                                    <a class="hover-effect" href="/restaurant/[[restaurant.id]]">
+                                                        <img class="img-responsive restaurant-image" alt="" ng-src="[[restaurant.images[0].image_url]]">
                                                     </a>
                                                 </figure>
                                                 <div class="details">
 
                                                     <div class="pull-right rating-container">
-                                                        <strong>[[ restaurant.rating ]]
+                                                        <strong ng-cloak >[[ restaurant.rating ]]
                                                             <i class="fa fa-star" aria-hidden="true"></i>
                                                         </strong>
                                                     </div>
                                                     <h2 class="box-title" style="font-size:24px">
                                                         <strong>
-                                                            <a href="/restaurant/[[restaurant.id]]">[[ restaurant.name ]]</a>
+                                                            <a href="/restaurant/[[restaurant.id]]" ng-cloak>[[ restaurant.name ]]</a>
                                                         </strong>
                                                     </h2>
 
                                                     <div>
                                                         <small>
-                                                            <strong>[[ restaurant.city ]]</strong>
+                                                            <strong ng-cloak>[[ restaurant.city ]]</strong>
                                                         </small>
                                                     </div>
-                                                    <div class="restaurant-address">
+                                                    <div class="restaurant-address" ng-cloak>
                                                         [[restaurant.address]]
                                                     </div>
 
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cuisines : </span>
                                                         <span ng-repeat="association in restaurant.association">
-                                                            <strong>[[association.cuisines.cuisine]]
+                                                            <strong ng-cloak>[[association.cuisines.cuisine]]
                                                                 <span ng-if="$index != restaurant.association.length - 1">,</span>
                                                             </strong>
                                                         </span>
@@ -1688,7 +1683,7 @@
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cost for two : </span>
                                                         <span>
-                                                            <strong>₹[[ restaurant.price ]]</strong>
+                                                            <strong ng-cloak>₹[[ restaurant.price ]]</strong>
                                                         </span>
                                                         <!-- <span ng-repeat="association in restaurant.association">
                                                          <strong>[[association.cuisines.cuisine]] <span ng-if="$index != restaurant.association.length - 1" >,</span></strong>
@@ -1698,8 +1693,8 @@
                                                     <div class="btn-group btn-group-justified">
                                                         <a href="tel:[[restaurant.phone]]" class="btn btn-primary">
                                                             <i class="fa fa-phone" aria-hidden="true"></i> call</a>
-                                                        <a href="#" class="btn btn-default">
-                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</a>
+                                                        <div class="btn btn-default" ng-click="getMenubyId(restaurant.id, restaurant.name)">
+                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</div>
 
                                                     </div>
                                                 </div>
@@ -1761,8 +1756,8 @@
                                                     <div class="btn-group btn-group-justified">
                                                         <a href="tel:{{restaurant.phone}}" class="btn btn-primary">
                                                             <i class="fa fa-phone" aria-hidden="true"></i> call</a>
-                                                        <a href="#" class="btn btn-default">
-                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</a>
+                                                        <div class="btn btn-default" ng-click="getMenuById({{restaurant.id | safe}}, '{{restaurant.name | safe}}')">
+                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</div>
 
                                                     </div>
                                                 </div>
@@ -1780,6 +1775,44 @@
                                         </div>
 
                                     </div>
+
+                                    <div class="modal fade" id="view-menu-modal" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">[[restaurantName]]</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Item</th>
+                                                                <th>Half</th>
+                                                                <th>Full</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                           
+                                                            <tr ng-repeat="dish in restaurantDish">
+                                                                <td>[[dish.dish]]</td>
+                                                                <td>[[dish.half_price]]</td>
+                                                                <td>[[dish.full_price]]</td>
+                                                            </tr>
+                                                           
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
 

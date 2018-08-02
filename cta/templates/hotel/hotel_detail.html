@@ -3,6 +3,13 @@
 <html class=" js flexbox canvas canvastext webgl touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" jstcache="0"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div{font-weight:400}
 </style><link type="text/css" rel="stylesheet" href="/css/css">
 <style type="text/css">
+    #share-buttons img {
+        width: 35px;
+        padding: 5px;
+        border: 0;
+        box-shadow: 0;
+        display: inline;
+    }
 
 .addslide{
     background-color: pink;
@@ -716,12 +723,104 @@
             <div class="page-title-container">
                 <div class="container">
                     <div class="page-title pull-left">
-                        <h2 class="entry-title">Hotel Detailed</h2>
+                        <h2 class="entry-title">[[roomData.hotelData.name]]</h2>
                     </div>
-                    <ul class="breadcrumbs pull-right">
-                        <li><a href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#">HOME</a></li>
-                        <li class="active">Hotel Detailed</li>
+                    <ul style="cursor:pointer" class="breadcrumbs pull-right">
+                        <li><a ng-click="openHome()">HOME</a></li>
+                        <li class="active"><a ng-click="openHotel()">Hotel</a></li>
                     </ul>
+                </div>
+            </div>
+            <div class="modal fade" id="shareDetail" role="dialog">
+                <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title">Share Detail</h2>
+                    </div>
+                    <div class="modal-body">
+                            <div id="share-buttons">
+                                <!-- Buffer -->
+                                <a href="https://bufferapp.com/add?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
+                                </a>
+                                
+                                <!-- Digg -->
+                                <a href="http://www.digg.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
+                                </a>
+                                
+                                <!-- Email -->
+                                <a href="mailto:?Subject=travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://travel-beans.ap-south-1.elasticbeanstalk.com/">
+                                    <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+                                </a>
+                                
+                                <!-- Facebook -->
+                                <a href="http://www.facebook.com/sharer.php?u=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                                </a>
+                                
+                                <!-- Google+ -->
+                                <a href="https://plus.google.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                                </a>
+                                
+                                <!-- LinkedIn -->
+                                <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+                                </a>
+                                
+                                <!-- Pinterest -->
+                                <!-- <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+                                    <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
+                                </a> -->
+                                
+                                <!-- Print -->
+                                <a href="javascript:;" onclick="window.print()">
+                                    <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+                                </a>
+                                
+                                <!-- Reddit -->
+                                <a href="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;title=travel-beans.ap-south-1.elasticbeanstalk" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+                                </a>
+                                
+                                <!-- StumbleUpon-->
+                                <a href="http://www.stumbleupon.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
+                                </a>
+                                
+                                <!-- Tumblr-->
+                                <a href="http://www.tumblr.com/share/link?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
+                                </a>
+                                    
+                                <!-- Twitter -->
+                                <a href="https://twitter.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]&amp;text=travel-beans%20ap-south-1%20elasticbeanstalk.com&amp;hashtags=travel-beans.ap-south-1.elasticbeanstalk.com" target="_blank">
+                                    <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                                </a>
+                                <br>
+                                <div></div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" value="http://travel-beans.ap-south-1.elasticbeanstalk.com/hotel/[[roomData.id]]" id="myInput">
+                                </div>
+                                    <!-- <div class="tooltip"> -->
+                                <button class="btn btn-default" onclick="copyUrl()">
+                                    <span data-toggle="tooltip" title="Copy to clipboard!" id="myTooltip">
+                                        Copy text
+
+                                    </span>
+                                </button>
+                                <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                    
                 </div>
             </div>
             <section id="content" jstcache="0">
@@ -738,7 +837,7 @@
                                     
                                     <li class="pull-right"><a class="button btn-small red-bg white-color" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#">TRAVEL GUIDE</a></li>
                                     
-                                    <li class="pull-right"><a class="button btn-small green-bg white-color" href="http://www.soaptheme.net/html/travelo/hotel-detailed.html#">Share Details</a></li>
+                                    <li class="pull-right"><a class="button btn-small green-bg white-color" data-toggle="modal" data-target="#shareDetail" >Share Details</a></li>
                                 </ul>
                                 <div class="tab-content" jstcache="0">
                                     <div id="photos-tab" class="tab-pane fade active in">
@@ -746,7 +845,7 @@
                                             
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides slider" style="width: 4000%; transition-duration: 0.6s;">
-                                                <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style=" float: left; display: block;" ><img src="[[image.image_url]]" alt="" draggable="false"></li>
+                                                <li class="mySlides" ng-repeat="image in roomData.hotelData.images"  style=" float: left; display: block;" ><img class="img" src="[[image.image_url]]" alt="" draggable="false"></li>
                                             </ul>
                                         </div>
                                             <!-- <ol class="flex-control-nav flex-control-paging">
@@ -761,7 +860,7 @@
                                         <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#photos-tab .photo-gallery">
                                             
                                         <div  class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides " style="display:block; width: 3000%; ">
-                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images" class="" style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img class="img"  src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
+                                                <li class="demo w3-opacity w3-hover-opacity-off " ng-click="currentDiv($index+1)"  ng-repeat="image in roomData.hotelData.images"  style=" transition-duration: 0.6s; width: 70px; float: left; display: block; height: 70px; position: relative;"><img  class="img" src="[[image.image_url]]" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;"></li>
                                             </ul>
                                         </div>
                                         <!-- <ol class="flex-control-nav flex-control-paging">
@@ -833,8 +932,11 @@
                                     <li class="" ><a  data-ng-href="#hotel-moredeals" data-toggle="tab" aria-expanded="false">More Deals</a></li>
                                     <li ><a  href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
                                     <li ><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
+                                    <li ><a href="#hotel-Booking" data-toggle="tab">Book A Room</a></li>
+
 
                                 </ul>
+                               
                                 <div class="tab-content">
                                     <div class="tab-pane fade" id="hotel-description">
                                         <div class="intro table-wrapper full-width hidden-table-sms">
@@ -883,50 +985,43 @@
                                         <h2>Available Deals</h2>
                                         <div class="room-list listing-style3 hotel">
                                             <div ng-repeat="room in roomData.hotelData.rooms | limitTo:deallimit">
-                                                <article class="box card" ng-repeat="deal in room.deals " >
-                                                    <hr>
-
+                                                <article class="card" ng-repeat="deal in room.deals " >
                                                     <figure class="col-sm-4 col-md-3">
-                                                        <a class="hover-effect popup-gallery" href="" title=""><img width="230" height="161" src="[[deal.website.logo_image]]" alt=""></a>
+                                                        <a href="[[deal.hotel_url]]" target="_blank" title=""><img src="[[deal.website.logo_image]]" alt=""></a>
                                                     </figure>
-                                                    <div class="details col-xs-12 col-sm-8 col-md-9">
-                                                        <div>
-                                                            <div>
-                                                                <div class="box-title">
-                                                                    <h4 class="title" >[[room.other_room_type]]</h4>
-
-                                                                    <!-- <dl class="description">
-                                                                        <dt>Max Guests:</dt>
-                                                                        <dd>[[deal.dealsRoom.member.total_members]]</dd>
-                                                                    </dl> -->
+                                                    <div class="col-xs-12 col-sm-8 col-md-9">
+                                                            <div clas="row">
+                                                                <div class="col-md-3">
+                                                                    <p>[[room.other_room_type]]</p>
                                                                 </div>
-                                                                <!-- <div class="amenities">
-                                                                    <i class="soap-icon-wifi circle" ng-show="room.facilities.wifi"></i>
-                                                                    <i class="soap-icon-fitnessfacility circle" ng-show="room.facilities.wifi"></i> -->
-                                                                    <!-- <i class="soap-icon-fork circle" ng-show="room.facilities.free_evening_snacks"></i> -->
-                                                                    <!-- <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i> -->
-                                                                <!-- </div> -->
+                                                                <div class="col-md-2"><a href="[[deal.hotel_url]]" class="button btn-small  text-center">BOOK NOW</a></div>
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-2"><a ng-click="showDetail(deal.room)" class="button btn-small  text-center">View Detail</a></div>
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-1" >
+                                                                    <div class="price">
+                                                                        <small>PER/NIGHT</small>₹ [[deal.price]]
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="price-section">
-                                                                <span class="price" ><small>PER/NIGHT</small>₹ [[deal.price]]</span>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            
-                                                            <div class="action-section">
-                                                                <a href="[[deal.hotel_url]]" title="" class="button btn-small  text-center">BOOK NOW</a>
-                                                                <a ng-click="showDetail(deal.room)" title="" class="button btn-small  text-center">View Detail</a>
-                                                            </div>
-                                                        </div>
+                                                        <!-- </div> -->
                                                     </div>
                                                 </article>
+                                                <br>
                                             </div>
                                            
                                             <a href="" class="load-more button full-width btn-large fourty-space" ng-click="loadMoreDeals()">LOAD MORE ROOMS</a>
                                         </div>
                                         
                                     </div>
-  
+                                    <div id="hotel-Booking" class="tab-pane fade">
+                                        <h1>Call Hotel</h1>
+                                        <a href="tel:[[roomData.hotelData.phone]]">
+                                            <address class="contact-details">
+                                                <span class="contact-phone"><i class="soap-icon-phone"></i> [[roomData.hotelData.phone]]</span>
+                                            </address>
+                                        </a>
+                                    </div>
                                     <div class="tab-pane fade" id="hotel-availability">
                                         <form>
                                             <div class="update-search clearfix">
@@ -1002,37 +1097,35 @@
                                         <div class="room-list listing-style3 hotel">
                                             <article class="box" ng-repeat="room in roomData.hotelData.rooms | limitTo:limit">
                                                 <figure class="col-sm-4 col-md-3">
-                                                    <a class="hover-effect popup-gallery" href="" title=""><img width="230" height="161" src="[[room.image_url]]" alt=""></a>
+                                                    <a  href="" title=""><img width="230" height="161" src="[[room.image_url]]" alt=""></a>
                                                 </figure>
                                                 <div class="details col-xs-12 col-sm-8 col-md-9">
                                                     <div>
                                                         <div>
                                                             <div class="box-title">
-                                                                <h4 class="title" ng-if="[[room.room_type]]==1">Premium</h4>
-                                                                <h4 class="title" ng-if="[[room.room_type]]==2">Executive</h4>
-                                                                <h4 class="title" ng-if="[[room.room_type]]==3">Sweet</h4>
-                                                                <h4 class="title" ng-if="[[room.room_type]]==4">Deluxe</h4>
-                                                                <h4 class="title" ng-if="[[room.room_type]]==5">Super Deluxe</h4>
-                                                                <h4 class="title" ng-if="[[room.room_type]]==6">Presidential Sweet</h4>
+                                                                <h4 class="title" >[[room.other_room_type]]</h4>
+                                                              
 
                                                                 <dl class="description">
                                                                     <dt>Max Guests:</dt>
                                                                     <dd>[[room.member.total_members]]</dd>
                                                                 </dl>
                                                             </div>
-                                                            <div class="amenities">
-                                                                <i class="soap-icon-wifi circle" ng-show="room.facilities.wifi"></i>
-                                                                <!-- <i class="soap-icon-fitnessfacility circle" ng-show="room.facilities.wifi"></i> -->
-                                                                <i class="soap-icon-fork circle" ng-show="room.facilities.free_evening_snacks"></i>
-                                                                <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i>
-                                                            </div>
+                                                           
                                                         </div>
                                                         <div class="price-section">
                                                             <span class="price" ><small> Mini. PER/NIGHT</small>₹ [[(room.deals | orderBy:'price')[0].price]]</span>
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p>
+                                                         <div class="amenities">
+                                                            <i class="soap-icon-wifi circle" ng-show="room.facilities.wifi"></i>
+                                                            <i class="soap-icon-coffee circle" ng-show="room.facilities.electric_kettle"></i>
+                                                            <i class="soap-icon-breakfast circle"  ng-show="room.facilities.breakfast"></i>
+                                                            <i class="soap-icon-aircon circle"  ng-show="room.facilities.ac"></i>
+                                                            <i class="soap-icon-television circle" ng-show="room.facilities.tv"></i>
+                                                        </div>
+                                                        <!-- <p>Nunc cursus libero purus ac congue ar lorem cursus ut sed vitae pulvinar massa idend porta nequetiam elerisque mi id, consectetur adipi deese cing elit maus fringilla bibe endum.</p> -->
                                                         <div class="action-section">
                                                             <a href="" title="" class="button btn-small full-width text-center">BOOK NOW</a>
                                                         </div>
@@ -1151,7 +1244,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-wifi"></i>Wifi Accesible</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.tv">
-                                                <div class="icon-box style1"><i class="soap-icon-swimming"></i>Television</div>
+                                                <div class="icon-box style1"><i class="soap-icon-Television"></i>Television</div>
                                             </li>
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-television"></i>Central heating</div>
@@ -1166,7 +1259,7 @@
                                                 <div class="icon-box style1"><i class="soap-icon-fitnessfacility"></i>Bathroom with bathtub</div>
                                             </li> -->
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.bathroom_with_shower">
-                                                <div class="icon-box style1"><i class="soap-icon-fridge"></i>Bathroom with shower</div>
+                                                <div class="icon-box style1"><i class="soap-icon-shower"></i>Bathroom with shower</div>
                                             </li>
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.wifi">
                                                 <div class="icon-box style1"><i class="soap-icon-winebar"></i>Mini Bar</div>
@@ -1175,13 +1268,13 @@
                                                 <div class="icon-box style1"><i class="soap-icon-smoking"></i>Cosmetic mirror</div>
                                             </li> -->
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.desk">
-                                                <div class="icon-box style1"><i class="soap-icon-entertainment"></i>Desk</div>
+                                                <div class="icon-box style1"><i class="soap-icon-desk"></i>Desk</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.hairdryer">
-                                                <div class="icon-box style1"><i class="soap-icon-securevault"></i>Hairdryer</div>
+                                                <div class="icon-box style1"><i class="soap-icon-Hairdryer"></i>Hairdryer</div>
                                             </li>
                                             <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.room_safe">
-                                                <div class="icon-box style1"><i class="soap-icon-pickanddrop"></i>Room safe</div>
+                                                <div class="icon-box style1"><i class="soap-icon-roomsafe"></i>Room safe</div>
                                             </li>
                                             <!-- <li class="col-md-4 col-sm-6" ng-show="roomData.facilities.">
                                                 <div class="icon-box style1"><i class="soap-icon-phone"></i>Telephone</div>
@@ -1665,7 +1758,7 @@
                         <div class="sidebar col-md-3">
                             <article class="detailed-logo">
                                 <figure>
-                                    <img width="114" height="85" src="[[roomData.hotelData.images[0].image_url]]" alt="">
+                                    <img  src="[[roomData.hotelData.images[0].image_url]]" alt="">
                                 </figure>
                                 <div class="details">
                                     <h2 class="box-title">[[roomData.hotelData.name]]<small><i class="soap-icon-departure yellow-color"></i><span class="fourty-space">[[roomData.hotelData.city]]</span></small></h2>
@@ -2267,6 +2360,13 @@
     </div>
     <script type="text/javascript" src="/app.js"></script>
     <script>
+        function copyUrl() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        document.execCommand("copy");
+        }
+
+       
         function myMap() {
             var mapOptions = {
                 center: new google.maps.LatLng(53.2734, -7.77832031),
