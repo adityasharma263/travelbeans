@@ -940,22 +940,22 @@
                                                                               
                                                                                     <article class="box">
                                                                                         <figure>
-                                                                                            <a title="" href="#"><img alt="" src="[[cab.images.image_url]]"></a>
+                                                                                            <a title="" href="#"><img alt="" src="[[cab[0].images[0].image_url]]"></a>
                                                                                         </figure>
                                                                                         <div class="details">
                                                                                             <span class="price"><small>per day</small>$45.39</span>
                                                                                             <h4 class="box-title">Full Size<small>[[cab[0].car_name]]</small></h4>
                                                                                             <div class="amenities">
                                                                                                 <ul>
-                                                                                                    <li><i ng-show="[[cab[0].amenities.air_condition]]==true" class="fa fa-hdd circle"></i>AC</li>
+                                                                                                    <li ng-show="cab[0].amenities.air_condition"><i class="fa fa-hdd circle"></i>AC</li>
                                                                                                     <li><i class="fa fa-car circle"></i>[[cab[0].amenities.seater]]</li>
                                                                                                     <li><i class="fa fa-fill-drip circle"></i>[[cab[0].amenities.fuel_type]]</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.baggage_allowance]]==true"><i class="fa fa-suitcase circle"></i>BA</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.doorstep_delivery]]==true"><i class="fa fa-door-open circle"></i>DD</li>                                        
-                                                                                                    <li ng-if="[[cab[0].amenities.automatic]]==true"><i class="fa fa-cloud circle"></i>T</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.fuel]]==true"><i class="fa fa-tint circle"></i>WF</li>
-                                                                                                    <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.verified_driver]]==true"><i class="fa fa-id-card circle"></i>YES</li>
+                                                                                                    <!-- <li ng-show="cab[0].amenities.baggage_allowance"><i class="fa fa-suitcase circle"></i>BA</li> -->
+                                                                                                    <li ng-show="cab[0].amenities.doorstep_delivery"><i class="fa fa-door-open circle"></i>DD</li>                                        
+                                                                                                    <!-- <li ng-show="cab[0].amenities.automatic"><i class="fa fa-cloud circle"></i>T</li> -->
+                                                                                                    <li ng-show="cab[0].amenities.fuel"><i class="fa fa-tint circle"></i>WF</li>
+                                                                                                    <!-- <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li> -->
+                                                                                                    <!-- <li ng-show="cab[0].amenities.verified_driver"><i class="fa fa-id-card circle"></i>YES</li> -->
                                                                                                 </ul>
                                                                                             </div>
                                                                                              <div class="action row">
