@@ -15,6 +15,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
     
     <!-- Theme Styles -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -63,8 +65,8 @@
       <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
 </head>
-<body>
-    
+<body ng-app="comparetravel">
+    <div ng-controller="detailController">
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
@@ -938,18 +940,22 @@
                                                                               
                                                                                     <article class="box">
                                                                                         <figure>
-                                                                                            <a title="" href="#"><img alt="" src="images/cars/19.png"></a>
+                                                                                            <a title="" href="#"><img alt="" src="[[cab.images.image_url]]"></a>
                                                                                         </figure>
                                                                                         <div class="details">
                                                                                             <span class="price"><small>per day</small>$45.39</span>
-                                                                                            <h4 class="box-title">Full Size<small>Toyota camry</small></h4>
+                                                                                            <h4 class="box-title">Full Size<small>[[cab[0].car_name]]</small></h4>
                                                                                             <div class="amenities">
                                                                                                 <ul>
-                                                                                                    <li><i class="fa fa-hdd circle"></i>AC</li>
-                                                                                                    <li><i class="fa fa-car circle"></i>3</li>
-                                                                                                    <li><i class="fa fa-fill-drip circle"></i>f</li>
-                                                                                                    <li><i class="fa fa-suitcase circle"></i>BA</li>
-                                                                                                    <li><i class="fa fa-door-open circle"></i>DD</li>
+                                                                                                    <li><i ng-show="[[cab[0].amenities.air_condition]]==true" class="fa fa-hdd circle"></i>AC</li>
+                                                                                                    <li><i class="fa fa-car circle"></i>[[cab[0].amenities.seater]]</li>
+                                                                                                    <li><i class="fa fa-fill-drip circle"></i>[[cab[0].amenities.fuel_type]]</li>
+                                                                                                    <li ng-if="[[cab[0].amenities.baggage_allowance]]==true"><i class="fa fa-suitcase circle"></i>BA</li>
+                                                                                                    <li ng-if="[[cab[0].amenities.doorstep_delivery]]==true"><i class="fa fa-door-open circle"></i>DD</li>                                        
+                                                                                                    <li ng-if="[[cab[0].amenities.automatic]]==true"><i class="fa fa-cloud circle"></i>T</li>
+                                                                                                    <li ng-if="[[cab[0].amenities.fuel]]==true"><i class="fa fa-tint circle"></i>WF</li>
+                                                                                                    <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li>
+                                                                                                    <li ng-if="[[cab[0].amenities.verified_driver]]==true"><i class="fa fa-id-card circle"></i>YES</li>
                                                                                                 </ul>
                                                                                             </div>
                                                                                              <div class="action row">
@@ -1104,7 +1110,7 @@
             </div>
         </footer>
     </div>
-    
+</div>
 
     <!-- Javascript -->
     <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
@@ -1157,6 +1163,8 @@
             tjq(".max-price-label").html( "$" + tjq(".price-range").slider( "values", 1 ));
         });
     </script>
+
+<script type="text/javascript" src="/cab_js/app.js"></script>
 </body>
 </html>
 
