@@ -1094,8 +1094,12 @@ var i=1;
 if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
-    
-    var totalSlides=($scope.roomData.hotelData.images.length)/10;
+    if($scope.roomData.hotelData.images.length>10){
+     var totalSlides=($scope.roomData.hotelData.images.length)/10;
+    }
+    else{
+     var totalSlides=1;
+    }
     var onSlideImage = (slideIndex+1)%10
     // var lastSlides=totalSlides.toString().split(".")[1]+1;
     // if(onSlideImage==1){
@@ -1188,7 +1192,12 @@ if(window.screen.availWidth <=440){
 
   $( ".flex-next" ).click(function() {
     console.log(window.screen.availWidth);
-    var totalSlides=($scope.roomData.hotelData.images.length)/3;
+    if($scope.roomData.hotelData.images.length>3){
+      var totalSlides=($scope.roomData.hotelData.images.length)/3;
+     }
+     else{
+      var totalSlides=1;
+     }
     var onSlideImage = (slideIndex+1)%3
 
     if(onSlideImage==1){
