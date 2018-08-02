@@ -1021,22 +1021,25 @@
                     </div>
 
                     <h2>Special Delighted Collection</h2>
+                    <a href="/restaurant/collection" class="pull-right btn btn-primary" >see more</a>
 
                     <div class="row image-box style2 add-clearfix">
+                        {% for collection in collections %}
                         <div class="col-md-4">
                             <article class="box">
                                 <figure>
                                     <a title="" href="#">
-                                        <img width="270" height="192" alt="" src="/Resturants Padding_files/inflight-experience-features1.jpg">
+                                        <img width="270" height="192" alt="{{collection.collection}}" src="{{collection.image}}">
                                     </a>
                                 </figure>
                                 <div class="details">
-                                    <h4 class="box-title">Trending This Week</h4>
+                                    <h4 class="box-title">{{collection.collection}}</h4>
                                     <p>Our premium classy Resturants Trending .. </p>
                                 </div>
                             </article>
                         </div>
-                        <div class="col-md-4">
+                        {% endfor %}
+                        <!-- <div class="col-md-4">
                             <article class="box">
                                 <figure>
                                     <a title="" href="">
@@ -1061,7 +1064,7 @@
                                     <p>The Best Lavishing Newly .. </p>
                                 </div>
                             </article>
-                        </div>
+                        </div> -->
 
                     </div>
 

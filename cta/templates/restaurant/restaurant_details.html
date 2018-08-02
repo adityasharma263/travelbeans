@@ -77,20 +77,11 @@
     <link rel="stylesheet" type="text/css" href="/Detailed View_files/jquery.bxslider.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/Detailed View_files/flexslider.css" media="screen">
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
 
     <!-- Main Style -->
     <link id="main-style" rel="stylesheet" href="/Detailed View_files/style.css">
-    <!-- <script type="text/javascript">
-        var mainStyle = "style.css";
-        if (typeof localStorage != "undefined") {
-            var colorSkin = localStorage.getItem("colorSkin");
-            if (colorSkin != null) {
-                mainStyle = "style-" + colorSkin + ".css";
-            }
-        }
-        document.write('<link id="main-style" rel="stylesheet" href="css/' + mainStyle + '">');
-    </script> -->
     <link id="main-style" rel="stylesheet" href="/Detailed View_files/style-orange.css">
 
     <!-- Updated Styles -->
@@ -663,28 +654,7 @@
                                                 <li style="width: 870px; float: left; display: block;" class="clone" aria-hidden="true">
                                                     <img src="/Detailed View_files/1.jpg" alt="" draggable="false">
                                                 </li>
-                                                <div class="pos-ab mr15 mb15 image-stack">
-                                                    <div class="row">
-                                                        <div class="col-sm-4">
-                                                            <a href="#">
-                                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=1">
-                                                            </a>
-                                                        </div>
 
-                                                        <div class="col-sm-4">
-                                                            <a href="#">
-                                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=2">
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="col-sm-4">
-                                                            <a href="#">
-                                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=3">
-                                                            </a>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
                                             </ul>
                                         </div>
 
@@ -800,6 +770,44 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <span class="pos-ab mr15 mb15 image-stack ">
+
+
+                                        <a href="#" data-toggle="modal" data-target="#ambience-photo">
+                                            <div class="photo-container">
+                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=1">
+                                                <span style="margin-left: 10px;">
+                                                    <strong>Ambience</strong>
+                                                </span>
+                                            </div>
+                                        </a>
+
+
+
+                                        <a href="#">
+                                            <div class="photo-container">
+                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=2">
+                                                <span style="margin-left: 10px;">
+                                                    <strong>Food</strong>
+                                                </span>
+                                            </div>
+                                        </a>
+
+
+
+                                        <a href="#">
+                                            <div class="photo-container">
+
+                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=3">
+                                                <span style="margin-left: 10px;">
+                                                    <strong>Menu</strong>
+                                                </span>
+                                            </div>
+                                        </a>
+
+
+
+                                    </span>
                                 </div>
 
 
@@ -1159,7 +1167,7 @@
                                                 <div class="gm-iv-address-description">
                                                     <div jstcache="39" class="" style="display: none;"></div>
                                                     <div jstcache="40" class="" style="display: none;"></div>
-                                                    <div jstcache="41" class="gm-iv-profile-url" style="">
+                                                    <div jstcache="41" class="gm-iv-profile-url">
                                                         <a target="_blank" jstcache="42" href="http://maps.google.com/maps/contrib/107556897951100465158/photos">
                                                             <div jstcache="43" class="gm-iv-profile-link" jsan="7.gm-iv-profile-link">
                                                             </div>
@@ -1173,8 +1181,8 @@
                                                 <div jstcache="46" class="gm-iv-address-custom" style="display:none">
                                                     <p>Custom Imagery</p>
                                                 </div>
-                                                <div jstcache="47" class="gm-iv-vertical-separator" style=""></div>
-                                                <div jstcache="48" class="gm-iv-marker" style="">
+                                                <div jstcache="47" class="gm-iv-vertical-separator"></div>
+                                                <div jstcache="48" class="gm-iv-marker">
                                                     <a target="_blank" jstcache="49" href="https://www.google.com/maps/@48.85657705898899,2.3522607312700075,13z?hl=en-US&amp;gl=US">
                                                         <div class="gm-iv-marker-icon gm-iv-marker-icon-background"></div>
                                                     </a>
@@ -1316,7 +1324,7 @@
                                                 <div class="gm-iv-address-description">
                                                     <div jstcache="39" class="" style="display: none;"></div>
                                                     <div jstcache="40" class="" style="display: none;"></div>
-                                                    <div jstcache="41" class="gm-iv-profile-url" style="">
+                                                    <div jstcache="41" class="gm-iv-profile-url">
                                                         <a target="_blank" jstcache="42" href="http://maps.google.com/maps/contrib/117968437283177268289/photos">
                                                             <div jstcache="43" class="gm-iv-profile-link" jsan="7.gm-iv-profile-link">Virtual Shows &amp; Exhibitions</div>
                                                         </a>
@@ -1329,8 +1337,8 @@
                                                 <div jstcache="46" class="gm-iv-address-custom" style="display:none">
                                                     <p>Custom Imagery</p>
                                                 </div>
-                                                <div jstcache="47" class="gm-iv-vertical-separator" style=""></div>
-                                                <div jstcache="48" class="gm-iv-marker" style="">
+                                                <div jstcache="47" class="gm-iv-vertical-separator"></div>
+                                                <div jstcache="48" class="gm-iv-marker">
                                                     <a target="_blank" jstcache="49" href="https://www.google.com/maps/@48.856614,2.3522222000000284,13z?hl=en-US&amp;gl=US">
                                                         <div class="gm-iv-marker-icon gm-iv-marker-icon-background"></div>
                                                     </a>
@@ -1472,7 +1480,7 @@
                                                 <div class="gm-iv-address-description">
                                                     <div jstcache="39" class="" style="display: none;"></div>
                                                     <div jstcache="40" class="" style="display: none;"></div>
-                                                    <div jstcache="41" class="gm-iv-profile-url" style="">
+                                                    <div jstcache="41" class="gm-iv-profile-url">
                                                         <a target="_blank" jstcache="42" href="http://maps.google.com/maps/contrib/117968437283177268289/photos">
                                                             <div jstcache="43" class="gm-iv-profile-link" jsan="7.gm-iv-profile-link">Virtual Shows &amp; Exhibitions</div>
                                                         </a>
@@ -1485,8 +1493,8 @@
                                                 <div jstcache="46" class="gm-iv-address-custom" style="display:none">
                                                     <p>Custom Imagery</p>
                                                 </div>
-                                                <div jstcache="47" class="gm-iv-vertical-separator" style=""></div>
-                                                <div jstcache="48" class="gm-iv-marker" style="">
+                                                <div jstcache="47" class="gm-iv-vertical-separator"></div>
+                                                <div jstcache="48" class="gm-iv-marker">
                                                     <a target="_blank" jstcache="49" href="https://www.google.com/maps/@48.856614,2.3522222000000284,13z?hl=en-US&amp;gl=US">
                                                         <div class="gm-iv-marker-icon gm-iv-marker-icon-background"></div>
                                                     </a>
@@ -1719,11 +1727,47 @@
 
                             </div>
                         </div>
+                        <div class="modal fade " id="ambience-photo" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <!-- <button type="button" class="close pull-right" data-dismiss="modal">&times;</button> -->
+
+                                    <div class="modal-body">
+                                        <div class="ambience-slider">
+                                            <div>
+                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=2" alt="Test images">
+                                            </div>
+                                            <div>
+                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=3" alt="Test images">
+                                            </div>
+                                            <div>
+                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=4" alt="Test images">
+                                            </div>
+                                            <div>
+                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=5" alt="Test images">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
+
+
 
                         <div id="hotel-features" class="tab-container">
                             <ul class="tabs">
                                 <li class="">
-                                    <a href="#restaurant-description" data-toggle="tab" aria-expanded="false">Descrrp...</a>
+                                    <a href="#restaurant-description" data-toggle="tab" aria-expanded="false">Descrip...</a>
                                 </li>
                                 <li class="">
                                     <a href="#hotel-write-review" data-toggle="tab" aria-expanded="false">Order Online</a>
@@ -2145,7 +2189,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="hotel-things-todo">
 
-                                    <div class="container">
+                                    <div class="">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -2155,11 +2199,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for dish in restaurant_detail.association %}
+                                                {% for dish in restaurant_detail.dishes %}
                                                 <tr>
-                                                    <td>{{dish.dishes.dish}}</td>
-                                                    <td>{{dish.dishes.half_price}}</td>
-                                                    <td>{{dish.dishes.full_price}}</td>
+                                                    <td>{{dish.dish}}</td>
+                                                    <td>{{dish.half_price}}</td>
+                                                    <td>{{dish.full_price}}</td>
                                                 </tr>
                                                 {% endfor %}
                                             </tbody>
@@ -2466,6 +2510,7 @@
     <script type="text/javascript" src="/Detailed View_files/jquery-migrate-1.2.1.min.js.download"></script>
     <script type="text/javascript" src="/Detailed View_files/jquery.placeholder.js.download"></script>
     <script type="text/javascript" src="/Detailed View_files/jquery-ui.1.10.4.min.js.download"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
     <!-- Twitter Bootstrap -->
     <script type="text/javascript" src="/Detailed View_files/bootstrap.js.download"></script>
@@ -2538,7 +2583,11 @@
 
                     }
                 });
+
             });
+
+            
+            
         });
 
         tjq('a[href="#map-tab"]').on('shown.bs.tab', function (e) {
@@ -2576,6 +2625,17 @@
             map.setStreetView(panorama);
         }
         google.maps.event.addDomListener(window, 'load', initialize);
+
+
+        tjq(function () {
+            tjq('.ambience-slider').bxSlider({
+                auto: true,
+                autoControls: true,
+                stopAutoOnClick: true,
+                pager: true,
+                slideWidth: 500
+            });
+        });
     </script>
 
 
@@ -2588,7 +2648,7 @@
                     <img alt="" src="/Detailed View_files/logo.png">
                 </a>
             </h1>
-            <ul class="menu" style="">
+            <ul class="menu">
                 <li class="menu-item-has-children">
                     <a href="http://www.soaptheme.net/html/travelo/index.html">Home</a>
                     <ul>

@@ -39,8 +39,13 @@ def admin():
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant():
-    return render_template("restaurant/restaurant.html")
+    collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
+    return render_template("restaurant/restaurant.html", collections=collections)
 
+@app.route("/restaurant/collection", methods=["GET"])
+def restaurant_collection():
+    return render_template("restaurant/collections.html")
+    pass
 
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
@@ -52,7 +57,7 @@ def restaurant_search():
     if args:
         searched_value = list(args.values())[0]
         searched_key = list(args.keys())[0]
-    print(searched_key)
+    print(restaurant_data)
     return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value, searched_key=searched_key)
 
 
