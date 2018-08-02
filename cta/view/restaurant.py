@@ -265,6 +265,7 @@ def restaurant_api():
                     RestaurantAssociation(**association_obj).save()
         return jsonify({'result': {'restaurant': restaurant}, 'message': "Success", 'error': False})
 
+
 @app.route('/api/v1/restaurant/<int:id>', methods=['PUT', 'DELETE'])
 def restaurant_id(id):
     if request.method == 'PUT':
