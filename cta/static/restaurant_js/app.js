@@ -65,6 +65,23 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         console.log(err);
       });
 
+      $scope.getMenubyId = function (restaurantId, restaurantName) {
+        console.log("getMenubyId.exe")
+        $scope.restaurantName = restaurantName;
+  
+        $http.get("/api/v1/restaurant/dish?restaurant_id=" + restaurantId)
+          .then(function (res) {
+            console.log("rest id =", res.data);
+            $scope.restaurantDish = res.data.result.dish;
+          },
+          function (err) {
+            console.log(err);
+          })
+  
+  
+  
+      }
+
 
     $http.get("/api/v1/restaurant")
       .then(function (res) {
@@ -251,16 +268,6 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       }]
     };
 
-    // $scope.association = [{
-    //   "collection": {
-
-    //   },
-    //   "cuisine": {
-
-    //   }
-    // }];
-
-
     $scope.image_types = {
       1: "Ambience",
       2: "Food",
@@ -350,21 +357,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     }
 
-    $scope.getMenubyId = function (restaurantId, restaurantName) {
-
-      $scope.restaurantName = restaurantName;
-
-      $http.get("/api/v1/restaurant/dish?restaurant_id=" + restaurantId)
-        .then(function (res) {
-          $scope.restaurantDish = res.data.result.dish;
-         },
-         function (err) {
-           console.log(err);
-          })
-
-
-
-    }
+    
 
 
     $scope.addMoreRestaurantImages = function () {

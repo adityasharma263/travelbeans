@@ -39,7 +39,8 @@ def admin():
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant():
-    return render_template("restaurant/restaurant.html")
+    collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
+    return render_template("restaurant/restaurant.html", collections=collections)
 
 
 @app.route("/restaurant/search", methods=['GET'])

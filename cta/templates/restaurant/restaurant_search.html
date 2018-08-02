@@ -1466,7 +1466,7 @@
                                 <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion" ng-init="searchQueryValue = '{{ searched_value }}'">
                                     <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
                                         <li ng-repeat="searchResult in searchValue">
-                                            <a href="{{config['DOMAIN_URL']}}/restaurant/search?[[searchType]]=[[searchResult]]">
+                                            <a ng-cloak href="{{config['DOMAIN_URL']}}/restaurant/search?[[searchType]]=[[searchResult]]">
                                                 <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
                                             </a>
                                         </li>
@@ -1585,7 +1585,7 @@
                                 <div class="cuisine filter">
                                     <fieldset>
                                         <legend>Cuisine</legend>
-                                        <span ng-repeat="cuisine_name in cuisine">
+                                        <span ng-cloak ng-repeat="cuisine_name in cuisine">
                                             <input type="radio" name="cuisine" value="[[cuisine_name.cuisine]]" ng-click="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
                                             <br>
                                         </span>
@@ -1598,7 +1598,7 @@
 
                                         <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price">
                                         <span>price range:
-                                            <span>[[filter.price]]</span>
+                                            <span ng-cloak>[[filter.price]]</span>
                                         </span>
                                         <span>
                                             <button class="btn btn-secondary pull-right" ng-click="priceFilter(filter.price)">Apply</button>
@@ -1610,7 +1610,7 @@
                                 <div class="menu filter">
                                     <fieldset>
                                         <legend>Menu</legend>
-                                        <span ng-repeat="(menu_name, menu_value) in menu">
+                                        <span ng-cloak ng-repeat="(menu_name, menu_value) in menu">
                                             <input type="radio" name="menu" value="[[menu_name]]" ng-click="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
                                             <br>
                                         </span>
@@ -1621,7 +1621,7 @@
                                 <div class="book-a-party filter">
                                     <fieldset>
                                         <legend>More filters</legend>
-                                        <span ng-repeat="(amenities_name, amenities_value) in amenities">
+                                        <span ng-repeat="(amenities_name, amenities_value) in amenities" ng-cloak>
                                             <input type="radio" name="amenities" value="[[amenities_name]]" ng-click="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
                                             <br>
                                         </span>
@@ -1693,8 +1693,8 @@
                                                     <div class="btn-group btn-group-justified">
                                                         <a href="tel:[[restaurant.phone]]" class="btn btn-primary">
                                                             <i class="fa fa-phone" aria-hidden="true"></i> call</a>
-                                                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#view-menu-modal" ng-click="getMenubyId(restaurant.id, restaurant.name)">
-                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</a>
+                                                        <div class="btn btn-default" ng-click="getMenubyId(restaurant.id, restaurant.name)">
+                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</div>
 
                                                     </div>
                                                 </div>
@@ -1756,8 +1756,8 @@
                                                     <div class="btn-group btn-group-justified">
                                                         <a href="tel:{{restaurant.phone}}" class="btn btn-primary">
                                                             <i class="fa fa-phone" aria-hidden="true"></i> call</a>
-                                                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#view-menu-modal" data-server-side="true" ng-click="getMenubyId({{restaurant.id}},'{{ restaurant.name}}')">
-                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</a>
+                                                        <div class="btn btn-default" ng-click="getMenuById({{restaurant.id | safe}}, '{{restaurant.name | safe}}')">
+                                                            <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</div>
 
                                                     </div>
                                                 </div>
