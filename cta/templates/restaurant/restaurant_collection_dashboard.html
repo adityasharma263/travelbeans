@@ -1,0 +1,56 @@
+{% extends '/restaurant/components/dashboard_header.html' %} {% block controller%}dashboardCollectionController{% endblock %} {%
+    block content %}
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Edit Colection</h3>
+            
+
+            <label>Collection name</label>
+            <input type="text" ng-model="collectionData.collection" class="form-control">
+            <label>Image</label>
+            <input type="text" ng-model="collectionData.image" class="form-control">
+            <label>Short description</label>
+            <input type="text" ng-model="collectionData.desc" class="form-control">
+            <label>featured on home page?</label>
+            <input type="checkbox" ng-model="collectionData.featured" ng-true-value="true" ng-false-value="false">
+            <br>
+    
+                
+    
+            <button class="btn btn-default" ng-disabled="disable_update" ng-click="update()">Update</button>
+    
+        </div>
+    
+        <div class="col-sm-6">
+            <h3>Choose collection to update or delete.</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="search" placeholder="search...">
+            </div>
+    
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="collection in collections | filter: search">
+                    <div class="thumbnail">
+                        <img ng-src="[[collection.image]]" alt="">
+                        <div class="caption">
+                            <h4>[[collection.collection]]</h4>
+                            <p>
+                                <div class="label label-success" ng-if="collection.featured">featured</div>
+                                <span>
+                                    <span>[[collection.desc]]</span>
+                                </span>
+                            </p>
+                            <p>
+                                <button class="btn btn-primary" role="button" ng-click="$parent.editCollection(collection)">Edit</button>
+                                <button class="btn btn-default" role="button" ng-click="deleteCollection()">Delete</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    
+    {% endblock %}

@@ -45,7 +45,6 @@ def restaurant():
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
     return render_template("restaurant/collections.html")
-    pass
 
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
@@ -80,6 +79,35 @@ def restaurant_search_sugg():
 @app.route("/admin/restaurant", methods=["GET"])
 def admin_restaurant():
     return render_template("restaurant/restaurant_dashboard.html")
+
+
+@app.route("/admin/restaurant/amenity", methods=['GET'])
+def admin_amenity():
+    return render_template("restaurant/restaurant_amenity_dashboard.html")
+    
+
+@app.route("/admin/restaurant/dish", methods=['GET'])
+def admin_dish():
+    return render_template("restaurant/restaurant_dish_dashboard.html")
+    
+
+@app.route("/admin/restaurant/collection", methods=['GET'])
+def admin_collection():
+    return render_template("restaurant/restaurant_collection_dashboard.html")
+    
+
+@app.route("/admin/restaurant/cuisine", methods=['GET'])
+def admin_cuisine():
+    return render_template("restaurant/restaurant_cuisine_dashboard.html")
+
+@app.route("/admin/restaurant/menu", methods=['GET'])
+def admin_menu():
+    return render_template("restaurant/restaurant_menu_dashboard.html")
+
+@app.route("/admin/restaurant/images", methods=['GET'])
+def admin_images():
+    return render_template("restaurant/restaurant_images_dashboard.html")
+
 
 
 
