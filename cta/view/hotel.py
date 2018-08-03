@@ -83,6 +83,7 @@ def hotel_api():
         "name": hotel.get("name", None),
         "city": hotel.get("city", None),
         "category": hotel.get("category", None),
+        "phone": hotel.get("phone", None),
         'rating': hotel.get("rating", None),
         "desc": hotel.get("desc", None),
         "address": hotel.get("address", None),
@@ -145,12 +146,12 @@ def hotel_id(id):
             hotels = Hotel.query.filter_by(id=id).first()
             result = HotelSchema(many=False).dump(hotels)
             return jsonify({'result': result.data, "status": "Success", 'error': False})
-    else:
+    elif request.method == 'DELETE':
         hotel = Hotel.query.filter_by(id=id).first()
         if not hotel:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        hotel.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Hotel.delete_db(hotel)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/room', methods=['GET', 'POST'])
@@ -246,9 +247,9 @@ def room_id(id):
     else:
         rooms = Room.query.filter_by(id=id).first()
         if not rooms:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Room.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Room.delete_db(rooms)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/amenity', methods=['GET', 'POST'])
@@ -279,11 +280,11 @@ def amenity_id(id):
             result = AmenitySchema(many=False).dump(s)
             return jsonify({'result': result.data, "status": "Success", 'error': False})
     else:
-        amenities= Amenity.query.filter_by(id=id).first()
+        amenities = Amenity.query.filter_by(id=id).first()
         if not amenities:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Amenity.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Amenity.delete_db(amenities)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 
@@ -317,9 +318,9 @@ def image_id(id):
     else:
         images = Image.query.filter_by(id=id).first()
         if not images:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Image.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Image.delete_db(images)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/member', methods=['GET', 'POST'])
@@ -352,9 +353,9 @@ def member_id(id):
     else:
         members = Member.query.filter_by(id=id).first()
         if not members:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Member.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Member.delete_db(members)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 @app.route('/api/v1/facility', methods=['GET', 'POST'])
 def facility_api():
@@ -387,9 +388,9 @@ def facility_id(id):
     else:
         data = Facility.query.filter_by(id=id).first()
         if not data:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Facility.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Facility.delete_db(data)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/website', methods=['GET', 'POST'])
@@ -493,9 +494,9 @@ def deal_id(id):
     else:
         data = Deal.query.filter_by(id=id).first()
         if not data:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Deal.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Deal.delete_db(data)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/hotel/search', methods=['GET', 'POST'])

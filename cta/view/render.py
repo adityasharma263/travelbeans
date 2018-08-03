@@ -76,6 +76,7 @@ def restaurant_search_sugg():
     suggestion = requests.post(app.config["DOMAIN_URL"]+"/api/v1/restaurant/search", json={"search" : search_query}).json()
     return suggestion
 
+
 @app.route("/admin/restaurant", methods=["GET"])
 def admin_restaurant():
     return render_template("restaurant/restaurant_dashboard.html")
