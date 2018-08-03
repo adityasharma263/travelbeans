@@ -156,3 +156,17 @@ hr{
 .restaurant-image{
     background: url("../Resturants_files/loader.gif") no-repeat;
 }
+
+.fs20{
+    font-size: 20px;
+}
+
+.select-location{
+    /* padding: 10px; */
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.mt20{
+    margin-top: 20px;
+}

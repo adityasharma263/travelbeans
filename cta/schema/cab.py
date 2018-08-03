@@ -28,7 +28,15 @@ class CabImageSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at')
 
 
+class CabBookingSchema(ma.ModelSchema):
+
+    class Meta:
+        model = CabBooking
+        exclude = ('updated_at', 'created_at')
+
+
 class CabDealSchema(ma.ModelSchema):
+    booking = ma.Nested(CabBookingSchema, many=False)
     website = ma.Nested(CabWebsiteSchema, many=False)
     tax = ma.Nested(CabTaxSchema, many=False)
 
@@ -37,16 +45,8 @@ class CabDealSchema(ma.ModelSchema):
         exclude = ('updated_at', 'created_at')
 
 
-class CabBookingSchema(ma.ModelSchema):
-    deals = ma.Nested(CabDealSchema, many=True)
-
-    class Meta:
-        model = CabBooking
-        exclude = ('updated_at', 'created_at')
-
-
 class CabSchema(ma.ModelSchema):
-    bookings = ma.Nested(CabBookingSchema, many=True)
+    deals = ma.Nested(CabDealSchema, many=True)
     amenities = ma.Nested(CabAmenitySchema, many=False)
     images = ma.Nested(CabImageSchema, many=True)
 
