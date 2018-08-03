@@ -57,7 +57,6 @@ def restaurant_search():
     if args:
         searched_value = list(args.values())[0]
         searched_key = list(args.keys())[0]
-    print(restaurant_data)
     return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value, searched_key=searched_key)
 
 
