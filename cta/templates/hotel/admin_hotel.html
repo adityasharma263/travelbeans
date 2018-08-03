@@ -512,36 +512,78 @@
                             
                     </div>
                     <div class="container" style="z-index: 10000000;">
-                            <!-- The Modal -->
-                            <div class="modal" id="addImagesModal">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
+                        <!-- The Modal -->
+                        <div class="modal" id="addImagesModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Images</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                 
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                    <h4 class="modal-title">Add Images</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <label class="control-label " for="image">Image Url:   </label>
+                                    <div >          
+                                        <input  class="form-control" id="name" ng-model="hotelsImg.image_url" type="text" required>
                                     </div>
-                                    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <label class="control-label " for="image">Image Url:   </label>
-                                        <div >          
-                                            <input  class="form-control" id="name" ng-model="hotelsImg.image_url" type="text" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" ng-click="addHotelImages()">Add Image</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-                                    
                                 </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="addHotelImages()">Add Image</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
+                                
                             </div>
-                                
+                            </div>
                         </div>
+                            
+                    </div>
+                    <div class="container" style="z-index: 10000000;">
+                        <!-- The Modal -->
+                        <div class="modal" id="addDealModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Deal</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    
+                                    <label class="control-label "  for="wname">Website name:</label>
+                                    <div>        
+                                        <select class="form-control" ng-model="hotelsDeal.website_id">
+                                            <!-- <option  value="[[deal.website.id]]" ng-selected="true">[[deal.website.website]]</option> -->
+                                            <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
+
+                                        </select>  
+                                    </div>
+                                    <label class="control-label "  for="url">Hotel Url: </label>
+                                    <div >          
+                                        <input  class="form-control" id="name"  ng-model="hotelsDeal.hotel_url" type="text" required>
+                                    </div>
+                                    <label class="control-label " for="price">Price ₹: </label>
+                                    <div >          
+                                        <input  class="form-control" id="name"  type="number" ng-model="hotelsDeal.price" required>
+                                    </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="addHotelDeal()">Add Deal</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="container" style="z-index: 10000000;">
                         <!-- The Modal -->
                         <div class="modal" id="imgModal">
@@ -1090,6 +1132,9 @@
 
                         </div>
                         <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-2">
+                                <button class="btn" data-toggle="modal" data-target="#addDealModal"  >Add deals</button>
+                            </div>
                             <div class="col-sm-offset-8 col-sm-8">
                                 <button class="btn" data-toggle="modal" data-target="#facilitiesModal"  >Edit Facilities</button>
                                 <button class="btn" data-toggle="modal" data-target="#membersModal"  >Edit Members</button>

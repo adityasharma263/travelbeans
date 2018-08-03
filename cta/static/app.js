@@ -831,6 +831,14 @@ loadDeals=function(){
     createToast("'Image Added!!'","green");
     
   }
+  $scope.addHotelDeal=function(){
+    $scope.hotelsDeal.room_id=$scope.rooms.id;
+    // $scope.roomDeals.push($scope.hotelsDeal); //to show added deal
+    sendPostCall('/api/v1/deal', $scope.hotelsDeal)
+    // $scope.hotelsDeal={};
+    createToast("'Deal Added!!'","green");
+    
+  }
   $scope.showAddRoom=function(){
     $scope.showRoomDetail=false;
     $scope.addRoomDetail=true;
