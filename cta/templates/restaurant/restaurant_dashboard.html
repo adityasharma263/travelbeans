@@ -171,29 +171,34 @@
                     </fieldset>
 
                     <div ng-repeat="association in restaurantData.association">
-
+                        <button class="btn btn-danger pull-right" ng-click="restaurantData.association.splice($index,1);" ng-if="$index != 0">remove</button>
+                        
                         <div class="row">
 
                             <div class="col-sm-6">
 
                                 <div class="form-group">
                                     <h4>Collection</h4>
-                                    <div ng-show="!addNewCollection">
+                                    <div ng-show="!$parent.addNewCollection[$index]">
                                         <select ng-model="association.collections.collection_id">
                                             <option value disabled selected> -- Select Collection --</option>
-                                            <!-- <option value ng-click="addNewCollection = true">Add new collection</option> -->
-                                            <option value="[[collectionData.id]]" ng-repeat=" collectionData in  collection">[[collectionData.collection]]</option>
+                                
+                                            <option value="[[collectionData.id]]" ng-repeat="collectionData in collection">[[collectionData.collection]]</option>
                                         </select>
                                         or
-                                        <button class="btn btn-default" ng-click="$parent.addNewCollection = true">Add Collection</button>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCollection[$index] = true">Add Collection</button>
                                     </div>
-                                    <div ng-show="addNewCollection">
+                                    <div ng-show="$parent.addNewCollection[$index]">
                                         <label>Collection name</label>
                                         <input type="text" ng-model="association.collections.collection" class="form-control">
                                         <label>Image</label>
                                         <input type="text" ng-model="association.collections.image" class="form-control">
-
-                                        <button class="btn btn-default" ng-click="$parent.addNewCollection= false;">cancel</button>
+                                        <label>Short description</label>
+                                        <input type="text" ng-model="association.collections.desc"  class="form-control">
+                                        <label>featured on home page?</label>
+                                        <input type="checkbox" ng-model="association.collections.fatured" ng-true-value="true" ng-false-value="false">
+                                        <br>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCollection[$index] = false;">cancel</button>
 
                                     </div>
                                 </div>
@@ -203,24 +208,27 @@
                                 <div class="form-group">
 
                                     <h4>Cuisine</h4>
-                                    <div ng-if="!addNewCuisine">
+                                    <div ng-if="!addNewCuisine[$index]">
                                         <select ng-model="association.cuisines.cuisine_id">
                                             <option value disabled selected> -- Select Cuisine --</option>
                                             <option value="[[cuisineData.id]]" ng-repeat=" cuisineData in  cuisine">[[cuisineData.cuisine]]</option>
                                         </select>
                                         or
-                                        <button class="btn btn-default" ng-click="$parent.addNewCuisine = true">Add Cuisine</button>
+                                        <br>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCuisine[$index] = true">Add Cuisine</button>
                                     </div>
 
-                                    <div ng-if="addNewCuisine">
+                                    <div ng-if="addNewCuisine[$index]">
                                         <label>Cuisine name</label>
                                         <input type="text" ng-model="association.cuisines.cuisine" class="form-control">
-                                        <button class="btn btn-default" ng-click="$parent.addNewCuisine = false;">cancel</button>
+                                        <button class="btn btn-default" ng-click="$parent.addNewCuisine[$index] = false;">cancel</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <buttton class="btn btn-default" ng-click="addMoreAssociation()">Add more association</buttton>
 
                     <fieldset>
                         <h4>Menu</h4>

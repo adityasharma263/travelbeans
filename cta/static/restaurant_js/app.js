@@ -83,10 +83,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     }
 
 
-    $http.get("/api/v1/restaurant"+window.location.search)
+    $http.get("/api/v1/restaurant" + window.location.search)
       .then(function (res) {
         var allRestaurants = $scope.restaurants = res.data.result.restaurants;
-        console.log("$scope.restaurants =",$scope.restaurants);
+        console.log("$scope.restaurants =", $scope.restaurants);
         $scope.min_price = Math.min.apply(Math, allRestaurants.map(function (item) { return item.price; }));
         $scope.max_price = Math.max.apply(Math, allRestaurants.map(function (item) { return item.price; }));
         $scope.price_filter = $scope.max_price;
@@ -373,6 +373,21 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     function getQueryStringValue(key) {
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+
+    $scope.addMoreAssociation = function () {
+      var addAssociation = {
+        "collections": {
+
+        },
+        "cuisines": {
+
+        }
+      }
+      $scope.restaurantData.association.push(addAssociation);
+
+
+
     }
 
 
