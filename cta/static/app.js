@@ -783,6 +783,22 @@ loadDeals=function(){
     createToast("Deal Updated!!!","green");
     
   }
+  $scope.deleteHotel=function(data){
+    sendDeleteCall('/api/v1/hotel/'+data.id,data);
+    createToast("Hotel Deleted!!!","green");
+  }
+  $scope.deleteImage=function(data){
+    sendDeleteCall('/api/v1/image/'+data.id,data);
+    createToast("Image Deleted!!!","green");
+  }
+  $scope.deleteRoom=function(data){
+    sendDeleteCall('/api/v1/room/'+data.id,data);
+    createToast("Room Deleted!!!","green");
+  }
+  $scope.deleteDeals=function(data){
+    sendDeleteCall('/api/v1/deal/'+data.id,data);
+    createToast("Deal Deleted!!!","green");
+  }
   $scope.addRoom=function(){
 
     $scope.room.hotel_id = $scope.hotels.id;
@@ -855,7 +871,25 @@ loadDeals=function(){
       })
     
   }
+  var sendDeleteCall = function(url, data) {
+    console.log(data);
+    
+    $http({
+      method: 'DELETE',
+      url: url,
+      data: data
+    }).then(function (res) {
+      console.log(res);
+      
+      // createToast("'hotel successfully created!!!'","green");
 
+      },
+      // failed callback
+      function (req) {
+        createToast("'Something went wrong!!!'","red");
+      })
+    
+  }
   var sendPostCall = function(url, data) {
     console.log(data);
     

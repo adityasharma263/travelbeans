@@ -534,6 +534,7 @@
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-success" ng-click="updateImage()" data-dismiss="modal">Update Image</button>
+                                <button type="button" class="btn btn-success" ng-click="deleteImage(imageData)" data-dismiss="modal">Delete Image</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                                 
@@ -807,15 +808,19 @@
                         <label class="control-label col-sm-2"for="name">Search Hotel (for Update):</label>
                         <div class="col-sm-10">
                             <input class="form-control" data-toggle="dropdown" ng-model="searchHotel" placeholder="enter search term here">
-                                <div  class="container" style="max-height: 500px;overflow-y: scroll;">
+                                <div  class="container col-sm-12" style="max-height: 500px;overflow-y: scroll;">
                                     <div ng-repeat="data in hotelsData  | filter : searchHotel" >
                                     [[data.name]] 
                                     <!-- <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Amenities</button> -->
                                     <button class="btn" ng-click="editHotel(data)">Edit Hotel</button>
+                                    <button class="btn" ng-click="deleteHotel(data)">Delete Hotel</button>
+
 
                                     <hr>
                                     </div>
                                 </div>
+                                <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelsData | filter:searchHotel).length == 0">No Results Found</span>
+
     
                         </div>
                     </div>
@@ -851,7 +856,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2"  for="desc">Description: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required>
+                                <textarea  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -861,12 +866,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update It): </label>
+                            <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update or Delete): </label>
                             <div style="max-height: 100px; overflow-y: scroll;" class="col-sm-10">
                                 <div ng-repeat="img in hotelImages" class="col-sm-2">          
                                     <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img,$index)" src="[[img.image_url]]" >
                                     <div></div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-defalut" >Add Images</button>
                             </div>
                         </div>
                        
@@ -925,21 +935,36 @@
                         </div>
                         <h3>Rooms Deatils</h3>
                         <div class="form-group">
-                            <div class="col-sm-2"></div>
+                            <label class="control-label col-sm-2"for="name">Search Room (for Update):</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchRoom" placeholder="enter search term here">
+                                    <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
+                                        <div ng-repeat="data in hotelRooms | filter:searchRoom">
+                                            <span class="title">[[data.other_room_type]]</span>
+                                            
+                                            <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
+                                            <button class="btn" ng-click="deleteRoom(data)">Delete Room</button>
+                                            
+                                            <hr>
+                                        </div>
+
+                                    </div>
+                                    <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelRooms | filter:searchRoom).length == 0">No Results Found</span>
+
+
+        
+                            </div>
+                            <!-- <div class="col-sm-2"></div>
                             <div class="col-sm-10">
                                 <div class="container">
                                     <div ng-repeat="data in hotelRooms">
-                                        <span class="title" ng-if="[[data.room_type]]==1">Premium</span>
-                                        <span class="title" ng-if="[[data.room_type]]==2">Executive</span>
-                                        <span class="title" ng-if="[[data.room_type]]==3">Sweet</span>
-                                        <span class="title" ng-if="[[data.room_type]]==4">Deluxe</span>
-                                        <span class="title" ng-if="[[data.room_type]]==5">Super Deluxe</span>
-                                        <span class="title" ng-if="[[data.room_type]]==6">Presidential Sweet</span>
+                                        <span class="title">[[data.other_room_type]]</span>
+                                       
                                     <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
                                     <hr>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     </form>
@@ -1017,13 +1042,17 @@
                             <br>
                             <label class="control-label"for="name">Search deals (for Update):</label>
                             <div >
-                                <input class="form-control" data-toggle="dropdown" ng-model="searchDeals" placeholder="enter search term here">
-                                    <div  class="container" style="max-height: 100px;overflow-y: scroll;">
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchDeals" placeholder="enter search term here" type="number">
+                                    <div  class="container col-sm-12" style="max-height: 100px;overflow-y: scroll;">
                                         <div style="margin-bottom: 5px;" ng-repeat="data in roomDeals  | filter : searchDeals" >
                                             Price ₹: [[data.price]] 
                                             <button class="btn" data-toggle="modal" data-target="#dealModal" ng-click="editDealData(data)">Edit deal</button>
+                                            <button type="button" class="btn btn-defalut" ng-click="deleteDeal(data)">Delete Deal</button>
+
                                             <br>
                                         </div>
+                                        <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(roomDeals | filter:searchDeals).length == 0">No Results Found</span>
+
                                     </div>
         
                             </div>
@@ -1063,13 +1092,13 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="address">Phone No.: </label>
                                 <div class="col-sm-10">          
-                                    <input  class="form-control"  ng-model="hotel.phone"  type="textarea" required>
+                                    <input  class="form-control"  ng-model="hotel.phone"  type="number" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2"  for="desc">Description: </label>
                                 <div class="col-sm-10">          
-                                    <input  class="form-control" id="name" ng-model="hotel.desc" type="textarea" required>
+                                    <textarea rows="4" class="form-control" id="name" ng-model="hotel.desc" type="textarea" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1108,7 +1137,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="rating">Rating: </label>
+                                <label class="control-label col-sm-2" for="rating">Rating(Out of 10): </label>
                                 <div class="radio col-sm-10">
                                     <input class="form-control" id="rating1" type="number" name="rating" step="any"  ng-model="hotel.rating"/>
                                 </div>
