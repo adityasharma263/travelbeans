@@ -788,8 +788,17 @@ loadDeals=function(){
     createToast("Hotel Deleted!!!","green");
   }
   $scope.deleteImage=function(data){
-    sendDeleteCall('/api/v1/image/'+data.id);
-    createToast("Image Deleted!!!","green");
+    console.log("data",data);
+    if(data.id){
+      sendDeleteCall('/api/v1/image/'+data.id);
+      createToast("Image Deleted!!!","green");
+    }
+    else{
+      createToast("'Try Again'!!!","blue");
+      setTimeout(function(){ location.reload(); }, 1000);
+
+
+    }
   }
   $scope.deleteRoom=function(data){
     sendDeleteCall('/api/v1/room/'+data.id);
@@ -815,6 +824,11 @@ loadDeals=function(){
 
   }
   $scope.addHotelImages=function(){
+    $scope.hotelsImg.hotel_id=$scope.hotels.id;
+    $scope.hotelImages.push($scope.hotelsImg); //to show added image
+    sendPostCall('/api/v1/image', $scope.hotelsImg)
+    $scope.hotelsImg={};
+    createToast("'Image Added!!'","green");
     
   }
   $scope.showAddRoom=function(){
@@ -880,8 +894,7 @@ loadDeals=function(){
       method: 'DELETE',
       url: url,
     }).then(function (res) {
-      console.log(res);
-      
+      setTimeout(function(){ location.reload(); }, 1000);
       // createToast("'hotel successfully created!!!'","green");
 
       },
