@@ -77,7 +77,7 @@
     <link rel="stylesheet" type="text/css" href="/Detailed View_files/jquery.bxslider.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/Detailed View_files/flexslider.css" media="screen">
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
 
     <!-- Main Style -->
@@ -609,6 +609,8 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
+                                                
+                                                
                                                 <li class="clone" aria-hidden="true" style="width: 870px; float: left; display: block;">
                                                     <img src="{{restaurant_detail.images[0].image_url}}" alt="" draggable="false">
                                                 </li>
@@ -712,6 +714,9 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                                <li style="width: 70px; float: left; display: block; height: 70px; position: relative;" class="flex-active-slide">
+                                                    <img src="{{restaurant_detail.images[0].image_url}}" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;">
+                                                </li>
                                                 <li class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;">
                                                     <img src="/Detailed View_files/1(1).jpg" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;">
                                                 </li>
@@ -773,9 +778,9 @@
                                     <span class="pos-ab mr15 mb15 image-stack ">
 
 
-                                        <a href="#" data-toggle="modal" data-target="#ambience-photo">
+                                        <a href="#" data-toggle="modal" data-target="#ambience-photo" id="ambience-photo-contanier">
                                             <div class="photo-container">
-                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=1">
+                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,interior?random=1">
                                                 <span style="margin-left: 10px;">
                                                     <strong>Ambience</strong>
                                                 </span>
@@ -784,7 +789,7 @@
 
 
 
-                                        <a href="#">
+                                        <a href="#" data-toggle="modal" data-target="#food-photo" id="food-photo-contanier">
                                             <div class="photo-container">
                                                 <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=2">
                                                 <span style="margin-left: 10px;">
@@ -795,10 +800,10 @@
 
 
 
-                                        <a href="#">
+                                        <a href="#" data-toggle="modal" data-target="#menu-photo" id="menu-photo-contanier">
                                             <div class="photo-container">
 
-                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,food?random=3">
+                                                <img class="restaurant-image" src="https://loremflickr.com/320/240/restaurant,menu card?random=3">
                                                 <span style="margin-left: 10px;">
                                                     <strong>Menu</strong>
                                                 </span>
@@ -1727,6 +1732,7 @@
 
                             </div>
                         </div>
+
                         <div class="modal fade " id="ambience-photo" role="dialog">
                             <div class="modal-dialog">
 
@@ -1737,18 +1743,13 @@
 
                                     <div class="modal-body">
                                         <div class="ambience-slider">
+                                            {% if restaurant_detail.images%} {% for ambience_image in restaurant_detail.images %} {% if ambience_image.image_type ==
+                                            1 %}
                                             <div>
-                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=2" alt="Test images">
+                                                <img src="{{ambience_image.image_url}}" alt="ambience">
                                             </div>
-                                            <div>
-                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=3" alt="Test images">
-                                            </div>
-                                            <div>
-                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=4" alt="Test images">
-                                            </div>
-                                            <div>
-                                                <img src="https://loremflickr.com/320/240/restaurant,food?random=5" alt="Test images">
-                                            </div>
+                                            {% endif %} {% endfor %} {% endif %}
+
                                         </div>
 
                                     </div>
@@ -1760,7 +1761,63 @@
                             </div>
                         </div>
 
-                        
+                        <div class="modal fade " id="food-photo" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <!-- <button type="button" class="close pull-right" data-dismiss="modal">&times;</button> -->
+
+                                    <div class="modal-body">
+                                        <div class="food-slider">
+                                            {% if restaurant_detail.images%} {% for food_image in restaurant_detail.images %} {% if food_image.image_type ==
+                                            2 %}
+                                            <div>
+                                                <img src="{{food_image.image_url}}" alt="ambience">
+                                            </div>
+                                            {% endif %} {% endfor %} {% endif %}
+
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="modal fade " id="menu-photo" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+
+                                    <!-- <button type="button" class="close pull-right" data-dismiss="modal">&times;</button> -->
+
+                                    <div class="modal-body">
+                                        <div class="menu-slider">
+                                            {% if restaurant_detail.images%} {% for menu_image in restaurant_detail.images %} {% if menu_image.image_type ==
+                                            3 %}
+                                            <div>
+                                                <img src="{{menu_image.image_url}}" alt="food menu">
+                                            </div>
+                                            {% endif %} {% endfor %} {% endif %}
+
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
 
 
 
@@ -2586,8 +2643,8 @@
 
             });
 
-            
-            
+
+
         });
 
         tjq('a[href="#map-tab"]').on('shown.bs.tab', function (e) {
@@ -2628,13 +2685,55 @@
 
 
         tjq(function () {
-            tjq('.ambience-slider').bxSlider({
-                auto: true,
-                autoControls: true,
-                stopAutoOnClick: true,
-                pager: true,
-                slideWidth: 500
+            var ambienceSliderLoaded = false;
+            var foodSliderLoaded = false;
+            var menuSliderLoaded = false;
+
+            tjq('#ambience-photo-contanier').click(function () {
+                if (!ambienceSliderLoaded)
+                    setTimeout(function () {
+                        tjq('.ambience-slider').bxSlider({
+                            auto: true,
+                            autoControls: true,
+                            stopAutoOnClick: true,
+                            pager: true,
+                            slideWidth: 320
+
+                        });
+                        ambienceSliderLoaded = true;
+                    }, 500)
             });
+
+            tjq('#food-photo-contanier').click(function () {
+                if (!foodSliderLoaded)
+                    setTimeout(function () {
+                        tjq('.food-slider').bxSlider({
+                            auto: true,
+                            autoControls: true,
+                            stopAutoOnClick: true,
+                            pager: true,
+                            slideWidth: 320
+
+                        });
+                        foodSliderLoaded = true;
+                    }, 500)
+            });
+
+            tjq('#menu-photo-contanier').click(function () {
+                if (!menuSliderLoaded)
+                    setTimeout(function () {
+                        tjq('.menu-slider').bxSlider({
+                            auto: true,
+                            autoControls: true,
+                            stopAutoOnClick: true,
+                            pager: true,
+                            slideWidth: 320
+
+                        });
+                        menuSliderLoaded = true;
+                    }, 500)
+            });
+
         });
     </script>
 
