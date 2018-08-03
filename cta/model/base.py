@@ -38,3 +38,8 @@ class Base(db.Model):
     def merge(cls, obj):
         db.session.merge(obj)
         db.session.commit()
+
+    @staticmethod
+    def delete_db(obj):
+        db.session.delete(obj)
+        db.session.commit()

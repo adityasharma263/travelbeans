@@ -279,9 +279,10 @@ def restaurant_id(id):
     else:
         restaurant = Restaurant.query.filter_by(id=id).first()
         if not restaurant:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        restaurant.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Restaurant.delete_db(restaurant)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
 
 @app.route('/api/v1/restaurant/amenity', methods=['GET', 'POST'])
 def restaurant_amenity():
@@ -313,9 +314,9 @@ def restaurant_amenity_id(id):
     else:
         restaurant_amenities = RestaurantAmenity.query.filter_by(id=id).first()
         if not restaurant_amenities:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        RestaurantAmenity.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        RestaurantAmenity.delete_db(restaurant_amenities)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/images', methods=['GET', 'POST'])
@@ -348,9 +349,9 @@ def restaurant_image_id(id):
     else:
         restaurant_images = RestaurantImage.query.filter_by(id=id).first()
         if not restaurant_images:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        RestaurantImage.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        RestaurantImage.delete_db(restaurant_images)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/menu', methods=['GET', 'POST'])
@@ -383,9 +384,9 @@ def restaurant_menu_id(id):
     else:
         restaurant_menu = Menu.query.filter_by(id=id).first()
         if not restaurant_menu:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Menu.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Menu.delete_db(restaurant_menu)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/cuisine', methods=['GET', 'POST'])
@@ -418,9 +419,9 @@ def restaurant_cuisine_id(id):
     else:
         restaurant_cuisine = Cuisine.query.filter_by(id=id).first()
         if not restaurant_cuisine:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Cuisine.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Cuisine.delete_db(restaurant_cuisine)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/collection', methods=['GET', 'POST'])
@@ -453,9 +454,9 @@ def restaurant_collection_id(id):
     else:
         restaurant_collection = Collection.query.filter_by(id=id).first()
         if not restaurant_collection:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Collection.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Collection.delete_db(restaurant_collection)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/dish', methods=['GET', 'POST'])
@@ -488,9 +489,9 @@ def restaurant_dish_id(id):
     else:
         restaurant_dish = Dish.query.filter_by(id=id).first()
         if not restaurant_dish:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        Dish.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Dish.delete_db(restaurant_dish)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/association', methods=['GET', 'POST'])
@@ -523,9 +524,9 @@ def restaurant_association_id(id):
     else:
         restaurant_association = RestaurantAssociation.query.filter_by(id=id).first()
         if not restaurant_association:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True}), 404
-        RestaurantAssociation.commit()
-        return jsonify({'result': {}, 'message': "Success", 'error': False}), 204
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        RestaurantAssociation.delete_db(restaurant_association)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/restaurant/search', methods=['GET', 'POST'])
