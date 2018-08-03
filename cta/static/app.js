@@ -784,19 +784,19 @@ loadDeals=function(){
     
   }
   $scope.deleteHotel=function(data){
-    sendDeleteCall('/api/v1/hotel/'+data.id,data);
+    sendDeleteCall('/api/v1/hotel/'+data.id);
     createToast("Hotel Deleted!!!","green");
   }
   $scope.deleteImage=function(data){
-    sendDeleteCall('/api/v1/image/'+data.id,data);
+    sendDeleteCall('/api/v1/image/'+data.id);
     createToast("Image Deleted!!!","green");
   }
   $scope.deleteRoom=function(data){
-    sendDeleteCall('/api/v1/room/'+data.id,data);
+    sendDeleteCall('/api/v1/room/'+data.id);
     createToast("Room Deleted!!!","green");
   }
   $scope.deleteDeals=function(data){
-    sendDeleteCall('/api/v1/deal/'+data.id,data);
+    sendDeleteCall('/api/v1/deal/'+data.id);
     createToast("Deal Deleted!!!","green");
   }
   $scope.addRoom=function(){
@@ -813,6 +813,9 @@ loadDeals=function(){
     // $scope.deals.hotel_url="";
     $scope.hotelDeals=[];
 
+  }
+  $scope.addHotelImages=function(){
+    
   }
   $scope.showAddRoom=function(){
     $scope.showRoomDetail=false;
@@ -871,13 +874,11 @@ loadDeals=function(){
       })
     
   }
-  var sendDeleteCall = function(url, data) {
-    console.log(data);
+  var sendDeleteCall = function(url) {
     
     $http({
       method: 'DELETE',
       url: url,
-      data: data
     }).then(function (res) {
       console.log(res);
       
