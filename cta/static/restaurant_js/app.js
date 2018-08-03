@@ -1301,6 +1301,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
     $scope.disable_update = true;
+    $scope.functionCall = "update";
+    var restaurant_id = null;
 
     $http.get("/api/v1/restaurant")
       .then(function (res) {
@@ -1313,6 +1315,9 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $scope.editDish = function (restaurantData) {
       console.log(restaurantData);
       $scope.disable_update = false;
+      $scope.addDish = false;
+      $scope.functionCall = "update";
+      restaurant_id = restaurantData.id;
 
       $scope.restaurantData = restaurantData;
     }
@@ -1340,18 +1345,74 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     }
 
-    $scope.deleteDish = function (dishId) {
+    $scope.deleteDish = function (dishId, index) {
       $http.delete("/api/v1/restaurant/dish/" + dishId)
         .then(function (res) {
+
+          $scope.restaurantData.dishes.splice(index, 1)
+
           alert("Deleted!!");
 
         },
         function (err) {
           console.log(err);
-          alert("err "+err.status+" ("+err.statusText+")");
+          alert("err " + err.status + " (" + err.statusText + ")");
         })
     }
 
+
+    $scope.addMoreDish = function () {
+      $scope.addDish = true;
+      $scope.functionCall = "Add"
+      $scope.restaurantData = {};
+
+      $scope.restaurantData.dishes = [
+        {
+          "desc": "",
+          "dish": "",
+          "dish_type": null,
+          "full_price": null,
+          "half_price": null,
+          "image": "",
+
+        }
+      ]
+    }
+
+
+    $scope.addMore = function () {
+      var moreDishes = {
+        "desc": "",
+        "dish": "",
+        "dish_type": null,
+        "full_price": null,
+        "half_price": null,
+        "image": "",
+
+      }
+
+      $scope.restaurantData.dishes.push(moreDishes);
+    }
+
+    $scope.Add = function () {
+
+      var dishList = [];
+
+      for (i in $scope.restaurantData.dishes) {
+        $scope.restaurantData.dishes[i].restaurant_id = restaurant_id;
+
+        dishList.push($http.post("/api/v1/restaurant/dish", $scope.restaurantData.dishes[i]))
+      }
+
+
+      $q.all(dishList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+    }
 
 
   }])
@@ -1482,6 +1543,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       3: "Menu"
     }
     $scope.disable_update = true;
+    var restaurant_id = null;
+    $scope.functionCall = "update";
 
     $http.get("/api/v1/restaurant")
       .then(function (res) {
@@ -1492,6 +1555,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     $scope.editImages = function (restaurantData) {
       $scope.disable_update = false;
+      restaurant_id = restaurantData.id;
       for (i in restaurantData.images) {
         restaurantData.images[i].image_type = restaurantData.images[i].image_type + ""
       }
@@ -1535,6 +1599,59 @@ var app = angular.module("restaurantApp", ['angular.filter'])
           console.log(err)
         })
     }
+
+
+    $scope.addMoreImages = function () {
+      $scope.addImages = true;
+      $scope.functionCall = "Add";
+
+      $scope.restaurantData = {};
+      $scope.restaurantData.images = [
+        {
+
+          "image_type": null,
+          "image_url": ""
+        }
+      ]
+    }
+
+    $scope.addMoreRestaurantImages = function () {
+      var addImages = {
+
+        "image_type": null,
+        "image_url": ""
+      }
+
+      $scope.restaurantData.images.push(addImages);
+    };
+
+
+    $scope.Add = function () {
+
+      console.log($scope.restaurantData);
+      var imageList = [];
+
+      for (i in $scope.restaurantData.images) {
+        
+        $scope.restaurantData.images[i].restaurant_id = restaurant_id;
+        imageList.push($http.post("/api/v1/restaurant/images", $scope.restaurantData.images[i]))
+      }
+
+
+      $q.all(imageList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+    }
+
+
+
+
+
 
   }])
 
