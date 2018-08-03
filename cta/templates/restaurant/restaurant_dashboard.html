@@ -10,7 +10,7 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/restaurant_js/app.js"></script>
@@ -64,7 +64,12 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>City</label>
-                                <input type="text" class="form-control" ng-model="restaurantData.city" ng-required="true">
+                                <br>
+                                <!-- <input type="text" class="form-control" ng-model="" ng-required="true"> -->
+                                <select ng-model="restaurantData.city">
+                                    <option value disabled selected>--Select Your Location--</option>
+                                    <option value="[[location]]" ng-repeat="location in locations">[[location]]</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6">

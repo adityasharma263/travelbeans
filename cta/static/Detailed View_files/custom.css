@@ -3,13 +3,13 @@
  * Author:  http://themeforest.net/user/soaptheme 
  */
 .pos-ab {
-    position: absolute;
+    position: relative;
     bottom: 0;
     right: 0;
 }
 .image-stack{
-    bottom: 0;
-    right: 0;
+    bottom: 305px;
+    left: 10px;
 }
 .mr15 {
      margin-right: 15px;
@@ -20,4 +20,21 @@
 
 .restaurant-image{
     width: 55px !important;
+  
+}
+
+/* .image-stack.img-circle.mb15.mr15.pos-ab img {
+    width: 50px;
+} */
+
+.photo-container{
+    width : 130px;
+    background-color: #ffffff;
+    border-radius:0 10px 10px 0;
+    margin-right: 10px;
+    display: table;
+    box-shadow: 0 5px 35px rgba(0, 0, 0, 0.5);
+}
+.image-stack > a {
+    display:inline-block;
 }
