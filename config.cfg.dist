@@ -14,19 +14,18 @@ SERVER_TIMEZONE = 'Etc/UTC'
 
 # postgreSQL
 
-NAME='test'
+NAME = 'test'
 
-USER='postgres'
+USER = 'postgres'
 
-PASSWORD='root'
+PASSWORD = 'root'
 
 PORT = 5432
 
-SQLALCHEMY_DATABASE_URI= 'postgresql://travelbeans:orev-travel-beans@travel-beans.c0dfxfu6dtnp.ap-south-1.rds.amazonaws.com:5432/travelbeans'
+SQLALCHEMY_DATABASE_URI = 'postgresql://travelbeans:orev-travel-beans@travel-beans.c0dfxfu6dtnp.ap-south-1.rds.amazonaws.com:5432/travelbeans'
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
-
 #variables
 
-DOMAIN_URL = 'http://localhost:5001'
+DOMAIN_URL = 'http://travel-beans.ap-south-1.elasticbeanstalk.com/'

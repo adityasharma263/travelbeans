@@ -11,7 +11,7 @@ class Cab(Base):
     car_type = db.Column(db.Integer, nullable=True)
     cab_type = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
-    bookings = db.relationship('CabBooking', backref='cab')
+    deals = db.relationship('CabDeal', secondary='cab_deal_association')
     images = db.relationship('CabImage', backref='cab')
     amenities = db.relationship('CabAmenity', uselist=False, backref='cab')
 
@@ -25,7 +25,6 @@ class Cab(Base):
 class CabBooking(Base):
     __tablename__ = 'cab_booking'
 
-    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
     one_way = db.Column(db.Boolean, default=False, nullable=True)
     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
     drop_time = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -34,7 +33,7 @@ class CabBooking(Base):
     drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
     pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
     pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
-    deals = db.relationship('CabDeal', backref='cab_booking')
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -110,6 +109,7 @@ class CabDeal(Base):
 
     booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'), unique=False)
+    booking = db.relationship('CabBooking', foreign_keys=booking_id)
     website = db.relationship('CabWebsite', foreign_keys=website_id)
     slab = db.Column(db.Integer, nullable=True)
     driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
@@ -136,3 +136,16 @@ class CabDeal(Base):
     def __repr__(self):
         return '<booking_id %r>' % self.booking_id
 
+
+class CabDealAssociation(Base):
+    __tablename__ = 'cab_deal_association'
+
+    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
+    deal_id = db.Column(db.Integer, db.ForeignKey('cab_deal.id'))
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<cab_id %r>' % self.cab_id
