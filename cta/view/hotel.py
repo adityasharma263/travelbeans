@@ -288,7 +288,7 @@ def amenity_id(id):
 
 
 
-@app.route('/api/v1/images', methods=['GET', 'POST'])
+@app.route('/api/v1/image', methods=['GET', 'POST'])
 def image_api():
     if request.method == 'GET':
         args = request.args.to_dict()
