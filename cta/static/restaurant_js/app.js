@@ -1416,20 +1416,89 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
   }])
-  .controller("dashboardCollectionController", ["$scope", "$http", function ($scope, $http) {
+  .controller("dashboardCollectionController", ["$scope", "$http", "$q", function ($scope, $http, $q) {
 
     $scope.disable_update = true;
+    $scope.addCollection = false;
+    $scope.functionCall = "update";
+    var restaurant_id = null;
+
     $http.get("/api/v1/restaurant/collection")
       .then(function (res) {
         $scope.collections = res.data.result.collection;
       }, function (err) {
         console.log(err)
-
       })
 
     $scope.editCollection = function (collection) {
-      $scope.collectionData = collection;
+
       $scope.disable_update = false;
+      $scope.addCollection = false;
+      $scope.functionCall = "update";
+      $scope.collectionData = collection;
+      console.log($scope.collectionData)
+
+    }
+
+    $scope.deleteCollection = function (collectionId , index) {
+
+      $http.delete("/api/v1/restaurant/collection/" + collectionId)
+        .then(function (res) {
+          alert("deleted!!");
+          $scope.collections.splice(index, 1);
+        }, function (err) {
+          alert("err " + err)
+        })
+
+    }
+
+    $scope.addMoreCollection = function () {
+      $scope.addCollection = true;
+      $scope.disable_update = false;
+      $scope.functionCall = "Add"
+      $scope.restaurantData = {}
+      $scope.restaurantData.collections = [
+        {
+          "collection": "",
+          "image": "",
+          "desc": "",
+          "featured": null
+        }
+      ]
+    }
+
+    $scope.addMore = function () {
+
+      var addCollection = {
+        "collection": "",
+        "image": "",
+        "desc": "",
+        "featured": null
+      }
+      $scope.restaurantData.collections.push(addCollection);
+    }
+
+    $scope.Add = function () {
+
+      console.log($scope.restaurantData);
+      var collectionList = [];
+
+      for (i in $scope.restaurantData.collections) {
+
+        collectionList.push($http.post("/api/v1/restaurant/collection", $scope.restaurantData.collections[i]))
+      }
+
+
+      $q.all(collectionList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+
+
 
 
     }
@@ -1632,7 +1701,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       var imageList = [];
 
       for (i in $scope.restaurantData.images) {
-        
+
         $scope.restaurantData.images[i].restaurant_id = restaurant_id;
         imageList.push($http.post("/api/v1/restaurant/images", $scope.restaurantData.images[i]))
       }
