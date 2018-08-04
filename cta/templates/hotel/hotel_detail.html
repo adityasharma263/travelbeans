@@ -2030,6 +2030,7 @@
 
         <!-- load page Javascript -->
         <script type="text/javascript" src="/js/theme-scripts.js.download"></script>
+        <script type="text/javascript" src="/js/top-scroller.js"></script>
         
         <script type="text/javascript">
             tjq(document).ready(function() {
@@ -2334,6 +2335,9 @@
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
         }
     </script>
+    <button onclick="topFunction()" id="upBtn" title="Go to top" style="display: block;">
+        <i class="fa fa-chevron-up"></i>
+    </button>
 
 </body>
 </html>
