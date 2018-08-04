@@ -1440,7 +1440,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     }
 
-    $scope.deleteCollection = function (collectionId , index) {
+    $scope.deleteCollection = function (collectionId, index) {
 
       $http.delete("/api/v1/restaurant/collection/" + collectionId)
         .then(function (res) {
@@ -1520,8 +1520,11 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
   }])
-  .controller("dashboardCuisineController", ["$scope", "$http", function ($scope, $http) {
+  .controller("dashboardCuisineController", ["$scope", "$http", "$q", function ($scope, $http, $q) {
     $scope.disable_update = true;
+    $scope.functionCall = "update";
+
+
     $http.get("/api/v1/restaurant/cuisine")
       .then(function (res) {
         $scope.cuisines = res.data.result.cuisine;
@@ -1533,7 +1536,69 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $scope.editCuisine = function (cuisine) {
       $scope.cuisineData = cuisine;
       $scope.disable_update = false;
+      $scope.functionCall = "update";
+      $scope.addCuisine = false;
     }
+
+    $scope.addNewCuisine = function () {
+      $scope.addCuisine = true;
+      $scope.functionCall = "Add";
+      $scope.disable_update = false;
+      
+      
+      $scope.cuisineData = [
+        {
+          cuisine : null
+        }
+      ]
+      
+
+    }
+
+    $scope.addMore = function(){
+      var addCusine =  {
+        cuisine : null
+      };
+
+      $scope.cuisineData.push(addCusine);
+    }
+
+    $scope.Add = function(){ 
+      console.log($scope.cuisineData);
+      var cuisineList = [];
+
+      for (i in $scope.cuisineData) {
+
+        cuisineList.push($http.post("/api/v1/restaurant/cuisine", $scope.cuisineData[i]))
+      }
+
+
+      $q.all(cuisineList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+
+
+    }
+
+    $scope.deleteCollection = function(cuisineId, index){
+
+      $http.delete("/api/v1/restaurant/cuisine/" + cuisineId)
+      .then(function (res) {
+
+        alert("delete");
+
+      }, function (err) {
+        console.log(err)
+      })
+
+    }
+
+
 
     $scope.update = function () {
       var cuisineId = $scope.cuisineData.id;

@@ -1,44 +1,58 @@
-{% extends '/restaurant/components/dashboard_header.html' %} 
-{% block controller%}dashboardCuisineController{% endblock %} 
+{% extends '/restaurant/components/dashboard_header.html' %} {% block controller%}dashboardCuisineController{% endblock %}
 {% block content %}
-    
-    <div class="row">
-        <div class="col-md-6">
+
+<div class="row">
+    <div class="col-md-6">
+        <div ng-show="!addCuisine">
             <h3>Edit Cuisine</h3>
 
             <label>Cuisine name</label>
             <input type="text" ng-model="cuisineData.cuisine" class="form-control">
             <br>
-    
-                
-    
-            <button class="btn btn-default" ng-disabled="disable_update" ng-click="update()">Update</button>
-    
         </div>
-    
-        <div class="col-sm-6">
-            <h3>Choose collection to update or delete.</h3>
-            <div class="form-group">
-                <input type="text" class="form-control" ng-model="search" placeholder="search...">
+
+        <div ng-show="addCuisine">
+            <h3>Add Cuisine</h3>
+
+            <div ng-repeat="cusine in cuisineData" style="margin:10px 0;">
+                <button class="btn btn-danger pull-right" ng-click="cuisineData.splice($index,1);" ng-if="$index != 0" ng-disabled="disable_association">remove</button>
+
+                <label>Cuisine Name</label>
+                <input type="text" ng-model="cusine.cuisine" class="form-control">
             </div>
-    
-            <div class="row">
-                <div class="col-sm-4" ng-repeat="cuisine in cuisines | filter: search">
-                    <div class="thumbnail">
-                        
-                        <div class="caption">
-                            <h4>[[cuisine.cuisine]]</h4>
-                            <p>
-                                <button class="btn btn-primary" role="button" ng-click="$parent.editCuisine(cuisine)">Edit</button>
-                                <button class="btn btn-default" role="button" ng-click="deleteCollection()">Delete</button>
-                            </p>
-                        </div>
+            <button class="btn btn-defalut" ng-click="addMore()" style="margin: 10px 0;">Add more</button>
+        </div>
+
+
+
+        <button class="btn btn-default" ng-disabled="disable_update" ng-click="this[functionCall]()">[[functionCall]]</button>
+        <button class="btn btn-default" ng-click="addNewCuisine()">Add new cusine</button>
+
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Choose collection to update or delete.</h3>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cuisine in cuisines | filter: search">
+                <div class="thumbnail">
+
+                    <div class="caption">
+                        <h4>[[cuisine.cuisine]]</h4>
+                        <p>
+                            <button class="btn btn-primary" role="button" ng-click="$parent.editCuisine(cuisine)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="$parent.deleteCollection(cuisine.id, $index)">Delete</button>
+                        </p>
                     </div>
                 </div>
             </div>
-    
         </div>
+
     </div>
-    
-    
-    {% endblock %}
+</div>
+
+
+{% endblock %}
