@@ -149,6 +149,10 @@ def restaurant_api():
             "price": restaurant.get("price", None),
         }
         post = Restaurant(**restaurant_obj)
+        # p = Restaurant()
+        # a = RestaurantAssociation()
+        # a.cuisine_id = Cuisine()
+        # p.cuisines.append(a)
         post.save()
         restaurant_result = RestaurantSchema().dump(post)
         if restaurant.get("amenities"):
@@ -533,15 +537,11 @@ def restaurant_association_id(id):
 def restaurant_search_api():
     search = request.json
     search = search['search']
-    cities = []
     names = []
     cuisines = []
     collections = []
     dishes = []
     menus = []
-    restaurant_cities = Restaurant.query.distinct(Restaurant.city).filter(Restaurant.city.ilike('%' + search + '%')).order_by(Restaurant.city).all()
-    for restaurant_city in restaurant_cities:
-        cities.append(restaurant_city.city)
     restaurant_names = Restaurant.query.distinct(Restaurant.name).filter(Restaurant.name.ilike('%' + search + '%')).order_by(Restaurant.name).all()
     for restaurant_name in restaurant_names:
         names.append(restaurant_name.name)
@@ -560,7 +560,6 @@ def restaurant_search_api():
         if restaurant_menu.startswith(search):
             menus.append(restaurant_menu)
     obj = {
-    "city": list(cities),
     "cuisine": list(cuisines),
     "collection": list(collections),
     "dish": list(dishes),

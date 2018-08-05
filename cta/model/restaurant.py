@@ -17,6 +17,7 @@ class Restaurant(Base):
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     address = db.Column(db.String, nullable=True)
+    locality = db.Column(db.String, nullable=True)
     category = db.Column(db.Integer, nullable=True)
     featured = db.Column(db.Boolean, default=False, nullable=True)
     collections = db.relationship('Collection', secondary='restaurant_association')
@@ -116,6 +117,9 @@ class Cuisine(Base):
     __tablename__ = 'cuisine'
 
     cuisine = db.Column(db.String, default=False, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String, default=False, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -163,6 +167,9 @@ class RestaurantAssociation(Base):
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
     collection_id = db.Column(db.Integer, db.ForeignKey('collection.id'))
     cuisine_id = db.Column(db.Integer, db.ForeignKey('cuisine.id'))
+    collection = db.relationship('Collection', foreign_keys=collection_id)
+    cuisine = db.relationship('Cuisine', foreign_keys=cuisine_id)
+    restaurant = db.relationship('Restaurant', foreign_keys=restaurant_id)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
