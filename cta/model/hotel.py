@@ -11,7 +11,7 @@ class Hotel(Base):
     rating = db.Column(db.DECIMAL, nullable=True)
     phone = db.Column(db.String, nullable=True, unique=True)
     city = db.Column(db.String, nullable=True)
-    category = db.Column(db.String, nullable=True)
+    category = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     address = db.Column(db.String, nullable=True)
     images = db.relationship('Image', backref='hotel')
