@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from cta import db
 from cta.model.base import Base
+# import enum
+#
+# class HotelCategory(enum.Enum):
+#     1 = "Crunchy apple"
+#     BANANA = "Sweet banana
 
 
 class Hotel(Base):
@@ -11,8 +16,8 @@ class Hotel(Base):
     rating = db.Column(db.DECIMAL, nullable=True)
     phone = db.Column(db.String, nullable=True, unique=True)
     city = db.Column(db.String, nullable=True)
-    category = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
+    category = db.Column(db.Integer, nullable=True)
     address = db.Column(db.String, nullable=True)
     images = db.relationship('Image', backref='hotel')
     rooms = db.relationship('Room', backref='hotel')
@@ -31,7 +36,7 @@ class Hotel(Base):
 class Room(Base):
     __tablename__ = 'room'
 
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
     status = db.Column(db.Boolean, default=False, nullable=True)
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
@@ -52,21 +57,10 @@ class Room(Base):
         return '<hotel_id %r>' % self.hotel_id
 
 
-class Image(Base):
-    __tablename__ = 'image'
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'))
-    image_url = db.Column(db.String, nullable=True)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<image_url %r>' % self.image_url
-
 
 class Amenity(Base):
     __tablename__ = 'amenity'
-    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True)
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True, nullable=False)
     conference_room = db.Column(db.Boolean, default=False, nullable=True)
     parking = db.Column(db.Boolean, default=False, nullable=True)
     couple_friendly = db.Column(db.Boolean, default=False, nullable=True)
@@ -102,13 +96,26 @@ class Amenity(Base):
         return '<pool %r>' % self.pool
 
 
+class Image(Base):
+    __tablename__ = 'image'
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), nullable=False)
+    image_url = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<image_url %r>' % self.image_url
+
+
+
 class Member(Base):
     __tablename__ = 'member'
 
     no_of_adults = db.Column(db.Integer, nullable=True)
     children = db.Column(db.Integer, nullable=True)
     total_members = db.Column(db.Integer, nullable=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True, nullable=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -146,7 +153,7 @@ class Facility(Base):
     desk = db.Column(db.Boolean, default=False, nullable=True)
     fan = db.Column(db.Boolean, default=False, nullable=True)
     electric_kettle = db.Column(db.Boolean, default=False, nullable=True)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=True, nullable=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -175,8 +182,8 @@ class Deal(Base):
     price = db.Column(db.Integer, nullable=True)
     hotel_url = db.Column(db.String)
     weekend = db.Column(db.Boolean, default=False, nullable=False)
-    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False)
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False)
+    website_id = db.Column(db.Integer, db.ForeignKey('website.id'), unique=False, nullable=False)
+    room_id = db.Column(db.Integer, db.ForeignKey('room.id'), unique=False, nullable=False)
     website = db.relationship('Website', foreign_keys=website_id)
 
     def __init__(self, *args, **kwargs):
