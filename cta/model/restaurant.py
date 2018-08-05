@@ -37,7 +37,7 @@ class Restaurant(Base):
 class RestaurantImage(Base):
     __tablename__ = 'restaurant_image'
 
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
     image_url = db.Column(db.String, default=False, nullable=True)
     image_type = db.Column(db.Integer, nullable=True)
 
@@ -51,7 +51,7 @@ class RestaurantImage(Base):
 class RestaurantAmenity(Base):
     __tablename__ = 'restaurant_amenity'
 
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True, nullable=False)
     home_delivery = db.Column(db.Boolean, default=False, nullable=True)
     private_dining_area_available = db.Column(db.Boolean, default=False, nullable=True)
     kid_friendly = db.Column(db.Boolean, default=False, nullable=True)
@@ -92,7 +92,7 @@ class RestaurantAmenity(Base):
 
 class Menu(Base):
     __tablename__ = 'menu'
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), unique=True, nullable=False)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     lunch = db.Column(db.Boolean, default=False, nullable=True)
     dinner = db.Column(db.Boolean, default=False, nullable=True)
@@ -146,7 +146,7 @@ class Collection(Base):
 class Dish(Base):
     __tablename__ = 'dish'
 
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
     dish = db.Column(db.String, default=False, nullable=True)
     dish_type = db.Column(db.String, nullable=True)
     half_price = db.Column(db.Integer, nullable=True)

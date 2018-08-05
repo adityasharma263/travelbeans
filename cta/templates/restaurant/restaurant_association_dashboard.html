@@ -1,0 +1,80 @@
+{% extends '/restaurant/components/dashboard_header.html' %} {% block controller%}dashboardAssociationController{% endblock
+%} {% block content %}
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Edit Association</h3>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Restaurant name</h4>
+            </div>
+
+            <div class="h25" ng-repeat="association in associations">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- <button class="btn btn-danger pull-right" ng-click="$parent.deleteAssociation(association, 'collection');">Remove</button> -->
+
+                        <label>Collection</label>
+                        <select ng-model="association.collection">
+                            <option value disabled>-- Select Collection --</option>
+                            <option ng-value="[[collection.id]]" ng-repeat="collection in collections">[[collection.collection]]</option>
+                            <option value="null" >None</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- <button class="btn btn-danger pull-right" ng-click="$parent.deleteAssociation(association, 'cuisine');">Remove</button> -->
+                        <label>
+                            Cuisine
+                        </label>
+                        <!-- <br> -->
+                        <select ng-model="association.cuisine">
+                            <option value disabled>--Select Cuisine --</option>
+                            <option ng-value="[[cuisine.id]]" ng-repeat="cuisine in cuisines">[[cuisine.cuisine]]</option>
+                            <option value="null">None</option>
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-default" ng-disabled="disable_update" ng-click="update()">Update</button>
+
+    </div>
+    <div class="col-sm-6">
+        <h3>Choose restaurant to update or delete amenity.</h3>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search hotels...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="restaurant in restaurants | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[restaurant.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[restaurant.name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[restaurant.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" ng-click="$parent.editAssociation(restaurant)">Edit</button>
+                            <!-- <button class="btn btn-default" role="button" ng-click="deleteAmenity()">Delete</button> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

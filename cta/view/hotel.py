@@ -150,6 +150,15 @@ def hotel_id(id):
         hotel = Hotel.query.filter_by(id=id).first()
         if not hotel:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Amenity.query.filter_by(hotel_id=id).delete()
+        Image.query.filter_by(hotel_id=id).delete()
+        rooms = Room.query.filter_by(hotel_id=id).all()
+        if rooms:
+            for room in rooms:
+                Facility.query.filter_by(room_id=room.id).delete()
+                Member.query.filter_by(room_id=room.id).delete()
+                Deal.query.filter_by(room_id=room.id).delete()
+                Room.delete_db(room)
         Hotel.delete_db(hotel)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -248,6 +257,9 @@ def room_id(id):
         rooms = Room.query.filter_by(id=id).first()
         if not rooms:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        Facility.query.filter_by(room_id=id).delete()
+        Member.query.filter_by(room_id=id).delete()
+        Deal.query.filter_by(room_id=id).delete()
         Room.delete_db(rooms)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 

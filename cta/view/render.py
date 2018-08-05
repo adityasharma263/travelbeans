@@ -130,7 +130,9 @@ def admin_menu():
 def admin_images():
     return render_template("restaurant/restaurant_images_dashboard.html")
 
-
+@app.route("/admin/restaurant/association" , methods=['GET'])
+def admin_association():
+    return render_template("restaurant/restaurant_association_dashboard.html")
 
 
 #=========================== CABS =======================================
