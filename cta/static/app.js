@@ -786,9 +786,8 @@ loadDeals=function(){
   $scope.deleteHotel=function(data){
     sendDeleteCall('/api/v1/hotel/'+data.id);
     createToast("Hotel Deleted!!!","green");
-  }
+}
   $scope.deleteImage=function(data){
-    console.log("data",data);
     if(data.id){
       sendDeleteCall('/api/v1/image/'+data.id);
       createToast("Image Deleted!!!","green");
@@ -1025,6 +1024,7 @@ $scope.createHotel = function() {
   $scope.roomData={};
   $scope.hotels={};
   $scope.roomobj={};
+  $scope.similarhotels=[];
   $scope.limit=10;
   $scope.deallimit=1;
 
@@ -1128,6 +1128,7 @@ var getrooms=function(){
       }
       
       $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
+      getSimilarHotels($scope.hotelobj.city);
       $scope.roomData.hotelData=$scope.hotelobj;
       for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
         for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
@@ -1140,6 +1141,29 @@ var getrooms=function(){
       // called asynchronously if an error occurs
       // or server returns response with an error status.
   });
+}
+var getSimilarHotels=function(city){
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel?city='+city,
+  }).then(function successCallback(response) {
+
+      for(var i=0; i<response.data.result.hotel.length; i++){
+        if(response.data.result.hotel[i].id==$scope.roomData.hotel){
+          response.data.result.hotel.splice(1, i); //to remove current showing hotel data
+        }
+        else{
+          $scope.similarhotels.push(response.data.result.hotel[i]) 
+        }
+      }
+     
+     
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
 }
 
 
