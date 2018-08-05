@@ -284,6 +284,16 @@ def restaurant_id(id):
         restaurant = Restaurant.query.filter_by(id=id).first()
         if not restaurant:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurant_amenities = RestaurantAmenity.query.filter_by(restaurant_id=id).first()
+        RestaurantAmenity.delete_db(restaurant_amenities)
+        restaurant_images = RestaurantImage.query.filter_by(restaurant_id=id).first()
+        RestaurantImage.delete_db(restaurant_images)
+        restaurant_menu = Menu.query.filter_by(restaurant_id=id).first()
+        Menu.delete_db(restaurant_menu)
+        restaurant_dish = Dish.query.filter_by(restaurant_id=id).first()
+        Dish.delete_db(restaurant_dish)
+        restaurant_association = RestaurantAssociation.query.filter_by(restaurant_id=id).first()
+        RestaurantAssociation.delete_db(restaurant_association)
         Restaurant.delete_db(restaurant)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -424,6 +434,8 @@ def restaurant_cuisine_id(id):
         restaurant_cuisine = Cuisine.query.filter_by(id=id).first()
         if not restaurant_cuisine:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurant_association = RestaurantAssociation.query.filter_by(cuisine_id=id).first()
+        RestaurantAssociation.delete_db(restaurant_association)
         Cuisine.delete_db(restaurant_cuisine)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -459,6 +471,8 @@ def restaurant_collection_id(id):
         restaurant_collection = Collection.query.filter_by(id=id).first()
         if not restaurant_collection:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurant_association = RestaurantAssociation.query.filter_by(collection_id=id).first()
+        RestaurantAssociation.delete_db(restaurant_association)
         Collection.delete_db(restaurant_collection)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
