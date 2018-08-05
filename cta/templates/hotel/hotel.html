@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" type="text/css" href="/css/settings.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css" media="screen">
-    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen"> -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
     <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
     
     
@@ -522,7 +522,8 @@
                             <div class="search-box">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group" onmousemove="myFunction(event)" onmouseout="clearCoor()">
+                                        <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)" onmouseout="clearCoor()">
+                                            
                                             <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
                                         
                                             <div class="row" id="demo">

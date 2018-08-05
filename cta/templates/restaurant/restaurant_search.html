@@ -1677,9 +1677,9 @@
 
                                                     <div class="restaurant-details">
                                                         <span class="detail-title">Cuisines : </span>
-                                                        <span ng-repeat="association in restaurant.association">
-                                                            <strong ng-cloak>[[association.cuisines.cuisine]]
-                                                                <span ng-if="$index != restaurant.association.length - 1">,</span>
+                                                        <span ng-repeat="cuisine in restaurant.cuisines">
+                                                            <strong ng-cloak>[[cuisine.cuisine]]
+                                                                <span ng-if="$index != restaurant.cuisines.length - 1">,</span>
                                                             </strong>
                                                         </span>
                                                     </div>
@@ -1764,7 +1764,7 @@
                             <div>
                                 <h4>Price Comparison</h4>
                             </div>
-                            <a href="/restaurant/[[restaurant.id]]"  ng-repeat="restaurant in restaurants | orderBy: '-'">
+                            <a href="/restaurant/[[restaurant.id]]"  ng-repeat="restaurant in restaurants | orderBy: 'price'">
                                 <div class="panel">
                                     <span ng-bind="restaurant.name+' -'">loading...</span>
                                     <strong ng-bind="restaurant.price">loading...</strong>

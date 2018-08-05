@@ -83,10 +83,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     }
 
 
-    $http.get("/api/v1/restaurant"+window.location.search)
+    $http.get("/api/v1/restaurant" + window.location.search)
       .then(function (res) {
         var allRestaurants = $scope.restaurants = res.data.result.restaurants;
-        console.log("$scope.restaurants =",$scope.restaurants);
+        console.log("$scope.restaurants =", $scope.restaurants);
         $scope.min_price = Math.min.apply(Math, allRestaurants.map(function (item) { return item.price; }));
         $scope.max_price = Math.max.apply(Math, allRestaurants.map(function (item) { return item.price; }));
         $scope.price_filter = $scope.max_price;
@@ -254,7 +254,9 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
   // ============= Dashboard Controller =====================
 
-  .controller("dashboarController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+  .controller("dashboardController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+
+    var put_restaurant_id = null;
 
     $scope.restaurantData = {
       association: [{
@@ -350,7 +352,23 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         })
     }
     $scope.Update = function () {
-      $http.put("/api/v1/restaurant", {})
+
+      delete $scope.restaurantData.amenities
+      delete $scope.restaurantData.association;
+      delete $scope.restaurantData.dishes;
+      delete $scope.restaurantData.id;
+      delete $scope.restaurantData.images;
+      delete $scope.restaurantData.menus;
+
+      console.log(" $scope.restaurantData =", $scope.restaurantData);
+
+      $http.put("/api/v1/restaurant/" + put_restaurant_id, $scope.restaurantData)
+        .then(function (res) {
+          console.log(res);
+
+        }, function (err) {
+          console.log(err);
+        })
 
 
 
@@ -373,6 +391,58 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     function getQueryStringValue(key) {
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+
+    $scope.addMoreAssociation = function () {
+      var addAssociation = {
+        "collections": {
+
+        },
+        "cuisines": {
+
+        }
+      }
+      $scope.restaurantData.association.push(addAssociation);
+
+
+
+    }
+
+
+    $scope.editRestaurant = function (restaurantData) {
+      $scope.functionCalling = "Update";
+      $scope.disable_amenity = true;
+      $scope.disable_association = true;
+      $scope.disable_dish = true;
+      $scope.disable_menu = true;
+      $scope.disable_images = true;
+
+
+      restaurantData.phone = parseInt(restaurantData.phone);
+      put_restaurant_id = restaurantData.id;
+
+      for (i in restaurantData.association) {
+        restaurantData.association[i].collections.collection_id = restaurantData.association[i].collections.id + ""
+        restaurantData.association[i].cuisines.cuisine_id = restaurantData.association[i].cuisines.id + ""
+        restaurantData.association[i].collections.collection = null;
+        restaurantData.association[i].collections.image = null;
+        restaurantData.association[i].collections.desc = null;
+        restaurantData.association[i].collections.featured = null;
+      }
+
+      for (i in restaurantData.images) {
+        restaurantData.images[i].image_type = restaurantData.images[i].image_type + ""
+      }
+
+      restaurantData.category = restaurantData.category + ""
+
+      $scope.restaurantData = restaurantData;
+      console.log(restaurantData);
+      console.log($scope.restaurantData);
+
+
+
+
     }
 
 
@@ -1172,6 +1242,547 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       'Zirakpur',
       'Ziro',
     ]
+
+
+
+
+  }])
+  .controller("dashboardAmenityController", ["$scope", "$http", function ($scope, $http) {
+    $scope.disable_update = true;
+
+    $http.get("/api/v1/restaurant/amenity")
+      .then(function (res) {
+        $scope.amenity = res.data.result.amenities;
+        $scope.amenities = $scope.amenity[0]
+        delete $scope.amenities.id;
+        delete $scope.amenities.restaurant;
+
+
+      }, function (err) {
+        console.log(err);
+      })
+
+    $http.get("/api/v1/restaurant")
+      .then(function (res) {
+        $scope.restaurants = res.data.result.restaurants;
+      }, function (err) {
+        console.log(err);
+      })
+
+    $scope.editAmenity = function (restaurantData) {
+      console.log(restaurantData);
+      $scope.disable_update = false;
+      $scope.restaurantData = {}
+      $scope.restaurantData.amenities = restaurantData.amenities;
+
+
+    }
+
+    $scope.update = function () {
+      var amenityId = $scope.restaurantData.amenities.id
+      delete $scope.restaurantData.amenities.id;
+      delete $scope.restaurantData.amenities.restaurant;
+
+      console.log($scope.restaurantData.amenities);
+
+      $http.put("/api/v1/restaurant/amenity/" + amenityId, $scope.restaurantData.amenities)
+        .then(function (res) {
+          console.log(res);
+          alert("Updated!!")
+        }, function (err) {
+          alert("err = " + err.data);
+          console.log(err);
+        })
+    }
+
+
+  }])
+  .controller("dashboardDishController", ["$http", "$scope", "$q", function ($http, $scope, $q) {
+
+
+    $scope.disable_update = true;
+    $scope.functionCall = "update";
+    var restaurant_id = null;
+
+    $http.get("/api/v1/restaurant")
+      .then(function (res) {
+        $scope.restaurants = res.data.result.restaurants;
+      }, function (err) {
+        console.log(err);
+      })
+
+
+    $scope.editDish = function (restaurantData) {
+      console.log(restaurantData);
+      $scope.disable_update = false;
+      $scope.addDish = false;
+      $scope.functionCall = "update";
+      restaurant_id = restaurantData.id;
+
+      $scope.restaurantData = restaurantData;
+    }
+
+    $scope.update = function () {
+      var dishList = [];
+
+      for (i in $scope.restaurantData.dishes) {
+        var dishId = $scope.restaurantData.dishes[i].id
+        delete $scope.restaurantData.dishes[i].id;
+        delete $scope.restaurantData.dishes[i].restaurant;
+
+        dishList.push($http.put("/api/v1/restaurant/dish/" + dishId, $scope.restaurantData.dishes[i]))
+      }
+
+
+      $q.all(dishList)
+        .then(function (res) {
+          alert("updated!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+
+    }
+
+    $scope.deleteDish = function (dishId, index) {
+      $http.delete("/api/v1/restaurant/dish/" + dishId)
+        .then(function (res) {
+
+          $scope.restaurantData.dishes.splice(index, 1)
+
+          alert("Deleted!!");
+
+        },
+        function (err) {
+          console.log(err);
+          alert("err " + err.status + " (" + err.statusText + ")");
+        })
+    }
+
+
+    $scope.addMoreDish = function () {
+      $scope.addDish = true;
+      $scope.functionCall = "Add"
+      $scope.restaurantData = {};
+
+      $scope.restaurantData.dishes = [
+        {
+          "desc": "",
+          "dish": "",
+          "dish_type": null,
+          "full_price": null,
+          "half_price": null,
+          "image": "",
+
+        }
+      ]
+    }
+
+
+    $scope.addMore = function () {
+      var moreDishes = {
+        "desc": "",
+        "dish": "",
+        "dish_type": null,
+        "full_price": null,
+        "half_price": null,
+        "image": "",
+
+      }
+
+      $scope.restaurantData.dishes.push(moreDishes);
+    }
+
+    $scope.Add = function () {
+
+      var dishList = [];
+
+      for (i in $scope.restaurantData.dishes) {
+        $scope.restaurantData.dishes[i].restaurant_id = restaurant_id;
+
+        dishList.push($http.post("/api/v1/restaurant/dish", $scope.restaurantData.dishes[i]))
+      }
+
+
+      $q.all(dishList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+    }
+
+
+  }])
+  .controller("dashboardCollectionController", ["$scope", "$http", "$q", function ($scope, $http, $q) {
+
+    $scope.disable_update = true;
+    $scope.addCollection = false;
+    $scope.functionCall = "update";
+    var restaurant_id = null;
+
+    $http.get("/api/v1/restaurant/collection")
+      .then(function (res) {
+        $scope.collections = res.data.result.collection;
+      }, function (err) {
+        console.log(err)
+      })
+
+    $scope.editCollection = function (collection) {
+
+      $scope.disable_update = false;
+      $scope.addCollection = false;
+      $scope.functionCall = "update";
+      $scope.collectionData = collection;
+      console.log($scope.collectionData)
+
+    }
+
+    $scope.deleteCollection = function (collectionId, index) {
+
+      $http.delete("/api/v1/restaurant/collection/" + collectionId)
+        .then(function (res) {
+          alert("deleted!!");
+          $scope.collections.splice(index, 1);
+        }, function (err) {
+          alert("err " + err)
+        })
+
+    }
+
+    $scope.addMoreCollection = function () {
+      $scope.addCollection = true;
+      $scope.disable_update = false;
+      $scope.functionCall = "Add"
+      $scope.restaurantData = {}
+      $scope.restaurantData.collections = [
+        {
+          "collection": "",
+          "image": "",
+          "desc": "",
+          "featured": null
+        }
+      ]
+    }
+
+    $scope.addMore = function () {
+
+      var addCollection = {
+        "collection": "",
+        "image": "",
+        "desc": "",
+        "featured": null
+      }
+      $scope.restaurantData.collections.push(addCollection);
+    }
+
+    $scope.Add = function () {
+
+      console.log($scope.restaurantData);
+      var collectionList = [];
+
+      for (i in $scope.restaurantData.collections) {
+
+        collectionList.push($http.post("/api/v1/restaurant/collection", $scope.restaurantData.collections[i]))
+      }
+
+
+      $q.all(collectionList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+
+
+
+
+    }
+
+    $scope.update = function () {
+      var collectionId = $scope.collectionData.id;
+      delete $scope.collectionData.id
+
+      $http.put("/api/v1/restaurant/collection/" + collectionId, $scope.collectionData)
+        .then(function (res) {
+          alert("updated!!");
+
+        }, function (err) {
+          alert("err =" + err);
+          console.log(err);
+        })
+
+    }
+
+
+  }])
+  .controller("dashboardCuisineController", ["$scope", "$http", "$q", function ($scope, $http, $q) {
+    $scope.disable_update = true;
+    $scope.functionCall = "update";
+
+
+    $http.get("/api/v1/restaurant/cuisine")
+      .then(function (res) {
+        $scope.cuisines = res.data.result.cuisine;
+      }, function (err) {
+        console.log(err)
+
+      })
+
+    $scope.editCuisine = function (cuisine) {
+      $scope.cuisineData = cuisine;
+      $scope.disable_update = false;
+      $scope.functionCall = "update";
+      $scope.addCuisine = false;
+    }
+
+    $scope.addNewCuisine = function () {
+      $scope.addCuisine = true;
+      $scope.functionCall = "Add";
+      $scope.disable_update = false;
+      
+      
+      $scope.cuisineData = [
+        {
+          cuisine : null
+        }
+      ]
+      
+
+    }
+
+    $scope.addMore = function(){
+      var addCusine =  {
+        cuisine : null
+      };
+
+      $scope.cuisineData.push(addCusine);
+    }
+
+    $scope.Add = function(){ 
+      console.log($scope.cuisineData);
+      var cuisineList = [];
+
+      for (i in $scope.cuisineData) {
+
+        cuisineList.push($http.post("/api/v1/restaurant/cuisine", $scope.cuisineData[i]))
+      }
+
+
+      $q.all(cuisineList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+
+
+    }
+
+    $scope.deleteCollection = function(cuisineId, index){
+
+      $http.delete("/api/v1/restaurant/cuisine/" + cuisineId)
+      .then(function (res) {
+
+        alert("delete");
+
+      }, function (err) {
+        console.log(err)
+      })
+
+    }
+
+
+
+    $scope.update = function () {
+      var cuisineId = $scope.cuisineData.id;
+      delete $scope.cuisineData.id
+
+      $http.put("/api/v1/restaurant/cuisine/" + cuisineId, $scope.cuisineData)
+        .then(function (res) {
+          alert("Updated!!")
+        }, function (err) {
+          console.log(err)
+          alert("err = " + err)
+        })
+    }
+
+
+
+  }])
+  .controller("dashboardMenuController", ["$scope", "$http", function ($scope, $http) {
+
+    $scope.disable_update = true;
+
+    $http.get("/api/v1/restaurant/menu")
+      .then(function (res) {
+        $scope.menu = res.data.result.menu;
+        $scope.menus = $scope.menu[0];
+        delete $scope.menus.id;
+        delete $scope.menus.restaurant;
+      }, function (err) {
+        console.log(err);
+      })
+
+
+    $http.get("/api/v1/restaurant")
+      .then(function (res) {
+        $scope.restaurants = res.data.result.restaurants;
+      }, function (err) {
+        console.log(err);
+      })
+
+    $scope.editAmenity = function (restaurantData) {
+      console.log(restaurantData);
+      $scope.disable_update = false;
+      $scope.restaurantData = {}
+      $scope.restaurantData.menus = restaurantData.menus;
+
+
+    }
+
+    $scope.update = function () {
+      var menuId = $scope.restaurantData.menus.id
+      delete $scope.restaurantData.menus.id;
+      delete $scope.restaurantData.menus.restaurant;
+
+      console.log($scope.restaurantData.menus);
+
+      $http.put("/api/v1/restaurant/menu/" + menuId, $scope.restaurantData.menus)
+        .then(function (res) {
+          console.log(res);
+          alert("Updated!!")
+        }, function (err) {
+          alert("err = " + err.data);
+          console.log(err);
+        })
+    }
+
+
+
+
+
+  }])
+  .controller("dashboardImagesController", ["$scope", "$http", "$q", function ($scope, $http, $q) {
+
+    $scope.image_types = {
+      1: "Ambience",
+      2: "Food",
+      3: "Menu"
+    }
+    $scope.disable_update = true;
+    var restaurant_id = null;
+    $scope.functionCall = "update";
+
+    $http.get("/api/v1/restaurant")
+      .then(function (res) {
+        $scope.restaurants = res.data.result.restaurants;
+      }, function (err) {
+        console.log(err);
+      })
+
+    $scope.editImages = function (restaurantData) {
+      $scope.disable_update = false;
+      restaurant_id = restaurantData.id;
+      for (i in restaurantData.images) {
+        restaurantData.images[i].image_type = restaurantData.images[i].image_type + ""
+      }
+      $scope.restaurantData = {}
+      $scope.restaurantData.images = restaurantData.images;
+
+
+    }
+
+    $scope.update = function () {
+
+      var imageList = [];
+
+      for (i in $scope.restaurantData.images) {
+        var imageId = $scope.restaurantData.images[i].id;
+        delete $scope.restaurantData.images[i].id;
+        delete $scope.restaurantData.images[i].restaurant;
+
+        imageList.push($http.put("/api/v1/restaurant/image/" + imageId, $scope.restaurantData.images[i]))
+      }
+
+
+      $q.all(imageList)
+        .then(function (res) {
+          alert("updated!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+
+    }
+
+    $scope.deleteImage = function (imageId) {
+      $http.delete("/api/v1/restaurant/image/" + imageId)
+        .then(function (res) {
+
+          alert("delete");
+
+        }, function (err) {
+          console.log(err)
+        })
+    }
+
+
+    $scope.addMoreImages = function () {
+      $scope.addImages = true;
+      $scope.functionCall = "Add";
+
+      $scope.restaurantData = {};
+      $scope.restaurantData.images = [
+        {
+
+          "image_type": null,
+          "image_url": ""
+        }
+      ]
+    }
+
+    $scope.addMoreRestaurantImages = function () {
+      var addImages = {
+
+        "image_type": null,
+        "image_url": ""
+      }
+
+      $scope.restaurantData.images.push(addImages);
+    };
+
+
+    $scope.Add = function () {
+
+      console.log($scope.restaurantData);
+      var imageList = [];
+
+      for (i in $scope.restaurantData.images) {
+
+        $scope.restaurantData.images[i].restaurant_id = restaurant_id;
+        imageList.push($http.post("/api/v1/restaurant/images", $scope.restaurantData.images[i]))
+      }
+
+
+      $q.all(imageList)
+        .then(function (res) {
+          alert("Added!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
+
+    }
+
+
 
 
 

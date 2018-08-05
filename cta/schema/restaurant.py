@@ -43,19 +43,20 @@ class CuisineSchema(ma.ModelSchema):
 
 
 class RestaurantAssociationSchema(ma.ModelSchema):
-    collections = ma.Nested(CollectionSchema, many=False)
-    cuisines = ma.Nested(CuisineSchema, many=False)
 
     class Meta:
         model = RestaurantAssociation
         exclude = ('updated_at', 'created_at')
+
 
 class RestaurantSchema(ma.ModelSchema):
     amenities = ma.Nested(RestaurantAmenitySchema, many=False)
     images = ma.Nested(RestaurantImageSchema, many=True)
     dishes = ma.Nested(DishSchema, many=True)
     menus = ma.Nested(MenuSchema, many=False)
-    association = ma.Nested(RestaurantAssociationSchema, many=True)
+    collections = ma.Nested(CollectionSchema, many=True)
+    cuisines = ma.Nested(CuisineSchema, many=True)
+
     class Meta:
         model = Restaurant
         exclude = ('updated_at', 'created_at')

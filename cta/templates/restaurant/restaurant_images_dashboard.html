@@ -1,0 +1,103 @@
+{% extends '/restaurant/components/dashboard_header.html' %} {% block controller%}dashboardImagesController{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Edit Images</h3>
+        <h4 ng-bind="'Restaurant - '+restaurantData.name" ng-show="restaurantData.name"></h4>
+        <div ng-show="!addImages">
+            <div ng-repeat="imageData in restaurantData.images" class="mt10">
+                <div class="row">
+                    <button class="btn btn-danger pull-right" ng-click="$parent.deleteImage(imageData.id);restaurantData.images.splice($index,1)">Delete</button>
+
+                    <div class="col-sm-6">
+                        <label>Image Type</label>
+                        <br>
+                        <select ng-model="imageData.image_type" ng-required="true" ng-disabled="disable_images">
+                            <option value disabled>Select image type for restaurant</option>
+                            <option value="[[image_enum]]" ng-repeat="(image_enum, image_type) in image_types">[[image_type]]</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <span>
+                            URL
+                            <input type="text" ng-model="imageData.image_url" class="form-control" ng-disabled="disable_images" ng-required="true">
+                            <img class="img-responsive img-thumbnail img-small50" ng-show="imageData.image_url" src="[[imageData.image_url]]" alt="[[imageData.image_url]]">
+                        </span>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <div ng-show="addImages">
+
+                <div ng-repeat="imageData in restaurantData.images" class="mt10">
+                        <button class="btn btn-danger pull-right" ng-click="restaurantData.images.splice($index,1);" ng-if="$index != 0" ng-disabled="disable_images">remove</button>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Image Type</label>
+                                <br>
+                                <select ng-model="imageData.image_type" ng-required="true" ng-disabled="disable_images">
+                                    <option value disabled>Select image type for restaurant</option>
+                                    <option value="[[image_enum]]" ng-repeat="(image_enum, image_type) in image_types">[[image_type]]</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <span>
+                                    URL
+                                    <input type="text" ng-model="imageData.image_url" class="form-control" ng-disabled="disable_images" ng-required="true">
+                                    <img class="img-responsive img-thumbnail img-small50" ng-show="imageData.image_url" src="[[imageData.image_url]]" alt="[[imageData.image_url]]">
+                                </span>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <button class="btn btn-default" ng-click="addMoreRestaurantImages()" style="margin:10px 0;">Add More Images</button>
+
+
+        </div>
+
+        <button class="btn btn-success" ng-disabled="disable_update" ng-click="this[functionCall]()">[[functionCall]]</button>
+        <button class="btn btn-default" ng-disabled="disable_update" ng-show="!addImages" ng-click="addMoreImages()">Add More Images</button>
+
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Choose restaurant to update or delete dish(es).</h3>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search hotels...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="restaurant in restaurants | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[restaurant.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[restaurant.name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[restaurant.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" ng-click="$parent.editImages(restaurant)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteDish()">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

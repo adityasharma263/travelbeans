@@ -31,6 +31,18 @@
     <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/css/icon.css" media="screen" />
     <link rel="shortcut icon" href="http://www.soaptheme.net/html/travelo/favicon.icon" type="image/x-icon">
+    <script>
+            function hide(id) {
+                var x = document.getElementById(id);
+                x.style.display = "none";
+            
+            }
+            function show(id) {
+                var x = document.getElementById(id);
+                    x.style.display = "block";
+                    
+            }
+            </script>
     <!-- Main Style -->
     <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
     <!-- <script type="text/javascript">
@@ -69,684 +81,342 @@
     <div ng-controller="detailController">
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
-            <div class="topnav hidden-xs">
-                <div class="container">
-                    <ul class="quick-menu pull-left">
-                        <li><a href="#">MY ACCOUNT</a></li>
-                        <li class="ribbon">
-                            <a href="#">English</a>
-                            <ul class="menu mini">
-                                <li><a href="#" title="Dansk">Dansk</a></li>
-                                <li><a href="#" title="Deutsch">Deutsch</a></li>
-                                <li class="active"><a href="#" title="English">English</a></li>
-                                <li><a href="#" title="Español">Español</a></li>
-                                <li><a href="#" title="Français">Français</a></li>
-                                <li><a href="#" title="Italiano">Italiano</a></li>
-                                <li><a href="#" title="Magyar">Magyar</a></li>
-                                <li><a href="#" title="Nederlands">Nederlands</a></li>
-                                <li><a href="#" title="Norsk">Norsk</a></li>
-                                <li><a href="#" title="Polski">Polski</a></li>
-                                <li><a href="#" title="Português">Português</a></li>
-                                <li><a href="#" title="Suomi">Suomi</a></li>
-                                <li><a href="#" title="Svenska">Svenska</a></li>
-                            </ul>
+        <div class="topnav hidden-xs">
+            <div class="container">
+                <ul class="quick-menu pull-left">
+                    
+                    <li class="ribbon currency">
+                        <a href="" title="">INR</a>
+                        <ul class="menu mini left">
+                        </ul>
+                    </li>
+                    <li class="ribbon">
+                        <a href="">English</a>
+                        <ul class="menu mini">
+                        </ul>
+                    </li>
+                    <li class="ribbon">
+                        <a href="">India</a>
+                        <ul class="menu mini">
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="quick-menu pull-right">
+                    <li><a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
+                    <i class="soap-icon-shopping"></i> SIGN UP</a></li>
+                    <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
+                    <li><a href="">Business CAPITAL</a></li>
+                    <li><a href="#travelo-signup" class="soap-popupbox">Customer Care</a></li>
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            
+            <!-- <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle collapsed" aria-expanded="false">
+                Mobile Menu Toggle
+            </a> -->
+            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+    
+            </a>
+
+
+            <div class="container">
+                 <!-- <h1 class="logo navbar-brand">
+                    <a href="http://www.soaptheme.net/html/travelo/index.html" title="Travelo - home">
+                        <img src="/images/logo.png" alt="Travelo HTML5 Template">
+                    </a>
+                </h1> -->
+                <h1 class="logo navbar-brand">
+                    <a href="index.html" title="Travelo - home">
+                        <img src="" alt="Travelo HTML5 Template">
+                    </a>
+                </h1>
+                
+                
+                <nav id="main-menu" role="navigation">
+                    <ul class="menu">
+                        <li class="menu-item-has-children">
+                            <a href="/home">Home</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/hotel">Hotels</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/flight">Flights</a>
+                        </li>
+                        <li class="menu-item-has-children active">
+                            <a href="/cab">Cars</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/cruise">Cruises</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/tour">Tour</a>
+                        </li>
+                        <li class="menu-item-has-children megamenu-menu">
+                            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Pages</a>
+                            <div class="megamenu-wrapper container" data-items-per-column="8" style="left: -903.219px; width: 1170px; display: block;">
+                                <div class="megamenu-holder">
+                                    <ul class="megamenu">
+                                        <li class="menu-item-has-children megamenu-columns-3" style="width: 42.8571%;">
+                                            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Standard Pages</a>
+                                            
+                                        <ul class="sub-menu"><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-aboutus1.html">About Us 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-aboutus2.html">About Us 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-services1.html">Services 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-services2.html">Services 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-4column.html">Gallery 4 Column</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-3column.html">Gallery 3 Column</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-2column.html">Gallery 2 Column</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-photogallery-fullview.html">Gallery Read</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-rightsidebar.html">Blog Right Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-leftsidebar.html">Blog Left Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-fullwidth.html">Blog Full Width</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-blog-read.html">Blog Read</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-faq1.html">Faq 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-faq2.html">Faq 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-leftsidebar.html">Layouts Left Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-rightsidebar.html">Layouts Right Sidebar</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-twosidebar.html">Layouts Two Sidebar</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-layouts-fullwidth.html">Layouts Full Width</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-contactus1.html">Contact Us 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-contactus2.html">Contact Us 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-contactus3.html">Contact Us 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-travelo-policies.html">Travelo Policies</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-sitemap.html">Site Map</a></li></ul></li></ul></li>
+                                        <li class="menu-item-has-children megamenu-columns-2" style="width: 28.5714%;">
+                                            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Extra Pages</a>
+                                            
+                                        <ul class="sub-menu"><li><ul><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-holidays.html">Holidays</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-hotdeals.html">Hot Deals</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-before-you-fly.html">Before You Fly</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html">Inflight Experience</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-things-todo1.html">Things To Do 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-things-todo2.html">Things To Do 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-essentials.html">Travel Essentials</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-stories.html">Travel Stories</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-guide.html">Travel Guide</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-ideas.html">Travel Ideas</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-travel-insurance.html">Travel Insurance</a></li><li><a href="http://www.soaptheme.net/html/travelo/extra-pages-group-booking.html">Group Bookings</a></li></ul></li></ul></li>
+                                        <li class="menu-item-has-children megamenu-columns-2" style="width: 28.5714%;">
+                                            <a href="http://www.soaptheme.net/html/travelo/hotel-index.html#">Special Pages</a>
+                                            
+                                        <ul class="sub-menu"><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-404-1.html">404 Page 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-404-2.html">404 Page 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-404-3.html">404 Page 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-coming-soon1.html">Coming Soon 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-coming-soon2.html">Coming Soon 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-coming-soon3.html">Coming Soon 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-loading1.html">Loading Page 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-loading2.html">Loading Page 2</a></li></ul></li><li><ul><li><a href="http://www.soaptheme.net/html/travelo/pages-loading3.html">Loading Page 3</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-login1.html">Login Page 1</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-login2.html">Login Page 2</a></li><li><a href="http://www.soaptheme.net/html/travelo/pages-login3.html">Login Page 3</a></li></ul></li></ul></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
                     </ul>
-                    <ul class="quick-menu pull-right">
-                        <li><a href="http://themeforest.net/item/travelo-responsive-travel-booking-site-template/8346649?ref=SoapTheme" class="button yellow btn-small" style="height: 30px; font-size: 1em;"><i class="soap-icon-shopping"></i> PURCHASE</a></li>
-                        <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
-                        <li><a href="#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
-                        <li class="ribbon currency">
-                            <a href="#" title="">USD</a>
-                            <ul class="menu mini">
-                                <li><a href="#" title="AUD">AUD</a></li>
-                                <li><a href="#" title="BRL">BRL</a></li>
-                                <li class="active"><a href="#" title="USD">USD</a></li>
-                                <li><a href="#" title="CAD">CAD</a></li>
-                                <li><a href="#" title="CHF">CHF</a></li>
-                                <li><a href="#" title="CNY">CNY</a></li>
-                                <li><a href="#" title="CZK">CZK</a></li>
-                                <li><a href="#" title="DKK">DKK</a></li>
-                                <li><a href="#" title="EUR">EUR</a></li>
-                                <li><a href="#" title="GBP">GBP</a></li>
-                                <li><a href="#" title="HKD">HKD</a></li>
-                                <li><a href="#" title="HUF">HUF</a></li>
-                                <li><a href="#" title="IDR">IDR</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                </nav>
             </div>
             
-            <div class="main-header">
+            <nav id="mobile-menu-01" class="mobile-menu collapse" aria-expanded="false" style="height: 0px;">
+                <ul id="mobile-primary-menu" class="menu">
+                    <li class="menu-item-has-children">
+                        <a href="/home">Home</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
+                    </li>
+                    <li class="menu-item-has-children active">
+                        <a href="/hotel">Hotels</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-1"></button>
+                       
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="/flight">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
+                        
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="/cab">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
+                        
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="/cruise">Cruises</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-4"></button>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="/tour">Tour</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-5"></button>
                 
-                <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
-                    Mobile Menu Toggle
-                </a>
-
-                <div class="container">
-                    <h1 class="logo navbar-brand">
-                        <a href="index.html" title="Travelo - home">
-                            <img src="images/logo.png" alt="Travelo HTML5 Template" />
-                        </a>
-                    </h1>
-                    
-                    <nav id="main-menu" role="navigation">
-                        <ul class="menu">
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Pages</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-6"></button>
+                        <ul id="mobile-menu-submenu-item-6" class="collapse">
                             <li class="menu-item-has-children">
-                                <a href="index.html">Home</a>
+                                <a href="#">Standard Pages</a>
                                 <ul>
-                                    <li><a href="index.html">Home Layout 1</a></li>
-                                    <li><a href="homepage2.html">Home Layout 2</a></li>
-                                    <li><a href="homepage3.html">Home Layout 3</a></li>
-                                    <li><a href="homepage4.html">Home Layout 4</a></li>
-                                    <li><a href="homepage5.html">Home Layout 5</a></li>
-                                    <li><a href="homepage6.html">Home Layout 6</a></li>
-                                    <li><a href="homepage7.html">Home Layout 7</a></li>
-                                    <li><a href="homepage8.html">Home Layout 8</a></li>
-                                    <li><a href="homepage9.html">Home Layout 9</a></li>
-                                    <li><a href="homepage10.html">Home Layout 10</a></li>
-                                    <li><a href="homepage11.html">Home Layout 11</a></li>
+                                    <li><a href="pages-aboutus1.html">About Us 1</a></li>
+                                    <li><a href="pages-aboutus2.html">About Us 2</a></li>
+                                    <li><a href="pages-services1.html">Services 1</a></li>
+                                    <li><a href="pages-services2.html">Services 2</a></li>
+                                    <li><a href="pages-photogallery-4column.html">Gallery 4 Column</a></li>
+                                    <li><a href="pages-photogallery-3column.html">Gallery 3 Column</a></li>
+                                    <li><a href="pages-photogallery-2column.html">Gallery 2 Column</a></li>
+                                    <li><a href="pages-photogallery-fullview.html">Gallery Read</a></li>
+                                    <li><a href="pages-blog-rightsidebar.html">Blog Right Sidebar</a></li>
+                                    <li><a href="pages-blog-leftsidebar.html">Blog Left Sidebar</a></li>
+                                    <li><a href="pages-blog-fullwidth.html">Blog Full Width</a></li>
+                                    <li><a href="pages-blog-read.html">Blog Read</a></li>
+                                    <li><a href="pages-faq1.html">Faq 1</a></li>
+                                    <li><a href="pages-faq2.html">Faq 2</a></li>
+                                    <li><a href="pages-layouts-leftsidebar.html">Layouts Left Sidebar</a></li>
+                                    <li><a href="pages-layouts-rightsidebar.html">Layouts Right Sidebar</a></li>
+                                    <li><a href="pages-layouts-twosidebar.html">Layouts Two Sidebar</a></li>
+                                    <li><a href="pages-layouts-fullwidth.html">Layouts Full Width</a></li>
+                                    <li><a href="pages-contactus1.html">Contact Us 1</a></li>
+                                    <li><a href="pages-contactus2.html">Contact Us 2</a></li>
+                                    <li><a href="pages-contactus3.html">Contact Us 3</a></li>
+                                    <li><a href="pages-travelo-policies.html">Travelo Policies</a></li>
+                                    <li><a href="pages-sitemap.html">Site Map</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="hotel-index.html">Hotels</a>
+                                <a href="#">Extra Pages</a>
                                 <ul>
-                                    <li><a href="hotel-index.html">Home Hotels</a></li>
-                                    <li><a href="hotel-list-view.html">List View</a></li>
-                                    <li><a href="hotel-grid-view.html">Grid View</a></li>
-                                    <li><a href="hotel-block-view.html">Block View</a></li>
-                                    <li><a href="hotel-detailed.html">Detailed</a></li>
-                                    <li><a href="hotel-booking.html">Booking</a></li>
-                                    <li><a href="hotel-thankyou.html">Thank You</a></li>
+                                    <li><a href="extra-pages-holidays.html">Holidays</a></li>
+                                    <li><a href="extra-pages-hotdeals.html">Hot Deals</a></li>
+                                    <li><a href="extra-pages-before-you-fly.html">Before You Fly</a></li>
+                                    <li><a href="extra-pages-inflight-experience.html">Inflight Experience</a></li>
+                                    <li><a href="extra-pages-things-todo1.html">Things To Do 1</a></li>
+                                    <li><a href="extra-pages-things-todo2.html">Things To Do 2</a></li>
+                                    <li><a href="extra-pages-travel-essentials.html">Travel Essentials</a></li>
+                                    <li><a href="extra-pages-travel-stories.html">Travel Stories</a></li>
+                                    <li><a href="extra-pages-travel-guide.html">Travel Guide</a></li>
+                                    <li><a href="extra-pages-travel-ideas.html">Travel Ideas</a></li>
+                                    <li><a href="extra-pages-travel-insurance.html">Travel Insurance</a></li>
+                                    <li><a href="extra-pages-group-booking.html">Group Bookings</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="flight-index.html">Flights</a>
+                                <a href="#">Special Pages</a>
                                 <ul>
-                                    <li><a href="flight-index.html">Home Flights</a></li>
-                                    <li><a href="flight-list-view.html">List View</a></li>
-                                    <li><a href="flight-grid-view.html">Grid View</a></li>
-                                    <li><a href="flight-block-view.html">Block View</a></li>
-                                    <li><a href="flight-detailed.html">Detailed</a></li>
-                                    <li><a href="flight-booking.html">Booking</a></li>
-                                    <li><a href="flight-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="car-index.html">Cars</a>
-                                <ul>
-                                    <li><a href="car-index.html">Home Cars</a></li>
-                                    <li><a href="car-list-view.html">List View</a></li>
-                                    <li><a href="car-grid-view.html">Grid View</a></li>
-                                    <li><a href="car-block-view.html">Block View</a></li>
-                                    <li><a href="car-detailed.html">Detailed</a></li>
-                                    <li><a href="car-booking.html">Booking</a></li>
-                                    <li><a href="car-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="cruise-index.html">Cruises</a>
-                                <ul>
-                                    <li><a href="cruise-index.html">Home Cruises</a></li>
-                                    <li><a href="cruise-list-view.html">List View</a></li>
-                                    <li><a href="cruise-grid-view.html">Grid View</a></li>
-                                    <li><a href="cruise-block-view.html">Block View</a></li>
-                                    <li><a href="cruise-detailed.html">Detailed</a></li>
-                                    <li><a href="cruise-booking.html">Booking</a></li>
-                                    <li><a href="cruise-thankyou.html">Thank You</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="tour-index.html">Tour</a>
-                                <ul>
-                                    <li><a href="tour-index.html">Home Tour</a></li>
-                                    <li><a href="tour-fancy-package-2column.html">Fancy Packages 2 Column</a></li>
-                                    <li><a href="tour-fancy-package-3column.html">Fancy Packages 3 Column</a></li>
-                                    <li><a href="tour-fancy-package-4column.html">Fancy Packages 4 Column</a></li>
-                                    <li><a href="tour-simple-package-2column.html">Simple Packages 2 Column</a></li>
-                                    <li><a href="tour-simple-package-3column.html">Simple Packages 3 Column</a></li>
-                                    <li><a href="tour-simple-package-4column.html">Simple Packages 4 Column</a></li>
-                                    <li><a href="tour-simple-package-3column.html">Location - Eruope</a></li>
-                                    <li><a href="tour-simple-package-4column.html">Location - North America</a></li>
-                                    <li><a href="tour-detailed1.html">Detailed 1</a></li>
-                                    <li><a href="tour-detailed2.html">Detailed 2</a></li>
-                                    <li><a href="tour-booking.html">Booking</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children megamenu-menu">
-                                <a href="#">Pages</a>
-                                <div class="megamenu-wrapper container" data-items-per-column="8">
-                                    <div class="megamenu-holder">
-                                        <ul class="megamenu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Standard Pages</a>
-                                                <ul class="clearfix">
-                                                    <li><a href="pages-aboutus1.html">About Us 1</a></li>
-                                                    <li><a href="pages-aboutus2.html">About Us 2</a></li>
-                                                    <li><a href="pages-services1.html">Services 1</a></li>
-                                                    <li><a href="pages-services2.html">Services 2</a></li>
-                                                    <li><a href="pages-photogallery-4column.html">Gallery 4 Column</a></li>
-                                                    <li><a href="pages-photogallery-3column.html">Gallery 3 Column</a></li>
-                                                    <li><a href="pages-photogallery-2column.html">Gallery 2 Column</a></li>
-                                                    <li><a href="pages-photogallery-fullview.html">Gallery Read</a></li>
-                                                    <li><a href="pages-blog-rightsidebar.html">Blog Right Sidebar</a></li>
-                                                    <li><a href="pages-blog-leftsidebar.html">Blog Left Sidebar</a></li>
-                                                    <li><a href="pages-blog-fullwidth.html">Blog Full Width</a></li>
-                                                    <li><a href="pages-blog-read.html">Blog Read</a></li>
-                                                    <li><a href="pages-faq1.html">Faq 1</a></li>
-                                                    <li><a href="pages-faq2.html">Faq 2</a></li>
-                                                    <li><a href="pages-layouts-leftsidebar.html">Layouts Left Sidebar</a></li>
-                                                    <li><a href="pages-layouts-rightsidebar.html">Layouts Right Sidebar</a></li>
-                                                    <li><a href="pages-layouts-twosidebar.html">Layouts Two Sidebar</a></li>
-                                                    <li><a href="pages-layouts-fullwidth.html">Layouts Full Width</a></li>
-                                                    <li><a href="pages-contactus1.html">Contact Us 1</a></li>
-                                                    <li><a href="pages-contactus2.html">Contact Us 2</a></li>
-                                                    <li><a href="pages-contactus3.html">Contact Us 3</a></li>
-                                                    <li><a href="pages-travelo-policies.html">Travelo Policies</a></li>
-                                                    <li><a href="pages-sitemap.html">Site Map</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Extra Pages</a>
-                                                <ul class="clearfix">
-                                                    <li><a href="extra-pages-holidays.html">Holidays</a></li>
-                                                    <li><a href="extra-pages-hotdeals.html">Hot Deals</a></li>
-                                                    <li><a href="extra-pages-before-you-fly.html">Before You Fly</a></li>
-                                                    <li><a href="extra-pages-inflight-experience.html">Inflight Experience</a></li>
-                                                    <li><a href="extra-pages-things-todo1.html">Things To Do 1</a></li>
-                                                    <li><a href="extra-pages-things-todo2.html">Things To Do 2</a></li>
-                                                    <li><a href="extra-pages-travel-essentials.html">Travel Essentials</a></li>
-                                                    <li><a href="extra-pages-travel-stories.html">Travel Stories</a></li>
-                                                    <li><a href="extra-pages-travel-guide.html">Travel Guide</a></li>
-                                                    <li><a href="extra-pages-travel-ideas.html">Travel Ideas</a></li>
-                                                    <li><a href="extra-pages-travel-insurance.html">Travel Insurance</a></li>
-                                                    <li><a href="extra-pages-group-booking.html">Group Bookings</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Special Pages</a>
-                                                <ul class="clearfix">
-                                                    <li><a href="pages-404-1.html">404 Page 1</a></li>
-                                                    <li><a href="pages-404-2.html">404 Page 2</a></li>
-                                                    <li><a href="pages-404-3.html">404 Page 3</a></li>
-                                                    <li><a href="pages-coming-soon1.html">Coming Soon 1</a></li>
-                                                    <li><a href="pages-coming-soon2.html">Coming Soon 2</a></li>
-                                                    <li><a href="pages-coming-soon3.html">Coming Soon 3</a></li>
-                                                    <li><a href="pages-loading1.html">Loading Page 1</a></li>
-                                                    <li><a href="pages-loading2.html">Loading Page 2</a></li>
-                                                    <li><a href="pages-loading3.html">Loading Page 3</a></li>
-                                                    <li><a href="pages-login1.html">Login Page 1</a></li>
-                                                    <li><a href="pages-login2.html">Login Page 2</a></li>
-                                                    <li><a href="pages-login3.html">Login Page 3</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Shortcodes</a>
-                                <ul>
-                                    <li><a href="shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
-                                    <li><a href="shortcode-tabs.html">Tabs</a></li>
-                                    <li><a href="shortcode-buttons.html">Buttons</a></li>
-                                    <li><a href="shortcode-icon-boxes.html">Icon Boxes</a></li>
-                                    <li><a href="shortcode-gallery-styles.html">Image &amp; Gallery Styles</a></li>
-                                    <li><a href="shortcode-image-box-styles.html">Image Box Styles</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Listing Styles</a>
-                                        <ul>
-                                            <li><a href="shortcode-listing-style1.html">Listing Style 01</a></li>
-                                            <li><a href="shortcode-listing-style2.html">Listing Style 02</a></li>
-                                            <li><a href="shortcode-listing-style3.html">Listing Style 03</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shortcode-dropdowns.html">Dropdowns</a></li>
-                                    <li><a href="shortcode-pricing-tables.html">Pricing Tables</a></li>
-                                    <li><a href="shortcode-testimonials.html">Testimonials</a></li>
-                                    <li><a href="shortcode-our-team.html">Our Team</a></li>
-                                    <li><a href="shortcode-gallery-popup.html">Gallery Popup</a></li>
-                                    <li><a href="shortcode-map-popup.html">Map Popup</a></li>
-                                    <li><a href="shortcode-style-changer.html">Style Changer</a></li>
-                                    <li><a href="shortcode-typography.html">Typography</a></li>
-                                    <li><a href="shortcode-animations.html">Animations</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Bonus</a>
-                                <ul>
-                                    <li><a href="dashboard1.html">Dashboard 1</a></li>
-                                    <li><a href="dashboard2.html">Dashboard 2</a></li>
-                                    <li><a href="dashboard3.html">Dashboard 3</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Sliders</a>
-                                        <ul>
-                                            <li><a href="slider1.html">Slider - Travelo</a></li>
-                                            <li><a href="slider2.html">Slider - Concept</a></li>
-                                            <li><a href="slider3.html">Slider - Promotion</a></li>
-                                            <li><a href="slider4.html">Slider - Snapshots</a></li>
-                                            <li><a href="slider5.html">Slider - Holidays</a></li>
-                                            <li><a href="slider6.html">Slider - Couples</a></li>
-                                            <li><a href="slider7.html">Slider - Family</a></li>
-                                            
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">7 Footer Styles</a>
-                                        <ul>
-                                            <li><a href="#">Default Style</a></li>
-                                            <li><a href="footer-style1.html">Footer Style 1</a></li>
-                                            <li><a href="footer-style2.html">Footer Style 2</a></li>
-                                            <li><a href="footer-style3.html">Footer Style 3</a></li>
-                                            <li><a href="footer-style4.html">Footer Style 4</a></li>
-                                            <li><a href="footer-style5.html">Footer Style 5</a></li>
-                                            <li><a href="footer-style6.html">Footer Style 6</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">8 Header Styles</a>
-                                        <ul>
-                                            <li><a href="#">Default Style</a></li>
-                                            <li><a href="header-style1.html">Header Style 1</a></li>
-                                            <li><a href="header-style2.html">Header Style 2</a></li>
-                                            <li><a href="header-style3.html">Header Style 3</a></li>
-                                            <li><a href="header-style4.html">Header Style 4</a></li>
-                                            <li><a href="header-style5.html">Header Style 5</a></li>
-                                            <li><a href="header-style6.html">Header Style 6</a></li>
-                                            <li><a href="header-style7.html">Header Style 7</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">7 Inner Start Styles</a>
-                                        <ul>
-                                            <li><a href="#">Default Style</a></li>
-                                            <li><a href="inner-starts-style1.html">Inner Start Style 1</a></li>
-                                            <li><a href="inner-starts-style2.html">Inner Start Style 2</a></li>
-                                            <li><a href="inner-starts-style3.html">Inner Start Style 3</a></li>
-                                            <li><a href="inner-starts-style4.html">Inner Start Style 4</a></li>
-                                            <li><a href="inner-starts-style5.html">Inner Start Style 5</a></li>
-                                            <li><a href="inner-starts-style6.html">Inner Start Style 6</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">3 Search Styles</a>
-                                        <ul>
-                                            <li><a href="search-style1.html">Search Style 1</a></li>
-                                            <li><a href="search-style2.html">Search Style 2</a></li>
-                                            <li><a href="search-style3.html">Search Style 3</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="pages-404-1.html">404 Page 1</a></li>
+                                    <li><a href="pages-404-2.html">404 Page 2</a></li>
+                                    <li><a href="pages-404-3.html">404 Page 3</a></li>
+                                    <li><a href="pages-coming-soon1.html">Coming Soon 1</a></li>
+                                    <li><a href="pages-coming-soon2.html">Coming Soon 2</a></li>
+                                    <li><a href="pages-coming-soon3.html">Coming Soon 3</a></li>
+                                    <li><a href="pages-loading1.html">Loading Page 1</a></li>
+                                    <li><a href="pages-loading2.html">Loading Page 2</a></li>
+                                    <li><a href="pages-loading3.html">Loading Page 3</a></li>
+                                    <li><a href="pages-login1.html">Login Page 1</a></li>
+                                    <li><a href="pages-login2.html">Login Page 2</a></li>
+                                    <li><a href="pages-login3.html">Login Page 3</a></li>
                                 </ul>
                             </li>
                         </ul>
-                    </nav>
-                </div>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Shortcodes</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-7"></button>
+                        <ul id="mobile-menu-submenu-item-7" class="collapse">
+                            <li><a href="shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
+                            <li><a href="shortcode-tabs.html">Tabs</a></li>
+                            <li><a href="shortcode-buttons.html">Buttons</a></li>
+                            <li><a href="shortcode-icon-boxes.html">Icon Boxes</a></li>
+                            <li><a href="shortcode-gallery-styles.html">Image &amp; Gallery Styles</a></li>
+                            <li><a href="shortcode-image-box-styles.html">Image Box Styles</a></li>
+                            <li class="menu-item-has-children">
+                                <a href="#">Listing Styles</a>
+                                <ul>
+                                    <li><a href="shortcode-listing-style1.html">Listing Style 01</a></li>
+                                    <li><a href="shortcode-listing-style2.html">Listing Style 02</a></li>
+                                    <li><a href="shortcode-listing-style3.html">Listing Style 03</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="shortcode-dropdowns.html">Dropdowns</a></li>
+                            <li><a href="shortcode-pricing-tables.html">Pricing Tables</a></li>
+                            <li><a href="shortcode-testimonials.html">Testimonials</a></li>
+                            <li><a href="shortcode-our-team.html">Our Team</a></li>
+                            <li><a href="shortcode-gallery-popup.html">Gallery Popup</a></li>
+                            <li><a href="shortcode-map-popup.html">Map Popup</a></li>
+                            <li><a href="shortcode-style-changer.html">Style Changer</a></li>
+                            <li><a href="shortcode-typography.html">Typography</a></li>
+                            <li><a href="shortcode-animations.html">Animations</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="#">Bonus</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-8"></button>
+                        <ul id="mobile-menu-submenu-item-8" class="collapse">
+                            <li><a href="dashboard1.html">Dashboard 1</a></li>
+                            <li><a href="dashboard2.html">Dashboard 2</a></li>
+                            <li><a href="dashboard3.html">Dashboard 3</a></li>
+                            <li class="menu-item-has-children">
+                                <a href="#">Sliders</a>
+                                <ul>
+                                    <li><a href="slider1.html">Slider - Travelo</a></li>
+                                    <li><a href="slider2.html">Slider - Concept</a></li>
+                                    <li><a href="slider3.html">Slider - Promotion</a></li>
+                                    <li><a href="slider4.html">Slider - Snapshots</a></li>
+                                    <li><a href="slider5.html">Slider - Holidays</a></li>
+                                    <li><a href="slider6.html">Slider - Couples</a></li>
+                                    <li><a href="slider7.html">Slider - Family</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="#">7 Footer Styles</a>
+                                <ul>
+                                    <li><a href="#">Default Style</a></li>
+                                    <li><a href="footer-style1.html">Footer Style 1</a></li>
+                                    <li><a href="footer-style2.html">Footer Style 2</a></li>
+                                    <li><a href="footer-style3.html">Footer Style 3</a></li>
+                                    <li><a href="footer-style4.html">Footer Style 4</a></li>
+                                    <li><a href="footer-style5.html">Footer Style 5</a></li>
+                                    <li><a href="footer-style6.html">Footer Style 6</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="#">8 Header Styles</a>
+                                <ul>
+                                    <li><a href="#">Default Style</a></li>
+                                    <li><a href="header-style1.html">Header Style 1</a></li>
+                                    <li><a href="header-style2.html">Header Style 2</a></li>
+                                    <li><a href="header-style3.html">Header Style 3</a></li>
+                                    <li><a href="header-style4.html">Header Style 4</a></li>
+                                    <li><a href="header-style5.html">Header Style 5</a></li>
+                                    <li><a href="header-style6.html">Header Style 6</a></li>
+                                    <li><a href="header-style7.html">Header Style 7</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="#">7 Inner Start Styles</a>
+                                <ul>
+                                    <li><a href="#">Default Style</a></li>
+                                    <li><a href="inner-starts-style1.html">Inner Start Style 1</a></li>
+                                    <li><a href="inner-starts-style2.html">Inner Start Style 2</a></li>
+                                    <li><a href="inner-starts-style3.html">Inner Start Style 3</a></li>
+                                    <li><a href="inner-starts-style4.html">Inner Start Style 4</a></li>
+                                    <li><a href="inner-starts-style5.html">Inner Start Style 5</a></li>
+                                    <li><a href="inner-starts-style6.html">Inner Start Style 6</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="#">3 Search Styles</a>
+                                <ul>
+                                    <li><a href="search-style1.html">Search Style 1</a></li>
+                                    <li><a href="search-style2.html">Search Style 2</a></li>
+                                    <li><a href="search-style3.html">Search Style 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://themeforest.net/item/travelo-responsive-travel-booking-site-template/8346649?ref=SoapTheme"><i class="soap-icon-shopping"></i> PURCHASE</a>
+                    </li>
+                </ul>
                 
-                <nav id="mobile-menu-01" class="mobile-menu collapse">
-                    <ul id="mobile-primary-menu" class="menu">
-                        <li class="menu-item-has-children">
-                            <a href="index.html">Home</a>
-                            <ul>
-                                <li><a href="index.html">Home Layout 1</a></li>
-                                <li><a href="homepage2.html">Home Layout 2</a></li>
-                                <li><a href="homepage3.html">Home Layout 3</a></li>
-                                <li><a href="homepage4.html">Home Layout 4</a></li>
-                                <li><a href="homepage5.html">Home Layout 5</a></li>
-                                <li><a href="homepage6.html">Home Layout 6</a></li>
-                                <li><a href="homepage7.html">Home Layout 7</a></li>
-                                <li><a href="homepage8.html">Home Layout 8</a></li>
-                                <li><a href="homepage9.html">Home Layout 9</a></li>
-                                <li><a href="homepage10.html">Home Layout 10</a></li>
-                                <li><a href="homepage11.html">Home Layout 11</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="hotel-index.html">Hotels</a>
-                            <ul>
-                                <li><a href="hotel-index.html">Home Hotels</a></li>
-                                <li><a href="hotel-list-view.html">List View</a></li>
-                                <li><a href="hotel-grid-view.html">Grid View</a></li>
-                                <li><a href="hotel-block-view.html">Block View</a></li>
-                                <li><a href="hotel-detailed.html">Detailed</a></li>
-                                <li><a href="hotel-booking.html">Booking</a></li>
-                                <li><a href="hotel-thankyou.html">Thank You</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="flight-index.html">Flights</a>
-                            <ul>
-                                <li><a href="flight-index.html">Home Flights</a></li>
-                                <li><a href="flight-list-view.html">List View</a></li>
-                                <li><a href="flight-grid-view.html">Grid View</a></li>
-                                <li><a href="flight-block-view.html">Block View</a></li>
-                                <li><a href="flight-detailed.html">Detailed</a></li>
-                                <li><a href="flight-booking.html">Booking</a></li>
-                                <li><a href="flight-thankyou.html">Thank You</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="car-index.html">Cars</a>
-                            <ul>
-                                <li><a href="car-index.html">Home Cars</a></li>
-                                <li><a href="car-list-view.html">List View</a></li>
-                                <li><a href="car-grid-view.html">Grid View</a></li>
-                                <li><a href="car-block-view.html">Block View</a></li>
-                                <li><a href="car-detailed.html">Detailed</a></li>
-                                <li><a href="car-booking.html">Booking</a></li>
-                                <li><a href="car-thankyou.html">Thank You</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="cruise-index.html">Cruises</a>
-                            <ul>
-                                <li><a href="cruise-index.html">Home Cruises</a></li>
-                                <li><a href="cruise-list-view.html">List View</a></li>
-                                <li><a href="cruise-grid-view.html">Grid View</a></li>
-                                <li><a href="cruise-block-view.html">Block View</a></li>
-                                <li><a href="cruise-detailed.html">Detailed</a></li>
-                                <li><a href="cruise-booking.html">Booking</a></li>
-                                <li><a href="cruise-thankyou.html">Thank You</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="tour-index.html">Tour</a>
-                            <ul>
-                                <li><a href="tour-index.html">Home Tour</a></li>
-                                <li><a href="tour-fancy-package-2column.html">Fancy Packages 2 Column</a></li>
-                                <li><a href="tour-fancy-package-3column.html">Fancy Packages 3 Column</a></li>
-                                <li><a href="tour-fancy-package-4column.html">Fancy Packages 4 Column</a></li>
-                                <li><a href="tour-simple-package-2column.html">Simple Packages 2 Column</a></li>
-                                <li><a href="tour-simple-package-3column.html">Simple Packages 3 Column</a></li>
-                                <li><a href="tour-simple-package-4column.html">Simple Packages 4 Column</a></li>
-                                <li><a href="tour-simple-package-3column.html">Location - Eruope</a></li>
-                                <li><a href="tour-simple-package-4column.html">Location - North America</a></li>
-                                <li><a href="tour-detailed1.html">Detailed 1</a></li>
-                                <li><a href="tour-detailed2.html">Detailed 2</a></li>
-                                <li><a href="tour-booking.html">Booking</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Pages</a>
-                            <ul>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Standard Pages</a>
-                                    <ul>
-                                        <li><a href="pages-aboutus1.html">About Us 1</a></li>
-                                        <li><a href="pages-aboutus2.html">About Us 2</a></li>
-                                        <li><a href="pages-services1.html">Services 1</a></li>
-                                        <li><a href="pages-services2.html">Services 2</a></li>
-                                        <li><a href="pages-photogallery-4column.html">Gallery 4 Column</a></li>
-                                        <li><a href="pages-photogallery-3column.html">Gallery 3 Column</a></li>
-                                        <li><a href="pages-photogallery-2column.html">Gallery 2 Column</a></li>
-                                        <li><a href="pages-photogallery-fullview.html">Gallery Read</a></li>
-                                        <li><a href="pages-blog-rightsidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a href="pages-blog-leftsidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="pages-blog-fullwidth.html">Blog Full Width</a></li>
-                                        <li><a href="pages-blog-read.html">Blog Read</a></li>
-                                        <li><a href="pages-faq1.html">Faq 1</a></li>
-                                        <li><a href="pages-faq2.html">Faq 2</a></li>
-                                        <li><a href="pages-layouts-leftsidebar.html">Layouts Left Sidebar</a></li>
-                                        <li><a href="pages-layouts-rightsidebar.html">Layouts Right Sidebar</a></li>
-                                        <li><a href="pages-layouts-twosidebar.html">Layouts Two Sidebar</a></li>
-                                        <li><a href="pages-layouts-fullwidth.html">Layouts Full Width</a></li>
-                                        <li><a href="pages-contactus1.html">Contact Us 1</a></li>
-                                        <li><a href="pages-contactus2.html">Contact Us 2</a></li>
-                                        <li><a href="pages-contactus3.html">Contact Us 3</a></li>
-                                        <li><a href="pages-travelo-policies.html">Travelo Policies</a></li>
-                                        <li><a href="pages-sitemap.html">Site Map</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Extra Pages</a>
-                                    <ul>
-                                        <li><a href="extra-pages-holidays.html">Holidays</a></li>
-                                        <li><a href="extra-pages-hotdeals.html">Hot Deals</a></li>
-                                        <li><a href="extra-pages-before-you-fly.html">Before You Fly</a></li>
-                                        <li><a href="extra-pages-inflight-experience.html">Inflight Experience</a></li>
-                                        <li><a href="extra-pages-things-todo1.html">Things To Do 1</a></li>
-                                        <li><a href="extra-pages-things-todo2.html">Things To Do 2</a></li>
-                                        <li><a href="extra-pages-travel-essentials.html">Travel Essentials</a></li>
-                                        <li><a href="extra-pages-travel-stories.html">Travel Stories</a></li>
-                                        <li><a href="extra-pages-travel-guide.html">Travel Guide</a></li>
-                                        <li><a href="extra-pages-travel-ideas.html">Travel Ideas</a></li>
-                                        <li><a href="extra-pages-travel-insurance.html">Travel Insurance</a></li>
-                                        <li><a href="extra-pages-group-booking.html">Group Bookings</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Special Pages</a>
-                                    <ul>
-                                        <li><a href="pages-404-1.html">404 Page 1</a></li>
-                                        <li><a href="pages-404-2.html">404 Page 2</a></li>
-                                        <li><a href="pages-404-3.html">404 Page 3</a></li>
-                                        <li><a href="pages-coming-soon1.html">Coming Soon 1</a></li>
-                                        <li><a href="pages-coming-soon2.html">Coming Soon 2</a></li>
-                                        <li><a href="pages-coming-soon3.html">Coming Soon 3</a></li>
-                                        <li><a href="pages-loading1.html">Loading Page 1</a></li>
-                                        <li><a href="pages-loading2.html">Loading Page 2</a></li>
-                                        <li><a href="pages-loading3.html">Loading Page 3</a></li>
-                                        <li><a href="pages-login1.html">Login Page 1</a></li>
-                                        <li><a href="pages-login2.html">Login Page 2</a></li>
-                                        <li><a href="pages-login3.html">Login Page 3</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Shortcodes</a>
-                            <ul>
-                                <li><a href="shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
-                                <li><a href="shortcode-tabs.html">Tabs</a></li>
-                                <li><a href="shortcode-buttons.html">Buttons</a></li>
-                                <li><a href="shortcode-icon-boxes.html">Icon Boxes</a></li>
-                                <li><a href="shortcode-gallery-styles.html">Image &amp; Gallery Styles</a></li>
-                                <li><a href="shortcode-image-box-styles.html">Image Box Styles</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Listing Styles</a>
-                                    <ul>
-                                        <li><a href="shortcode-listing-style1.html">Listing Style 01</a></li>
-                                        <li><a href="shortcode-listing-style2.html">Listing Style 02</a></li>
-                                        <li><a href="shortcode-listing-style3.html">Listing Style 03</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="shortcode-dropdowns.html">Dropdowns</a></li>
-                                <li><a href="shortcode-pricing-tables.html">Pricing Tables</a></li>
-                                <li><a href="shortcode-testimonials.html">Testimonials</a></li>
-                                <li><a href="shortcode-our-team.html">Our Team</a></li>
-                                <li><a href="shortcode-gallery-popup.html">Gallery Popup</a></li>
-                                <li><a href="shortcode-map-popup.html">Map Popup</a></li>
-                                <li><a href="shortcode-style-changer.html">Style Changer</a></li>
-                                <li><a href="shortcode-typography.html">Typography</a></li>
-                                <li><a href="shortcode-animations.html">Animations</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Bonus</a>
-                            <ul>
-                                <li><a href="dashboard1.html">Dashboard 1</a></li>
-                                <li><a href="dashboard2.html">Dashboard 2</a></li>
-                                <li><a href="dashboard3.html">Dashboard 3</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Sliders</a>
-                                    <ul>
-                                        <li><a href="slider1.html">Slider - Travelo</a></li>
-                                        <li><a href="slider2.html">Slider - Concept</a></li>
-                                        <li><a href="slider3.html">Slider - Promotion</a></li>
-                                        <li><a href="slider4.html">Slider - Snapshots</a></li>
-                                        <li><a href="slider5.html">Slider - Holidays</a></li>
-                                        <li><a href="slider6.html">Slider - Couples</a></li>
-                                        <li><a href="slider7.html">Slider - Family</a></li>
-                                        
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">7 Footer Styles</a>
-                                    <ul>
-                                        <li><a href="#">Default Style</a></li>
-                                        <li><a href="footer-style1.html">Footer Style 1</a></li>
-                                        <li><a href="footer-style2.html">Footer Style 2</a></li>
-                                        <li><a href="footer-style3.html">Footer Style 3</a></li>
-                                        <li><a href="footer-style4.html">Footer Style 4</a></li>
-                                        <li><a href="footer-style5.html">Footer Style 5</a></li>
-                                        <li><a href="footer-style6.html">Footer Style 6</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">8 Header Styles</a>
-                                    <ul>
-                                        <li><a href="#">Default Style</a></li>
-                                        <li><a href="header-style1.html">Header Style 1</a></li>
-                                        <li><a href="header-style2.html">Header Style 2</a></li>
-                                        <li><a href="header-style3.html">Header Style 3</a></li>
-                                        <li><a href="header-style4.html">Header Style 4</a></li>
-                                        <li><a href="header-style5.html">Header Style 5</a></li>
-                                        <li><a href="header-style6.html">Header Style 6</a></li>
-                                        <li><a href="header-style7.html">Header Style 7</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">7 Inner Start Styles</a>
-                                    <ul>
-                                        <li><a href="#">Default Style</a></li>
-                                        <li><a href="inner-starts-style1.html">Inner Start Style 1</a></li>
-                                        <li><a href="inner-starts-style2.html">Inner Start Style 2</a></li>
-                                        <li><a href="inner-starts-style3.html">Inner Start Style 3</a></li>
-                                        <li><a href="inner-starts-style4.html">Inner Start Style 4</a></li>
-                                        <li><a href="inner-starts-style5.html">Inner Start Style 5</a></li>
-                                        <li><a href="inner-starts-style6.html">Inner Start Style 6</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">3 Search Styles</a>
-                                    <ul>
-                                        <li><a href="search-style1.html">Search Style 1</a></li>
-                                        <li><a href="search-style2.html">Search Style 2</a></li>
-                                        <li><a href="search-style3.html">Search Style 3</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="http://themeforest.net/item/travelo-responsive-travel-booking-site-template/8346649?ref=SoapTheme"><i class="soap-icon-shopping"></i> PURCHASE</a>
-                        </li>
-                    </ul>
-                    
-                    <ul class="mobile-topnav container">
-                        <li><a href="#">MY ACCOUNT</a></li>
-                        <li class="ribbon language menu-color-skin">
-                            <a href="#" data-toggle="collapse">ENGLISH</a>
-                            <ul class="menu mini">
-                                <li><a href="#" title="Dansk">Dansk</a></li>
-                                <li><a href="#" title="Deutsch">Deutsch</a></li>
-                                <li class="active"><a href="#" title="English">English</a></li>
-                                <li><a href="#" title="Español">Español</a></li>
-                                <li><a href="#" title="Français">Français</a></li>
-                                <li><a href="#" title="Italiano">Italiano</a></li>
-                                <li><a href="#" title="Magyar">Magyar</a></li>
-                                <li><a href="#" title="Nederlands">Nederlands</a></li>
-                                <li><a href="#" title="Norsk">Norsk</a></li>
-                                <li><a href="#" title="Polski">Polski</a></li>
-                                <li><a href="#" title="Português">Português</a></li>
-                                <li><a href="#" title="Suomi">Suomi</a></li>
-                                <li><a href="#" title="Svenska">Svenska</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
-                        <li><a href="#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
-                        <li class="ribbon currency menu-color-skin">
-                            <a href="#">USD</a>
-                            <ul class="menu mini">
-                                <li><a href="#" title="AUD">AUD</a></li>
-                                <li><a href="#" title="BRL">BRL</a></li>
-                                <li class="active"><a href="#" title="USD">USD</a></li>
-                                <li><a href="#" title="CAD">CAD</a></li>
-                                <li><a href="#" title="CHF">CHF</a></li>
-                                <li><a href="#" title="CNY">CNY</a></li>
-                                <li><a href="#" title="CZK">CZK</a></li>
-                                <li><a href="#" title="DKK">DKK</a></li>
-                                <li><a href="#" title="EUR">EUR</a></li>
-                                <li><a href="#" title="GBP">GBP</a></li>
-                                <li><a href="#" title="HKD">HKD</a></li>
-                                <li><a href="#" title="HUF">HUF</a></li>
-                                <li><a href="#" title="IDR">IDR</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                </nav>
-            </div>
-            <div id="travelo-signup" class="travelo-signup-box travelo-box">
-                <div class="login-social">
-                    <a href="#" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>
-                    <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>
-                </div>
-                <div class="seperator"><label>OR</label></div>
-                <div class="simple-signup">
-                    <div class="text-center signup-email-section">
-                        <a href="#" class="signup-email"><i class="soap-icon-letter"></i>Sign up with Email</a>
-                    </div>
-                    <p class="description">By signing up, I agree to Travelo's Terms of Service, Privacy Policy, Guest Refund olicy, and Host Guarantee Terms.</p>
-                </div>
-                <div class="email-signup">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="input-text full-width" placeholder="first name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="input-text full-width" placeholder="last name">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="input-text full-width" placeholder="email address">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="input-text full-width" placeholder="password">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="input-text full-width" placeholder="confirm password">
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Tell me about Travelo news
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <p class="description">By signing up, I agree to Travelo's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms.</p>
-                        </div>
-                        <button type="submit" class="full-width btn-medium">SIGNUP</button>
-                    </form>
-                </div>
-                <div class="seperator"></div>
-                <p>Already a Travelo member? <a href="#travelo-login" class="goto-login soap-popupbox">Login</a></p>
-            </div>
-            <div id="travelo-login" class="travelo-login-box travelo-box">
-                <div class="login-social">
-                    <a href="#" class="button login-facebook"><i class="soap-icon-facebook"></i>Login with Facebook</a>
-                    <a href="#" class="button login-googleplus"><i class="soap-icon-googleplus"></i>Login with Google+</a>
-                </div>
-                <div class="seperator"><label>OR</label></div>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="input-text full-width" placeholder="email address">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="input-text full-width" placeholder="password">
-                    </div>
-                    <div class="form-group">
-                        <a href="#" class="forgot-password pull-right">Forgot password?</a>
-                        <div class="checkbox checkbox-inline">
-                            <label>
-                                <input type="checkbox"> Remember me
-                            </label>
-                        </div>
-                    </div>
-                </form>
-                <div class="seperator"></div>
-                <p>Don't have an account? <a href="#travelo-signup" class="goto-signup soap-popupbox">Sign up</a></p>
-            </div>
-        </header>
+                <ul class="mobile-topnav container">
+                    <li><a href="#">MY ACCOUNT</a></li>
+                    <li class="ribbon language menu-color-skin">
+                        <a href="#" data-toggle="collapse">ENGLISH</a>
+                        <ul class="menu mini" style="">
+                            <li><a href="#" title="Dansk">Dansk</a></li>
+                            <li><a href="#" title="Deutsch">Deutsch</a></li>
+                            <li class="active"><a href="#" title="English">English</a></li>
+                            <li><a href="#" title="Español">Español</a></li>
+                            <li><a href="#" title="Français">Français</a></li>
+                            <li><a href="#" title="Italiano">Italiano</a></li>
+                            <li><a href="#" title="Magyar">Magyar</a></li>
+                            <li><a href="#" title="Nederlands">Nederlands</a></li>
+                            <li><a href="#" title="Norsk">Norsk</a></li>
+                            <li><a href="#" title="Polski">Polski</a></li>
+                            <li><a href="#" title="Português">Português</a></li>
+                            <li><a href="#" title="Suomi">Suomi</a></li>
+                            <li><a href="#" title="Svenska">Svenska</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
+                    <li><a href="#travelo-signup" class="soap-popupbox">SIGNUP</a></li>
+                    <li class="ribbon currency menu-color-skin">
+                        <a href="#">USD</a>
+                        <ul class="menu mini" style="">
+                            <li><a href="#" title="AUD">AUD</a></li>
+                            <li><a href="#" title="BRL">BRL</a></li>
+                            <li class="active"><a href="#" title="USD">USD</a></li>
+                            <li><a href="#" title="CAD">CAD</a></li>
+                            <li><a href="#" title="CHF">CHF</a></li>
+                            <li><a href="#" title="CNY">CNY</a></li>
+                            <li><a href="#" title="CZK">CZK</a></li>
+                            <li><a href="#" title="DKK">DKK</a></li>
+                            <li><a href="#" title="EUR">EUR</a></li>
+                            <li><a href="#" title="GBP">GBP</a></li>
+                            <li><a href="#" title="HKD">HKD</a></li>
+                            <li><a href="#" title="HUF">HUF</a></li>
+                            <li><a href="#" title="IDR">IDR</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+            </nav>
+        </div>
+           
+
+    </header>
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
@@ -763,12 +433,101 @@
                     <div id="main">
                                              
                                 <div class="row" style="margin-top:15px;">
+                                       
+                                                <div class="car-list listing-style3 car" style="margin-top:0px">
+                                                        <article class="box">
+                                                           
+                                                               
+                                                                    <figure class="col-xs-3">
+                                                                        <a title="" href="#"><img alt="" src="[[cab[0].images[0].image_url]]"></a>
+                                                                    </figure>
+                                                                    <div class="details col-xs-9 clearfix">
+                                                                        <div class="col-sm-8">
+                                                                            <div class="clearfix">
+                                                                                <h4 class="box-title">Full Size<small>[[cab[0].car_name]]</small></h4>
+                                                                                
+                                                                                <div class="logo">
+                                                                                    <img src="images/cars/logo/1.png" alt="" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="amenities">
+                                                                                    <ul>
+                                                                                            <li ng-show="cab[0].amenities.air_condition"><i class="soap-icon-aircon circle"></i>AC</li>
+                                                                                            <li><i class="soap-icon-user circle"></i>[[cab[0].amenities.seater]]</li>
+                                                                                            <li><i class="fa fa-fill-drip circle"></i>[[cab[0].amenities.fuel_type]]</li>
+                                                                                            <!-- <li ng-show="cab[0].amenities.baggage_allowance"><i class="soap-icon-suitcase circle"></i>BA</li> -->
+                                                                                            <li ng-show="cab[0].amenities.doorstep_delivery"><i class="fa fa-door-open circle"></i>DD</li>                                        
+                                                                                            <!-- <li ng-show="cab[0].amenities.automatic"><i class="fa fa-cloud circle"></i>T</li> -->
+                                                                                            <li ng-show="cab[0].amenities.fuel"><i class="fa fa-tint circle"></i>WF</li>
+                                                                                            <!-- <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li> -->
+                                                                                            <!-- <li ng-show="cab[0].amenities.verified_driver"><i class="fa fa-id-card circle"></i>YES</li> -->
+                                                                                        </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xs-6 col-sm-2 character" style="line-height:98px;">
+                                                                            <a class="button btn-small yellow" style="padding:0 8px;" data-toggle="collapse" data-target="#more_deals1">More Deals</a>
+                                                                        </div>
+                                                                        <div class="action col-xs-6 col-sm-2">
+                                                                            <span class="price"><small>per day</small>$45.39</span>
+                                                                        </div>
+                                                                        <div id="more_deals1" class="col-sm-12 collapse" style="transition: 2s;" aria-expanded="true">
+                                                                                
+                                                                                <table class="table table-hover">
+                                                                                    
+                                                                                    <tbody class="ng-scope">
+                                                                                   
+                                                                                        <!-- ngIf: [[rm.room_type]]==1 --><td >[[]]</td><!-- end ngIf: [[rm.room_type]]==1 -->
+                                                                                       
+                                                                                        <td><a class="button btn-mini orange">fare detail</a></td>
+                                                                                        <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
+                                                                                    
+                                                                                    
+                                                                                     </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
+                                                                                
+                                                                                </table>
+                                                                          
+                                                                            </div>
+                                                                </div>
+                                                                
+                                                                    <!-- <div id="[[deal.roomdata.hoteldata.id]]" class="collapse" style="transition:2s">
+                                                                    
+                                                                    
+                        
+                                                                <table class="table table-hover">
+                                                                    
+                                                                    <tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms">
+                                                                    <tr ng-repeat="deal in rm.deals | limitTo:lim ">
+                                                                        <td><img src="[[deal.website.logo_image]]"></td>
+                                                                        <td ng-if="[[rm.room_type]]==1">Premium</td>
+                                                                        <td ng-if="[[rm.room_type]]==2">Executive</td>
+                                                                        <td ng-if="[[rm.room_type]]==3">Sweet</td>
+                                                                        <td ng-if="[[rm.room_type]]==4">Super_Deluxe</td>
+                                                                        <td ng-if="[[rm.room_type]]==5">[[rm.other_room_type]]</td>
+                                                                        <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
+                                                                        <td class="price"><a href="[[deal.hotel_url]]">₹[[deal.price]]</a></td>
+                                                                    </tr>
+                                                                    
+                                                                    
+                                                                    </tbody>
+                                                                
+                                                                </table>
+                                                                
+                                                                </div> -->
+                                                          
+                                                                   
+                                                                   
+                                                        </article>
+                                                             
+                                                     
+                                                   
+                                        </div>
                                     <div class="col-sm-8 col-md-8">
-                                            <div class="booking-section travelo-box">
-                                                    
-                                                    <form class="booking-form" method="post" action="booking-handler.php">
-                                                        <div class="person-information">
-                                                            <h2>Your Personal Information</h2>
+                                            <div class="booking-section travelo-box" id="booking-complete">
+                                                    <h2>Your Personal Information</h2>
+                                                    <form class="booking-form" method="post" id="booking-form">
+                                                            
+                                                          <div class="person-information">
+                                                            
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6 col-md-5">
                                                                     <label>first name</label>
@@ -811,70 +570,161 @@
                                                                     </label>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="card-information">
-                                                            <h2>Your Card Information</h2>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-6 col-md-5">
-                                                                    <label>Credit Card Type</label>
-                                                                    <div class="selector">
-                                                                        <select class="full-width">
-                                                                            <option>select a card</option>
-                                                                        </select><span class="custom-select full-width">select a card</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-5">
-                                                                    <label>Card holder name</label>
-                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 col-md-5">
-                                                                    <label>Card number</label>
-                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-5">
-                                                                    <label>Card identification number</label>
-                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-6 col-md-5">
-                                                                    <label>Expiration Date</label>
-                                                                    <div class="constant-column-2">
-                                                                        <div class="selector">
-                                                                            <select class="full-width">
-                                                                                <option>month</option>
-                                                                            </select><span class="custom-select full-width">month</span>
-                                                                        </div>
-                                                                        <div class="selector">
-                                                                            <select class="full-width">
-                                                                                <option>year</option>
-                                                                            </select><span class="custom-select full-width">year</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-5">
-                                                                    <label>billing zip code</label>
-                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
+                                                                    <button onclick="hide('booking-form'),show('proceed_for_payment'),show('payment-content')" type="submit" class="full-width btn-large">PROCEED FOR PAYMENT</button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <hr>
-                                                        <div class="form-group">
-                                                            <div class="checkbox">
-                                                                <label>
-                                                                    <input type="checkbox"> By continuing, you agree to the <a href="#"><span class="skin-color">Terms and Conditions</span></a>.
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-6 col-md-5">
-                                                                <button type="submit" class="full-width btn-large">CONFIRM BOOKING</button>
-                                                            </div>
-                                                        </div>
+                                                       
                                                     </form>
+                                                </div>
+
+                                            <div id="proceed_for_payment" class="col-sm-12 collapse booking-section travelo-box" style="display:none;" aria-expanded="true">
+                                                    
+                                                    <form class="booking-form" method="post">
+                                                            <div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-10">
+                                                                        <h2>Your Card Information</h2>
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                            <a class="button btn-small yellow" onclick="show('booking-form'),hide('payment-content')"style="padding:0 8px;">back</a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="block" id="payment-content">
+                                                                       
+                                                                        <div class="tab-container full-width-style white-bg">
+                                                                            <ul class="tabs">
+                                                                                <li class="active"><a href="#credit-card" data-toggle="tab" aria-expanded="true"><i class="soap-icon-anchor circle"></i>Credit card</a></li>
+                                                                                <li class=""><a href="#debit-card" data-toggle="tab" aria-expanded="false"><i class="soap-icon-user circle"></i>Debit card</a></li>
+                                                                                <li class=""><a href="#paytm" data-toggle="tab" aria-expanded="false"><i class="soap-icon-suitcase circle"></i>Wallet</a></li>
+                                                                                <li class=""><a href="#net-banking" data-toggle="tab" aria-expanded="false"><i class="soap-icon-user circle"></i>net Banking</a></li>
+                                                                                <li class=""><a href="#vendor" data-toggle="tab" aria-expanded="false"><i class="soap-icon-suitcase circle"></i>Vendor</a></li>
+                                                                                <li class=""><a href="#fifth-tab" data-toggle="tab" aria-expanded="false"><i class="soap-icon-suitcase circle"></i>EMI travel</a></li>
+                                                                            
+                                                                            </ul>
+                                                                            <div class="tab-content">
+                                                                                <div class="tab-pane fade active in" id="credit-card">
+                                                                                    <h2 class="tab-content-title">Hi First Tab Text</h2>
+                                                                                    <div>
+                                                                                            <div class="form-group row">
+                                                                                                <div class="col-sm-6 col-md-5">
+                                                                                                    <label>Credit Card Type</label>
+                                                                                                    <div class="selector">
+                                                                                                        <select class="full-width">
+                                                                                                            <option>select a card</option>
+                                                                                                        </select><span class="custom-select full-width">select a card</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-sm-6 col-md-5">
+                                                                                                    <label>Card holder name</label>
+                                                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                            <div class="form-group row">
+                                                                                                <div class="col-sm-6 col-md-5">
+                                                                                                    <label>Card number</label>
+                                                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
+                                                                                                </div>
+                                                                                                <div class="col-sm-6 col-md-5">
+                                                                                                    <label>Card identification number</label>
+                                                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <div class="col-sm-6 col-md-5">
+                                                                                                    <label>Expiration Date</label>
+                                                                                                    <div class="constant-column-2">
+                                                                                                        <div class="selector">
+                                                                                                            <select class="full-width">
+                                                                                                                <option>month</option>
+                                                                                                            </select><span class="custom-select full-width">month</span>
+                                                                                                        </div>
+                                                                                                        <div class="selector">
+                                                                                                            <select class="full-width">
+                                                                                                                <option>year</option>
+                                                                                                            </select><span class="custom-select full-width">year</span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-sm-6 col-md-5">
+                                                                                                    <label>billing zip code</label>
+                                                                                                    <input type="text" class="input-text full-width" value="" placeholder="">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                        <hr>
+                                                                                        <div class="form-group">
+                                                                                            <div class="checkbox">
+                                                                                                <label>
+                                                                                                    <input type="checkbox"> By continuing, you agree to the <a href="#"><span class="skin-color">Terms and Conditions</span></a>.
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <div class="col-sm-6 col-md-5">
+                                                                                                <button type="submit" onclick="hide('proceed_for_payment'),show('booking_confirm'),hide('booking-complete')" class="full-width btn-large">CONFIRM BOOKING</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                <div class="tab-pane fade" id="debit-card">
+                                                                                    <h2 class="tab-content-title">Second Tab</h2>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="paytm">
+                                                                                    <h2 class="tab-content-title">Third Tab</h2>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="net-banking">
+                                                                                        <h2 class="tab-content-title">Third Tab</h2>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="vendor">
+                                                                                        <h2 class="tab-content-title">Third Tab</h2>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="fifth-tab">
+                                                                                        <h2 class="tab-content-title">Third Tab</h2>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                            </div>
+                                                            </form>
+                                            </div>
+                                            <div class="booking-information travelo-box" id="booking_confirm" style="display:none;">
+                                                    <h2>Booking Confirmation</h2>
+                                                    <hr>
+                                                    <div class="booking-confirmation clearfix">
+                                                        <i class="soap-icon-recommend icon circle"></i>
+                                                        <div class="message">
+                                                            <h4 class="main-message">Thank You. Your Booking Order is Confirmed Now.</h4>
+                                                            <p>A confirmation email has been sent to your provided email address.</p>
+                                                        </div>
+                                                        <a href="#" class="button print-button btn-small uppercase">print Details</a>
+                                                    </div>
+                                                    <hr>
+                                                    <h2>Traveler Information</h2>
+                                                    <dl class="term-description">
+                                                        <dt>Booking number:</dt><dd>5784-BD245</dd>
+                                                        <dt>First name:</dt><dd>Jessica</dd>
+                                                        <dt>Last name:</dt><dd>Brown</dd>
+                                                        <dt>E-mail address:</dt><dd>Info@Jessica.com</dd>
+                                                        <dt>Street Address and number:</dt><dd>353 Third floor Avenue</dd>
+                                                        <dt>Town / City:</dt><dd>Paris,France</dd>
+                                                        <dt>ZIP code:</dt><dd>75800-875</dd>
+                                                        <dt>Country:</dt><dd>United States of america</dd>
+                                                    </dl>
+                                                    <hr>
+                                                    <h2>Payment</h2>
+                                                    <p>Praesent dolor lectus, rutrum sit amet risus vitae, imperdiet cursus neque. Nulla tempor nec lorem eu suscipit. Donec dignissim lectus a nunc molestie consectetur. Nulla eu urna in nisi adipiscing placerat. Nam vel scelerisque magna. Donec justo urna, posuere ut dictum quis.</p>
+                                                    <br>
+                                                    <p class="red-color">Payment is made by Credit Card Via Paypal.</p>
+                                                    <hr>
+                                                    <h2>View Booking Details</h2>
+                                                    <p>Praesent dolor lectus, rutrum sit amet risus vitae, imperdiet cursus neque. Nulla tempor nec lorem eu suscipit. Donec dignissim lectus a nunc molestie consectetur. Nulla eu urna in nisi adipiscing placerat. Nam vel scelerisque magna. Donec justo urna, posuere ut dictum quis.</p>
+                                                    <br>
+                                                    <a href="#" class="red-color underline view-link">https://www.travelo.com/booking-details/?=f4acb19f-9542-4a5c-b8ee</a>
                                                 </div>
                                     </div>
                                     <div class="col-sm-4 col-md-4">      
@@ -886,22 +736,36 @@
                                                                       <form action="car-list-view.html" method="post">
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <h4 class="title">Where</h4>
+                                                                                <h4 class="title">Booking details</h4>
                                                                                 <div class="form-group">
                                                                                     <div class="row">
                                                                                         <div class="col-sm-4"><label>Pick Up :</label></div>
-                                                                                        <div class="col-sm-8"><p style="background-color:#f5f5f5; padding:3px;">pick up location</p></div>
+                                                                                        <div class="col-sm-8"><p>pick up location</p></div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                         <div class="row">
                                                                                                 <div class="col-sm-4"><label>Drop Off :</label></div>
-                                                                                                <div class="col-sm-8"><p style="background-color:#f5f5f5; padding:3px;">drop off location</p></div>
+                                                                                                <div class="col-sm-8"><p>drop off location</p></div>
                                                                                             </div>
                                                                                 </div>
                                                                             </div>
                                                                             
-                                                                            
+                                                                            <div class="col-12">
+                                                                                    
+                                                                                    <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                    <div class="col-sm-4"><label>Pick-Up Date / Time:</label></div>
+                                                                                                    <div class="col-sm-8"><p>[[cab[0].deals[0].booking.pickup_time]]</p></div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                    <div class="col-sm-4"><label>Drop-Off Date / Time:</label></div>
+                                                                                                    <div class="col-sm-8"><p>[[cab[0].deals[0].booking.drop_time]]</p></div>
+                                                                                            </div>  
+                                                                                    </div>
+                                                                                </div>
                                                                             
                                                                         </div>
                                                                     </form>
@@ -914,17 +778,17 @@
                                                                       <form action="car-list-view.html" method="post">
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <h4 class="title">When</h4>
+                                                                                <h4 class="title">Fare Calculation</h4>
                                                                                 <div class="form-group">
                                                                                         <div class="row">
                                                                                                 <div class="col-sm-4"><label>Pick-Up Date / Time:</label></div>
-                                                                                                <div class="col-sm-8"><p style="background-color:#f5f5f5; padding:3px;">Pick-Up Date / Time</p></div>
+                                                                                                <div class="col-sm-8"><p>[[cab[0].deals[0].booking.pickup_time]]</p></div>
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                         <div class="row">
                                                                                                 <div class="col-sm-4"><label>Drop-Off Date / Time:</label></div>
-                                                                                                <div class="col-sm-8"><p style="background-color:#f5f5f5; padding:3px;">Drop-Off Date / Time</p></div>
+                                                                                                <div class="col-sm-8"><p>[[cab[0].deals[0].booking.drop_time]]</p></div>
                                                                                         </div>  
                                                                                 </div>
                                                                             </div>
@@ -940,22 +804,22 @@
                                                                               
                                                                                     <article class="box">
                                                                                         <figure>
-                                                                                            <a title="" href="#"><img alt="" src="[[cab.images.image_url]]"></a>
+                                                                                            <a title="" href="#"><img alt="" src="[[cab[0].images[0].image_url]]"></a>
                                                                                         </figure>
                                                                                         <div class="details">
                                                                                             <span class="price"><small>per day</small>$45.39</span>
                                                                                             <h4 class="box-title">Full Size<small>[[cab[0].car_name]]</small></h4>
                                                                                             <div class="amenities">
                                                                                                 <ul>
-                                                                                                    <li><i ng-show="[[cab[0].amenities.air_condition]]==true" class="fa fa-hdd circle"></i>AC</li>
+                                                                                                    <li ng-show="cab[0].amenities.air_condition"><i class="fa fa-hdd circle"></i>AC</li>
                                                                                                     <li><i class="fa fa-car circle"></i>[[cab[0].amenities.seater]]</li>
                                                                                                     <li><i class="fa fa-fill-drip circle"></i>[[cab[0].amenities.fuel_type]]</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.baggage_allowance]]==true"><i class="fa fa-suitcase circle"></i>BA</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.doorstep_delivery]]==true"><i class="fa fa-door-open circle"></i>DD</li>                                        
-                                                                                                    <li ng-if="[[cab[0].amenities.automatic]]==true"><i class="fa fa-cloud circle"></i>T</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.fuel]]==true"><i class="fa fa-tint circle"></i>WF</li>
-                                                                                                    <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li>
-                                                                                                    <li ng-if="[[cab[0].amenities.verified_driver]]==true"><i class="fa fa-id-card circle"></i>YES</li>
+                                                                                                    <!-- <li ng-show="cab[0].amenities.baggage_allowance"><i class="fa fa-suitcase circle"></i>BA</li> -->
+                                                                                                    <li ng-show="cab[0].amenities.doorstep_delivery"><i class="fa fa-door-open circle"></i>DD</li>                                        
+                                                                                                    <!-- <li ng-show="cab[0].amenities.automatic"><i class="fa fa-cloud circle"></i>T</li> -->
+                                                                                                    <li ng-show="cab[0].amenities.fuel"><i class="fa fa-tint circle"></i>WF</li>
+                                                                                                    <!-- <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li> -->
+                                                                                                    <!-- <li ng-show="cab[0].amenities.verified_driver"><i class="fa fa-id-card circle"></i>YES</li> -->
                                                                                                 </ul>
                                                                                             </div>
                                                                                              <div class="action row">
@@ -969,31 +833,36 @@
                                                                                                
                                                                                             
                                                                                         </div>
-                                                                                        <div id="2" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
-                                                                                        
-                                                                                    <table class="table table-hover">
-                                                                                        
-                                                                                        <!-- ngRepeat: rm in deal.roomdata.hoteldata.rooms --><tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" class="ng-scope">
-                                                                                        <!-- ngRepeat: deal in rm.deals | limitTo:lim  --><tr ng-repeat="deal in rm.deals | limitTo:lim " class="ng-scope">
-                                                                                            <td><img></td>
-                                                                                            <!-- ngIf: [[rm.room_type]]==1 --><td ng-if="1==1" class="ng-scope">Premium</td><!-- end ngIf: [[rm.room_type]]==1 -->
-                                                                                            <!-- ngIf: [[rm.room_type]]==2 -->
-                                                                                            <!-- ngIf: [[rm.room_type]]==3 -->
-                                                                                            <!-- ngIf: [[rm.room_type]]==4 -->
-                                                                                            <!-- ngIf: [[rm.room_type]]==5 -->
-                                                                                            <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
-                                                                                            <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
-                                                                                        </tr><!-- end ngRepeat: deal in rm.deals | limitTo:lim  -->
-                                                                                        
-                                                                                        <!-- <tr>
-                                                                                            <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
-                                                                                        </tr> -->
-                                                                                        </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
-                                                                                    
-                                                                                    </table>
-                                                                                    
-                                                                                    </div>
+                                                                                        <div class="">
+                                                                                            <div id="2" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
+                                                                                                
+                                                                                                
+                                                    
+                                                                                            <table class="table table-hover">
+                                                                                                
+                                                                                                <!-- ngRepeat: rm in deal.roomdata.hoteldata.rooms --><tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" class="ng-scope">
+                                                                                                <!-- ngRepeat: deal in rm.deals | limitTo:lim  --><tr ng-repeat="deal in rm.deals | limitTo:lim " class="ng-scope">
+                                                                                                    <td><img></td>
+                                                                                                    <!-- ngIf: [[rm.room_type]]==1 --><td ng-if="1==1" class="ng-scope">Premium</td><!-- end ngIf: [[rm.room_type]]==1 -->
+                                                                                                    <!-- ngIf: [[rm.room_type]]==2 -->
+                                                                                                    <!-- ngIf: [[rm.room_type]]==3 -->
+                                                                                                    <!-- ngIf: [[rm.room_type]]==4 -->
+                                                                                                    <!-- ngIf: [[rm.room_type]]==5 -->
+                                                                                                    <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">fare detail</a></td>
+                                                                                                    <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
+                                                                                                </tr><!-- end ngRepeat: deal in rm.deals | limitTo:lim  -->
+                                                                                                
+                                                                                                <!-- <tr>
+                                                                                                    <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
+                                                                                                </tr> -->
+                                                                                                </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
+                                                                                            
+                                                                                            </table>
+                                                                                            
+                                                                                            </div>
+                                                                                          </div>
                                                                                     </article>
+                                                                                    
                                                                                 
                                                                                 
                                                                             </div>
@@ -1111,8 +980,12 @@
         </footer>
     </div>
 </div>
-
-    <!-- Javascript -->
+<button onclick="topFunction()" id="upBtn" title="Go to top">
+    <i class="fa fa-chevron-up"></i>
+</button>
+    <!-- for bottom to top scroller -->
+    <script type="text/javascript" src="/js/top-scroller.js"></script>
+        <!-- Javascript -->
     <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery.noconflict.js"></script>
     <script type="text/javascript" src="/js/modernizr.2.7.1.min.js"></script>
