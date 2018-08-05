@@ -1845,9 +1845,25 @@ var app = angular.module("restaurantApp", ['angular.filter'])
      
       
             for (i in $scope.associations) {
-              var associationId = $scope.associations[i].id
+              var associationId = $scope.associations[i].id;
               delete $scope.associations[i].id;
-              // delete $scope.associations[i].restaurant;
+
+              $scope.associations[i].collection_id = $scope.associations[i].collection;
+              delete $scope.associations[i].collection;
+
+              $scope.associations[i].cuisine_id = $scope.associations[i].cuisine;
+              delete $scope.associations[i].cuisine;
+
+              $scope.associations[i].restaurant_id = $scope.associations[i].restaurant;
+              delete $scope.associations[i].restaurant; 
+
+              if($scope.associations[i].collection_id == "null"){
+                 $scope.associations[i].collection_id = null
+                 
+              }
+              if($scope.associations[i].cuisine_id == "null"){
+                $scope.associations[i].cuisine_id = null;
+              }
       
               associationList.push($http.put("/api/v1/restaurant/association/" + associationId, $scope.associations[i]))
             }

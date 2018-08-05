@@ -20,7 +20,7 @@
                         <select ng-model="association.collection">
                             <option value disabled>-- Select Collection --</option>
                             <option ng-value="[[collection.id]]" ng-repeat="collection in collections">[[collection.collection]]</option>
-                            <option value >None</option>
+                            <option value="null" >None</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
@@ -32,7 +32,7 @@
                         <select ng-model="association.cuisine">
                             <option value disabled>--Select Cuisine --</option>
                             <option ng-value="[[cuisine.id]]" ng-repeat="cuisine in cuisines">[[cuisine.cuisine]]</option>
-                            <option value >None</option>
+                            <option value="null">None</option>
                             
                         </select>
                     </div>
