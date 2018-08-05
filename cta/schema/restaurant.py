@@ -43,6 +43,7 @@ class CuisineSchema(ma.ModelSchema):
 
 
 class RestaurantAssociationSchema(ma.ModelSchema):
+
     class Meta:
         model = RestaurantAssociation
         exclude = ('updated_at', 'created_at')

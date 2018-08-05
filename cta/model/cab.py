@@ -21,6 +21,9 @@ class Cab(Base):
     def __repr__(self):
         return '<name %r>' % self.name
 
+    def __hash__(self):
+        return hash(self.name)
+
 
 class CabBooking(Base):
     __tablename__ = 'cab_booking'
@@ -135,6 +138,9 @@ class CabDeal(Base):
 
     def __repr__(self):
         return '<booking_id %r>' % self.booking_id
+
+    def __hash__(self):
+        return hash(self.base_fare)
 
 
 class CabDealAssociation(Base):
