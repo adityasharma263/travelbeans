@@ -1544,26 +1544,26 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       $scope.addCuisine = true;
       $scope.functionCall = "Add";
       $scope.disable_update = false;
-      
-      
+
+
       $scope.cuisineData = [
         {
-          cuisine : null
+          cuisine: null
         }
       ]
-      
+
 
     }
 
-    $scope.addMore = function(){
-      var addCusine =  {
-        cuisine : null
+    $scope.addMore = function () {
+      var addCusine = {
+        cuisine: null
       };
 
       $scope.cuisineData.push(addCusine);
     }
 
-    $scope.Add = function(){ 
+    $scope.Add = function () {
       console.log($scope.cuisineData);
       var cuisineList = [];
 
@@ -1581,20 +1581,18 @@ var app = angular.module("restaurantApp", ['angular.filter'])
           console.log(err);
         })
 
-
-
     }
 
-    $scope.deleteCollection = function(cuisineId, index){
+    $scope.deleteCollection = function (cuisineId, index) {
 
       $http.delete("/api/v1/restaurant/cuisine/" + cuisineId)
-      .then(function (res) {
+        .then(function (res) {
 
-        alert("delete");
+          alert("delete");
 
-      }, function (err) {
-        console.log(err)
-      })
+        }, function (err) {
+          console.log(err)
+        })
 
     }
 
