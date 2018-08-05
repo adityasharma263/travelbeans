@@ -784,23 +784,10 @@ loadDeals=function(){
     
   }
   $scope.deleteHotel=function(data){
-  //   for (var i = 0; i < data.images.length; i++) { 
-  //   sendDeleteCall('/api/v1/image/'+data.images[i].id);
-
-  // }
-  // for (var i = 0; i < data.images.length; i++) { 
-  //   sendDeleteCall('/api/v1/deal/'+data.id);
-
-  // }
-  // for (var i = 0; i < data.rooms.length; i++) { 
-  //   sendDeleteCall('/api/v1/room/'+data.rooms[i].id);
-  // }
-  
     sendDeleteCall('/api/v1/hotel/'+data.id);
     createToast("Hotel Deleted!!!","green");
 }
   $scope.deleteImage=function(data){
-    console.log("data",data);
     if(data.id){
       sendDeleteCall('/api/v1/image/'+data.id);
       createToast("Image Deleted!!!","green");
