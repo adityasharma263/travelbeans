@@ -5,14 +5,38 @@
 <div class="row">
     <div class="col-sm-6">
         <h3>Edit Association</h3>
+
         <div class="row">
+            <div class="col-sm-12">
+                <h4>Restaurant name</h4>
+            </div>
 
-            <div class="col-sm-4 panel h25" ng-repeat=" (amenity_key, amenity_value) in  amenities">
+            <div class="h25" ng-repeat="association in associations">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <!-- <button class="btn btn-danger pull-right" ng-click="$parent.deleteAssociation(association, 'collection');">Remove</button> -->
 
-                <label>
-                    [[amenity_key]]
-                    <input type="checkbox" ng-model="restaurantData.amenities[amenity_key]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_amenity">
-                </label>
+                        <label>Collection</label>
+                        <select ng-model="association.collection">
+                            <option value disabled>-- Select Collection --</option>
+                            <option ng-value="[[collection.id]]" ng-repeat="collection in collections">[[collection.collection]]</option>
+                            <option value >None</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- <button class="btn btn-danger pull-right" ng-click="$parent.deleteAssociation(association, 'cuisine');">Remove</button> -->
+                        <label>
+                            Cuisine
+                        </label>
+                        <!-- <br> -->
+                        <select ng-model="association.cuisine">
+                            <option value disabled>--Select Cuisine --</option>
+                            <option ng-value="[[cuisine.id]]" ng-repeat="cuisine in cuisines">[[cuisine.cuisine]]</option>
+                            <option value >None</option>
+                            
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -37,7 +61,7 @@
                             </span>
                         </p>
                         <p>
-                            <button class="btn btn-primary" role="button" ng-click="$parent.editAmenity(restaurant)">Edit</button>
+                            <button class="btn btn-primary" role="button" ng-click="$parent.editAssociation(restaurant)">Edit</button>
                             <!-- <button class="btn btn-default" role="button" ng-click="deleteAmenity()">Delete</button> -->
                         </p>
                     </div>

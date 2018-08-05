@@ -374,6 +374,17 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
     }
+    $scope.deleteRestaurant = function(restaurantId, index){
+
+      $http.delete("/api/v1/restaurant/"+restaurantId)
+      .then(function(res){
+        $scope.restaurants.splice(index, 1);
+        alert("Deleted!!");
+      }, function(err){
+        alert("err "+err);
+      })
+
+    }
 
 
 
@@ -1779,11 +1790,80 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         })
 
     }
+  }])
+  .controller("dashboardAssociationController", ["$scope", "$http", "$q", function($scope, $http, $q){
+
+    $http.get("/api/v1/restaurant")
+    .then(function (res) {
+      $scope.restaurants = res.data.result.restaurants;
+    }, function (err) {
+      console.log(err);
+    });
+
+    $http.get("/api/v1/restaurant/collection")
+    .then(function (res) {
+      $scope.collections = res.data.result.collection;
+    }, function (err) {
+      console.log(err);
+    });
+
+    $http.get("/api/v1/restaurant/cuisine")
+    .then(function (res) {
+
+      $scope.cuisines = res.data.result.cuisine;
+      console.log($scope.cuisines);
+    }, function (err) {
+      console.log(err);
+    });
+
+    
 
 
 
+    $scope.editAssociation = function(restaurant){
+      console.log("akshay");
+      var collections = restaurant.collections
+      var cuisines = restaurant.cuisines
+      $scope.restaurantId = restaurant.id;
+
+      $http.get("/api/v1/restaurant/association?restaurant_id="+restaurant.id)
+      .then(function (res) {
+        $scope.associations = res.data.result.association;
+        console.log($scope.associations);
+      }, function (err) {
+        console.log(err);
+      });
+
+    }
+    
 
 
+    $scope.update = function () {
+
+      var associationList = [];
+      console.log($scope.associations);
+     
+      
+            for (i in $scope.associations) {
+              var associationId = $scope.associations[i].id
+              delete $scope.associations[i].id;
+              // delete $scope.associations[i].restaurant;
+      
+              associationList.push($http.put("/api/v1/restaurant/association/" + associationId, $scope.associations[i]))
+            }
+      
+      
+            $q.all(associationList)
+              .then(function (res) {
+                alert("updated!!");
+              }, function (err) {
+                alert("err =" + err)
+                console.log(err);
+              })
+
+
+
+    }
 
   }])
 
