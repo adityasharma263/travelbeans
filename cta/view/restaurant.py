@@ -46,7 +46,6 @@ def restaurant_api():
             is_filter = 1
             try:
                 cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
-
                 restaurant_list = RestaurantAssociation.query.filter(RestaurantAssociation.cuisine_id == cuisine_id).all()
                 for restaurant_obj in restaurant_list:
                     cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
@@ -149,6 +148,10 @@ def restaurant_api():
             "price": restaurant.get("price", None),
         }
         post = Restaurant(**restaurant_obj)
+        # p = Restaurant()
+        # a = RestaurantAssociation()
+        # a.cuisine_id = Cuisine()
+        # p.cuisines.append(a)
         post.save()
         restaurant_result = RestaurantSchema().dump(post)
         if restaurant.get("amenities"):
@@ -280,6 +283,24 @@ def restaurant_id(id):
         restaurant = Restaurant.query.filter_by(id=id).first()
         if not restaurant:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurant_amenities = RestaurantAmenity.query.filter_by(restaurant_id=id).first()
+        if restaurant_amenities:
+            RestaurantAmenity.delete_db(restaurant_amenities)
+        restaurant_menu = Menu.query.filter_by(restaurant_id=id).first()
+        if restaurant_menu:
+            Menu.delete_db(restaurant_menu)
+        restaurant_images = RestaurantImage.query.filter_by(restaurant_id=id).all()
+        if restaurant_images:
+            for restaurant_image in restaurant_images:
+                RestaurantImage.delete_db(restaurant_image)
+        restaurant_dishes = Dish.query.filter_by(restaurant_id=id).all()
+        if restaurant_dishes:
+            for restaurant_dish in restaurant_dishes:
+                Dish.delete_db(restaurant_dish)
+        restaurant_associations = RestaurantAssociation.query.filter_by(restaurant_id=id).all()
+        if restaurant_associations:
+            for restaurant_association in restaurant_associations:
+                RestaurantAssociation.delete_db(restaurant_association)
         Restaurant.delete_db(restaurant)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -420,6 +441,10 @@ def restaurant_cuisine_id(id):
         restaurant_cuisine = Cuisine.query.filter_by(id=id).first()
         if not restaurant_cuisine:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurant_associations = RestaurantAssociation.query.filter_by(cuisine_id=id).all()
+        if restaurant_associations:
+            for restaurant_association in restaurant_associations:
+                RestaurantAssociation.delete_db(restaurant_association)
         Cuisine.delete_db(restaurant_cuisine)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -455,6 +480,10 @@ def restaurant_collection_id(id):
         restaurant_collection = Collection.query.filter_by(id=id).first()
         if not restaurant_collection:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurant_associations = RestaurantAssociation.query.filter_by(collection_id=id).all()
+        if restaurant_associations:
+            for restaurant_association in restaurant_associations:
+                RestaurantAssociation.delete_db(restaurant_association)
         Collection.delete_db(restaurant_collection)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -533,15 +562,11 @@ def restaurant_association_id(id):
 def restaurant_search_api():
     search = request.json
     search = search['search']
-    cities = []
     names = []
     cuisines = []
     collections = []
     dishes = []
     menus = []
-    restaurant_cities = Restaurant.query.distinct(Restaurant.city).filter(Restaurant.city.ilike('%' + search + '%')).order_by(Restaurant.city).all()
-    for restaurant_city in restaurant_cities:
-        cities.append(restaurant_city.city)
     restaurant_names = Restaurant.query.distinct(Restaurant.name).filter(Restaurant.name.ilike('%' + search + '%')).order_by(Restaurant.name).all()
     for restaurant_name in restaurant_names:
         names.append(restaurant_name.name)
@@ -560,7 +585,6 @@ def restaurant_search_api():
         if restaurant_menu.startswith(search):
             menus.append(restaurant_menu)
     obj = {
-    "city": list(cities),
     "cuisine": list(cuisines),
     "collection": list(collections),
     "dish": list(dishes),
