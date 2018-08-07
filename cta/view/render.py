@@ -2,7 +2,7 @@
 __author__ = 'aditya'
 
 from cta import app
-from flask import render_template, request, make_response
+from flask import render_template, request, make_response, jsonify
 import requests
 
 
@@ -39,17 +39,354 @@ def admin():
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant():
+    check_location = request.cookies.get("location")
+
+    featured_restaurant_params = {
+            "featured":True
+            }
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
+            
+    featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
+    cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
+    cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
+    
+
+    # if not check_location:
+    #     return render_template("restaurant/restaurant_choose_location.html")
     collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
-    return render_template("restaurant/restaurant.html", collections=collections)
+    return render_template("restaurant/restaurant.html", cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data)
 
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
     return render_template("restaurant/collections.html")
 
+@app.route("/restaurant/location")
+def restaurant_location():
+    locations = [
+      'Abu',
+      'Agartala',
+      'Ahmedabad',
+      'Aizawl',
+      'Ajmer',
+      'Allahabad',
+      'Almora',
+      'Along',
+      'Alwar',
+      'Amarnath',
+      'Ambala',
+      'Amboli',
+      'Amritsar',
+      'Andaman',
+      'Andhra Pradesh',
+      'Araku',
+      'Arunachal Pradesh',
+      'Assam',
+      'Auli',
+      'Aurangabad',
+      'Badrinath',
+      'Bagan',
+      'Bagdogra',
+      'Bakkhali',
+      'Bali',
+      'Bandhavgarh',
+      'Bandipur',
+      'Bangalore',
+      'Banjar',
+      'Barot',
+      'Batala',
+      'Bhandardara',
+      'Bhangarh',
+      'Bharatpur',
+      'Bhatinda',
+      'Bhimashankar',
+      'Bhimtal',
+      'Bhopal',
+      'Bihar',
+      'Bikaner',
+      'Bir-Billing',
+      'Bundi',
+      'Chail',
+      'Chalakudy',
+      'Chamba',
+      'Champawat',
+      'Chandigarh',
+      'Chattisgarh',
+      'Cherrapunji',
+      'Chikhaldara',
+      'Chikmagalur',
+      'Chitkul',
+      'Chittorgarh',
+      'Chumathang',
+      'Coimbatore',
+      'Coonoor',
+      'Coorg',
+      'Corbett',
+      'Dadra and Nagar Haveli',
+      'Dalhousie',
+      'Daman',
+      'Daman and Diu',
+      'Dandeli',
+      'Daranghati',
+      'Darjeeling',
+      'Dehradun',
+      'Delhi',
+      'Devprayag',
+      'Dhana',
+      'Dhanaulti',
+      'Dharamshala',
+      'Dibrugarh',
+      'Digha',
+      'Dimapur',
+      'Diu',
+      'Dudhwa',
+      'Dwarka',
+      'Faridabad',
+      'GHNP',
+      'Gangotri',
+      'Gangtok',
+      'Gaya',
+      'Ghaziabad',
+      'Gir',
+      'Goa',
+      'Gokarna',
+      'Gopalpur',
+      'Gorakhpur',
+      'Gujarat',
+      'Gulmarg',
+      'Guntakal',
+      'Guptkashi',
+      'Gurdaspur',
+      'Gurgaon',
+      'Guwahati',
+      'Haflong',
+      'Hampi',
+      'Hanoi',
+      'Haridwar',
+      'Haryana',
+      'Himachal Pradesh',
+      'Hogenakkal',
+      'Hoshiarpur',
+      'Hunder',
+      'Igatpuri',
+      'Imphal',
+      'Indore',
+      'Itanagar',
+      'Jabalpur',
+      'Jagdalpur',
+      'Jaisalmer',
+      'Jakarta',
+      'Jalandhar',
+      'Jammu and Kashmir',
+      'Jharkhand',
+      'Jodhpur',
+      'Jorhat',
+      'Joshimath',
+      'Junagadh',
+      'Junnar',
+      'Kalimpong',
+      'Kamshet',
+      'Kanatal',
+      'Kanchipuram',
+      'Kangra',
+      'Kanyakumari',
+      'Kargil',
+      'Karjat',
+      'Karnaprayag',
+      'Karnataka',
+      'Karsog',
+      'Kasauli',
+      'Kashid',
+      'Kasol',
+      'Katra',
+      'Kaza',
+      'Kaziranga',
+      'Kedarnath',
+      'Kerala',
+      'Keylong',
+      'Khajjiar',
+      'Khajuraho',
+      'Khandala',
+      'Kharapathar',
+      'Khimsar',
+      'Kochi',
+      'Kodaikanal',
+      'Kohima',
+      'Kolad',
+      'Kollam',
+      'Konark',
+      'Kota',
+      'Kovalam',
+      'Kozhikode',
+      'Kudremukha',
+      'Kufri',
+      'Kullu',
+      'Kumarakom',
+      'Kumbhalgarh',
+      'Kurnool',
+      'Kurseong',
+      'Kurukshetra',
+      'Kutch',
+      'Lachung',
+      'Lakshadweep',
+      'Lamayuru',
+      'Lambasingi',
+      'Lansdowne',
+      'Lavasa',
+      'Leh',
+      'Likir',
+      'Lohajung',
+      'Lonar',
+      'Lucknow',
+      'Ludhiana',
+      'Madhya Pradesh',
+      'Madurai',
+      'Mahabaleshwar',
+      'Mahabalipuram',
+      'Maharashtra',
+      'Male',
+      'Malvan',
+      'Manali',
+      'Mandarmani',
+      'Mandi',
+      'Mandu',
+      'Manipur',
+      'Maredumilli',
+      'Matheran',
+      'Mathura',
+      'Mawlynnong',
+      'Mawsynram',
+      'Mcleodganj',
+      'Meghalaya',
+      'Mizoram',
+      'Mohali',
+      'Mukteshwar',
+      'Mumbai',
+      'Munnar',
+      'Mussoorie',
+      'Mysore',
+      'Nagaland',
+      'Naggar',
+      'Nagpur',
+      'Nainital',
+      'Nandaprayag',
+      'Nandi',
+      'Narkanda',
+      'Nashik',
+      'Naukuchiatal',
+      'Neemrana',
+      'Nelliyampathy',
+      'Netarhat',
+      'Noida',
+      'Nongstoin',
+      'Odisha',
+      'Orchha',
+      'Osian',
+      'Pahalgam',
+      'Palakkad',
+      'Palampur',
+      'Palanpur',
+      'Panchgani',
+      'Panna',
+      'Pasighat',
+      'Pathankot',
+      'Patiala',
+      'Patna',
+      'Patnitop',
+      'Pattaya',
+      'Peermade',
+      'Pelling',
+      'Periyar',
+      'Pithoragarh',
+      'Pondicherry',
+      'Pune',
+      'Punjab',
+      'Puri',
+      'Pushkar',
+      'Raipur',
+      'Rajaji',
+      'Rajasthan',
+      'Rajgir',
+      'Rajkot',
+      'Rameswaram',
+      'Ramtek',
+      'Ranchi',
+      'Ranikhet',
+      'Ranthambore',
+      'Ratnagiri',
+      'Ravangla',
+      'Rudraprayag',
+      'Sagar',
+      'Samui',
+      'Sanchi',
+      'Sangli',
+      'Saputara',
+      'Sariska',
+      'Seoni',
+      'Shillong',
+      'Shimla',
+      'Shirdi',
+      'Shivanasamundram',
+      'Shoghi',
+      'Shravanabelagola',
+      'Sikkim',
+      'Silchar',
+      'Siliguri',
+      'Similipal',
+      'Singalila',
+      'Sirmaur',
+      'Solan',
+      'Sonamarg',
+      'Sonipat',
+      'Srinagar',
+      'Sundarbans',
+      'Surat',
+      'Tamenglong',
+      'Tamil Nadu',
+      'Tanakpur',
+      'Tarkarli',
+      'Tatapani',
+      'Tawang',
+      'Telangana',
+      'Tezpur',
+      'Thanjavur',
+      'Thenmala',
+      'Thiruvananthapuram',
+      'Tiruchirappalli',
+      'Tirupati',
+      'Tiruvannamalai',
+      'Tripura',
+      'Tura',
+      'Udaipur',
+      'Ujjain',
+      'Unakoti',
+      'Uttar Pradesh',
+      'Uttarakhand',
+      'Uttarkashi',
+      'Vadodara',
+      'Vagamon',
+      'Varkala',
+      'Visakhapatnam',
+      'Vishnuprayag',
+      'Vrindavan',
+      'Wayanad',
+      'West Bengal',
+      'Yamunotri',
+      'Yelagiri',
+      'Yousmarg',
+      'Zirakpur',
+      'Ziro',
+    ]
+
+    return jsonify({"result": {"locations" : locations}, 'message': "Success", 'error': False})
+
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
     args = request.args.to_dict()
-
+    searched_value = ''
+    # searched_key  = ''
+    if args:
+        searched_value = list(args.values())[0]
+        # searched_key = list(args.keys())[0]
     cuisine = args.get("cuisine", None)
     category = args.get("category", None)
     args['collection'] = 'trending'
@@ -59,7 +396,7 @@ def restaurant_search():
     if cuisine:
         cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
         cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
-        pass
+        
 
     featured_restaurant_params = {
         "featured":True
@@ -69,12 +406,15 @@ def restaurant_search():
     # featured_restaurant_params['featured'] = True
 
 
+    
+
+
     restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
     featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
     trending_restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
 
     
-    return render_template("restaurant/restaurant_search.html", trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
+    return render_template("restaurant/restaurant_search.html",searched_value=searched_value, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])

@@ -865,14 +865,6 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       'Zirakpur',
       'Ziro',
     ]
-
-
-
-
-
-
-
-
   }])
   .controller("collectionController", ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
 
