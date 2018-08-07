@@ -57,7 +57,6 @@
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="/css/responsive.css">
     <script type="text/javascript" src="/cab_js/app.js"></script>
-    
     <!-- CSS for IE -->
     <!--[if lte IE 9]>
         <link rel="stylesheet" type="text/css" href="css/ie.css" />
@@ -900,11 +899,10 @@
                                                 </h4>
                                                 <div id="Air-Condition-filter" class="panel-collapse collapse filters-container">
                                                     <div class="panel-content">
-                                                        <ul class="check-square filters-option">
-                                                            <li><a href="#">Available</a></li>
-                                                            <li><a href="#">Not Available</a></li>
-                                                        </ul>
-                                                        <a class="button btn-mini">MORE</a>
+                                                        
+                                                        <input type="radio" name="ac" value="true" ng-click="amenityFilter('ac')"> Available
+                                                        <br>
+                                                        <input type="radio" name="ac" value="false" ng-click="amenityFilter('ac')"> Not Available
                                                     </div>
                                                 </div>
                                             </div>
@@ -1045,7 +1043,7 @@
                                             <a title="" href="#"><img alt="" src="[[cab.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
-                                            <span class="price"><small>per day</small>$45.39</span>
+                                            <span class="price">₹ [[(cab.deals | orderBy:'total_fare')[0].total_fare]]</span>
                                             <h4 class="box-title">[[type(cab.car_type)]]<small>[[cab.car_name]]</small></h4>
                                             <div class="amenities">
                                                 <ul>
@@ -1058,35 +1056,28 @@
                                             </div>
                                              <div class="action row">
                                                  <div class="col-xs-6">
-                                                  <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#3">More Deals</a>
+                                                  <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#[[cab.id]]">More Deals</a>
                                                 </div>
-                                                <div class="col-xs-6">
-                                                <div class="price full-width"><small>per day</small>$45.39</div>
-                                                </div>
+                                                <!-- <div class="col-xs-6">
+                                                <div class="price full-width">₹ [[(cab.deals | orderBy:'total_fare')[0].total_fare]]</div>
+                                                </div> -->
                                             </div>        
                                                
                                             
                                         </div>
-                                        <div id="3" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
+                                        <div id="[[cab.id]]" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
                                         
                                     <table class="table table-hover">
                                         
-                                        <!-- ngRepeat: rm in deal.roomdata.hoteldata.rooms --><tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" class="ng-scope">
-                                        <!-- ngRepeat: deal in rm.deals | limitTo:lim  --><tr ng-repeat="deal in rm.deals | limitTo:lim " class="ng-scope">
-                                            <td><img></td>
-                                            <!-- ngIf: [[rm.room_type]]==1 --><td ng-if="1==1" class="ng-scope">Premium</td><!-- end ngIf: [[rm.room_type]]==1 -->
-                                            <!-- ngIf: [[rm.room_type]]==2 -->
-                                            <!-- ngIf: [[rm.room_type]]==3 -->
-                                            <!-- ngIf: [[rm.room_type]]==4 -->
-                                            <!-- ngIf: [[rm.room_type]]==5 -->
-                                            <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
-                                            <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
-                                        </tr><!-- end ngRepeat: deal in rm.deals | limitTo:lim  -->
+                                        <tbody class="ng-scope">
+                                                                                   
+                                            <tr ng-repeat="deal in cab.deals ">
+                                            <td><img src="[[deal.website.logo_image]]"></td>
+                                            <td><a class="button btn-mini orange">fare detail</a></td>
+                                            <td class="price"><a href="[[deal.website.website]]" class="ng-binding">₹ [[deal.total_fare]]</a></td>
+                                            </tr>
                                         
-                                        <!-- <tr>
-                                            <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
-                                        </tr> -->
-                                        </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
+                                         </tbody>
                                     
                                     </table>
                                     
@@ -1094,60 +1085,6 @@
                                     </article>
                                 </div>
                                 
-                                <div class="col-sms-6 col-sm-6 col-md-6">
-                                    <article class="box">
-                                        <figure>
-                                            <a title="" href="#"><img alt="" src="images/cars/19.png"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <span class="price"><small>per day</small>$45.39</span>
-                                            <h4 class="box-title">Full Size<small>Toyota camry</small></h4>
-                                            <div class="amenities">
-                                                <ul>
-                                                    <li><i class="fa fa-hdd circle"></i>AC</li>
-                                                    <li><i class="fa fa-car circle"></i>3</li>
-                                                    <li><i class="fa fa-fill-drip circle"></i>f</li>
-                                                    <li><i class="fa fa-suitcase circle"></i>BA</li>
-                                                    <li><i class="fa fa-door-open circle"></i>DD</li>
-                                                </ul>
-                                            </div>
-                                             <div class="action row">
-                                                 <div class="col-xs-6">
-                                                  <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#2">More Deals</a>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                <div class="price full-width"><small>per day</small>$45.39</div>
-                                                </div>
-                                            </div>        
-                                               
-                                            
-                                        </div>
-                                        <div id="2" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
-                                        
-                                    <table class="table table-hover">
-                                        
-                                        <!-- ngRepeat: rm in deal.roomdata.hoteldata.rooms --><tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" class="ng-scope">
-                                        <!-- ngRepeat: deal in rm.deals | limitTo:lim  --><tr ng-repeat="deal in rm.deals | limitTo:lim " class="ng-scope">
-                                            <td><img></td>
-                                            <!-- ngIf: [[rm.room_type]]==1 --><td ng-if="1==1" class="ng-scope">Premium</td><!-- end ngIf: [[rm.room_type]]==1 -->
-                                            <!-- ngIf: [[rm.room_type]]==2 -->
-                                            <!-- ngIf: [[rm.room_type]]==3 -->
-                                            <!-- ngIf: [[rm.room_type]]==4 -->
-                                            <!-- ngIf: [[rm.room_type]]==5 -->
-                                            <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">View Detail</a></td>
-                                            <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
-                                        </tr><!-- end ngRepeat: deal in rm.deals | limitTo:lim  -->
-                                        
-                                        <!-- <tr>
-                                            <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
-                                        </tr> -->
-                                        </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
-                                    
-                                    </table>
-                                    
-                                    </div>
-                                    </article>
-                                </div>
                                 
                             </div>
                         </div>

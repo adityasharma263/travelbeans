@@ -94,6 +94,11 @@ angular.module('comparetravel', ['angular.filter'])
       console.log(err);
     });
 
+    $scope.amenityFilter = function (filterType) {
+
+  
+      }
+
   }]) 
 
 
