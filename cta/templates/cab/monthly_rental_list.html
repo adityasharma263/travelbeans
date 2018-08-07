@@ -30,6 +30,10 @@
     <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
         <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+            
+
     <!-- <link rel="shortcut icon" href="http://www.soaptheme.net/html/travelo/favicon.ico" type="image/x-icon"> -->
     <!-- Main Style -->
     <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
@@ -52,6 +56,7 @@
     
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="/css/responsive.css">
+    <script type="text/javascript" src="/cab_js/app.js"></script>
     
     <!-- CSS for IE -->
     <!--[if lte IE 9]>
@@ -65,8 +70,8 @@
       <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
 </head>
-<body>
-    
+<body ng-app="comparetravel">
+    <div ng-controller="CabListController">  
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
@@ -1031,24 +1036,24 @@
                         </div>
                     </div>
                     <div class="col-sm-8 col-md-9">        
-                        <div class="car-list">
+                        <div class="car-list" ng-repeat="cab in cabs">
                             <div class="row image-box car listing-style1">
                                 
                                     <div class="col-sms-6 col-sm-6 col-md-6">
                                     <article class="box">
                                         <figure>
-                                            <a title="" href="#"><img alt="" src="images/cars/19.png"></a>
+                                            <a title="" href="#"><img alt="" src="[[cab.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
                                             <span class="price"><small>per day</small>$45.39</span>
-                                            <h4 class="box-title">Full Size<small>Toyota camry</small></h4>
+                                            <h4 class="box-title">[[type(cab.car_type)]]<small>[[cab.car_name]]</small></h4>
                                             <div class="amenities">
                                                 <ul>
-                                                    <li><i class="fa fa-hdd circle"></i>AC</li>
-                                                    <li><i class="fa fa-car circle"></i>3</li>
-                                                    <li><i class="fa fa-fill-drip circle"></i>f</li>
-                                                    <li><i class="fa fa-suitcase circle"></i>BA</li>
-                                                    <li><i class="fa fa-door-open circle"></i>DD</li>
+                                                    <li ng-show="cab.amenities.air_condition"><i class="soap-icon-aircon circle"></i>AC</li>
+                                                    <li><i class="soap-icon-user circle"></i>[[cab.amenities.seater]]</li>
+                                                    <li><i class="fa fa-fill-drip circle"></i>[[cab.amenities.fuel_type]]</li>
+                                                    <li ng-show="cab.amenities.baggage_allowance"><i class="soap-icon-suitcase circle"></i>BA</li>
+                                                    <li ng-show="cab.amenities.doorstep_delivery"><i class="fa fa-door-open circle"></i>DD</li>
                                                 </ul>
                                             </div>
                                              <div class="action row">
@@ -1305,5 +1310,6 @@ tjq(document).ready(function() {
     tjq(".max-price-label").html( "$" + tjq(".price-range").slider( "values", 1 ));
 });
 </script>
+</div>
 </body>
 </html>
