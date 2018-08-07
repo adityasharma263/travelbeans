@@ -1759,45 +1759,203 @@
                         </div>
                     </div>
 
+
                     <div class="col-sm-3">
+                        {% if args.cuisine and cuisine_data|length%}
+
+
+                        <div class="card">
+                            <h5>Other cuisines</h5>
+                            {% for cuisine in cuisine_data %} {% if args.cuisine != cuisine.cuisine %}
+                            <a href="/restaurant/search?cuisine={{cuisine.cuisine}}">
+                                <span class="restaurant-tag">
+                                    {{cuisine.cuisine}}
+                                </span>
+                            </a>
+                            {% else %}
+                            <span class="restaurant-tag active">
+                                {{cuisine.cuisine}}
+                            </span>
+                            {% endif %} {% endfor %}
+
+                            <hr>
+
+                            <small>SPONSORED & TRENDING</small>
+                            <div class="row image-box car listing-style1">
+                                {% for featured_restaurant in featured_restaurant_data %}
+                                <article class="box">
+                                    <figure>
+                                        <a title="" href="/restaurant/{{featured_restaurant.id}}">
+                                            <img alt="" src="{{featured_restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>price for two</small>₹{{featured_restaurant.price}}</span>
+                                        <h4 class="box-title">{{featured_restaurant.name}}
+                                            <small>{{featured_restaurant.rating}}
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </small>
+                                        </h4>
+                                        <p class="mile">
+                                            <span class="skin-color">Cuisine:</span>
+                                            {% for cuisine in featured_restaurant.cuisines %}
+                                            <span>
+                                                {{cuisine.cuisine}}
+                                            </span>
+                                            {% if loop.index != featured_restaurant.cuisines|length %}
+                                            <span>,</span>
+                                            {% endif %} {% endfor %}
+                                        </p>
+
+                                    </div>
+                                </article>
+                                {% endfor %}
+
+                                {% for trending_restaurant in trending_restaurant_data %}
+                                <article class="box">
+                                    <figure>
+                                        <a title="" href="/restaurant/{{trending_restaurant.id}}">
+                                            <img alt="" src="{{trending_restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>price for two</small>₹{{trending_restaurant.price}}</span>
+                                        <h4 class="box-title">{{trending_restaurant.name}}
+                                            <small>{{trending_restaurant.rating}}
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </small>
+                                        </h4>
+                                        <p class="mile">
+                                            <span class="skin-color">Cuisine:</span>
+                                            {% for cuisine in trending_restaurant.cuisines %}
+                                            <span>
+                                                {{cuisine.cuisine}}
+                                            </span>
+                                            {% if loop.index != trending_restaurant.cuisines|length %}
+                                            <span>,</span>
+                                            {% endif %} {% endfor %}
+                                        </p>
+
+                                    </div>
+                                </article>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+
+                        {% elif args.category %} {% set category_data = [ "bistro", "ethnic", "fine_dining ", "trattoria ", "teppanyaki_ya ", "osteria",
+                        "drive_in ", "drive_thru", "pizzeria ", "taverna", "fast_casual ", "pop_up", "Café", "iner", "ramen_ya
+                        ", "teahouse ", "fast_food", "buffet", "cafeteria ", "luncheonette ", "tapas_bar", "steakhouse ",
+                        "all_you_can_eat_restaurant ", "kosher", "dinner_in_the_Sky ", "dark_restaurant ", "a_la_carte ",
+                        "gastropub ", "brasserie ", "chiringuito", "food_truck", "churrascaria", "food_court", "restrobars",
+                        "street_stalls", "theme_resturants", "coffee_shop", "coffee_house", "cabaret", "tea_shop", ] %}
+
+                        <div class="card">
+                            <h5>Other categories</h5>
+                            {% for category in category_data %} {% if args.category != loop.index|string %}
+                            <a href="/restaurant/search?category={{loop.index}}">
+                                <span class="restaurant-tag">
+                                    {{category}}
+                                </span>
+                            </a>
+                            {% else %}
+                            <span class="restaurant-tag active">
+                                {{category}}
+                            </span>
+                            {% endif %} {% endfor %}
+
+                            <hr>
+
+                            <small>SPONSORED & TRENDING</small>
+                            <div class="row image-box car listing-style1">
+                                {% for featured_restaurant in featured_restaurant_data %}
+                                <article class="box">
+                                    <figure>
+                                        <a title="" href="/restaurant/{{featured_restaurant.id}}">
+                                            <img alt="" src="{{featured_restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>price for two</small>₹{{featured_restaurant.price}}</span>
+                                        <h4 class="box-title">{{featured_restaurant.name}}
+                                            <small>{{featured_restaurant.rating}}
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </small>
+                                        </h4>
+                                        <p class="mile">
+                                            <span class="skin-color">Cuisine:</span>
+                                            {% for cuisine in featured_restaurant.cuisines %}
+                                            <span>
+                                                {{cuisine.cuisine}}
+                                            </span>
+                                            {% if loop.index != featured_restaurant.cuisines|length %}
+                                            <span>,</span>
+                                            {% endif %} {% endfor %}
+                                        </p>
+
+                                    </div>
+                                </article>
+                                {% endfor %}
+
+                                {% for trending_restaurant in trending_restaurant_data %}
+                                <article class="box">
+                                    <figure>
+                                        <a title="" href="/restaurant/{{trending_restaurant.id}}">
+                                            <img alt="" src="{{trending_restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>price for two</small>₹{{trending_restaurant.price}}</span>
+                                        <h4 class="box-title">{{trending_restaurant.name}}
+                                            <small>{{trending_restaurant.rating}}
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </small>
+                                        </h4>
+                                        <p class="mile">
+                                            <span class="skin-color">Cuisine:</span>
+                                            {% for cuisine in trending_restaurant.cuisines %}
+                                            <span>
+                                                {{cuisine.cuisine}}
+                                            </span>
+                                            {% if loop.index != trending_restaurant.cuisines|length %}
+                                            <span>,</span>
+                                            {% endif %} {% endfor %}
+                                        </p>
+
+                                    </div>
+                                </article>
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        {% else %}
+
+
                         <div class="card">
                             <div>
                                 <h4>Price Comparison</h4>
                             </div>
-                            <a href="/restaurant/[[restaurant.id]]"  ng-repeat="restaurant in restaurants | orderBy: 'price'">
+                            <a href="/restaurant/[[restaurant.id]]" ng-repeat="restaurant in restaurants | orderBy: 'price'">
                                 <div class="panel">
                                     <span ng-bind="restaurant.name+' -'">loading...</span>
                                     <strong ng-bind="restaurant.price">loading...</strong>
                                 </div>
                             </a>
-
-                            <!-- <div class="panel">
-                                <span>Resturant 1 -</span>
-                                <strong>500</strong>
-                            </div>
-
-                            <div class="panel">
-                                <span>Resturant 1 -</span>
-                                <strong>500</strong>
-                            </div>
-                            <div class="panel">
-                                <span>Resturant 1 -</span>
-                                <strong>500</strong>
-                            </div>
-
-                            <div class="panel">
-                                <span>Resturant 1 -</span>
-                                <strong>500</strong>
-                            </div>
-
-                            <div class="panel">
-                                <span>Resturant 1 -</span>
-                                <strong>500</strong>
-                            </div> -->
-
                         </div>
-                    </div>
 
+
+
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
