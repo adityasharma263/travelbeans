@@ -20,10 +20,11 @@
     <link rel="stylesheet" href="/css/animate.min.css">
     
     <!-- Current Page Styles -->
+    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
+
     <link rel="stylesheet" type="text/css" href="/css/settings.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen">
-    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen"> -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
     <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
     
     
@@ -100,9 +101,9 @@
                     <ul class="quick-menu pull-right">
                         <li><a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
 						<i class="soap-icon-shopping"></i> SIGN UP</a></li>
-                        <li><a href="travelo-login" class="soap-popupbox">LOGIN</a></li>
+                        <li><a href="#travelo-login" class="soap-popupbox">LOGIN</a></li>
 						<li><a href="">Business CAPITAL</a></li>
-                        <li><a href="travelo-signup" class="soap-popupbox">Customer Care</a></li>
+                        <li><a href="#travelo-signup" class="soap-popupbox">Customer Care</a></li>
 
                     </ul>
                 </div>
@@ -487,20 +488,23 @@
 
 
         <section id="content" class="tour">
-            <div id="slideshow" class="slideshow-bg full-screen" style="height: 541px;">
+            <div id="slideshow" class="slideshow-bg" style="height: 541px;">
                 <div class="flexslider">
                     <ul class="slides">
                         <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
                             <div class="slidebg" style="background-image: url(images/hotel_home/Campsite-Daytime-Travel-Beans-Unique-Places-To-Stay.jpg);"></div>
                         </li>
                         <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations-TB.jpg);"></div>
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-Collections-Boutique-Hotels.jpg);"></div>
+                        </li>
+						<li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
+                            <div class="slidebg" style="background-image: url(images/hotel_home/cabins-travel-beans-book-now.jpg);"></div>
                         </li>
                         <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
                             <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotel-And-Accomodations.jpg);"></div>
                         </li>
                         <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotels-And-Accomodations.jpg);"></div>
+                            <div class="slidebg" style="background-image: url(images/hotel_home/Travel-Beans-Hotel-Collection-Capmsite.jpg);"></div>
                         </li>
                         <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
                             <div class="slidebg" style="background-image: url(images/hotel_home/Hotels-In-India-Travel-Beans.jpg);"></div>
@@ -519,7 +523,8 @@
                             <div class="search-box">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group" onmousemove="myFunction(event)" onmouseout="clearCoor()">
+                                        <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)" onmouseout="clearCoor()">
+                                            
                                             <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
                                         
                                             <div class="row" id="demo">
@@ -549,14 +554,14 @@
                                         
                                             
                                             <div class="col-sm-4 form-group">
-                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1" ng-click="getHotel()">Search Now</button>
+                                                <button type="submit" class="button btn-medium full-width uppercase sky-blue1 animated" data-animation-type="tada" ng-click="getHotel()">Search Now</button>
                                             </div>
                                         
                                     </div>
                                 </form>
                             </div>
                             <div class="text-center">
-                                <a href="" class="button btn-medium yellow uppercase">View All Collections</a>
+                                <a href="#collections" class="button btn-medium yellow uppercase animated" data-animation-type="bounceInDown">View All Collections</a>
                                 &nbsp;&nbsp;
                             </div>
                         </div>
@@ -844,578 +849,581 @@
                     </div>
 
 
-                        <div class="block">
-                            <h1>Not Just Hotels , Travel Beans is About More !</h1>
-                            <p>To Make Your Vacations Best , We Have a Collection of The Most Awesome and Unique Places to Experience .</p>
-                            <div class="row image-box style4">
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/campsites-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Campsites</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/bed-and-breakfast-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Bed and Breakfast</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/boatstays-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Boat stays</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div><div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/botique-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Botique hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div><div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/budget-hotel-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Budget hotel</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div><div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/appartments-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Appartments</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div><div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/cabins-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Cabins</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/capsules-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Capsules</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/contry-house-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Country House</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/army-mess-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Army Mess</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/cottages-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Cottages</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/resorts-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Resorts</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/country-side-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Country Side</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/dharamshala-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Dharamshala</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/economy-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Economy Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/family-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Family Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/farm-stays-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Farm Stays</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/golf-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">	
-                                            <h4 class="box-title">Golf Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/guest-house-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Guest House</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/high-rise-view-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">High Rise View</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/holiday-homes-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Holiday Homes</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/holiday-parks-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Holiday Parks</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/holiday-rentals-trave-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Holiday Rentals</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/homestays-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Home Stays</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/horror-houses-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Horror Houses</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/hostels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Hostels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/hotel-with-jacuzzi-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Hotel with Jacuzzi</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/igloo-house-travel-beans.png" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Igloo House</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/inns-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Inns</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/lodges-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Lodges</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/love-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Love Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/luxury-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Luxury Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/luxury-tents-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Luxury Tents</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/motels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Motels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/palace-stays-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Palaces Stay</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/pet-friendly-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Pet Friendly</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/pg-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">PG</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/rest-house-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Rest House</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/riads-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Riads</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/romantic-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Romantic Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/ryokans-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Ryokans</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/self-catering-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Self Catering</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/serviced-appartments-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Serviced Appartments</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/spa-hotels-travel-beans.JPG" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">SPA Hotels</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/tent-house-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Tent House</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/theme-house-trave-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Theme House</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/village-stays-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Village Stays</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                    <article class="box">
-                                        <figure>
-                                            <a class="hover-effect" href="" title=""><img src="/images/hotel_collections/villas-travel-beans.jpg" alt="" width="370" height="172"></a>
-                                        </figure>
-                                        <div class="details">
-                                            <h4 class="box-title">Villas</h4>
-                                            <a href="" class="goto-detail"><span class="fa fa-angle-right"></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                
-                                
+                    <div id="collections" class="block">
+                        <h1>Not Just Hotels , Travel Beans is About More ! <a href="#collections" class="active">#Collections</a></h1>
+                        <p>To Make Your Vacations Best , We Have a Collection of The Most Awesome and Unique Places to Experience .</p>
+                        <div class="row image-box style4">
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/campsite-travel-beans" title="">
+                                        <img src="images/hotel_collections/campsites-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Campsites</h4>
+                                        <a href="/hotel/collection/campsite-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
                             </div>
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/bed-and-breakfast-travel-beans" title="">
+                                        <img src="images/hotel_collections/bed-and-breakfast-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Bed and Breakfast</h4>
+                                        <a href="/hotel/collection/bed-and-breakfast-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/boatstays-travel-beans" title=""><img src="images/hotel_collections/boatstays-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Boat stays</h4>
+                                        <a href="/hotel/collection/boatstays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div><div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/boutique-hotels-travel-beans" title=""><img src="images/hotel_collections/botique-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Botique hotels</h4>
+                                        <a href="/hotel/collection/boutique-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div><div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/budget-hotels-travel-beans" title=""><img src="images/hotel_collections/budget-hotel-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Budget hotel</h4>
+                                        <a href="/hotel/collection/budget-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div><div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/appartments-travel-beans" title=""><img src="images/hotel_collections/appartments-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Appartments</h4>
+                                        <a href="/hotel/collection/appartments-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div><div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/cabins-travel-beans" title=""><img src="images/hotel_collections/cabins-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Cabins</h4>
+                                        <a href="/hotel/collection/cabins-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/capsules-travel-beans" title=""><img src="images/hotel_collections/capsules-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Capsules</h4>
+                                        <a href="/hotel/collection/capsules-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/country-houses-travel-beans" title="">
+                                        <img src="images/hotel_collections/contry-house-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Country House</h4>
+                                        <a href="/hotel/collection/country-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/army-mess-travel-beans" title=""><img src="images/hotel_collections/army-mess-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Army Mess</h4>
+                                        <a href="/hotel/collection/army-mess-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/cottages-travel-beans" title=""><img src="images/hotel_collections/cottages-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Cottages</h4>
+                                        <a href="/hotel/collection/cottages-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/resorts-travel-beans" title=""><img src="images/hotel_collections/resorts-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Resorts</h4>
+                                        <a href="/hotel/collection/resorts-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/country-side-travel-beans" title=""><img src="images/hotel_collections/country-side-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Country Side</h4>
+                                        <a href="/hotel/collection/country-side-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/dharamshala-travel-beans" title=""><img src="images/hotel_collections/dharamshala-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Dharamshala</h4>
+                                        <a href="/hotel/collection/dharamshala-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/economy-hotels-travel-beans" title=""><img src="images/hotel_collections/economy-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Economy Hotels</h4>
+                                        <a href="/hotel/collection/economy-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/family-hotels-travel-beans" title=""><img src="images/hotel_collections/family-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Family Hotels</h4>
+                                        <a href="/hotel/collection/family-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/farm-stays-travel-beans" title=""><img src="images/hotel_collections/farm-stays-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Farm Stays</h4>
+                                        <a href="/hotel/collection/farm-stays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/golf-hotels-travel-beans" title=""><img src="images/hotel_collections/golf-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">	
+                                        <h4 class="box-title">Golf Hotels</h4>
+                                        <a href="/hotel/collection/golf-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/guest-houses-travel-beans" title=""><img src="images/hotel_collections/guest-house-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Guest House</h4>
+                                        <a href="/hotel/collection/guest-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/high-rise-view-travel-beans" title=""><img src="images/hotel_collections/high-rise-view-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">High Rise View</h4>
+                                        <a href="/hotel/collection/high-rise-view-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/holiday-homes-travel-beans" title=""><img src="images/hotel_collections/holiday-homes-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Holiday Homes</h4>
+                                        <a href="/hotel/collection//hotel/collection/holiday-homes-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="holiday-parks-travel-beans" title=""><img src="images/hotel_collections/holiday-parks-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Holiday Parks</h4>
+                                        <a href="/hotel/collection/holiday-parks-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/holiday-rentals-travel-beans" title=""><img src="images/hotel_collections/holiday-rentals-trave-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Holiday Rentals</h4>
+                                        <a href="/hotel/collection/holiday-rentals-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/home-stays-travel-beans" title=""><img src="images/hotel_collections/homestays-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Home Stays</h4>
+                                        <a href="/hotel/collection/home-stays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/horror-houses-travel-beans" title=""><img src="images/hotel_collections/horror-houses-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Horror Houses</h4>
+                                        <a href="/hotel/collection/horror-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/hostels-travel-beans" title=""><img src="images/hotel_collections/hostels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Hostels</h4>
+                                        <a href="/hotel/collection/hostels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href=/hotel/collection/"hotel-with-jaccuzi-travel-beans" title=""><img src="images/hotel_collections/hotel/collection-with-jacuzzi-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Hotel with Jacuzzi</h4>
+                                        <a href="/hotel/collection/hotel-with-jaccuzi-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/igloo-houses-travel-beans" title=""><img src="images/hotel_collections/igloo-house-travel-beans.png" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Igloo House</h4>
+                                        <a href="/hotel/collection/igloo-houses-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/inns-travel-beans" title=""><img src="images/hotel_collections/inns-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Inns</h4>
+                                        <a href="/hotel/collection/inns-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/lodges-travel-beans" title=""><img src="images/hotel_collections/lodges-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Lodges</h4>
+                                        <a href="/hotel/collection/lodges-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/love-hotels-travel-beans" title=""><img src="images/hotel_collections/love-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Love Hotels</h4>
+                                        <a href="/hotel/collection/love-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/luxury-hotels-travel-beans" title=""><img src="images/hotel_collections/luxury-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Luxury Hotels</h4>
+                                        <a href="/hotel/collection/luxury-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/luxury-tents-travel-beans" title=""><img src="images/hotel_collections/luxury-tents-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Luxury Tents</h4>
+                                        <a href="/hotel/collection/luxury-tents-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/motels-travel-beans" title=""><img src="images/hotel_collections/motels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Motels</h4>
+                                        <a href="/hotel/collection/motels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/palaces-stay-travel-beans" title=""><img src="images/hotel_collections/palace-stays-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Palaces Stay</h4>
+                                        <a href="/hotel/collection/palaces-stay-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/pet-friendly-travel-beans" title=""><img src="images/hotel_collections/pet-friendly-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Pet Friendly</h4>
+                                        <a href="/hotel/collection/pet-friendly-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/pg-travel-beans" title=""><img src="images/hotel_collections/pg-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">PG</h4>
+                                        <a href="/hotel/collection/pg-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/rest-house-travel-beans" title=""><img src="images/hotel_collections/rest-house-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Rest House</h4>
+                                        <a href="/hotel/collection/rest-house-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/riads-travel-beans" title=""><img src="images/hotel_collections/riads-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Riads</h4>
+                                        <a href="/hotel/collection/riads-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/romantic-hotels-travel-beans" title=""><img src="images/hotel_collections/romantic-hotels-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Romantic Hotels</h4>
+                                        <a href="/hotel/collection/romantic-hotels-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/ryokans-travel-beans" title=""><img src="images/hotel_collections/ryokans-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Ryokans</h4>
+                                        <a href="/hotel/collection/ryokans-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/self-catering-travel-beans" title=""><img src="images/hotel_collections/self-catering-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Self Catering</h4>
+                                        <a href="/hotel/collection/self-catering-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/serviced-appartments-travel-beans" title=""><img src="images/hotel_collections/serviced-appartments-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Serviced Appartments</h4>
+                                        <a href="/hotel/collection/serviced-appartments-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/spa-travel-beans" title=""><img src="images/hotel_collections/spa-hotels-travel-beans.JPG" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">SPA Hotels</h4>
+                                        <a href="/hotel/collection/spa-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/tent-house-travel-beans" title=""><img src="images/hotel_collections/tent-house-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Tent House</h4>
+                                        <a href="/hotel/collection/tent-house-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/theme-house-travel-beans" title=""><img src="images/hotel_collections/theme-house-trave-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Theme House</h4>
+                                        <a href="/hotel/collection/theme-house-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/village-stays-travel-beans" title=""><img src="images/hotel_collections/village-stays-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Village Stays</h4>
+                                        <a href="/hotel/collection/village-stays-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <article class="box">
+                                    <figure>
+                                        <a class="hover-effect" href="/hotel/collection/villas-travel-beans" title=""><img src="images/hotel_collections/villas-travel-beans.jpg" alt="" width="370" height="172"></a>
+                                    </figure>
+                                    <div class="details">
+                                        <h4 class="box-title">Villas</h4>
+                                        <a href="/hotel/collection/villas-travel-beans" class="goto-detail"><span class="glyphicon glyphicon-arrow-right"></span></a>
+                                    </div>
+                                </article>
+                            </div>
+                            
+                            
                         </div>
+                    </div>
                         
                         </div>
                         
@@ -1467,7 +1475,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                                         <h2>About Travel Beans</h2>
-                                        <p>Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque.</p>
+                                        <p>Travel Beans is a Metasearch Engine Technology , Developed To Compare Prices for all Categories and Products of Traveling at a One Stop Place so as to Bring the Entire Global Travel Market at One Binded Platform .</p>
                                         <br>
                                         <address class="contact-details">
                                             <span class="contact-phone"><i class="soap-icon-phone"></i>Get In Touch</span>
@@ -1580,7 +1588,17 @@
     <!-- for bottom to top scroller -->
     <script type="text/javascript" src="/js/top-scroller.js"></script>
 
-
+    
+    <script type="text/javascript">
+        tjq("#slideshow .flexslider").flexslider({
+            animation: "fade",
+            controlNav: false,
+            animationLoop: true,
+            directionNav: false,
+            slideshow: true,
+            slideshowSpeed: 5000
+        });
+    </script>
     <script type="text/javascript">
         tjq(document).ready(function() {
             tjq('.revolution-slider').revolution(
@@ -1647,7 +1665,16 @@
             });
         });
     </script>
-
+  <script type="text/javascript">
+    tjq("#slideshow .flexslider").flexslider({
+        animation: "fade",
+        controlNav: false,
+        animationLoop: true,
+        directionNav: false,
+        slideshow: true,
+        slideshowSpeed: 5000
+    });
+</script>
 
 <button onclick="topFunction()" id="upBtn" title="Go to top">
     <i class="fa fa-chevron-up"></i>

@@ -783,6 +783,30 @@ loadDeals=function(){
     createToast("Deal Updated!!!","green");
     
   }
+  $scope.deleteHotel=function(data){
+    sendDeleteCall('/api/v1/hotel/'+data.id);
+    createToast("Hotel Deleted!!!","green");
+}
+  $scope.deleteImage=function(data){
+    if(data.id){
+      sendDeleteCall('/api/v1/image/'+data.id);
+      createToast("Image Deleted!!!","green");
+    }
+    else{
+      createToast("'Try Again'!!!","blue");
+      setTimeout(function(){ location.reload(); }, 1000);
+
+
+    }
+  }
+  $scope.deleteRoom=function(data){
+    sendDeleteCall('/api/v1/room/'+data.id);
+    createToast("Room Deleted!!!","green");
+  }
+  $scope.deleteDeals=function(data){
+    sendDeleteCall('/api/v1/deal/'+data.id);
+    createToast("Deal Deleted!!!","green");
+  }
   $scope.addRoom=function(){
 
     $scope.room.hotel_id = $scope.hotels.id;
@@ -797,6 +821,22 @@ loadDeals=function(){
     // $scope.deals.hotel_url="";
     $scope.hotelDeals=[];
 
+  }
+  $scope.addHotelImages=function(){
+    $scope.hotelsImg.hotel_id=$scope.hotels.id;
+    $scope.hotelImages.push($scope.hotelsImg); //to show added image
+    sendPostCall('/api/v1/image', $scope.hotelsImg)
+    $scope.hotelsImg={};
+    createToast("'Image Added!!'","green");
+    
+  }
+  $scope.addHotelDeal=function(){
+    $scope.hotelsDeal.room_id=$scope.rooms.id;
+    // $scope.roomDeals.push($scope.hotelsDeal); //to show added deal
+    sendPostCall('/api/v1/deal', $scope.hotelsDeal)
+    // $scope.hotelsDeal={};
+    createToast("'Deal Added!!'","green");
+    
   }
   $scope.showAddRoom=function(){
     $scope.showRoomDetail=false;
@@ -855,7 +895,22 @@ loadDeals=function(){
       })
     
   }
+  var sendDeleteCall = function(url) {
+    
+    $http({
+      method: 'DELETE',
+      url: url,
+    }).then(function (res) {
+      setTimeout(function(){ location.reload(); }, 1000);
+      // createToast("'hotel successfully created!!!'","green");
 
+      },
+      // failed callback
+      function (req) {
+        createToast("'Something went wrong!!!'","red");
+      })
+    
+  }
   var sendPostCall = function(url, data) {
     console.log(data);
     
@@ -969,11 +1024,18 @@ $scope.createHotel = function() {
   $scope.roomData={};
   $scope.hotels={};
   $scope.roomobj={};
+  $scope.similarhotels=[];
   $scope.limit=10;
   $scope.deallimit=1;
 
-  window.onresize = function(){ location.reload(); }
-  
+  // window.onresize = function(){ location.reload(); }
+  $scope.openHome=function(){
+    window.open('/','_self');
+
+  }
+  $scope.openHotel=function(){
+    window.open('/hotel','_self');
+  }
   var showDivs=function(n) {
     var i;
     var x = document.getElementsByClassName("mySlides");
@@ -1034,7 +1096,7 @@ $scope.createHotel = function() {
 
   }
   $scope.showDetail=function(roomid){
-    window.open('/hotel/'+roomid,'_self');
+    window.open('/hotel/'+roomid);
     
   }
   $http({
@@ -1066,6 +1128,7 @@ var getrooms=function(){
       }
       
       $scope.hotelobj=$scope.hotels[$scope.roomData.hotel];
+      getSimilarHotels($scope.hotelobj.city);
       $scope.roomData.hotelData=$scope.hotelobj;
       for(var j=0; j<$scope.roomData.hotelData.rooms.length; j++){
         for(var k=0; k<$scope.roomData.hotelData.rooms[j].deals.length; k++){
@@ -1079,6 +1142,29 @@ var getrooms=function(){
       // or server returns response with an error status.
   });
 }
+var getSimilarHotels=function(city){
+  $http({
+    method: 'GET',
+    url: '/api/v1/hotel?city='+city,
+  }).then(function successCallback(response) {
+
+      for(var i=0; i<response.data.result.hotel.length; i++){
+        if(response.data.result.hotel[i].id==$scope.roomData.hotel){
+          response.data.result.hotel.splice(1, i); //to remove current showing hotel data
+        }
+        else{
+          $scope.similarhotels.push(response.data.result.hotel[i]) 
+        }
+      }
+     
+     
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+  })
+
+}
 
 
 
@@ -1088,8 +1174,12 @@ var i=1;
 if(window.screen.availWidth >=440){
   console.log(window.screen.availWidth);
   $( ".flex-next" ).click(function() {
-    
-    var totalSlides=($scope.roomData.hotelData.images.length)/10;
+    if($scope.roomData.hotelData.images.length>10){
+     var totalSlides=($scope.roomData.hotelData.images.length)/10;
+    }
+    else{
+     var totalSlides=1;
+    }
     var onSlideImage = (slideIndex+1)%10
     // var lastSlides=totalSlides.toString().split(".")[1]+1;
     // if(onSlideImage==1){
@@ -1182,7 +1272,12 @@ if(window.screen.availWidth <=440){
 
   $( ".flex-next" ).click(function() {
     console.log(window.screen.availWidth);
-    var totalSlides=($scope.roomData.hotelData.images.length)/3;
+    if($scope.roomData.hotelData.images.length>3){
+      var totalSlides=($scope.roomData.hotelData.images.length)/3;
+     }
+     else{
+      var totalSlides=1;
+     }
     var onSlideImage = (slideIndex+1)%3
 
     if(onSlideImage==1){
@@ -1239,14 +1334,6 @@ if(window.screen.availWidth <=440){
 }])
 
 
-
-.controller('adminCabController',["$scope", "$http", function($scope, $http, $filter) {
-  $scope.cab = {}; // main cab model
-  $scope.createCab = function() {
-  // e.preventDefault()
-  console.log("$scope.cab",$scope.cab);
-
-}
-}])  
+ 
 
 

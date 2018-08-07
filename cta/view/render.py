@@ -33,6 +33,27 @@ def hotel_detail(hotel_id):
 def admin():
     return render_template('hotel/admin_hotel.html')
 
+@app.route('/hotel/collection/bed-and-breakfast-travel-beans', methods=['GET'])
+def collection1():
+    return render_template('hotel/collections/bed-and-breakfast.html')   
+
+@app.route('/hotel/collection/boatstays-travel-beans', methods=['GET'])
+def collection2():
+    return render_template('hotel/collections/boatstays.html')   
+
+@app.route('/hotel/collection/boutique-hotels-travel-beans', methods=['GET'])
+def collection3():
+    return render_template('hotel/collections/boutique-hotels.html')  
+
+@app.route('/hotel/collection/budget-hotels-travel-beans', methods=['GET'])
+def collection4():
+    return render_template('hotel/collections/budget-hotels.html')                
+
+@app.route('/hotel/collection/campsite-travel-beans', methods=['GET'])
+def collection5():
+    return render_template('hotel/collections/campsite.html')   
+
+
 
 #======================== RESTAURANT ============================
 
@@ -490,7 +511,7 @@ def cab_list():
     cab_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/cab"
     args = request.args
     cab_data = requests.get(url=cab_api_url, params=args).json()
-    return render_template('cab/cab_list.html', cab_details=cab_data)
+    return render_template('cab/monthly_rental_list.html', cab_details=cab_data)
 
 
 @app.route('/cab/detail', methods=['GET'])

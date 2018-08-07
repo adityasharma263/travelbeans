@@ -513,6 +513,79 @@
                     </div>
                     <div class="container" style="z-index: 10000000;">
                         <!-- The Modal -->
+                        <div class="modal" id="addImagesModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Images</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <label class="control-label " for="image">Image Url:   </label>
+                                    <div >          
+                                        <input  class="form-control" id="name" ng-model="hotelsImg.image_url" type="text" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="addHotelImages()">Add Image</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                    <div class="container" style="z-index: 10000000;">
+                        <!-- The Modal -->
+                        <div class="modal" id="addDealModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Deal</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    
+                                    <label class="control-label "  for="wname">Website name:</label>
+                                    <div>        
+                                        <select class="form-control" ng-model="hotelsDeal.website_id">
+                                            <!-- <option  value="[[deal.website.id]]" ng-selected="true">[[deal.website.website]]</option> -->
+                                            <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
+
+                                        </select>  
+                                    </div>
+                                    <label class="control-label "  for="url">Hotel Url: </label>
+                                    <div >          
+                                        <input  class="form-control" id="name"  ng-model="hotelsDeal.hotel_url" type="text" required>
+                                    </div>
+                                    <label class="control-label " for="price">Price ₹: </label>
+                                    <div >          
+                                        <input  class="form-control" id="name"  type="number" ng-model="hotelsDeal.price" required>
+                                    </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="addHotelDeal()">Add Deal</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="z-index: 10000000;">
+                        <!-- The Modal -->
                         <div class="modal" id="imgModal">
                             <div class="modal-dialog">
                             <div class="modal-content">
@@ -534,6 +607,7 @@
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-success" ng-click="updateImage()" data-dismiss="modal">Update Image</button>
+                                <button type="button" class="btn btn-success" ng-click="deleteImage(imageData)" data-dismiss="modal">Delete Image</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
                                 
@@ -807,15 +881,19 @@
                         <label class="control-label col-sm-2"for="name">Search Hotel (for Update):</label>
                         <div class="col-sm-10">
                             <input class="form-control" data-toggle="dropdown" ng-model="searchHotel" placeholder="enter search term here">
-                                <div  class="container" style="max-height: 500px;overflow-y: scroll;">
+                                <div  class="container col-sm-12" style="max-height: 500px;overflow-y: scroll;">
                                     <div ng-repeat="data in hotelsData  | filter : searchHotel" >
                                     [[data.name]] 
                                     <!-- <button class="btn" data-toggle="modal" data-target="#hotelModal" ng-click="editHotelData(data)">Edit Amenities</button> -->
                                     <button class="btn" ng-click="editHotel(data)">Edit Hotel</button>
+                                    <button class="btn" ng-click="deleteHotel(data)">Delete Hotel</button>
+
 
                                     <hr>
                                     </div>
                                 </div>
+                                <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelsData | filter:searchHotel).length == 0">No Results Found</span>
+
     
                         </div>
                     </div>
@@ -843,9 +921,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-2" for="address">Phone No.: </label>
+                            <div class="col-sm-10">          
+                                <input  class="form-control"  ng-model="hotels.phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-sm-2"  for="desc">Description: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required>
+                                <textarea  class="form-control" id="name" ng-model="hotels.desc" type="textarea" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -855,12 +939,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update It): </label>
+                            <label class="control-label col-sm-2" for="image_url">images (Click On Image to Update or Delete): </label>
                             <div style="max-height: 100px; overflow-y: scroll;" class="col-sm-10">
                                 <div ng-repeat="img in hotelImages" class="col-sm-2">          
                                     <img style="cursor: pointer;max-width:87px; margin: 5px" data-toggle="modal" data-target="#imgModal" ng-click="editImg(img,$index)" src="[[img.image_url]]" >
                                     <div></div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-defalut" data-toggle="modal" data-target="#addImagesModal" >Add Images</button>
                             </div>
                         </div>
                        
@@ -919,21 +1008,36 @@
                         </div>
                         <h3>Rooms Deatils</h3>
                         <div class="form-group">
-                            <div class="col-sm-2"></div>
+                            <label class="control-label col-sm-2"for="name">Search Room (for Update):</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchRoom" placeholder="enter search term here">
+                                    <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
+                                        <div ng-repeat="data in hotelRooms | filter:searchRoom">
+                                            <span class="title">[[data.other_room_type]]</span>
+                                            
+                                            <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
+                                            <button class="btn" ng-click="deleteRoom(data)">Delete Room</button>
+                                            
+                                            <hr>
+                                        </div>
+
+                                    </div>
+                                    <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelRooms | filter:searchRoom).length == 0">No Results Found</span>
+
+
+        
+                            </div>
+                            <!-- <div class="col-sm-2"></div>
                             <div class="col-sm-10">
                                 <div class="container">
                                     <div ng-repeat="data in hotelRooms">
-                                        <span class="title" ng-if="[[data.room_type]]==1">Premium</span>
-                                        <span class="title" ng-if="[[data.room_type]]==2">Executive</span>
-                                        <span class="title" ng-if="[[data.room_type]]==3">Sweet</span>
-                                        <span class="title" ng-if="[[data.room_type]]==4">Deluxe</span>
-                                        <span class="title" ng-if="[[data.room_type]]==5">Super Deluxe</span>
-                                        <span class="title" ng-if="[[data.room_type]]==6">Presidential Sweet</span>
+                                        <span class="title">[[data.other_room_type]]</span>
+                                       
                                     <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
                                     <hr>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     </form>
@@ -984,7 +1088,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="default">Default Room Type:</label>
                             <div class="col-sm-10">          
-                                <input id="room_type4" class="form-control" type="text" ng-model="rooms.sother_room_type" required/>
+                                <input id="room_type4" class="form-control" type="text" ng-model="rooms.other_room_type" required/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -1011,19 +1115,26 @@
                             <br>
                             <label class="control-label"for="name">Search deals (for Update):</label>
                             <div >
-                                <input class="form-control" data-toggle="dropdown" ng-model="searchDeals" placeholder="enter search term here">
-                                    <div  class="container" style="max-height: 100px;overflow-y: scroll;">
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchDeals" placeholder="enter search term here" type="number">
+                                    <div  class="container col-sm-12" style="max-height: 100px;overflow-y: scroll;">
                                         <div style="margin-bottom: 5px;" ng-repeat="data in roomDeals  | filter : searchDeals" >
                                             Price ₹: [[data.price]] 
                                             <button class="btn" data-toggle="modal" data-target="#dealModal" ng-click="editDealData(data)">Edit deal</button>
+                                            <button type="button" class="btn btn-defalut" ng-click="deleteDeal(data)">Delete Deal</button>
+
                                             <br>
                                         </div>
+                                        <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(roomDeals | filter:searchDeals).length == 0">No Results Found</span>
+
                                     </div>
         
                             </div>
 
                         </div>
                         <div class="form-group">        
+                            <div class="col-sm-offset-2 col-sm-2">
+                                <button class="btn" data-toggle="modal" data-target="#addDealModal"  >Add deals</button>
+                            </div>
                             <div class="col-sm-offset-8 col-sm-8">
                                 <button class="btn" data-toggle="modal" data-target="#facilitiesModal"  >Edit Facilities</button>
                                 <button class="btn" data-toggle="modal" data-target="#membersModal"  >Edit Members</button>
@@ -1055,9 +1166,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-sm-2" for="address">Phone No.: </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control"  ng-model="hotel.phone"  type="number" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-sm-2"  for="desc">Description: </label>
                                 <div class="col-sm-10">          
-                                    <input  class="form-control" id="name" ng-model="hotel.desc" type="textarea" required>
+                                    <textarea rows="4" class="form-control" id="name" ng-model="hotel.desc" type="textarea" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1096,7 +1213,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="rating">Rating: </label>
+                                <label class="control-label col-sm-2" for="rating">Rating(Out of 10): </label>
                                 <div class="radio col-sm-10">
                                     <input class="form-control" id="rating1" type="number" name="rating" step="any"  ng-model="hotel.rating"/>
                                 </div>
@@ -1385,7 +1502,7 @@
                             <label for="bathroom_nightie">Bathroom Nightie
                                 <input type="checkbox" value="4" ng-model="room.facilities.bathroom_nightie"/>
                             </label>
-                            , <br>
+                            <br>
                             <label for="bathroom_towels">Bathroom Towels
                                 <input type="checkbox" value="5" ng-model="room.facilities.bathroom_towels"/>
                             </label>
@@ -1393,7 +1510,7 @@
                             <label for="bathroom_with_shower">Bathroom with Shower
                                 <input type="checkbox" value="6" ng-model="room.facilities.bathroom_with_shower"/>
                             </label>
-                        
+                            <br>
                             <label for="desk">Desk
                                 <input type="checkbox" value="8" ng-model="room.facilities.desk"/>
                             </label>
@@ -1521,7 +1638,7 @@
                         </div>
                         <div class="form-group">        
                             <div class="col-sm-offset-8 col-sm-8">
-                                <button type="submit" class="btn btn-success" >Add more room</button>
+                                <button type="submit" class="btn btn-success" >Add Room</button>
                                 <button type="button" class="btn btn-success" onclick="window.location.reload()">Next hotel</button>
                         
                             </div>
