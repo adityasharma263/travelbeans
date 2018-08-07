@@ -470,22 +470,91 @@
                                                                         <div class="action col-xs-6 col-sm-2">
                                                                             <span class="price"><small>per day</small>$45.39</span>
                                                                         </div>
+                                                                        <div>
                                                                         <div id="more_deals1" class="col-sm-12 collapse" style="transition: 2s;" aria-expanded="true">
                                                                                 
                                                                                 <table class="table table-hover">
                                                                                     
-                                                                                    <tbody class="ng-scope">
+                                                                                    <tbody class="ng-scope" ng-repeat="deal in cab">
+                                                                                        <tr ng-repeat="logo in deal.deals">
+                                                                                        <td ><span >[[logo.website.logo_image]]</span></td>
+                                                                                        <td class="price"><a class="ng-binding">[[logo.total_fare]] ₹ </a></td>                                                                                        
+                                                                                        <td ><a  class="button btn-mini orange" data-toggle="modal" data-target="#[[logo.id]]">fare detail</a></td>
+                                                                                    </tr>
+                                                                                     <!-- Modal -->
+                                                                                     <div ng-repeat="deal in cab">
+                                                                                         <div ng-repeat="logo in deal.deals">
+                                                                                     
+                                                                                    <div class="modal fade" id="[[logo.id]]" role="dialog">
+                                                                                        <div class="modal-dialog modal-sm">
                                                                                         
-                                                                                        <td ng-repeat="deal in cab"><span ng-repeat="logo in deal.deals">[[logo.website.logo_image]]</span></td>
-                                                                                       
-                                                                                        <td><a class="button btn-mini orange">fare detail</a></td>
-                                                                                        <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
-                                                                                    
-                                                                                    
+                                                                                        <!-- Modal content-->
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                            <h4 class="modal-title">Modal Header</h4>
+                                                                                            
+                                                                                            </div>
+                                                                                            <div class="modal-body" style="margin-left:30px;">
+                                                                                                   
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-12">
+                                                                                                            <h4 class="title">Fare Calculation</h4>
+                                                                                                            <div class="form-group">
+                                                                                                                    <div class="row">
+                                                                                                                            <div class="col-sm-8"><label>Per km fare (f):</label></div>
+                                                                                                                            <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="km in deal.deals">[[km.distance]]</p></div>
+                                                                                                                    </div>
+                                                                                                            </div>
+                                                                                                            <div class="form-group">
+                                                                                                                    <div class="row">
+                                                                                                                            <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                                                            <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="cancel in deal.deals">[[cancel.cancellation_charges]]</p></div>
+                                                                                                                    </div>  
+                                                                                                            </div>
+                                                                                                            <div class="form-group">
+                                                                                                                <div class="row">
+                                                                                                                        <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                                                        <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="taxs in deal.deals">[[taxs.cancellation_charges]]</p></div>
+                                                                                                                </div>  
+                                                                                                        </div>
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="row">
+                                                                                                                    <div class="col-sm-8"><label>Distance (x):</label></div>
+                                                                                                                    <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="distance in deal.deals">[[distance.distance]]</p></div>
+                                                                                                            </div>  
+                                                                                                        </div>
+                                                                                                        <div class="form-group">
+                                                                                                                <div class="row">
+                                                                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                                                        <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                                                </div>  
+                                                                                                            </div>
+                                                                                                        <div class="form-group">
+                                                                                                            <div class="row">
+                                                                                                                    <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                                                    <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="total in deal.deals">[[total.total_fare]]</p></div>
+                                                                                                            </div>  
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                        
+                                                                                                    </div>
+                                                                                                
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    </div>
+                                                                                    </div>
                                                                                      </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
                                                                                 
                                                                                 </table>
                                                                           
+                                                                            </div>
                                                                             </div>
                                                                 </div>
                                                                 
@@ -606,7 +675,7 @@
                                                                             </ul>
                                                                             <div class="tab-content">
                                                                                 <div class="tab-pane fade active in" id="credit-card">
-                                                                                    <h2 class="tab-content-title">Hi First Tab Text</h2>
+                                                                                    <h2 class="tab-content-title">Credit Card</h2>
                                                                                     <div>
                                                                                            
                                                                                             <div class="form-group row">
@@ -657,7 +726,7 @@
                                                                                         </div> 
                                                                                     </div>
                                                                                 <div class="tab-pane fade" id="debit-card">
-                                                                                    <h2 class="tab-content-title">Second Tab</h2>
+                                                                                    <h2 class="tab-content-title">Debit Card</h2>
                                                                                     <div>
                                                                                         
                                                                                          <div class="form-group row">
@@ -708,7 +777,7 @@
                                                                                      </div> 
                                                                                 </div>
                                                                                 <div class="tab-pane fade" id="paytm">
-                                                                                    <h2 class="tab-content-title">Third Tab</h2>
+                                                                                    <h2 class="tab-content-title">Wallet</h2>
                                                                                     <div class="form-group row">
                                                                                         <div class="col">
                                                                                             <p>select one of the wallets to complete payment</p>
@@ -739,7 +808,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="tab-pane fade" id="net-banking">
-                                                                                        <h2 class="tab-content-title">Third Tab</h2>
+                                                                                        <h2 class="tab-content-title">Net Banking</h2>
                                                                                         
                                                                                         <div class="form-group row">
                                                                                             <div class="col-sm-6 col-md-5">
@@ -770,7 +839,7 @@
                                                                                        
                                                                                 </div>
                                                                                 <div class="tab-pane fade" id="vendor">
-                                                                                        <h2 class="tab-content-title">Third Tab</h2>
+                                                                                        <h2 class="tab-content-title">Vendor</h2>
 
                                                                                         <form>
                                                                                             <div class="radio">
@@ -819,7 +888,7 @@
                                                                                           </form>
                                                                                 </div>
                                                                                 <div class="tab-pane fade" id="EMI-travel">
-                                                                                        <h2 class="tab-content-title">Third Tab</h2>
+                                                                                        <h2 class="tab-content-title">EMI Travel</h2>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -876,13 +945,13 @@
                                                                                 <div class="form-group">
                                                                                     <div class="row">
                                                                                         <div class="col-sm-4"><label>Pick Up :</label></div>
-                                                                                        <div class="col-sm-8"><p>pick up location</p></div>
+                                                                                        <div class="col-sm-8" ng-repeat="deal in cab"><p>pick up location</p></div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                         <div class="row">
                                                                                                 <div class="col-sm-4"><label>Drop Off :</label></div>
-                                                                                                <div class="col-sm-8"><p>drop off location</p></div>
+                                                                                                <div class="col-sm-8" ng-repeat="deal in cab"><p>drop off location</p></div>
                                                                                             </div>
                                                                                 </div>
                                                                             </div>
@@ -892,13 +961,13 @@
                                                                                     <div class="form-group">
                                                                                             <div class="row">
                                                                                                     <div class="col-sm-4"><label>Pick-Up Date / Time:</label></div>
-                                                                                                    <div class="col-sm-8"><p>[[cab[0].deals[0].booking.pickup_time]]</p></div>
+                                                                                                    <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="pick in deal.deals">[[pick.booking.pickup_time]]</p></div>
                                                                                             </div>
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                             <div class="row">
                                                                                                     <div class="col-sm-4"><label>Drop-Off Date / Time:</label></div>
-                                                                                                    <div class="col-sm-8"><p>[[cab[0].deals[0].booking.drop_time]]</p></div>
+                                                                                                    <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="drop in deal.deals">[[drop.booking.drop_time]]</p></div>
                                                                                             </div>  
                                                                                     </div>
                                                                                 </div>
@@ -911,22 +980,46 @@
                                             <div class="col-12">
                                                     <div class="sort-by-section clearfix" style="padding:0 30px;">
                                                             <div class="search-tab-content">
-                                                                      <form action="car-list-view.html" method="post">
+                                                                      <form>
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <h4 class="title">Fare Calculation</h4>
                                                                                 <div class="form-group">
                                                                                         <div class="row">
-                                                                                                <div class="col-sm-4"><label>Pick-Up Date / Time:</label></div>
-                                                                                                <div class="col-sm-8"><p>[[cab[0].deals[0].booking.pickup_time]]</p></div>
+                                                                                                <div class="col-sm-4"><label>Per km fare:</label></div>
+                                                                                                <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="km in deal.deals">[[km.distance]]</p></div>
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                         <div class="row">
-                                                                                                <div class="col-sm-4"><label>Drop-Off Date / Time:</label></div>
-                                                                                                <div class="col-sm-8"><p>[[cab[0].deals[0].booking.drop_time]]</p></div>
+                                                                                                <div class="col-sm-4"><label>Cancellation Charges:</label></div>
+                                                                                                <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="cancel in deal.deals">[[cancel.cancellation_charges]]</p></div>
                                                                                         </div>  
                                                                                 </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-4"><label>Tax:</label></div>
+                                                                                            <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="taxs in deal.deals">[[taxs.cancellation_charges]]</p></div>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-4"><label>Distance:</label></div>
+                                                                                        <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="distance in deal.deals">[[distance.distance]]</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-4"><label>Total fare:</label></div>
+                                                                                            <div class="col-sm-8"><p>distance X km + tax + cancellation charges(if booking cancelled)</p></div>
+                                                                                    </div>  
+                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-4"><label>Total fare:</label></div>
+                                                                                        <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="total in deal.deals">[[total.total_fare]]</p></div>
+                                                                                </div>  
+                                                                            </div>
                                                                             </div>
                                                                             
                                                                         </div>
@@ -934,76 +1027,56 @@
                                                                     </div>
                                                         </div>
                                             </div>
-                                                            <div class="col-12">
-                                                                    <div class="car-list">
-                                                                            <div class="image-box car listing-style1">
-                                                                              
-                                                                                    <article class="box">
-                                                                                        <figure>
-                                                                                            <a title="" href="#"><img alt="" src="[[cab[0].images[0].image_url]]"></a>
-                                                                                        </figure>
-                                                                                        <div class="details">
-                                                                                            <span class="price"><small>per day</small>$45.39</span>
-                                                                                            <h4 class="box-title">Full Size<small>[[cab[0].car_name]]</small></h4>
-                                                                                            <div class="amenities">
-                                                                                                <ul>
-                                                                                                    <li ng-show="cab[0].amenities.air_condition"><i class="fa fa-hdd circle"></i>AC</li>
-                                                                                                    <li><i class="fa fa-car circle"></i>[[cab[0].amenities.seater]]</li>
-                                                                                                    <li><i class="fa fa-fill-drip circle"></i>[[cab[0].amenities.fuel_type]]</li>
-                                                                                                    <!-- <li ng-show="cab[0].amenities.baggage_allowance"><i class="fa fa-suitcase circle"></i>BA</li> -->
-                                                                                                    <li ng-show="cab[0].amenities.doorstep_delivery"><i class="fa fa-door-open circle"></i>DD</li>                                        
-                                                                                                    <!-- <li ng-show="cab[0].amenities.automatic"><i class="fa fa-cloud circle"></i>T</li> -->
-                                                                                                    <li ng-show="cab[0].amenities.fuel"><i class="fa fa-tint circle"></i>WF</li>
-                                                                                                    <!-- <li><i class="fa fa-battery-full circle"></i>[[cab[0].amenities.fuel_capacity]]</li> -->
-                                                                                                    <!-- <li ng-show="cab[0].amenities.verified_driver"><i class="fa fa-id-card circle"></i>YES</li> -->
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                             <div class="action row">
-                                                                                                 <div class="col-xs-6">
-                                                                                                  <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#2">More Deals</a>
-                                                                                                </div>
-                                                                                                <div class="col-xs-6">
-                                                                                                <div class="price full-width"><small>per day</small>$45.39</div>
-                                                                                                </div>
-                                                                                            </div>        
-                                                                                               
-                                                                                            
-                                                                                        </div>
-                                                                                        <div class="">
-                                                                                            <div id="2" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
-                                                                                                
-                                                                                                
-                                                    
-                                                                                            <table class="table table-hover">
-                                                                                                
-                                                                                                <!-- ngRepeat: rm in deal.roomdata.hoteldata.rooms --><tbody ng-repeat="rm in deal.roomdata.hoteldata.rooms" class="ng-scope">
-                                                                                                <!-- ngRepeat: deal in rm.deals | limitTo:lim  --><tr ng-repeat="deal in rm.deals | limitTo:lim " class="ng-scope">
-                                                                                                    <td><img></td>
-                                                                                                    <!-- ngIf: [[rm.room_type]]==1 --><td ng-if="1==1" class="ng-scope">Premium</td><!-- end ngIf: [[rm.room_type]]==1 -->
-                                                                                                    <!-- ngIf: [[rm.room_type]]==2 -->
-                                                                                                    <!-- ngIf: [[rm.room_type]]==3 -->
-                                                                                                    <!-- ngIf: [[rm.room_type]]==4 -->
-                                                                                                    <!-- ngIf: [[rm.room_type]]==5 -->
-                                                                                                    <td><a class="button btn-mini orange" ng-click="showDetail(deal.room)">fare detail</a></td>
-                                                                                                    <td class="price"><a href="https://imgio.trivago.com/uploadimages/33/10/33109706_x.jpeg" class="ng-binding">₹3333</a></td>
-                                                                                                </tr><!-- end ngRepeat: deal in rm.deals | limitTo:lim  -->
-                                                                                                
-                                                                                                <!-- <tr>
-                                                                                                    <td><a href="" class="uppercase full-width button btn-large" ng-click='loadmoredeals()'>load more deals</a></td>
-                                                                                                </tr> -->
-                                                                                                </tbody><!-- end ngRepeat: rm in deal.roomdata.hoteldata.rooms -->
-                                                                                            
-                                                                                            </table>
-                                                                                            
-                                                                                            </div>
-                                                                                          </div>
-                                                                                    </article>
-                                                                                    
-                                                                                
-                                                                                
-                                                                            </div>
+                                            <div class="col-12" style="margin-top:30px;">
+                                            <div class="sort-by-section clearfix" style="padding:0 30px;">
+                                                    <div class="search-tab-content">
+                                                              <form action="car-list-view.html" method="post">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <h4 class="title">Other Charges</h4>
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-4"><label>Cost / Excess Km:</label></div>
+                                                                                        <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="km in deal.deals">[[km.fare_exceeded_per_km]]</p></div>
+                                                                                </div>
                                                                         </div>
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-4"><label>Cost / Excess Hour:</label></div>
+                                                                                        <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="hour in deal.deals">[[hour.fare_exceeded_per_hr]]</p></div>
+                                                                                </div>  
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                    <div class="col-sm-4"><label>Pickup Spots:</label></div>
+                                                                                    <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="pick in deal.deals">[[pick.different_pickup_drop_point_charge]]</p></div>
+                                                                            </div>  
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+                                                                                <div class="col-sm-4"><label>Cancelation charges:</label></div>
+                                                                                <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="cancel in deal.deals">[[cancel.cancellation_charges]]</p></div>
+                                                                        </div>  
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+                                                                                <div class="col-sm-4"><label>Km Restriction:</label></div>
+                                                                                <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="km in deal.deals">[[km.km_restriction]]</p></div>
+                                                                        </div>  
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+                                                                                <div class="col-sm-4"><label>Night Time Allowance Charges:</label></div>
+                                                                                <div class="col-sm-8" ng-repeat="deal in cab"><p ng-repeat="night in deal.deals">[[night.driver_night_allowance_charge]]</p></div>
+                                                                        </div>  
+                                                                    </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </form>
                                                             </div>
+                                                </div>
+                                    </div>
                                                         
                                             </div>
                                         </div>

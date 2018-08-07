@@ -109,3 +109,35 @@ def cab_list():
 @app.route('/cab/detail', methods=['GET'])
 def cab_detail():
     return render_template('cab/cab_detail.html')
+
+
+@app.route('/cab/detail/hire_driver', methods=['GET'])
+def detail_hire_driver():
+    return render_template('cab/detail_hire_driver.html')
+
+
+@app.route('/cab/detail/luxury', methods=['GET'])
+def detail_luxury():
+    return render_template('cab/detail_luxury.html')
+
+
+@app.route('/cab/detail/monthly_rental', methods=['GET'])
+def detail_monthly_rental():
+    return render_template('cab/detail_monthly_rental.html')
+
+
+@app.route('/cab/detail/outstation_rental', methods=['GET'])
+def detail_outstation_rental():
+    return render_template('cab/detail_outstation_rental.html')
+
+
+@app.route('/cab/detail/self_drive', methods=['GET'])
+def detail_self_drive():
+    return render_template('cab/detail_self_drive.html')
+
+
+@app.route('/cab/detail/sight_seeing', methods=['GET'])
+def detail_sight_seeing():
+    return render_template('cab/detail_sight_seeing.html')
+    
+
