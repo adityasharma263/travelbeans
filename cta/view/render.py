@@ -2,7 +2,7 @@
 __author__ = 'aditya'
 
 from cta import app
-from flask import render_template, request
+from flask import render_template, request, make_response
 import requests
 
 
@@ -69,15 +69,33 @@ def restaurant_collection():
 
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
-    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
     args = request.args.to_dict()
-    restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
-    searched_value = ''
-    searched_key  = ''
-    if args:
-        searched_value = list(args.values())[0]
-        searched_key = list(args.keys())[0]
-    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value, searched_key=searched_key)
+
+    cuisine = args.get("cuisine", None)
+    category = args.get("category", None)
+    args['collection'] = 'trending'
+
+    cuisine_data = None
+
+    if cuisine:
+        cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
+        cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
+        pass
+
+    featured_restaurant_params = {
+        "featured":True
+        }
+    # featured_restaurant_params = args
+    # featured_restaurant_params.pop("collection", None)
+    # featured_restaurant_params['featured'] = True
+
+
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
+    featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
+    trending_restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
+
+    
+    return render_template("restaurant/restaurant_search.html", trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
