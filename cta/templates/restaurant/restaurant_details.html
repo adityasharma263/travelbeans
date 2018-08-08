@@ -2306,24 +2306,26 @@
                         </article>
 
                         <div class="travelo-box">
-                            <h4>Similar Listings</h4>
+                            <h4>Popular Listings</h4>
                             <div class="image-box style14">
+                                {% for featured_restaurant in featured_restaurant_data %}
                                 <article class="box">
                                     <figure>
-                                        <a href="#">
-                                            <img src="/Detailed View_files/buttons-sample1.png" alt="">
+                                        <a href="/restaurant/{{featured_restaurant.id}}">
+                                            <img src="{{featured_restaurant.images[0].image_url}}" alt="">
                                         </a>
                                     </figure>
                                     <div class="details">
                                         <h5 class="box-title">
-                                            <a href="#">Plaza Tour Eiffel</a>
+                                            <a href="/restaurant/{{featured_restaurant.id}}">{{featured_restaurant.name}}</a>
                                         </h5>
                                         <label class="price-wrapper">
-                                            <span class="price-per-unit">$170</span>avg/night
+                                            <span class="price-per-unit">₹{{featured_restaurant.price}}</span>for two.
                                         </label>
                                     </div>
                                 </article>
-                                <article class="box">
+                                {% endfor %}
+                                <!-- <article class="box">
                                     <figure>
                                         <a href="#">
                                             <img src="/Detailed View_files/buttons-sample2.png" alt="">
@@ -2352,9 +2354,34 @@
                                             <span class="price-per-unit">$322</span>avg/night
                                         </label>
                                     </div>
-                                </article>
+                                </article> -->
                             </div>
                         </div>
+
+
+                        <div class="travelo-box">
+                                <h4>Trending Listings</h4>
+                                <div class="image-box style14">
+                                    {% for trending_restaurant in trending_restaurant_data %}
+                                    <article class="box">
+                                        <figure>
+                                            <a href="/restaurant/{{trending_restaurant.id}}">
+                                                <img src="{{trending_restaurant.images[0].image_url}}" alt="">
+                                            </a>
+                                        </figure>
+                                        <div class="details">
+                                            <h5 class="box-title">
+                                                <a href="/restaurant/{{trending_restaurant.id}}">{{trending_restaurant.name}}</a>
+                                            </h5>
+                                            <label class="price-wrapper">
+                                                <span class="price-per-unit">₹{{trending_restaurant.price}}</span>for two.
+                                            </label>
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
 
                         <div class="travelo-box contact-box">
                             <h4>Need Travelo Help?</h4>

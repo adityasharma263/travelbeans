@@ -1449,8 +1449,14 @@
                                         <div class="form-group col-sm-6 col-md-6">
                                             <h4 class="title">Trip Keys Resturants</h4>
                                             <label>Search for a Perfect Dinning</label>
+                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                    <!-- <option value disabled>--Select Location--</option> -->
+                                                    {% for location in locations %}
+                                                    <option value="{{location}}">{{location}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             <input type="text" class="input-text full-width search-input-text" placeholder="Search for a Dish" ng-model="searchQueryValue"
-                                                ng-change="searchQuery(searchQueryValue)">
+                                                ng-change="searchQuery(searchQueryValue, userLocation)">
                                         </div>
 
 
@@ -1486,8 +1492,15 @@
                                             <h4 class="title">Order Online</h4>
                                             <label>Hungry ? Worry Not , We'll Get Your Order Placed</label>
 
+                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                <!-- <option value disabled>--Select Location--</option> -->
+                                                {% for location in locations %}
+                                                <option value="{{location}}">{{location}}</option>
+                                                {% endfor %}
+                                            </select>
+
                                             <input type="text" class="input-text full-width search-input-text" placeholder="Tell Us ! What are You Hungry For ?" ng-model="searchQueryValue"
-                                                ng-change="searchQuery(searchQueryValue)">
+                                                ng-change="searchQuery(searchQueryValue, userLocation)">
                                         </div>
 
                                         <div class="form-group col-sm-6 col-md-2 fixheight">
@@ -1508,6 +1521,7 @@
                                         <div class="form-group col-sm-6 col-md-6">
                                             <h4 class="title">Book a Table</h4>
                                             <label>We'll Help You for a Perfect Dine Out , Book With Us </label>
+                                            
                                             <input type="text" class="input-text full-width" placeholder="Search for Resturants Around You">
                                         </div>
 
@@ -1810,9 +1824,7 @@
 
                                     </div>
                                 </article>
-                                {% endfor %}
-
-                                {% for trending_restaurant in trending_restaurant_data %}
+                                {% endfor %} {% for trending_restaurant in trending_restaurant_data %}
                                 <article class="box">
                                     <figure>
                                         <a title="" href="/restaurant/{{trending_restaurant.id}}">
@@ -1898,9 +1910,7 @@
 
                                     </div>
                                 </article>
-                                {% endfor %}
-
-                                {% for trending_restaurant in trending_restaurant_data %}
+                                {% endfor %} {% for trending_restaurant in trending_restaurant_data %}
                                 <article class="box">
                                     <figure>
                                         <a title="" href="/restaurant/{{trending_restaurant.id}}">

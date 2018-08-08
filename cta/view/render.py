@@ -2,7 +2,7 @@
 __author__ = 'aditya'
 
 from cta import app
-from flask import render_template, request, make_response, jsonify
+from flask import render_template, request, make_response, jsonify, abort, redirect
 import requests
 
 
@@ -10,6 +10,9 @@ import requests
 def home():
     return render_template('index.html')
 
+@app.errorhandler(400)
+def page_not_found():
+    return render_template("404.html"), 400
 
 #======================== HOTEL ============================
 
@@ -55,27 +58,29 @@ def collection5():
 
 
 
-#======================== RESTAURANT ============================
+#======================== RESTAURANT =============================
 
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant():
     check_location = request.cookies.get("location")
-
-    featured_restaurant_params = {
-            "featured":True
-            }
-    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
-            
-    featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
-    cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
-    cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
     
+    if not check_location:
+        print("in the first cond")
+        locations = requests.get(url=str(app.config["DOMAIN_URL"]) +"/restaurant/location").json()['result']['locations']
+        return render_template("restaurant/restaurant_choose_location.html", locations=locations)
+    else:
+        return redirect(str(app.config["DOMAIN_URL"]) +"/restaurant/"+check_location)
+    
+@app.route("/restaurant/set-value", methods=['POST'])
+def restaurant_set_location_cookie():
+    request_data = request.json
+    location = request_data.get("location", None)
 
-    # if not check_location:
-    #     return render_template("restaurant/restaurant_choose_location.html")
-    collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
-    return render_template("restaurant/restaurant.html", cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data)
+    resp = make_response()
+    resp.set_cookie("location", location, max_age=(60 * 60 * 24 * 90))
+    return resp
+
 
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
@@ -403,6 +408,9 @@ def restaurant_location():
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
     args = request.args.to_dict()
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
     searched_value = ''
     # searched_key  = ''
     if args:
@@ -411,6 +419,7 @@ def restaurant_search():
     cuisine = args.get("cuisine", None)
     category = args.get("category", None)
     args['collection'] = 'trending'
+    args['city'] = location_from_cookie
 
     cuisine_data = None
 
@@ -420,33 +429,80 @@ def restaurant_search():
         
 
     featured_restaurant_params = {
-        "featured":True
+        "featured":True,
+        "city" : location_from_cookie
         }
     # featured_restaurant_params = args
     # featured_restaurant_params.pop("collection", None)
     # featured_restaurant_params['featured'] = True
 
-
+    locations = requests.get(url=str(app.config["DOMAIN_URL"]) + "/restaurant/location").json()['result']['locations']
     
-
 
     restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
     featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
     trending_restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
 
     
-    return render_template("restaurant/restaurant_search.html",searched_value=searched_value, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
+    return render_template("restaurant/restaurant_search.html", locations=locations, user_location = location_from_cookie, searched_value=searched_value, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
 def restaurant_detail(restaurant_id):
-    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant?id="+str(restaurant_id)
-    restaurant_data = requests.get(url=restaurant_api_url).json()['result']['restaurants'][0]
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
+
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
+    params = {
+        "id" : restaurant_id
+    }
+    trending_params = {
+        "collection" : "trending",
+        "city" : location_from_cookie
+    }
+
+    featured_params = {
+        "featured" : True,
+        "city" : location_from_cookie
+    }
+
+
+    restaurant_data = requests.get(url=restaurant_api_url, params=params).json()['result']['restaurants'][0]
+    trending_restaurant_data = requests.get(url=restaurant_api_url, params=trending_params).json()['result']['restaurants']
+    featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_params).json()['result']['restaurants']
     if restaurant_data['amenities']:
         restaurant_data['amenities'].pop("id", None)
         restaurant_data['amenities'].pop("restaurant", None)
-    return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data)
+    return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data, trending_restaurant_data=trending_restaurant_data, featured_restaurant_data=featured_restaurant_data)
 
+
+@app.route("/restaurant/<string:location>")
+def restaurant_home(location):
+    locations = requests.get(url=str(app.config["DOMAIN_URL"]) + "/restaurant/location").json()['result']['locations']
+    print("test location")
+    
+    if not location in locations :
+        resp = make_response(redirect("/restaurant"))
+        resp.set_cookie('location', expires=0)
+        return resp
+    else:
+
+        featured_restaurant_params = {
+            "featured":True,
+            "city" : location
+            }
+        restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
+                
+        featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
+        cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
+        cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
+        print(cuisine_data)
+        collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
+        resp =  make_response(render_template("restaurant/restaurant.html", user_location = location, locations=locations, cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data))
+        resp.set_cookie('location', location, max_age=(60 * 60 * 24 * 90))
+        return resp
+    
 
 @app.route("/restaurant/search/suggestion", methods=["GET"])
 def restaurant_search_sugg():
