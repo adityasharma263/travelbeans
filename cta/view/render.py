@@ -84,7 +84,10 @@ def restaurant_set_location_cookie():
 
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
-    return render_template("restaurant/collections.html")
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
+    return render_template("restaurant/collections.html", user_location = location_from_cookie)
 
 @app.route("/restaurant/location")
 def restaurant_location():
