@@ -139,9 +139,9 @@ hr{
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) { 
     .search-suggestion-box{
-    top: 70%;
-    width: 570px;
-    left: 86px;
+        top: 58%;
+        width: 482px;
+        left: 373px;
     
 }
 }
@@ -189,4 +189,20 @@ hr{
     padding-left: 30px;
     font-weight: 900;
     font-size: 16px;
+}
+.theme-button-color{
+    background-color: #98ce44;
+    border: none;
+    border-radius: 0 !important;
+    color:white;
+}
+
+.border-radius-0{
+    border-radius: 0 !important;
+    
+}
+
+.theme-button-color:hover{
+    color:white !important;
+    background-color: #7fb231 !important;
 }
