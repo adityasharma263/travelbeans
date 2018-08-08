@@ -36,7 +36,10 @@ def cab_api():
                     common_id = value
                 else:
                     common_id = list(set(common_id).intersection(value))
-        data = Cab.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        if is_filter:
+            data = Cab.query.filter_by(**args).filter(Cab.id.in_(common_id)).offset((page - 1) * per_page).limit(per_page).all()
+        else:
+            data = Cab.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
         result = CabSchema(many=True).dump(data)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
