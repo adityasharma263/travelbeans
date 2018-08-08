@@ -19,6 +19,7 @@ def cab_api():
         per_page = int(request.args.get('per_page', 10))
         amenity_cab_id = []
         common_id = []
+        is_filter = 0
         if amenity:
             is_filter = 1
             try:
