@@ -190,3 +190,19 @@ hr{
     font-weight: 900;
     font-size: 16px;
 }
+.theme-button-color{
+    background-color: #98ce44;
+    border: none;
+    border-radius: 0 !important;
+    color:white;
+}
+
+.border-radius-0{
+    border-radius: 0 !important;
+    
+}
+
+.theme-button-color:hover{
+    color:white !important;
+    background-color: #7fb231 !important;
+}

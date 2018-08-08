@@ -38,3 +38,20 @@
 .image-stack > a {
     display:inline-block;
 }
+
+.theme-button-color{
+    background-color: #fdb714;;
+    border: none;
+    border-radius: 0 !important;
+    color:white;
+}
+
+.border-radius-0{
+    border-radius: 0 !important;
+    
+}
+
+.theme-button-color:hover{
+    color:white !important;
+    background-color: #e9b02b !important;
+}

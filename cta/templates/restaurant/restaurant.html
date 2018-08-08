@@ -794,14 +794,14 @@
                 <div class="container">
 
                     <h2>Special Delighted Collection</h2>
-                    <a href="/restaurant/collection" class="pull-right btn btn-primary">see more</a>
+                    
 
                     <div class="row image-box style2 add-clearfix">
                         {% for collection in collections %}
                         <div class="col-md-4">
                             <article class="box">
                                 <figure>
-                                    <a title="" href="#">
+                                    <a title="" href="/restaurant/search?collection={{collection.collection}}">
                                         <img width="270" height="192" alt="{{collection.collection}}" src="{{collection.image}}">
                                     </a>
                                 </figure>
@@ -812,6 +812,8 @@
                             </article>
                         </div>
                         {% endfor %}
+
+                        <div class="col-sm-12"><a href="/restaurant/collection" class="button">see more</a></div>
                         <!-- <div class="col-md-4">
                                 <article class="box">
                                     <figure>
@@ -853,81 +855,103 @@
                             </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=lunch">
                             <div class="icon-box style4">
                                 <i class="soap-icon-beach"></i>
                                 <h4 class="box-title">Lunch</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=dinner">
                             <div class="icon-box style4">
                                 <i class="soap-icon-beach"></i>
                                 <h4 class="box-title">Dinner</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=cafe">
                             <div class="icon-box style4">
                                 <i class="soap-icon-party"></i>
                                 <h4 class="box-title">Cafe's</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=lounge">
                             <div class="icon-box style4">
                                 <i class="soap-icon-playplace"></i>
                                 <h4 class="box-title">Lounge</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=restaurant">
                             <div class="icon-box style4">
                                 <i class="soap-icon-couples"></i>
                                 <h4 class="box-title">Resturants</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=bars">
                             <div class="icon-box style4">
                                 <i class="soap-icon-ski"></i>
                                 <h4 class="box-title">Bars</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=nightlife">
                             <div class="icon-box style4">
                                 <i class="soap-icon-ski"></i>
                                 <h4 class="box-title">Nightlife</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=luxury">
                             <div class="icon-box style4">
                                 <i class="soap-icon-ski"></i>
                                 <h4 class="box-title">Luxury</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=street_stalls">
                             <div class="icon-box style4">
                                 <i class="soap-icon-ski"></i>
                                 <h4 class="box-title">Street Stalls</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=pocket_friendly">
                             <div class="icon-box style4">
                                 <i class="soap-icon-ski"></i>
                                 <h4 class="box-title">Pocket Friendly</h4>
 
                             </div>
+                        </a>
                         </div>
                         <div class="col-xs-10 col-sm-4 col-md-1">
+                            <a href="/restaurant/search?menu=diet">
                             <div class="icon-box style4">
                                 <i class="soap-icon-ski"></i>
                                 <h4 class="box-title">Diet</h4>
 
                             </div>
+                        </a>
                         </div>
                     </div>
 
@@ -947,7 +971,7 @@
                                         <a href="/restaurant/{{featured_restaurant.id}}" class="button">MORE</a>
                                         <h4 class="box-title">{{featured_restaurant.name}}
                                             <br>
-                                            <small></small>
+                                            <small>{{featured_restaurant.locality}}</small>
                                         </h4>
                                     </div>
                                 </article>
