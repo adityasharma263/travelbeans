@@ -17,14 +17,14 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       overlayBox.style.display = "none";
     }
 
-    $scope.searchQuery = function (query) {
+    $scope.searchQuery = function (query, cityLocation) {
 
       console.log(query);
 
 
 
       if (query.length >= 2) {
-        $http.post("/api/v1/restaurant/search", { search: query })
+        $http.post("/api/v1/restaurant/search", { search: query, city: cityLocation })
           .then(function (response) {
             searchSuggestionDiv.style.display = "block";
             overlayBox.style.display = "block";
@@ -46,6 +46,16 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
     };
 
+    $scope.setValues = function (location) {
+      $http.post("restaurant/set-value" , {location : location})
+      .then(function(res){
+        console.log("set values success");
+      }, function(err){
+        console.log(err);
+      })
+
+    }
+
 
 
   }])
@@ -65,6 +75,14 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         console.log(err);
       });
 
+
+      function getQueryStringValue(key) {
+        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+      }
+
+
+      
+
     $scope.getMenubyId = function (restaurantId, restaurantName) {
       console.log("akshay");
       $scope.restaurantName = restaurantName;
@@ -77,8 +95,15 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         function (err) {
           console.log(err);
         })
+    }
 
-
+    $scope.setValues = function (location) {
+      $http.post("/restaurant/set-value" , {location : location})
+      .then(function(res){
+        console.log("set values success");
+      }, function(err){
+        console.log(err);
+      })
 
     }
 
@@ -96,6 +121,22 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         for (i in allRestaurants) {
           restaurantStructure[allRestaurants[i].id] = allRestaurants[i];
         };
+
+
+        if (getQueryStringValue("name")){
+          console.log("in the name")
+          $http.get("/api/v1/restaurant?city="+$scope.userLocation)
+          .then(function (res) {
+            var mergeRestaurantList =  res.data.result.restaurants;
+            $scope.restaurants =  $scope.restaurants.concat(mergeRestaurantList);
+            console.log("merged");
+    
+          }, function (err) {
+            console.log(err);
+          });
+          
+          
+        }
 
       }, function (err) {
         console.log(err);
@@ -124,12 +165,12 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         console.log(err);
       });
 
-    $http.get("/api/v1/restaurant/amenity")
-      .then(function (res) {
-        $scope.amenities = res.data.result.amenities[0];
-      }, function (err) {
-        console.log(err);
-      });
+    // $http.get("/api/v1/restaurant/amenity")
+    //   .then(function (res) {
+    //     $scope.amenities = res.data.result.amenities[0];
+    //   }, function (err) {
+    //     console.log(err);
+    //   });
 
 
     $http.get("/api/v1/restaurant/menu")
@@ -209,14 +250,14 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       overlayBox.style.display = "none";
     }
 
-    $scope.searchQuery = function (query) {
+    $scope.searchQuery = function (query, cityLocation) {
 
       console.log(query);
-
+      console.log(cityLocation);
 
 
       if (query.length >= 2) {
-        $http.post("/api/v1/restaurant/search", { search: query })
+        $http.post("/api/v1/restaurant/search", { search: query, city: cityLocation })
           .then(function (response) {
             searchSuggestionDiv.style.display = "block";
             overlayBox.style.display = "block";
@@ -400,9 +441,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     };
 
 
-    function getQueryStringValue(key) {
-      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-    }
+    
 
     $scope.addMoreAssociation = function () {
       var addAssociation = {
@@ -865,14 +904,6 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       'Zirakpur',
       'Ziro',
     ]
-
-
-
-
-
-
-
-
   }])
   .controller("collectionController", ["$scope", "$http", "$sce", function ($scope, $http, $sce) {
 
@@ -1568,7 +1599,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     $scope.addMore = function () {
       var addCusine = {
-        cuisine: null
+        cuisine: null,
+        desc : null,
+        image : null,
+        featured : false
       };
 
       $scope.cuisineData.push(addCusine);

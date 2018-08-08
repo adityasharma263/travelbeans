@@ -2,7 +2,7 @@
 __author__ = 'aditya'
 
 from cta import app
-from flask import render_template, request
+from flask import render_template, request, make_response, jsonify, abort, redirect
 import requests
 
 
@@ -10,6 +10,9 @@ import requests
 def home():
     return render_template('index.html')
 
+@app.errorhandler(400)
+def page_not_found():
+    return render_template("404.html"), 400
 
 #======================== HOTEL ============================
 
@@ -55,40 +58,451 @@ def collection5():
 
 
 
-#======================== RESTAURANT ============================
+#======================== RESTAURANT =============================
 
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant():
-    collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
-    return render_template("restaurant/restaurant.html", collections=collections)
+    check_location = request.cookies.get("location")
+    
+    if not check_location:
+        print("in the first cond")
+        locations = requests.get(url=str(app.config["DOMAIN_URL"]) +"/restaurant/location").json()['result']['locations']
+        return render_template("restaurant/restaurant_choose_location.html", locations=locations)
+    else:
+        return redirect(str(app.config["DOMAIN_URL"]) +"/restaurant/"+check_location)
+    
+@app.route("/restaurant/set-value", methods=['POST'])
+def restaurant_set_location_cookie():
+    request_data = request.json
+    location = request_data.get("location", None)
+
+    resp = make_response()
+    resp.set_cookie("location", location, max_age=(60 * 60 * 24 * 90))
+    return resp
+
 
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
     return render_template("restaurant/collections.html")
 
+@app.route("/restaurant/location")
+def restaurant_location():
+    locations = [
+      'Abu',
+      'Agartala',
+      'Ahmedabad',
+      'Aizawl',
+      'Ajmer',
+      'Allahabad',
+      'Almora',
+      'Along',
+      'Alwar',
+      'Amarnath',
+      'Ambala',
+      'Amboli',
+      'Amritsar',
+      'Andaman',
+      'Andhra Pradesh',
+      'Araku',
+      'Arunachal Pradesh',
+      'Assam',
+      'Auli',
+      'Aurangabad',
+      'Badrinath',
+      'Bagan',
+      'Bagdogra',
+      'Bakkhali',
+      'Bali',
+      'Bandhavgarh',
+      'Bandipur',
+      'Bangalore',
+      'Banjar',
+      'Barot',
+      'Batala',
+      'Bhandardara',
+      'Bhangarh',
+      'Bharatpur',
+      'Bhatinda',
+      'Bhimashankar',
+      'Bhimtal',
+      'Bhopal',
+      'Bihar',
+      'Bikaner',
+      'Bir-Billing',
+      'Bundi',
+      'Chail',
+      'Chalakudy',
+      'Chamba',
+      'Champawat',
+      'Chandigarh',
+      'Chattisgarh',
+      'Cherrapunji',
+      'Chikhaldara',
+      'Chikmagalur',
+      'Chitkul',
+      'Chittorgarh',
+      'Chumathang',
+      'Coimbatore',
+      'Coonoor',
+      'Coorg',
+      'Corbett',
+      'Dadra and Nagar Haveli',
+      'Dalhousie',
+      'Daman',
+      'Daman and Diu',
+      'Dandeli',
+      'Daranghati',
+      'Darjeeling',
+      'Dehradun',
+      'Delhi',
+      'Devprayag',
+      'Dhana',
+      'Dhanaulti',
+      'Dharamshala',
+      'Dibrugarh',
+      'Digha',
+      'Dimapur',
+      'Diu',
+      'Dudhwa',
+      'Dwarka',
+      'Faridabad',
+      'GHNP',
+      'Gangotri',
+      'Gangtok',
+      'Gaya',
+      'Ghaziabad',
+      'Gir',
+      'Goa',
+      'Gokarna',
+      'Gopalpur',
+      'Gorakhpur',
+      'Gujarat',
+      'Gulmarg',
+      'Guntakal',
+      'Guptkashi',
+      'Gurdaspur',
+      'Gurgaon',
+      'Guwahati',
+      'Haflong',
+      'Hampi',
+      'Hanoi',
+      'Haridwar',
+      'Haryana',
+      'Himachal Pradesh',
+      'Hogenakkal',
+      'Hoshiarpur',
+      'Hunder',
+      'Igatpuri',
+      'Imphal',
+      'Indore',
+      'Itanagar',
+      'Jabalpur',
+      'Jagdalpur',
+      'Jaisalmer',
+      'Jakarta',
+      'Jalandhar',
+      'Jammu and Kashmir',
+      'Jharkhand',
+      'Jodhpur',
+      'Jorhat',
+      'Joshimath',
+      'Junagadh',
+      'Junnar',
+      'Kalimpong',
+      'Kamshet',
+      'Kanatal',
+      'Kanchipuram',
+      'Kangra',
+      'Kanyakumari',
+      'Kargil',
+      'Karjat',
+      'Karnaprayag',
+      'Karnataka',
+      'Karsog',
+      'Kasauli',
+      'Kashid',
+      'Kasol',
+      'Katra',
+      'Kaza',
+      'Kaziranga',
+      'Kedarnath',
+      'Kerala',
+      'Keylong',
+      'Khajjiar',
+      'Khajuraho',
+      'Khandala',
+      'Kharapathar',
+      'Khimsar',
+      'Kochi',
+      'Kodaikanal',
+      'Kohima',
+      'Kolad',
+      'Kollam',
+      'Konark',
+      'Kota',
+      'Kovalam',
+      'Kozhikode',
+      'Kudremukha',
+      'Kufri',
+      'Kullu',
+      'Kumarakom',
+      'Kumbhalgarh',
+      'Kurnool',
+      'Kurseong',
+      'Kurukshetra',
+      'Kutch',
+      'Lachung',
+      'Lakshadweep',
+      'Lamayuru',
+      'Lambasingi',
+      'Lansdowne',
+      'Lavasa',
+      'Leh',
+      'Likir',
+      'Lohajung',
+      'Lonar',
+      'Lucknow',
+      'Ludhiana',
+      'Madhya Pradesh',
+      'Madurai',
+      'Mahabaleshwar',
+      'Mahabalipuram',
+      'Maharashtra',
+      'Male',
+      'Malvan',
+      'Manali',
+      'Mandarmani',
+      'Mandi',
+      'Mandu',
+      'Manipur',
+      'Maredumilli',
+      'Matheran',
+      'Mathura',
+      'Mawlynnong',
+      'Mawsynram',
+      'Mcleodganj',
+      'Meghalaya',
+      'Mizoram',
+      'Mohali',
+      'Mukteshwar',
+      'Mumbai',
+      'Munnar',
+      'Mussoorie',
+      'Mysore',
+      'Nagaland',
+      'Naggar',
+      'Nagpur',
+      'Nainital',
+      'Nandaprayag',
+      'Nandi',
+      'Narkanda',
+      'Nashik',
+      'Naukuchiatal',
+      'Neemrana',
+      'Nelliyampathy',
+      'Netarhat',
+      'Noida',
+      'Nongstoin',
+      'Odisha',
+      'Orchha',
+      'Osian',
+      'Pahalgam',
+      'Palakkad',
+      'Palampur',
+      'Palanpur',
+      'Panchgani',
+      'Panna',
+      'Pasighat',
+      'Pathankot',
+      'Patiala',
+      'Patna',
+      'Patnitop',
+      'Pattaya',
+      'Peermade',
+      'Pelling',
+      'Periyar',
+      'Pithoragarh',
+      'Pondicherry',
+      'Pune',
+      'Punjab',
+      'Puri',
+      'Pushkar',
+      'Raipur',
+      'Rajaji',
+      'Rajasthan',
+      'Rajgir',
+      'Rajkot',
+      'Rameswaram',
+      'Ramtek',
+      'Ranchi',
+      'Ranikhet',
+      'Ranthambore',
+      'Ratnagiri',
+      'Ravangla',
+      'Rudraprayag',
+      'Sagar',
+      'Samui',
+      'Sanchi',
+      'Sangli',
+      'Saputara',
+      'Sariska',
+      'Seoni',
+      'Shillong',
+      'Shimla',
+      'Shirdi',
+      'Shivanasamundram',
+      'Shoghi',
+      'Shravanabelagola',
+      'Sikkim',
+      'Silchar',
+      'Siliguri',
+      'Similipal',
+      'Singalila',
+      'Sirmaur',
+      'Solan',
+      'Sonamarg',
+      'Sonipat',
+      'Srinagar',
+      'Sundarbans',
+      'Surat',
+      'Tamenglong',
+      'Tamil Nadu',
+      'Tanakpur',
+      'Tarkarli',
+      'Tatapani',
+      'Tawang',
+      'Telangana',
+      'Tezpur',
+      'Thanjavur',
+      'Thenmala',
+      'Thiruvananthapuram',
+      'Tiruchirappalli',
+      'Tirupati',
+      'Tiruvannamalai',
+      'Tripura',
+      'Tura',
+      'Udaipur',
+      'Ujjain',
+      'Unakoti',
+      'Uttar Pradesh',
+      'Uttarakhand',
+      'Uttarkashi',
+      'Vadodara',
+      'Vagamon',
+      'Varkala',
+      'Visakhapatnam',
+      'Vishnuprayag',
+      'Vrindavan',
+      'Wayanad',
+      'West Bengal',
+      'Yamunotri',
+      'Yelagiri',
+      'Yousmarg',
+      'Zirakpur',
+      'Ziro',
+    ]
+
+    return jsonify({"result": {"locations" : locations}, 'message': "Success", 'error': False})
+
 @app.route("/restaurant/search", methods=['GET'])
 def restaurant_search():
-    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
     args = request.args.to_dict()
-    restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
     searched_value = ''
-    searched_key  = ''
+    # searched_key  = ''
     if args:
         searched_value = list(args.values())[0]
-        searched_key = list(args.keys())[0]
-    return render_template("restaurant/restaurant_search.html", restaurant_details=restaurant_data, args=args, searched_value=searched_value, searched_key=searched_key)
+        # searched_key = list(args.keys())[0]
+    cuisine = args.get("cuisine", None)
+    category = args.get("category", None)
+    args['collection'] = 'trending'
+    args['city'] = location_from_cookie
+
+    cuisine_data = None
+
+    if cuisine:
+        cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
+        cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
+        
+
+    featured_restaurant_params = {
+        "featured":True,
+        "city" : location_from_cookie
+        }
+    # featured_restaurant_params = args
+    # featured_restaurant_params.pop("collection", None)
+    # featured_restaurant_params['featured'] = True
+
+    locations = requests.get(url=str(app.config["DOMAIN_URL"]) + "/restaurant/location").json()['result']['locations']
+    
+
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
+    featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
+    trending_restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
+
+    
+    return render_template("restaurant/restaurant_search.html", locations=locations, user_location = location_from_cookie, searched_value=searched_value, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
 def restaurant_detail(restaurant_id):
-    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant?id="+str(restaurant_id)
-    restaurant_data = requests.get(url=restaurant_api_url).json()['result']['restaurants'][0]
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
+
+    restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
+    params = {
+        "id" : restaurant_id
+    }
+    trending_params = {
+        "collection" : "trending",
+        "city" : location_from_cookie
+    }
+
+    featured_params = {
+        "featured" : True,
+        "city" : location_from_cookie
+    }
+
+
+    restaurant_data = requests.get(url=restaurant_api_url, params=params).json()['result']['restaurants'][0]
+    trending_restaurant_data = requests.get(url=restaurant_api_url, params=trending_params).json()['result']['restaurants']
+    featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_params).json()['result']['restaurants']
     if restaurant_data['amenities']:
         restaurant_data['amenities'].pop("id", None)
         restaurant_data['amenities'].pop("restaurant", None)
-    return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data)
+    return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data, trending_restaurant_data=trending_restaurant_data, featured_restaurant_data=featured_restaurant_data)
 
+
+@app.route("/restaurant/<string:location>")
+def restaurant_home(location):
+    locations = requests.get(url=str(app.config["DOMAIN_URL"]) + "/restaurant/location").json()['result']['locations']
+    print("test location")
+    
+    if not location in locations :
+        resp = make_response(redirect("/restaurant"))
+        resp.set_cookie('location', expires=0)
+        return resp
+    else:
+
+        featured_restaurant_params = {
+            "featured":True,
+            "city" : location
+            }
+        restaurant_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"   
+                
+        featured_restaurant_data = requests.get(url=restaurant_api_url, params=featured_restaurant_params).json()['result']['restaurants']
+        cuisine_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant/cuisine"
+        cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
+        print(cuisine_data)
+        collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
+        resp =  make_response(render_template("restaurant/restaurant.html", user_location = location, locations=locations, cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data))
+        resp.set_cookie('location', location, max_age=(60 * 60 * 24 * 90))
+        return resp
+    
 
 @app.route("/restaurant/search/suggestion", methods=["GET"])
 def restaurant_search_sugg():
@@ -115,7 +529,10 @@ def admin_dish():
 
 @app.route("/admin/restaurant/collection", methods=['GET'])
 def admin_collection():
-    return render_template("restaurant/restaurant_collection_dashboard.html")
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
+    return render_template("restaurant/restaurant_collection_dashboard.html", user_location = location_from_cookie)
     
 
 @app.route("/admin/restaurant/cuisine", methods=['GET'])
@@ -159,3 +576,35 @@ def cab_list():
 @app.route('/cab/detail', methods=['GET'])
 def cab_detail():
     return render_template('cab/cab_detail.html')
+
+
+@app.route('/cab/detail/hire_driver', methods=['GET'])
+def detail_hire_driver():
+    return render_template('cab/detail_hire_driver.html')
+
+
+@app.route('/cab/detail/luxury', methods=['GET'])
+def detail_luxury():
+    return render_template('cab/detail_luxury.html')
+
+
+@app.route('/cab/detail/monthly_rental', methods=['GET'])
+def detail_monthly_rental():
+    return render_template('cab/detail_monthly_rental.html')
+
+
+@app.route('/cab/detail/outstation_rental', methods=['GET'])
+def detail_outstation_rental():
+    return render_template('cab/detail_outstation_rental.html')
+
+
+@app.route('/cab/detail/self_drive', methods=['GET'])
+def detail_self_drive():
+    return render_template('cab/detail_self_drive.html')
+
+
+@app.route('/cab/detail/sight_seeing', methods=['GET'])
+def detail_sight_seeing():
+    return render_template('cab/detail_sight_seeing.html')
+    
+

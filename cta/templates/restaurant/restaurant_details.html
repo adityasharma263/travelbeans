@@ -611,13 +611,15 @@
                                             <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
                                                 
                                                 
-                                                <li class="clone" aria-hidden="true" style="width: 870px; float: left; display: block;">
+                                                <!-- <li class="clone" aria-hidden="true" style="width: 870px; float: left; display: block;">
                                                     <img src="{{restaurant_detail.images[0].image_url}}" alt="" draggable="false">
-                                                </li>
+                                                </li> -->
+                                                {% for images in restaurant_detail.images %}
                                                 <li style="width: 870px; float: left; display: block;" class="">
-                                                    <img src="/Detailed View_files/1.jpg" alt="" draggable="false">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                {% endfor %}
+                                                <!-- <li style="width: 870px; float: left; display: block;" class="">
                                                     <img src="/Detailed View_files/2.jpg" alt="" draggable="false">
                                                 </li>
                                                 <li style="width: 870px; float: left; display: block;" class="flex-active-slide">
@@ -655,7 +657,7 @@
                                                 </li>
                                                 <li style="width: 870px; float: left; display: block;" class="clone" aria-hidden="true">
                                                     <img src="/Detailed View_files/1.jpg" alt="" draggable="false">
-                                                </li>
+                                                </li> -->
 
                                             </ul>
                                         </div>
@@ -714,10 +716,17 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                                                <li style="width: 70px; float: left; display: block; height: 70px; position: relative;" class="flex-active-slide">
+                                                <!-- <li style="width: 70px; float: left; display: block; height: 70px; position: relative;" class="flex-active-slide">
                                                     <img src="{{restaurant_detail.images[0].image_url}}" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;">
+                                                </li> -->
+
+                                                {% for images in restaurant_detail.images %}
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                <li class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;">
+                                                {% endfor %}
+
+                                                <!-- <li class="" style="width: 70px; float: left; display: block; height: 70px; position: relative;">
                                                     <img src="/Detailed View_files/1(1).jpg" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;">
                                                 </li>
                                                 <li style="width: 70px; float: left; display: block; height: 70px; position: relative;" class="">
@@ -755,7 +764,7 @@
                                                 </li>
                                                 <li style="width: 70px; float: left; display: block; height: 70px; position: relative;" class="">
                                                     <img src="/Detailed View_files/13(1).jpg" alt="" draggable="false" style="position: absolute; top: 50%; margin-top: -35px; left: 50%; margin-left: -35px;">
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                         <ol class="flex-control-nav flex-control-paging">
@@ -1754,7 +1763,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
 
@@ -1782,7 +1791,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
 
@@ -1810,7 +1819,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
 
@@ -2306,24 +2315,26 @@
                         </article>
 
                         <div class="travelo-box">
-                            <h4>Similar Listings</h4>
+                            <h4>Popular Listings</h4>
                             <div class="image-box style14">
+                                {% for featured_restaurant in featured_restaurant_data %}
                                 <article class="box">
                                     <figure>
-                                        <a href="#">
-                                            <img src="/Detailed View_files/buttons-sample1.png" alt="">
+                                        <a href="/restaurant/{{featured_restaurant.id}}">
+                                            <img src="{{featured_restaurant.images[0].image_url}}" alt="">
                                         </a>
                                     </figure>
                                     <div class="details">
                                         <h5 class="box-title">
-                                            <a href="#">Plaza Tour Eiffel</a>
+                                            <a href="/restaurant/{{featured_restaurant.id}}">{{featured_restaurant.name}}</a>
                                         </h5>
                                         <label class="price-wrapper">
-                                            <span class="price-per-unit">$170</span>avg/night
+                                            <span class="price-per-unit">₹{{featured_restaurant.price}}</span>for two.
                                         </label>
                                     </div>
                                 </article>
-                                <article class="box">
+                                {% endfor %}
+                                <!-- <article class="box">
                                     <figure>
                                         <a href="#">
                                             <img src="/Detailed View_files/buttons-sample2.png" alt="">
@@ -2352,9 +2363,34 @@
                                             <span class="price-per-unit">$322</span>avg/night
                                         </label>
                                     </div>
-                                </article>
+                                </article> -->
                             </div>
                         </div>
+
+
+                        <div class="travelo-box">
+                                <h4>Trending Listings</h4>
+                                <div class="image-box style14">
+                                    {% for trending_restaurant in trending_restaurant_data %}
+                                    <article class="box">
+                                        <figure>
+                                            <a href="/restaurant/{{trending_restaurant.id}}">
+                                                <img src="{{trending_restaurant.images[0].image_url}}" alt="">
+                                            </a>
+                                        </figure>
+                                        <div class="details">
+                                            <h5 class="box-title">
+                                                <a href="/restaurant/{{trending_restaurant.id}}">{{trending_restaurant.name}}</a>
+                                            </h5>
+                                            <label class="price-wrapper">
+                                                <span class="price-per-unit">₹{{trending_restaurant.price}}</span>for two.
+                                            </label>
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
 
                         <div class="travelo-box contact-box">
                             <h4>Need Travelo Help?</h4>
