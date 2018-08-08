@@ -569,27 +569,30 @@ def restaurant_search_api():
     categories = []
     localities = []
     restaurant_city_id = []
-    if city:
-        try:
-            restaurant_list = Restaurant.query.filter(Restaurant.city == city).all()
-            for restaurant_obj in restaurant_list:
-                restaurant_city_id.append(restaurant_obj.id)
-        except:
-            restaurant_city_id = []
-    restaurant_localities = Restaurant.query.distinct(Restaurant.locality).filter(Restaurant.locality.ilike('%' + search + '%')).order_by(Restaurant.locality).all()
+    try:
+        restaurant_list = Restaurant.query.filter(Restaurant.city == city).all()
+        for restaurant_obj in restaurant_list:
+            restaurant_city_id.append(restaurant_obj.id)
+    except:
+        restaurant_city_id = []
+    restaurant_localities = Restaurant.query.distinct(Restaurant.locality).filter(Restaurant.locality.ilike('%' + search + '%'))\
+        .order_by(Restaurant.locality).all()
     for restaurant_locality in restaurant_localities:
         localities.append(restaurant_locality.locality)
     restaurant_names = Restaurant.query.distinct(Restaurant.name).filter(Restaurant.id.in_(restaurant_city_id)).filter(
         Restaurant.name.ilike('%' + search + '%')).order_by(Restaurant.name).all()
     for restaurant_name in restaurant_names:
         names.append(restaurant_name.name)
-    restaurant_cuisines = Cuisine.query.distinct(Cuisine.cuisine).filter(Restaurant.id.in_(restaurant_city_id)).filter(Cuisine.cuisine.ilike('%' + search + '%')).order_by(Cuisine.cuisine).all()
+    restaurant_cuisines = Cuisine.query.distinct(Cuisine.cuisine).filter(Restaurant.id.in_(restaurant_city_id))\
+        .filter(Cuisine.cuisine.ilike('%' + search + '%')).order_by(Cuisine.cuisine).all()
     for restaurant_cuisine in restaurant_cuisines:
         cuisines.append(restaurant_cuisine.cuisine)
-    restaurant_collections = Collection.query.distinct(Collection.collection).filter(Restaurant.id.in_(restaurant_city_id)).filter(Collection.collection.ilike('%' + search + '%')).order_by(Collection.collection).all()
+    restaurant_collections = Collection.query.distinct(Collection.collection).filter(Restaurant.id.in_(restaurant_city_id))\
+        .filter(Collection.collection.ilike('%' + search + '%')).order_by(Collection.collection).all()
     for restaurant_collection in restaurant_collections:
         collections.append(restaurant_collection.collection)
-    restaurant_dishes = Dish.query.distinct(Dish.dish).filter(Restaurant.id.in_(restaurant_city_id)).filter(Dish.dish.ilike('%' + search + '%')).order_by(Dish.dish).all()
+    restaurant_dishes = Dish.query.distinct(Dish.dish).filter(Restaurant.id.in_(restaurant_city_id))\
+        .filter(Dish.dish.ilike('%' + search + '%')).order_by(Dish.dish).all()
     for restaurant_dish in restaurant_dishes:
         dishes.append(restaurant_dish.dish)
     restaurant_menus = ['dinner', 'cafe', 'breakfast', 'street_stalls', 'bars', 'lounge', 'diet', 'luxury', 'lunch', 'family',
@@ -597,7 +600,12 @@ def restaurant_search_api():
     for restaurant_menu in restaurant_menus:
         if restaurant_menu.startswith(search):
             menus.append(restaurant_menu)
-    restaurant_categories = ["bistro", "ethnic", "fine_dining", "trattoria", "teppanyaki_ya", "osteria", "drive_in", "drive_thru","pizzeria" ,"taverna" ,'fast_casual' ,"pop_up","Cafe",'iner' ,'ramen_ya' ,"teahouse" ,"fast_food","buffet","cafeteria" ,'luncheonette' ,"tapas_bar","steakhouse" ,"all_you_can_eat_restaurant" ,"kosher","dinner_in_the_Sky" ,"dark_restaurant" ,"a_la_carte","gastropub",'brasserie',"chiringuito","food_truck",'churrascaria','food_court','restrobars','street_stalls','theme_resturants',"coffee_shop","coffee_house","cabaret","tea_shop"]
+    restaurant_categories = ["bistro", "ethnic", "fine_dining", "trattoria", "teppanyaki_ya", "osteria", "drive_in", "drive_thru",
+                             "pizzeria","taverna", 'fast_casual', "pop_up", "Cafe", 'iner', 'ramen_ya', "teahouse", "fast_food",
+                             "cafeteria", 'luncheonette', "tapas_bar", "steakhouse", "all_you_can_eat_restaurant", "kosher",
+                             "dinner_in_the_Sky", "dark_restaurant", "a_la_carte", "gastropub", "brasserie", "chiringuito",
+                             "food_truck", 'churrascaria', 'food_court', 'restrobars', 'street_stalls', "theme_resturants",
+                             "coffee_shop","coffee_house","cabaret","tea_shop", "buffet"]
     for restaurant_category in restaurant_categories:
         if restaurant_category.startswith(search):
             categories.append(restaurant_category)
