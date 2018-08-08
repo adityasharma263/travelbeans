@@ -139,9 +139,9 @@ hr{
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) { 
     .search-suggestion-box{
-    top: 70%;
-    width: 570px;
-    left: 86px;
+        top: 58%;
+        width: 482px;
+        left: 373px;
     
 }
 }

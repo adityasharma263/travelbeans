@@ -529,7 +529,10 @@ def admin_dish():
 
 @app.route("/admin/restaurant/collection", methods=['GET'])
 def admin_collection():
-    return render_template("restaurant/restaurant_collection_dashboard.html")
+    location_from_cookie = request.cookies.get("location",None)
+    if(not location_from_cookie):
+        return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
+    return render_template("restaurant/restaurant_collection_dashboard.html", user_location = location_from_cookie)
     
 
 @app.route("/admin/restaurant/cuisine", methods=['GET'])
