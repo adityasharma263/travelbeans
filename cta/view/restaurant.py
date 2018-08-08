@@ -558,9 +558,9 @@ def restaurant_association_id(id):
 
 @app.route('/api/v1/restaurant/search', methods=['GET', 'POST'])
 def restaurant_search_api():
-    search = request.json
-    search = search['search']
-    city = search['city']
+    restaurant_search = request.json
+    search = restaurant_search['search']
+    city = restaurant_search['city']
     names = []
     cuisines = []
     collections = []
