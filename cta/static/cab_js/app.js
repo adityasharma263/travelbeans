@@ -6,6 +6,7 @@ angular.module('comparetravel', ['angular.filter'])
 }])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .constant('Constants', {
     
     Car_type: {
@@ -106,25 +107,27 @@ angular.module('comparetravel', ['angular.filter'])
 
 // ######## cab admin controller ############
 =======
+=======
+>>>>>>> c34d37e65789f57d6797dd48c551e3a9ebdd6964
 .constant("Constants",{
 
    Car_types : {
 
                     1:     'Sedan',
                     2:     'Mini SUV',
-                    3:     'Compact Car', 
+                    3:     'Compact Car',
                     4:     'Sports Car',
-                    5:     'Convertable', 
+                    5:     'Convertable',
                     6:     'Coupe',
                     7:     'Mini Van',
-                    8:     'Hatchback', 
+                    8:     'Hatchback',
                     9:     'Off rode vehical',
                     10:    'Pickup Truck',
-                    11:    'Station Wagon', 
+                    11:    'Station Wagon',
                     12:    'Cross Over',
                     13:    'Full Sized Car',
                     14:    'Mid Sized Car',
-                    15:    'Utility Vehical', 
+                    15:    'Utility Vehical',
                     16:    'Hybrid Car',
                     17:    'Roadster',
                     18:    'Touring Car',
@@ -135,7 +138,7 @@ angular.module('comparetravel', ['angular.filter'])
                     23:    'Electric Cars',
                     24:    'Limousine',
                     25:    'Commercial Vehical',
-                    26:    'Recreational Vehical', 
+                    26:    'Recreational Vehical',
                     27:    'Carvan',
                     28:    'Economic Car',
                     29:    'Hybrid Electric Vehical ',
@@ -146,7 +149,7 @@ angular.module('comparetravel', ['angular.filter'])
                     34:    'Micro Car',
                     35:    'Pony Car',
                     36:    'Landaulet',
-                    37:    'Light Commercial', 
+                    37:    'Light Commercial',
                     38:    'Tempo Traveller',
                     39:    'Kei Car',
                     40:    'Vintage Car',
@@ -183,14 +186,14 @@ angular.module('comparetravel', ['angular.filter'])
 })
 
 .controller('CabListController',["$scope", "$http","Constants", function($scope, $http, Constants, $filter) {
-    
+
     $scope.car_types = Constants.Car_types;
 
     $http({
         method: 'GET',
-        url: '/api/v1/cab' 
+        url: '/api/v1/cab'
       }).then(function successCallback(response) {
-          
+
           $scope.cabs= response.data.result.cabs;
           console.log("$scope.cabs",$scope.cabs);
           // this callback will be called asynchronously
@@ -199,20 +202,23 @@ angular.module('comparetravel', ['angular.filter'])
           // called asynchronously if an error occurs
           // or server returns response with an error status.
       })
-    
+
     $scope.type = function(id)  {
         return $scope.car_types[id]
     }
 
   }])
 
+<<<<<<< HEAD
 >>>>>>> 71cf00c298c90f141e2e167009042c3527089281
+=======
+>>>>>>> c34d37e65789f57d6797dd48c551e3a9ebdd6964
 .controller('adminCabController',["$scope", "$http", function($scope, $http, $filter) {
     $scope.cab = {}; // main cab model
     $scope.cabImg = []; //for all images array
     $scope.images={}; //for one image
 
-   
+
     $scope.addImg=function(){
         $scope.cabImg.push($scope.images);
         $scope.images={};
@@ -234,14 +240,12 @@ angular.module('comparetravel', ['angular.filter'])
       }
 
 
-  }]) 
+  }])
 
-<<<<<<< HEAD
+
+
 //--------------------cab detail/booking controller-----------------------  
-=======
-   
 
->>>>>>> 71cf00c298c90f141e2e167009042c3527089281
 
   .controller('detailController',["$scope", "$http", function($scope, $http, $filter) {
     $scope.cab= {}; // main cab model

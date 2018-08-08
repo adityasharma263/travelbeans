@@ -60,7 +60,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
     
     <script type="text/javascript" src="/cab_js/app.js"></script>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> c34d37e65789f57d6797dd48c551e3a9ebdd6964
     <!-- CSS for IE -->
     <!--[if lte IE 9]>
         <link rel="stylesheet" type="text/css" href="css/ie.css" />
@@ -74,7 +78,10 @@
     <![endif]-->
 </head>
 <body ng-controller="CabListController">
+<<<<<<< HEAD
     
+=======
+>>>>>>> c34d37e65789f57d6797dd48c551e3a9ebdd6964
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
@@ -1035,9 +1042,9 @@
 
                         </div>
                     </div>
-                    <div class="col-sm-8 col-md-9">        
-                        <div class="car-list">
-                            <div class="row image-box car listing-style1" ng-repeat="cab in cabs">
+                    <div class="col-sm-8 col-md-9">
+                        <div class="car-list" ng-repeat="cab in cabs">
+                            <div class="row image-box car listing-style1">
                                 
                                     <div class="col-sms-6 col-sm-6 col-md-6">
                                     <article class="box">
@@ -1061,7 +1068,15 @@
                                                   <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#[[cab.id]]">More Deals</a>
                                                 </div>
                                                 <!-- <div class="col-xs-6">
+<<<<<<< HEAD
                                                 <div class="price full-width"><small>per day</small>$45.39</div>
+=======
+<<<<<<< HEAD
+                                                <div class="price full-width"><small>per day</small>$45.39</div>
+=======
+                                                <div class="price full-width">₹ [[(cab.deals | orderBy:'total_fare')[0].total_fare]]</div>
+>>>>>>> c40846cefa34e4d5d29d8f16de2d7244f4283e77
+>>>>>>> c34d37e65789f57d6797dd48c551e3a9ebdd6964
                                                 </div> -->
                                             </div>        
                                                
