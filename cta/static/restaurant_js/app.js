@@ -47,7 +47,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     };
 
     $scope.setValues = function (location) {
-      $http.post("restaurant/set-value" , {location : location})
+      $http.post("/restaurant/set-value" , {location : location})
       .then(function(res){
         console.log("set values success");
       }, function(err){
