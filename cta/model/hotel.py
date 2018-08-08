@@ -13,6 +13,7 @@ class Hotel(Base):
 
     name = db.Column(db.String)
     star = db.Column(db.Integer, nullable=True)
+    is_partner = db.Column(db.Boolean, default=False, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
     phone = db.Column(db.String, nullable=True, unique=True)
     city = db.Column(db.String, nullable=True)
