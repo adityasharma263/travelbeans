@@ -30,6 +30,10 @@
     <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
         <link rel="stylesheet" type="text/css" href="/css/style.css" media="screen">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script> 
+            
+
     <!-- <link rel="shortcut icon" href="http://www.soaptheme.net/html/travelo/favicon.ico" type="image/x-icon"> -->
     <!-- Main Style -->
     <!--<link id="main-style" rel="stylesheet" href="css/style.css">-->
@@ -56,7 +60,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
     
     <script type="text/javascript" src="/cab_js/app.js"></script>
-    
+
     <!-- CSS for IE -->
     <!--[if lte IE 9]>
         <link rel="stylesheet" type="text/css" href="css/ie.css" />
@@ -70,7 +74,6 @@
     <![endif]-->
 </head>
 <body ng-controller="CabListController">
-    
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
             <div class="topnav hidden-xs">
@@ -881,11 +884,10 @@
                                                 </h4>
                                                 <div id="Air-Condition-filter" class="panel-collapse collapse filters-container">
                                                     <div class="panel-content">
-                                                        <ul class="check-square filters-option">
-                                                            <li><a href="#">Available</a></li>
-                                                            <li><a href="#">Not Available</a></li>
-                                                        </ul>
-                                                        <a class="button btn-mini">MORE</a>
+                                                        
+                                                        <input type="radio" name="ac" value="true" ng-click="amenityFilter('ac')"> Available
+                                                        <br>
+                                                        <input type="radio" name="ac" value="false" ng-click="amenityFilter('ac')"> Not Available
                                                     </div>
                                                 </div>
                                             </div>
@@ -1032,9 +1034,9 @@
 
                         </div>
                     </div>
-                    <div class="col-sm-8 col-md-9">        
-                        <div class="car-list">
-                            <div class="row image-box car listing-style1" ng-repeat="cab in cabs">
+                    <div class="col-sm-8 col-md-9">
+                        <div class="car-list" ng-repeat="cab in cabs">
+                            <div class="row image-box car listing-style1">
                                 
                                     <div class="col-sms-6 col-sm-6 col-md-6">
                                     <article class="box">
@@ -1051,6 +1053,7 @@
                                                     <li><i class="fa fa-fill-drip circle"></i>[[cab.amenities.fuel_type]]</li>
                                                     <li ng-show="cab.amenities.baggage_allowance"><i class="soap-icon-suitcase circle"></i>BA</li>
                                                     <li ng-show="cab.amenities.doorstep_delivery"><i class="fa fa-door-open circle"></i>DD</li> 
+
                                                 </ul>
                                             </div>
                                              <div class="action row">
@@ -1058,7 +1061,11 @@
                                                   <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#[[cab.id]]">More Deals</a>
                                                 </div>
                                                 <!-- <div class="col-xs-6">
+<<<<<<< HEAD
                                                 <div class="price full-width"><small>per day</small>$45.39</div>
+=======
+                                                <div class="price full-width">₹ [[(cab.deals | orderBy:'total_fare')[0].total_fare]]</div>
+>>>>>>> c40846cefa34e4d5d29d8f16de2d7244f4283e77
                                                 </div> -->
                                             </div>        
                                                
@@ -1313,5 +1320,6 @@ tjq(document).ready(function() {
     tjq(".max-price-label").html( "$" + tjq(".price-range").slider( "values", 1 ));
 });
 </script>
+</div>
 </body>
 </html>
