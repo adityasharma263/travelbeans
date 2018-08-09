@@ -80,7 +80,13 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
       }
 
-
+      var map;
+      $scope.showMap = function(lat, long){
+        map = new google.maps.Map(document.getElementById('show-restaurant-map'), {
+          center: {lat: lat, lng: long},
+          zoom: 15
+        });
+      }
       
 
     $scope.getMenubyId = function (restaurantId, restaurantName) {
