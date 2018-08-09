@@ -11,6 +11,10 @@ import simplejson as json
 def cab_api():
     if request.method == 'GET':
         args = request.args.to_dict()
+        min_fare = request.args.get('min_fare', None)
+        max_fare = request.args.get('max_fare', None)
+        args.pop('price_start', None)
+        args.pop('price_end', None)
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
@@ -23,6 +27,8 @@ def cab_api():
                 q = q.filter(getattr(CabAmenity, key) == args[key])
             elif key in CabDeal.__dict__:
                 q = q.filter(getattr(CabDeal, key) == args[key])
+        if min_fare and max_fare:
+            q = q.filter(CabDeal.base_fare >= min_fare, CabDeal.base_fare <= max_fare)
         data = q.offset((page - 1) * per_page).limit(per_page).all()
         result = CabSchema(many=True).dump(data)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})

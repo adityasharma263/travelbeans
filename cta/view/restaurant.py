@@ -61,10 +61,6 @@ def restaurant_api():
             "price": restaurant.get("price", None),
         }
         post = Restaurant(**restaurant_obj)
-        # p = Restaurant()
-        # a = RestaurantAssociation()
-        # a.cuisine_id = Cuisine()
-        # p.cuisines.append(a)
         post.save()
         restaurant_result = RestaurantSchema().dump(post)
         if restaurant.get("amenities"):
