@@ -35,9 +35,9 @@
                             <div class="form-group col-sm-6 col-md-6 z-index-10">
                                 <h4 class="title">Trip Keys Resturants</h4>
                                 <label>Search for a Perfect Dinning</label>
-                                <label>Location:
+                                <label>
                                     <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                        <!-- <option value disabled>--Select Location--</option> -->
+                                        <option value disabled>--Select Location--</option>
                                         {% for location in locations %}
                                         <option value="{{location}}">{{location}}</option>
                                         {% endfor %}
