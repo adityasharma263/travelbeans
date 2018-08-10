@@ -47,12 +47,45 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     };
 
     $scope.setValues = function (location) {
-      $http.post("/restaurant/set-value" , {location : location})
-      .then(function(res){
-        console.log("set values success");
-      }, function(err){
-        console.log(err);
-      })
+      $http.post("/restaurant/set-value", { location: location })
+        .then(function (res) {
+          console.log("set values success");
+          window.location.reload();
+        }, function (err) {
+          console.log(err);
+        })
+
+    }
+
+
+    $scope.getLocationByGPS = function () {
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+          var lat = position.coords.latitude;
+          var long = position.coords.longitude;
+          var params = {
+            latitude : lat,
+            longitude : long
+          }
+
+          $http.get("/restaurant", {params: params})
+            .then(function (res) {
+              window.location.reload()
+            }, function (err) {
+              alert("Some error occur! Please Try different method.");
+              
+            })
+
+        }, function (err) {
+          alert("Some error occur! Please Try different method.");
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+
+
 
     }
 
@@ -76,18 +109,18 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       });
 
 
-      function getQueryStringValue(key) {
-        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-      }
+    function getQueryStringValue(key) {
+      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
 
-      var map;
-      $scope.showMap = function(lat, long){
-        map = new google.maps.Map(document.getElementById('show-restaurant-map'), {
-          center: {lat: lat, lng: long},
-          zoom: 15
-        });
-      }
-      
+    var map;
+    $scope.showMap = function (lat, long) {
+      map = new google.maps.Map(document.getElementById('show-restaurant-map'), {
+        center: { lat: lat, lng: long },
+        zoom: 15
+      });
+    }
+
 
     $scope.getMenubyId = function (restaurantId, restaurantName) {
       console.log("akshay");
@@ -104,12 +137,12 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     }
 
     $scope.setValues = function (location) {
-      $http.post("/restaurant/set-value" , {location : location})
-      .then(function(res){
-        console.log("set values success");
-      }, function(err){
-        console.log(err);
-      })
+      $http.post("/restaurant/set-value", { location: location })
+        .then(function (res) {
+          console.log("set values success");
+        }, function (err) {
+          console.log(err);
+        })
 
     }
 
@@ -129,19 +162,19 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         };
 
 
-        if (getQueryStringValue("name")){
+        if (getQueryStringValue("name")) {
           console.log("in the name")
-          $http.get("/api/v1/restaurant?city="+$scope.userLocation)
-          .then(function (res) {
-            var mergeRestaurantList =  res.data.result.restaurants;
-            $scope.restaurants =  $scope.restaurants.concat(mergeRestaurantList);
-            console.log("merged");
-    
-          }, function (err) {
-            console.log(err);
-          });
-          
-          
+          $http.get("/api/v1/restaurant?city=" + $scope.userLocation)
+            .then(function (res) {
+              var mergeRestaurantList = res.data.result.restaurants;
+              $scope.restaurants = $scope.restaurants.concat(mergeRestaurantList);
+              console.log("merged");
+
+            }, function (err) {
+              console.log(err);
+            });
+
+
         }
 
       }, function (err) {
@@ -421,15 +454,15 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
     }
-    $scope.deleteRestaurant = function(restaurantId, index){
+    $scope.deleteRestaurant = function (restaurantId, index) {
 
-      $http.delete("/api/v1/restaurant/"+restaurantId)
-      .then(function(res){
-        $scope.restaurants.splice(index, 1);
-        alert("Deleted!!");
-      }, function(err){
-        alert("err "+err);
-      })
+      $http.delete("/api/v1/restaurant/" + restaurantId)
+        .then(function (res) {
+          $scope.restaurants.splice(index, 1);
+          alert("Deleted!!");
+        }, function (err) {
+          alert("err " + err);
+        })
 
     }
 
@@ -447,7 +480,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     };
 
 
-    
+
 
     $scope.addMoreAssociation = function () {
       var addAssociation = {
@@ -1606,9 +1639,9 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $scope.addMore = function () {
       var addCusine = {
         cuisine: null,
-        desc : null,
-        image : null,
-        featured : false
+        desc: null,
+        image: null,
+        featured: false
       };
 
       $scope.cuisineData.push(addCusine);
@@ -1831,91 +1864,91 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     }
   }])
-  .controller("dashboardAssociationController", ["$scope", "$http", "$q", function($scope, $http, $q){
+  .controller("dashboardAssociationController", ["$scope", "$http", "$q", function ($scope, $http, $q) {
 
     $http.get("/api/v1/restaurant")
-    .then(function (res) {
-      $scope.restaurants = res.data.result.restaurants;
-    }, function (err) {
-      console.log(err);
-    });
+      .then(function (res) {
+        $scope.restaurants = res.data.result.restaurants;
+      }, function (err) {
+        console.log(err);
+      });
 
     $http.get("/api/v1/restaurant/collection")
-    .then(function (res) {
-      $scope.collections = res.data.result.collection;
-    }, function (err) {
-      console.log(err);
-    });
+      .then(function (res) {
+        $scope.collections = res.data.result.collection;
+      }, function (err) {
+        console.log(err);
+      });
 
     $http.get("/api/v1/restaurant/cuisine")
-    .then(function (res) {
+      .then(function (res) {
 
-      $scope.cuisines = res.data.result.cuisine;
-      console.log($scope.cuisines);
-    }, function (err) {
-      console.log(err);
-    });
-
-    
+        $scope.cuisines = res.data.result.cuisine;
+        console.log($scope.cuisines);
+      }, function (err) {
+        console.log(err);
+      });
 
 
 
-    $scope.editAssociation = function(restaurant){
+
+
+    $scope.editAssociation = function (restaurant) {
       console.log("akshay");
       var collections = restaurant.collections
       var cuisines = restaurant.cuisines
       $scope.restaurantId = restaurant.id;
 
-      $http.get("/api/v1/restaurant/association?restaurant_id="+restaurant.id)
-      .then(function (res) {
-        $scope.associations = res.data.result.association;
-        console.log($scope.associations);
-      }, function (err) {
-        console.log(err);
-      });
+      $http.get("/api/v1/restaurant/association?restaurant_id=" + restaurant.id)
+        .then(function (res) {
+          $scope.associations = res.data.result.association;
+          console.log($scope.associations);
+        }, function (err) {
+          console.log(err);
+        });
 
     }
-    
+
 
 
     $scope.update = function () {
 
       var associationList = [];
       console.log($scope.associations);
-     
-      
-            for (i in $scope.associations) {
-              var associationId = $scope.associations[i].id;
-              delete $scope.associations[i].id;
 
-              $scope.associations[i].collection_id = $scope.associations[i].collection;
-              delete $scope.associations[i].collection;
 
-              $scope.associations[i].cuisine_id = $scope.associations[i].cuisine;
-              delete $scope.associations[i].cuisine;
+      for (i in $scope.associations) {
+        var associationId = $scope.associations[i].id;
+        delete $scope.associations[i].id;
 
-              $scope.associations[i].restaurant_id = $scope.associations[i].restaurant;
-              delete $scope.associations[i].restaurant; 
+        $scope.associations[i].collection_id = $scope.associations[i].collection;
+        delete $scope.associations[i].collection;
 
-              if($scope.associations[i].collection_id == "null"){
-                 $scope.associations[i].collection_id = null
-                 
-              }
-              if($scope.associations[i].cuisine_id == "null"){
-                $scope.associations[i].cuisine_id = null;
-              }
-      
-              associationList.push($http.put("/api/v1/restaurant/association/" + associationId, $scope.associations[i]))
-            }
-      
-      
-            $q.all(associationList)
-              .then(function (res) {
-                alert("updated!!");
-              }, function (err) {
-                alert("err =" + err)
-                console.log(err);
-              })
+        $scope.associations[i].cuisine_id = $scope.associations[i].cuisine;
+        delete $scope.associations[i].cuisine;
+
+        $scope.associations[i].restaurant_id = $scope.associations[i].restaurant;
+        delete $scope.associations[i].restaurant;
+
+        if ($scope.associations[i].collection_id == "null") {
+          $scope.associations[i].collection_id = null
+
+        }
+        if ($scope.associations[i].cuisine_id == "null") {
+          $scope.associations[i].cuisine_id = null;
+        }
+
+        associationList.push($http.put("/api/v1/restaurant/association/" + associationId, $scope.associations[i]))
+      }
+
+
+      $q.all(associationList)
+        .then(function (res) {
+          alert("updated!!");
+        }, function (err) {
+          alert("err =" + err)
+          console.log(err);
+        })
 
 
 
