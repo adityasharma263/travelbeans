@@ -821,7 +821,7 @@
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
                             <div class="box">
-                                <img src="images/logo.png" alt="">
+                                <img src="images/logopng" alt="">
                             </div>
                             <div class="heading box">
                                 <h1 class="title">#TB Restaurants</h1>
@@ -878,8 +878,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Book your tabel now... " ng-model="searchQueryValue"
-                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                        <input type="text" class="input-text full-width" placeholder="Book your tabel now... " ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
                                                     </div>
                                                 </div>
 
@@ -913,8 +912,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Book your party now..." ng-model="searchQueryValue"
-                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                        <input type="text" class="input-text full-width" placeholder="Book your party now..." ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
                                                     </div>
                                                 </div>
 
@@ -948,8 +946,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Find best recipies.... " ng-model="searchQueryValue"
-                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                        <input type="text" class="input-text full-width" placeholder="Find best recipies.... " ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
                                                     </div>
                                                 </div>
 
@@ -1004,6 +1001,38 @@
                 <div id="overlay-box"></div>
 
             </div>
+
+            {% if get_location %}
+            <div class="modal fade" id="location-modal" role="dialog"  data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header" style="background:#ff6000;">
+                            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                            <h4 class="modal-title" style="color:white;">Choose your location</h4>
+                        </div>
+                        <div class="modal-body">
+                            <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()">use GPS</button>
+                            or
+                            <select ng-model="userLocationFromModal" ng-change="setValues(userLocationFromModal)">
+                                <option value disabled selected>--Select Location--</option>
+                                {% for location in locations %}
+                                <option value="{{location}}">{{location}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+
+
+            
 
 
             <div class="section ">
@@ -2331,7 +2360,11 @@
         <script type="text/javascript " src="/Home Page With Chefs Recipies_files/scripts.js "></script>
 
 
-
+        <script>
+            tjq(document).ready(function () {
+                tjq('#location-modal').modal('show');
+            });
+        </script>
 
         <div class="chaser hidden-mobile " style="visibility: visible; display: none; ">
             <div class="container ">
