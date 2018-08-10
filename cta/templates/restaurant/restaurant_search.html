@@ -1702,7 +1702,7 @@
                                                         <!-- <span class="review">270 reviews</span> -->
                                                     </div>
                                                     <p class="description">
-                                                        <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude); restaurantName =restaurant.name "
+                                                        <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);"
                                                             role="button" data-toggle="modal" data-target="#show-map">[[restaurant.address]]</div>
                                                         <span>Cuisine:</span>
                                                         <span ng-repeat="cuisine in restaurant.cuisines">
@@ -2162,46 +2162,7 @@
             </div>
         </footer>
     </div>
-    <!-- <div id="style-changer" class="style-changer dark">
-        <div class="style-changer-header">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" class="style-toggle open">
-                <i class="fa fa-gear"></i>
-            </a>
-            <h2 class="style-main-title">Customize Travelo</h2>
-        </div>
-        <div class="style-chagner-main">
-            <label for="header-style">header style</label>
-            <div class="selector">
-                <select class="full-width" name="header-style" id="header-style">
-                    <option value="">Default Style</option>
-                    <option value="style1">Style1</option>
-                    <option value="style2">Style2</option>
-                    <option value="style3">Style3</option>
-                    <option value="style4">Style4</option>
-                    <option value="style5">Style5</option>
-                    <option value="style6">Style6</option>
-                    <option value="style7">Style7</option>
-                </select>
-                <span class="custom-select full-width">Default Style</span>
-            </div>
-           <label for="inner-start-style">inner start style</label>
-            <div class="selector">
-                <select class="full-width" name="inner-start-style" id="inner-start-style">
-                    <option value="">Default Style</option>
-                    <option value="style1">Style1</option>
-                    <option value="style2">Style2</option>
-                    <option value="style3">Style3</option>
-                    <option value="style4">Style4</option>
-                    <option value="style5">Style5</option>
-                    <option value="style6">Style6</option>
-                </select>
-            </div>
-            <label for="search-style">search style</label>
-            <div class="selector">
-                <select class="full-width" name="search-style" id="search-style">
-                    <option value="">please select</option>
-                </select>
-            </div>-->
+    
     <label for="footer-style">footer style</label>
     <div class="selector">
         <select class="full-width" name="footer-style" id="footer-style">
