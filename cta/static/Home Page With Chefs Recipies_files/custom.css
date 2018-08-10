@@ -99,9 +99,9 @@ hr{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 599px) { 
     .search-suggestion-box{
-        top: 67%;
-        width: 92%;
-        left: 16px;
+        top: 58%;
+        width: 83%;
+        left: 59px;
     
 }
 } 
@@ -141,7 +141,7 @@ hr{
     .search-suggestion-box{
         top: 58%;
         width: 482px;
-        left: 373px;
+        left: 311px;
     
 }
 }

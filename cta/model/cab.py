@@ -8,6 +8,7 @@ class Cab(Base):
 
     car_name = db.Column(db.String)
     city = db.Column(db.String, nullable=True)
+    rating = db.Column(db.DECIMAL, nullable=True)
     is_partner = db.Column(db.Boolean, default=False, nullable=True)
     car_type = db.Column(db.Integer, nullable=True)
     cab_type = db.Column(db.Integer, nullable=True)
