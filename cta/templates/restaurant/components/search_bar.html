@@ -35,8 +35,16 @@
                             <div class="form-group col-sm-6 col-md-6 z-index-10">
                                 <h4 class="title">Trip Keys Resturants</h4>
                                 <label>Search for a Perfect Dinning</label>
+                                <label>
+                                    <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                        <option value disabled>--Select Location--</option>
+                                        {% for location in locations %}
+                                        <option value="{{location}}">{{location}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
                                 <input type="text" class="input-text full-width search-input-text" placeholder="Search Resturant , Cusine or Dishes" ng-model="searchQueryValue"
-                                    ng-change="searchQuery(searchQueryValue)">
+                                    ng-change="searchQuery(searchQueryValue, userLocation)">
                             </div>
 
 
@@ -90,7 +98,7 @@
                                 <h4 class="title">Book a Table</h4>
                                 <label>We'll Help You for a Perfect Dine Out , Book With Us </label>
                                 <input type="text" class="input-text full-width search-input-text" placeholder="Search for Resturants Around You" ng-model="searchQueryValue"
-                                ng-change="searchQuery(searchQueryValue)">
+                                    ng-change="searchQuery(searchQueryValue)">
                                 <!-- <input type="text" class="input-text full-width" placeholder="Search for Resturants Around You"> -->
                             </div>
 
@@ -113,7 +121,7 @@
                                 <h4 class="title">Book For a Party , Event</h4>
                                 <label>Let the Fun Begin , Book the Most Auspicious Place For Your Occasion</label>
                                 <input type="text" class="input-text full-width search-input-text" placeholder="Search for Resturants Around You" ng-model="searchQueryValue"
-                                ng-change="searchQuery(searchQueryValue)">
+                                    ng-change="searchQuery(searchQueryValue)">
                                 <!-- <input type="text" class="input-text full-width" placeholder="Search for Resturants Around You"> -->
                             </div>
 
@@ -136,7 +144,7 @@
                                 <h4 class="title">Chefs Recipie Corner</h4>
                                 <label>Looking to Cook at Home , Try Something New With Recipies from Our MOM Chef's</label>
                                 <input type="text" class="input-text full-width search-input-text" placeholder="Search for a Dish" ng-model="searchQueryValue"
-                                ng-change="searchQuery(searchQueryValue)">
+                                    ng-change="searchQuery(searchQueryValue)">
                                 <!-- <input type="text" class="input-text full-width" placeholder="Search for a Dish "> -->
                             </div>
 

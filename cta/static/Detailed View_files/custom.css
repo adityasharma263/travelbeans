@@ -38,3 +38,34 @@
 .image-stack > a {
     display:inline-block;
 }
+
+.theme-button-color{
+    background-color: #fdb714;;
+    border: none;
+    border-radius: 0 !important;
+    color:white;
+}
+
+.border-radius-0{
+    border-radius: 0 !important;
+    
+}
+
+.theme-button-color:hover{
+    color:white !important;
+    background-color: #e9b02b !important;
+}
+
+.restaurant-rating{
+    display: block;
+    font-size: 5em;
+    color: #2d3e52;
+    font-weight: 300;
+    line-height: 1.25em;
+}
+
+.restaurant-type{
+    background: #fff;
+    padding: 30px;
+    text-transform: uppercase;
+}
