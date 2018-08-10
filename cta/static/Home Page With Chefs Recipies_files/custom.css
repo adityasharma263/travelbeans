@@ -99,9 +99,9 @@ hr{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 599px) { 
     .search-suggestion-box{
-        top: 67%;
-        width: 92%;
-        left: 16px;
+        top: 58%;
+        width: 83%;
+        left: 59px;
     
 }
 } 
@@ -139,9 +139,9 @@ hr{
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) { 
     .search-suggestion-box{
-    top: 70%;
-    width: 570px;
-    left: 86px;
+        top: 58%;
+        width: 482px;
+        left: 311px;
     
 }
 }
@@ -182,4 +182,27 @@ hr{
     background-color: #c8c8c8;
     color: white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.custom-panel{
+    padding: 10px;
+    padding-left: 30px;
+    font-weight: 900;
+    font-size: 16px;
+}
+.theme-button-color{
+    background-color: #98ce44;
+    border: none;
+    border-radius: 0 !important;
+    color:white;
+}
+
+.border-radius-0{
+    border-radius: 0 !important;
+    
+}
+
+.theme-button-color:hover{
+    color:white !important;
+    background-color: #7fb231 !important;
 }

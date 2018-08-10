@@ -8,6 +8,12 @@
 
             <label>Cuisine name</label>
             <input type="text" ng-model="cuisineData.cuisine" class="form-control">
+            <label>description</label>
+            <input type="text" class="form-control" ng-model="cuisineData.desc">
+            <label>image</label>
+            <input type="text" class="form-control" ng-model="cuisineData.image">
+            <label>featured</label>
+            <input type="checkbox" ng-model="cuisineData.featured">
             <br>
         </div>
 
@@ -19,6 +25,13 @@
 
                 <label>Cuisine Name</label>
                 <input type="text" ng-model="cusine.cuisine" class="form-control">
+
+                <label>description</label>
+                <input type="text" class="form-control" ng-model="cusine.desc">
+                <label>image</label>
+                <input type="text" class="form-control" ng-model="cusine.image">
+                <label>Featured</label>
+                <input type="checkbox" ng-model="cusine.featured">
             </div>
             <button class="btn btn-defalut" ng-click="addMore()" style="margin: 10px 0;">Add more</button>
         </div>

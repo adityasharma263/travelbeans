@@ -8,6 +8,7 @@ class Cab(Base):
 
     car_name = db.Column(db.String)
     city = db.Column(db.String, nullable=True)
+    is_partner = db.Column(db.Boolean, default=False, nullable=True)
     car_type = db.Column(db.Integer, nullable=True)
     cab_type = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
@@ -112,6 +113,7 @@ class CabDeal(Base):
 
     booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'), unique=False)
+    cab_url = db.Column(db.String, nullable=True)
     booking = db.relationship('CabBooking', foreign_keys=booking_id)
     website = db.relationship('CabWebsite', foreign_keys=website_id)
     slab = db.Column(db.Integer, nullable=True)
