@@ -33,7 +33,7 @@ def cab_api():
             q = q.filter(CabDeal.base_fare >= min_fare, CabDeal.base_fare <= max_fare)
         elif rating:
             q = q.filter(Cab.rating >= rating)
-        data = q.offset((page - 1) * per_page).limit(per_page).all()
+        data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
