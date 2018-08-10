@@ -2,7 +2,7 @@
 
 from cta.model.restaurant import RestaurantImage, Restaurant, RestaurantAmenity, Menu,\
     Cuisine, Collection, RestaurantAssociation, Dish
-from cta import app
+from cta import app, db
 from flask import jsonify, request
 from cta.schema.restaurant import RestaurantSchema, RestaurantImageSchema,\
     RestaurantAmenitySchema, CuisineSchema, CollectionSchema, RestaurantAssociationSchema, MenuSchema, DishSchema
@@ -15,118 +15,33 @@ def restaurant_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
-        cuisine = request.args.get('cuisine')
-        args.pop('cuisine', None)
-        menu = request.args.get('menu')
-        args.pop('menu', None)
-        amenity = request.args.get('amenity')
-        args.pop('amenity', None)
-        collection = request.args.get('collection')
-        args.pop('collection', None)
-        dish = request.args.get('dish')
-        args.pop('dish', None)
         price_start = request.args.get('price_start', None)
         price_end = request.args.get('price_end', None)
         args.pop('price_start', None)
         args.pop('price_end', None)
-        page = request.args.get('page', None)
-        per_page = request.args.get('per_page', None)
-        cuisine_restaurant_id = []
-        collection_restaurant_id = []
-        dish_restaurant_id = []
-        rating_restaurant_id = []
-        price_restaurant_id = []
-        menu_restaurant_id =[]
-        amenity_restaurant_id = []
-        common_id = []
-        is_filter = 0
-        if cuisine:
-            is_filter = 1
-            try:
-                cuisine_id = Cuisine.query.filter(Cuisine.cuisine == cuisine).first().id
-                restaurant_list = RestaurantAssociation.query.filter(RestaurantAssociation.cuisine_id == cuisine_id).all()
-                for restaurant_obj in restaurant_list:
-                    cuisine_restaurant_id.append(restaurant_obj.restaurant_id)
-            except:
-                cuisine_restaurant_id = []
-        if collection:
-            is_filter = 1
-            try:
-                collection_id = Collection.query.filter(Collection.collection == collection).first().id
-                restaurant_list = RestaurantAssociation.query.filter(RestaurantAssociation.collection_id == collection_id).all()
-                for restaurant_obj in restaurant_list:
-                    collection_restaurant_id.append(restaurant_obj.restaurant_id)
-            except:
-                collection_restaurant_id = []
-        if dish:
-            is_filter = 1
-            try:
-                restaurant_list = Dish.query.filter(Dish.dish == dish).all()
-                for restaurant_obj in restaurant_list:
-                    dish_restaurant_id.append(restaurant_obj.restaurant_id)
-            except:
-                dish_restaurant_id = []
-        if menu:
-            is_filter = 1
-            try:
-                restaurant_list = Menu.query.filter(getattr(Menu, menu).is_(True)).all()
-                for restaurant_obj in restaurant_list:
-                    menu_restaurant_id.append(restaurant_obj.restaurant_id)
-            except:
-                menu_restaurant_id = []
-        if amenity:
-            is_filter = 1
-            try:
-                restaurant_list = RestaurantAmenity.query.filter(getattr(RestaurantAmenity, amenity).is_(True)).all()
-                for restaurant_obj in restaurant_list:
-                    amenity_restaurant_id.append(restaurant_obj.restaurant_id)
-            except:
-                amenity_restaurant_id = []
-        if rating:
-            is_filter = 1
-            try:
-                restaurant_list = Restaurant.query.filter(Restaurant.rating >= rating).all()
-                for restaurant_obj in restaurant_list:
-                    rating_restaurant_id.append(restaurant_obj.id)
-            except:
-                rating_restaurant_id = []
-
+        page = request.args.get('page', 1)
+        per_page = request.args.get('per_page', 20)
+        q = db.session.query(Restaurant).outerjoin(Restaurant.amenities).outerjoin(Restaurant.cuisines)\
+            .outerjoin(Restaurant.collections).outerjoin(Restaurant.dishes).outerjoin(Restaurant.menus)
+        for key in args:
+            if key in Restaurant.__dict__:
+                q = q.filter(getattr(Restaurant, key) == args[key])
+            elif key in RestaurantAmenity.__dict__:
+                q = q.filter(getattr(RestaurantAmenity, key) == args[key])
+            elif key in Menu.__dict__:
+                q = q.filter(getattr(Menu, key) == args[key])
+            elif key in Collection.__dict__:
+                q = q.filter(getattr(Collection, key) == args[key])
+            elif key in Cuisine.__dict__:
+                q = q.filter(getattr(Cuisine, key) == args[key])
+            elif key in Dish.__dict__:
+                q = q.filter(getattr(Dish, key) == args[key])
         if price_start and price_end:
-            is_filter = 1
-            try:
-                restaurant_list = Restaurant.query.filter(Restaurant.price >= price_start, Restaurant.price <= price_end).all()
-                for restaurant_obj in restaurant_list:
-                    price_restaurant_id.append(restaurant_obj.id)
-            except:
-                price_restaurant_id = []
-        obj = {
-            "cuisine": cuisine_restaurant_id,
-            "collection": collection_restaurant_id,
-            "dish": dish_restaurant_id,
-            "price": price_restaurant_id,
-            "rating": rating_restaurant_id,
-            "amenity": amenity_restaurant_id,
-            "menu": menu_restaurant_id
-        }
-        for key, value in obj.items():
-            if value:
-                if not common_id:
-                    common_id = value
-                else:
-                    common_id = list(set(common_id).intersection(value))
-
-        if is_filter:
-            if page and per_page:
-                restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(common_id))\
-                    .offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-            else:
-                restaurants = Restaurant.query.filter_by(**args).filter(Restaurant.id.in_(common_id)).all()
-        else:
-            if page and per_page:
-                restaurants = Restaurant.query.filter_by(**args).offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
-            else:
-                restaurants = Restaurant.query.filter_by(**args).all()
-        result = RestaurantSchema(many=True).dump(restaurants)
+            q = q.filter(Restaurant.price >= price_start, Restaurant.price <= price_end)
+        elif rating:
+            q = q.filter(Restaurant.rating >= rating)
+        data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        result = RestaurantSchema(many=True).dump(data)
         return jsonify({'result': {'restaurants': result.data}, 'message': "Success", 'error': False})
     else:
         restaurant = request.json
@@ -146,10 +61,6 @@ def restaurant_api():
             "price": restaurant.get("price", None),
         }
         post = Restaurant(**restaurant_obj)
-        # p = Restaurant()
-        # a = RestaurantAssociation()
-        # a.cuisine_id = Cuisine()
-        # p.cuisines.append(a)
         post.save()
         restaurant_result = RestaurantSchema().dump(post)
         if restaurant.get("amenities"):
@@ -232,12 +143,10 @@ def restaurant_api():
                     cuisines = association.get("cuisines")
                     if cuisines.get("cuisine_id"):
                         cuisine_id = cuisines.get("cuisine_id")
-                        print(cuisine_id)
                     else:
                         cuisine_obj = {
                                 "cuisine": cuisines.get("cuisine", None),
                             }
-                        print(cuisine_obj)
                         post = Cuisine(**cuisine_obj)
                         post.save()
                         cuisine_result = CuisineSchema().dump(post)
@@ -281,24 +190,11 @@ def restaurant_id(id):
         restaurant = Restaurant.query.filter_by(id=id).first()
         if not restaurant:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
-        restaurant_amenities = RestaurantAmenity.query.filter_by(restaurant_id=id).first()
-        if restaurant_amenities:
-            RestaurantAmenity.delete_db(restaurant_amenities)
-        restaurant_menu = Menu.query.filter_by(restaurant_id=id).first()
-        if restaurant_menu:
-            Menu.delete_db(restaurant_menu)
-        restaurant_images = RestaurantImage.query.filter_by(restaurant_id=id).all()
-        if restaurant_images:
-            for restaurant_image in restaurant_images:
-                RestaurantImage.delete_db(restaurant_image)
-        restaurant_dishes = Dish.query.filter_by(restaurant_id=id).all()
-        if restaurant_dishes:
-            for restaurant_dish in restaurant_dishes:
-                Dish.delete_db(restaurant_dish)
-        restaurant_associations = RestaurantAssociation.query.filter_by(restaurant_id=id).all()
-        if restaurant_associations:
-            for restaurant_association in restaurant_associations:
-                RestaurantAssociation.delete_db(restaurant_association)
+        RestaurantAmenity.query.filter_by(restaurant_id=id).delete()
+        Menu.query.filter_by(restaurant_id=id).delete()
+        RestaurantImage.query.filter_by(restaurant_id=id).delete()
+        Dish.query.filter_by(restaurant_id=id).delete()
+        RestaurantAssociation.query.filter_by(restaurant_id=id).delete()
         Restaurant.delete_db(restaurant)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -439,10 +335,7 @@ def restaurant_cuisine_id(id):
         restaurant_cuisine = Cuisine.query.filter_by(id=id).first()
         if not restaurant_cuisine:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
-        restaurant_associations = RestaurantAssociation.query.filter_by(cuisine_id=id).all()
-        if restaurant_associations:
-            for restaurant_association in restaurant_associations:
-                RestaurantAssociation.delete_db(restaurant_association)
+        RestaurantAssociation.query.filter_by(cuisine_id=id).delete()
         Cuisine.delete_db(restaurant_cuisine)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
@@ -478,10 +371,7 @@ def restaurant_collection_id(id):
         restaurant_collection = Collection.query.filter_by(id=id).first()
         if not restaurant_collection:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
-        restaurant_associations = RestaurantAssociation.query.filter_by(collection_id=id).all()
-        if restaurant_associations:
-            for restaurant_association in restaurant_associations:
-                RestaurantAssociation.delete_db(restaurant_association)
+        RestaurantAssociation.query.filter_by(collection_id=id).delete()
         Collection.delete_db(restaurant_collection)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 

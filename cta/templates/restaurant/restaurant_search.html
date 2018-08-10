@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/updates.css">
 
     <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
-    
+
 
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/custom.css">
 
@@ -1591,108 +1591,110 @@
 
 
             <div id="slideshow" class="slideshow-bg" style="height: 400px;">
-                    
-                                    <div class="flexslider">
-                                        <ul class="slides">
-                                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                                                <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
-                                            </li>
-                                            <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
-                                                <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-order-online.jpg);"></div>
-                                            </li>
-                                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                                                <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-waffle.jpg);"></div>
-                                            </li>
-                                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                                                <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-north-indian.jpg);"></div>
-                                            </li>
-                                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                                                <div class="slidebg" style="background-image: url(/image/south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
-                                            </li>
-                                            <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                                                <div class="slidebg" style="background-image: url(/image/tandoori-chicken-south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                    
-                    
-                                    <div class="container">
-                                        <div class="table-wrapper full-width">
-                                            <div class="table-cell">
-                                                <div class="box">
-                                                    <img src="images/logo.png" alt="">
+
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
+                        </li>
+                        <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
+                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-order-online.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-waffle.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-north-indian.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(/image/south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
+                        </li>
+                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
+                            <div class="slidebg" style="background-image: url(/image/tandoori-chicken-south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="container">
+                    <div class="table-wrapper full-width">
+                        <div class="table-cell">
+                            <div class="box">
+                                <img src="images/logo.png" alt="">
+                            </div>
+                            <div class="heading box">
+                                <h1 class="title">#TB Restaurants</h1>
+                            </div>
+                            <div class="search-box">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-8 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label>
+                                                        <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <option value disabled>--Select Location--</option>
+                                                            {% for location in locations %}
+                                                            <option value="{{location}}">{{location}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </label>
                                                 </div>
-                                                <div class="heading box">
-                                                    <h1 class="title">#TB Restaurants</h1>
-                                                </div>
-                                                <div class="search-box">
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="col-sm-4 col-md-8 form-group">
-                                                                <div class="row">
-                                                                    <div class="col-sm-4">
-                                                                        <label>Location:
-                                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                                <!-- <option value disabled>--Select Location--</option> -->
-                                                                                {% for location in locations %}
-                                                                                <option value="{{location}}">{{location}}</option>
-                                                                                {% endfor %}
-                                                                            </select>
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="col-sm-8" ng-init="searchQueryValue = '{{ searched_value }}'">
-                                                                        <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
-                                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                                    </div>
-                                                                </div>
-                    
-                    
-                                                            </div>
-                    
-                    
-                                                            <div class=" col-sm-4 form-group ">
-                                                                <button class="button btn-medium full-width uppercase dark-blue1 animated tada
-                                                                    " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
-                                                            </div>
-                    
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="text-center ">
-                                                    <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium dark-orange
-                                                                    uppercase animated fadeInLeftBig " data-animation-type="fadeInLeftBig "
-                                                        style="animation-duration: 1s; visibility: visible; ">Order Online</a>
-                                                    &nbsp;&nbsp;
-                                                    <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium yellow
-                                                                    uppercase animated fadeInUpBig " data-animation-type="fadeInUpBig " style="animation-duration: 1s; visibility: visible; ">Book a Table</a>
-                                                    &nbsp;&nbsp;
-                                                    <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium green uppercase
-                                                                    animated fadeInDownBig " data-animation-type="fadeInDownBig " style="animation-duration: 1s; visibility: visible; ">Book a Party</a>
-                                                    &nbsp;&nbsp;
-                                                    <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium sky-blue1
-                                                                    uppercase animated fadeInRightBig " data-animation-type="fadeInRightBig "
-                                                        style="animation-duration: 1s; visibility: visible; ">Chef's Recipies</a>
-                                                    &nbsp;&nbsp;
-                    
+                                                <div class="col-sm-8" ng-init="searchQueryValue = '{{ searched_value }}'">
+                                                    <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
+                                                        ng-change="searchQuery(searchQueryValue, userLocation)">
                                                 </div>
                                             </div>
+
+
                                         </div>
+
+
+                                        <div class=" col-sm-4 form-group ">
+                                            <button class="button btn-medium full-width uppercase dark-blue1 animated tada
+                                                                    " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
+                                        </div>
+
                                     </div>
-                                    <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion">
-                                        <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
-                                            <li ng-repeat="searchResult in searchValue">
-                                                <a href="/restaurant/search?[[searchType]]=[[searchResult]]">
-                                                    <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                    
-                    
-                                    <div id="overlay-box"></div>
-                    
-                                </div>
-                    
+                                </form>
+                            </div>
+                            <div class="text-center ">
+                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium dark-orange
+                                                                    uppercase animated fadeInLeftBig " data-animation-type="fadeInLeftBig "
+                                    style="animation-duration: 1s; visibility: visible; ">Order Online</a>
+                                &nbsp;&nbsp;
+                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium yellow
+                                                                    uppercase animated fadeInUpBig " data-animation-type="fadeInUpBig "
+                                    style="animation-duration: 1s; visibility: visible; ">Book a Table</a>
+                                &nbsp;&nbsp;
+                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium green uppercase
+                                                                    animated fadeInDownBig " data-animation-type="fadeInDownBig "
+                                    style="animation-duration: 1s; visibility: visible; ">Book a Party</a>
+                                &nbsp;&nbsp;
+                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium sky-blue1
+                                                                    uppercase animated fadeInRightBig " data-animation-type="fadeInRightBig "
+                                    style="animation-duration: 1s; visibility: visible; ">Chef's Recipies</a>
+                                &nbsp;&nbsp;
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion">
+                    <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
+                        <li ng-repeat="searchResult in searchValue">
+                            <a href="/restaurant/search?[[searchType]]=[[searchResult]]">
+                                <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div id="overlay-box"></div>
+
+            </div>
+
 
             <div class="container">
                 <div class="row ">
@@ -1766,10 +1768,10 @@
                                 <div style="display: none" ng-init="restaurants = JSON.parse({{restaurant_details}})"></div>
 
                                 <div class="">
-                                    <div class="row image-box style2 add-clearfix">
+                                    <div class="row image-box listing-style1 hotel">
 
-                                        <div class="col-md-12" ng-repeat="restaurant in restaurants" ng-if="serverSideRender">
-                                            <article class="box">
+                                        <div class="col-md-6" ng-repeat="restaurant in restaurants" ng-if="serverSideRender">
+                                            <!-- <article class="box">
                                                 <figure class="animated fadeInRight" data-animation-type="fadeInRight" data-animation-delay="0.3" style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible;">
                                                     <a class="hover-effect" href="/restaurant/[[restaurant.id]]">
                                                         <img class="img-responsive restaurant-image" alt="" ng-src="[[restaurant.images[0].image_url]]">
@@ -1813,14 +1815,53 @@
                                                         </span>
                                                         <!-- <span ng-repeat="association in restaurant.association">
                                                          <strong>[[association.cuisines.cuisine]] <span ng-if="$index != restaurant.association.length - 1" >,</span></strong>
-                                                     </span> -->
+                                                     </span> - ->
                                                     </div>
 
                                                     <div class="btn-group btn-group-justified">
-                                                        <a href="tel:[[restaurant.phone]]" class="btn btn-primary theme-button-color">
-                                                            <i class="fa fa-phone" aria-hidden="true"></i> call</a>
-                                                        <div class="btn btn-default border-radius-0" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
+                                                        <div class="btn btn-primary theme-button-color" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
                                                             <i class="fa fa-file-text-o" aria-hidden="true"></i> view menu</div>
+                                                        <a href="tel:[[restaurant.phone]]" class="btn btn-default border-radius-0">
+                                                            <i class="fa fa-phone" aria-hidden="true"></i> call</a>
+
+
+                                                    </div>
+                                                </div>
+                                            </article> -->
+
+                                            <article class="box">
+                                                <figure>
+                                                    <a href="/restaurant/[[restaurant.id]]" class="hover-effect">
+                                                        <img width="270" height="161" alt="" ng-src="[[restaurant.images[0].image_url]]">
+                                                    </a>
+                                                </figure>
+                                                <div class="details">
+                                                    <span class="price">
+                                                        <small>Cost for 2:</small>
+                                                        ₹[[restaurant.price]]
+                                                    </span>
+                                                    <h4 class="box-title">[[restaurant.name]]
+                                                        <small>[[restaurant.locality]]</small>
+                                                    </h4>
+                                                    <div class="feedback">
+                                                        <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="[[restaurant.rating]] stars">
+                                                            <span style="width: [[restaurant.rating/0.5*10]]%;" class="five-stars"></span>
+                                                        </div>
+                                                        <!-- <span class="review">270 reviews</span> -->
+                                                    </div>
+                                                    <p class="description">
+                                                        <div ng-click="showMap(restaurant.latitude, restaurant.longitude); restaurantName =restaurant.name " role="button" data-toggle="modal" data-target="#show-map">[[restaurant.address]]</div>
+                                                        <span>Cuisine:</span>
+                                                        <span ng-repeat="cuisine in restaurant.cuisines">
+                                                            <strong ng-cloak>[[cuisine.cuisine]]
+                                                                <span ng-if="$index != restaurant.cuisines.length - 1">,</span>
+                                                            </strong>
+                                                        </span>
+
+                                                    </p>
+                                                    <div class="action">
+                                                        <a class="button btn-small green" href="javascript:;" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)"><i class="fa fa-file-text-o" aria-hidden="true"></i> VIEW MENU</a>
+                                                        <a class="button btn-small" href="tel:[[restaurant.phone]]">CALL</a>
 
                                                     </div>
                                                 </div>
@@ -1842,9 +1883,9 @@
 
                                             <!-- Modal content-->
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                                <div class="modal-header" style="background:#ff6000;">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">[[restaurantName]]</h4>
+                                                    <h4 class="modal-title" style="color:white;">[[restaurantName]]</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <table class="table">
@@ -1873,6 +1914,27 @@
 
                                         </div>
                                     </div>
+
+
+                                    <div class="modal fade" id="show-map" role="dialog">
+                                            <div class="modal-dialog">
+    
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="background:#ff6000;">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title" style="color:white;">[[restaurantName]]</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="show-restaurant-map" style="height: 300px;"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+    
+                                            </div>
+                                        </div>
 
                                 </div>
 
@@ -1903,7 +1965,7 @@
                             <hr>
 
                             <small>SPONSORED & TRENDING</small>
-                            <div class="row image-box car listing-style1">
+                            <div class="row car listing-style1">
                                 {% for featured_restaurant in featured_restaurant_data %}
                                 <article class="box">
                                     <figure>
@@ -2966,6 +3028,7 @@
             </ul>
         </div>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRWPSOaz96s93plN3mlcK_K2K73B4niaM"></script>     
 </body>
 
 </html>
