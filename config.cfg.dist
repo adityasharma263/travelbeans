@@ -28,4 +28,4 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 #variables
 
-DOMAIN_URL = 'http://travel-beans.ap-south-1.elasticbeanstalk.com/'
+DOMAIN_URL = 'http://travel-beans.ap-south-1.elasticbeanstalk.com'
