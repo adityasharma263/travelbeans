@@ -144,6 +144,9 @@
                                 <a href="/flight">Flights</a>
                             </li>
                             <li class="menu-item-has-children">
+                                <a href="/restaurant">Restaurants</a>
+                            </li>
+                            <li class="menu-item-has-children">
                                 <a href="/cab">Cars</a>
                             </li>
                             <li class="menu-item-has-children">
@@ -189,6 +192,9 @@
                         <li class="menu-item-has-children">
                             <a href="/flight">Flights</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-2"></button>
                             
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="/restaurant">Restaurants</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-0"></button>
                         </li>
                         <li class="menu-item-has-children">
                             <a href="/cab">Cars</a><button class="dropdown-toggle collapsed" data-toggle="collapse" data-target="#mobile-menu-submenu-item-3"></button>
@@ -520,35 +526,12 @@
                                 <h1 class="title">#TB Hotels</h1>
                                 <h3 class="sub-title"><font color="white">We Have More Than Just Hotels Explore More Unique Places !</font></h3>
                             </div>
-                            <div class="search-box">
+                            <div class="search-box" style="margin-bottom:0px;">
                                 <form>
                                     <div class="row">
                                         <div class="col-sm-4 col-md-8 form-group" onmouseover="myFunction(event)" onmouseout="clearCoor()">
                                             
                                             <input type="text" class="input-text full-width" ng-keyup="[search() , show()]" ng-model="hotel.search" placeholder="Where Do You Wanna Visit ? .... ">
-                                        
-                                            <div class="row" id="demo">
-                                                <div class="col-sm-12"> 
-                                                    <div style="max-height:100px; overflow-y:scroll; margin-right:0px;">
-                                            <table class="table table-hover " style="background-color:white">
-    
-                                                    <tbody>
-                                                      <tr ng-repeat="city in cities">
-                                                        <td ng-click="result([[city]],'city')">[[city]]</td>
-    
-                                                      </tr>
-                                                      <tr ng-repeat="name in names">
-                                                        <td ng-click="result([[name]],'name')">[[name]]</td>
-    
-                                                      </tr>
-                                                      <tr ng-if="resp">
-                                                          <td>No result found</td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                                </div>
-                                                </div>
-                                            </div>
                                         
                                         </div>
                                         
@@ -560,8 +543,29 @@
                                     </div>
                                 </form>
                             </div>
-                            
-                            <div class="text-center">
+                            <div class="row col-md-8" id="demo" style="margin-left:10px; top:-19px; z-index:999">
+                                    <div class="col-sm-12"> 
+                                        <div style="max-height:100px; overflow-y:scroll; margin-right:0px;">
+                                <table class="table table-hover " style="background-color:white">
+
+                                        <tbody>
+                                          <tr ng-repeat="city in cities">
+                                            <td ng-click="result([[city]],'city')">[[city]]</td>
+
+                                          </tr>
+                                          <tr ng-repeat="name in names">
+                                            <td ng-click="result([[name]],'name')">[[name]]</td>
+
+                                          </tr>
+                                          <tr ng-if="resp">
+                                              <td>No result found</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    </div>
+                                </div>
+                            <div class="text-center" style="margin-top:40px;">
                                 <a href="#collections" class="button btn-medium yellow uppercase animated" data-animation-type="bounceInDown">View All Collections</a>
                                 &nbsp;&nbsp;
                             </div>
