@@ -40,7 +40,7 @@ def restaurant_api():
             q = q.filter(Restaurant.price >= price_start, Restaurant.price <= price_end)
         elif rating:
             q = q.filter(Restaurant.rating >= rating)
-        data = q.offset((page - 1) * per_page).limit(per_page).all()
+        data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = RestaurantSchema(many=True).dump(data)
         return jsonify({'result': {'restaurants': result.data}, 'message': "Success", 'error': False})
     else:
@@ -61,10 +61,6 @@ def restaurant_api():
             "price": restaurant.get("price", None),
         }
         post = Restaurant(**restaurant_obj)
-        # p = Restaurant()
-        # a = RestaurantAssociation()
-        # a.cuisine_id = Cuisine()
-        # p.cuisines.append(a)
         post.save()
         restaurant_result = RestaurantSchema().dump(post)
         if restaurant.get("amenities"):
