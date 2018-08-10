@@ -416,10 +416,10 @@ def restaurant_search():
     if(not location_from_cookie):
         return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
     searched_value = ''
-    # searched_key  = ''
+    searched_key  = ''
     if args:
         searched_value = list(args.values())[0]
-        # searched_key = list(args.keys())[0]
+        searched_key = list(args.keys())[0]
     cuisine = args.get("cuisine", None)
     category = args.get("category", None)
     args['collection'] = 'trending'
@@ -448,7 +448,7 @@ def restaurant_search():
     trending_restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
 
     
-    return render_template("restaurant/restaurant_search.html", locations=locations, user_location = location_from_cookie, searched_value=searched_value, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
+    return render_template("restaurant/restaurant_search.html", locations=locations, user_location = location_from_cookie, searched_value=searched_value, searched_key=searched_key, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])

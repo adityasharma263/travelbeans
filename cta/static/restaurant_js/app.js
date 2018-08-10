@@ -330,6 +330,50 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         })
 
     };
+
+    $scope.categories_data = {
+      "bistro": 1,
+      "ethnic": 2,
+      "fine_dining": 3,
+      "trattoria": 4,
+      "teppanyaki_ya": 5,
+      "osteria": 6,
+      "drive_in": 7,
+      "drive_thru": 8,
+      "pizzeria": 9,
+      "taverna": 10,
+      "fast_casual": 11,
+      "pop_up": 12,
+      "Café": 13,
+      "iner": 14,
+      "ramen_ya": 15,
+      "teahouse": 16,
+      "fast_food": 17,
+      "buffet": 18,
+      "cafeteria": 19,
+      "luncheonette": 20,
+      "tapas_bar": 21,
+      "steakhouse": 22,
+      "all_you_can_eat_restaurant": 23,
+      "kosher": 24,
+      "dinner_in_the_Sky": 25,
+      "dark_restaurant": 26,
+      "a_la_carte": 27,
+      "gastropub": 28,
+      "brasserie": 29,
+      "chiringuito": 30,
+      "food_truck": 31,
+      "churrascaria": 32,
+      "food_court": 33,
+      "restrobars": 34,
+      "street_stalls": 35,
+      "theme_resturants": 36,
+      "coffee_shop": 37,
+      "coffee_house": 38,
+      "cabaret": 39,
+      "tea_shop": 40
+    }
+
   }])
 
   // ============= Dashboard Controller =====================
@@ -571,36 +615,159 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       "wifi": true
     }
 
+    $scope.categories_data = [
+      {
+        "bistro": 1
+      },
+      {
+        "ethnic": 2
+      },
+      {
+        "fine_dining": 3
+      },
+      {
+        "trattoria": 4
+      },
+      {
+        "teppanyaki_ya": 5
+      },
+      {
+        "osteria": 6
+      },
+      {
+        "drive_in": 7
+      },
+      {
+        "drive_thru": 8
+      },
+      {
+        "pizzeria": 9
+      },
+      {
+        "taverna": 10
+      },
+      {
+        "fast_casual": 11
+      },
+      {
+        "pop_up": 12
+      },
+      {
+        "Café": 13
+      },
+      {
+        "iner": 14
+      },
+      {
+        "ramen_ya": 15
+      },
+      {
+        "teahouse": 16
+      },
+      {
+        "fast_food": 17
+      },
+      {
+        "buffet": 18
+      },
+      {
+        "cafeteria": 19
+      },
+      {
+        "luncheonette": 20
+      },
+      {
+        "tapas_bar": 21
+      },
+      {
+        "steakhouse": 22
+      },
+      {
+        "all_you_can_eat_restaurant": 23
+      },
+      {
+        "kosher": 24
+      },
+      {
+        "dinner_in_the_Sky": 25
+      },
+      {
+        "dark_restaurant": 26
+      },
+      {
+        "a_la_carte": 27
+      },
+      {
+        "gastropub": 28
+      },
+      {
+        "brasserie": 29
+      },
+      {
+        "chiringuito": 30
+      },
+      {
+        "food_truck": 31
+      },
+      {
+        "churrascaria": 32
+      },
+      {
+        "food_court": 33
+      },
+      {
+        "restrobars": 34
+      },
+      {
+        "street_stalls": 35
+      },
+      {
+        "theme_resturants": 36
+      },
+      {
+        "coffee_shop": 37
+      },
+      {
+        "coffee_house": 38
+      },
+      {
+        "cabaret": 39
+      },
+      {
+        "tea_shop": 40
+      }
+    ]
+
     $scope.categories = [
       "bistro",
       "ethnic",
-      "fine_dining ",
-      "trattoria ",
-      "teppanyaki_ya ",
+      "fine_dining",
+      "trattoria",
+      "teppanyaki_ya",
       "osteria",
-      "drive_in ",
+      "drive_in",
       "drive_thru",
-      "pizzeria ",
+      "pizzeria",
       "taverna",
-      "fast_casual ",
+      "fast_casual",
       "pop_up",
       "Café",
       "iner",
-      "ramen_ya ",
-      "teahouse ",
+      "ramen_ya",
+      "teahouse",
       "fast_food",
       "buffet",
-      "cafeteria ",
-      "luncheonette ",
+      "cafeteria",
+      "luncheonette",
       "tapas_bar",
-      "steakhouse ",
-      "all_you_can_eat_restaurant ",
+      "steakhouse",
+      "all_you_can_eat_restaurant",
       "kosher",
-      "dinner_in_the_Sky ",
-      "dark_restaurant ",
-      "a_la_carte ",
-      "gastropub ",
-      "brasserie ",
+      "dinner_in_the_Sky",
+      "dark_restaurant",
+      "a_la_carte",
+      "gastropub",
+      "brasserie",
       "chiringuito",
       "food_truck",
       "churrascaria",
