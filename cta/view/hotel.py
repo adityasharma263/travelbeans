@@ -81,7 +81,7 @@ def hotel_api():
         hotel = request.json
         hotel_obj = {
         "name": hotel.get("name", None),
-        "is_partner": : hotel.get("is_partner", None),
+        "is_partner": hotel.get("is_partner", None),
         "city": hotel.get("city", None),
         "category": hotel.get("category", None),
         "phone": hotel.get("phone", None),
