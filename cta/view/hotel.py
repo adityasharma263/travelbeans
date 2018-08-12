@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room
+from cta.model.hotel import Hotel, Amenity, Image, Deal, Website, Facility, Member, Room, HotelCollection, CollectionProduct
 from cta import app
 from sqlalchemy import or_
 from flask import jsonify, request
-from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema
+from cta.schema.hotel import HotelSchema, AmenitySchema, ImageSchema, DealSchema, WebsiteSchema, FacilitySchema, MemberSchema, RoomSchema, HotelCollectionSchema, CollectionProductSchema
 import datetime
 from itertools import cycle
 import simplejson as json
@@ -94,6 +94,30 @@ def hotel_api():
         post = Hotel(**hotel_obj)
         post.save()
         hotel_result = HotelSchema().dump(post)
+        if hotel.get("collection"):
+            collection = hotel.get("collection", None)
+            collection_obj = {
+                "hotel_id": hotel_result.data['id'],
+                "collection_name": collection.get("collection_name", None),
+                "featured": collection.get("featured", None),
+                "desc": collection.get("desc", None),
+                "image": collection.get("image", None),
+            }
+            post = HotelCollection(**collection_obj)
+            post.save()
+            collection_result = HotelCollectionSchema().dump(post)
+            if collection.get("products"):
+                products = collection.get("products")
+                products_obj = {
+                    "hotel_collection_id": collection_result.data['id'],
+                    "product_name": products.get("product_name", None),
+                    "product_url": products.get("product_url", None),
+                    "featured_product": products.get("featured_product", None),
+                    "product_desc": products.get("product_desc", None),
+                    "product_image": products.get("product_image", None),
+                }
+                post = CollectionProduct(**products_obj)
+                post.save()
         if hotel.get("amenities"):
             amenity = hotel.get("amenities", None)
             amenity_obj = {
@@ -152,6 +176,10 @@ def hotel_id(id):
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         Amenity.query.filter_by(hotel_id=id).delete()
         Image.query.filter_by(hotel_id=id).delete()
+        collection = HotelCollection.query.filter_by(hotel_id=id).first()
+        if collection:
+            CollectionProduct.query.filter_by(hotel_collection_id=collection.id).delete()
+            HotelCollection.delete_db(collection)
         rooms = Room.query.filter_by(hotel_id=id).all()
         if rooms:
             for room in rooms:
@@ -162,6 +190,30 @@ def hotel_id(id):
         Hotel.delete_db(hotel)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
+@app.route('/api/v1/hotel/collection', methods=['GET', 'POST'])
+def room_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        data = HotelCollection.query.filter_by(**args).all()
+        result = HotelCollectionSchema(many=True).dump(data)
+        return jsonify({'result': {'collection': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/hotel/collection/product', methods=['GET', 'POST'])
+def room_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        data = CollectionProduct.query.filter_by(**args).all()
+        result = CollectionProductSchema(many=True).dump(data)
+        return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
 
 @app.route('/api/v1/room', methods=['GET', 'POST'])
 def room_api():
