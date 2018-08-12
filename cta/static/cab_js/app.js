@@ -119,13 +119,13 @@ angular.module('comparetravel', ['angular.filter'])
 .controller('Cab_HomeController',["$scope", "$http","dataShare", function($scope, $http, dataShare, $filter) {
     $scope.info = {};
 
-    $scope.getCabs = function() {
+    $scope.getCabs = function(id) {
         // console.log("$location.path",$location.path);
         console.log("$scope.info",$scope.info);
         dataShare.sendData($scope.info);
         $scope.location=document.location.href;
         console.log("$scope.location",$scope.location);
-        window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=1",'_self'); 
+        window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=" + id ,'_self'); 
       } 
     
   
@@ -148,7 +148,7 @@ angular.module('comparetravel', ['angular.filter'])
 
     $http({
         method: 'GET',
-        url: '/api/v1/cab' 
+        url: '/api/v1/cab' + document.location.search
       }).then(function successCallback(response) {
           
           $scope.cabs= response.data.result.cabs;
