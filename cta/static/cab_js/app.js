@@ -279,7 +279,7 @@ angular.module('comparetravel', ['angular.filter'])
         }).then(function successCallback(response) {
             for(var i=0; i<response.data.result.cabs.length; i++){
                 for(var j=0; j<response.data.result.cabs[i].deals.length; j++){
-                    if(response.data.result.cabs[i].id==1 && response.data.result.cabs[i].deals[j].id==2){
+                    if(response.data.result.cabs[i].id==1 && response.data.result.cabs[i].deals[j].id==1){
                         $scope.cabs =response.data.result.cabs[i];
                         $scope.deal =response.data.result.cabs[i].deals[j];
 

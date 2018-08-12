@@ -832,27 +832,30 @@
                     <div class="row" style="margin-top:15px;">
                             <div class="col-sm-4 col-md-3">
                             <div class="toggle-container filters-container">
-                                
                             <div class="panel style1 arrow-right">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
-                                    </h4>
-                                    <div id="price-filter" class="panel-collapse collapse">
-                                        <div class="panel-content">
-                                            <div class="price-range"></div>
-                                            <br />
-                                            <span class="min-price-label pull-left"></span>
-                                            <span class="max-price-label pull-right"></span>
-                                            <div class="clearer"></div>
-                                        </div><!-- end content -->
-                                    </div>
-                                </div>
+                                            <a data-toggle="collapse" href="#filter" class="collapsed">Filter</a>
+                                        </h4>
+                            <div id="filter" class="panel-collapse collapse">            
                                 <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#Base-Fare-filter" class="collapsed">Base Fare</a>
+                                            <a data-toggle="collapse" href="#price-filter" class="collapsed">Range</a>
                                         </h4>
-                                        <div id="Base-Fare-filter" class="panel-collapse collapse">
+                                        <div id="price-filter" class="panel-collapse collapse">
                                             <div class="panel-content">
+                                                <h4 class="panel-title">
+                                                        Price
+                                                </h4>
+                                                <div class="price-range"></div>
+                                                <br />
+                                                <span class="min-price-label pull-left"></span>
+                                                <span class="max-price-label pull-right"></span>
+                                                <div class="clearer"></div>
+                                        
+                                    
+                                                <h4 class="panel-title">
+                                                Base Fare
+                                                </h4>
                                                 <div class="price-range"></div>
                                                 <br />
                                                 <span class="min-price-label pull-left"></span>
@@ -860,7 +863,67 @@
                                                 <div class="clearer"></div>
                                             </div><!-- end content -->
                                         </div>
-                                    </div>
+                                </div>
+                                <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#amenities-filter" class="collapsed">amenities</a>
+                                        </h4>
+                                        <div id="amenities-filter" class="panel-collapse collapse">
+                                            <div class="panel-content">
+                                               
+                                            <div>
+                                                <h4 class="panel-title">
+                                                        Air Condition
+                                                    </h4>
+                                                <ul class="check-square filters-option">
+                                                    <li><a href="#">Available</a></li>
+                                                    <li><a href="#">Not Available</a></li>
+                                                </ul>
+                                            </div>
+                                            <div>        
+                                                <h4 class="panel-title">
+                                                    Transmission
+                                                </h4>
+                                                <div class="price-range"></div>
+                                                <br />
+                                                <span class="min-price-label pull-left"></span>
+                                                <span class="max-price-label pull-right"></span>
+                                                <div class="clearer"></div>
+                                            </div>   
+                                            <div>
+                                                <h4 class="panel-title">
+                                                     Baggage Allowance
+                                                 </h4>
+                                                <ul class="check-square filters-option">
+                                                    <li><a href="#">Allowed</a></li>
+                                                    <li><a href="#">Not Allowed</a></li>
+                                                </ul>
+                                                        
+                                            </div> 
+
+                                            <div>
+                                                <h4 class="panel-title">
+                                                        Doorstep Delivery
+                                                    </h4>
+                                                <ul class="check-square filters-option">
+                                                    <li><a href="#">Available</a></li>
+                                                    <li><a href="#">Not Available</a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div>
+                                                    <h4 class="panel-title">
+                                                            With / Without Fuel
+                                                        </h4>
+                                                        <ul class="check-square filters-option">
+                                                            <li><a href="#">With fuel<small>(08)</small></a></li>
+                                                            <li><a href="#">Without fuel<small>(32)</small></a></li>
+                                                        </ul>
+                                                           
+                                            </div>
+                                            </div><!-- end content -->
+                                        </div>
+                                </div>
                                     <div class="panel style1 arrow-right">
                                             <h4 class="panel-title">
                                                 <a data-toggle="collapse" href="#Free-Km-filter" class="collapsed">Free Km</a>
@@ -875,20 +938,7 @@
                                                 </div><!-- end content -->
                                             </div>
                                         </div>
-                                        <div class="panel style1 arrow-right">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#Air-Condition-filter" class="collapsed">Air Condition</a>
-                                                </h4>
-                                                <div id="Air-Condition-filter" class="panel-collapse collapse filters-container">
-                                                    <div class="panel-content">
-                                                        <ul class="check-square filters-option">
-                                                            <li><a href="#">Available</a></li>
-                                                            <li><a href="#">Not Available</a></li>
-                                                        </ul>
-                                                        <a class="button btn-mini">MORE</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                
                                             <div class="panel style1 arrow-right">
                                                     <h4 class="panel-title">
                                                         <a data-toggle="collapse" href="#Seater-filter" class="collapsed">Seater</a>
@@ -924,63 +974,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="panel style1 arrow-right">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" href="#Transmission-filter" class="collapsed">Transmission</a>
-                                                            </h4>
-                                                            <div id="Transmission-filter" class="panel-collapse collapse">
-                                                                <div class="panel-content">
-                                                                    <div class="price-range"></div>
-                                                                    <br />
-                                                                    <span class="min-price-label pull-left"></span>
-                                                                    <span class="max-price-label pull-right"></span>
-                                                                    <div class="clearer"></div>
-                                                                </div><!-- end content -->
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel style1 arrow-right">
-                                                                <h4 class="panel-title">
-                                                                    <a data-toggle="collapse" href="#Baggage-Allowance-filter" class="collapsed">Baggage Allowance</a>
-                                                                </h4>
-                                                                <div id="Baggage-Allowance-filter" class="panel-collapse collapse filters-container">
-                                                                    <div class="panel-content">   
-                                                                        <ul class="check-square filters-option">
-                                                                            <li><a href="#">Allowed</a></li>
-                                                                            <li><a href="#">Not Allowed</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                   
+                                                       
                             
-                            <div class="panel style1 arrow-right">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#Doorstep-Delivery-filter" class="collapsed">Doorstep Delivery</a>
-                                </h4>
-                                <div id="Doorstep-Delivery-filter" class="panel-collapse collapse filters-container">
-                                    <div class="panel-content">
-                                        <ul class="check-square filters-option">
-                                            <li><a href="#">Available</a></li>
-                                            <li><a href="#">Not Available</a></li>
-                                        </ul>
-                                        <a class="button btn-mini">MORE</a>
-                                    </div>
-                                </div>
-                            </div>
+                          
                             
-                            <div class="panel style1 arrow-right">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#With-Without-Fuel-filter" class="collapsed">With / Without Fuel</a>
-                                </h4>
-                                <div id="With-Without-Fuel-filter" class="panel-collapse collapse filters-container">
-                                    <div class="panel-content">
-                                        <ul class="check-square filters-option">
-                                            <li><a href="#">With fuel<small>(08)</small></a></li>
-                                            <li><a href="#">Without fuel<small>(32)</small></a></li>
-                                        </ul>
-                                        <a class="button btn-mini">MORE</a>
-                                    </div>
-                                </div>
-                            </div>
+                        
                             
                             <div class="panel style1 arrow-right">
                                 <h4 class="panel-title">
@@ -1029,7 +1028,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                            </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-8 col-md-9">        
