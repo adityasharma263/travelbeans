@@ -71,7 +71,7 @@ angular.module('comparetravel', ['angular.filter'])
                     60:    'Entry Level Luxury ',
                     61:    'Mid Sized Luxury',
                     62:    'Economy Car',
-                    63:    'Mid Sized Sedan',
+                    63:    'Mid Sized Sedan'
 
    }
 
@@ -81,13 +81,74 @@ angular.module('comparetravel', ['angular.filter'])
 
 })
 
-.controller('CabListController',["$scope", "$http","Constants", function($scope, $http, Constants, $filter) {
+.constant("Cabs",{
+
+    Cab_types : {
+ 
+                     1:     'Monthly Rental',
+                     2:     'Sightseeing',
+                     3:     'Luxury', 
+                     4:     'Outstation',
+                     5:     'Self Drive', 
+                     6:     'Hire a Driver ',
+                     7:     'Quick Cabs'
+                   
+ 
+    }
+ 
+ 
+ 
+ 
+ 
+ })
+
+ .factory('dataShare',function($rootScope){
+    var service = {};
+    service.data = false;
+    service.sendData = function(data){
+        this.data = data;
+        $rootScope.$broadcast('data_shared');
+    };
+    service.getData = function(){
+      return this.data;
+    };
+    return service;
+  })
+ 
+
+.controller('Cab_HomeController',["$scope", "$http","dataShare", function($scope, $http, dataShare, $filter) {
+    $scope.info = {};
+
+    $scope.getCabs = function(id) {
+        // console.log("$location.path",$location.path);
+        console.log("$scope.info",$scope.info);
+        dataShare.sendData($scope.info);
+        $scope.location=document.location.href;
+        console.log("$scope.location",$scope.location);
+        window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=" + id ,'_self'); 
+      } 
+    
+  
+  }])
+
+
+.controller('CabListController',["$scope", "$http","Constants","dataShare", function($scope, $http, Constants, dataShare, $filter) {
     
     $scope.car_types = Constants.Car_types;
+    var info = {};
+    $scope.info = {};
+
+
+    $scope.$on('data_shared',function(){
+                            info =  dataShare.getData();    
+             $scope.info = info;
+
+    })
+    console.log("$scope.info",$scope.info);
 
     $http({
         method: 'GET',
-        url: '/api/v1/cab' 
+        url: '/api/v1/cab' + document.location.search
       }).then(function successCallback(response) {
           
           $scope.cabs= response.data.result.cabs;
