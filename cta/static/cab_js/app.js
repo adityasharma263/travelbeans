@@ -186,6 +186,13 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.car_types = Constants.Car_types;
     var info = {};
     $scope.info = {};
+    $scope.cab_type = 1;
+
+    var str = document.location.search.split("&");
+    var type = str[1].split("=");
+    $scope.cab_type = type[1];
+    
+    
 
 
     $scope.$on('data_shared',function(){
