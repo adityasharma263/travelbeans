@@ -191,7 +191,7 @@ def hotel_id(id):
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 @app.route('/api/v1/hotel/collection', methods=['GET', 'POST'])
-def room_api():
+def hotel_collection_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         args.pop('page', None)
@@ -204,7 +204,7 @@ def room_api():
 
 
 @app.route('/api/v1/hotel/collection/product', methods=['GET', 'POST'])
-def room_api():
+def collection_product_api():
     if request.method == 'GET':
         args = request.args.to_dict()
         args.pop('page', None)
