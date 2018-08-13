@@ -190,6 +190,7 @@ def hotel_id(id):
         Hotel.delete_db(hotel)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
+
 @app.route('/api/v1/hotel/collection', methods=['GET', 'POST'])
 def hotel_collection_api():
     if request.method == 'GET':

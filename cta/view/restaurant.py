@@ -45,6 +45,22 @@ def restaurant_api():
         return jsonify({'result': {'restaurants': result.data}, 'message': "Success", 'error': False})
     else:
         restaurant = request.json
+        if restaurant.get("restaurant_chain"):
+            chain = restaurant.get("restaurant_chain")
+            if chain.get("restaurant_chain_id"):
+                restaurant_chain_id = chain.get("restaurant_chain_id")
+            else:
+                chain_obj = {
+                    "restaurant_chain_name": chain.get("restaurant_chain_name", None),
+                    "restaurant_chain_category": chain.get("restaurant_chain_category", None),
+                    "restaurant_chain_desc": chain.get("restaurant_chain_desc", None),
+                }
+                post = RestaurantChain(**chain_obj)
+                post.save()
+                chain_result = RestaurantChainSchema().dump(post)
+                restaurant_chain_id = chain_result.data['id']
+        else:
+            restaurant_chain_id = None
         restaurant_obj = {
             "name": restaurant.get("name", None),
             "city": restaurant.get("city", None),
@@ -59,6 +75,7 @@ def restaurant_api():
             "featured": restaurant.get("featured", None),
             "phone": restaurant.get("phone", None),
             "price": restaurant.get("price", None),
+            "restaurant_chain_id": restaurant_chain_id,
         }
         post = Restaurant(**restaurant_obj)
         post.save()
@@ -198,6 +215,7 @@ def restaurant_id(id):
         Restaurant.delete_db(restaurant)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
+
 @app.route('/api/v1/restaurant/chain', methods=['GET', 'POST'])
 def restaurant_chain():
     if request.method == 'GET':
@@ -229,6 +247,15 @@ def restaurant_chain_id(id):
         restaurant_chain = RestaurantChain.query.filter_by(id=id).first()
         if not restaurant_chain:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurants = Restaurant.query.filter_by(id=id).all()
+        if restaurants:
+            for restaurant in restaurants:
+                RestaurantAmenity.query.filter_by(restaurant_id=id).delete()
+                Menu.query.filter_by(restaurant_id=id).delete()
+                RestaurantImage.query.filter_by(restaurant_id=id).delete()
+                Dish.query.filter_by(restaurant_id=id).delete()
+                RestaurantAssociation.query.filter_by(restaurant_id=id).delete()
+                Restaurant.delete_db(restaurant)
         RestaurantChain.delete_db(restaurant_chain)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
