@@ -37,26 +37,26 @@ def cab_api():
         result = CabSchema(many=True).dump(data)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
-        obj = request.json
-        deals = []
-        # deal = obj["deals"]
-        # obj.pop('deals', None)
-
-        for index, deal in enumerate(obj["deals"]):
-            print(deal)
-            deal = frozenset(deal.items())
-            obj["deals"][index] = deal
-        print(obj)
-        p = Cab(**obj)
-        # a =
-        # for deal in deal:
-        c = CabDeal()
-        p.deals.append(c)
-
-        # a = CabDealAssociation(cab_id=p, deal_id=c)
-        # a.save()
-        p.save()
-        result = CabSchema().dump(p)
+        cab = request.json
+        deals = cab.get("deals", None)
+        amenities = cab.get("amenities", None)
+        cab.pop('amenities', None)
+        cab.pop('deals', None)
+        cab_post = Cab(**cab)
+        cab_post.save()
+        for deal in deals:
+            if deal.get("deal_id", None):
+                assoc_post = CabDealAssociation(cab_id=cab_post.id, deal_id=deal.get("deal_id", None))
+                assoc_post.save()
+            else:
+                deal_post = CabDeal(**deal)
+                cab_post.deals.append(deal_post)
+                deal_post.save()
+        amenities["cab_id"] = cab_post.id
+        amenities_post = CabAmenity(**amenities)
+        cab_post.amenities = amenities_post
+        amenities_post.save()
+        result = CabSchema().dump(cab_post)
         return jsonify({'result': {'cab': result.data}, 'message': "Success", 'error': False})
 
 
