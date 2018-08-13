@@ -22,15 +22,15 @@
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/animate.min.css">
 
 
-    <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-orange.css">
+    <link rel="stylesheet" type="text/css" href="/Home Page With Chefs Recipies_files/style-orange.css">
 
 
     <!-- Updated Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/updates.css">
-    <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
+    <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/custom.css">
+    <link rel="stylesheet" type="text/css" href="/Home Page With Chefs Recipies_files/custom.css">
 
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/responsive.css">
@@ -47,7 +47,7 @@
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
 
-            <div class="topnav hidden-xs">
+            <!-- <div class="topnav hidden-xs">
                 <div class="container">
                     <ul class="quick-menu pull-left">
 
@@ -84,8 +84,8 @@
 
                     </ul>
                 </div>
-            </div>
-
+            </div> -->
+{% include "/restaurant/components/orange_headbar.html" %}
 
             <div class="main-header">
 
@@ -831,28 +831,47 @@
 
                                     <form>
                                         <div class="row">
-                                            <div class="col-sm-4 col-md-8 form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                <option value disabled>--Select Location--</option>
-                                                                {% for location in locations %}
-                                                                <option value="{{location}}">{{location}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
-                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                    </div>
+                                            <div class="col-sm-2">
+                                                {#
+                                                <label>
+                                                    <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
+                                                        <option value disabled>--Select Location--</option>
+                                                        {% for location in locations %}
+                                                        <option value="{{location}}">{{location}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </label> #}
+
+                                                <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
+                                                    <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
+                                                        ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
+                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
+                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
+                                                    </button>
+                                                    <span ng-show="submitted">
+                                                        <label class="error">Select an Individual</label>
+                                                    </span>
+                                                    <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                                        <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
+                                                        />
+                                                        <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                            <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
 
-
                                             </div>
+                                            <div class="col-sm-4 col-md-6 form-group">
+                                                <!-- <div class="row"> -->
+                                                <!-- <div class="col-sm-2">
 
-
+                                                    </div>
+                                                    <div class="col-sm-9 col-sm-offset-1"> -->
+                                                <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
+                                                    ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                <!-- </div> -->
+                                                <!-- </div> -->
+                                            </div>
                                             <div class=" col-sm-4 form-group ">
                                                 <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                 " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
@@ -869,7 +888,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
                                                                 <option value disabled>--Select Location--</option>
                                                                 {% for location in locations %}
                                                                 <option value="{{location}}">{{location}}</option>
@@ -903,7 +922,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
                                                                 <option value disabled>--Select Location--</option>
                                                                 {% for location in locations %}
                                                                 <option value="{{location}}">{{location}}</option>
@@ -937,7 +956,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
                                                                 <option value disabled>--Select Location--</option>
                                                                 {% for location in locations %}
                                                                 <option value="{{location}}">{{location}}</option>
@@ -1003,7 +1022,7 @@
             </div>
 
             {% if get_location %}
-            <div class="modal fade" id="location-modal" role="dialog"  data-backdrop="static" data-keyboard="false">
+            <div class="modal fade" id="location-modal" role="dialog" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
@@ -1013,14 +1032,44 @@
                             <h4 class="modal-title" style="color:white;">Choose your location</h4>
                         </div>
                         <div class="modal-body">
-                            <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()">use GPS</button>
-                            or
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()" style="width:100%;">use GPS</button>
+
+                                </div>
+                                <div class="col-sm-1">
+                                    <strong>OR</strong>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="dropdown makePaymentDropdownMainDiv" auto-close="outsideClick">
+                                        <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
+                                            ng-click="serchFilter = ''" data-toggle="dropdown" ng-cloak=""> Select City
+                                            <span class="caret pull-right" style="margin-top:10px;"></span>
+                                        </button>
+                                        <span ng-show="submitted">
+                                            <label class="error">Select an Individual</label>
+                                        </span>
+                                        <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                            <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
+                                            />
+                                            <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {#
                             <select ng-model="userLocationFromModal" ng-change="setValues(userLocationFromModal)">
                                 <option value disabled selected>--Select Location--</option>
                                 {% for location in locations %}
                                 <option value="{{location}}">{{location}}</option>
                                 {% endfor %}
-                            </select>
+                            </select> #}
+
+
+
+
                         </div>
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button> -->
@@ -1032,7 +1081,7 @@
             {% endif %}
 
 
-            
+
 
 
             <div class="section ">
@@ -1043,15 +1092,15 @@
 
                     <div class="row image-box style2 add-clearfix ">
                         {% for collection in collections %}
-                        <div class="col-md-4 ">
+                        <div class="col-md-4 collection-card">
                             <article class="box ">
                                 <figure>
                                     <a title=" " href="/restaurant/search?collection={{collection.collection}} ">
-                                        <img width="270 " height="192 " alt="{{collection.collection}} " src="{{collection.image}} ">
+                                        <img class="collection-card-img" alt="{{collection.collection}} " src="{{collection.image}} ">
                                     </a>
                                 </figure>
-                                <div class="details ">
-                                    <h4 class="box-title ">{{collection.collection}}</h4>
+                                <div class="details collection-card-details ">
+                                    <h3 class="box-title ">{{collection.collection}}</h3>
                                     <p>Our premium classy Resturants Trending .. </p>
                                 </div>
                             </article>
@@ -1059,7 +1108,12 @@
                         {% endfor %}
 
                         <div class="col-sm-12 ">
-                            <a href="/restaurant/collection " class="button btn-small green">see more</a>
+                            <div class="row">
+                                <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
+                                    <a href="/restaurant/collection " class="button btn-medium green">see more collections</a>
+
+                                </div>
+                            </div>
                         </div>
                         <!-- <div class="col-md-4 ">
                                 <article class="box ">
@@ -2176,7 +2230,7 @@
         </footer> -->
 
 
-        <footer id="footer " class="style5 ">
+        <!-- <footer id="footer " class="style5 ">
             <div class="footer-wrapper ">
                 <div class="container ">
                     <div class="row ">
@@ -2332,8 +2386,9 @@
                     </div>
                 </div>
             </div>
-        </footer>
-
+        </footer> -->
+        {% include '/restaurant/components/footer.html' %}
+        
 
         </div>
 
@@ -2352,6 +2407,9 @@
         <!-- parallax -->
         <script type="text/javascript " src="/Home Page With Chefs Recipies_files/jquery.stellar.min.js "></script>
 
+        <script type="text/javascript" src="/Detailed View_files/jquery.flexslider-min.js.download"></script>
+
+
         <!-- waypoint -->
         <script type="text/javascript " src="/Home Page With Chefs Recipies_files/waypoints.min.js "></script>
 
@@ -2363,6 +2421,17 @@
         <script>
             tjq(document).ready(function () {
                 tjq('#location-modal').modal('show');
+
+
+                tjq("#slideshow .flexslider").flexslider({
+                    animation: "fade",
+                    controlNav: false,
+                    animationLoop: true,
+                    directionNav: false,
+                    slideshow: true,
+                    slideshowSpeed: 5000
+                });
+
             });
         </script>
 
@@ -2957,6 +3026,7 @@
                 </ul>
             </div>
         </div>
+
 </body>
 
 </html>

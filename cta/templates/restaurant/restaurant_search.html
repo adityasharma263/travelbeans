@@ -27,6 +27,7 @@
 
 
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/custom.css">
+    <link rel="stylesheet" href="/Detailed View_files/custom.css">
 
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/responsive.css">
 
@@ -42,6 +43,8 @@
 <body ng-controller="searchController">
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
+            {% include "/restaurant/components/orange_headbar.html" %}
+
             <div class="main-header">
 
                 <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
@@ -1390,9 +1393,9 @@
 
         <section id="content" class="tour">
 
-            <div id="slideshow" class="slideshow-bg" style="height: 400px;">
+            <div>
 
-                <div class="flexslider">
+                <!-- <div class="flexslider">
                     <ul class="slides">
                         <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
                             <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
@@ -1413,44 +1416,51 @@
                             <div class="slidebg" style="background-image: url(/image/tandoori-chicken-south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
                         </li>
                     </ul>
-                </div>
+                </div> -->
 
 
                 <div class="container">
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
-                            <div class="box">
+                            <!-- <div class="box">
                                 <img src="images/logo.png" alt="">
-                            </div>
-                            <div class="heading box">
-                                <h1 class="title">#TB Restaurants</h1>
-                            </div>
+                            </div> -->
+
                             <div class="tab-content">
                                 <div class="search-box tab-pane fade active in" id="search">
 
                                     <form>
                                         <div class="row">
-                                            <div class="col-sm-4 col-md-8 form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                <option value disabled>--Select Location--</option>
-                                                                {% for location in locations %}
-                                                                <option value="{{location}}">{{location}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </label>
-                                                    </div> 
-                                                    <div class="col-sm-9 col-sm-offset-1" {% if not searched_key == 'category' %} ng-init="searchQueryValue = '{{ searched_value }}'" {% else %} ng-init="searchQueryValue = ''" {% endif %} >
-                                                        <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
-                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                    </div>
-                                                </div>
 
+                                            <div class="col-sm-2">
+
+                                                <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
+                                                    <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
+                                                        ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
+                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
+                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
+                                                    </button>
+                                                    <span ng-show="submitted">
+                                                        <label class="error">Select an Individual</label>
+                                                    </span>
+                                                    <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                                        <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
+                                                        />
+                                                        <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                            <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
 
                                             </div>
 
+                                            <div class="col-sm-4 col-md-6 form-group" {% if not searched_key=='category' %} ng-init="searchQueryValue = '{{ searched_value }}'"
+                                                {% else %} ng-init="searchQueryValue = ''" {% endif %}>
+
+                                                <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
+                                                    ng-change="searchQuery(searchQueryValue, userLocation)">
+
+                                            </div>
 
                                             <div class=" col-sm-4 form-group ">
                                                 <button class="button btn-medium full-width uppercase dark-blue1 animated tada
@@ -1461,129 +1471,129 @@
                                     </form>
                                 </div>
 
-                                <div class="search-box tab-pane fade" id="book-table">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-md-8 form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                <option value disabled>--Select Location--</option>
-                                                                {% for location in locations %}
-                                                                <option value="{{location}}">{{location}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Book your tabel now... " ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                    </div>
+                                <!-- <div class="search-box tab-pane fade" id="book-table">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-8 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label>
+                                                        <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <option value disabled>--Select Location--</option>
+                                                            {% for location in locations %}
+                                                            <option value="{{location}}">{{location}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </label>
                                                 </div>
-
-
+                                                <div class="col-sm-9 col-sm-offset-1">
+                                                    <input type="text" class="input-text full-width" placeholder="Book your tabel now... " ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                </div>
                                             </div>
 
 
-                                            <div class=" col-sm-4 form-group ">
-                                                <button class="button btn-medium full-width uppercase dark-blue1 animated tada
+                                        </div>
+
+
+                                        <div class=" col-sm-4 form-group ">
+                                            <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                         " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div class="search-box tab-pane fade" id="book-party">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-8 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label>
+                                                        <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <option value disabled>--Select Location--</option>
+                                                            {% for location in locations %}
+                                                            <option value="{{location}}">{{location}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-9 col-sm-offset-1">
+                                                    <input type="text" class="input-text full-width" placeholder="Book your party now..." ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                </div>
                                             </div>
+
 
                                         </div>
-                                    </form>
-                                </div>
 
 
-                                <div class="search-box tab-pane fade" id="book-party">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-md-8 form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                <option value disabled>--Select Location--</option>
-                                                                {% for location in locations %}
-                                                                <option value="{{location}}">{{location}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Book your party now..." ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-
-                                            <div class=" col-sm-4 form-group ">
-                                                <button class="button btn-medium full-width uppercase dark-blue1 animated tada
+                                        <div class=" col-sm-4 form-group ">
+                                            <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                             " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
-                                            </div>
-
                                         </div>
-                                    </form>
-                                </div>
+
+                                    </div>
+                                </form>
+                            </div>
 
 
-                                <div class="search-box tab-pane fade" id="chefs-recipie-corner">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-sm-4 col-md-8 form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                <option value disabled>--Select Location--</option>
-                                                                {% for location in locations %}
-                                                                <option value="{{location}}">{{location}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Find best recipies.... " ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                    </div>
+                            <div class="search-box tab-pane fade" id="chefs-recipie-corner">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-8 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label>
+                                                        <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <option value disabled>--Select Location--</option>
+                                                            {% for location in locations %}
+                                                            <option value="{{location}}">{{location}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </label>
                                                 </div>
-
-
+                                                <div class="col-sm-9 col-sm-offset-1">
+                                                    <input type="text" class="input-text full-width" placeholder="Find best recipies.... " ng-model="searchQueryValue" ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                </div>
                                             </div>
 
-
-                                            <div class=" col-sm-4 form-group ">
-                                                <button class="button btn-medium full-width uppercase dark-blue1 animated tada
-                                                                " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
-                                            </div>
 
                                         </div>
-                                    </form>
-                                </div>
+
+
+                                        <div class=" col-sm-4 form-group ">
+                                            <button class="button btn-medium full-width uppercase dark-blue1 animated tada
+                                                                " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div> -->
 
 
 
 
                             </div>
-                            <div class="text-center ">
-                                <a data-toggle="tab" href="#search" class="button btn-medium dark-orange
+                            <!-- <div class="text-center ">
+                            <a data-toggle="tab" href="#search" class="button btn-medium dark-orange
                                                         uppercase animated fadeInLeftBig " data-animation-type="fadeInLeftBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Order Online</a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="tab" href="#book-table" class="button btn-medium yellow
+                                style="animation-duration: 1s; visibility: visible; ">Order Online</a>
+                            &nbsp;&nbsp;
+                            <a data-toggle="tab" href="#book-table" class="button btn-medium yellow
                                                         uppercase animated fadeInUpBig " data-animation-type="fadeInUpBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Book a Table</a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="tab" href="#book-party" class="button btn-medium green uppercase
+                                style="animation-duration: 1s; visibility: visible; ">Book a Table</a>
+                            &nbsp;&nbsp;
+                            <a data-toggle="tab" href="#book-party" class="button btn-medium green uppercase
                                                         animated fadeInDownBig " data-animation-type="fadeInDownBig " style="animation-duration: 1s; visibility: visible; ">Book a Party</a>
-                                &nbsp;&nbsp;
-                                <a data-toggle="tab" href="#chefs-recipie-corner" class="button btn-medium sky-blue1
+                            &nbsp;&nbsp;
+                            <a data-toggle="tab" href="#chefs-recipie-corner" class="button btn-medium sky-blue1
                                                         uppercase animated fadeInRightBig " data-animation-type="fadeInRightBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Chef's Recipies</a>
-                                &nbsp;&nbsp;
+                                style="animation-duration: 1s; visibility: visible; ">Chef's Recipies</a>
+                            &nbsp;&nbsp;
 
-                            </div>
+                        </div> -->
                         </div>
                     </div>
                 </div>
@@ -1609,56 +1619,71 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-sm-3 ">
-                        <div class="filter-container card">
+                        <div class="filter-container card toggle-container filters-container">
                             <a type="button" class="navbar-toggle collapsed btn btn-default" data-toggle="collapse" data-target="#filter-menu" aria-expanded="false">
                                 <i class="fa fa-bars"></i>
                             </a>
                             <h2>Filters</h2>
                             <hr>
                             <div id="filter-menu" class="collapse navbar-collapse">
-                                <div class="cuisine filter">
-                                    <fieldset>
-                                        <legend>Cuisine</legend>
-                                        <span ng-cloak ng-repeat="cuisine_name in cuisine">
-                                            <input type="radio" name="cuisine" value="[[cuisine_name.cuisine]]" ng-click="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
-                                            <br>
-                                        </span>
+                                <div class="cuisine filter ">
+                                    <fieldset class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#cuisine-panel" class="collapsed" aria-expanded="false">Cuisine</a>
+                                        </h4>
+                                        <div id="cuisine-panel" class="panel-collapse collapse panel-content" aria-expanded="false" style="height: 0px;">
+                                            <span ng-cloak ng-repeat="cuisine_name in cuisine">
+                                                <input type="radio" name="cuisine" value="[[cuisine_name.cuisine]]" ng-click="getFilterRestaurant('cuisine',cuisine_name.cuisine)"> [[cuisine_name.cuisine]]
+                                                <br>
+                                            </span>
+                                        </div>
                                     </fieldset>
                                 </div>
 
                                 <div class="pricing filter ">
-                                    <fieldset>
-                                        <legend>Price</legend>
-
-                                        <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price">
-                                        <span>price range:
-                                            <span ng-cloak>[[filter.price]]</span>
-                                        </span>
-                                        <span>
-                                            <button class="btn btn-secondary pull-right" ng-click="priceFilter(filter.price)">Apply</button>
-                                        </span>
+                                    <fieldset class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#price-panel" class="collapsed" aria-expanded="true">Price</a>
+                                        </h4>
+                                        <div id="price-panel" class="panel-collapse collapse panel-content in" aria-expanded="true" style="height: 68px;">
+                                            <input type="range" max="[[max_price]]" min="[[min_price]]" ng-model="filter.price">
+                                            <span>price range:
+                                                <span ng-cloak>[[filter.price]]</span>
+                                            </span>
+                                            <span>
+                                                <button class="btn btn-secondary pull-right" ng-click="priceFilter(filter.price)">Apply</button>
+                                            </span>
+                                        </div>
                                         <br>
                                     </fieldset>
                                 </div>
 
                                 <div class="menu filter">
-                                    <fieldset>
-                                        <legend>Menu</legend>
-                                        <span ng-cloak ng-repeat="(menu_name, menu_value) in menu">
-                                            <input type="radio" name="menu" value="[[menu_name]]" ng-click="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
-                                            <br>
-                                        </span>
+                                    <fieldset class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#menu-panel" class="collapsed" aria-expanded="false">Menu</a>
+                                        </h4>
+                                        <div id="menu-panel" class="panel-collapse collapse panel-content" aria-expanded="false" style="height: 0px;">
+                                            <span ng-cloak ng-repeat="(menu_name, menu_value) in menu">
+                                                <input type="radio" name="menu" value="[[menu_name]]" ng-click="amenityAndMenuFilter('menu',menu_name)"> [[menu_name]]
+                                                <br>
+                                            </span>
+                                        </div>
                                     </fieldset>
                                 </div>
 
 
                                 <div class="book-a-party filter">
-                                    <fieldset>
-                                        <legend>More filters</legend>
-                                        <span ng-repeat="(amenities_name, amenities_value) in amenities" ng-cloak>
-                                            <input type="radio" name="amenities" value="[[amenities_name]]" ng-click="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
-                                            <br>
-                                        </span>
+                                    <fieldset class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#more-filter-panel" class="collapsed" aria-expanded="false">More filters</a>
+                                        </h4>
+                                        <div id="more-filter-panel" class="panel-collapse collapse panel-content" aria-expanded="false" style="height: 0px;">
+                                            <span ng-repeat="(amenities_name, amenities_value) in amenities" ng-cloak>
+                                                <input type="radio" name="amenities" value="[[amenities_name]]" ng-click="amenityAndMenuFilter('amenity',amenities_name)"> [[amenities_name]]
+                                                <br>
+                                            </span>
+                                        </div>
 
                                     </fieldset>
                                 </div>
@@ -1670,8 +1695,12 @@
 
                         <div class="">
                             <div class="">
-                                {% if searched_value and not searched_key  == 'category'%}
-                                <h2>Search for "{{searched_value}}"</h2>
+                                {% if searched_value and not searched_key == 'category'%}
+                                <h2>
+                                    {% if searched_key == 'name' %} Restaurants in {{user_location}} {% else %} {{searched_value}} in {{user_location}} {% endif
+                                    %}
+                                </h2>
+
                                 {% else%}
                                 <h2>Popular Restaurants</h2>
                                 {% endif %}
@@ -1688,7 +1717,7 @@
                                                     </a>
                                                 </figure>
                                                 <div class="details">
-                                                    <span class="price" >
+                                                    <span class="price">
                                                         <small>Cost for 2:</small>
                                                         ₹[[restaurant.price]]
                                                     </span>
@@ -1699,11 +1728,14 @@
                                                         <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="[[restaurant.rating]] stars">
                                                             <span style="width: [[restaurant.rating/0.5*10]]%;" class="five-stars"></span>
                                                         </div>
-                                                        <!-- <span class="review">270 reviews</span> -->
+                                                        <span class="review"> rating : [[restaurant.rating]]</span>
                                                     </div>
                                                     <p class="description">
-                                                        <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);"
-                                                            role="button" data-toggle="modal" data-target="#show-map">[[restaurant.address]]</div>
+                                                        <div>
+                                                            Type : [[categories_data_reverse[restaurant.category] ]]
+                                                        </div>
+                                                        <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
+                                                            data-toggle="modal" data-target="#show-map">[[restaurant.address]]</div>
                                                         <span>Cuisine:</span>
                                                         <span ng-repeat="cuisine in restaurant.cuisines">
                                                             <strong ng-cloak>[[cuisine.cuisine]]
@@ -1724,8 +1756,8 @@
 
 
                                         </div>
-                                        
-                                        
+
+
 
                                         <div class="col-md-12" ng-show="!restaurants.length">
                                             <article class="box" style="height:200px">
@@ -1744,7 +1776,9 @@
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background:#ff6000;">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title" style="color:white;">[[restaurantName]]</h4>
+                                                    <h4 class="modal-title" style="color:white;">[[restaurantName]] menu </br>
+                                                        <small style="color:white;">By Travel Beans</small>
+                                                    </h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <table class="table">
@@ -1753,6 +1787,7 @@
                                                                 <th>Item</th>
                                                                 <th>Half</th>
                                                                 <th>Full</th>
+                                                                <th style="text-align: center;">Add to cart</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -1761,14 +1796,15 @@
                                                                 <td>[[dish.dish]]</td>
                                                                 <td>[[dish.half_price]]</td>
                                                                 <td>[[dish.full_price]]</td>
+                                                                <td><button style="width:100%;" class="button btn-small yellow">add</button></td>
                                                             </tr>
 
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="modal-footer">
+                                                <!-- <div class="modal-footer">
                                                     <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button>
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                         </div>
@@ -1976,7 +2012,7 @@
 
 
 
-                        {% else %}
+                        {% elif args.dish %}
 
 
                         <div class="card">
@@ -1992,6 +2028,70 @@
                         </div>
 
 
+                        {% else %}
+                        <div class="card">
+                            <small>SPONSORED & TRENDING</small>
+                            <div class="row car listing-style1">
+                                {% for featured_restaurant in featured_restaurant_data %}
+                                <article class="box">
+                                    <figure>
+                                        <a title="" href="/restaurant/{{featured_restaurant.id}}">
+                                            <img alt="" src="{{featured_restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>price for two</small>₹{{featured_restaurant.price}}</span>
+                                        <h4 class="box-title">{{featured_restaurant.name}}
+                                            <small>{{featured_restaurant.rating}}
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </small>
+                                        </h4>
+                                        <p class="mile">
+                                            <span class="skin-color">Cuisine:</span>
+                                            {% for cuisine in featured_restaurant.cuisines %}
+                                            <span>
+                                                {{cuisine.cuisine}}
+                                            </span>
+                                            {% if loop.index != featured_restaurant.cuisines|length %}
+                                            <span>,</span>
+                                            {% endif %} {% endfor %}
+                                        </p>
+
+                                    </div>
+                                </article>
+                                {% endfor %} {% for trending_restaurant in trending_restaurant_data %}
+                                <article class="box">
+                                    <figure>
+                                        <a title="" href="/restaurant/{{trending_restaurant.id}}">
+                                            <img alt="" src="{{trending_restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>price for two</small>₹{{trending_restaurant.price}}</span>
+                                        <h4 class="box-title">{{trending_restaurant.name}}
+                                            <small>{{trending_restaurant.rating}}
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </small>
+                                        </h4>
+                                        <p class="mile">
+                                            <span class="skin-color">Cuisine:</span>
+                                            {% for cuisine in trending_restaurant.cuisines %}
+                                            <span>
+                                                {{cuisine.cuisine}}
+                                            </span>
+                                            {% if loop.index != trending_restaurant.cuisines|length %}
+                                            <span>,</span>
+                                            {% endif %} {% endfor %}
+                                        </p>
+
+                                    </div>
+                                </article>
+                                {% endfor %}
+                            </div>
+
+                        </div>
 
                         {% endif %}
                     </div>
@@ -1999,241 +2099,11 @@
             </div>
 
         </section>
+        {% include '/restaurant/components/footer.html' %}
 
 
 
-        <footer id="footer">
-            <div class="footer-wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-3">
-                            <h2>Discover</h2>
-                            <ul class="discover triangle hover row">
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Safety</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">About</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Travelo Picks</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Latest Jobs</a>
-                                </li>
-                                <li class="active col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Mobile</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Press Releases</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Why Host</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Blog Posts</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Social Connect</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Help Topics</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Site Map</a>
-                                </li>
-                                <li class="col-xs-6">
-                                    <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Policies</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <h2>Travel News</h2>
-                            <ul class="travel-news">
-                                <li>
-                                    <div class="thumb">
-                                        <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                                            <img src="/Home Page With Chefs Recipies_files/news01.png" alt="" width="63" height="63">
-                                        </a>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="s-title">
-                                            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Amazing Places</a>
-                                        </h5>
-                                        <p>Purus ac congue arcu cursus ut vitae pulvinar massaidp.</p>
-                                        <span class="date">25 Sep, 2013</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="thumb">
-                                        <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                                            <img src="/Home Page With Chefs Recipies_files/news02.png" alt="" width="63" height="63">
-                                        </a>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="s-title">
-                                            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">Travel Insurance</a>
-                                        </h5>
-                                        <p>Purus ac congue arcu cursus ut vitae pulvinar massaidp.</p>
-                                        <span class="date">24 Sep, 2013</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <h2>Mailing List</h2>
-                            <p>Sign up for our mailing list to get latest updates and offers.</p>
-                            <br>
-                            <div class="icon-check">
-                                <input type="text" class="input-text full-width" placeholder="your email">
-                            </div>
-                            <br>
-                            <span>We respect your privacy</span>
-                        </div>
-                        <div class="col-sm-6 col-md-3">
-                            <h2>About Travelo</h2>
-                            <p>Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore
-                                elerisque.
-                            </p>
-                            <br>
-                            <address class="contact-details">
-                                <span class="contact-phone">
-                                    <i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
-                                <br>
-                                <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" class="contact-email">help@travelo.com</a>
-                            </address>
-                            <ul class="social-icons clearfix">
-                                <li class="twitter">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="twitter">
-                                        <i class="soap-icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="googleplus">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="googleplus">
-                                        <i class="soap-icon-googleplus"></i>
-                                    </a>
-                                </li>
-                                <li class="facebook">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="facebook">
-                                        <i class="soap-icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="linkedin">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="linkedin">
-                                        <i class="soap-icon-linkedin"></i>
-                                    </a>
-                                </li>
-                                <li class="vimeo">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="vimeo">
-                                        <i class="soap-icon-vimeo"></i>
-                                    </a>
-                                </li>
-                                <li class="dribble">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="dribble">
-                                        <i class="soap-icon-dribble"></i>
-                                    </a>
-                                </li>
-                                <li class="flickr">
-                                    <a title="" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" data-toggle="tooltip" data-original-title="flickr">
-                                        <i class="soap-icon-flickr"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="bottom gray-area">
-                <div class="container">
-                    <div class="logo pull-left">
-                        <a href="http://www.soaptheme.net/html/travelo/index.html" title="Travelo - home">
-                            <img src="/Home Page With Chefs Recipies_files/logo.png" alt="Travelo HTML5 Template">
-                        </a>
-                    </div>
-                    <div class="pull-right">
-                        <a id="back-to-top" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#" class="animated" data-animation-type="bounce">
-                            <i class="soap-icon-longarrow-up circle"></i>
-                        </a>
-                    </div>
-                    <div class="copyright pull-right">
-                        <p>© 2014 Travelo</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
-    
-    <label for="footer-style">footer style</label>
-    <div class="selector">
-        <select class="full-width" name="footer-style" id="footer-style">
-            <option value="">Default Style</option>
-            <option value="style1">Style1</option>
-            <option value="style2">Style2</option>
-            <option value="style3">Style3</option>
-            <option value="style4">Style4</option>
-            <option value="style5">Style5</option>
-            <option value="style6">Style6</option>
-        </select>
-        <span class="custom-select full-width">Default Style</span>
-    </div>
-    <label>design skins</label>
-    <ul class="design-skins column-5 clearfix">
-        <li class="light-blue">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="purple">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="orange active">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="light-orange">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="sea-blue">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="sky-blue">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="dark-orange">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="dark-blue">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="light-yellow">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-        <li class="red">
-            <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">
-                <i class="soap-icon-check-1"></i>
-            </a>
-        </li>
-    </ul>
-    <a class="button full-width btn-medium green uppercase" href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">apply settings</a>
-    </div>
-    </div> -->
-
-
     <!-- Javascript -->
     <script type="text/javascript" src="/Home Page With Chefs Recipies_files/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/Home Page With Chefs Recipies_files/jquery.noconflict.js"></script>

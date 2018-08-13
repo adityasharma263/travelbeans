@@ -386,6 +386,50 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       "tea_shop": 40
     }
 
+
+    $scope.categories_data_reverse = {
+      "1": "bistro",
+      "2": "ethnic",
+      "3": "fine_dining",
+      "4": "trattoria",
+      "5": "teppanyaki_ya",
+      "6": "osteria",
+      "7": "drive_in",
+      "8": "drive_thru",
+      "9": "pizzeria",
+      "10": "taverna",
+      "11": "fast_casual",
+      "12": "pop_up",
+      "13": "Café",
+      "14": "iner",
+      "15": "ramen_ya",
+      "16": "teahouse",
+      "17": "fast_food",
+      "18": "buffet",
+      "19": "cafeteria",
+      "20": "luncheonette",
+      "21": "tapas_bar",
+      "22": "steakhouse",
+      "23": "all_you_can_eat_restaurant",
+      "24": "kosher",
+      "25": "dinner_in_the_Sky",
+      "26": "dark_restaurant",
+      "27": "a_la_carte",
+      "28": "gastropub",
+      "29": "brasserie",
+      "30": "chiringuito",
+      "31": "food_truck",
+      "32": "churrascaria",
+      "33": "food_court",
+      "34": "restrobars",
+      "35": "street_stalls",
+      "36": "theme_resturants",
+      "37": "coffee_shop",
+      "38": "coffee_house",
+      "39": "cabaret",
+      "40": "tea_shop"
+    }
+
   }])
 
   // ============= Dashboard Controller =====================

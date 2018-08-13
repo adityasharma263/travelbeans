@@ -6,6 +6,7 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 import datetime
 from geopy.geocoders import Nominatim
+import json
 
 @app.route('/', methods=['GET'])
 def home():
@@ -86,9 +87,22 @@ def restaurant_set_location_cookie():
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
     location_from_cookie = request.cookies.get("location",None)
-    if(not location_from_cookie):
+    if not location_from_cookie:
         return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
-    return render_template("restaurant/collections.html", user_location = location_from_cookie)
+
+    restaurant_url =str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
+
+    collection_data = requests.get(restaurant_url, params={"city" : "Delhi"}).json()['result']['restaurants']
+
+    collections = {}
+
+    for restaurnt in  collection_data:
+        for collection in restaurnt['collections']:
+            collections[collection['collection']] = collection
+    
+    print(collections)
+    
+    return render_template("restaurant/collections.html", user_location = location_from_cookie, collections=collections)
 
 @app.route("/restaurant/location")
 def restaurant_location():
