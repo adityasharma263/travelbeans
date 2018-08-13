@@ -39,9 +39,11 @@ def cab_api():
     else:
         cab = request.json
         deals = cab.get("deals", None)
+        images = cab.get("images", None)
         amenities = cab.get("amenities", None)
         cab.pop('amenities', None)
         cab.pop('deals', None)
+        cab.pop('images', None)
         cab_post = Cab(**cab)
         cab_post.save()
         for deal in deals:
@@ -49,9 +51,24 @@ def cab_api():
                 assoc_post = CabDealAssociation(cab_id=cab_post.id, deal_id=deal.get("deal_id", None))
                 assoc_post.save()
             else:
-                deal_post = CabDeal(**deal)
-                cab_post.deals.append(deal_post)
-                deal_post.save()
+                if deal.get("tax", None):
+                    tax = deal.get("tax", None)
+                    deal.pop('tax', None)
+                    deal_post = CabDeal(**deal)
+                    cab_post.deals.append(deal_post)
+                    deal_post.save()
+                    tax_post = CabTax(**tax)
+                    deal_post.tax = tax_post
+                    tax_post.save()
+                else:
+                    deal_post = CabDeal(**deal)
+                    cab_post.deals.append(deal_post)
+                    deal_post.save()
+        for image in images:
+            image["cab_id"] = cab_post.id
+            image_post = CabImage(**image)
+            cab_post.images.append(image_post)
+            image_post.save()
         amenities["cab_id"] = cab_post.id
         amenities_post = CabAmenity(**amenities)
         cab_post.amenities = amenities_post
