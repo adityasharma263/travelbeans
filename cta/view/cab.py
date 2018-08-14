@@ -1,12 +1,11 @@
 from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser
 from cta import app, db
 from flask import jsonify, request
+from cta.lib.cab_fare import CabFare
 from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema, CabUserSchema
 import datetime
 from itertools import cycle
 import simplejson as json
-from math import sin, cos, sqrt, atan2, radians
-
 
 
 
@@ -17,6 +16,15 @@ def cab_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
+        cab_type = request.args.get('cab_type', None)
+        source_lat = request.args.get('source_lat', None)
+        source_lon = request.args.get('source_lon', None)
+        destination_lat = request.args.get('destination_lat', None)
+        destination_lon = request.args.get('destination_lon', None)
+        args.pop('source_lat', None)
+        args.pop('source_lon', None)
+        args.pop('destination_lat', None)
+        args.pop('destination_lon', None)
         min_base_fare = request.args.get('min_base_fare', None)
         max_base_fare = request.args.get('max_base_fare', None)
         min_total_fare = request.args.get('min_total_fare', None)
@@ -25,10 +33,10 @@ def cab_api():
         args.pop('max_base_fare', None)
         args.pop('min_total_fare', None)
         args.pop('max_total_fare', None)
-        args.pop('page', None)
-        args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 20))
+        args.pop('page', None)
+        args.pop('per_page', None)
         q = db.session.query(Cab).outerjoin(Cab.amenities).outerjoin(Cab.deals)
         for key in args:
             if key in Cab.__dict__:
@@ -45,21 +53,9 @@ def cab_api():
             q = q.filter(Cab.rating >= rating)
         data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
-        # approximate radius of earth in km
-        R = 6373.0
-
-        lat1 = radians(52.2296756)
-        lon1 = radians(21.0122287)
-        lat2 = radians(52.406374)
-        lon2 = radians(16.9251681)
-
-        dlon = lon2 - lon1
-        dlat = lat2 - lat1
-
-        a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-        c = 2 * atan2(sqrt(a), sqrt(1 - a))
-
-        distance = R * c
+        total_fare = CabFare.fare_calculation(source_lat, source_lon, destination_lat, destination_lon, cab_type)
+        for cab in result['cab']:
+            cab['total_fare'] = total_fare
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
         cab = request.json
