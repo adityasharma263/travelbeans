@@ -1736,6 +1736,8 @@
                                                         </div>
                                                         <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
                                                             data-toggle="modal" data-target="#show-map">[[restaurant.address]]</div>
+
+                                                            <div>open at : [[restaurant.opening_time.substring(0,restaurant.opening_time.length -3)]] - [[restaurant.closing_time.substring(0,restaurant.opening_time.length -3)]]</div>
                                                         <span>Cuisine:</span>
                                                         <span ng-repeat="cuisine in restaurant.cuisines">
                                                             <strong ng-cloak>[[cuisine.cuisine]]
@@ -1743,6 +1745,9 @@
                                                             </strong>
                                                         </span>
 
+                                                        <div class="restaurant-address">Amenities :
+                                                        <span ><span ng-repeat="(key , value) in restaurant.amenities"> <span ng-if="value">[[key]], </span> </span> </span>
+                                                                    </div>
                                                     </p>
                                                     <div class="action">
                                                         <a class="button btn-small green" href="javascript:;" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
@@ -1776,7 +1781,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header" style="background:#ff6000;">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title" style="color:white;">[[restaurantName]] menu </br>
+                                                    <h4 class="modal-title" style="color:white;">[[restaurantName]] - MENU CARD </br>
                                                         <small style="color:white;">By Travel Beans</small>
                                                     </h4>
                                                 </div>

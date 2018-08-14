@@ -591,15 +591,15 @@
                                     <a data-toggle="tab" href="#food-tab" aria-expanded="false">Food</a>
                                 </li>
                                 <li class="">
-                                    <a data-toggle="tab" href="#menu-tab" aria-expanded="false">Menu</a>
+                                    <a data-toggle="tab" href="#menu-tab" data-toggle="tab">Menu</a>
                                 </li>
 
                                 <li class="pull-right">
-                                    <a class="button btn-small yellow-bg white-color" href="#">Street View</a>
+                                    <a class="button btn-small yellow-bg white-color" data-toggle="tab" data-toggle="tab" href="#show-restaurant-street">Street View</a>
                                 </li>
 
                                 <li class="pull-right">
-                                    <a class="button btn-small red-bg white-color" href="#">Map</a>
+                                    <a class="button btn-small red-bg white-color" data-toggle="tab" data-toggle="tab" href="#map-tab">Map</a>
                                 </li>
 
                                 <li class="pull-right">
@@ -891,6 +891,12 @@
                                     </div>
 
                                 </div>
+                                <div id="map-tab" class="tab-pane fade">
+                                    <div id="show-restaurant-map" class="restuarant-map"></div>
+                                </div>
+                                <div id="street-tab" class="tab-pane fade">
+                                        <div id="show-restaurant-street" class="restuarant-street"></div>
+                                    </div>                                        
                             </div>
                         </div>
 
@@ -1229,12 +1235,13 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="hotel-availability">
-                                    <h2>call at
+                                    <div class="main-rating table-wrapper full-width hidden-table-sms intro" >
+                                    <h2>Reserve or Book Your Table at : 
                                         <strong>
                                             <a href="tel:{{restaurant_detail.phone}}">{{restaurant_detail.phone}}</a>
                                         </strong>
                                     </h2>
-
+                                </div>
 
 
                                 </div>
@@ -1534,13 +1541,13 @@
                                     <a href="#" class="button full-width btn-large">LOAD MORE REVIEWS</a>
                                 </div>
                                 <div class="tab-pane fade" id="hotel-faqs">
-
-                                    <h2>call at
+                                    <div class="main-rating table-wrapper full-width hidden-table-sms intro">
+                                    <h2>Book a party at
                                         <strong>
                                             <a href="tel:{{restaurant_detail.phone}}">{{restaurant_detail.phone}}</a>
                                         </strong>
                                     </h2>
-
+                                </div>
 
                                 </div>
                                 <div class="tab-pane fade" id="hotel-things-todo">
@@ -1570,9 +1577,9 @@
                                 <div class="tab-pane fade" id="hotel-write-review">
                                     <div class="main-rating table-wrapper full-width hidden-table-sms intro">
 
-                                        <h2>call at
+                                        <h2>
                                             <strong>
-                                                <a href="tel:{{restaurant_detail.phone}}">{{restaurant_detail.phone}}</a>
+                                                    Order Online at : <a href="tel:{{restaurant_detail.phone}}">{{restaurant_detail.phone}}</a>
                                             </strong>
                                         </h2>
                                     </div>
