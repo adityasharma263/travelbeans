@@ -4,7 +4,9 @@ __author__ = 'aditya'
 from cta import app
 from flask import render_template, request, make_response, jsonify, abort, redirect
 import requests
-
+import datetime
+from geopy.geocoders import Nominatim
+import json
 
 @app.route('/', methods=['GET'])
 def home():
@@ -61,16 +63,16 @@ def collection5():
 #======================== RESTAURANT =============================
 
 
-@app.route("/restaurant", methods=['GET'])
-def restaurant():
-    check_location = request.cookies.get("location")
+# @app.route("/restaurant", methods=['GET'])
+# def restaurant():
+#     check_location = request.cookies.get("location")
     
-    if not check_location:
-        print("in the first cond")
-        locations = requests.get(url=str(app.config["DOMAIN_URL"]) +"/restaurant/location").json()['result']['locations']
-        return render_template("restaurant/restaurant_choose_location.html", locations=locations)
-    else:
-        return redirect(str(app.config["DOMAIN_URL"]) +"/restaurant/"+check_location)
+#     if not check_location:
+#         print("in the first cond")
+#         locations = requests.get(url=str(app.config["DOMAIN_URL"]) +"/restaurant/location").json()['result']['locations']
+#         return render_template("restaurant/restaurant_choose_location.html", locations=locations)
+#     else:
+#         return redirect(str(app.config["DOMAIN_URL"]) +"/restaurant/"+check_location)
     
 @app.route("/restaurant/set-value", methods=['POST'])
 def restaurant_set_location_cookie():
@@ -78,16 +80,29 @@ def restaurant_set_location_cookie():
     location = request_data.get("location", None)
 
     resp = make_response()
-    resp.set_cookie("location", location, max_age=(60 * 60 * 24 * 90))
+    resp.set_cookie("location", location, expires=datetime.datetime.now() + datetime.timedelta(days=30), max_age=60*60*24*365*2)
     return resp
 
 
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
     location_from_cookie = request.cookies.get("location",None)
-    if(not location_from_cookie):
+    if not location_from_cookie:
         return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
-    return render_template("restaurant/collections.html", user_location = location_from_cookie)
+
+    restaurant_url =str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
+
+    collection_data = requests.get(restaurant_url, params={"city" : "Delhi"}).json()['result']['restaurants']
+
+    collections = {}
+
+    for restaurnt in  collection_data:
+        for collection in restaurnt['collections']:
+            collections[collection['collection']] = collection
+    
+    print(collections)
+    
+    return render_template("restaurant/collections.html", user_location = location_from_cookie, collections=collections)
 
 @app.route("/restaurant/location")
 def restaurant_location():
@@ -415,10 +430,10 @@ def restaurant_search():
     if(not location_from_cookie):
         return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
     searched_value = ''
-    # searched_key  = ''
+    searched_key  = ''
     if args:
         searched_value = list(args.values())[0]
-        # searched_key = list(args.keys())[0]
+        searched_key = list(args.keys())[0]
     cuisine = args.get("cuisine", None)
     category = args.get("category", None)
     args['collection'] = 'trending'
@@ -447,7 +462,7 @@ def restaurant_search():
     trending_restaurant_data = requests.get(url=restaurant_api_url, params=args).json()['result']['restaurants']
 
     
-    return render_template("restaurant/restaurant_search.html", locations=locations, user_location = location_from_cookie, searched_value=searched_value, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
+    return render_template("restaurant/restaurant_search.html", locations=locations, user_location = location_from_cookie, searched_value=searched_value, searched_key=searched_key, trending_restaurant_data=trending_restaurant_data, args=args, featured_restaurant_data=featured_restaurant_data, cuisine_data=cuisine_data)
 
 
 @app.route("/restaurant/<int:restaurant_id>", methods=['GET'])
@@ -470,6 +485,49 @@ def restaurant_detail(restaurant_id):
         "city" : location_from_cookie
     }
 
+    categories_data_reverse = {
+      "1": "bistro",
+      "2": "ethnic",
+      "3": "fine_dining",
+      "4": "trattoria",
+      "5": "teppanyaki_ya",
+      "6": "osteria",
+      "7": "drive_in",
+      "8": "drive_thru",
+      "9": "pizzeria",
+      "10": "taverna",
+      "11": "fast_casual",
+      "12": "pop_up",
+      "13": "Café",
+      "14": "iner",
+      "15": "ramen_ya",
+      "16": "teahouse",
+      "17": "fast_food",
+      "18": "buffet",
+      "19": "cafeteria",
+      "20": "luncheonette",
+      "21": "tapas_bar",
+      "22": "steakhouse",
+      "23": "all_you_can_eat_restaurant",
+      "24": "kosher",
+      "25": "dinner_in_the_Sky",
+      "26": "dark_restaurant",
+      "27": "a_la_carte",
+      "28": "gastropub",
+      "29": "brasserie",
+      "30": "chiringuito",
+      "31": "food_truck",
+      "32": "churrascaria",
+      "33": "food_court",
+      "34": "restrobars",
+      "35": "street_stalls",
+      "36": "theme_resturants",
+      "37": "coffee_shop",
+      "38": "coffee_house",
+      "39": "cabaret",
+      "40": "tea_shop"
+    }
+
 
     restaurant_data = requests.get(url=restaurant_api_url, params=params).json()['result']['restaurants'][0]
     trending_restaurant_data = requests.get(url=restaurant_api_url, params=trending_params).json()['result']['restaurants']
@@ -477,17 +535,41 @@ def restaurant_detail(restaurant_id):
     if restaurant_data['amenities']:
         restaurant_data['amenities'].pop("id", None)
         restaurant_data['amenities'].pop("restaurant", None)
+    if restaurant_data['category']:
+        print(restaurant_data['category'])
+        restaurant_data['category'] = categories_data_reverse[str(restaurant_data['category'])]
     return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data, trending_restaurant_data=trending_restaurant_data, featured_restaurant_data=featured_restaurant_data)
 
 
-@app.route("/restaurant/<string:location>")
-def restaurant_home(location):
+@app.route("/restaurant", methods=['GET'])
+def restaurant_home():
+    location  = request.cookies.get("location")
+    args  = request.args.to_dict()
     locations = requests.get(url=str(app.config["DOMAIN_URL"]) + "/restaurant/location").json()['result']['locations']
-    print("test location")
+    print("test location\n\n")
+    print(args)
+
+    if args and args['latitude'] and args['longitude']:
+
+        geolocator = Nominatim(user_agent = "travel-beans")
+
+        location = geolocator.reverse(args['latitude']+", "+args['longitude'])
+
+        state = location.raw["address"]['state']
+        resp =  make_response()
+        resp.set_cookie('location', state, expires=datetime.datetime.now() + datetime.timedelta(days=365))
+        
+        print("state =",state)
+
+        return resp
     
-    if not location in locations :
-        resp = make_response(redirect("/restaurant"))
-        resp.set_cookie('location', expires=0)
+    elif not location in locations :
+        print(location)
+        resp =  make_response(render_template("restaurant/restaurant.html", user_location = None, locations=locations, get_location = True))
+        # resp.set_cookie('location', location, expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=60*60*24*365*2)
+
+        print("\n================COOKIE DELETED!!===========\n")
+
         return resp
     else:
 
@@ -503,7 +585,7 @@ def restaurant_home(location):
         print(cuisine_data)
         collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
         resp =  make_response(render_template("restaurant/restaurant.html", user_location = location, locations=locations, cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data))
-        resp.set_cookie('location', location, max_age=(60 * 60 * 24 * 90))
+        resp.set_cookie('location', location, expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=60*60*24*365*2)
         return resp
     
 

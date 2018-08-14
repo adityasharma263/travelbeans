@@ -62,10 +62,73 @@
     color: #2d3e52;
     font-weight: 300;
     line-height: 1.25em;
+    text-align: center;
 }
 
 .restaurant-type{
     background: #fff;
     padding: 30px;
     text-transform: uppercase;
+}
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 599px) { 
+    .search-suggestion-box{
+        top: 58%;
+        width: 83%;
+        left: 59px;
+    
+}
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) { 
+    .search-suggestion-box{
+    top: 70%;
+    width: 570px;
+    left: 86px;
+    
+}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) { 
+    .search-suggestion-box{
+        top: 53%;
+        width: 358px;
+        left: 101px;
+    
+}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) { 
+    .search-suggestion-box{
+    top: 70%;
+    width: 570px;
+    left: 86px;
+    
+}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) { 
+    .search-suggestion-box{
+        top: 4%;
+        width: 482px;
+        left: 249px;
+    
+}
+}
+
+.rating-container{
+    background-color: #5BA829;
+    border-radius: 10px;
+    padding: 5px;
+    color:#fff;
+    font-weight: 700;
+    
+    
 }

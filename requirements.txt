@@ -14,4 +14,5 @@ numpy==1.13.1
 simplejson==3.16.0
 xlrd==1.1.0
 graphene>=2.0
+geopy==1.16.0
 psycopg2>=2.6.2

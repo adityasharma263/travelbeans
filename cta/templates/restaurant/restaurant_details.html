@@ -562,6 +562,9 @@
 <body jstcache="0">
 
     <div id="page-wrapper" jstcache="0">
+            <header id="header" class="navbar-static-top">
+            {% include "/restaurant/components/orange_headbar.html" %}    
+            </header>        
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
@@ -582,7 +585,7 @@
                         <div class="tab-container style1" id="hotel-main-content" jstcache="0">
                             <ul class="tabs">
                                 <li class="active">
-                                    <a data-toggle="tab" href="#photos-tab" aria-expanded="true">Abience</a>
+                                    <a data-toggle="tab" href="#photos-tab" aria-expanded="true">Ambience</a>
                                 </li>
                                 <li class="">
                                     <a data-toggle="tab" href="#food-tab" aria-expanded="false">Food</a>
@@ -600,7 +603,7 @@
                                 </li>
 
                                 <li class="pull-right">
-                                    <a class="button btn-small green-bg white-color" href="#">Share Details</a>
+                                    <a class="button btn-small green-bg white-color" href="javascript:;" data-toggle="modal" data-target="#shareDetail" >Share Details</a>
                                 </li>
                             </ul>
                             <div class="tab-content" jstcache="0">
@@ -609,11 +612,11 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
-                                                {% for images in restaurant_detail.images %}
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==1 %}
                                                 <li style="width: 870px; float: left; display: block;" class="">
                                                     <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                {% endfor %}
+                                                {% endif %} {% endfor %}
                                             </ul>
                                         </div>
 
@@ -671,11 +674,12 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                                                {% for images in restaurant_detail.images %}
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==1 %}
+
                                                 <li style="width: 870px; float: left; display: block;" class="">
                                                     <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                {% endfor %}
+                                                {% endif %} {% endfor %}
                                             </ul>
                                         </div>
                                         <ol class="flex-control-nav flex-control-paging">
@@ -698,38 +702,194 @@
                                 </div>
 
 
-                                <div id="food-tab" class="tab-pane fade" style="height: 522px; position: relative; overflow: hidden;">
-                                    <div class="flexslider-food">
-                                        <ul class="slides">
-                                            {%  for images in restaurant_detail.images %}
-                                            {% if images.image_type==2 %}
-                                            <li data-thumb="{{images.image_url}}">
-                                                <img src="{{images.image_url}}" />
+                                <div id="food-tab" class="tab-pane fade">
+                                    <div class="photo-gallery style1" data-animation="slide" data-sync="#food-tab .image-carousel">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==2 %}
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
+                                                </li>
+                                                {% endif %} {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="">1</a>
                                             </li>
-                                            {% endif %}
-                                            {% endfor%}
-                                            
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-active">3</a>
+                                            </li>
+                                            <li>
+                                                <a class="">4</a>
+                                            </li>
+                                            <li>
+                                                <a class="">5</a>
+                                            </li>
+                                            <li>
+                                                <a class="">6</a>
+                                            </li>
+                                            <li>
+                                                <a class="">7</a>
+                                            </li>
+                                            <li>
+                                                <a class="">8</a>
+                                            </li>
+                                            <li>
+                                                <a class="">9</a>
+                                            </li>
+                                            <li>
+                                                <a class="">10</a>
+                                            </li>
+                                            <li>
+                                                <a class="">11</a>
+                                            </li>
+                                            <li>
+                                                <a class="">12</a>
+                                            </li>
+                                            <li>
+                                                <a class="">13</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#food-tab .photo-gallery">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==2 %}
+
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
+                                                </li>
+                                                {% endif %} {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="flex-active">1</a>
+                                            </li>
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
 
 
-                                <div id="menu-tab" class="tab-pane fade" style="height: 500px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;"
-                                    jstcache="0">
-                                    <div class="flexslider-menu">
-                                            <ul class="slides">
-                                                {%  for images in restaurant_detail.images %}
-                                                {% if images.image_type==3 %}
-                                                <li data-thumb="{{images.image_url}}">
-                                                    <img src="{{images.image_url}}" />
+                                <div id="menu-tab" class="tab-pane fade" jstcache="0">
+                                    <div class="photo-gallery style1" data-animation="slide" data-sync="#menu-tab .image-carousel">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==3 %}
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                {% endif %}
-                                                {% endfor%}
-                                                
+                                                {% endif %} {% endfor %}
                                             </ul>
                                         </div>
 
-                                    
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="">1</a>
+                                            </li>
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-active">3</a>
+                                            </li>
+                                            <li>
+                                                <a class="">4</a>
+                                            </li>
+                                            <li>
+                                                <a class="">5</a>
+                                            </li>
+                                            <li>
+                                                <a class="">6</a>
+                                            </li>
+                                            <li>
+                                                <a class="">7</a>
+                                            </li>
+                                            <li>
+                                                <a class="">8</a>
+                                            </li>
+                                            <li>
+                                                <a class="">9</a>
+                                            </li>
+                                            <li>
+                                                <a class="">10</a>
+                                            </li>
+                                            <li>
+                                                <a class="">11</a>
+                                            </li>
+                                            <li>
+                                                <a class="">12</a>
+                                            </li>
+                                            <li>
+                                                <a class="">13</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#menu-tab .photo-gallery">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==3 %}
+
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
+                                                </li>
+                                                {% endif %} {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="flex-active">1</a>
+                                            </li>
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -816,7 +976,100 @@
                             </div>
                         </div>
 
+                        <div class="modal fade" id="shareDetail" role="dialog">
+                            <div class="modal-dialog">
 
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h2 class="modal-title">Share Detail</h2>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="share-buttons">
+                                            <!-- Buffer -->
+                                            <a href="https://bufferapp.com/add?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}" target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
+                                            </a>
+
+                                            <!-- Digg -->
+                                            <a href="http://www.digg.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}" target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
+                                            </a>
+
+                                            <!-- Email -->
+                                            <a href="mailto:?Subject=travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 http://travel-beans.ap-south-1.elasticbeanstalk.com/">
+                                                <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+                                            </a>
+
+                                            <!-- Facebook -->
+                                            <a href="http://www.facebook.com/sharer.php?u=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}"
+                                                target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                                            </a>
+
+                                            <!-- Google+ -->
+                                            <a href="https://plus.google.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}" target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                                            </a>
+
+                                            <!-- LinkedIn -->
+                                            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}"
+                                                target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+                                            </a>
+
+                                            <!-- Print -->
+                                            <a href="javascript:;" onclick="window.print()">
+                                                <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+                                            </a>
+
+                                            <!-- Reddit -->
+                                            <a href="http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk"
+                                                target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+                                            </a>
+
+                                            <!-- StumbleUpon-->
+                                            <a href="http://www.stumbleupon.com/submit?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com"
+                                                target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
+                                            </a>
+
+                                            <!-- Tumblr-->
+                                            <a href="http://www.tumblr.com/share/link?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}&amp;title=travel-beans.ap-south-1.elasticbeanstalk.com"
+                                                target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
+                                            </a>
+
+                                            <!-- Twitter -->
+                                            <a href="https://twitter.com/share?url=http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}&amp;text=travel-beans%20ap-south-1%20elasticbeanstalk.com&amp;hashtags=travel-beans.ap-south-1.elasticbeanstalk.com"
+                                                target="_blank">
+                                                <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                                            </a>
+                                            <br>
+                                            <div></div>
+                                            <div class="col-sm-6">
+                                                <input class="form-control" type="text" value="http://travel-beans.ap-south-1.elasticbeanstalk.com/restaurant/{{restaurant_detail.id}}"
+                                                    id="myInput">
+                                            </div>
+                                            <!-- <div class="tooltip"> -->
+                                            <button class="btn btn-default" onclick="copyUrl()">
+                                                <span data-toggle="tooltip" title="Copy to clipboard!" id="myTooltip">
+                                                    Copy text
+
+                                                </span>
+                                            </button>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
 
 
@@ -902,8 +1155,8 @@
                                         </div> -->
 
                                         <div class="table-cell col-sm-4">
-                                            <span class="restaurant-rating">3.9/5.0</span>
-                                            <div class="five-stars-container">
+                                            <span class="restaurant-rating">{{restaurant_detail.rating}}/5.0</span>
+                                            <div class="five-stars-container" style="margin-left: 17%;font-size: 28px;">
                                                 <div class="five-stars" style="width: 78%;"></div>
                                             </div>
                                             <a href="#" class="goto-writereview-pane button green btn-small full-width">WRITE A REVIEW</a>
@@ -914,7 +1167,7 @@
                                                 <div class="col-sm-5 col-lg-4 features table-cell">
                                                     <ul>
                                                         <li>
-                                                            <label>Restaurant type:</label> {{restaurant_detail.rating}} star</li>
+                                                            <label>Restaurant type:</label> {{restaurant_detail.category}}</li>
 
 
 
@@ -923,6 +1176,44 @@
 
                                                         <li>
                                                             <label>Address:</label> {{restaurant_detail.address}}</li>
+
+                                                        <li>
+                                                            <label>Collction :</label> 
+                                                            {% for collection in  restaurant_detail.collections%}
+                                                            {% if not loop.counter == 1 %}
+                                                                ,
+                                                            {% endif %}
+                                                            {{collection.collection}}
+                                                            {% endfor %}
+                                                        </li>
+
+
+                                                        <li>
+                                                                <label>Open at:</label> {{restaurant_detail.opening_time}}</li>
+
+
+                                                        <li>
+                                                                <label>Close at:</label> {{restaurant_detail.closing_time}}</li>
+                                                        
+                                                        <li>
+                                                                <label>Nearest Metro Station:</label> {{restaurant_detail.nearest_metro_station}}</li>
+
+                                                
+                                                        <li>
+                                                                <label>Espaciality:</label> {{restaurant_detail.especially}}</li>
+
+                                                                                                
+                                                        <li>
+                                                                <label>Type of Menu Available:</label> {% for cuisines in  restaurant_detail.cuisines%}
+                                                                {% if not loop.counter == 1 %}
+                                                                    ,
+                                                                {% endif %}
+                                                                {{cuisines.cuisine}}
+                                                                {% endfor %}</li>
+                                                        
+
+                                                        <li>
+                                                                <label>Featured or Not:</label> {% if restaurant_detail.featured %} Featured Restaurant {% else %}Not Featured Restaurant{% endif %}</li>
 
                                                     </ul>
                                                 </div>
@@ -1682,11 +1973,17 @@
             tjq('.flexslider-food').flexslider({
                 animation: "slide",
                 controlNav: "thumbnails"
-              });
-              tjq('.flexslider-menu').flexslider({
+            });
+            tjq('.flexslider-menu').flexslider({
                 animation: "slide",
                 controlNav: "thumbnails"
-              });
+            });
+
+            function copyUrl() {
+                var copyText = document.getElementById("myInput");
+                copyText.select();
+                document.execCommand("copy");
+                }
 
 
 
