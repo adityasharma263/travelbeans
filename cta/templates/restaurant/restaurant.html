@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/Detailed View_files/custom.css">    
+    <link rel="stylesheet" href="/Detailed View_files/custom.css">
     <link rel="stylesheet" type="text/css" href="/Home Page With Chefs Recipies_files/custom.css">
 
     <!-- Responsive Styles -->
@@ -997,14 +997,20 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12" ng-show="!showlocationDiv">
+                                    <h3>Use GPS for location</h3>
+                                </div>
+                                <div  ng-show="!showlocationDiv" class="col-sm-6"><button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()">Allow</button></div>
+                                <div  ng-show="!showlocationDiv" class="col-sm-6"> <button class="button btn-medium red" ng-click="showlocationDiv = true;"  >Deny</button></div>
+                                <!-- <div class="col-sm-6">
                                     <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()" style="width:100%;">use GPS</button>
 
-                                </div>
-                                <div class="col-sm-1">
+                                </div> -->
+                                <!-- <div class="col-sm-1">
                                     <strong>OR</strong>
-                                </div>
-                                <div class="col-sm-5">
+                                </div> -->
+                                <div class="col-sm-6"  ng-show="showlocationDiv">
+                                    <h3>Select location below:</h3>
                                     <div class="dropdown makePaymentDropdownMainDiv" auto-close="outsideClick">
                                         <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
                                             ng-click="serchFilter = ''" data-toggle="dropdown" ng-cloak=""> Select City
@@ -1263,7 +1269,8 @@
                                             <small>Cost for 2:</small>
                                             ₹{{restaurant.price}}
                                         </span>
-                                        <h4 class="box-title"><a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a>
+                                        <h4 class="box-title">
+                                            <a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a>
                                             <small>{{restaurant.locality}}</small>
                                         </h4>
                                         <div class="feedback">
@@ -1273,58 +1280,26 @@
                                             <span class="review pull-right"> rating : {{restaurant.rating}}</span>
                                         </div>
                                         <p class="description">
-                                            {% set categories_data_reverse = {
-                                                "1": "bistro",
-                                                "2": "ethnic",
-                                                "3": "fine_dining",
-                                                "4": "trattoria",
-                                                "5": "teppanyaki_ya",
-                                                "6": "osteria",
-                                                "7": "drive_in",
-                                                "8": "drive_thru",
-                                                "9": "pizzeria",
-                                                "10": "taverna",
-                                                "11": "fast_casual",
-                                                "12": "pop_up",
-                                                "13": "Café",
-                                                "14": "iner",
-                                                "15": "ramen_ya",
-                                                "16": "teahouse",
-                                                "17": "fast_food",
-                                                "18": "buffet",
-                                                "19": "cafeteria",
-                                                "20": "luncheonette",
-                                                "21": "tapas_bar",
-                                                "22": "steakhouse",
-                                                "23": "all_you_can_eat_restaurant",
-                                                "24": "kosher",
-                                                "25": "dinner_in_the_Sky",
-                                                "26": "dark_restaurant",
-                                                "27": "a_la_carte",
-                                                "28": "gastropub",
-                                                "29": "brasserie",
-                                                "30": "chiringuito",
-                                                "31": "food_truck",
-                                                "32": "churrascaria",
-                                                "33": "food_court",
-                                                "34": "restrobars",
-                                                "35": "street_stalls",
-                                                "36": "theme_resturants",
-                                                "37": "coffee_shop",
-                                                "38": "coffee_house",
-                                                "39": "cabaret",
-                                                "40": "tea_shop"
-                                              }  %}
+                                            {% set categories_data_reverse = { "1": "bistro", "2": "ethnic", "3": "fine_dining", "4": "trattoria", "5": "teppanyaki_ya",
+                                            "6": "osteria", "7": "drive_in", "8": "drive_thru", "9": "pizzeria", "10": "taverna",
+                                            "11": "fast_casual", "12": "pop_up", "13": "Café", "14": "iner", "15": "ramen_ya",
+                                            "16": "teahouse", "17": "fast_food", "18": "buffet", "19": "cafeteria", "20":
+                                            "luncheonette", "21": "tapas_bar", "22": "steakhouse", "23": "all_you_can_eat_restaurant",
+                                            "24": "kosher", "25": "dinner_in_the_Sky", "26": "dark_restaurant", "27": "a_la_carte",
+                                            "28": "gastropub", "29": "brasserie", "30": "chiringuito", "31": "food_truck",
+                                            "32": "churrascaria", "33": "food_court", "34": "restrobars", "35": "street_stalls",
+                                            "36": "theme_resturants", "37": "coffee_shop", "38": "coffee_house", "39": "cabaret",
+                                            "40": "tea_shop" } %}
                                             <div>
-                                                Type : {{categories_data_reverse[restaurant.category] }}
+                                                Type : {{categories_data_reverse[restaurant.category|string] }}
                                             </div>
                                             <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
                                                 data-toggle="modal" data-target="#show-map">{{restaurant.address}}</div>
                                             <span>Cuisine:</span>
                                             {% for cuisine in restaurant.cuisines %}
                                             <span>
-                                                <strong >{{cuisine.cuisine}}
-                                                   {% if loop.count != restaurant.cuisines|length %} <span>,</span>{% endif %}
+                                                <strong>{{cuisine.cuisine}} {% if loop.count != restaurant.cuisines|length %}
+                                                    <span>,</span>{% endif %}
                                                 </strong>
                                             </span>
                                             {% endfor %}
@@ -1767,6 +1742,14 @@
                                         </figcaption>
                                     </figure>
                                 </article>
+                            </div>
+                            <div class="col-sm-12 ">
+                                <div class="row">
+                                    <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
+                                        <a href="/restaurant/collection " class="button btn-medium green">see more recipes</a>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
