@@ -450,6 +450,8 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       }]
     };
 
+    $scope.restaurantData.restaurent_chain = {};
+
     $scope.image_types = {
       1: "Ambience",
       2: "Food",
@@ -502,6 +504,13 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     $http.get("/api/v1/restaurant/cuisine")
       .then(function (res) {
         $scope.cuisine = res.data.result.cuisine;
+      }, function (err) {
+        console.log(err);
+      });
+
+      $http.get("/api/v1/restaurant/chain")
+      .then(function (res) {
+        $scope.restaurent_chain = res.data.result.restaurent_chain;
       }, function (err) {
         console.log(err);
       });

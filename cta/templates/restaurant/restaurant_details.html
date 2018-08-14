@@ -562,6 +562,9 @@
 <body jstcache="0">
 
     <div id="page-wrapper" jstcache="0">
+            <header id="header" class="navbar-static-top">
+            {% include "/restaurant/components/orange_headbar.html" %}    
+            </header>        
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
@@ -1183,6 +1186,34 @@
                                                             {{collection.collection}}
                                                             {% endfor %}
                                                         </li>
+
+
+                                                        <li>
+                                                                <label>Open at:</label> {{restaurant_detail.opening_time}}</li>
+
+
+                                                        <li>
+                                                                <label>Close at:</label> {{restaurant_detail.closing_time}}</li>
+                                                        
+                                                        <li>
+                                                                <label>Nearest Metro Station:</label> {{restaurant_detail.nearest_metro_station}}</li>
+
+                                                
+                                                        <li>
+                                                                <label>Espaciality:</label> {{restaurant_detail.especially}}</li>
+
+                                                                                                
+                                                        <li>
+                                                                <label>Type of Menu Available:</label> {% for cuisines in  restaurant_detail.cuisines%}
+                                                                {% if not loop.counter == 1 %}
+                                                                    ,
+                                                                {% endif %}
+                                                                {{cuisines.cuisine}}
+                                                                {% endfor %}</li>
+                                                        
+
+                                                        <li>
+                                                                <label>Featured or Not:</label> {% if restaurant_detail.featured %} Featured Restaurant {% else %}Not Featured Restaurant{% endif %}</li>
 
                                                     </ul>
                                                 </div>
