@@ -668,6 +668,7 @@ loadDeals=function(){
   $scope.images={}; //object of image
   $scope.product={};// object of product
   $scope.collectionProdcut=[];//array of products
+  $scope.hotelsProduct={};
   $scope.deals={}; //for deals
   $scope.hotelDeals = []; // for all deals array
   $scope.room={}; //for one room
@@ -715,6 +716,7 @@ loadDeals=function(){
   $scope.editHotel=function(data){
     $scope.hotels=data;
     $scope.hotelAmenities=data.amenities;
+    $scope.hotelCollection=data.collection;
     $scope.hotelImages=data.images;
     $scope.hotelRooms=data.rooms;
     $scope.hotelProducts=data.collection.products;
@@ -724,9 +726,7 @@ loadDeals=function(){
 
 
   }
-  $scope.editAmenities=function(){
-   console.log('scope.hotels',$scope.hotelAmenities); 
-  }
+  
   $scope.editImg=function(data,index){
     $scope.imageData=data;
     // $scope.imagedata=data.id;
@@ -756,10 +756,18 @@ loadDeals=function(){
     createToast("Hotel Amenities Updated!!!","green");
   
   }
+  $scope.updateCollection=function(){
+    $scope.hotelCollection.hotel_id=$scope.hotels.id;
+    delete  $scope.hotelCollection.products;
+    sendPutCall('/api/v1/hotel/collection/'+$scope.hotelCollection.id, $scope.hotelCollection);
+    createToast("Hotel Collection Updated!!!","green");
+  
+  }
   $scope.updateProduct=function(){
 
-    $scope.product.hotel_id=$scope.hotels.id;
-    sendPutCall('/api/v1/Product/'+$scope.product.id, $scope.product);
+    $scope.product.hotel_collection_id=$scope.product.hotel_collection;
+    delete $scope.product.hotel_collection;
+    sendPutCall('/api/v1/hotel/collection/product/'+$scope.product.id, $scope.product);
     createToast("Product Updated!!!","green");
     
   }
@@ -814,6 +822,10 @@ loadDeals=function(){
 
     }
   }
+  $scope.deleteProduct=function(data){
+    sendDeleteCall('/api/v1/hotel/collection/product/'+data.id);
+    createToast("Product Deleted!!!","green");
+  }
   $scope.deleteRoom=function(data){
     sendDeleteCall('/api/v1/room/'+data.id);
     createToast("Room Deleted!!!","green");
@@ -847,10 +859,17 @@ loadDeals=function(){
   }
   $scope.addHotelDeal=function(){
     $scope.hotelsDeal.room_id=$scope.rooms.id;
-    // $scope.roomDeals.push($scope.hotelsDeal); //to show added deal
+
     sendPostCall('/api/v1/deal', $scope.hotelsDeal)
-    // $scope.hotelsDeal={};
+
     createToast("'Deal Added!!'","green");
+    
+  }
+
+  $scope.addHotelProduct=function(){
+    $scope.hotelsProduct.hotel_collection_id=$scope.hotels.collection.id;
+    sendPostCall('/api/v1/hotel/collection/product', $scope.hotelsProduct)
+    createToast("'Product Added!!'","green");
     
   }
   $scope.showAddRoom=function(){
