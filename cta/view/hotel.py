@@ -248,7 +248,7 @@ def collection_product_api():
         return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
 
 
-@app.route('/api/v1/hotel/collection/product<int:id>', methods=['PUT', 'DELETE'])
+@app.route('/api/v1/hotel/collection/product/<int:id>', methods=['PUT', 'DELETE'])
 def collection_product_id(id):
     if request.method == 'PUT':
         put = CollectionProduct.query.filter_by(id=id).update(request.json)
