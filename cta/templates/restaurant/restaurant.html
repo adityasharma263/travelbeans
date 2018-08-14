@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
 
     <!-- Custom Styles -->
+    <link rel="stylesheet" href="/Detailed View_files/custom.css">    
     <link rel="stylesheet" type="text/css" href="/Home Page With Chefs Recipies_files/custom.css">
 
     <!-- Responsive Styles -->
@@ -47,45 +48,8 @@
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
 
-            <!-- <div class="topnav hidden-xs">
-                <div class="container">
-                    <ul class="quick-menu pull-left">
 
-                        <li class="ribbon currency">
-                            <a href="" title="">INR</a>
-                            <ul class="menu mini">
-                            </ul>
-                        </li>
-                        <li class="ribbon">
-                            <a href="">English</a>
-                            <ul class="menu mini">
-                            </ul>
-                        </li>
-                        <li class="ribbon">
-                            <a href="">India</a>
-                            <ul class="menu mini">
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="quick-menu pull-right">
-                        <li>
-                            <a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
-                                <i class="soap-icon-shopping"></i> SIGN UP</a>
-                        </li>
-                        <li>
-                            <a href="travelo-login" class="soap-popupbox">LOGIN</a>
-                        </li>
-                        <li>
-                            <a href="">Business CAPITAL</a>
-                        </li>
-                        <li>
-                            <a href="travelo-signup" class="soap-popupbox">Cutomer Care</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div> -->
-{% include "/restaurant/components/orange_headbar.html" %}
+            {% include "/restaurant/components/orange_headbar.html" %}
 
             <div class="main-header">
 
@@ -1169,7 +1133,8 @@
                             <a href="/restaurant/search?menu=dinner ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-beach "></i> -->
-                                    <img style="width:77px"  src="https://cdn3.iconfinder.com/data/icons/food-drinks-icon-set/434/platter2-simple-black-icon-512.png" alt="">
+                                    <img style="width:77px" src="https://cdn3.iconfinder.com/data/icons/food-drinks-icon-set/434/platter2-simple-black-icon-512.png"
+                                        alt="">
                                     <h4 class="box-title ">Dinner</h4>
 
                                 </div>
@@ -1188,7 +1153,7 @@
                             <a href="/restaurant/search?menu=lounge ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-playplace "></i> -->
-                                    <img style="width:60px" src="https://cdn3.iconfinder.com/data/icons/aviation-2/505/Aviation-45-512.png" alt="Lounge"/>
+                                    <img style="width:60px" src="https://cdn3.iconfinder.com/data/icons/aviation-2/505/Aviation-45-512.png" alt="Lounge" />
                                     <h4 class="box-title ">Lounge</h4>
 
                                 </div>
@@ -1198,7 +1163,8 @@
                             <a href="/restaurant/search?menu=restaurant ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-couples "></i> -->
-                                    <img style="width:60px" src="https://cdn0.iconfinder.com/data/icons/low-income-jobs-occupations-careers/311/occupation-04-011-512.png" alt="restaurant"/>
+                                    <img style="width:60px" src="https://cdn0.iconfinder.com/data/icons/low-income-jobs-occupations-careers/311/occupation-04-011-512.png"
+                                        alt="restaurant" />
                                     <h4 class="box-title ">Resturants</h4>
 
                                 </div>
@@ -1255,7 +1221,8 @@
                             <a href="/restaurant/search?menu=diet ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
-                                    <img src="https://cdn2.iconfinder.com/data/icons/fitness-glyph/512/fitness-glyph-02-512.png" alt="diet" style="width:60px"/>
+                                    <img src="https://cdn2.iconfinder.com/data/icons/fitness-glyph/512/fitness-glyph-02-512.png" alt="diet" style="width:60px"
+                                    />
                                     <h4 class="box-title ">Diet</h4>
 
                                 </div>
@@ -1266,10 +1233,10 @@
                     <h2>Popular Resturants</h2>
                     <div class="block ">
                         <div class="row image-box style10 ">
-                            {% for featured_restaurant in featured_restaurant_data %}
+                            {% for restaurant in featured_restaurant_data %}
 
-                            <div class="col-md-4 ">
-                                <article class="box ">
+                            <div class="col-md-3 ">
+                                <!-- {#<article class="box ">
                                     <figure class="animated fadeInRight " data-animation-type="fadeInRight
                                                 " data-animation-delay="0.3 " style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible; ">
                                         <a class="hover-effect " title=" " href="/restaurant/{{featured_restaurant.id}} ">
@@ -1282,6 +1249,93 @@
                                             <br>
                                             <small>{{featured_restaurant.locality}}</small>
                                         </h4>
+                                    </div>
+                                </article> #}-->
+
+                                <article class="box">
+                                    <figure>
+                                        <a href="/restaurant/{{restaurant.id}}" class="hover-effect">
+                                            <img width="270" height="161" alt="" ng-src="{{restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>Cost for 2:</small>
+                                            ₹{{restaurant.price}}
+                                        </span>
+                                        <h4 class="box-title"><a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a>
+                                            <small>{{restaurant.locality}}</small>
+                                        </h4>
+                                        <div class="feedback">
+                                            <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="{{restaurant.rating}} stars">
+                                                <span style="width: {{restaurant.rating/0.5*10}}%;" class="five-stars"></span>
+                                            </div>
+                                            <span class="review pull-right"> rating : {{restaurant.rating}}</span>
+                                        </div>
+                                        <p class="description">
+                                            {% set categories_data_reverse = {
+                                                "1": "bistro",
+                                                "2": "ethnic",
+                                                "3": "fine_dining",
+                                                "4": "trattoria",
+                                                "5": "teppanyaki_ya",
+                                                "6": "osteria",
+                                                "7": "drive_in",
+                                                "8": "drive_thru",
+                                                "9": "pizzeria",
+                                                "10": "taverna",
+                                                "11": "fast_casual",
+                                                "12": "pop_up",
+                                                "13": "Café",
+                                                "14": "iner",
+                                                "15": "ramen_ya",
+                                                "16": "teahouse",
+                                                "17": "fast_food",
+                                                "18": "buffet",
+                                                "19": "cafeteria",
+                                                "20": "luncheonette",
+                                                "21": "tapas_bar",
+                                                "22": "steakhouse",
+                                                "23": "all_you_can_eat_restaurant",
+                                                "24": "kosher",
+                                                "25": "dinner_in_the_Sky",
+                                                "26": "dark_restaurant",
+                                                "27": "a_la_carte",
+                                                "28": "gastropub",
+                                                "29": "brasserie",
+                                                "30": "chiringuito",
+                                                "31": "food_truck",
+                                                "32": "churrascaria",
+                                                "33": "food_court",
+                                                "34": "restrobars",
+                                                "35": "street_stalls",
+                                                "36": "theme_resturants",
+                                                "37": "coffee_shop",
+                                                "38": "coffee_house",
+                                                "39": "cabaret",
+                                                "40": "tea_shop"
+                                              }  %}
+                                            <div>
+                                                Type : {{categories_data_reverse[restaurant.category] }}
+                                            </div>
+                                            <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
+                                                data-toggle="modal" data-target="#show-map">{{restaurant.address}}</div>
+                                            <span>Cuisine:</span>
+                                            {% for cuisine in restaurant.cuisines %}
+                                            <span>
+                                                <strong >{{cuisine.cuisine}}
+                                                   {% if loop.count != restaurant.cuisines|length %} <span>,</span>{% endif %}
+                                                </strong>
+                                            </span>
+                                            {% endfor %}
+
+                                        </p>
+                                        <!-- <div class="action">
+                                            <a class="button btn-small green" href="javascript:;" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
+                                                <i class="fa fa-file-text-o" aria-hidden="true"></i> VIEW MENU</a>
+                                            <a class="button btn-small" href="tel:{{restaurant.phone}}">CALL</a>
+
+                                        </div> -->
                                     </div>
                                 </article>
                             </div>
@@ -2395,7 +2449,7 @@
             </div>
         </footer> -->
         {% include '/restaurant/components/footer.html' %}
-        
+
 
         </div>
 
