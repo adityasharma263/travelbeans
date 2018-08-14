@@ -46,7 +46,7 @@ class Restaurant(Base):
 class RestaurantChain(Base):
     __tablename__ = 'restaurant_chain'
 
-    restaurants = db.relationship('Restaurant', backref='restaurant')
+    restaurants = db.relationship('Restaurant')
     restaurant_chain_name = db.Column(db.String)
     restaurant_chain_category = db.Column(db.Integer, nullable=True)
     restaurant_chain_desc = db.Column(db.Text, nullable=True)

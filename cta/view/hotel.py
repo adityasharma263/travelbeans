@@ -108,16 +108,17 @@ def hotel_api():
             collection_result = HotelCollectionSchema().dump(post)
             if collection.get("products"):
                 products = collection.get("products")
-                products_obj = {
-                    "hotel_collection_id": collection_result.data['id'],
-                    "product_name": products.get("product_name", None),
-                    "product_url": products.get("product_url", None),
-                    "featured_product": products.get("featured_product", None),
-                    "product_desc": products.get("product_desc", None),
-                    "product_image": products.get("product_image", None),
-                }
-                post = CollectionProduct(**products_obj)
-                post.save()
+                for product in products:
+                    product_obj = {
+                        "hotel_collection_id": collection_result.data['id'],
+                        "product_name": product.get("product_name", None),
+                        "product_url": product.get("product_url", None),
+                        "featured_product": product.get("featured_product", None),
+                        "product_desc": product.get("product_desc", None),
+                        "product_image": product.get("product_image", None),
+                    }
+                    post = CollectionProduct(**product_obj)
+                    post.save()
         if hotel.get("amenities"):
             amenity = hotel.get("amenities", None)
             amenity_obj = {
@@ -202,6 +203,30 @@ def hotel_collection_api():
         data = HotelCollection.query.filter_by(**args).all()
         result = HotelCollectionSchema(many=True).dump(data)
         return jsonify({'result': {'collection': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = HotelCollection(**request.json)
+        post.save()
+        result = HotelCollectionSchema().dump(post)
+        return jsonify({'result': {'collection': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/hotel/collection/<int:id>', methods=['PUT', 'DELETE'])
+def hotel_collection_id(id):
+    if request.method == 'PUT':
+        put = HotelCollection.query.filter_by(id=id).update(request.json)
+        if put:
+            HotelCollection.update_db()
+            s = HotelCollection.query.filter_by(id=id).first()
+            result = HotelCollectionSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        collection = HotelCollection.query.filter_by(id=id).first()
+        if not collection:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        else:
+            CollectionProduct.query.filter_by(hotel_collection_id=collection.id).delete()
+            HotelCollection.delete_db(collection)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/hotel/collection/product', methods=['GET', 'POST'])
@@ -215,6 +240,29 @@ def collection_product_api():
         data = CollectionProduct.query.filter_by(**args).all()
         result = CollectionProductSchema(many=True).dump(data)
         return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = CollectionProduct(**request.json)
+        post.save()
+        result = CollectionProductSchema().dump(post)
+        return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/hotel/collection/product<int:id>', methods=['PUT', 'DELETE'])
+def collection_product_id(id):
+    if request.method == 'PUT':
+        put = CollectionProduct.query.filter_by(id=id).update(request.json)
+        if put:
+            CollectionProduct.update_db()
+            s = CollectionProduct.query.filter_by(id=id).first()
+            result = HotelCollectionSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        collection_product = CollectionProduct.query.filter_by(id=id).first()
+        if not collection_product:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CollectionProduct.delete_db(collection_product)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
 
 @app.route('/api/v1/room', methods=['GET', 'POST'])
 def room_api():
