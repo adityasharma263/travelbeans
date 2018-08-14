@@ -6,6 +6,7 @@ from flask import render_template, request, make_response, jsonify, abort, redir
 import requests
 import datetime
 from geopy.geocoders import Nominatim
+import json
 
 @app.route('/', methods=['GET'])
 def home():
@@ -86,9 +87,22 @@ def restaurant_set_location_cookie():
 @app.route("/restaurant/collection", methods=["GET"])
 def restaurant_collection():
     location_from_cookie = request.cookies.get("location",None)
-    if(not location_from_cookie):
+    if not location_from_cookie:
         return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
-    return render_template("restaurant/collections.html", user_location = location_from_cookie)
+
+    restaurant_url =str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
+
+    collection_data = requests.get(restaurant_url, params={"city" : "Delhi"}).json()['result']['restaurants']
+
+    collections = {}
+
+    for restaurnt in  collection_data:
+        for collection in restaurnt['collections']:
+            collections[collection['collection']] = collection
+    
+    print(collections)
+    
+    return render_template("restaurant/collections.html", user_location = location_from_cookie, collections=collections)
 
 @app.route("/restaurant/location")
 def restaurant_location():
@@ -471,6 +485,49 @@ def restaurant_detail(restaurant_id):
         "city" : location_from_cookie
     }
 
+    categories_data_reverse = {
+      "1": "bistro",
+      "2": "ethnic",
+      "3": "fine_dining",
+      "4": "trattoria",
+      "5": "teppanyaki_ya",
+      "6": "osteria",
+      "7": "drive_in",
+      "8": "drive_thru",
+      "9": "pizzeria",
+      "10": "taverna",
+      "11": "fast_casual",
+      "12": "pop_up",
+      "13": "Café",
+      "14": "iner",
+      "15": "ramen_ya",
+      "16": "teahouse",
+      "17": "fast_food",
+      "18": "buffet",
+      "19": "cafeteria",
+      "20": "luncheonette",
+      "21": "tapas_bar",
+      "22": "steakhouse",
+      "23": "all_you_can_eat_restaurant",
+      "24": "kosher",
+      "25": "dinner_in_the_Sky",
+      "26": "dark_restaurant",
+      "27": "a_la_carte",
+      "28": "gastropub",
+      "29": "brasserie",
+      "30": "chiringuito",
+      "31": "food_truck",
+      "32": "churrascaria",
+      "33": "food_court",
+      "34": "restrobars",
+      "35": "street_stalls",
+      "36": "theme_resturants",
+      "37": "coffee_shop",
+      "38": "coffee_house",
+      "39": "cabaret",
+      "40": "tea_shop"
+    }
+
 
     restaurant_data = requests.get(url=restaurant_api_url, params=params).json()['result']['restaurants'][0]
     trending_restaurant_data = requests.get(url=restaurant_api_url, params=trending_params).json()['result']['restaurants']
@@ -478,6 +535,9 @@ def restaurant_detail(restaurant_id):
     if restaurant_data['amenities']:
         restaurant_data['amenities'].pop("id", None)
         restaurant_data['amenities'].pop("restaurant", None)
+    if restaurant_data['category']:
+        print(restaurant_data['category'])
+        restaurant_data['category'] = categories_data_reverse[str(restaurant_data['category'])]
     return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data, trending_restaurant_data=trending_restaurant_data, featured_restaurant_data=featured_restaurant_data)
 
 

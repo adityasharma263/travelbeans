@@ -1,10 +1,14 @@
-from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation
+from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser
 from cta import app, db
 from flask import jsonify, request
-from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema
+from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema, CabUserSchema
 import datetime
 from itertools import cycle
 import simplejson as json
+from math import sin, cos, sqrt, atan2, radians
+
+
+
 
 
 @app.route('/api/v1/cab', methods=['GET', 'POST'])
@@ -13,10 +17,14 @@ def cab_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
-        min_fare = request.args.get('min_fare', None)
-        max_fare = request.args.get('max_fare', None)
-        args.pop('price_start', None)
-        args.pop('price_end', None)
+        min_base_fare = request.args.get('min_base_fare', None)
+        max_base_fare = request.args.get('max_base_fare', None)
+        min_total_fare = request.args.get('min_total_fare', None)
+        max_total_fare = request.args.get('max_total_fare', None)
+        args.pop('min_base_fare', None)
+        args.pop('max_base_fare', None)
+        args.pop('min_total_fare', None)
+        args.pop('max_total_fare', None)
         args.pop('page', None)
         args.pop('per_page', None)
         page = int(request.args.get('page', 1))
@@ -29,34 +37,68 @@ def cab_api():
                 q = q.filter(getattr(CabAmenity, key) == args[key])
             elif key in CabDeal.__dict__:
                 q = q.filter(getattr(CabDeal, key) == args[key])
-        if min_fare and max_fare:
-            q = q.filter(CabDeal.base_fare >= min_fare, CabDeal.base_fare <= max_fare)
+        if min_base_fare and max_base_fare:
+            q = q.filter(CabDeal.base_fare >= min_base_fare, CabDeal.base_fare <= max_base_fare)
+        elif min_total_fare and max_total_fare:
+            q = q.filter(CabDeal.total_fare >= min_total_fare, CabDeal.total_fare <= max_total_fare)
         elif rating:
             q = q.filter(Cab.rating >= rating)
         data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
+        # approximate radius of earth in km
+        R = 6373.0
+
+        lat1 = radians(52.2296756)
+        lon1 = radians(21.0122287)
+        lat2 = radians(52.406374)
+        lon2 = radians(16.9251681)
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+
+        a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        distance = R * c
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
-        obj = request.json
-        deals = []
-        # deal = obj["deals"]
-        # obj.pop('deals', None)
-
-        for index, deal in enumerate(obj["deals"]):
-            print(deal)
-            deal = frozenset(deal.items())
-            obj["deals"][index] = deal
-        print(obj)
-        p = Cab(**obj)
-        # a =
-        # for deal in deal:
-        c = CabDeal()
-        p.deals.append(c)
-
-        # a = CabDealAssociation(cab_id=p, deal_id=c)
-        # a.save()
-        p.save()
-        result = CabSchema().dump(p)
+        cab = request.json
+        deals = cab.get("deals", None)
+        images = cab.get("images", None)
+        amenities = cab.get("amenities", None)
+        cab.pop('amenities', None)
+        cab.pop('deals', None)
+        cab.pop('images', None)
+        cab_post = Cab(**cab)
+        cab_post.save()
+        for deal in deals:
+            if deal.get("deal_id", None):
+                assoc_post = CabDealAssociation(cab_id=cab_post.id, deal_id=deal.get("deal_id", None))
+                assoc_post.save()
+            else:
+                if deal.get("tax", None):
+                    tax = deal.get("tax", None)
+                    deal.pop('tax', None)
+                    deal_post = CabDeal(**deal)
+                    cab_post.deals.append(deal_post)
+                    deal_post.save()
+                    tax_post = CabTax(**tax)
+                    deal_post.tax = tax_post
+                    tax_post.save()
+                else:
+                    deal_post = CabDeal(**deal)
+                    cab_post.deals.append(deal_post)
+                    deal_post.save()
+        for image in images:
+            image["cab_id"] = cab_post.id
+            image_post = CabImage(**image)
+            cab_post.images.append(image_post)
+            image_post.save()
+        amenities["cab_id"] = cab_post.id
+        amenities_post = CabAmenity(**amenities)
+        cab_post.amenities = amenities_post
+        amenities_post.save()
+        result = CabSchema().dump(cab_post)
         return jsonify({'result': {'cab': result.data}, 'message': "Success", 'error': False})
 
 
@@ -76,6 +118,24 @@ def cab_amenity():
         post.save()
         result = CabAmenitySchema().dump(post)
         return jsonify({'result': {'amenities': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/user', methods=['GET', 'POST'])
+def cab_user():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        data = CabUser.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = CabUserSchema(many=True).dump(data)
+        return jsonify({'result': {'users': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = CabUser(**request.json)
+        post.save()
+        result = CabUserSchema().dump(post)
+        return jsonify({'result': {'users': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/cab/deal', methods=['GET', 'POST'])
@@ -130,6 +190,7 @@ def cab_booking():
         post.save()
         result = CabBookingSchema().dump(post)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
+
 
 @app.route('/api/v1/cab/tax', methods=['GET', 'POST'])
 def cab_tax():

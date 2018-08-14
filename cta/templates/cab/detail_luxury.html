@@ -502,7 +502,7 @@
                                                                                                             <h4 class="title">Fare Calculation</h4>
                                                                                                             <div class="form-group">
                                                                                                                     <div class="row">
-                                                                                                                            <div class="col-sm-8"><label>Per km fare (f):</label></div>
+                                                                                                                            <div class="col-sm-8"><label>Total Time (t):</label></div>
                                                                                                                             <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="km in deal.deals">[[km.distance]]</p></div>
                                                                                                                     </div>
                                                                                                             </div>
@@ -514,13 +514,13 @@
                                                                                                             </div>
                                                                                                             <div class="form-group">
                                                                                                                 <div class="row">
-                                                                                                                        <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                                                        <div class="col-sm-8"><label>Cost / Excess Hour (ch):</label></div>
                                                                                                                         <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="taxs in deal.deals">[[taxs.cancellation_charges]]</p></div>
                                                                                                                 </div>  
                                                                                                         </div>
                                                                                                         <div class="form-group">
                                                                                                             <div class="row">
-                                                                                                                    <div class="col-sm-8"><label>Distance (x):</label></div>
+                                                                                                                    <div class="col-sm-8"><label>Cost / Excess Km(ck):</label></div>
                                                                                                                     <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="distance in deal.deals">[[distance.distance]]</p></div>
                                                                                                             </div>  
                                                                                                         </div>

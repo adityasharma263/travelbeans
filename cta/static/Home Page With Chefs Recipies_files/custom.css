@@ -60,7 +60,7 @@ hr{
     position: absolute;
     top: 70%;
     width: 570px;
-    background: #f5f5f5f5;
+    background: rgba(245, 245, 245, 0.961);
     left: 86px;
     z-index: 1000;
 }
@@ -205,4 +205,17 @@ hr{
 .theme-button-color:hover{
     color:white !important;
     background-color: #7fb231 !important;
+}
+.collection-card-img {
+    width : 144px !important;
+}
+
+.collection-card-details{
+    padding-left: 200px !important;
+}
+.collection .box figure{
+    width: 100px !important;
+}
+.collection-card{
+
 }

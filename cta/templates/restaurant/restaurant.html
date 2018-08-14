@@ -22,15 +22,16 @@
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/animate.min.css">
 
 
-    <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-orange.css">
+    <link rel="stylesheet" type="text/css" href="/Home Page With Chefs Recipies_files/style-orange.css">
 
 
     <!-- Updated Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/updates.css">
-    <link id="main-style" rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
+    <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/style-light-yellow.css">
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/custom.css">
+    <link rel="stylesheet" href="/Detailed View_files/custom.css">    
+    <link rel="stylesheet" type="text/css" href="/Home Page With Chefs Recipies_files/custom.css">
 
     <!-- Responsive Styles -->
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/responsive.css">
@@ -47,45 +48,8 @@
     <div id="page-wrapper">
         <header id="header" class="navbar-static-top">
 
-            <div class="topnav hidden-xs">
-                <div class="container">
-                    <ul class="quick-menu pull-left">
 
-                        <li class="ribbon currency">
-                            <a href="" title="">INR</a>
-                            <ul class="menu mini">
-                            </ul>
-                        </li>
-                        <li class="ribbon">
-                            <a href="">English</a>
-                            <ul class="menu mini">
-                            </ul>
-                        </li>
-                        <li class="ribbon">
-                            <a href="">India</a>
-                            <ul class="menu mini">
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="quick-menu pull-right">
-                        <li>
-                            <a href="" class="button yellow btn-small" style="height: 30px; font-size: 1em;">
-                                <i class="soap-icon-shopping"></i> SIGN UP</a>
-                        </li>
-                        <li>
-                            <a href="travelo-login" class="soap-popupbox">LOGIN</a>
-                        </li>
-                        <li>
-                            <a href="">Business CAPITAL</a>
-                        </li>
-                        <li>
-                            <a href="travelo-signup" class="soap-popupbox">Cutomer Care</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-
+            {% include "/restaurant/components/orange_headbar.html" %}
 
             <div class="main-header">
 
@@ -831,28 +795,47 @@
 
                                     <form>
                                         <div class="row">
-                                            <div class="col-sm-4 col-md-8 form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                <option value disabled>--Select Location--</option>
-                                                                {% for location in locations %}
-                                                                <option value="{{location}}">{{location}}</option>
-                                                                {% endfor %}
-                                                            </select>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-sm-9 col-sm-offset-1">
-                                                        <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
-                                                            ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                    </div>
+                                            <div class="col-sm-2">
+                                                {#
+                                                <label>
+                                                    <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
+                                                        <option value disabled>--Select Location--</option>
+                                                        {% for location in locations %}
+                                                        <option value="{{location}}">{{location}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </label> #}
+
+                                                <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
+                                                    <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
+                                                        ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
+                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
+                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
+                                                    </button>
+                                                    <span ng-show="submitted">
+                                                        <label class="error">Select an Individual</label>
+                                                    </span>
+                                                    <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                                        <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
+                                                        />
+                                                        <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                            <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
 
-
                                             </div>
+                                            <div class="col-sm-4 col-md-6 form-group">
+                                                <!-- <div class="row"> -->
+                                                <!-- <div class="col-sm-2">
 
-
+                                                    </div>
+                                                    <div class="col-sm-9 col-sm-offset-1"> -->
+                                                <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
+                                                    ng-change="searchQuery(searchQueryValue, userLocation)">
+                                                <!-- </div> -->
+                                                <!-- </div> -->
+                                            </div>
                                             <div class=" col-sm-4 form-group ">
                                                 <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                 " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
@@ -869,7 +852,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
                                                                 <option value disabled>--Select Location--</option>
                                                                 {% for location in locations %}
                                                                 <option value="{{location}}">{{location}}</option>
@@ -903,7 +886,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
                                                                 <option value disabled>--Select Location--</option>
                                                                 {% for location in locations %}
                                                                 <option value="{{location}}">{{location}}</option>
@@ -937,7 +920,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <label>
-                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
+                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
                                                                 <option value disabled>--Select Location--</option>
                                                                 {% for location in locations %}
                                                                 <option value="{{location}}">{{location}}</option>
@@ -1003,7 +986,7 @@
             </div>
 
             {% if get_location %}
-            <div class="modal fade" id="location-modal" role="dialog"  data-backdrop="static" data-keyboard="false">
+            <div class="modal fade" id="location-modal" role="dialog" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
@@ -1013,14 +996,44 @@
                             <h4 class="modal-title" style="color:white;">Choose your location</h4>
                         </div>
                         <div class="modal-body">
-                            <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()">use GPS</button>
-                            or
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()" style="width:100%;">use GPS</button>
+
+                                </div>
+                                <div class="col-sm-1">
+                                    <strong>OR</strong>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="dropdown makePaymentDropdownMainDiv" auto-close="outsideClick">
+                                        <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
+                                            ng-click="serchFilter = ''" data-toggle="dropdown" ng-cloak=""> Select City
+                                            <span class="caret pull-right" style="margin-top:10px;"></span>
+                                        </button>
+                                        <span ng-show="submitted">
+                                            <label class="error">Select an Individual</label>
+                                        </span>
+                                        <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                            <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
+                                            />
+                                            <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {#
                             <select ng-model="userLocationFromModal" ng-change="setValues(userLocationFromModal)">
                                 <option value disabled selected>--Select Location--</option>
                                 {% for location in locations %}
                                 <option value="{{location}}">{{location}}</option>
                                 {% endfor %}
-                            </select>
+                            </select> #}
+
+
+
+
                         </div>
                         <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-default theme-button-color" data-dismiss="modal">Close</button> -->
@@ -1032,7 +1045,7 @@
             {% endif %}
 
 
-            
+
 
 
             <div class="section ">
@@ -1043,15 +1056,15 @@
 
                     <div class="row image-box style2 add-clearfix ">
                         {% for collection in collections %}
-                        <div class="col-md-4 ">
+                        <div class="col-md-4 collection-card">
                             <article class="box ">
-                                <figure>
+                                <figure style="width:150px">
                                     <a title=" " href="/restaurant/search?collection={{collection.collection}} ">
-                                        <img width="270 " height="192 " alt="{{collection.collection}} " src="{{collection.image}} ">
+                                        <img class="collection-card-img" alt="{{collection.collection}} " src="{{collection.image}} ">
                                     </a>
                                 </figure>
-                                <div class="details ">
-                                    <h4 class="box-title ">{{collection.collection}}</h4>
+                                <div class="details collection-card-details ">
+                                    <h3 class="box-title ">{{collection.collection}}</h3>
                                     <p>Our premium classy Resturants Trending .. </p>
                                 </div>
                             </article>
@@ -1059,7 +1072,12 @@
                         {% endfor %}
 
                         <div class="col-sm-12 ">
-                            <a href="/restaurant/collection " class="button btn-small green">see more</a>
+                            <div class="row">
+                                <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
+                                    <a href="/restaurant/collection " class="button btn-medium green">see more collections</a>
+
+                                </div>
+                            </div>
                         </div>
                         <!-- <div class="col-md-4 ">
                                 <article class="box ">
@@ -1095,7 +1113,7 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=breakfast ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-adventure "></i>
+                                    <i class="soap-icon-breakfast "></i>
                                     <h4 class="box-title ">Breakfast</h4>
 
                                 </div>
@@ -1104,7 +1122,8 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=lunch ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-beach "></i>
+                                    <!-- <i class="soap-icon-beach "></i> -->
+                                    <img style="width:60px;" src="https://cdn0.iconfinder.com/data/icons/food-volume-1-4/48/53-512.png" alt="Lunch">
                                     <h4 class="box-title ">Lunch</h4>
 
                                 </div>
@@ -1113,7 +1132,9 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=dinner ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-beach "></i>
+                                    <!-- <i class="soap-icon-beach "></i> -->
+                                    <img style="width:77px" src="https://cdn3.iconfinder.com/data/icons/food-drinks-icon-set/434/platter2-simple-black-icon-512.png"
+                                        alt="">
                                     <h4 class="box-title ">Dinner</h4>
 
                                 </div>
@@ -1122,7 +1143,7 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=cafe ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-party "></i>
+                                    <i class="soap-icon-coffee "></i>
                                     <h4 class="box-title ">Cafe's</h4>
 
                                 </div>
@@ -1131,7 +1152,8 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=lounge ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-playplace "></i>
+                                    <!-- <i class="soap-icon-playplace "></i> -->
+                                    <img style="width:60px" src="https://cdn3.iconfinder.com/data/icons/aviation-2/505/Aviation-45-512.png" alt="Lounge" />
                                     <h4 class="box-title ">Lounge</h4>
 
                                 </div>
@@ -1140,7 +1162,9 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=restaurant ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-couples "></i>
+                                    <!-- <i class="soap-icon-couples "></i> -->
+                                    <img style="width:60px" src="https://cdn0.iconfinder.com/data/icons/low-income-jobs-occupations-careers/311/occupation-04-011-512.png"
+                                        alt="restaurant" />
                                     <h4 class="box-title ">Resturants</h4>
 
                                 </div>
@@ -1149,7 +1173,7 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=bars ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-ski "></i>
+                                    <i class="soap-icon-winebar"></i>
                                     <h4 class="box-title ">Bars</h4>
 
                                 </div>
@@ -1158,7 +1182,8 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=nightlife ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-ski "></i>
+                                    <!-- <i class="soap-icon-ski "></i> -->
+                                    <img src="https://cdn3.iconfinder.com/data/icons/pub-bar/500/pub_bar-02-512.png" alt="Nightlife" style="width:60px">
                                     <h4 class="box-title ">Nightlife</h4>
 
                                 </div>
@@ -1167,7 +1192,8 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=luxury ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-ski "></i>
+                                    <!-- <i class="soap-icon-ski "></i> -->
+                                    <img src="https://cdn2.iconfinder.com/data/icons/man-poses/512/servant-512.png" alt="Luxury" style="width:60px">
                                     <h4 class="box-title ">Luxury</h4>
 
                                 </div>
@@ -1176,7 +1202,7 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=street_stalls ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-ski "></i>
+                                    <i class="soap-icon-food"></i>
                                     <h4 class="box-title ">Street Stalls</h4>
 
                                 </div>
@@ -1185,7 +1211,7 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=pocket_friendly ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-ski "></i>
+                                    <i class="soap-icon-savings "></i>
                                     <h4 class="box-title ">Pocket Friendly</h4>
 
                                 </div>
@@ -1194,7 +1220,9 @@
                         <div class="col-xs-10 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=diet ">
                                 <div class="icon-box style4 ">
-                                    <i class="soap-icon-ski "></i>
+                                    <!-- <i class="soap-icon-ski "></i> -->
+                                    <img src="https://cdn2.iconfinder.com/data/icons/fitness-glyph/512/fitness-glyph-02-512.png" alt="diet" style="width:60px"
+                                    />
                                     <h4 class="box-title ">Diet</h4>
 
                                 </div>
@@ -1205,10 +1233,10 @@
                     <h2>Popular Resturants</h2>
                     <div class="block ">
                         <div class="row image-box style10 ">
-                            {% for featured_restaurant in featured_restaurant_data %}
+                            {% for restaurant in featured_restaurant_data %}
 
-                            <div class="col-md-4 ">
-                                <article class="box ">
+                            <div class="col-md-3 ">
+                                <!-- {#<article class="box ">
                                     <figure class="animated fadeInRight " data-animation-type="fadeInRight
                                                 " data-animation-delay="0.3 " style="animation-duration: 1s; animation-delay: 0.3s; visibility: visible; ">
                                         <a class="hover-effect " title=" " href="/restaurant/{{featured_restaurant.id}} ">
@@ -1221,6 +1249,93 @@
                                             <br>
                                             <small>{{featured_restaurant.locality}}</small>
                                         </h4>
+                                    </div>
+                                </article> #}-->
+
+                                <article class="box">
+                                    <figure>
+                                        <a href="/restaurant/{{restaurant.id}}" class="hover-effect">
+                                            <img width="270" height="161" alt="" ng-src="{{restaurant.images[0].image_url}}">
+                                        </a>
+                                    </figure>
+                                    <div class="details">
+                                        <span class="price">
+                                            <small>Cost for 2:</small>
+                                            ₹{{restaurant.price}}
+                                        </span>
+                                        <h4 class="box-title"><a href="/restaurant/{{restaurant.id}}">{{restaurant.name}}</a>
+                                            <small>{{restaurant.locality}}</small>
+                                        </h4>
+                                        <div class="feedback">
+                                            <div data-placement="bottom" data-toggle="tooltip" class="five-stars-container" title="" data-original-title="{{restaurant.rating}} stars">
+                                                <span style="width: {{restaurant.rating/0.5*10}}%;" class="five-stars"></span>
+                                            </div>
+                                            <span class="review pull-right"> rating : {{restaurant.rating}}</span>
+                                        </div>
+                                        <p class="description">
+                                            {% set categories_data_reverse = {
+                                                "1": "bistro",
+                                                "2": "ethnic",
+                                                "3": "fine_dining",
+                                                "4": "trattoria",
+                                                "5": "teppanyaki_ya",
+                                                "6": "osteria",
+                                                "7": "drive_in",
+                                                "8": "drive_thru",
+                                                "9": "pizzeria",
+                                                "10": "taverna",
+                                                "11": "fast_casual",
+                                                "12": "pop_up",
+                                                "13": "Café",
+                                                "14": "iner",
+                                                "15": "ramen_ya",
+                                                "16": "teahouse",
+                                                "17": "fast_food",
+                                                "18": "buffet",
+                                                "19": "cafeteria",
+                                                "20": "luncheonette",
+                                                "21": "tapas_bar",
+                                                "22": "steakhouse",
+                                                "23": "all_you_can_eat_restaurant",
+                                                "24": "kosher",
+                                                "25": "dinner_in_the_Sky",
+                                                "26": "dark_restaurant",
+                                                "27": "a_la_carte",
+                                                "28": "gastropub",
+                                                "29": "brasserie",
+                                                "30": "chiringuito",
+                                                "31": "food_truck",
+                                                "32": "churrascaria",
+                                                "33": "food_court",
+                                                "34": "restrobars",
+                                                "35": "street_stalls",
+                                                "36": "theme_resturants",
+                                                "37": "coffee_shop",
+                                                "38": "coffee_house",
+                                                "39": "cabaret",
+                                                "40": "tea_shop"
+                                              }  %}
+                                            <div>
+                                                Type : {{categories_data_reverse[restaurant.category] }}
+                                            </div>
+                                            <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
+                                                data-toggle="modal" data-target="#show-map">{{restaurant.address}}</div>
+                                            <span>Cuisine:</span>
+                                            {% for cuisine in restaurant.cuisines %}
+                                            <span>
+                                                <strong >{{cuisine.cuisine}}
+                                                   {% if loop.count != restaurant.cuisines|length %} <span>,</span>{% endif %}
+                                                </strong>
+                                            </span>
+                                            {% endfor %}
+
+                                        </p>
+                                        <!-- <div class="action">
+                                            <a class="button btn-small green" href="javascript:;" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
+                                                <i class="fa fa-file-text-o" aria-hidden="true"></i> VIEW MENU</a>
+                                            <a class="button btn-small" href="tel:{{restaurant.phone}}">CALL</a>
+
+                                        </div> -->
                                     </div>
                                 </article>
                             </div>
@@ -2176,7 +2291,7 @@
         </footer> -->
 
 
-        <footer id="footer " class="style5 ">
+        <!-- <footer id="footer " class="style5 ">
             <div class="footer-wrapper ">
                 <div class="container ">
                     <div class="row ">
@@ -2332,7 +2447,8 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> -->
+        {% include '/restaurant/components/footer.html' %}
 
 
         </div>
@@ -2352,6 +2468,9 @@
         <!-- parallax -->
         <script type="text/javascript " src="/Home Page With Chefs Recipies_files/jquery.stellar.min.js "></script>
 
+        <script type="text/javascript" src="/Detailed View_files/jquery.flexslider-min.js.download"></script>
+
+
         <!-- waypoint -->
         <script type="text/javascript " src="/Home Page With Chefs Recipies_files/waypoints.min.js "></script>
 
@@ -2363,6 +2482,17 @@
         <script>
             tjq(document).ready(function () {
                 tjq('#location-modal').modal('show');
+
+
+                tjq("#slideshow .flexslider").flexslider({
+                    animation: "fade",
+                    controlNav: false,
+                    animationLoop: true,
+                    directionNav: false,
+                    slideshow: true,
+                    slideshowSpeed: 5000
+                });
+
             });
         </script>
 
@@ -2957,6 +3087,7 @@
                 </ul>
             </div>
         </div>
+
 </body>
 
 </html>
