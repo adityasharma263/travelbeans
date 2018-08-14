@@ -7,7 +7,6 @@ class Restaurant(Base):
     __tablename__ = 'restaurant'
 
     name = db.Column(db.String)
-    state = db.Column(db.String, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
     nearest_metro_station = db.Column(db.String)
     off_day_in_week = db.Column(db.String)
