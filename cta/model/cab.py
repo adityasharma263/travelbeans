@@ -21,7 +21,7 @@ class Cab(Base):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<name %r>' % self.name
+        return '<car_name %r>' % self.car_name
 
     def __hash__(self):
         return hash(self.name)

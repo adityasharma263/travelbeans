@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from cta.model.restaurant import RestaurantImage, Restaurant, RestaurantAmenity, Menu,\
-    Cuisine, Collection, RestaurantAssociation, Dish
+    Cuisine, Collection, RestaurantAssociation, Dish, RestaurantChain
 from cta import app, db
 from flask import jsonify, request
 from cta.schema.restaurant import RestaurantSchema, RestaurantImageSchema,\
-    RestaurantAmenitySchema, CuisineSchema, CollectionSchema, RestaurantAssociationSchema, MenuSchema, DishSchema
+    RestaurantAmenitySchema, CuisineSchema, CollectionSchema, RestaurantAssociationSchema, MenuSchema, DishSchema, RestaurantChainSchema
 import simplejson as json
 
 
@@ -45,6 +45,22 @@ def restaurant_api():
         return jsonify({'result': {'restaurants': result.data}, 'message': "Success", 'error': False})
     else:
         restaurant = request.json
+        if restaurant.get("restaurant_chain"):
+            chain = restaurant.get("restaurant_chain")
+            if chain.get("restaurant_chain_id"):
+                restaurant_chain_id = chain.get("restaurant_chain_id")
+            else:
+                chain_obj = {
+                    "restaurant_chain_name": chain.get("restaurant_chain_name", None),
+                    "restaurant_chain_category": chain.get("restaurant_chain_category", None),
+                    "restaurant_chain_desc": chain.get("restaurant_chain_desc", None),
+                }
+                post = RestaurantChain(**chain_obj)
+                post.save()
+                chain_result = RestaurantChainSchema().dump(post)
+                restaurant_chain_id = chain_result.data['id']
+        else:
+            restaurant_chain_id = None
         restaurant_obj = {
             "name": restaurant.get("name", None),
             "city": restaurant.get("city", None),
@@ -59,6 +75,7 @@ def restaurant_api():
             "featured": restaurant.get("featured", None),
             "phone": restaurant.get("phone", None),
             "price": restaurant.get("price", None),
+            "restaurant_chain_id": restaurant_chain_id,
         }
         post = Restaurant(**restaurant_obj)
         post.save()
@@ -196,6 +213,50 @@ def restaurant_id(id):
         Dish.query.filter_by(restaurant_id=id).delete()
         RestaurantAssociation.query.filter_by(restaurant_id=id).delete()
         Restaurant.delete_db(restaurant)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/restaurant/chain', methods=['GET', 'POST'])
+def restaurant_chain():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        data = RestaurantChain.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
+        result = RestaurantChainSchema(many=True).dump(data)
+        return jsonify({'result': {'restaurent_chain': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = RestaurantChain(**request.json)
+        post.save()
+        result = RestaurantChainSchema().dump(post)
+        return jsonify({'result': {'restaurent_chain': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/restaurant/chain/<int:id>', methods=['PUT', 'DELETE'])
+def restaurant_chain_id(id):
+    if request.method == 'PUT':
+        put = RestaurantChain.query.filter_by(id=id).update(request.json)
+        if put:
+            RestaurantChain.update_db()
+            s = RestaurantChain.query.filter_by(id=id).first()
+            result = RestaurantAmenitySchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        restaurant_chain = RestaurantChain.query.filter_by(id=id).first()
+        if not restaurant_chain:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        restaurants = Restaurant.query.filter_by(id=id).all()
+        if restaurants:
+            for restaurant in restaurants:
+                RestaurantAmenity.query.filter_by(restaurant_id=id).delete()
+                Menu.query.filter_by(restaurant_id=id).delete()
+                RestaurantImage.query.filter_by(restaurant_id=id).delete()
+                Dish.query.filter_by(restaurant_id=id).delete()
+                RestaurantAssociation.query.filter_by(restaurant_id=id).delete()
+                Restaurant.delete_db(restaurant)
+        RestaurantChain.delete_db(restaurant_chain)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
 
