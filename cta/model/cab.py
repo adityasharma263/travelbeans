@@ -45,7 +45,7 @@ class CabBooking(Base):
     __tablename__ = 'cab_booking'
 
     cab_booking_id = db.Column(db.String, nullable=True)
-    booking_date = db.Column(db.DateTime(timezone=True), nullable=False)
+    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
     mode_of_payment = db.Column(db.Integer, nullable=True)
     booking_status = db.Column(db.Integer, nullable=True)
     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
