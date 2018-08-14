@@ -759,7 +759,7 @@ loadDeals=function(){
   $scope.updateProduct=function(){
 
     $scope.product.hotel_id=$scope.hotels.id;
-    sendPutCall('/api/v1/deal/'+$scope.product.id, $scope.product);
+    sendPutCall('/api/v1/Product/'+$scope.product.id, $scope.product);
     createToast("Product Updated!!!","green");
     
   }
@@ -1005,7 +1005,6 @@ loadDeals=function(){
   }
   $scope.addProduct=function(){
     $scope.collectionProdcut.push($scope.product);
-    $scope.product={};
     createToast("'product Added!!'","green");
 
   }
@@ -1030,7 +1029,7 @@ $scope.createHotel = function() {
   $scope.collectionProdcut.push($scope.product);
 
   $scope.hotelImg.push($scope.images);
-  $scope.hotel.collection.product=$scope.collectionProdcut;
+  $scope.hotel.collection.products=$scope.collectionProdcut;
   $scope.hotel.images=$scope.hotelImg;
   console.log("$scope.hotel",$scope.hotel);
 
