@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from cta.model.hotel import Hotel
 from cta.model.hotel import Image
 from cta.model.hotel import Facility
@@ -9,6 +8,9 @@ from cta.model.hotel import Amenity
 from cta.model.hotel import Deal
 from cta.model.hotel import Website
 from cta.model.hotel import Room
+from cta.model.hotel import HotelCollection
+from cta.model.hotel import CollectionProduct
+
 from cta import ma
 
 
@@ -30,6 +32,20 @@ class DealSchema(ma.ModelSchema):
 class AmenitySchema(ma.ModelSchema):
     class Meta:
         model = Amenity
+        exclude = ('updated_at', 'created_at', 'hotel')
+
+
+class CollectionProductSchema(ma.ModelSchema):
+    class Meta:
+        model = CollectionProduct
+        exclude = ('updated_at', 'created_at')
+
+
+class HotelCollectionSchema(ma.ModelSchema):
+    products = ma.Nested(CollectionProductSchema, many=True)
+
+    class Meta:
+        model = HotelCollection
         exclude = ('updated_at', 'created_at', 'hotel')
 
 
@@ -71,6 +87,7 @@ class RoomSchema(ma.ModelSchema):
 
 class HotelSchema(ma.ModelSchema):
     amenities = ma.Nested(AmenitySchema, many=False)
+    collection = ma.Nested(HotelCollectionSchema, many=False)
     images = ma.Nested(ImageSchema, many=True)
     rooms = ma.Nested(RoomSchema, many=True)
 
