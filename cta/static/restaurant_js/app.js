@@ -114,11 +114,23 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     }
 
     var map;
-    $scope.showMap = function (lat, long) {
+    $scope.showMap = function (lat, long, restaurantName) {
+      var latLong = { lat: lat, lng: long }
+
+
       map = new google.maps.Map(document.getElementById('show-restaurant-map'), {
-        center: { lat: lat, lng: long },
+        center: latLong,
         zoom: 15
       });
+
+      var marker = new google.maps.Marker({
+        position: latLong,
+        map: map,
+        title: restaurantName
+      });
+
+      $scope.restaurantName = restaurantName;
+
     }
 
 
