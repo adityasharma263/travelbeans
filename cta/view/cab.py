@@ -17,14 +17,18 @@ def cab_api():
         rating = request.args.get('rating')
         args.pop('rating', None)
         cab_type = request.args.get('cab_type', None)
-        source_lat = request.args.get('source_lat', None)
-        source_lon = request.args.get('source_lon', None)
-        destination_lat = request.args.get('destination_lat', None)
-        destination_lon = request.args.get('destination_lon', None)
-        args.pop('source_lat', None)
-        args.pop('source_lon', None)
-        args.pop('destination_lat', None)
-        args.pop('destination_lon', None)
+        pickup_time = request.args.get('pickup_time', None)
+        drop_time = request.args.get('drop_time', None)
+        pickup_lat = request.args.get('pickup_lat', None)
+        pickup_lon = request.args.get('pickup_lon', None)
+        drop_lat = request.args.get('drop_lat', None)
+        drop_lon = request.args.get('drop_lon', None)
+        args.pop('pickup_time', None)
+        args.pop('drop_time', None)
+        args.pop('pickup_lat', None)
+        args.pop('pickup_lon', None)
+        args.pop('drop_lat', None)
+        args.pop('drop_lon', None)
         min_base_fare = request.args.get('min_base_fare', None)
         max_base_fare = request.args.get('max_base_fare', None)
         min_total_fare = request.args.get('min_total_fare', None)
@@ -53,9 +57,21 @@ def cab_api():
             q = q.filter(Cab.rating >= rating)
         data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
-        total_fare = CabFare.fare_calculation(source_lat, source_lon, destination_lat, destination_lon, cab_type)
-        for cab in result['cab']:
-            cab['total_fare'] = total_fare
+        for cab in result.data:
+            if cab.get("deals", None):
+                deals = cab.get("deals", None)
+                for deal in deals:
+                    fare_obj = {
+                        "pickup_time": pickup_time,
+                        "drop_time": drop_time,
+                        "pickup_lat": pickup_lat,
+                        "pickup_lon": pickup_lon,
+                        "drop_lat": drop_lat,
+                        "drop_lon": drop_lon,
+                        "cab_type": cab_type,
+                        "base_fare": deal.get('base_fare', None),
+                    }
+                    deal['total_fare'] = int(CabFare().fare_calculation(fare_obj))
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
         cab = request.json
