@@ -88,19 +88,9 @@ def cab_api():
                 assoc_post = CabDealAssociation(cab_id=cab_post.id, deal_id=deal.get("deal_id", None))
                 assoc_post.save()
             else:
-                if deal.get("tax", None):
-                    tax = deal.get("tax", None)
-                    deal.pop('tax', None)
-                    deal_post = CabDeal(**deal)
-                    cab_post.deals.append(deal_post)
-                    deal_post.save()
-                    tax_post = CabTax(**tax)
-                    deal_post.tax = tax_post
-                    tax_post.save()
-                else:
-                    deal_post = CabDeal(**deal)
-                    cab_post.deals.append(deal_post)
-                    deal_post.save()
+                deal_post = CabDeal(**deal)
+                cab_post.deals.append(deal_post)
+                deal_post.save()
         for image in images:
             image["cab_id"] = cab_post.id
             image_post = CabImage(**image)
