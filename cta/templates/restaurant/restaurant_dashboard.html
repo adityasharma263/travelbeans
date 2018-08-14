@@ -69,7 +69,7 @@ content%}
                 </div>
             </div>
             <div class="col-sm-6">
-                <label >Locality</label>
+                <label>Locality</label>
                 <input type="text" class="form-control" ng-model="restaurantData.locality">
             </div>
         </div>
@@ -91,6 +91,35 @@ content%}
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Open at (00:00)</label>
+                    <input type="text" class="form-control" ng-model="restaurantData.opening_time" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Close at (00:00)</label>
+                    <input type="text" class="form-control" ng-model="restaurantData.closing_time">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Break Time(00:00)</label>
+                    <input type="text" class="form-control" ng-model="restaurantData.break_time" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Break Interval(how long is break (in hours))</label>
+                    <input type="text" class="form-control" ng-model="restaurantData.break_interval">
+                </div>
+            </div>
+        </div>
 
 
         <div class="row">
@@ -320,7 +349,33 @@ content%}
         </div>
 
 
+        <div class="row" >
+            <div class="col-sm-6" ng-show="!showAddBranch">
+                <label >Add Branch</label>
+                <select ng-model="restaurantData.restaurent_chain.restaurant_chain_id">
+                    <option value disabled>-- select branch--</option>
+                    <option ng-value="[[chain.id]]" ng-repeat="chain in restaurent_chain">[[chain.restaurant_chain_name]]</option>
+                </select>
+                or
+                <button class="btn btn-default" ng-click="showAddBranch = true;">Add Branch</button>
+            </div>
 
+            <div class="" ng-show="showAddBranch">
+                <label> Category </label>
+                <select ng-model="restaurantData.restaurent_chain.restaurant_chain_category">
+                    <option value disabled>-- Select Category --</option>
+                    <option value="[[$index+1]]" ng-repeat="category in categories">[[category]]</option>
+                </select>
+
+                <label >Description</label>
+                <input type="text" class="form-control" ng-model="restaurantData.restaurent_chain.restaurant_chain_desc">
+
+                <label >Branch Name</label>
+                <input type="text" class="form-control" ng-model="restaurantData.restaurent_chain.restaurant_chain_name">
+                <!-- <button class="btn btn-default" ng-click="showAddBranch = false;"></button> -->
+                <button class="btn btn-default" ng-click="showAddBranch = false;">Cancel</button>
+            </div>
+        </div>
 
 
 
