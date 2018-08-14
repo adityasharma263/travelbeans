@@ -582,7 +582,7 @@
                         <div class="tab-container style1" id="hotel-main-content" jstcache="0">
                             <ul class="tabs">
                                 <li class="active">
-                                    <a data-toggle="tab" href="#photos-tab" aria-expanded="true">Abience</a>
+                                    <a data-toggle="tab" href="#photos-tab" aria-expanded="true">Ambience</a>
                                 </li>
                                 <li class="">
                                     <a data-toggle="tab" href="#food-tab" aria-expanded="false">Food</a>
@@ -609,11 +609,11 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
-                                                {% for images in restaurant_detail.images %}
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==1 %}
                                                 <li style="width: 870px; float: left; display: block;" class="">
                                                     <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                {% endfor %}
+                                                {% endif %} {% endfor %}
                                             </ul>
                                         </div>
 
@@ -671,11 +671,12 @@
 
                                         <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                             <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-                                                {% for images in restaurant_detail.images %}
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==1 %}
+
                                                 <li style="width: 870px; float: left; display: block;" class="">
                                                     <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                {% endfor %}
+                                                {% endif %} {% endfor %}
                                             </ul>
                                         </div>
                                         <ol class="flex-control-nav flex-control-paging">
@@ -698,38 +699,194 @@
                                 </div>
 
 
-                                <div id="food-tab" class="tab-pane fade" style="height: 522px; position: relative; overflow: hidden;">
-                                    <div class="flexslider-food">
-                                        <ul class="slides">
-                                            {%  for images in restaurant_detail.images %}
-                                            {% if images.image_type==2 %}
-                                            <li data-thumb="{{images.image_url}}">
-                                                <img src="{{images.image_url}}" />
+                                <div id="food-tab" class="tab-pane fade">
+                                    <div class="photo-gallery style1" data-animation="slide" data-sync="#food-tab .image-carousel">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==2 %}
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
+                                                </li>
+                                                {% endif %} {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="">1</a>
                                             </li>
-                                            {% endif %}
-                                            {% endfor%}
-                                            
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-active">3</a>
+                                            </li>
+                                            <li>
+                                                <a class="">4</a>
+                                            </li>
+                                            <li>
+                                                <a class="">5</a>
+                                            </li>
+                                            <li>
+                                                <a class="">6</a>
+                                            </li>
+                                            <li>
+                                                <a class="">7</a>
+                                            </li>
+                                            <li>
+                                                <a class="">8</a>
+                                            </li>
+                                            <li>
+                                                <a class="">9</a>
+                                            </li>
+                                            <li>
+                                                <a class="">10</a>
+                                            </li>
+                                            <li>
+                                                <a class="">11</a>
+                                            </li>
+                                            <li>
+                                                <a class="">12</a>
+                                            </li>
+                                            <li>
+                                                <a class="">13</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#food-tab .photo-gallery">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==2 %}
+
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
+                                                </li>
+                                                {% endif %} {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="flex-active">1</a>
+                                            </li>
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
 
 
-                                <div id="menu-tab" class="tab-pane fade" style="height: 500px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;"
-                                    jstcache="0">
-                                    <div class="flexslider-menu">
-                                            <ul class="slides">
-                                                {%  for images in restaurant_detail.images %}
-                                                {% if images.image_type==3 %}
-                                                <li data-thumb="{{images.image_url}}">
-                                                    <img src="{{images.image_url}}" />
+                                <div id="menu-tab" class="tab-pane fade" jstcache="0">
+                                    <div class="photo-gallery style1" data-animation="slide" data-sync="#menu-tab .image-carousel">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 3000%; transition-duration: 0.6s; transform: translate3d(-2610px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==3 %}
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
                                                 </li>
-                                                {% endif %}
-                                                {% endfor%}
-                                                
+                                                {% endif %} {% endfor %}
                                             </ul>
                                         </div>
 
-                                    
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="">1</a>
+                                            </li>
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-active">3</a>
+                                            </li>
+                                            <li>
+                                                <a class="">4</a>
+                                            </li>
+                                            <li>
+                                                <a class="">5</a>
+                                            </li>
+                                            <li>
+                                                <a class="">6</a>
+                                            </li>
+                                            <li>
+                                                <a class="">7</a>
+                                            </li>
+                                            <li>
+                                                <a class="">8</a>
+                                            </li>
+                                            <li>
+                                                <a class="">9</a>
+                                            </li>
+                                            <li>
+                                                <a class="">10</a>
+                                            </li>
+                                            <li>
+                                                <a class="">11</a>
+                                            </li>
+                                            <li>
+                                                <a class="">12</a>
+                                            </li>
+                                            <li>
+                                                <a class="">13</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="image-carousel style1" data-animation="slide" data-item-width="70" data-item-margin="10" data-sync="#menu-tab .photo-gallery">
+
+                                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                            <ul class="slides" style="width: 2600%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                                {% for images in restaurant_detail.images %} {% if images.image_type==3 %}
+
+                                                <li style="width: 870px; float: left; display: block;" class="">
+                                                    <img src="{{images.image_url}}" alt="" draggable="false">
+                                                </li>
+                                                {% endif %} {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <ol class="flex-control-nav flex-control-paging">
+                                            <li>
+                                                <a class="flex-active">1</a>
+                                            </li>
+                                            <li>
+                                                <a class="">2</a>
+                                            </li>
+                                        </ol>
+                                        <ul class="flex-direction-nav">
+                                            <li>
+                                                <a class="flex-prev" href="#">Previous</a>
+                                            </li>
+                                            <li>
+                                                <a class="flex-next" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -902,7 +1059,7 @@
                                         </div> -->
 
                                         <div class="table-cell col-sm-4">
-                                            <span class="restaurant-rating">3.9/5.0</span>
+                                            <span class="restaurant-rating">{{restaurant_detail.rating}}/5.0</span>
                                             <div class="five-stars-container">
                                                 <div class="five-stars" style="width: 78%;"></div>
                                             </div>
@@ -1682,11 +1839,11 @@
             tjq('.flexslider-food').flexslider({
                 animation: "slide",
                 controlNav: "thumbnails"
-              });
-              tjq('.flexslider-menu').flexslider({
+            });
+            tjq('.flexslider-menu').flexslider({
                 animation: "slide",
                 controlNav: "thumbnails"
-              });
+            });
 
 
 
