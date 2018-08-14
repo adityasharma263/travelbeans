@@ -74,7 +74,13 @@ def restaurant_api():
             "latitude": json.dumps(restaurant.get("latitude", None)),
             "featured": restaurant.get("featured", None),
             "phone": restaurant.get("phone", None),
-            "price": restaurant.get("price", None),
+            "state": restaurant.get("state", None),
+            "off_day_in_week": restaurant.get("off_day_in_week", None),
+            "opening_time": restaurant.get("opening_time", None),
+            "closing_time": restaurant.get("closing_time", None),
+            "break_time": restaurant.get("break_time", None),
+            "break_interval": restaurant.get("break_interval", None),
+            "mode_of_payment": restaurant.get("mode_of_payment", None),
             "restaurant_chain_id": restaurant_chain_id,
         }
         post = Restaurant(**restaurant_obj)

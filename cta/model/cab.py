@@ -27,24 +27,47 @@ class Cab(Base):
         return hash(self.name)
 
 
+class CabUser(Base):
+    __tablename__ = 'cab_user'
+
+    name = db.Column(db.String)
+    phone = db.Column(db.String, nullable=True, unique=True)
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<name %r>' % self.name
+
+
 class CabBooking(Base):
     __tablename__ = 'cab_booking'
 
-    one_way = db.Column(db.Boolean, default=False, nullable=True)
+    cab_booking_id = db.Column(db.String, nullable=True)
+    booking_date = db.Column(db.DateTime(timezone=True), nullable=False)
+    mode_of_payment = db.Column(db.Integer, nullable=True)
+    booking_status = db.Column(db.Integer, nullable=True)
     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
     drop_time = db.Column(db.DateTime(timezone=True), nullable=False)
-    outstation = db.Column(db.Boolean, default=False, nullable=True)
     drop_latitude = db.Column('drop_latitude', db.Float(asdecimal=True), nullable=True)
     drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
     pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
     pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('cab_user.id'))
+    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
+    deal_id = db.Column(db.Integer, db.ForeignKey('cab_deal.id'))
+    cab = db.relationship('Cab', foreign_keys=cab_id)
+    user = db.relationship('CabUser', foreign_keys=user_id)
+    deal = db.relationship('CabDeal', foreign_keys=deal_id)
+
 
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<cab_id %r>' % self.cab_id
+        return '<deal_id %r>' % self.deal_id
 
 
 class CabImage(Base):
@@ -112,10 +135,10 @@ class CabTax(Base):
 class CabDeal(Base):
     __tablename__ = 'cab_deal'
 
-    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=False)
     website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'), unique=False)
     cab_url = db.Column(db.String, nullable=True)
-    booking = db.relationship('CabBooking', foreign_keys=booking_id)
+    outstation = db.Column(db.Boolean, default=False, nullable=True)
+    one_way = db.Column(db.Boolean, default=False, nullable=True)
     website = db.relationship('CabWebsite', foreign_keys=website_id)
     slab = db.Column(db.Integer, nullable=True)
     driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
