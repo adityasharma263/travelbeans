@@ -565,6 +565,20 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.cab_types = Constants.Cab_types;
 
 
+    $http({
+      method: 'GET',
+      url: '/api/v1/cab/deal?website_id=' + $scope.deals.website_id
+    }).then(function successCallback(response) {
+
+        $scope.availableDeals= response.data.result.deals;
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+
+
     var sendPostCall = function(url, data) {
       console.log(data);
       
