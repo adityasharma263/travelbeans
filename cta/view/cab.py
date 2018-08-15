@@ -70,8 +70,23 @@ def cab_api():
                         "drop_lon": drop_lon,
                         "cab_type": cab_type,
                         "base_fare": deal.get('base_fare', None),
+                        "one_way": deal.get('one_way', None),
+                        "driver_per_hr_allowance_charge": deal.get('driver_per_hr_allowance_charge', None),
+                        "slab": deal.get('slab', None),
+                        "driver_daily_allowance_charge": deal.get('driver_daily_allowance_charge', None),
+                        "car_night_allowance_charge": deal.get('car_night_allowance_charge', None),
+                        "base_fare_weekend": deal.get('base_fare_weekend', None),
+                        "base_fare_peak_season": deal.get('base_fare_peak_season', None),
+                        "base_fare_with_fuel": deal.get('base_fare_with_fuel', None),
+                        "different_pickup_drop_point_charge": deal.get('different_pickup_drop_point_charge', None),
+                        "fare_exceeded_per_km": deal.get('fare_exceeded_per_km', None),
+                        "fare_exceeded_per_hr": deal.get('fare_exceeded_per_hr', None),
+                        "initial_km": deal.get('initial_km', None),
+                        "initial_km_fare": deal.get('initial_km_fare', None),
+                        "km_restriction": deal.get('km_restriction', None),
+                        "cancellation_charges": deal.get('cancellation_charges', None),
                     }
-                    deal['total_fare'] = int(CabFare().fare_calculation(fare_obj))
+                    deal['booking'] = CabFare().fare_calculation(fare_obj)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
         cab = request.json
