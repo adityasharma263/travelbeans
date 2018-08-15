@@ -104,6 +104,16 @@ hr{
         left: 59px;
     
 }
+.collection-card{
+    /* background: rgba(255, 255, 1, 0.514); */
+}
+
+.collection-card article figure{
+    width:100% !important;
+}
+
+
+
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -114,6 +124,13 @@ hr{
     left: 86px;
     
 }
+
+.collection-card{
+    /* background: rgba(255, 1, 1, 0.514); */
+}
+
+
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -124,6 +141,12 @@ hr{
         left: 101px;
     
 }
+
+.collection-card{
+    /* background: rgba(43, 255, 1, 0.514); */
+
+}
+
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -133,6 +156,13 @@ hr{
     width: 570px;
     left: 86px;
     
+}
+.collection-card{
+    /* background: rgba(39, 1, 255, 0.514); */
+}
+
+.collection-card-details {
+    padding-left: 200px !important;
 }
 } 
 
@@ -144,6 +174,19 @@ hr{
         left: 311px;
     
 }
+.collection-card{
+    /* background: rgba(204, 1, 255, 0.514); */
+}
+
+.collection-card article figure{
+    width: 50% !important;
+}
+
+.collection-card-details {
+    padding-left: 200px !important;
+}
+
+
 }
 
 .filter{
@@ -207,15 +250,24 @@ hr{
     background-color: #7fb231 !important;
 }
 .collection-card-img {
-    width : 144px !important;
+    width : 144px;
 }
 
 .collection-card-details{
-    padding-left: 200px !important;
+    padding-left: 200px ;
 }
 .collection .box figure{
     width: 100px !important;
 }
-.collection-card{
 
+
+.restaurent-type{
+    position: absolute;
+    background: #fdb714;
+    top: 8px;
+    z-index: 33;
+    padding: 5px;
+    color: #fff;
+    border-top-right-radius: 10px;
+    font-size: 15px;
 }

@@ -10,20 +10,47 @@
 
             {% if collections|length > 0 %}
             {% for collection_key, collection_value in collections.items() %}
-            <div class="col-md-4">
-                <article class="box">
+            <div class="col-md-4 collection-card">
+                <article class="box ">
                     <figure>
-                        <a title="" href="/restaurant/search?city={{user_location}}&collection={{collecion_key}}">
-                            <img width="270" height="192" alt="golden collection 2" src="{{collection_value.image}}">
+                        <a title=" " href="/restaurant/search?collection={{collection_value.collection}} ">
+                            <img class="collection-card-img" alt="{{collection_value.collection}} " src="{{collection_value.image}} ">
                         </a>
                     </figure>
-                    <div class="details">
-                        <a href="/restaurant/search?city={{user_location}}&collection={{collection_key}}"><h4 class="box-title">{{collection_key}}</h4></a> 
+                    <div class="details collection-card-details ">
+                        <h3 class="box-title ">{{collection_value.collection}}</h3>
                         <p>{{collection_value.desc}} </p>
                     </div>
                 </article>
             </div>
             {% endfor %}
+
+            <!-- <div class="row image-box style2 add-clearfix ">
+                {% for collection in collections %}
+                <div class="col-md-4 collection-card">
+                    <article class="box ">
+                        <figure>
+                            <a title=" " href="/restaurant/search?collection={{collection.collection}} ">
+                                <img class="collection-card-img" alt="{{collection.collection}} " src="{{collection.image}} ">
+                            </a>
+                        </figure>
+                        <div class="details collection-card-details ">
+                            <h3 class="box-title ">{{collection.collection}}</h3>
+                            <p>Our premium classy Resturants Trending .. </p>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+
+                <div class="col-sm-12 ">
+                    <div class="row">
+                        <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
+                            <a href="/restaurant/collection " class="button btn-medium green">see more collections</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div> -->
 
             {% else %}
             <div class="col-sm-12">

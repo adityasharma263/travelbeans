@@ -66,16 +66,16 @@ var app = angular.module("restaurantApp", ['angular.filter'])
           var lat = position.coords.latitude;
           var long = position.coords.longitude;
           var params = {
-            latitude : lat,
-            longitude : long
+            latitude: lat,
+            longitude: long
           }
 
-          $http.get("/restaurant", {params: params})
+          $http.get("/restaurant", { params: params })
             .then(function (res) {
               window.location.reload()
             }, function (err) {
               alert("Some error occur! Please Try different method.");
-              
+
             })
 
         }, function (err) {
@@ -146,6 +146,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         function (err) {
           console.log(err);
         })
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     $scope.setValues = function (location) {
@@ -343,6 +347,17 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     };
 
+    $scope.getImageForResults = function (imagesArray) {
+
+      for (i in imagesArray) {
+        if (imagesArray[i].image_type == 1 || imagesArray[i].image_type == 2) {
+          return imagesArray[i].image_url;
+        }
+      }
+
+
+    }
+
     $scope.categories_data = {
       "bistro": 1,
       "ethnic": 2,
@@ -508,7 +523,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         console.log(err);
       });
 
-      $http.get("/api/v1/restaurant/chain")
+    $http.get("/api/v1/restaurant/chain")
       .then(function (res) {
         $scope.restaurent_chain = res.data.result.restaurent_chain;
       }, function (err) {
