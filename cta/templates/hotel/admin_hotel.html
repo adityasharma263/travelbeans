@@ -480,7 +480,7 @@
                             
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                <h4 class="modal-title">Update Image Url</h4>
+                                <h4 class="modal-title">Update Members</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 
@@ -584,6 +584,165 @@
                             </div>
                         </div>
                     </div>
+                    <div class="container" style="z-index: 10000000;">
+                        <!-- The Modal -->
+                        <div class="modal" id="productModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Update Product</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product name:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="product.product_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product Url:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="product.product_url" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label ">Product featured:  </label>
+                                            <input type="checkbox" ng-model="product.featured_product">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product Description:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="product.product_desc" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product Image Url:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="product.product_image" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="updateProduct()" data-dismiss="modal">Update Product</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                    <div class="container" style="z-index: 10000000;">
+                        <!-- The Modal -->
+                        <div class="modal" id="addProductModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Product</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product name:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="hotelsProduct.product_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product Url:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="hotelsProduct.product_url" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label ">Product featured:  </label>
+                                            <input type="checkbox" ng-model="hotelsProduct.featured_product">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product Description:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="hotelsProduct.product_desc" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label "  for="image">Product Image Url:  </label>
+                                        <div class="">          
+                                            <input  class="form-control" id="name"  type="text" ng-model="hotelsProduct.product_image" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="addHotelProduct()" >Add Product</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                            
+                    </div>
+                    <div class="container" style="z-index: 10000000;">
+                            <!-- The Modal -->
+                            <div class="modal" id="collectionModal">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                    <h4 class="modal-title">Update Hotel collection</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label class="control-label " >Collection Name : </label>
+                                            <div class="">     
+                                                <input class="form-control" type="text" ng-model="hotelCollection.collection_name"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" >Featured: </label>
+                                                <input type="checkbox" ng-model="hotelCollection.featured"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label"  for="desc">Description: </label>
+                                            <div class="">          
+                                                <textarea  class="form-control" id="name" ng-model="hotelCollection.desc" type="textarea" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label "  for="image">Collection Image Url:  </label>
+                                            <div class="">          
+                                                <input  class="form-control" id="name"  type="text" ng-model="hotelCollection.image" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" ng-click="updateCollection()" data-dismiss="modal">Update Collection</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+                                    
+                                </div>
+                                </div>
+                            </div>
+                                
+                        </div>
                     <div class="container" style="z-index: 10000000;">
                         <!-- The Modal -->
                         <div class="modal" id="imgModal">
@@ -935,7 +1094,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="category ">Category: </label>
                             <div class="col-sm-10">          
-                                <input  class="form-control" id="name"  ng-model="hotels.category" type="text" required>
+                                <input  class="form-control" id="name"  ng-model="hotels.category" type="number" >
                             </div>
                         </div>
                         <div class="form-group">
@@ -1000,10 +1159,31 @@
                              </div>
                         </div>
                         <div class="form-group">        
-                            <div class="col-sm-offset-8 col-sm-8">
+                            <div class="col-sm-offset-6 col-sm-6">
+                                <button type="" class="btn btn-defalut"  data-toggle="modal" data-target="#collectionModal"   >Edit Collection</button>
                                 <button type="" class="btn btn-defalut"  data-toggle="modal" data-target="#amenitiesModal"  ng-click="editAmenities()" >Edit Amenities</button>
+                                <button  class="btn btn-defalut" data-toggle="modal" data-target="#addProductModal" >Add Product</button>
                                 <button  class="btn btn-defalut" ng-click="showAddRoom()">Add Room</button>
                                 <button type="submit" class="btn btn-success" ng-click="updateHotel()">Update Hotel</button>
+                            </div>
+                        </div>
+                        <h3>Product Deatils</h3>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"for="name">Search Product (for Update):</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" data-toggle="dropdown" ng-model="searchProduct" placeholder="enter search term here">
+                                    <div  class="container col-sm-12" style="max-height: 200px;overflow-y: scroll;">
+                                        <div ng-repeat="data in hotelProducts | filter:searchProduct">
+                                            <span class="title">[[data.product_name]]</span>
+                                            
+                                            <button class="btn" data-toggle="modal" data-target="#productModal" ng-click="editProductData(data)">Edit </button>
+                                            <button class="btn" ng-click="deleteProduct(data)">Delete </button>
+                                            
+                                            <hr>
+                                        </div>
+
+                                    </div>
+                                    <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelProducts | filter:searchProduct).length == 0">No Results Found</span>
                             </div>
                         </div>
                         <h3>Rooms Deatils</h3>
@@ -1015,29 +1195,15 @@
                                         <div ng-repeat="data in hotelRooms | filter:searchRoom">
                                             <span class="title">[[data.other_room_type]]</span>
                                             
-                                            <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
-                                            <button class="btn" ng-click="deleteRoom(data)">Delete Room</button>
+                                            <button class="btn" ng-click="editRoomsData(data)">Edit </button>
+                                            <button class="btn" ng-click="deleteRoom(data)">Delete </button>
                                             
                                             <hr>
                                         </div>
 
                                     </div>
                                     <span style="font-size: 23px;opacity: 0.5; text-align: center; margin-left: 300px;" ng-show="(hotelRooms | filter:searchRoom).length == 0">No Results Found</span>
-
-
-        
                             </div>
-                            <!-- <div class="col-sm-2"></div>
-                            <div class="col-sm-10">
-                                <div class="container">
-                                    <div ng-repeat="data in hotelRooms">
-                                        <span class="title">[[data.other_room_type]]</span>
-                                       
-                                    <button class="btn" ng-click="editRoomsData(data)">Edit Room</button>
-                                    <hr>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                     </form>
@@ -1180,7 +1346,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="category ">Category: </label>
                                 <div class="col-sm-10">          
-                                    <input  class="form-control" id="name"  ng-model="hotel.category" type="text" required>
+                                    <input  class="form-control" id="name"  ng-model="hotel.category" type="number" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1264,7 +1430,7 @@
                                 </div>
                                 <div>
                                     <label for="parking">
-                                        <input type="checkbox"  ng-model="hotel.amenities.parking"/>Parking 
+                                        <input type="checkbox"  ng-model="hotel.amenities.parking"/>Parking
                                     </label>
                                 </div>
                                 <div>
@@ -1378,6 +1544,67 @@
                                     </label>
                                 </div>
                             </label>
+                            </div>
+                            <h2>Hotel collection :</h2>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" >Collection Name : </label>
+                                <div class="col-sm-10">     
+                                    <input class="form-control" type="text" ng-model="hotel.collection.collection_name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" >Featured: </label>
+                                <div class="col-sm-10 checkbox">     
+                                    <input type="checkbox" ng-model="hotel.collection.featured"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="desc">Description: </label>
+                                <div class="col-sm-10">          
+                                    <textarea  class="form-control" id="name" ng-model="hotel.collection.desc" type="textarea" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="image">Collection Image Url:  </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name"  type="text" ng-model="hotel.collection.image" required>
+                                </div>
+                            </div>
+                            <h3>Collection product :</h3>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="image">Product name:  </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name"  type="text" ng-model="product.product_name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="image">Product Url:  </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name"  type="text" ng-model="product.product_url" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Product featured:  </label>
+                                <div class="col-sm-10 checkbox">       
+                                    <input type="checkbox" ng-model="product.featured_product" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="image">Product Description:  </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name"  type="text" ng-model="product.product_desc" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"  for="image">Product Image Url:  </label>
+                                <div class="col-sm-10">          
+                                    <input  class="form-control" id="name"  type="text" ng-model="product.product_image" required>
+                                </div>
+                            </div>
+                            <div class="form-group">        
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" class="btn btn-primary" ng-click=addProduct()>Add more product</button>
+                                </div>
                             </div>
                             
                             <div class="form-group">        

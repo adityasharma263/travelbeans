@@ -76,6 +76,27 @@ angular.module('comparetravel', ['angular.filter'])
 
    },
 
+
+   Cab_types : {
+ 
+    1:     'Monthly Rental',
+    2:     'Sightseeing',
+    3:     'Luxury', 
+    4:     'Outstation',
+    5:     'Self Drive', 
+    6:     'Hire a Driver ',
+    7:     'Quick Cabs'
+  
+
+},
+
+    Fuel_types : {
+    
+      1:     'Petrol',
+      2:     'Diesel',
+      3:     'CNG'
+    },
+
    Amenities : {
     "air_condition": null, 
     "automatic": null, 
@@ -83,11 +104,10 @@ angular.module('comparetravel', ['angular.filter'])
     "chauffeur": null, 
     "doorstep_delivery": null, 
     "fuel": null, 
-    "fuel_capacity": 1, 
-    "fuel_type": 1, 
-    "seater": 1, 
     "verified_driver": null
   },
+
+
 
   Locations : [
     'Abu',
@@ -459,26 +479,6 @@ angular.module('comparetravel', ['angular.filter'])
        }
 })
 
-.constant("Cabs",{
-
-    Cab_types : {
- 
-                     1:     'Monthly Rental',
-                     2:     'Sightseeing',
-                     3:     'Luxury', 
-                     4:     'Outstation',
-                     5:     'Self Drive', 
-                     6:     'Hire a Driver ',
-                     7:     'Quick Cabs'
-                   
- 
-    }
- 
- 
- 
- 
- 
- })
 
  .factory('dataShare',function($rootScope){
     var service = {};
@@ -556,33 +556,70 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.cab = {}; // main cab model
     $scope.cabImg = []; //for all images array
     $scope.images={}; //for one image
+    $scope.cabDeals = [];
+    $scope.deals = {};
     $scope.locations = Constants.Locations;
     $scope.car_types = Constants.Car_types;
+    $scope.fuel_types = Constants.Fuel_types;
     $scope.amenities = Constants.Amenities;
+    $scope.cab_types = Constants.Cab_types;
 
 
+    $http({
+      method: 'GET',
+      url: '/api/v1/cab/deal?website_id=' + $scope.deals.website_id
+    }).then(function successCallback(response) {
 
+        $scope.availableDeals= response.data.result.deals;
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+
+
+    var sendPostCall = function(url, data) {
+      console.log(data);
+      
+      $http({
+        method: 'POST',
+        url: url,
+        data: data
+      }).then(function (res) {
+        console.log(res);
+        
+        // createToast("'hotel successfully created!!!'","green");
+  
+        },
+        // failed callback
+        function (req) {
+         // createToast("'Something went wrong!!!'","red");
+        })
+      
+    }
 
 
     $scope.addImg=function(){
         $scope.cabImg.push($scope.images);
         $scope.images={};
-        createToast("'Image Added!!'","green");
+    }
+
+    $scope.addDeal=function(){
+      $scope.cabDeals.push($scope.deals);
+      $scope.deals={};
+  
     }
 
     $scope.createCab = function() {
-        $scope.cabImg.push($scope.images);
         $scope.cab.images=$scope.cabImg;
+        $scope.cab.deals=$scope.cabDeals;
         console.log("$scope.cab",$scope.cab);
+
+        sendPostCall('/api/v1/cab', $scope.cab)
     }
 
-    var createToast=function(msg, color){
-        var x= document.getElementById("snackbar");
-        x.innerHTML=msg;
-        x.style.backgroundColor=color;
-        x.className = "show";
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-      }
+   
 
 
   }])

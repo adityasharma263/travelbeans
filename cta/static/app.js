@@ -665,7 +665,10 @@ loadDeals=function(){
 .controller('adminController',["$scope", "$http", function($scope, $http, $filter) {
   $scope.hotel = {}; // main hotel model
   $scope.hotelImg = []; //for all images array
-  $scope.images={}; //for one image
+  $scope.images={}; //object of image
+  $scope.product={};// object of product
+  $scope.collectionProdcut=[];//array of products
+  $scope.hotelsProduct={};
   $scope.deals={}; //for deals
   $scope.hotelDeals = []; // for all deals array
   $scope.room={}; //for one room
@@ -707,20 +710,23 @@ loadDeals=function(){
   $scope.editDealData=function(data){
     $scope.deal=data;
   }
+  $scope.editProductData=function(data){
+    $scope.product=data;
+  }
   $scope.editHotel=function(data){
     $scope.hotels=data;
     $scope.hotelAmenities=data.amenities;
+    $scope.hotelCollection=data.collection;
     $scope.hotelImages=data.images;
     $scope.hotelRooms=data.rooms;
+    $scope.hotelProducts=data.collection.products;
     $scope.showRoomDetail=true;
     $scope.showHotelDetail=false;
     // $scope.Rooms=data;
 
 
   }
-  $scope.editAmenities=function(){
-   console.log('scope.hotels',$scope.hotelAmenities); 
-  }
+  
   $scope.editImg=function(data,index){
     $scope.imageData=data;
     // $scope.imagedata=data.id;
@@ -740,6 +746,7 @@ loadDeals=function(){
     delete $scope.hotelData.images;
     delete $scope.hotelData.rooms;
     delete $scope.hotelData.amenities;
+    delete $scope.hotelData.collection.product;
     sendPutCall('/api/v1/hotel/'+$scope.hotelData.id, $scope.hotelData);
     createToast("Hotel Detail Updated!!!","green");
   }
@@ -748,6 +755,21 @@ loadDeals=function(){
     sendPutCall('/api/v1/amenity/'+$scope.hotelAmenities.id, $scope.hotelAmenities);
     createToast("Hotel Amenities Updated!!!","green");
   
+  }
+  $scope.updateCollection=function(){
+    $scope.hotelCollection.hotel_id=$scope.hotels.id;
+    delete  $scope.hotelCollection.products;
+    sendPutCall('/api/v1/hotel/collection/'+$scope.hotelCollection.id, $scope.hotelCollection);
+    createToast("Hotel Collection Updated!!!","green");
+  
+  }
+  $scope.updateProduct=function(){
+
+    $scope.product.hotel_collection_id=$scope.product.hotel_collection;
+    delete $scope.product.hotel_collection;
+    sendPutCall('/api/v1/hotel/collection/product/'+$scope.product.id, $scope.product);
+    createToast("Product Updated!!!","green");
+    
   }
   $scope.updateRoom=function(){
     $scope.rooms.hotel_id=$scope.hotels.id;
@@ -783,6 +805,7 @@ loadDeals=function(){
     createToast("Deal Updated!!!","green");
     
   }
+  
   $scope.deleteHotel=function(data){
     sendDeleteCall('/api/v1/hotel/'+data.id);
     createToast("Hotel Deleted!!!","green");
@@ -798,6 +821,10 @@ loadDeals=function(){
 
 
     }
+  }
+  $scope.deleteProduct=function(data){
+    sendDeleteCall('/api/v1/hotel/collection/product/'+data.id);
+    createToast("Product Deleted!!!","green");
   }
   $scope.deleteRoom=function(data){
     sendDeleteCall('/api/v1/room/'+data.id);
@@ -832,10 +859,17 @@ loadDeals=function(){
   }
   $scope.addHotelDeal=function(){
     $scope.hotelsDeal.room_id=$scope.rooms.id;
-    // $scope.roomDeals.push($scope.hotelsDeal); //to show added deal
+
     sendPostCall('/api/v1/deal', $scope.hotelsDeal)
-    // $scope.hotelsDeal={};
+
     createToast("'Deal Added!!'","green");
+    
+  }
+
+  $scope.addHotelProduct=function(){
+    $scope.hotelsProduct.hotel_collection_id=$scope.hotels.collection.id;
+    sendPostCall('/api/v1/hotel/collection/product', $scope.hotelsProduct)
+    createToast("'Product Added!!'","green");
     
   }
   $scope.showAddRoom=function(){
@@ -890,7 +924,7 @@ loadDeals=function(){
       function (req) {
         createToast("'Something went wrong!!!'","red");
         
-        setTimeout(function(){ location.reload(); }, 1000);
+        // setTimeout(function(){ location.reload(); }, 1000);
 
       })
     
@@ -988,6 +1022,11 @@ loadDeals=function(){
     createToast("'Image Added!!'","green");
 
   }
+  $scope.addProduct=function(){
+    $scope.collectionProdcut.push($scope.product);
+    createToast("'product Added!!'","green");
+
+  }
   $scope.addPrice=function(){
     $scope.hotelDeals.push($scope.deals);
     $scope.deals={};
@@ -1006,9 +1045,11 @@ $scope.createHotel = function() {
   $scope.hotelDetail=false;
   $scope.roomDetail=true;
 
-  $scope.hotelImg.push($scope.images);
-  $scope.hotel.images=$scope.hotelImg;
+  $scope.collectionProdcut.push($scope.product);
 
+  $scope.hotelImg.push($scope.images);
+  $scope.hotel.collection.products=$scope.collectionProdcut;
+  $scope.hotel.images=$scope.hotelImg;
   console.log("$scope.hotel",$scope.hotel);
 
   sendPostHotel('/api/v1/hotel', $scope.hotel)
