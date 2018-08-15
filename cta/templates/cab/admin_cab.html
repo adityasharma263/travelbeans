@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-sm-6">
             <!-- <form> -->
-
+            <form class="form-horizontal" ng-submit="createCab()">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Cab Type:</label>
                         <br>
-                        <select ng-model="restaurantData.category" ng-required="true">
+                        <select ng-model="cab.cab_type" ng-required="true">
                             <option value disabled>-- select cab type --</option>
                             <option value="[[$index+1]]" ng-repeat="type in cab_types">[[type]]</option>
                         </select>
@@ -24,14 +24,14 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Car Name:</label>
-                        <input type="text" class="form-control" ng-model="restaurantData.name" ng-required="true">
+                        <input type="text" class="form-control" ng-model="cab.car_name" ng-required="true">
     
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Rating(out of 10.0):</label>
-                        <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
+                        <input type="number" class="form-control" step="any" ng-model="cab.rating" ng-required="true">
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
     
             <div class="form-group">
                 <label>Description:</label>
-                <textarea class="form-control" ng-model="restaurantData.desc" ng-required="true"></textarea>
+                <textarea class="form-control" ng-model="cab.desc" ng-required="true"></textarea>
             </div>
     
             <div class="row">
@@ -48,7 +48,7 @@
                         <label>City:</label>
                         <br>
                         <!-- <input type="text" class="form-control" ng-model="" ng-required="true"> -->
-                        <select ng-model="restaurantData.city">
+                        <select ng-model="cab.city">
                             <option value disabled selected>--Select Your Location--</option>
                             <option value="[[location]]" ng-repeat="location in locations">[[location]]</option>
                         </select>
@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <label>Car Type:</label>
                         <br>
-                        <select ng-model="restaurantData.category" ng-required="true">
+                        <select ng-model="cab.car_type" ng-required="true">
                             <option value disabled>-- select car type --</option>
                             <option value="[[$index+1]]" ng-repeat="type in car_types">[[type]]</option>
                         </select>
@@ -93,7 +93,7 @@
     
                         <label>
                             
-                            <input type="checkbox" ng-model="restaurantData.amenities[amenity_key]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_amenity">[[amenity_key]]
+                            <input type="checkbox" ng-model="cab.amenities[amenity_key]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_amenity">[[amenity_key]]
                         </label>
                     </div>
                 </div>
@@ -102,15 +102,20 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Fuel Capacity:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
+                            <input type="number" class="form-control" ng-model="cab.amenities.fuel_capacity" ng-required="true">
         
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Fuel Type:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
+                            <div class="form-group">
+                                <label>Fuel Type:</label>
+                                <br>
+                                <select ng-model="cab.fuel_type" ng-required="true">
+                                    <option value disabled>-- select fuel type --</option>
+                                    <option value="[[$index+1]]" ng-repeat="type in fuel_types">[[type]]</option>
+                                </select>
+            
+                            </div>
                     </div>
                 </div>
 
@@ -118,7 +123,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Seater:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
+                            <input type="number" class="form-control" ng-model="cab.amenities.seater" ng-required="true">
         
                         </div>
                     </div>
@@ -140,165 +145,181 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Base Fare:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
+                            <label>Website name:</label>
+                            <select class="form-control" ng-model="deals.website_id">
+                                <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
+                            </select>  
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Base Fare Peak Season:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Base Fare Weekend:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Base Fare with Fuel:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Cancellation Charge:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Car Night Allowance Charge:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Driver Night Allowance Charge:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Different pickup drop point Charge:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Fare exceeded per Km:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Fare exceeded per Hr:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Intial Km:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Intial Km Fare:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Km Restriction:</label>
-                            <input type="number" class="form-control" ng-model="restaurantData.name" ng-required="true">
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Slab:</label>
-                            <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>
-                            <input type="checkbox" ng-model="restaurantData.name" ng-required="true">One Way
-                            </label>
-        
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>
-                            <input type="checkbox" step="any" ng-model="restaurantData.rating" ng-required="true">Outstation
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                        <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Website name:</label>
-                                <select class="form-control" ng-model="deals.website_id">
+                                <label>Deals</label>
+                                <select class="form-control">
                                     <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
                                 </select>  
                             </div>
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#deal">add new deal</button>
+                    </div>
+                </div>
+                <div id="deal" class="collapse">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare" ng-required="true">
+            
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Cab Url: </label>
-                                <input  class="form-control" id="name"  ng-model="deals.hotel_url" type="text" required>
+                                <label>Base Fare Peak Season:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_peak_season" ng-required="true">
                             </div>
                         </div>
-                    </div>   
-
-                    <div class="form-group">        
+                    </div>
+        
+                    <div class="row">
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary" ng-click=addPrice()>Add more deals</button>
+                            <div class="form-group">
+                                <label>Base Fare Weekend:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_weekend" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare with Fuel:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_with_fuel" ng-required="true">
+                            </div>
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Cancellation Charge:</label>
+                                <input type="number" class="form-control" ng-model="deals.cancellation_charge" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Night Allowance Charge:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.car_night_allowance_charge" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Driver Night Allowance Charge:</label>
+                                <input type="number" class="form-control" ng-model="deals.driver_night_allowance_charge" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Different pickup drop point Charge:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.different_pickup_drop_point_charge" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fare exceeded per Km:</label>
+                                <input type="number" class="form-control" ng-model="deals.fare_exceeded_per_km" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fare exceeded per Hr:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.fare_exceeded_per_hr" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Intial Km:</label>
+                                <input type="number" class="form-control" ng-model="deals.intial_km" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Intial Km Fare:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.intial_km_fare" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Km Restriction:</label>
+                                <input type="number" class="form-control" ng-model="deals.km_restriction" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Slab:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.slab" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>
+                                <input type="checkbox" ng-model="deals.one_way">One Way
+                                </label>
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>
+                                <input type="checkbox" step="any" ng-model="deals.outstation">Outstation
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cab Url: </label>
+                                    <input  class="form-control" id="name"  ng-model="deals.cab_url" type="text" required>
+                                </div>
+                            </div>
+                        </div>   
+
+                        <div class="form-group">        
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-primary" ng-click=addDeal()>Add more deals</button>
+                            </div>
+                        </div>
+                    </div>
             </fieldset>
     
            
             <div class="form-group">
                 <br>
                 <label>
-                    <input type="checkbox" ng-model="restaurantData.featured" ng-true-value="true" ng-false-value="false">Is partner?
+                    <input type="checkbox" ng-model="cab.is_partner" ng-true-value="true" ng-false-value="false">Is partner?
                 </label>
             </div>
+
+            <button type="submit" class="btn btn-success">Add</button>
+            </form>
             <!-- </form> -->
             <hr>
         </div>
