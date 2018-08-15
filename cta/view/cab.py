@@ -57,21 +57,21 @@ def cab_api():
             q = q.filter(Cab.rating >= rating)
         data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
-        for cab in result.data:
-            if cab.get("deals", None):
-                deals = cab.get("deals", None)
-                for deal in deals:
-                    fare_obj = {
-                        "pickup_time": pickup_time,
-                        "drop_time": drop_time,
-                        "pickup_lat": pickup_lat,
-                        "pickup_lon": pickup_lon,
-                        "drop_lat": drop_lat,
-                        "drop_lon": drop_lon,
-                        "cab_type": cab_type,
-                        "base_fare": deal.get('base_fare', None),
-                    }
-                    deal['total_fare'] = int(CabFare().fare_calculation(fare_obj))
+        # for cab in result.data:
+        #     if cab.get("deals", None):
+        #         deals = cab.get("deals", None)
+        #         for deal in deals:
+        #             fare_obj = {
+        #                 "pickup_time": pickup_time,
+        #                 "drop_time": drop_time,
+        #                 "pickup_lat": pickup_lat,
+        #                 "pickup_lon": pickup_lon,
+        #                 "drop_lat": drop_lat,
+        #                 "drop_lon": drop_lon,
+        #                 "cab_type": cab_type,
+        #                 "base_fare": deal.get('base_fare', None),
+        #             }
+        #             deal['total_fare'] = int(CabFare().fare_calculation(fare_obj))
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
         cab = request.json

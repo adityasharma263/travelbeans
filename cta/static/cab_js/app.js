@@ -76,6 +76,20 @@ angular.module('comparetravel', ['angular.filter'])
 
    },
 
+
+   Cab_types : {
+ 
+    1:     'Monthly Rental',
+    2:     'Sightseeing',
+    3:     'Luxury', 
+    4:     'Outstation',
+    5:     'Self Drive', 
+    6:     'Hire a Driver ',
+    7:     'Quick Cabs'
+  
+
+},
+
    Amenities : {
     "air_condition": null, 
     "automatic": null, 
@@ -83,11 +97,10 @@ angular.module('comparetravel', ['angular.filter'])
     "chauffeur": null, 
     "doorstep_delivery": null, 
     "fuel": null, 
-    "fuel_capacity": 1, 
-    "fuel_type": 1, 
-    "seater": 1, 
     "verified_driver": null
   },
+
+
 
   Locations : [
     'Abu',
@@ -459,26 +472,6 @@ angular.module('comparetravel', ['angular.filter'])
        }
 })
 
-.constant("Cabs",{
-
-    Cab_types : {
- 
-                     1:     'Monthly Rental',
-                     2:     'Sightseeing',
-                     3:     'Luxury', 
-                     4:     'Outstation',
-                     5:     'Self Drive', 
-                     6:     'Hire a Driver ',
-                     7:     'Quick Cabs'
-                   
- 
-    }
- 
- 
- 
- 
- 
- })
 
  .factory('dataShare',function($rootScope){
     var service = {};
@@ -559,6 +552,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.locations = Constants.Locations;
     $scope.car_types = Constants.Car_types;
     $scope.amenities = Constants.Amenities;
+    $scope.cab_types = Constants.Cab_types;
 
 
 
