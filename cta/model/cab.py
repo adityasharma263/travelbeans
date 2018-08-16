@@ -45,7 +45,7 @@ class CabBooking(Base):
     __tablename__ = 'cab_booking'
 
     cab_booking_id = db.Column(db.String, nullable=True)
-    booking_date = db.Column(db.DateTime(timezone=True), nullable=False)
+    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
     mode_of_payment = db.Column(db.Integer, nullable=True)
     booking_status = db.Column(db.Integer, nullable=True)
     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
@@ -54,12 +54,17 @@ class CabBooking(Base):
     drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
     pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
     pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
+    total_fare = db.Column(db.DECIMAL, nullable=True)
+    total_days = db.Column(db.Integer, nullable=True)
+    total_distance = db.Column(db.DECIMAL, nullable=True)
+    total_hours = db.Column(db.Integer, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('cab_user.id'))
     cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
     deal_id = db.Column(db.Integer, db.ForeignKey('cab_deal.id'))
     cab = db.relationship('Cab', foreign_keys=cab_id)
     user = db.relationship('CabUser', foreign_keys=user_id)
     deal = db.relationship('CabDeal', foreign_keys=deal_id)
+    tax = db.relationship('CabTax', uselist=False, backref='cab_booking')
 
 
 
@@ -120,10 +125,11 @@ class CabWebsite(Base):
 class CabTax(Base):
     __tablename__ = 'cab_tax'
 
-    deal_id = db.Column(db.Integer, db.ForeignKey('cab_deal.id'), unique=True)
+    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=True)
     gst = db.Column(db.DECIMAL, nullable=True)
     s_gst = db.Column(db.DECIMAL, nullable=True)
     c_gst = db.Column(db.DECIMAL, nullable=True)
+    i_gst = db.Column(db.DECIMAL, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -141,9 +147,9 @@ class CabDeal(Base):
     one_way = db.Column(db.Boolean, default=False, nullable=True)
     website = db.relationship('CabWebsite', foreign_keys=website_id)
     slab = db.Column(db.Integer, nullable=True)
-    driver_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
+    driver_daily_allowance_charge = db.Column(db.DECIMAL, nullable=True)
+    driver_per_hr_allowance_charge = db.Column(db.DECIMAL, nullable=True)
     car_night_allowance_charge = db.Column(db.DECIMAL, nullable=True)
-    total_hours = db.Column(db.Integer, nullable=True)
     base_fare = db.Column(db.DECIMAL, nullable=True)
     base_fare_weekend = db.Column(db.DECIMAL, nullable=True)
     base_fare_peak_season = db.Column(db.DECIMAL, nullable=True)
@@ -155,9 +161,6 @@ class CabDeal(Base):
     initial_km = db.Column(db.Integer, nullable=True)
     initial_km_fare = db.Column(db.DECIMAL, nullable=True)
     cancellation_charges = db.Column(db.DECIMAL, nullable=True)
-    distance = db.Column(db.DECIMAL, nullable=True)
-    tax = db.relationship('CabTax', uselist=False, backref='cab_deal')
-    total_fare = db.Column(db.DECIMAL, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -96,7 +96,7 @@ def restaurant_collection():
 
     collections = {}
 
-    for restaurnt in  collection_data:
+    for restaurnt in collection_data:
         for collection in restaurnt['collections']:
             collections[collection['collection']] = collection
     

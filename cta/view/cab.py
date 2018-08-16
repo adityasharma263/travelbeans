@@ -1,12 +1,11 @@
 from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser
 from cta import app, db
 from flask import jsonify, request
+from cta.lib.cab_fare import CabFare
 from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema, CabUserSchema
 import datetime
 from itertools import cycle
 import simplejson as json
-from math import sin, cos, sqrt, atan2, radians
-
 
 
 
@@ -17,6 +16,19 @@ def cab_api():
         args = request.args.to_dict()
         rating = request.args.get('rating')
         args.pop('rating', None)
+        cab_type = request.args.get('cab_type', None)
+        pickup_time = request.args.get('pickup_time', None)
+        drop_time = request.args.get('drop_time', None)
+        pickup_lat = request.args.get('pickup_lat', None)
+        pickup_lon = request.args.get('pickup_lon', None)
+        drop_lat = request.args.get('drop_lat', None)
+        drop_lon = request.args.get('drop_lon', None)
+        args.pop('pickup_time', None)
+        args.pop('drop_time', None)
+        args.pop('pickup_lat', None)
+        args.pop('pickup_lon', None)
+        args.pop('drop_lat', None)
+        args.pop('drop_lon', None)
         min_base_fare = request.args.get('min_base_fare', None)
         max_base_fare = request.args.get('max_base_fare', None)
         min_total_fare = request.args.get('min_total_fare', None)
@@ -25,10 +37,10 @@ def cab_api():
         args.pop('max_base_fare', None)
         args.pop('min_total_fare', None)
         args.pop('max_total_fare', None)
-        args.pop('page', None)
-        args.pop('per_page', None)
         page = int(request.args.get('page', 1))
         per_page = int(request.args.get('per_page', 20))
+        args.pop('page', None)
+        args.pop('per_page', None)
         q = db.session.query(Cab).outerjoin(Cab.amenities).outerjoin(Cab.deals)
         for key in args:
             if key in Cab.__dict__:
@@ -45,21 +57,36 @@ def cab_api():
             q = q.filter(Cab.rating >= rating)
         data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
-        # approximate radius of earth in km
-        R = 6373.0
-
-        lat1 = radians(52.2296756)
-        lon1 = radians(21.0122287)
-        lat2 = radians(52.406374)
-        lon2 = radians(16.9251681)
-
-        dlon = lon2 - lon1
-        dlat = lat2 - lat1
-
-        a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-        c = 2 * atan2(sqrt(a), sqrt(1 - a))
-
-        distance = R * c
+        for cab in result.data:
+            if cab.get("deals", None):
+                deals = cab.get("deals", None)
+                for deal in deals:
+                    fare_obj = {
+                        "pickup_time": pickup_time,
+                        "drop_time": drop_time,
+                        "pickup_lat": pickup_lat,
+                        "pickup_lon": pickup_lon,
+                        "drop_lat": drop_lat,
+                        "drop_lon": drop_lon,
+                        "cab_type": cab_type,
+                        "base_fare": deal.get('base_fare', None),
+                        "one_way": deal.get('one_way', None),
+                        "driver_per_hr_allowance_charge": deal.get('driver_per_hr_allowance_charge', None),
+                        "slab": deal.get('slab', None),
+                        "driver_daily_allowance_charge": deal.get('driver_daily_allowance_charge', None),
+                        "car_night_allowance_charge": deal.get('car_night_allowance_charge', None),
+                        "base_fare_weekend": deal.get('base_fare_weekend', None),
+                        "base_fare_peak_season": deal.get('base_fare_peak_season', None),
+                        "base_fare_with_fuel": deal.get('base_fare_with_fuel', None),
+                        "different_pickup_drop_point_charge": deal.get('different_pickup_drop_point_charge', None),
+                        "fare_exceeded_per_km": deal.get('fare_exceeded_per_km', None),
+                        "fare_exceeded_per_hr": deal.get('fare_exceeded_per_hr', None),
+                        "initial_km": deal.get('initial_km', None),
+                        "initial_km_fare": deal.get('initial_km_fare', None),
+                        "km_restriction": deal.get('km_restriction', None),
+                        "cancellation_charges": deal.get('cancellation_charges', None),
+                    }
+                    deal['booking'] = CabFare().fare_calculation(fare_obj)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
         cab = request.json
@@ -76,19 +103,9 @@ def cab_api():
                 assoc_post = CabDealAssociation(cab_id=cab_post.id, deal_id=deal.get("deal_id", None))
                 assoc_post.save()
             else:
-                if deal.get("tax", None):
-                    tax = deal.get("tax", None)
-                    deal.pop('tax', None)
-                    deal_post = CabDeal(**deal)
-                    cab_post.deals.append(deal_post)
-                    deal_post.save()
-                    tax_post = CabTax(**tax)
-                    deal_post.tax = tax_post
-                    tax_post.save()
-                else:
-                    deal_post = CabDeal(**deal)
-                    cab_post.deals.append(deal_post)
-                    deal_post.save()
+                deal_post = CabDeal(**deal)
+                cab_post.deals.append(deal_post)
+                deal_post.save()
         for image in images:
             image["cab_id"] = cab_post.id
             image_post = CabImage(**image)

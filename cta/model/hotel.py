@@ -39,10 +39,10 @@ class HotelCollection(Base):
     __tablename__ = 'hotel_collection'
 
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True, nullable=True)
-    collection_name = db.Column(db.String, default=False, nullable=True)
+    collection_name = db.Column(db.String, nullable=True)
     featured = db.Column(db.Boolean, default=False, nullable=True)
     desc = db.Column(db.Text, nullable=True)
-    image = db.Column(db.String, default=False, nullable=True)
+    image = db.Column(db.String, nullable=True)
     products = db.relationship('CollectionProduct', backref='hotel_collection')
 
     def __init__(self, *args, **kwargs):
@@ -60,7 +60,7 @@ class CollectionProduct(Base):
     product_name = db.Column(db.String, nullable=True)
     featured_product = db.Column(db.Boolean, default=False, nullable=True)
     product_desc = db.Column(db.Text, nullable=True)
-    product_image = db.Column(db.String, default=False, nullable=True)
+    product_image = db.Column(db.String, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -77,8 +77,8 @@ class Room(Base):
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     other_room_type = db.Column(db.String, nullable=True)
-    check_in = db.Column(db.DateTime(timezone=True), nullable=False)
-    check_out = db.Column(db.DateTime(timezone=True), nullable=False)
+    check_in = db.Column(db.DateTime(timezone=True), nullable=True)
+    check_out = db.Column(db.DateTime(timezone=True), nullable=True)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     balcony = db.Column(db.Boolean, default=False, nullable=True)
     member = db.relationship('Member', uselist=False, backref='room')
