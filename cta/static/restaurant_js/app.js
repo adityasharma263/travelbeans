@@ -364,7 +364,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         }
       }
 
-      return "Restaurant SVG Icons/placeholder.png";
+      return "/Restaurant SVG Icons/placeholder.png";
 
 
     }
