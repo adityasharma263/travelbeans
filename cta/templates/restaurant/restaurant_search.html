@@ -1533,7 +1533,7 @@
                                 </a>
 
                                 <div class="panel style1 arrow-right">
-                                    <button class="btn-medium icon-check uppercase full-width" ng-click=";">Clear filter</button>
+                                    <button class="btn-medium icon-check uppercase full-width" ng-click="reload();">Clear filter</button>
                                 </div>
                                 <h2>Filters</h2>
                                 <hr>
@@ -1651,12 +1651,12 @@
                                                             <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
                                                                 data-toggle="modal" data-target="#show-map">
                                                                 <span>
-                                                                    <i class="soap-icon-departure"></i>
+                                                                    <i class="soap-icon-departure" style="padding:1px"></i>
                                                                 </span>: [[restaurant.address]]</div>
 
                                                             <div>
                                                                 <span>
-                                                                    <i class="soap-icon-clock"></i>
+                                                                    <i class="soap-icon-clock" style="padding:1px"></i>
                                                                 </span> : [[restaurant.opening_time.substring(0,restaurant.opening_time.length
                                                                 -3)]] - [[restaurant.closing_time.substring(0,restaurant.opening_time.length
                                                                 -3)]]
@@ -1723,29 +1723,24 @@
 
                                                                         </span>
 
-                                                                        <span class="amenity-veg-nonveg" #d3000a  style="margin-left: 10px;">
-                                                                                <!-- <svg  style="enable-background:new 0 0 286.082 286.082;width: 20px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                                                                                    <metadata>
-                                                                                     <rdf:RDF>
-                                                                                      <cc:Work rdf:about="">
-                                                                                       <dc:format>image/svg+xml</dc:format>
-                                                                                       <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-                                                                                       <dc:title/>
-                                                                                      </cc:Work>
-                                                                                     </rdf:RDF>
-                                                                                    </metadata>
-                                                                                    <g transform="translate(-44.983 -51.665)">
-                                                                                     <g transform="matrix(.47964 0 0 .48559 23.4 26.585)">
-                                                                                      <path d="m66.988 51.65c-12.115 0-21.99 9.8756-21.99 21.99v213.16c0 12.115 9.8756 21.99 21.99 21.99h212.94c12.115 0 21.992-9.8756 21.992-21.99v-213.16c0-12.115-9.8776-21.99-21.992-21.99zm0 7.8906h212.94c7.8793 0 14.1 6.2203 14.1 14.1v213.16c0 7.8793-6.2203 14.1-14.1 14.1h-212.94c-7.8793 0-14.1-6.2203-14.1-14.1v-213.16c0-7.8793 6.2203-14.1 14.1-14.1z" style="color-rendering:auto;color:#000000;dominant-baseline:auto;fill:#007a00;font-feature-settings:normal;font-variant-alternates:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;font-variant-position:normal;image-rendering:auto;isolation:auto;mix-blend-mode:normal;shape-padding:0;shape-rendering:auto;solid-color:#000000;text-decoration-color:#000000;text-decoration-line:none;text-decoration-style:solid;text-indent:0;text-orientation:mixed;text-transform:none;white-space:normal"/>
-                                                                                      <path transform="matrix(.78879 0 0 .78947 -47.401 -114.31)" d="m374.29 366.65a94.286 94.286 0 0 1-94.286 94.286 94.286 94.286 0 0 1-94.286-94.286 94.286 94.286 0 0 1 94.286-94.286 94.286 94.286 0 0 1 94.286 94.286z" style="fill:#008000"/>
-                                                                                     </g>
-                                                                                    </g>
-                                                                                   </svg> -->
+                                                                        <span class="amenity-veg-nonveg" #d3000a style="margin-left: 10px;">
+                                                                            <svg style="width:20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                            x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;"
+                                                                            xml:space="preserve">
+                                                                                <g transform="scale(0.31)">
+                                                                                    <circle cx="100" cy="100" r="50" transform="translate(-22.5,-22.5)" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}" />
+                                                                                    <rect width="155" height="5" x="0" y="0" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}" />
+                                                                                    <rect width="155" height="5" x="0" y="150" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}" />
+                                                                                    <rect width="5" height="155" x="0" y="0" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}" />
+                                                                                    <rect width="5" height="155" x="150" y="0" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}" />
+                                                                                </g>
+                                                                            </svg>
+
 
                                                                         </span>
-                                                                        <span class="amenity-alcohol"  style="margin-left: 10px;">
-                                                                            <svg style="width:20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                                                viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;"
+                                                                        <span class="amenity-alcohol" style="margin-left: 10px;">
+                                                                            <svg style="width:20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;"
                                                                                 xml:space="preserve">
                                                                                 <g>
                                                                                     <path style="fill:#E6E6E6;" d="M44.5,20.232h-6v4h4c1.1,0,2,0.9,2,2v10c0,1.1-0.9,2-2,2h-4v4h6c2.2,0,4-1.8,4-4v-14
@@ -1759,11 +1754,16 @@
                                                                                     <path ng-style="restaurant.amenities.alcohol && {'fill':'#F4C44E'} || {'fill':'#cacaca'}" d="M26.568,12c0,3.3-2.7,6-6,6c-2.018,0-3.808-1.012-4.897-2.551C14.937,16.385,13.81,17,12.535,17
                                                                                    h-1.967c-0.758,0-1.462-0.225-2.068-0.596V47c0,2.75,2.25,5,5,5h20c2.75,0,5-2.25,5-5V12H26.568z"
                                                                                     />
-                                                                                    <path ng-style="restaurant.amenities.alcohol && { 'fill':'#F9DA49'} || {'fill':'#ababaa'}" d="M14.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z" />
-                                                                                    <path ng-style="restaurant.amenities.alcohol && {'fill':'#EEAF4B'} || {'fill':'#807f7f'}" d="M20.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z" />
-                                                                                    <path  ng-style="restaurant.amenities.alcohol && { 'fill':'#F9DA49'} || {'fill':'#ababaa'}" d="M26.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z" />
-                                                                                    <path ng-style="restaurant.amenities.alcohol && {'fill':'#EEAF4B'} || {'fill':'#807f7f'}" d="M32.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z" />
-                                                                                    <path  ng-style="restaurant.amenities.alcohol && { 'fill':'#F9DA49'} || {'fill':'#ababaa'}" d="M38.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z" />
+                                                                                    <path ng-style="restaurant.amenities.alcohol && { 'fill':'#F9DA49'} || {'fill':'#ababaa'}" d="M14.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z"
+                                                                                    />
+                                                                                    <path ng-style="restaurant.amenities.alcohol && {'fill':'#EEAF4B'} || {'fill':'#807f7f'}" d="M20.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z"
+                                                                                    />
+                                                                                    <path ng-style="restaurant.amenities.alcohol && { 'fill':'#F9DA49'} || {'fill':'#ababaa'}" d="M26.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z"
+                                                                                    />
+                                                                                    <path ng-style="restaurant.amenities.alcohol && {'fill':'#EEAF4B'} || {'fill':'#807f7f'}" d="M32.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z"
+                                                                                    />
+                                                                                    <path ng-style="restaurant.amenities.alcohol && { 'fill':'#F9DA49'} || {'fill':'#ababaa'}" d="M38.5,25c0-1.65-1.35-3-3-3s-3,1.35-3,3v21h6V25z"
+                                                                                    />
                                                                                 </g>
                                                                                 <g>
                                                                                 </g>
@@ -1861,7 +1861,8 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <div ng-repeat="(key, value) in restaurantDish | groupBy:'dish_type'">
+                                                                <span ng-repeat="(key, value) in restaurantDish | groupBy:'dish_type'">
+                                                                    <span title='[[key]]' ></span>
                                                                     <tr>
                                                                         <td colspan="4">[[key]]</td>
                                                                     </tr>
@@ -1875,7 +1876,7 @@
                                                                             <button style="width:100%;" class="button btn-small yellow">Add</button>
                                                                         </td>
                                                                     </tr>
-                                                                </div>
+                                                                </span>
 
 
 

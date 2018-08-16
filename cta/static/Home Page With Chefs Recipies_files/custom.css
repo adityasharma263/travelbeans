@@ -14,7 +14,7 @@ hr{
     border-color: #dddada;
 }
 
-.restaurant-address{
+.restaurant-address, .truncate-text{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

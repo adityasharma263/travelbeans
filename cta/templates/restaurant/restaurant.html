@@ -40,7 +40,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.4.7/angular-filter.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg-3eaCM5LOJXDjY6cMBASoAnREc4-R58">
     </script>
-
+    <script src="https://rawgit.com/josephschmitt/Clamp.js/master/clamp.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/restaurant_js/app.js"></script>
 </head>
 
@@ -788,14 +788,14 @@
                                 <img src="images/logopng" alt="">
                             </div>
                             <div class="heading box">
-                                <h1 class="title">#TB Restaurants</h1>
+                                <h1 class="title" style="font-size: 3.1667em;">#TB Restaurants</h1>
                             </div>
                             <div class="tab-content">
                                 <div class="search-box tab-pane fade active in" id="search">
 
                                     <form>
                                         <div class="row">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-2 col-xs-12">
                                                 {#
                                                 <label>
                                                     <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
@@ -825,7 +825,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-sm-4 col-md-6 form-group">
+                                            <div class="col-sm-6  col-xs-12 form-group">
                                                 <!-- <div class="row"> -->
                                                 <!-- <div class="col-sm-2">
 
@@ -836,7 +836,7 @@
                                                 <!-- </div> -->
                                                 <!-- </div> -->
                                             </div>
-                                            <div class=" col-sm-4 form-group ">
+                                            <div class=" col-sm-4 col-xs-12 form-group ">
                                                 <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                 " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
                                             </div>
@@ -1000,10 +1000,10 @@
                                 <div class="col-sm-12" ng-show="!showlocationDiv">
                                     <h3>Use GPS for location</h3>
                                 </div>
-                                <div ng-show="!showlocationDiv" class="col-sm-6">
+                                <div ng-show="!showlocationDiv" class="col-xs-6">
                                     <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()">Allow</button>
                                 </div>
-                                <div ng-show="!showlocationDiv" class="col-sm-6">
+                                <div ng-show="!showlocationDiv" class="col-xs-6">
                                     <button class="button btn-medium red" ng-click="showlocationDiv = true;">Deny</button>
                                 </div>
                                 <!-- <div class="col-sm-6">
@@ -1018,7 +1018,7 @@
                                     <div class="dropdown makePaymentDropdownMainDiv" auto-close="outsideClick">
                                         <button style="width:100%;border-radius: 0;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button"
                                             id="individualDrop" ng-click="serchFilter = ''" data-toggle="dropdown" ng-cloak="">
-                                        Select City
+                                            Select City
                                             <span class="caret pull-right" style="margin-top:10px;"></span>
                                         </button>
                                         <span ng-show="submitted">
@@ -1070,13 +1070,15 @@
                         <div class="col-md-4 collection-card">
                             <article class="box ">
                                 <figure>
-                                    <a title=" " href="/restaurant/search?collection={{collection.collection}} ">
+                                    <a title=" " href="/restaurant/search?collection={{collection.collection}}">
                                         <img class="collection-card-img" alt="{{collection.collection}} " src="{{collection.image}} ">
                                     </a>
                                 </figure>
                                 <div class="details collection-card-details ">
-                                    <h3 class="box-title ">{{collection.collection}}</h3>
-                                    <p>Our premium classy Resturants Trending .. </p>
+                                    <h3 class="box-title ">
+                                        <a title=" " href="/restaurant/search?collection={{collection.collection}}">{{collection.collection}}</a>
+                                    </h3>
+                                    <p class="truncate-text1" id="collection-desc">{{collection.desc}} </p>
                                 </div>
                             </article>
                         </div>
@@ -1118,7 +1120,7 @@
                             <a href="/restaurant/search?menu=dinner ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-beach "></i> -->
-                                    <img style="width:77px" src="Restaurant SVG Icons/dinner.svg" style="width: 60px;" alt="">
+                                    <img src="Restaurant SVG Icons/dinner.svg" style="width: 60px;" alt="">
                                     <h4 class="box-title ">Dinner</h4>
 
                                 </div>
@@ -1218,15 +1220,13 @@
 
                     <h2>Popular Resturants</h2>
                     {% set categories_data_reverse = { "1": "bistro", "2": "ethnic", "3": "fine_dining", "4": "trattoria", "5": "teppanyaki_ya",
-                    "6": "osteria", "7": "drive_in", "8": "drive_thru", "9": "pizzeria", "10": "taverna",
-                    "11": "fast_casual", "12": "pop_up", "13": "Café", "14": "iner", "15": "ramen_ya",
-                    "16": "teahouse", "17": "fast_food", "18": "buffet", "19": "cafeteria", "20":
-                    "luncheonette", "21": "tapas_bar", "22": "steakhouse", "23": "all_you_can_eat_restaurant",
-                    "24": "kosher", "25": "dinner_in_the_Sky", "26": "dark_restaurant", "27": "a_la_carte",
-                    "28": "gastropub", "29": "brasserie", "30": "chiringuito", "31": "food_truck",
-                    "32": "churrascaria", "33": "food_court", "34": "restrobars", "35": "street_stalls",
-                    "36": "theme_resturants", "37": "coffee_shop", "38": "coffee_house", "39": "cabaret",
-                    "40": "tea_shop" } %}
+                    "6": "osteria", "7": "drive_in", "8": "drive_thru", "9": "pizzeria", "10": "taverna", "11": "fast_casual",
+                    "12": "pop_up", "13": "Café", "14": "iner", "15": "ramen_ya", "16": "teahouse", "17": "fast_food", "18":
+                    "buffet", "19": "cafeteria", "20": "luncheonette", "21": "tapas_bar", "22": "steakhouse", "23": "all_you_can_eat_restaurant",
+                    "24": "kosher", "25": "dinner_in_the_Sky", "26": "dark_restaurant", "27": "a_la_carte", "28": "gastropub",
+                    "29": "brasserie", "30": "chiringuito", "31": "food_truck", "32": "churrascaria", "33": "food_court",
+                    "34": "restrobars", "35": "street_stalls", "36": "theme_resturants", "37": "coffee_shop", "38": "coffee_house",
+                    "39": "cabaret", "40": "tea_shop" } %}
                     <div class="block ">
                         <div class="row image-box style10 ">
                             {% for restaurant in featured_restaurant_data %}
@@ -1235,7 +1235,7 @@
 
 
                                 <article class="box">
-                                    <figure>
+                                    <figure stylr="height:171px;overflow:hidden;">
                                         <a href="/restaurant/{{restaurant.id}}" class="hover-effect">
                                             <span class="restaurent-type">{{categories_data_reverse[restaurant.category|string] }}</span>
                                             <img width="270" height="161" alt="" ng-src="{{restaurant.images[0].image_url}}">
@@ -1257,7 +1257,7 @@
                                             <span class="review pull-right"> rating : {{restaurant.rating}}</span>
                                         </div>
                                         <p class="description">
-                                            
+
                                             <!-- <div>
                                                 Type : {{categories_data_reverse[restaurant.category|string] }}
                                             </div> -->
@@ -1325,6 +1325,27 @@
                                                             </svg>
 
                                                         </span>
+                                                        <span class="amenity-veg-nonveg" #d3000a style="margin-left: 10px;">
+                                                            <svg style="width:20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;"
+                                                                xml:space="preserve">
+                                                                <g transform="scale(0.31)">
+                                                                    <circle cx="100" cy="100" r="50" transform="translate(-22.5,-22.5)" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}"
+                                                                    />
+                                                                    <rect width="155" height="5" x="0" y="0" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}"
+                                                                    />
+                                                                    <rect width="155" height="5" x="0" y="150" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}"
+                                                                    />
+                                                                    <rect width="5" height="155" x="0" y="0" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}"
+                                                                    />
+                                                                    <rect width="5" height="155" x="150" y="0" ng-style="restaurant.amenities.vegetarian_only && {'fill':'#008000'} || {'fill':'#d3000a'}"
+                                                                    />
+                                                                </g>
+                                                            </svg>
+
+
+                                                        </span>
+
                                                         <span class="amenity-alcohol" style="margin-left: 10px;">
                                                             <svg style="width:20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                                                 x="0px" y="0px" viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;"

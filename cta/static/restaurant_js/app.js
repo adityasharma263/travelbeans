@@ -17,6 +17,11 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       overlayBox.style.display = "none";
     }
 
+
+    var collection_desc = document.getElementById("collection-desc")
+    console.log(collection_desc)
+    $clamp(collection_desc, { clamp: 3 });
+
     $scope.searchQuery = function (query, cityLocation) {
 
       console.log(query);
@@ -111,6 +116,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     function getQueryStringValue(key) {
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+
+    $scope.reload = function(){
+      window.location.reload();
     }
 
     var map;
@@ -2517,3 +2526,10 @@ var Locations = [
   'Zirakpur',
   'Ziro',
 ]
+
+
+
+
+// var collection_desc = document.getElementById("collection-desc")
+
+// $clamp(collection_desc, {clamp: 2});
