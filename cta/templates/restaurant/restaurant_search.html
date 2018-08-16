@@ -1626,7 +1626,7 @@
                                                     <figure>
                                                         <a href="/restaurant/[[restaurant.id]]" class="hover-effect" style="max-height:211px;">
                                                             <span class="restaurent-type">[[categories_data_reverse[restaurant.category] ]]</span>
-                                                            <img width="270" height="161" alt="" ng-src="[[restaurant.images[0].image_url]]">
+                                                            <img width="270" height="161" alt="" ng-src="[[getImageForResults(restaurant.images)]]">
                                                         </a>
                                                     </figure>
                                                     <div class="details">
@@ -1860,11 +1860,10 @@
                                                                     <th style="text-align: center;">Order Online</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <span ng-repeat="(key, value) in restaurantDish | groupBy:'dish_type'">
-                                                                    <span title='[[key]]' ></span>
+                                                            <tbody ng-repeat="(key, value) in restaurantDish | groupBy:'dish_type'">
+                                                                
                                                                     <tr>
-                                                                        <td colspan="4">[[key]]</td>
+                                                                        <td colspan="4"> <span class="label label-primary" style="font-size: 12px;">[[key]]</span></td>
                                                                     </tr>
                                                                     <tr ng-repeat="dish in value">
 
@@ -1876,10 +1875,6 @@
                                                                             <button style="width:100%;" class="button btn-small yellow">Add</button>
                                                                         </td>
                                                                     </tr>
-                                                                </span>
-
-
-
                                                             </tbody>
                                                         </table>
                                                     </div>
