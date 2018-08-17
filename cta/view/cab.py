@@ -1,8 +1,10 @@
-from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser, CabWebsite
+from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser,\
+    CabWebsite
 from cta import app, db
 from flask import jsonify, request
 from cta.lib.cab_fare import CabFare
-from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema, CabUserSchema, CabWebsiteSchema
+from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema,\
+    CabUserSchema, CabWebsiteSchema
 import datetime
 from itertools import cycle
 import simplejson as json
