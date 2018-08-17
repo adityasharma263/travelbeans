@@ -1,12 +1,11 @@
-from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser
+from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser, CabWebsite
 from cta import app, db
 from flask import jsonify, request
 from cta.lib.cab_fare import CabFare
-from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema, CabUserSchema
+from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema, CabUserSchema, CabWebsiteSchema
 import datetime
 from itertools import cycle
 import simplejson as json
-
 
 
 
@@ -173,7 +172,7 @@ def cab_deal():
         return jsonify({'result': {'deals': result.data}, 'message': "Success", 'error': False})
 
 
-@app.route('/api/v1/restaurant/images', methods=['GET', 'POST'])
+@app.route('/api/v1/cab/images', methods=['GET', 'POST'])
 def cab_image_api():
     if request.method == 'GET':
         args = request.args.to_dict()
@@ -203,9 +202,22 @@ def cab_booking():
         result = CabBookingSchema(many=True).dump(data)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
     else:
-        post = CabBooking(**request.json)
-        post.save()
-        result = CabBookingSchema().dump(post)
+        booking = request.json
+        tax = booking.get("tax", None)
+        user = booking.get("user", None)
+        booking.pop('user', None)
+        booking.pop('tax', None)
+        tax_post = CabTax(**tax)
+        tax_post.save()
+        user_post = CabUser(**user)
+        user_post.save()
+        booking["tax_id"] = tax_post.id
+        booking["user_id"] = user_post.id
+        booking_post = CabBooking(**booking)
+        booking_post.save()
+        booking_post.tax = tax_post
+        booking_post.user = user_post
+        result = CabBookingSchema().dump(booking_post)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
 
 
@@ -225,3 +237,21 @@ def cab_tax():
         post.save()
         result = CabTaxSchema().dump(post)
         return jsonify({'result': {'taxes': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/website', methods=['GET', 'POST'])
+def cab_website_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        web = CabWebsite.query.filter_by(**args).all()
+        result = CabWebsiteSchema(many=True).dump(web)
+        return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = CabWebsite(**request.json)
+        post.save()
+        result = CabWebsiteSchema().dump(post)
+        return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
