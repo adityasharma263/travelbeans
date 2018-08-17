@@ -564,6 +564,14 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.amenities = Constants.Amenities;
     $scope.cab_types = Constants.Cab_types;
 
+    var createToast=function(msg, color){
+      var x= document.getElementById("snackbar");
+      x.innerHTML=msg;
+      x.style.backgroundColor=color;
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
 
     $http({
       method: 'GET',
@@ -589,12 +597,12 @@ angular.module('comparetravel', ['angular.filter'])
       }).then(function (res) {
         console.log(res);
         
-        // createToast("'hotel successfully created!!!'","green");
+        createToast("'cab successfully created!!!'","green");
   
         },
         // failed callback
         function (req) {
-         // createToast("'Something went wrong!!!'","red");
+         createToast("'Something went wrong!!!'","red");
         })
       
     }
@@ -603,11 +611,13 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.addImg=function(){
         $scope.cabImg.push($scope.images);
         $scope.images={};
+        createToast("'Image Added!!'","green");
     }
 
     $scope.addDeal=function(){
       $scope.cabDeals.push($scope.deals);
       $scope.deals={};
+      createToast("'Deal Added!!'","green");
   
     }
 
