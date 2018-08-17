@@ -603,7 +603,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     var sendPostCall = function(url, data) {
-      $scope.cab.city = $scope.cab.city.toLowerCase();
+      //$scope.cab.city = $scope.cab.city.toLowerCase();
       console.log(data);
       
       $http({
