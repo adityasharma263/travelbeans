@@ -497,6 +497,9 @@ angular.module('comparetravel', ['angular.filter'])
 .controller('Cab_HomeController',["$scope", "$http","dataShare", function($scope, $http, dataShare, $filter) {
     $scope.info = {};
 
+    $scope.info.pickup_time = Date.parse($scope.info.pickup_time)/1000;
+    $scope.info.drop_time = Date.parse($scope.info.drop_time)/1000;
+
     $scope.getCabs = function(id) {
         // console.log("$location.path",$location.path);
         console.log("$scope.info",$scope.info);
@@ -572,6 +575,18 @@ angular.module('comparetravel', ['angular.filter'])
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
+    $http({
+      method: 'GET',
+      url: '/api/v1/cab/website' 
+    }).then(function successCallback(response) {
+        // hotelData = response.data.result;
+        $scope.websites = response.data.result.website;
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
 
     $http({
       method: 'GET',
@@ -588,6 +603,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     var sendPostCall = function(url, data) {
+      //$scope.cab.city = $scope.cab.city.toLowerCase();
       console.log(data);
       
       $http({

@@ -56,36 +56,36 @@ def cab_api():
             q = q.filter(Cab.rating >= rating)
         data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
         result = CabSchema(many=True).dump(data)
-        for cab in result.data:
-            if cab.get("deals", None):
-                deals = cab.get("deals", None)
-                for deal in deals:
-                    fare_obj = {
-                        "pickup_time": pickup_time,
-                        "drop_time": drop_time,
-                        "pickup_lat": pickup_lat,
-                        "pickup_lon": pickup_lon,
-                        "drop_lat": drop_lat,
-                        "drop_lon": drop_lon,
-                        "cab_type": cab_type,
-                        "base_fare": deal.get('base_fare', None),
-                        "one_way": deal.get('one_way', None),
-                        "driver_per_hr_allowance_charge": deal.get('driver_per_hr_allowance_charge', None),
-                        "slab": deal.get('slab', None),
-                        "driver_daily_allowance_charge": deal.get('driver_daily_allowance_charge', None),
-                        "car_night_allowance_charge": deal.get('car_night_allowance_charge', None),
-                        "base_fare_weekend": deal.get('base_fare_weekend', None),
-                        "base_fare_peak_season": deal.get('base_fare_peak_season', None),
-                        "base_fare_with_fuel": deal.get('base_fare_with_fuel', None),
-                        "different_pickup_drop_point_charge": deal.get('different_pickup_drop_point_charge', None),
-                        "fare_exceeded_per_km": deal.get('fare_exceeded_per_km', None),
-                        "fare_exceeded_per_hr": deal.get('fare_exceeded_per_hr', None),
-                        "initial_km": deal.get('initial_km', None),
-                        "initial_km_fare": deal.get('initial_km_fare', None),
-                        "km_restriction": deal.get('km_restriction', None),
-                        "cancellation_charges": deal.get('cancellation_charges', None),
-                    }
-                    deal['booking'] = CabFare().fare_calculation(fare_obj)
+        # for cab in result.data:
+        #     if cab.get("deals", None):
+        #         deals = cab.get("deals", None)
+        #         for deal in deals:
+        #             fare_obj = {
+        #                 "pickup_time": pickup_time,
+        #                 "drop_time": drop_time,
+        #                 "pickup_lat": pickup_lat,
+        #                 "pickup_lon": pickup_lon,
+        #                 "drop_lat": drop_lat,
+        #                 "drop_lon": drop_lon,
+        #                 "cab_type": cab_type,
+        #                 "base_fare": deal.get('base_fare', None),
+        #                 "one_way": deal.get('one_way', None),
+        #                 "driver_per_hr_allowance_charge": deal.get('driver_per_hr_allowance_charge', None),
+        #                 "slab": deal.get('slab', None),
+        #                 "driver_daily_allowance_charge": deal.get('driver_daily_allowance_charge', None),
+        #                 "car_night_allowance_charge": deal.get('car_night_allowance_charge', None),
+        #                 "base_fare_weekend": deal.get('base_fare_weekend', None),
+        #                 "base_fare_peak_season": deal.get('base_fare_peak_season', None),
+        #                 "base_fare_with_fuel": deal.get('base_fare_with_fuel', None),
+        #                 "different_pickup_drop_point_charge": deal.get('different_pickup_drop_point_charge', None),
+        #                 "fare_exceeded_per_km": deal.get('fare_exceeded_per_km', None),
+        #                 "fare_exceeded_per_hr": deal.get('fare_exceeded_per_hr', None),
+        #                 "initial_km": deal.get('initial_km', None),
+        #                 "initial_km_fare": deal.get('initial_km_fare', None),
+        #                 "km_restriction": deal.get('km_restriction', None),
+        #                 "cancellation_charges": deal.get('cancellation_charges', None),
+        #             }
+        #             deal['booking'] = CabFare().fare_calculation(fare_obj)
         return jsonify({'result': {'cabs': result.data}, 'message': "Success", 'error': False})
     else:
         cab = request.json
@@ -188,6 +188,24 @@ def cab_image_api():
         post.save()
         result = CabImageSchema().dump(post)
         return jsonify({'result': {'image': result.data}, 'message': "Success", 'error': False})
+
+@app.route('/api/v1/cab/website', methods=['GET', 'POST'])
+def cabWebsite_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        page = int(request.args.get('page', 1))
+        per_page = int(request.args.get('per_page', 10))
+        web = CabWebsite.query.filter_by(**args).all()
+        result = CabWebsiteSchema(many=True).dump(web)
+        return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = Website(**request.json)
+        post.save()
+        result = CabWebsiteSchema().dump(post)
+        return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
+
 
 
 @app.route('/api/v1/cab/booking', methods=['GET', 'POST'])
