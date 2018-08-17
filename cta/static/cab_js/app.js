@@ -497,6 +497,9 @@ angular.module('comparetravel', ['angular.filter'])
 .controller('Cab_HomeController',["$scope", "$http","dataShare", function($scope, $http, dataShare, $filter) {
     $scope.info = {};
 
+    $scope.info.pickup_time = Date.parse($scope.info.pickup_time)/1000;
+    $scope.info.drop_time = Date.parse($scope.info.drop_time)/1000;
+
     $scope.getCabs = function(id) {
         // console.log("$location.path",$location.path);
         console.log("$scope.info",$scope.info);
@@ -564,6 +567,26 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.amenities = Constants.Amenities;
     $scope.cab_types = Constants.Cab_types;
 
+    var createToast=function(msg, color){
+      var x= document.getElementById("snackbar");
+      x.innerHTML=msg;
+      x.style.backgroundColor=color;
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    $http({
+      method: 'GET',
+      url: '/api/v1/cab/website' 
+    }).then(function successCallback(response) {
+        // hotelData = response.data.result;
+        $scope.websites = response.data.result.website;
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
 
     $http({
       method: 'GET',
@@ -580,6 +603,7 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     var sendPostCall = function(url, data) {
+      //$scope.cab.city = $scope.cab.city.toLowerCase();
       console.log(data);
       
       $http({
@@ -589,12 +613,12 @@ angular.module('comparetravel', ['angular.filter'])
       }).then(function (res) {
         console.log(res);
         
-        // createToast("'hotel successfully created!!!'","green");
+        createToast("'cab successfully created!!!'","green");
   
         },
         // failed callback
         function (req) {
-         // createToast("'Something went wrong!!!'","red");
+         createToast("'Something went wrong!!!'","red");
         })
       
     }
@@ -603,11 +627,13 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.addImg=function(){
         $scope.cabImg.push($scope.images);
         $scope.images={};
+        createToast("'Image Added!!'","green");
     }
 
     $scope.addDeal=function(){
       $scope.cabDeals.push($scope.deals);
       $scope.deals={};
+      createToast("'Deal Added!!'","green");
   
     }
 

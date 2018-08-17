@@ -290,8 +290,9 @@
                         <li><a href="#luxury-tab" data-toggle="tab"><i class="soap-icon-flight-hotel"></i><span>Luxury Cabs</span></a></li>
                         <li><a href="#monthly-tab" data-toggle="tab"><i class="soap-icon-car"></i><span>Monthly Rentals</span></a></li>
                         <li><a href="#sight_seeing-tab" data-toggle="tab"><i class="soap-icon-cruise"></i><span>Sightseeing Cabs</span></a></li>
-                        <li><a href="#hire_driver-tab" data-toggle="tab"><i class="soap-icon-status"></i><span>Hire a Driver</span></a></li>
                         <li><a href="#quick-tab" data-toggle="tab"><i class="soap-icon-status"></i><span>Quick Cabs</span></a></li>
+                        <li><a href="#hire_driver-tab" data-toggle="tab"><i class="soap-icon-status"></i><span>Hire a Driver</span></a></li>
+                        
                     </ul>
                     <div class="visible-mobile">
                         <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
@@ -312,267 +313,311 @@
                                 <div class="row">
                                     <label>
                                         <input type="radio" value="true" ng-model="info.one_way"/>One Way
-                                    </label>
-                                    <label>
                                         <input type="radio" value="false" ng-model="info.one_way"/>Round Trip
                                     </label>
-                                    <div class="col-md-4">
-                                        <h4 class="title">Where</h4>
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Pick Up</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop Off</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4">
-                                        <h4 class="title">When</h4>
-                                        <div class="form-group">
-                                            <label>Pick-Up Date / Time</label>
+                                            
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-md-3">
                                                     <div >
+                                                        <label>Pickup Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>Pickup Time</label>
                                                         <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop-Off Date / Time</label>
-                                            <div class="row">
-                                                <div class="col-xs-6">
+ 
+                                                <div class="col-md-3">
                                                     <div >
+                                                         <label>Drop Off Location</label>
+                                                         <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                    <div class="col-md-2">
+                                                    <div >
+                                                        <label>Drop Off Time</label>
                                                         <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>For Variety of Prices</label>
+                                                        <button type="submit" class="full-width" ng-click="getCabs(4)">SEARCH NOW</button>
+                                                    </div>
+                                                </div>
+ 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="full-width" ng-click="getCabs(4)" style="margin-top: 100px">SEARCH NOW</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
                         
                         <div class="tab-pane fade" id="self_drive-tab">
-							<form >
+							<form>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <h4 class="title">Where</h4>
+                                   
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Pick Up</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4">
-                                        <h4 class="title">When</h4>
-                                        <div class="form-group">
-                                            <label>Pick-Up Date / Time</label>
+                                            
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-md-3">
                                                     <div >
+                                                        <label>Pickup Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>Pickup Time</label>
                                                         <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop-Off Date / Time</label>
-                                            <div class="row">
-                                                <div class="col-xs-6">
+ 
+                                                <div class="col-md-3">
                                                     <div >
+                                                         <label>Drop Off Location</label>
+                                                         <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                    <div class="col-md-2">
+                                                    <div >
+                                                        <label>Drop Off Time</label>
                                                         <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>For Variety of Prices</label>
+                                                        <button type="submit" class="full-width" ng-click="getCabs(5)">SEARCH NOW</button>
+                                                    </div>
+                                                </div>
+ 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="full-width" ng-click="getCabs(5)" style="margin-top: 100px">SEARCH NOW</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="luxury-tab">
-                            <form >
+                            <form>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <h4 class="title">Where</h4>
-                                        <div class="form-group">
-                                            <label>Pick Up</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop Off</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                    </div>
                                     
-                                    <div class="col-md-4">
-                                        <h4 class="title">When</h4>
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Pick-Up Date / Time</label>
+                                            
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-md-3">
                                                     <div >
+                                                        <label>Pickup Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>Pickup Time</label>
                                                         <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop-Off Date / Time</label>
-                                            <div class="row">
-                                                <div class="col-xs-6">
+ 
+                                                <div class="col-md-3">
                                                     <div >
+                                                         <label>Drop Off Location</label>
+                                                         <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                    <div class="col-md-2">
+                                                    <div >
+                                                        <label>Drop Off Time</label>
                                                         <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>For Variety of Prices</label>
+                                                        <button type="submit" class="full-width" ng-click="getCabs(3)">SEARCH NOW</button>
+                                                    </div>
+                                                </div>
+ 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="full-width" ng-click="getCabs(3)" style="margin-top: 100px">SEARCH NOW</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="monthly-tab">
                             <form>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <h4 class="title">Where</h4>
-                                        <div class="form-group">
-                                            <label>Pick Up</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop Off</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                    </div>
                                     
-                                    <div class="col-md-4">
-                                        <h4 class="title">When</h4>
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Pick-Up Date / Time</label>
+                                            
                                             <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div>
+                                                <div class="col-md-3">
+                                                    <div >
+                                                        <label>Pickup Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>Pickup Time</label>
                                                         <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop-Off Date / Time</label>
-                                            <div class="row">
-                                                <div class="col-xs-6">
+ 
+                                                <div class="col-md-3">
                                                     <div >
+                                                         <label>Drop Off Location</label>
+                                                         <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                    <div class="col-md-2">
+                                                    <div >
+                                                        <label>Drop Off Time</label>
                                                         <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>For Variety of Prices</label>
+                                                        <button type="submit" class="full-width" ng-click="getCabs(1)">SEARCH NOW</button>
+                                                    </div>
+                                                </div>
+ 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="full-width" ng-click="getCabs(1)" style="margin-top: 100px">SEARCH NOW</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="sight_seeing-tab">
-                            <form >
+                            <form>
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <h4 class="title">Where</h4>
+                                   
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Pick Up</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4">
-                                        <h4 class="title">When</h4>
-                                        <div class="form-group">
-                                            <label>Pick-Up Date / Time</label>
+                                            
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-md-3">
                                                     <div >
+                                                        <label>Pickup Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>Pickup Time</label>
                                                         <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop-Off Date / Time</label>
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                        <div >
-                                                            <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                        </div>
+ 
+                                                <div class="col-md-3">
+                                                    <div >
+                                                         <label>Drop Off Location</label>
+                                                         <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
                                                 </div>
+ 
+                                                    <div class="col-md-2">
+                                                    <div >
+                                                        <label>Drop Off Time</label>
+                                                        <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>For Variety of Prices</label>
+                                                        <button type="submit" class="full-width" ng-click="getCabs(2)">SEARCH NOW</button>
+                                                    </div>
+                                                </div>
+ 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="full-width" ng-click="getCabs(2)" style="margin-top: 100px">SEARCH NOW</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="hire_driver-tab">
                             <form>
                                 <div class="row">
-                                        <label>
-                                            <input type="radio" value="true" ng-model="info.outstation"/>Outstation
-                                        </label>
-                                        <label>
-                                            <input type="radio" value="false" ng-model="info.outstation"/>Interstate
-                                        </label>
-                                    <div class="col-md-4">
-                                        <h4 class="title">Where</h4>
+                                    <label>
+                                        <input type="radio" value="true" ng-model="info.outstation"/>Outstation
+                                        <input type="radio" value="false" ng-model="info.outstation"/>Interstate
+                                    </label>
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Pick Up</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop Off</label>
-                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-4">
-                                        <h4 class="title">When</h4>
-                                        <div class="form-group">
-                                            <label>Pick-Up Date / Time</label>
+                                            
                                             <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div>
+                                                <div class="col-md-3">
+                                                    <div >
+                                                        <label>Pickup Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>Pickup Time</label>
                                                         <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Drop-Off Date / Time</label>
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div>
+ 
+                                                <div class="col-md-3">
+                                                    <div >
+                                                         <label>Drop Off Location</label>
+                                                         <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+ 
+                                                    </div>
+                                                </div>
+ 
+                                                    <div class="col-md-2">
+                                                    <div >
+                                                        <label>Drop Off Time</label>
                                                         <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div >
+                                                        <label>For Variety of Prices</label>
+                                                        <button type="submit" class="full-width" ng-click="getCabs(6)">SEARCH NOW</button>
+                                                    </div>
+                                                </div>
+ 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="full-width" ng-click="getCabs(6)" style="margin-top: 100px">SEARCH NOW</button>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
