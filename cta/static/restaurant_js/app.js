@@ -18,9 +18,16 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     }
 
 
-    var collection_desc = document.getElementById("collection-desc")
-    console.log(collection_desc)
-    $clamp(collection_desc, { clamp: 3 });
+    var collection_desc = document.getElementsByClassName("collection-desc")
+    
+    if(collection_desc.length){
+      for ( i in collection_desc ){
+        console.log(collection_desc[i]);
+        $clamp(collection_desc[i], { clamp: 3 });
+      }
+
+      
+    }
 
     $scope.searchQuery = function (query, cityLocation) {
 
