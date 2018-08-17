@@ -26,4 +26,4 @@ def cab_api():
         # post = Cab(**request.json)
         p.save()
         result = CabSchema().dump(p)
-        return jsonify({'result': {'cab': result.data}, 'message': "Success", 'error': False})git
+        return jsonify({'result': {'cab': result.data}, 'message': "Success", 'error': False})
