@@ -1458,7 +1458,7 @@
                                     <form>
                                         <div class="row">
 
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-2 col-xs-12">
 
                                                 <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
                                                     <button style="width:100%;border-radius:0;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button"
@@ -1480,7 +1480,7 @@
 
                                             </div>
 
-                                            <div class="col-sm-4 col-md-6 form-group" {% if not searched_key=='category' %} ng-init="searchQueryValue = '{{ searched_value }}'"
+                                            <div class="col-sm-6 col-xs-12 form-group" {% if not searched_key=='category' %} ng-init="searchQueryValue = '{{ searched_value }}'"
                                                 {% else %} ng-init="searchQueryValue = ''" {% endif %}>
 
                                                 <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
@@ -1488,7 +1488,7 @@
 
                                             </div>
 
-                                            <div class=" col-sm-4 form-group ">
+                                            <div class=" col-sm-4 col-xs-12 form-group ">
                                                 <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                     " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
                                             </div>
