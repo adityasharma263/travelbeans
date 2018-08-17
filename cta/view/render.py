@@ -92,7 +92,7 @@ def restaurant_collection():
 
     restaurant_url =str(app.config["DOMAIN_URL"]) + "/api/v1/restaurant"
 
-    collection_data = requests.get(restaurant_url, params={"city" : "Delhi"}).json()['result']['restaurants']
+    collection_data = requests.get(restaurant_url, params={"city" : location_from_cookie}).json()['result']['restaurants']
 
     collections = {}
 

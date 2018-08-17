@@ -17,6 +17,11 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       overlayBox.style.display = "none";
     }
 
+
+    var collection_desc = document.getElementById("collection-desc")
+    console.log(collection_desc)
+    $clamp(collection_desc, { clamp: 3 });
+
     $scope.searchQuery = function (query, cityLocation) {
 
       console.log(query);
@@ -66,16 +71,16 @@ var app = angular.module("restaurantApp", ['angular.filter'])
           var lat = position.coords.latitude;
           var long = position.coords.longitude;
           var params = {
-            latitude : lat,
-            longitude : long
+            latitude: lat,
+            longitude: long
           }
 
-          $http.get("/restaurant", {params: params})
+          $http.get("/restaurant", { params: params })
             .then(function (res) {
               window.location.reload()
             }, function (err) {
               alert("Some error occur! Please Try different method.");
-              
+
             })
 
         }, function (err) {
@@ -113,6 +118,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
     }
 
+    $scope.reload = function(){
+      window.location.reload();
+    }
+
     var map;
     $scope.showMap = function (lat, long, restaurantName) {
       var latLong = { lat: lat, lng: long }
@@ -146,6 +155,10 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         function (err) {
           console.log(err);
         })
+    }
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     $scope.setValues = function (location) {
@@ -343,6 +356,19 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
     };
 
+    $scope.getImageForResults = function (imagesArray) {
+
+      for (i in imagesArray) {
+        if (imagesArray[i].image_type == 1 || imagesArray[i].image_type == 2) {
+          return imagesArray[i].image_url;
+        }
+      }
+
+      return "/Restaurant SVG Icons/placeholder.png";
+
+
+    }
+
     $scope.categories_data = {
       "bistro": 1,
       "ethnic": 2,
@@ -508,7 +534,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         console.log(err);
       });
 
-      $http.get("/api/v1/restaurant/chain")
+    $http.get("/api/v1/restaurant/chain")
       .then(function (res) {
         $scope.restaurent_chain = res.data.result.restaurent_chain;
       }, function (err) {
@@ -2502,3 +2528,10 @@ var Locations = [
   'Zirakpur',
   'Ziro',
 ]
+
+
+
+
+// var collection_desc = document.getElementById("collection-desc")
+
+// $clamp(collection_desc, {clamp: 2});

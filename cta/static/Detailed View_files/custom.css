@@ -116,9 +116,9 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) { 
     .search-suggestion-box{
-        top: 4%;
+        top: 186px;
         width: 482px;
-        left: 249px;
+        left: 311px;
     
 }
 }
@@ -131,4 +131,14 @@
     font-weight: 700;
     
     
+}
+.restaurent-type{
+    position: absolute;
+    background: #fdb714;
+    top: 8px;
+    z-index: 33;
+    padding: 5px;
+    color: #fff;
+    border-top-right-radius: 10px;
+    font-size: 15px;
 }

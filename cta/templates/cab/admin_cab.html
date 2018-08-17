@@ -5,35 +5,50 @@
     <div class="row">
         <div class="col-sm-6">
             <!-- <form> -->
+            <form class="form-horizontal" ng-submit="createCab()">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Car Name</label>
-                        <input type="text" class="form-control" ng-model="restaurantData.name" ng-required="true">
+                        <label>Cab Type:</label>
+                        <br>
+                        <select ng-model="cab.cab_type" ng-required="true">
+                            <option value disabled>-- select cab type --</option>
+                            <option value="[[$index+1]]" ng-repeat="type in cab_types">[[type]]</option>
+                        </select>
+    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Car Name:</label>
+                        <input type="text" class="form-control" ng-model="cab.car_name" ng-required="true">
     
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Rating(out of 5.0)</label>
-                        <input type="number" class="form-control" step="any" ng-model="restaurantData.rating" ng-required="true">
+                        <label>Rating(out of 10.0):</label>
+                        <input type="number" class="form-control" step="any" ng-model="cab.rating" ng-required="true">
                     </div>
                 </div>
             </div>
     
     
             <div class="form-group">
-                <label>Description</label>
-                <textarea class="form-control" ng-model="restaurantData.desc" ng-required="true"></textarea>
+                <label>Description:</label>
+                <textarea class="form-control" ng-model="cab.desc" ng-required="true"></textarea>
             </div>
     
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>City</label>
+                        <label>City:</label>
                         <br>
                         <!-- <input type="text" class="form-control" ng-model="" ng-required="true"> -->
-                        <select ng-model="restaurantData.city">
+                        <select ng-model="cab.city">
                             <option value disabled selected>--Select Your Location--</option>
                             <option value="[[location]]" ng-repeat="location in locations">[[location]]</option>
                         </select>
@@ -44,9 +59,9 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Car Type</label>
+                        <label>Car Type:</label>
                         <br>
-                        <select ng-model="restaurantData.category" ng-required="true">
+                        <select ng-model="cab.car_type" ng-required="true">
                             <option value disabled>-- select car type --</option>
                             <option value="[[$index+1]]" ng-repeat="type in car_types">[[type]]</option>
                         </select>
@@ -54,6 +69,21 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-sm-6"> 
+                    <label>Image Url</label>         
+                    <input class="form-control" ng-model="images.image_url" type="text">
+                </div>
+                <div class="col-sm-6"> 
+                    <div style="display:inline-block; background-color: #9a9292; color: white;border-radius: 100%;text-align: center; width: 24px; margin: 12px;">
+                        [[cabImg.length]]
+                    </div>
+                    <button type="button" class="btn btn-primary" ng-click=addImg()>add more</button>
+                </div>
+            </div>
+
     
             <fieldset>
                 <h4>Amenity</h4>
@@ -62,196 +92,234 @@
                     <div class="col-sm-4 panel h25" ng-repeat=" (amenity_key, amenity_value) in  amenities">
     
                         <label>
-                            [[amenity_key]]
-                            <input type="checkbox" ng-model="restaurantData.amenities[amenity_key]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_amenity">
+                            
+                            <input type="checkbox" ng-model="cab.amenities[amenity_key]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_amenity">[[amenity_key]]
                         </label>
                     </div>
                 </div>
-    
-            </fieldset>
-    
-            <div ng-repeat="association in restaurantData.association">
-                <button class="btn btn-danger pull-right" ng-click="restaurantData.association.splice($index,1);" ng-if="$index != 0" ng-disabled="disable_association">remove</button>
-    
+
                 <div class="row">
-    
                     <div class="col-sm-6">
-    
                         <div class="form-group">
-                            <h4>Collection</h4>
-                            <div ng-show="!$parent.addNewCollection[$index]">
-                                <select ng-model="association.collections.collection_id" ng-disabled="disable_association">
-                                    <option value disabled selected> -- Select Collection --</option>
-    
-                                    <option value="[[collectionData.id]]" ng-repeat="collectionData in collection">[[collectionData.collection]]</option>
-                                </select>
-                                or
-                                <button class="btn btn-default" ng-click="$parent.addNewCollection[$index] = true" ng-disabled="disable_association">Add Collection</button>
-                            </div>
-                            <div ng-show="$parent.addNewCollection[$index]">
-                                <label>Collection name</label>
-                                <input type="text" ng-model="association.collections.collection" class="form-control">
-                                <label>Image</label>
-                                <input type="text" ng-model="association.collections.image" class="form-control">
-                                <label>Short description</label>
-                                <input type="text" ng-model="association.collections.desc" class="form-control">
-                                <label>featured on home page?</label>
-                                <input type="checkbox" ng-model="association.collections.featured" ng-true-value="true" ng-false-value="false">
-                                <br>
-                                <button class="btn btn-default" ng-click="$parent.addNewCollection[$index] = false;">cancel</button>
-    
-                            </div>
+                            <label>Fuel Capacity:</label>
+                            <input type="number" class="form-control" ng-model="cab.amenities.fuel_capacity" ng-required="true">
+        
                         </div>
                     </div>
-    
+                    <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fuel Type:</label>
+                                <br>
+                                <select ng-model="cab.fuel_type" ng-required="true">
+                                    <option value disabled>-- select fuel type --</option>
+                                    <option value="[[$index+1]]" ng-repeat="type in fuel_types">[[type]]</option>
+                                </select>
+            
+                            </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-    
-                            <h4>Cuisine</h4>
-                            <div ng-if="!addNewCuisine[$index]">
-                                <select ng-model="association.cuisines.cuisine_id" ng-disabled="disable_association">
-                                    <option value disabled selected> -- Select Cuisine --</option>
-                                    <option value="[[cuisineData.id]]" ng-repeat=" cuisineData in  cuisine">[[cuisineData.cuisine]]</option>
-                                </select>
-                                or
-                                <br>
-                                <button class="btn btn-default" ng-click="$parent.addNewCuisine[$index] = true" ng-disabled="disable_association">Add Cuisine</button>
-                            </div>
-    
-                            <div ng-if="addNewCuisine[$index]">
-                                <label>Cuisine name</label>
-                                <input type="text" ng-model="association.cuisines.cuisine" class="form-control">
-                                <button class="btn btn-default" ng-click="$parent.addNewCuisine[$index] = false;">cancel</button>
-                            </div>
+                            <label>Seater:</label>
+                            <input type="number" class="form-control" ng-model="cab.amenities.seater" ng-required="true">
+        
                         </div>
                     </div>
                 </div>
-            </div>
+
+                 
     
-            <buttton class="btn btn-default" ng-click="addMoreAssociation()" ng-disabled="disable_association">Add more association</buttton>
-    
+            </fieldset>
+
             <fieldset>
-                <h4>Menu</h4>
                 <div class="row">
-    
-                    <div class="col-sm-4 panel" ng-repeat=" menuData in  menu">
-    
-                        <label>
-                            [[menuData]]
-                            <input type="checkbox" ng-model="restaurantData.menus[menuData]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_menu">
-                        </label>
+                    <div class="col-sm-6">
+                        <h4>Deal</h4>
+                    </div>
+                    <div class="col-sm-6" style="display:inline-block; background-color: #9a9292; color: white;border-radius: 100%;text-align: center; width: 24px; ">
+                        [[cabDeals.length]]
                     </div>
                 </div>
-    
-            </fieldset>
-    
-            <div>
-                <div ng-repeat="imageData in restaurantData.images" class="mt10">
-                    <button class="btn btn-danger pull-right" ng-click="restaurantData.images.splice($index,1);" ng-if="$index != 0" ng-disabled="disable_images">remove</button>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Website name:</label>
+                            <select class="form-control" ng-model="deals.website_id">
+                                <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
+                            </select>  
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Deals</label>
+                                <select class="form-control">
+                                    <option ng-repeat="obj in availableDeals" value="[[obj.id]]">[[obj.]]</option>
+                                </select>  
+                            </div>
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#deal">add new deal</button>
+                    </div>
+                </div>
+                <div id="deal" class="collapse">
                     <div class="row">
                         <div class="col-sm-6">
-                            <label>Image Type</label>
-                            <br>
-                            <select ng-model="imageData.image_type" ng-required="true" ng-disabled="disable_images">
-                                <option value disabled>Select image type for restaurant</option>
-                                <option value="[[image_enum]]" ng-repeat="(image_enum, image_type) in image_types">[[image_type]]</option>
-                            </select>
+                            <div class="form-group">
+                                <label>Base Fare:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare" ng-required="true">
+            
+                            </div>
                         </div>
                         <div class="col-sm-6">
-                            <span>
-                                URL
-                                <input type="text" ng-model="imageData.image_url" class="form-control" ng-disabled="disable_images" ng-required="true">
-                                <img class="img-responsive img-thumbnail img-small50" ng-show="imageData.image_url" src="[[imageData.image_url]]" alt="[[imageData.image_url]]">
-                            </span>
+                            <div class="form-group">
+                                <label>Base Fare Peak Season:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_peak_season" ng-required="true">
+                            </div>
                         </div>
                     </div>
-    
-    
-    
-    
-                </div>
-    
-                <button class="btn btn-default" ng-click="addMoreRestaurantImages()" ng-disabled="disable_images">Add More Images</button>
-    
-    
-            </div>
-    
-    
-            <div class="mt10" ng-repeat=" dish in restaurantData.dishes">
-    
-                <div class="row">
-                    <div class="col-sm-12">
-                        <span class="btn btn-danger pull-right" ng-click="restaurantData.dishes.splice($index,1);" ng-if="$index != 0" ng-disabled="disable_dish">remove</span>
-                        <h4>Dish #[[$index+1]]</h4>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>
-                                Name
-                                <input type="text" class="form-control" ng-model="dish.dish" ng-required="true" ng-disabled="disable_dish">
-                            </label>
+        
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare Weekend:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_weekend" ng-required="true">
+            
+                            </div>
                         </div>
-    
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare with Fuel:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_with_fuel" ng-required="true">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <label>
-                            Half Price
-                            <input type="number" class="form-control" ng-model="dish.half_price" ng-required="true" ng-disabled="disable_dish">
-                        </label>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Cancellation Charge:</label>
+                                <input type="number" class="form-control" ng-model="deals.cancellation_charge" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Night Allowance Charge:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.car_night_allowance_charge" ng-required="true">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
-                        <label>
-                            Full Price
-                            <input type="number" class="form-control" ng-model="dish.full_price" ng-required="true" ng-disabled="disable_dish">
-                        </label>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Driver Night Allowance Charge:</label>
+                                <input type="number" class="form-control" ng-model="deals.driver_night_allowance_charge" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Different pickup drop point Charge:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.different_pickup_drop_point_charge" ng-required="true">
+                            </div>
+                        </div>
                     </div>
-    
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label>
-                            Category
-                            <br>
-                        </label>
-                        <input class="form-control" ng-model="dish.dish_type" ng-required="true" ng-disabled="disable_dish" />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fare exceeded per Km:</label>
+                                <input type="number" class="form-control" ng-model="deals.fare_exceeded_per_km" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fare exceeded per Hr:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.fare_exceeded_per_hr" ng-required="true">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label>
-                            Image
-                        </label>
-                        <input type="text" class="form-control" ng-model="dish.image" ng-required="true" ng-disabled="disable_dish">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Intial Km:</label>
+                                <input type="number" class="form-control" ng-model="deals.intial_km" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Intial Km Fare:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.intial_km_fare" ng-required="true">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <label>
-                    Description
-                </label>
-                <textarea class="form-control" ng-model="dish.desc" ng-required="true" ng-disabled="disable_dish"></textarea>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Km Restriction:</label>
+                                <input type="number" class="form-control" ng-model="deals.km_restriction" ng-required="true">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Slab:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.slab" ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>
+                                <input type="checkbox" ng-model="deals.one_way">One Way
+                                </label>
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>
+                                <input type="checkbox" step="any" ng-model="deals.outstation">Outstation
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cab Url: </label>
+                                    <input  class="form-control" id="name"  ng-model="deals.cab_url" type="text" required>
+                                </div>
+                            </div>
+                        </div>   
+
+                        <div class="form-group">        
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-primary" ng-click=addDeal()>Add more deals</button>
+                            </div>
+                        </div>
+                    </div>
+            </fieldset>
     
-            </div>
-            <button class="btn btn-default" ng-click="addMoreDish()" ng-disabled="disable_dish">Add More Dish</button>
-    
-    
-    
-    
-    
-    
-    
-    
+           
             <div class="form-group">
-                <label>is featured? (sponsored restaurant shown at home page)
-                    <input type="checkbox" ng-model="restaurantData.featured" ng-true-value="true" ng-false-value="false">
+                <br>
+                <label>
+                    <input type="checkbox" ng-model="cab.is_partner" ng-true-value="true" ng-false-value="false">Is partner?
                 </label>
             </div>
-    
-    
-    
-    
-    
-    
-    
-    
-            <button class="btn btn-default" ng-click="this[functionCalling]()">[[functionCalling]]</button>
-            <button class="btn btn-default" ng-click="functionCalling = 'Add'" ng-show="functionCalling == 'Update'">Cancel</button>
+
+            <button type="submit" class="btn btn-success">Add</button>
+            </form>
             <!-- </form> -->
             <hr>
         </div>
