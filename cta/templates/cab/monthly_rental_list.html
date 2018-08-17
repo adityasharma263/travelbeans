@@ -1264,7 +1264,7 @@
                                     <div class="col-sms-6 col-sm-6 col-md-6" ng-repeat="cab in cabs">
                                     <article class="box">
                                         <figure>
-                                            <a><img alt="" src="[[cab.images[0].image_url]]"></a>
+                                            <a><img style="max-width: 100%" alt="" src="[[cab.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
                                             <span class="price">₹ [[(cab.deals | orderBy:'total_fare')[0].total_fare]]</span>
