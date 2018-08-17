@@ -9,6 +9,12 @@ class Restaurant(Base):
     name = db.Column(db.String)
     rating = db.Column(db.DECIMAL, nullable=True)
     nearest_metro_station = db.Column(db.String)
+    off_day_in_week = db.Column(db.String)
+    opening_time = db.Column(db.TIME(), nullable=True)
+    closing_time = db.Column(db.TIME(), nullable=True)
+    break_time = db.Column(db.TIME(), nullable=True)
+    break_interval = db.Column(db.Integer, nullable=True)
+    mode_of_payment = db.Column(db.Integer, nullable=True)
     especially = db.Column(db.Text, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
@@ -20,6 +26,8 @@ class Restaurant(Base):
     locality = db.Column(db.String, nullable=True)
     category = db.Column(db.Integer, nullable=True)
     featured = db.Column(db.Boolean, default=False, nullable=True)
+    restaurant_chain_id = db.Column(db.Integer, db.ForeignKey('restaurant_chain.id'), unique=False, nullable=True)
+    restaurant_chain = db.relationship('RestaurantChain', foreign_keys=restaurant_chain_id)
     collections = db.relationship('Collection', secondary='restaurant_association')
     cuisines = db.relationship('Cuisine', secondary='restaurant_association')
     images = db.relationship('RestaurantImage', backref='restaurant')
@@ -32,6 +40,21 @@ class Restaurant(Base):
 
     def __repr__(self):
         return '<name %r>' % self.name
+
+
+class RestaurantChain(Base):
+    __tablename__ = 'restaurant_chain'
+
+    restaurants = db.relationship('Restaurant')
+    restaurant_chain_name = db.Column(db.String)
+    restaurant_chain_category = db.Column(db.Integer, nullable=True)
+    restaurant_chain_desc = db.Column(db.Text, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<restaurant_chain_name %r>' % self.restaurant_chain_name
 
 
 class RestaurantImage(Base):

@@ -14,7 +14,7 @@ hr{
     border-color: #dddada;
 }
 
-.restaurant-address{
+.restaurant-address, .truncate-text{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -60,7 +60,7 @@ hr{
     position: absolute;
     top: 70%;
     width: 570px;
-    background: #f5f5f5f5;
+    background: rgba(245, 245, 245, 0.961);
     left: 86px;
     z-index: 1000;
 }
@@ -99,11 +99,21 @@ hr{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 599px) { 
     .search-suggestion-box{
-        top: 67%;
-        width: 92%;
-        left: 16px;
+        top: 58%;
+        width: 83%;
+        left: 59px;
     
 }
+.collection-card{
+    /* background: rgba(255, 255, 1, 0.514); */
+}
+
+.collection-card article figure{
+    width:100% !important;
+}
+
+
+
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -114,6 +124,13 @@ hr{
     left: 86px;
     
 }
+
+.collection-card{
+    /* background: rgba(255, 1, 1, 0.514); */
+}
+
+
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -124,6 +141,12 @@ hr{
         left: 101px;
     
 }
+
+.collection-card{
+    /* background: rgba(43, 255, 1, 0.514); */
+
+}
+
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -134,6 +157,13 @@ hr{
     left: 86px;
     
 }
+.collection-card{
+    /* background: rgba(39, 1, 255, 0.514); */
+}
+
+.collection-card-details {
+    padding-left: 200px !important;
+}
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -141,9 +171,22 @@ hr{
     .search-suggestion-box{
         top: 58%;
         width: 482px;
-        left: 373px;
+        left: 311px;
     
 }
+.collection-card{
+    /* background: rgba(204, 1, 255, 0.514); */
+}
+
+.collection-card article figure{
+    width: 50% !important;
+}
+
+.collection-card-details {
+    padding-left: 200px !important;
+}
+
+
 }
 
 .filter{
@@ -205,4 +248,26 @@ hr{
 .theme-button-color:hover{
     color:white !important;
     background-color: #7fb231 !important;
+}
+.collection-card-img {
+    width : 144px;
+}
+
+.collection-card-details{
+    padding-left: 200px ;
+}
+.collection .box figure{
+    width: 100px !important;
+}
+
+
+.restaurent-type{
+    position: absolute;
+    background: #fdb714;
+    top: 8px;
+    z-index: 33;
+    padding: 5px;
+    color: #fff;
+    border-top-right-radius: 10px;
+    font-size: 15px;
 }

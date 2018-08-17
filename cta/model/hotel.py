@@ -22,6 +22,7 @@ class Hotel(Base):
     address = db.Column(db.String, nullable=True)
     images = db.relationship('Image', backref='hotel')
     rooms = db.relationship('Room', backref='hotel')
+    collection = db.relationship('HotelCollection', uselist=False)
     latitude = db.Column('latitude', db.Float(asdecimal=True), nullable=True)
     longitude = db.Column('longitude', db.Float(asdecimal=True), nullable=True)
     amenities = db.relationship('Amenity', uselist=False, backref='hotel')
@@ -34,6 +35,40 @@ class Hotel(Base):
         return '<name %r>' % self.name
 
 
+class HotelCollection(Base):
+    __tablename__ = 'hotel_collection'
+
+    hotel_id = db.Column(db.Integer, db.ForeignKey('hotel.id'), unique=True, nullable=True)
+    collection_name = db.Column(db.String, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String, nullable=True)
+    products = db.relationship('CollectionProduct', backref='hotel_collection')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<collection %r>' % self.collection
+
+
+class CollectionProduct(Base):
+    __tablename__ = 'collection_product'
+
+    hotel_collection_id = db.Column(db.Integer, db.ForeignKey('hotel_collection.id'), nullable=False)
+    product_url = db.Column(db.String, nullable=True)
+    product_name = db.Column(db.String, nullable=True)
+    featured_product = db.Column(db.Boolean, default=False, nullable=True)
+    product_desc = db.Column(db.Text, nullable=True)
+    product_image = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<image_url %r>' % self.image_url
+
+
 class Room(Base):
     __tablename__ = 'room'
 
@@ -42,8 +77,8 @@ class Room(Base):
     room_type = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String, nullable=True)
     other_room_type = db.Column(db.String, nullable=True)
-    check_in = db.Column(db.DateTime(timezone=True), nullable=False)
-    check_out = db.Column(db.DateTime(timezone=True), nullable=False)
+    check_in = db.Column(db.DateTime(timezone=True), nullable=True)
+    check_out = db.Column(db.DateTime(timezone=True), nullable=True)
     breakfast = db.Column(db.Boolean, default=False, nullable=True)
     balcony = db.Column(db.Boolean, default=False, nullable=True)
     member = db.relationship('Member', uselist=False, backref='room')
@@ -192,3 +227,5 @@ class Deal(Base):
 
     def __repr__(self):
         return '<room_id %r>' % self.room_id
+
+
