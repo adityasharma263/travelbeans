@@ -1057,6 +1057,9 @@
                     <div class="row" style="margin-top:15px;">
                             <div class="col-sm-4 col-md-3">
                             <div class="toggle-container filters-container">
+                                    <div class="panel style1 arrow-right">
+                                            <button class="btn-medium icon-check uppercase full-width" ng-click="reload();">Clear filter</button> 
+                                    </div>
                             <div class="panel style1 arrow-right">
                                     <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#filter" class="collapsed">Filter</a>
@@ -1087,11 +1090,13 @@
                                                 </h4>
                                                 <div class="form-group">
                                                     <div >
-                                                            <label>Max Price:</label>
-                                                            <input type="range" min="[[min]]" max="[[max]]" value="[[max]]" ng-model="hotel.end_price" >
-                                                            <p>Value: <span>[[hotel.end_price]]</span></p>
+                                                            <label>Max Base Fare:</label>
+                                                            <input type="range" min="[[min_base_fare]]" max="[[max_base_fare]]" value="[[max_base_fare]]" ng-model="cab.base_fare" >
+                                                            <p>Value: <span>[[cab.base_fare]]</span></p>
                                                     
-                                                    </div>    
+                                                    </div>
+                                                    <br>
+                                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_base_fare()">search again</button>    
                                                 </div>
                                             </div><!-- end content -->
                                         </div>
@@ -1108,9 +1113,9 @@
                                                         Air Condition
                                                     </h4>
                                                 <ul class="check-square filters-option">
-                                                    <input type="radio" name="ac" value="true"/>AC
+                                                    <input type="radio" name="ac" value="true" ng-click="getAmenity('air_condition',true)"/>AC
                                                     <br>
-                                                    <input type="radio" name="ac" value="false"/>Non AC
+                                                    <input type="radio" name="ac" value="false" ng-click="getAmenity('air_condition',false)"/>Non AC
                                                 
                                                 </ul>
                                             </div>
@@ -1119,20 +1124,20 @@
                                                     Transmission
                                                 </h4>
                                                 <ul class="check-square filters-option">
-                                                    <input type="radio" name="transmission" value="true"/>Automatic
+                                                    <input type="radio" name="transmission" value="true" ng-click="getAmenity('automatic',true)"/>Automatic
                                                     <br>
-                                                    <input type="radio" name="transmission  " value="false"/>Manual
+                                                    <input type="radio" name="transmission" value="false" ng-click="getAmenity('automatic',false)"/>Manual
                                                 </ul>
                                                          
                                             </div>   
                                             <div>
-                                                <h4 class="panel-title">
+                                                <h4 class="panel-title">        
                                                      Baggage Allowance
                                                  </h4>
                                                 <ul class="check-square filters-option">
-                                                    <input type="radio" name="baggage" value="true"/>Allowed
+                                                    <input type="radio" name="baggage" value="true" ng-click="getAmenity('baggage_allowance',true)"/>Allowed
                                                     <br>
-                                                    <input type="radio" name="baggage" value="false"/>Not Allowed
+                                                    <input type="radio" name="baggage" value="false" ng-click="getAmenity('baggage_allowance',false)"/>Not Allowed
                                                 </ul>
                                                         
                                             </div> 
@@ -1142,9 +1147,9 @@
                                                         Doorstep Delivery
                                                     </h4>
                                                 <ul class="check-square filters-option">
-                                                    <input type="radio" name="dd" value="true"/>Available
+                                                    <input type="radio" name="dd" value="true" ng-click="getAmenity('doorstep_delivery',true)"/>Available
                                                     <br>
-                                                    <input type="radio" name="dd" value="false"/>Not Available
+                                                    <input type="radio" name="dd" value="false" ng-click="getAmenity('doorstep_delivery',false)"/>Not Available
                                                 </ul>
                                             </div>
 
@@ -1153,9 +1158,9 @@
                                                             With / Without Fuel
                                                         </h4>
                                                         <ul class="check-square filters-option">
-                                                            <input type="radio" name="wf" value="true"/>With fuel
+                                                            <input type="radio" name="wf" value="true" ng-click="getAmenity('fuel',true)"/>With fuel
                                                             <br>
-                                                            <input type="radio" name="wf" value="false"/>Without fuel
+                                                            <input type="radio" name="wf" value="false" ng-click="getAmenity('fuel',false)"/>Without fuel
                                                         </ul>
                                                            
                                             </div>
