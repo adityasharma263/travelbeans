@@ -496,6 +496,10 @@ angular.module('comparetravel', ['angular.filter'])
 
 .controller('Cab_HomeController',["$scope", "$http","dataShare", function($scope, $http, dataShare, $filter) {
     $scope.info = {};
+    // $scope.platitude = 0;
+    // $scope.dlatitude = 0;
+    // $scope.plongitude = 0;
+    // $scope.dlongitude = 0;
 
     
     $scope.getCabs = function(id) {
@@ -504,11 +508,34 @@ angular.module('comparetravel', ['angular.filter'])
         console.log($scope.info.pickup_time);
         $scope.info.drop_time = Date.parse($scope.info.drop_time)/1000;
 
+        var geocoder = new google.maps.Geocoder();
+        var paddress = $scope.info.pickup_location;
+        var daddress = $scope.info.drop_location;
+
+        geocoder.geocode( { 'address': paddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+             $scope.platitude = results[0].geometry.location.lat();
+             $scope.plongitude = results[0].geometry.location.lng();
+             alert($scope.platitude);
+            
+          } 
+        }); 
+
+        geocoder.geocode( { 'address': daddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+              $scope.dlatitude = results[0].geometry.location.lat();
+              $scope.dlongitude = results[0].geometry.location.lng();
+              alert($scope.dlatitude);
+          } 
+        }); 
+
         console.log("$scope.info",$scope.info);
         dataShare.sendData($scope.info);
         $scope.location=document.location.href;
         console.log("$scope.location",$scope.location);
-        window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=" + id + "&pickup_time="  + $scope.info.pickup_time + "&drop_time=" + $scope.info.drop_time,'_self'); 
+        window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=" + id + "&pickup_time="  + $scope.info.pickup_time + "&drop_time=" + $scope.info.drop_time + "&pickup_lat="  + $scope.platitude + "&pickup_lon="  + $scope.plongitude+ "&drop_lat="  + $scope.dlatitude + "&drop_lon="  + $scope.dlongitude,'_self'); 
       } 
     
   
@@ -561,6 +588,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.cab = {}; // main cab model
     $scope.cabImg = []; //for all images array
     $scope.images={}; //for one image
+    $scope.myVar= true;
     $scope.cabDeals = [];
     $scope.deals = {};
     $scope.locations = Constants.Locations;
@@ -626,17 +654,6 @@ angular.module('comparetravel', ['angular.filter'])
     }
 
     
-      // Initialize the Geocoder
-      geocoder = new google.maps.Geocoder();
-      if (geocoder) {
-          geocoder.geocode({
-              'address': address
-          }, function (results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                  callback(results[0])
-              }
-          });
-      }
   
   
 
@@ -646,6 +663,10 @@ angular.module('comparetravel', ['angular.filter'])
         $scope.images={};
         createToast("'Image Added!!'","green");
     }
+
+    $scope.show=function(){
+      $scope.myVar= false;
+  }
 
     $scope.addDeal=function(){
       $scope.cabDeals.push($scope.deals);
