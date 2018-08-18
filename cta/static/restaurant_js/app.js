@@ -23,7 +23,12 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     if(collection_desc.length){
       for ( i in collection_desc ){
         console.log(collection_desc[i]);
-        $clamp(collection_desc[i], { clamp: 3 });
+        try {
+          $clamp(collection_desc[i], { clamp: 2 });
+        } catch (error) {
+          console.log(error);
+        }
+        
       }
 
       
