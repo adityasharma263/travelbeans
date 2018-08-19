@@ -104,6 +104,12 @@ def cab_api():
                 assoc_post = CabDealAssociation(cab_id=cab_post.id, deal_id=deal.get("deal_id", None))
                 assoc_post.save()
             else:
+                website = deal.get("website", None)
+                if website:
+                    deal.pop('website', None)
+                    website_post = CabWebsite(**website)
+                    website_post.save()
+                    deal["website_id"] = website_post.id
                 deal_post = CabDeal(**deal)
                 cab_post.deals.append(deal_post)
                 deal_post.save()
