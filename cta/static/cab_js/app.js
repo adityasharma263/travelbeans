@@ -496,10 +496,10 @@ angular.module('comparetravel', ['angular.filter'])
 
 .controller('Cab_HomeController',["$scope", "$http","dataShare", function($scope, $http, dataShare, $filter) {
     $scope.info = {};
-    $scope.platitude = 0;
-    $scope.dlatitude = 0;
-    $scope.plongitude = 0;
-    $scope.dlongitude = 0;
+    // $scope.platitude = 0;
+    // $scope.dlatitude = 0;
+    // $scope.plongitude = 0;
+    // $scope.dlongitude = 0;
 
     
     $scope.getCabs = function(id) {
@@ -518,11 +518,9 @@ angular.module('comparetravel', ['angular.filter'])
              $scope.platitude = results[0].geometry.location.lat();
              $scope.plongitude = results[0].geometry.location.lng();
              alert($scope.platitude);
-             console.log("$scope.platitude",$scope.platitude);
             
           } 
         }); 
-        
 
         geocoder.geocode( { 'address': daddress}, function(results, status) {
 
@@ -549,8 +547,48 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.car_types = Constants.Car_types;
     var info = {};
     $scope.info = {};
+    //  $scope.platitude = 0;
+    //  $scope.dlatitude = 0;
+    //  $scope.plongitude = 0;
+    //  $scope.dlongitude = 0;
+
+    
+    $scope.getCabs = function(id) {
+        // console.log("$location.path",$location.path);
+        $scope.info.pickup_time = Date.parse($scope.info.pickup_time)/1000;
+        console.log($scope.info.pickup_time);
+        $scope.info.drop_time = Date.parse($scope.info.drop_time)/1000;
+
+        var geocoder = new google.maps.Geocoder();
+        var paddress = $scope.info.pickup_location;
+        var daddress = $scope.info.drop_location;
+
+        geocoder.geocode( { 'address': paddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+             $scope.platitude = results[0].geometry.location.lat();
+             $scope.plongitude = results[0].geometry.location.lng();
+             alert($scope.platitude);
+            
+          } 
+        }); 
+
+        geocoder.geocode( { 'address': daddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+              $scope.dlatitude = results[0].geometry.location.lat();
+              $scope.dlongitude = results[0].geometry.location.lng();
+              alert($scope.dlatitude);
+          } 
+        }); 
+
+        console.log("$scope.info",$scope.info);
+        dataShare.sendData($scope.info);
+        $scope.location=document.location.href;
+        console.log("$scope.location",$scope.location);
+        window.open("/cab/list?city=" + $scope.info.pickup_location + "&cab_type=" + id + "&pickup_time="  + $scope.info.pickup_time + "&drop_time=" + $scope.info.drop_time + "&pickup_lat="  + $scope.platitude + "&pickup_lon="  + $scope.plongitude+ "&drop_lat="  + $scope.dlatitude + "&drop_lon="  + $scope.dlongitude,'_self'); 
+      } 
     $scope.cab_type = 1;
-    $scope.cab = {};
 
     var str = document.location.search.split("&");
     var type = str[1].split("=");
@@ -560,69 +598,11 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     $scope.$on('data_shared',function(){
-                            info =  dataShare.getData();    
+              info =  dataShare.getData();    
              $scope.info = info;
 
     })
     console.log("$scope.info",$scope.info);
-
-    $http({
-      method: 'GET',
-      url: '/api/v1/cab/deal'
-    }).then(function successCallback(response) {
-
-        $scope.deals= response.data.result.deals;
-        console.log("$scope.deals",$scope.deals);
-        $scope.min_base_fare = Math.min.apply(Math,$scope.deals.map(function(item){return item.base_fare;}));
-        $scope.max_base_fare = Math.max.apply(Math,$scope.deals.map(function(item){return item.base_fare;}));
-        
-        // this callback will be called asynchronously
-        // when the response is available
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    })
-
-    $scope.getCab_base_fare = function(){
-      
-      $http({
-        method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&min_base_fare=' + $scope.min_base_fare + '&max_base_fare=' + $scope.cab.base_fare
-      }).then(function successCallback(response) {
-          $scope.cabs = response.data.result.cabs;
-          console.log(" $scope.cabs ", $scope.cabs )
-          
-          // this callback will be called asynchronously
-  
-          // when the response is available
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-      })
-      
-    }
-    $scope.reload = function(){
-      window.location.reload();
-    }
-
-    $scope.getAmenity = function (filterName, filterValue) {
-
-
-      filter[filterName] = filterValue;
-
-      $http.get("/api/v1/cab" + document.location.search, { params: filter })
-        .then(function (res) {
-          $scope.cabs = res.data.result.cabs;
-          // $scope.serverSideRender = false;
-          console.log($scope.cabs);
-
-        }, function (err) {
-          console.log(err);
-        });
-
-    }
-
-    
     
 
     $http({
