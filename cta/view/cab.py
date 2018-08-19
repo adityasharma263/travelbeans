@@ -143,9 +143,27 @@ def cab_id(id):
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         CabAmenity.query.filter_by(cab_id=id).delete()
         CabImage.query.filter_by(restaurant_id=id).delete()
-        CabAssociation.query.filter_by(restaurant_id=id).delete()
+        CabDealAssociation.query.filter_by(Cab_id=id).delete()
         Cab.delete_db(cab)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/amenity/<int:id>', methods=['PUT', 'DELETE'])
+def cab_amenity_id(id):
+    if request.method == 'PUT':
+        put = CabAmenity.query.filter_by(id=id).update(request.json)
+        if put:
+            CabAmenity.update_db()
+            s = CabAmenity.query.filter_by(id=id).first()
+            result = CabAmenitySchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        cab_amenities = CabAmenity.query.filter_by(id=id).first()
+        if not cab_amenities:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CabAmenity.delete_db(cab_amenities)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
 
 @app.route('/api/v1/cab/amenity', methods=['GET', 'POST'])
 def cab_amenity():
@@ -201,6 +219,24 @@ def cab_deal():
         return jsonify({'result': {'deals': result.data}, 'message': "Success", 'error': False})
 
 
+@app.route('/api/v1/cab/deal/<int:id>', methods=['PUT', 'DELETE'])
+def cab_deal_id(id):
+    if request.method == 'PUT':
+        put = CabDeal.query.filter_by(id=id).update(request.json)
+        if put:
+            CabDeal.update_db()
+            data = CabDeal.query.filter_by(id=id).first()
+            result = CabDealSchema(many=False).dump(data)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        deal = CabDeal.query.filter_by(id=id).first()
+        if not deal:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CabDealAssociation.query.filter_by(deal_id=id).delete()
+        CabDeal.delete_db(deal)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
+
 @app.route('/api/v1/cab/images', methods=['GET', 'POST'])
 def cab_image_api():
     if request.method == 'GET':
@@ -218,6 +254,23 @@ def cab_image_api():
         result = CabImageSchema().dump(post)
         return jsonify({'result': {'image': result.data}, 'message': "Success", 'error': False})
 
+
+@app.route('/api/v1/cab/image/<int:id>', methods=['PUT', 'DELETE'])
+def cab_image_id(id):
+    if request.method == 'PUT':
+        put = CabImage.query.filter_by(id=id).update(request.json)
+        if put:
+            CabImage.update_db()
+            s = CabImage.query.filter_by(id=id).first()
+            result = CabImageSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        cab_images = CabImage.query.filter_by(id=id).first()
+        if not cab_images:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CabImage.delete_db(cab_images)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
 @app.route('/api/v1/cab/website', methods=['GET', 'POST'])
 def cabWebsite_api():
     if request.method == 'GET':
@@ -230,7 +283,7 @@ def cabWebsite_api():
         result = CabWebsiteSchema(many=True).dump(web)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
     else:
-        post = Website(**request.json)
+        post = CabWebsite(**request.json)
         post.save()
         result = CabWebsiteSchema().dump(post)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
@@ -266,6 +319,24 @@ def cab_booking():
         booking_post.user = user_post
         result = CabBookingSchema().dump(booking_post)
         return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
+
+@app.route('/api/v1/cab/booking/<int:id>', methods=['PUT', 'DELETE'])
+def cab_booking_id(id):
+    if request.method == 'PUT':
+        put = CabBooking.query.filter_by(id=id).update(request.json)
+        if put:
+            CabBooking.update_db()
+            data = CabBooking.query.filter_by(id=id).first()
+            result = CabBookingSchema(many=False).dump(data)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        booking = CabBooking.query.filter_by(id=id).first()
+        if not booking:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CabTax.query.filter_by(booking_id=id).delete()
+        CabBooking.delete_db(booking)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
 
 
 @app.route('/api/v1/cab/tax', methods=['GET', 'POST'])
