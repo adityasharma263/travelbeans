@@ -518,9 +518,11 @@ angular.module('comparetravel', ['angular.filter'])
              $scope.platitude = results[0].geometry.location.lat();
              $scope.plongitude = results[0].geometry.location.lng();
              alert($scope.platitude);
+             console.log("$scope.platitude",$scope.platitude);
             
           } 
         }); 
+        
 
         geocoder.geocode( { 'address': daddress}, function(results, status) {
 
