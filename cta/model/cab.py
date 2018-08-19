@@ -46,7 +46,7 @@ class CabCollection(Base):
 
 
 class CabCollectionProduct(Base):
-    __tablename__ = 'collection_product'
+    __tablename__ = 'cab_collection_product'
 
     cab_collection_id = db.Column(db.Integer, db.ForeignKey('cab_collection.id'), nullable=False)
     product_url = db.Column(db.String, nullable=True)
