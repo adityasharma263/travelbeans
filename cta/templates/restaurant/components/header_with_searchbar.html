@@ -25,6 +25,8 @@
 
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/custom.css">
 
+    <link rel="stylesheet" href="/restaurant_css/collection.css">
+
     <link rel="stylesheet" href="/Home Page With Chefs Recipies_files/responsive.css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
@@ -1610,31 +1612,22 @@
                             <div class="search-box">
                                 <form>
                                     <div class="row">
-                                        <div class="col-sm-4 col-md-8 form-group">
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <!-- <label>
-                                                                            <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)">
-                                                                                <option value disabled>--Select Location--</option>
-                                                                                {% for location in locations %}
-                                                                                <option value="{{location}}">{{location}}</option>
-                                                                                {% endfor %}
-                                                                            </select>
-                                                                        </label> -->
-
+                                        <!-- <div class="col-sm-4 col-md-8 form-group">
+                                            <div class="row"> -->
+                                                <div class="col-sm-2 col-xs-12">
+                                                    
 
                                                     <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
-                                                        <button style="width:100%;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button" id="individualDrop"
-                                                            ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
-                                                            data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
-                                                            <span class="caret pull-right" style="margin-top:10px;"></span>
-                                                        </button>
+                                                       
+                                                        <input ng-cloak ng-init="userLocation = '{{user_location}}'" style="border-radius: 0;font-weight:900" disable-auto-close
+                                                            type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop"
+                                                            class="dropdown-toggle makePaymentDropdownSearchBox form-control"
+                                                            placeholder="[[userLocation || 'Search City']]" />
                                                         <span ng-show="submitted">
                                                             <label class="error">Select an Individual</label>
                                                         </span>
                                                         <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
-                                                            <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
-                                                            />
+
                                                             <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
                                                                 <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
                                                             </li>
@@ -1642,19 +1635,18 @@
                                                     </div>
 
 
-
                                                 </div>
-                                                <div class="col-sm-8" ng-init="searchQueryValue = '{{ searched_value }}'">
+                                                <div class="col-sm-6 col-xs-12" ng-init="searchQueryValue = '{{ searched_value }}'">
                                                     <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
                                                         ng-change="searchQuery(searchQueryValue, userLocation)">
                                                 </div>
-                                            </div>
+                                            <!-- </div> -->
 
 
-                                        </div>
+                                        <!-- </div> -->
 
 
-                                        <div class=" col-sm-4 form-group ">
+                                        <div class=" col-sm-4 col-xs-12 form-group ">
                                             <button class="button btn-medium full-width uppercase dark-blue1 animated tada
                                                                     " data-animation-type="tada " style="animation-duration: 1s; visibility: visible; ">Search Now</button>
                                         </div>

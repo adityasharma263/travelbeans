@@ -19,14 +19,19 @@ var app = angular.module("restaurantApp", ['angular.filter'])
 
 
     var collection_desc = document.getElementsByClassName("collection-desc")
-    
-    if(collection_desc.length){
-      for ( i in collection_desc ){
+
+    if (collection_desc.length) {
+      for (i in collection_desc) {
         console.log(collection_desc[i]);
-        $clamp(collection_desc[i], { clamp: 3 });
+        try {
+          $clamp(collection_desc[i], { clamp: 2 });
+        } catch (error) {
+          console.log(error);
+        }
+
       }
 
-      
+
     }
 
     $scope.searchQuery = function (query, cityLocation) {
@@ -125,7 +130,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
     }
 
-    $scope.reload = function(){
+    $scope.reload = function () {
       window.location.reload();
     }
 
@@ -1220,14 +1225,14 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       overlayBox.style.display = "none";
     }
 
-    $scope.searchQuery = function (query) {
+    $scope.searchQuery = function (query, cityLocation) {
 
       console.log(query);
 
 
 
       if (query.length >= 2) {
-        $http.post("/api/v1/restaurant/search", { search: query })
+        $http.post("/api/v1/restaurant/search", { search: query, city: cityLocation })
           .then(function (response) {
             searchSuggestionDiv.style.display = "block";
             overlayBox.style.display = "block";

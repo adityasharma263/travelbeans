@@ -101,8 +101,11 @@ def restaurant_collection():
             collections[collection['collection']] = collection
     
     print(collections)
+
+    locations = requests.get(url=str(app.config["DOMAIN_URL"]) + "/restaurant/location").json()['result']['locations']
     
-    return render_template("restaurant/collections.html", user_location = location_from_cookie, collections=collections)
+    
+    return render_template("restaurant/collections.html", user_location = location_from_cookie, collections=collections, locations=locations)
 
 @app.route("/restaurant/location")
 def restaurant_location():
@@ -617,6 +620,9 @@ def admin_collection():
     location_from_cookie = request.cookies.get("location",None)
     if(not location_from_cookie):
         return redirect(str(app.config["DOMAIN_URL"])+"/restaurant")
+
+
+    
     return render_template("restaurant/restaurant_collection_dashboard.html", user_location = location_from_cookie)
     
 
