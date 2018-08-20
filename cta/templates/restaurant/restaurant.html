@@ -785,7 +785,7 @@
 
                                                 <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
                                                    
-                                                    <input ng-cloak style="border-radius: 0;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                                    <input ng-cloak style="border-radius: 0;font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
                                                     />
                                                     <span ng-show="submitted">
                                                         <label class="error">Select an Individual</label>
@@ -980,32 +980,23 @@
                                 <div ng-show="!showlocationDiv" class="col-xs-6">
                                     <button class="button btn-medium red" ng-click="showlocationDiv = true;">Deny</button>
                                 </div>
-                                <!-- <div class="col-sm-6">
-                                    <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()" style="width:100%;">use GPS</button>
-
-                                </div> -->
-                                <!-- <div class="col-sm-1">
-                                    <strong>OR</strong>
-                                </div> -->
+                                
                                 <div class="col-sm-6" ng-show="showlocationDiv">
                                     <h3>Select location below:</h3>
-                                    <div class="dropdown makePaymentDropdownMainDiv" auto-close="outsideClick">
-                                        <button style="width:100%;border-radius: 0;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button"
-                                            id="individualDrop" ng-click="serchFilter = ''" data-toggle="dropdown" ng-cloak="">
-                                            Select City
-                                            <span class="caret pull-right" style="margin-top:10px;"></span>
-                                        </button>
-                                        <span ng-show="submitted">
-                                            <label class="error">Select an Individual</label>
-                                        </span>
-                                        <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
-                                            <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
-                                            />
-                                            <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
-                                                <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
+                                        
+                                         <input ng-cloak style="border-radius: 0;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                         />
+                                         <span ng-show="submitted">
+                                             <label class="error">Select Location</label>
+                                         </span>
+                                         <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                             
+                                             <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                 <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                             </li>
+                                         </ul>
+                                     </div>
                                 </div>
                             </div>
                             {#
@@ -1040,6 +1031,7 @@
 
 
                     <div class="row image-box style2 add-clearfix ">
+                        {% if collections %}
                         {% for collection in collections[:3]  %}
                         <div class="col-md-4 collection-card">
                             <article class="box" >
@@ -1057,6 +1049,7 @@
                             </article>
                         </div>
                         {% endfor %}
+                        {% endif %}
 
                         <div class="col-sm-12 ">
                             <div class="row">
