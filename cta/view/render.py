@@ -543,6 +543,19 @@ def restaurant_detail(restaurant_id):
         restaurant_data['category'] = categories_data_reverse[str(restaurant_data['category'])]
     return render_template("restaurant/restaurant_details.html", restaurant_detail=restaurant_data, trending_restaurant_data=trending_restaurant_data, featured_restaurant_data=featured_restaurant_data)
 
+def capitalizeString(stringValue):
+
+    string = stringValue.replace("_", " ").split(" ")
+
+    capitalizeString = ""
+
+    for i in string:
+        capitalizeString = capitalizeString+i[0].upper() + i[1:]+" "
+    
+
+    return capitalizeString
+
+    
 
 @app.route("/restaurant", methods=['GET'])
 def restaurant_home():
@@ -587,7 +600,7 @@ def restaurant_home():
         cuisine_data = requests.get(url=cuisine_api_url).json()['result']['cuisine']
         print(cuisine_data)
         collections = requests.get( str(app.config["DOMAIN_URL"]) +"/api/v1/restaurant/collection").json()['result']['collection']
-        resp =  make_response(render_template("restaurant/restaurant.html", user_location = location, locations=locations, cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data))
+        resp =  make_response(render_template("restaurant/restaurant.html", user_location = location, locations=locations, cuisine_data=cuisine_data, collections=collections, featured_restaurant_data=featured_restaurant_data, capitalizeString=capitalizeString))
         resp.set_cookie('location', location, expires=datetime.datetime.now() + datetime.timedelta(days=365), max_age=60*60*24*365*2)
         return resp
     

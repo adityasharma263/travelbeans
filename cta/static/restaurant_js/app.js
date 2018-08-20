@@ -130,6 +130,19 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
     }
 
+
+    $scope.getCapitalize = function(stringValue){
+      var string = stringValue.replace("_", " ").split(" ");
+
+      var capitalizeString = "";
+
+      for (i in string){
+        capitalizeString += string[i].charAt(0).toUpperCase() + string[i].slice(1)+" ";
+      }
+
+      return capitalizeString;
+    }
+
     $scope.reload = function () {
       window.location.reload();
     }
