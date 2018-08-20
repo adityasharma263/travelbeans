@@ -552,22 +552,7 @@
             </div>
         </header>
 
-        <!-- <div class="page-title-container">
-            <div class="container">
-                <div class="page-title pull-left">
-                    <h2 class="entry-title">Resturants</h2>
-                </div>
-                <ul class="breadcrumbs pull-right">
-                    <li>
-                        <a href="#">HOME</a>
-                    </li>
-                    <li>
-                        <a href="#">PAGES</a>
-                    </li>
-                    <li class="active">Resturants</li>
-                </ul>
-            </div>
-        </div> -->
+        
 
 
         <section id="content" class="tour">
@@ -795,24 +780,12 @@
 
                                     <form>
                                         <div class="row">
-                                            <div class="col-sm-2 col-xs-12">
-                                                {#
-                                                <label>
-                                                    <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
-                                                        <option value disabled>--Select Location--</option>
-                                                        {% for location in locations %}
-                                                        <option value="{{location}}">{{location}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </label> #}
+                                            <div class="col-sm-2 col-xs-12 form-group">
+                                               
 
                                                 <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
-                                                    <!-- <button style="width:100%;border-radius: 0;" class="btn btn-default  makePaymentDropdownBtn" type="button"
-                                                         ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
-                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
-                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
-                                                    </button> -->
-                                                    <input ng-cloak style="border-radius: 0;font-weight:900" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                                   
+                                                    <input ng-cloak style="border-radius: 0;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
                                                     />
                                                     <span ng-show="submitted">
                                                         <label class="error">Select an Individual</label>
@@ -952,7 +925,7 @@
 
                             </div>
                             <div class="text-center ">
-                                <a data-toggle="tab" href="#search" class="button btn-medium dark-orange
+                                <a data-toggle="tab" href="#search" class="button btn-medium dark-orange form-group
                                                 uppercase animated fadeInLeftBig " data-animation-type="fadeInLeftBig "
                                     style="animation-duration: 1s; visibility: visible; ">Order Online</a>
                                 &nbsp;&nbsp;
@@ -1067,10 +1040,10 @@
 
 
                     <div class="row image-box style2 add-clearfix ">
-                        {% for collection in collections %}
+                        {% for collection in collections[:3]  %}
                         <div class="col-md-4 collection-card">
-                            <article class="box ">
-                                <figure>
+                            <article class="box" >
+                                <figure style="height: 117px;overflow: hidden;">
                                     <a title=" " href="/restaurant/search?collection={{collection.collection}}">
                                         <img class="collection-card-img" alt="{{collection.collection}} " src="{{collection.image}} ">
                                     </a>
@@ -1088,18 +1061,19 @@
                         <div class="col-sm-12 ">
                             <div class="row">
                                 <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
-                                    <a href="/restaurant/collection " class="button btn-medium green">see more collections</a>
+                                    <a href="/restaurant/collection " class="button btn-large green">See More Collections</a>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12"><hr></div>
+                        <!-- <div class="col-md-12"><hr></div> -->
                        
                     </div>
 
-                    <h2>Our Menu Card</h2>
+                    <h2 class="h2">Our Menu Card</h2>
+                    <div class="col-md-12"><hr></div>
                     <div class="block clearfix ">
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=breakfast ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-breakfast "></i> -->
@@ -1109,7 +1083,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=lunch ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-beach "></i> -->
@@ -1119,7 +1093,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=dinner ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-beach "></i> -->
@@ -1129,7 +1103,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=cafe ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-coffee "></i> -->
@@ -1139,7 +1113,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=lounge ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-playplace "></i> -->
@@ -1149,7 +1123,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=restaurant ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-couples "></i> -->
@@ -1159,7 +1133,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=bars ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-winebar"></i> -->
@@ -1169,7 +1143,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=nightlife ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
@@ -1179,7 +1153,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=luxury ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
@@ -1189,7 +1163,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=street_stalls ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-food"></i> -->
@@ -1199,7 +1173,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=pocket_friendly ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-savings "></i> -->
@@ -1209,7 +1183,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=diet ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
@@ -1219,6 +1193,8 @@
                                 </div>
                             </a>
                         </div>
+                    <div class="col-md-12"><hr></div>
+                    
                     </div>
 
                     <h2>Popular Resturants</h2>
@@ -1854,7 +1830,7 @@
                             <div class="col-sm-12 ">
                                 <div class="row">
                                     <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
-                                        <a href="/restaurant/collection " class="button btn-medium green">see more recipes</a>
+                                        <a href="/restaurant/collection " class="button btn-large green">See more recipes</a>
 
                                     </div>
                                 </div>
