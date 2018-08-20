@@ -141,6 +141,7 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       }
 
       return capitalizeString;
+      
     }
 
     $scope.reload = function () {
