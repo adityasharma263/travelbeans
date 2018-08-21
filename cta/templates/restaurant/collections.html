@@ -2,9 +2,10 @@
 
 <section id="content">
     <div class="container">
-        <h2 class="col-md-12">
+        <h2>
             Showing Collection for {{user_location}}
         </h2>
+        <br/>
         <div class="row image-box style2 add-clearfix mt20">
             {% if collections|length > 0 %} {% for collection_key, collection_value in collections.items() %}
             <div class="col-md-4 collection-card">
