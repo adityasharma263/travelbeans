@@ -549,6 +549,51 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.car_types = Constants.Car_types;
     var info = {};
     $scope.info = {};
+    $scope.platitude = 0;
+    $scope.dlatitude = 0;
+    $scope.plongitude = 0;
+    $scope.dlongitude = 0;
+
+    
+    $scope.getCabs = function(id) {
+        // console.log("$location.path",$location.path);
+        $scope.info.pickup_time = Date.parse($scope.info.pickup_time)/1000;
+        console.log($scope.info.pickup_time);
+        $scope.info.drop_time = Date.parse($scope.info.drop_time)/1000;
+
+        var geocoder = new google.maps.Geocoder();
+        var paddress = $scope.info.pickup_location;
+        var daddress = $scope.info.drop_location;
+
+        geocoder.geocode( { 'address': paddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+             $scope.platitude = results[0].geometry.location.lat();
+             $scope.plongitude = results[0].geometry.location.lng();
+             alert($scope.platitude);
+             console.log("$scope.platitude",$scope.platitude);
+            
+          } 
+        }); 
+        
+
+        geocoder.geocode( { 'address': daddress}, function(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+              $scope.dlatitude = results[0].geometry.location.lat();
+              $scope.dlongitude = results[0].geometry.location.lng();
+              alert($scope.dlatitude);
+          } 
+        }); 
+
+        console.log("$scope.info",$scope.info);
+        dataShare.sendData($scope.info);
+        $scope.location=document.location.href;
+        console.log("$scope.location",$scope.location);
+        window.open("/cab/list?city=" + $scope.info.pickup_location + "&cab_type=" + id + "&pickup_time="  + $scope.info.pickup_time + "&drop_time=" + $scope.info.drop_time + "&pickup_lat="  + $scope.platitude + "&pickup_lon="  + $scope.plongitude+ "&drop_lat="  + $scope.dlatitude + "&drop_lon="  + $scope.dlongitude,'_self'); 
+      } 
+    
+  
     $scope.cab_type = 1;
     $scope.cab = {};
 
@@ -601,6 +646,85 @@ angular.module('comparetravel', ['angular.filter'])
       })
       
     }
+
+
+    $scope.getCab_fuel_capacity = function(){
+      $scope.fuel_capacity = $scope.cab.amenities.fuel_capacity;
+      $http({
+        method: 'GET',
+        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.fuel_capacity
+      }).then(function successCallback(response) {
+          $scope.cabs = response.data.result.cabs;
+          console.log(" $scope.cabs ", $scope.cabs );
+          console.log($scope.fuel_capacity);
+
+          // this callback will be called asynchronously
+  
+          // when the response is available
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      })
+      
+    }
+
+    $scope.getCab_free_km = function(){
+      $scope.km_restriction = $scope.cab.km_restriction;
+      $http({
+        method: 'GET',
+        url: '/api/v1/cab' + document.location.search + '&km_restriction=' + $scope.km_restriction
+      }).then(function successCallback(response) {
+          $scope.cabs = response.data.result.cabs;
+          console.log(" $scope.cabs ", $scope.cabs );
+          console.log($scope.km_restriction);
+
+          // this callback will be called asynchronously
+  
+          // when the response is available
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      })
+      
+    }
+    $scope.getCab_car_type= function(car_name){
+      var count = 0;
+      var i;
+      console.log(car_name)
+      for (i in $scope.car_types) {
+          if ($scope.car_types.hasOwnProperty(i)) {
+              count++;
+          }
+      }
+      
+      $scope.car_type =$scope.car_types;
+      for ( var j=1; j<=count; j++){
+        
+        if($scope.car_types[j]==car_name){
+        $scope.car=j;
+        }
+       
+      }
+      
+     
+      $http({
+        method: 'GET',
+        url: '/api/v1/cab' + document.location.search + '&car_type=' + $scope.car
+      }).then(function successCallback(response) {
+          $scope.cabs = response.data.result.cabs;
+          console.log(" $scope.cabs ", $scope.cabs );
+          console.log($scope.car);
+
+          // this callback will be called asynchronously
+  
+          // when the response is available
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      })
+      
+    }
+  
     $scope.reload = function(){
       window.location.reload();
     }
@@ -609,13 +733,14 @@ angular.module('comparetravel', ['angular.filter'])
 
 
       filter[filterName] = filterValue;
-
+    
       $http.get("/api/v1/cab" + document.location.search, { params: filter })
+      
         .then(function (res) {
           $scope.cabs = res.data.result.cabs;
           // $scope.serverSideRender = false;
           console.log($scope.cabs);
-
+        
         }, function (err) {
           console.log(err);
         });

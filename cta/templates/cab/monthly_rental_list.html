@@ -1223,8 +1223,12 @@
                                             </h4>
                                             <div id="Free-Km-filter" class="panel-collapse collapse">
                                                 <div class="panel-content">
-                                                    
+                                                   <input type="text" ng-model="cab.km_restriction">
+                                                   <br>
+                                                   <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_free_km()" style="margin-top:10px">search again</button>                                            
+                                                   
                                                 </div><!-- end content -->
+                       
                                             </div>
                                         </div>
                                 
@@ -1267,10 +1271,12 @@
                                 </h4>
                                 <div id="Fuel-Capacity-filter" class="panel-collapse collapse filters-container">
                                     <div class="panel-content">
-                                        <ul class="check-square filters-option">
-                                          
-                                        </ul>
-                                    </div>
+                                        <input type="text" ng-model="cab.amenities.fuel_capacity">
+                                        <br>
+                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_fuel_capacity()" style="margin-top:10px">search again</button>                                            
+                                    
+                                    </div> 
+                                    
                                 </div>
                             </div>
                             
@@ -1297,7 +1303,7 @@
                                 <div id="cartype-filter" class="panel-collapse collapse filters-container">
                                     <div class="panel-content">
                                         <span ng-cloak ng-repeat="type in car_types">
-                                            <input type="radio" name="cuisine" value="[[type]]" ng-click=""> [[type]]
+                                            <input type="radio" name="cuisine" ng-model="cab.car_type" value="[[type]]" ng-click="getCab_car_type([[type]])"> [[type]]
                                             <br>
                                         </span>
                                         <a class="button btn-mini">MORE</a>
