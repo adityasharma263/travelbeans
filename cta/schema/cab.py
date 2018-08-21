@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabWebsite, CabUser
+from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabWebsite, CabUser, CabCollection, CabCollectionProduct
 from cta import ma
 
 
@@ -25,6 +25,12 @@ class CabAmenitySchema(ma.ModelSchema):
 class CabImageSchema(ma.ModelSchema):
     class Meta:
         model = CabImage
+        exclude = ('updated_at', 'created_at')
+
+
+class CabCollectionProductSchema(ma.ModelSchema):
+    class Meta:
+        model = CabCollectionProduct
         exclude = ('updated_at', 'created_at')
 
 
@@ -70,3 +76,12 @@ class CabSchema(ma.ModelSchema):
     class Meta:
         model = Cab
         exclude = ('updated_at', 'created_at')
+
+
+class CabCollectionSchema(ma.ModelSchema):
+    products = ma.Nested(CabCollectionProductSchema, many=True)
+    cabs = ma.Nested(CabSchema, many=True)
+
+    class Meta:
+        model = CabCollection
+        exclude = ('updated_at', 'created_at', 'hotel')

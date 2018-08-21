@@ -15,6 +15,7 @@ class Cab(Base):
     desc = db.Column(db.Text, nullable=True)
     deals = db.relationship('CabDeal', secondary='cab_deal_association')
     images = db.relationship('CabImage', backref='cab')
+    collection_id = db.Column(db.Integer, db.ForeignKey('cab_collection.id'), nullable=True)
     amenities = db.relationship('CabAmenity', uselist=False, backref='cab')
 
     def __init__(self, *args, **kwargs):
@@ -25,6 +26,42 @@ class Cab(Base):
 
     def __hash__(self):
         return hash(self.name)
+
+
+class CabCollection(Base):
+    __tablename__ = 'cab_collection'
+
+    collection_name = db.Column(db.String, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String, nullable=True)
+    products = db.relationship('CabCollectionProduct', backref='cab_collection')
+    cabs = db.relationship('Cab', backref='cab_collection')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<collection %r>' % self.collection
+
+
+class CabCollectionProduct(Base):
+    __tablename__ = 'cab_collection_product'
+
+    cab_collection_id = db.Column(db.Integer, db.ForeignKey('cab_collection.id'), nullable=False)
+    product_url = db.Column(db.String, nullable=True)
+    product_name = db.Column(db.String, nullable=True)
+    featured_product = db.Column(db.Boolean, default=False, nullable=True)
+    product_desc = db.Column(db.Text, nullable=True)
+    product_image = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<image_url %r>' % self.image_url
+
+
 
 
 class CabUser(Base):

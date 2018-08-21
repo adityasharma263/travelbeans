@@ -471,6 +471,7 @@ def member_id(id):
         Member.delete_db(members)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 
+
 @app.route('/api/v1/facility', methods=['GET', 'POST'])
 def facility_api():
     if request.method == 'GET':

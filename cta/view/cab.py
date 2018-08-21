@@ -1,10 +1,10 @@
 from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser,\
-    CabWebsite
+    CabWebsite, CabCollectionProduct, CabCollection
 from cta import app, db
 from flask import jsonify, request
 from cta.lib.cab_fare import CabFare
 from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema,\
-    CabUserSchema, CabWebsiteSchema
+    CabUserSchema, CabWebsiteSchema, CabCollectionProductSchema, CabCollectionSchema
 import datetime
 from itertools import cycle
 import simplejson as json
@@ -372,3 +372,76 @@ def cab_website_api():
         post.save()
         result = CabWebsiteSchema().dump(post)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/collection', methods=['GET', 'POST'])
+def cab_collection_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        args.pop('page', None)
+        args.pop('per_page', None)
+        data = CabCollection.query.filter_by(**args).all()
+        result = CabCollectionSchema(many=True).dump(data)
+        return jsonify({'result': {'collection': result.data}, 'message': "Success", 'error': False})
+    else:
+        collection = request.json
+        products = collection.get("products", None)
+        collection.pop('products', None)
+        collection_post = CabCollection(**collection)
+        collection_post.save()
+        for product in products:
+            product_post = CabCollection(**product)
+            collection_post.products.appand(product_post)
+            product_post.save()
+        result = CabCollectionSchema().dump(collection_post)
+        return jsonify({'result': {'collection': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/collection/<int:id>', methods=['PUT', 'DELETE'])
+def cab_collection_id(id):
+    if request.method == 'PUT':
+        put = CabCollection.query.filter_by(id=id).update(request.json)
+        if put:
+            CabCollection.update_db()
+            s = CabCollection.query.filter_by(id=id).first()
+            result = CabCollectionSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        collection = CabCollection.query.filter_by(id=id).first()
+        if not collection:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        else:
+            CabCollectionProduct.query.filter_by(cab_collection_id=collection.id).delete()
+            CabCollection.delete_db(collection)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/collection/product', methods=['GET', 'POST'])
+def cab_collection_product_api():
+    if request.method == 'GET':
+        args = request.args.to_dict()
+        data = CabCollectionProduct.query.filter_by(**args).all()
+        result = CabCollectionProductSchema(many=True).dump(data)
+        return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
+    else:
+        post = CabCollectionProduct(**request.json)
+        post.save()
+        result = CabCollectionProductSchema().dump(post)
+        return jsonify({'result': {'products': result.data}, 'message': "Success", 'error': False})
+
+
+@app.route('/api/v1/cab/collection/product/<int:id>', methods=['PUT', 'DELETE'])
+def cab_product_id(id):
+    if request.method == 'PUT':
+        put = CabCollectionProduct.query.filter_by(id=id).update(request.json)
+        if put:
+            CabCollectionProduct.update_db()
+            s = CabCollectionProduct.query.filter_by(id=id).first()
+            result = CabCollectionProductSchema(many=False).dump(s)
+            return jsonify({'result': result.data, "status": "Success", 'error': False})
+    else:
+        collection_product = CabCollectionProduct.query.filter_by(id=id).first()
+        if not collection_product:
+            return jsonify({'result': {}, 'message': "No Found", 'error': True})
+        CabCollectionProduct.delete_db(collection_product)
+        return jsonify({'result': {}, 'message': "Success", 'error': False})
