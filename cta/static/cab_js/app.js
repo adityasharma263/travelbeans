@@ -652,7 +652,7 @@ angular.module('comparetravel', ['angular.filter'])
       $scope.fuel_capacity = $scope.cab.amenities.fuel_capacity;
       $http({
         method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.fuel_capacity
+        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.cabfuel_capacity
       }).then(function successCallback(response) {
           $scope.cabs = response.data.result.cabs;
           console.log(" $scope.cabs ", $scope.cabs );
@@ -689,10 +689,10 @@ angular.module('comparetravel', ['angular.filter'])
     }
 
     $scope.getCab_free_km = function(){
-      $scope.km_restriction = $scope.cab.km_restriction;
+      // $scope.km_restriction = $scope.cab.km_restriction;
       $http({
         method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&km_restriction=' + $scope.km_restriction
+        url: '/api/v1/cab' + document.location.search + '&km_restriction=' + $scope.cab.km_restriction
       }).then(function successCallback(response) {
           $scope.cabs = response.data.result.cabs;
           console.log(" $scope.cabs ", $scope.cabs );
