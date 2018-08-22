@@ -1436,11 +1436,9 @@
 
                                                 <input ng-cloak ng-init="userLocation = '{{user_location}}'" style="border-radius: 0;font-size:12px;" disable-auto-close
                                                     type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop"
-                                                    class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                                    class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Enter a city']]"
                                                 />
-                                                <span ng-show="submitted">
-                                                    <label class="error">Select an Individual</label>
-                                                </span>
+                                               
                                                 <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
 
                                                     <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">

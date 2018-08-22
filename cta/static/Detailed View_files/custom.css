@@ -79,6 +79,17 @@
         left: 56px;
     
 }
+
+.photo-gallery.style1{
+    overflow: hidden;
+    height: 250px;
+}
+
+
+
+
+
+
 } 
 
 
@@ -129,6 +140,12 @@
         width: 482px;
         left: 311px;
     
+}
+
+
+.photo-gallery.style1{
+    overflow: hidden;
+    height: 520px;
 }
 }
 

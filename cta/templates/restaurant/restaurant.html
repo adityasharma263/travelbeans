@@ -785,11 +785,9 @@
 
                                                 <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
                                                    
-                                                <input ng-cloak style="border-radius: 0;font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                                <input ng-cloak style="border-radius: 0;font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Enter a city']]"
                                                     />
-                                                    <span ng-show="submitted">
-                                                        <label class="error">Select an Individual</label>
-                                                    </span>
+                                                    
                                                     <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
                                                         
                                                         <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
@@ -985,7 +983,7 @@
                                     <h3>Select location below:</h3>
                                     <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
                                         
-                                         <input ng-cloak style="border-radius: 0;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                         <input ng-cloak style="border-radius: 0;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation!='None'  ? userLocation : 'Enter a city']]"
                                          />
                                          <span ng-show="submitted">
                                              <label class="error">Select Location</label>
@@ -1233,8 +1231,7 @@
                                             <!-- <div>
                                                 Type : {{categories_data_reverse[restaurant.category|string] }}
                                             </div> -->
-                                            <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
-                                                data-toggle="modal" data-target="#show-map">{{restaurant.address}}</div>
+                                            <div class="restaurant-address" >{{restaurant.address}}</div>
                                             <span>Cuisine:</span>
                                             {% for cuisine in restaurant.cuisines %}
                                             <span>
@@ -1382,12 +1379,6 @@
                                             </div>
 
                                         </p>
-                                        <!-- <div class="action">
-                                            <a class="button btn-small green" href="javascript:;" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
-                                                <i class="fa fa-file-text-o" aria-hidden="true"></i> VIEW MENU</a>
-                                            <a class="button btn-small" href="tel:{{restaurant.phone}}">CALL</a>
-
-                                        </div> -->
                                     </div>
                                 </article>
                             </div>

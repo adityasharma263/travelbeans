@@ -1251,8 +1251,6 @@ var app = angular.module("restaurantApp", ['angular.filter'])
         }
 
       }
-
-
     }
 
     $scope.searchQuery = function (query, cityLocation) {

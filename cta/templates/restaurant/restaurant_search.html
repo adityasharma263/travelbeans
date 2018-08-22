@@ -1420,38 +1420,10 @@
         <section id="content" class="tour">
 
             <div>
-
-                <!-- <div class="flexslider">
-                    <ul class="slides">
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
-                        </li>
-                        <li class="flex-active-slide" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 1; display: block; transition: opacity 0.6s ease; z-index: 2;">
-                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-order-online.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-waffle.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(/image/restaurant-travel-beans-hungry-search-the-best-quality-food-here-north-indian.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(/image/south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
-                        </li>
-                        <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; opacity: 0; display: block; transition: opacity 0.6s ease; z-index: 1;">
-                            <div class="slidebg" style="background-image: url(/image/tandoori-chicken-south-Indian-food-dish-restaurant-travel-beans-hungry-search-the-best-quality-food-here.jpg);"></div>
-                        </li>
-                    </ul>
-                </div> -->
-
-
                 <div class="container">
                     <div class="table-wrapper full-width">
                         <div class="table-cell">
-                            <!-- <div class="box">
-                                <img src="images/logo.png" alt="">
-                            </div> -->
-
+                            
                             <div class="tab-content">
                                 <div class="search-box tab-pane fade active in" id="search" style="margin-top: 3%;">
 
@@ -1460,34 +1432,11 @@
 
                                             <div class="col-sm-2 col-xs-12 form-group">
 
-                                                <!-- <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
-                                                    <button style="width:100%;border-radius:0;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button"
-                                                        id="individualDrop" ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
-                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
-                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
-                                                    </button>
-                                                    <span ng-show="submitted">
-                                                        <label class="error">Select an Individual</label>
-                                                    </span>
-                                                    <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
-                                                        <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
-                                                        />
-                                                        <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
-                                                            <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
-                                                        </li>
-                                                    </ul>
-                                                </div> -->
                                                 <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" >
-                                                    <!-- <button style="width:100%;border-radius: 0;" class="btn btn-default  makePaymentDropdownBtn" type="button"
-                                                         ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
-                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
-                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
-                                                    </button> -->
-                                                    <input ng-cloak ng-init="userLocation = '{{user_location}}'" style="border-radius: 0;font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                                   
+                                                    <input ng-cloak ng-init="userLocation = '{{user_location}}'" style="border-radius: 0;font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Enter a city']]"
                                                     />
-                                                    <span ng-show="submitted">
-                                                        <label class="error">Select an Individual</label>
-                                                    </span>
+                                                    
                                                     <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
                                                         
                                                         <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
@@ -1546,15 +1495,15 @@
                             <div class="filter-container card toggle-container filters-container" style="background: #FFF;border-radius: 0;">
 
 
-                                <a type="button" class="navbar-toggle collapsed btn btn-default" data-toggle="collapse" data-target="#filter-menu" aria-expanded="false">
-                                    <i class="fa fa-bars"></i>
+                                <a type="button" class="navbar-toggle collapsed btn" data-toggle="collapse" data-target="#filter-menu" aria-expanded="false">
+                                    <i class="fa fa-plus-circle" style="background:#fff;color:#12a0c3; "></i>
                                 </a>
 
 
                                 <h2>Filters</h2>
                                 <!-- <hr> -->
                                 <div class=" style1 arrow-right" >
-                                <div id="filter-menu"  data-toggle="collapse" class="collapsed" aria-expanded="false">
+                                <div id="filter-menu"  data-toggle="collapse" class="collapsed collapse navbar-collapse" aria-expanded="false">
                                     <div class="panel style1 arrow-right">
                                         <button class="btn-medium icon-check uppercase full-width" ng-click="reload();">Clear filter</button>
                                     </div>
@@ -1868,7 +1817,7 @@
                                                     <div class="modal-header" style="background:#ff6000;">
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         <div style="text-align: center;">
-                                                            <h4 class="h3 modal-title" style="color:white;">[[restaurantName]]</br>
+                                                            <h4 class="h3 modal-title" style="color:white;">[[restaurantName]]
                                                             </h4>
                                                             <small style="color:white;">Menu card by Travel Beans</small>
 
@@ -1909,13 +1858,14 @@
                                                                 </tr>
                                                                 
                                                             </tbody>
-                                                            <br/>
+                                                            
                                                         </table>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <div class="pull-left">Total no. of dish(es) added: [[noOfDishes]]</div>
+                                                        <div class="pull-left">Items Added <i class="fa fa-shopping-cart" aria-hidden="true"></i> : [[noOfDishes]]</div>
                                                         <button type="button" class="button btn-medium green">Order Online</button>
                                                     </div>
+                                                    
                                                 </div>
 
                                             </div>
