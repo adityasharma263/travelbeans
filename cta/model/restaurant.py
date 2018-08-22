@@ -15,7 +15,7 @@ class Restaurant(Base):
     closing_time = db.Column(db.TIME(), nullable=True)
     break_time = db.Column(db.TIME(), nullable=True)
     break_interval = db.Column(db.Integer, nullable=True)
-    mode_of_payment = db.Column(db.Integer, nullable=True)
+    mode_of_payment = db.Column(db.String, nullable=True)
     especially = db.Column(db.Text, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
