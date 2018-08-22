@@ -7,6 +7,7 @@ class Restaurant(Base):
     __tablename__ = 'restaurant'
 
     name = db.Column(db.String)
+    website = db.Column(db.String, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
     nearest_metro_station = db.Column(db.String)
     off_day_in_week = db.Column(db.String)
@@ -14,7 +15,7 @@ class Restaurant(Base):
     closing_time = db.Column(db.TIME(), nullable=True)
     break_time = db.Column(db.TIME(), nullable=True)
     break_interval = db.Column(db.Integer, nullable=True)
-    mode_of_payment = db.Column(db.Integer, nullable=True)
+    mode_of_payment = db.Column(db.String, nullable=True)
     especially = db.Column(db.Text, nullable=True)
     price = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
