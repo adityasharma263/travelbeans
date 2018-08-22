@@ -1247,11 +1247,11 @@
                                                     <div id="Seater-filter" class="panel-collapse collapse filters-container">   
                                                         <div class="panel-content"> 
                                                                 <ul class="check-square filters-option">
-                                                                    <input type="radio" name="seater" value="true"/>3
+                                                                    <input type="radio" name="seater" value="3" ng-model="cab.seater" ng-click="getCab_seater()"/>3
                                                                     <br>
-                                                                    <input type="radio" name="seater" value="false"/>5
+                                                                    <input type="radio" name="seater" value="5" ng-model="cab.seater" ng-click="getCab_seater()"/>5
                                                                     <br>
-                                                                    <input type="radio" name="seater" value="false"/>8
+                                                                    <input type="radio" name="seater" value="8" ng-model="cab.seater" ng-click="getCab_seater()"/>8
                                                                 </ul>
                                                         </div>
                                                     </div>
@@ -1263,11 +1263,11 @@
                                                         <div id="Fuel-Type-filter" class="panel-collapse collapse filters-container">
                                                             <div class="panel-content"> 
                                                                 <ul class="check-square filters-option">
-                                                                    <input type="radio" name="fuel_type" value="true"/>Petrol
+                                                                    <input type="radio" name="fuel_type" value="1" ng-click="getCab_fuel_type(1)"/>Petrol
                                                                     <br>
-                                                                    <input type="radio" name="fuel_type" value="false"/>Diesel
-                                                                    <br>
-                                                                    <input type="radio" name="fuel_type" value="false"/>CNG
+                                                                    <input type="radio" name="fuel_type" value="2" ng-click="getCab_fuel_type(2)"/>Diesel
+                                                                    <br> 
+                                                                    <input type="radio" name="fuel_type" value="3" ng-click="getCab_fuel_type(3)"/>CNG
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -1295,9 +1295,9 @@
                                 <div id="Verified-Driver-panel" class="panel-collapse collapse filters-container">
                                     <div class="panel-content">
                                             <ul class="check-square filters-option">
-                                                <input type="radio" name="driver" value="true"/>Verified
+                                                <input type="radio" name="driver" value="true" ng-click="getAmenity('verified_driver',true)"/>Verified
                                                 <br>
-                                                <input type="radio" name="driver" value="false"/>Not Verified
+                                                <input type="radio" name="driver" value="false" ng-click="getAmenity('verified_driver',false)"/>Not Verified
                                             </ul>
                                                      
                                     </div>
@@ -1344,8 +1344,8 @@
                                                 </ul>
                                             </div>
                                              <div class="action row">
-                                                 <div class="col-xs-6">
-                                                  <a class="button btn-small yellow full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#[[cab.id]]">More Deals</a>
+                                                 <div class="col-xs-12">
+                                                  <a class="button btn-small green full-width" style="padding:0 8px;" data-toggle="collapse" data-target="#[[cab.id]]">More Deals</a>
                                                 </div>
                                                 
                                             </div>        

@@ -690,7 +690,7 @@ angular.module('comparetravel', ['angular.filter'])
       $scope.fuel_capacity = $scope.cab.amenities.fuel_capacity;
       $http({
         method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.fuel_capacity
+        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.cabfuel_capacity
       }).then(function successCallback(response) {
           $scope.cabs = response.data.result.cabs;
           console.log(" $scope.cabs ", $scope.cabs );
@@ -706,11 +706,31 @@ angular.module('comparetravel', ['angular.filter'])
       
     }
 
-    $scope.getCab_free_km = function(){
-      $scope.km_restriction = $scope.cab.km_restriction;
+    $scope.getCab_seater = function(){
+      
       $http({
         method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&km_restriction=' + $scope.km_restriction
+        url: '/api/v1/cab' + document.location.search + '&seater=' + $scope.cab.seater
+      }).then(function successCallback(response) {
+          $scope.cabs = response.data.result.cabs;
+          console.log(" $scope.cabs ", $scope.cabs );
+          console.log($scope.cab.seater);
+
+          // this callback will be called asynchronously
+  
+          // when the response is available
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      })
+      
+    }
+
+    $scope.getCab_free_km = function(){
+      // $scope.km_restriction = $scope.cab.km_restriction;
+      $http({
+        method: 'GET',
+        url: '/api/v1/cab' + document.location.search + '&km_restriction=' + $scope.cab.km_restriction
       }).then(function successCallback(response) {
           $scope.cabs = response.data.result.cabs;
           console.log(" $scope.cabs ", $scope.cabs );
@@ -725,6 +745,26 @@ angular.module('comparetravel', ['angular.filter'])
       })
       
     }
+
+    $scope.getCab_fuel_type= function(fuel_type){
+       
+      $http({
+        method: 'GET',
+        url: '/api/v1/cab' + document.location.search + '&car_type=' + fuel_type
+      }).then(function successCallback(response) {
+          $scope.cabs = response.data.result.cabs;
+          console.log(" $scope.cabs ", $scope.cabs );
+
+          // this callback will be called asynchronously
+  
+          // when the response is available
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      })
+      
+    }
+
     $scope.getCab_car_type= function(car_name){
       var count = 0;
       var i;
