@@ -554,7 +554,40 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.plongitude = 0;
     $scope.dlongitude = 0;
 
+    var str = document.location.search.split("&");
+    var type = str[0].split("=");
+    var type1 = str[2].split("=");
+    var type2 = str[3].split("=");
+    var type3 = str[0].split("=");
+    $scope.city = type[1];
+    $scope.pick_up= type1[1];
+    $scope.drop = type2[1];
+    $scope.drop_city = type3[1];
+    $scope.default_Pickup_Location=$scope.city;
+
+
+    var date=$scope.pick_up*1000
+    var d = new Date(date);
+    var n = d.toLocaleString().split(":");
+    n.pop();
+    var newdate=n[0] + ":" + n[1];
+    console.log(newdate)
+    $scope.pick_up_date= newdate;
+    $scope.default_Pickup_Time=$scope.pick_up_date;
+    console.log($scope.default_Pickup_Time);
+    $scope.default_Drop_Off_Location=$scope.drop_city;
+    $scope.default_Drop_Off_Time=$scope.drop_city;
+
+    var date1=$scope.drop*1000
+    var d1= new Date(date1);
+    var n1= d1.toLocaleString().split(":");
+    n1.pop();
+    var newdate1=n1[0] + ":" + n1[1];
+    $scope.default_Drop_Off_Time=newdate1;
+    console.log("drop time",$scope.default_Drop_Off_Time);
     
+    
+
     $scope.getCabs = function(id) {
         // console.log("$location.path",$location.path);
         $scope.info.pickup_time = Date.parse($scope.info.pickup_time)/1000;
@@ -585,7 +618,12 @@ angular.module('comparetravel', ['angular.filter'])
               alert($scope.dlatitude);
           } 
         }); 
-
+        var str = document.location.search.split("&");
+        var type = str[1].split("=");
+        $scope.city = type[1];
+        console.log($scope.city);
+        
+    
         console.log("$scope.info",$scope.info);
         dataShare.sendData($scope.info);
         $scope.location=document.location.href;
@@ -782,6 +820,13 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.fuel_types = Constants.Fuel_types;
     $scope.amenities = Constants.Amenities;
     $scope.cab_types = Constants.Cab_types;
+
+    $http.get("/api/v1/cab/id")
+    .then(function (res) {
+      $scope.cabs = res.data.result.cabs;
+    }, function (err) {
+      console.log(err);
+    });
 
     var createToast=function(msg, color){
       var x= document.getElementById("snackbar");

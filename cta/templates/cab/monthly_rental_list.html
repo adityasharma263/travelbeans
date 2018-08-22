@@ -776,13 +776,13 @@
                                     <div class="row">
                                         
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div class="form-group" onload="modify_search_value()">
                                                 
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <div >
                                                             <label>Pickup Location</label>
-                                                            <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+                                                            <input type="text" id="default_" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
         
                                                         </div>
                                                     </div>
@@ -932,12 +932,15 @@
                                 </div>
                             </form>
                         </div>
-                    </div>       
+                    </div>  
+                    <div class="search-box-wrapper style2">
+                        
+                    <div class="container search-box" style="background:rgba(0,0,0,0.75);padding:10px;">     
                     <div class="sort-by-section clearfix" ng-if="cab_type==4">
                         <div class="search-tab-content">
                             <h2>Modify Search</h2>
-                            <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                            <form>
+                             <!--<i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                           <form>
                                 <div class="row">
                                     <label>
                                         <input type="radio" value="true" ng-model="info.one_way"/>One Way
@@ -950,7 +953,7 @@
                                                 <div class="col-md-3">
                                                     <div >
                                                         <label>Pickup Location</label>
-                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+                                                        <input type="text"  ng-value="default_Pickup_Location" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
     
                                                     </div>
                                                 </div>
@@ -958,14 +961,14 @@
                                                 <div class="col-md-2">
                                                     <div >
                                                         <label>Pickup Time</label>
-                                                        <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
+                                                        <input type="datetime" ng-value="default_Pickup_Time" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
     
                                                 <div class="col-md-3">
                                                     <div >
                                                             <label>Drop Off Location</label>
-                                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+                                                            <input type="text" ng-value="default_Drop_Off_Location" class="input-text full-width" ng-model="info.drop_location">
     
                                                     </div>
                                                 </div>
@@ -973,7 +976,7 @@
                                                     <div class="col-md-2">
                                                     <div >
                                                         <label>Drop Off Time</label>
-                                                        <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                                        <input type="datetime" ng-value="default_Drop_Off_Time" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -990,7 +993,12 @@
                                 </div>
                             </form> 
                         </div>
-                    </div>        
+                    </div>       
+                    </div> 
+                        
+                    
+                        </div>
+                    </div>
                     <div class="sort-by-section clearfix" ng-if="cab_type==5">
                         <div class="search-tab-content">
                                 <h2>Modify Search</h2>

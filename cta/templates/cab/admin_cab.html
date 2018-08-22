@@ -351,14 +351,14 @@
             </div>
     
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4" ng-repeat="cabs in cabs | filter: search">
                     <div class="thumbnail">
-                        <img ng-src="[[cab.images[0].image_url]]" alt="">
+                        <img ng-src="[[cabs.images[0].image_url]]" alt="">
                         <div class="caption">
-                            <h4>[[cab.car_name]]</h4>
+                            <h4>[[cabs.car_name]]</h4>
                             <p>
                                 <span>location :
-                                    <span>[[cab.city]]</span>
+                                    <span>[[cabs.city]]</span>
                                 </span>
                             </p>
                             <p>
