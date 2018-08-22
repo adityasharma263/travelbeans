@@ -65,14 +65,14 @@ class CabFare:
 
     def sight_seening(self, fare_obj, distance, time_obj):
         if fare_obj.get("slab") < time_obj["total_hours"] and fare_obj.get("slab") != 0:
-            fare = fare_obj.get("base_fare")
+            fare = float(fare_obj.get("base_fare"))
         else:
             fare = None
         return fare
 
     def luxury(self, fare_obj, distance, time_obj):
         if fare_obj.get("slab") < time_obj["total_hours"] and fare_obj.get("slab") != 0:
-            fare = fare_obj.get("base_fare")
+            fare = float(fare_obj.get("base_fare"))
         else:
             fare = None
         return fare
