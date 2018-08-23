@@ -552,22 +552,7 @@
             </div>
         </header>
 
-        <!-- <div class="page-title-container">
-            <div class="container">
-                <div class="page-title pull-left">
-                    <h2 class="entry-title">Resturants</h2>
-                </div>
-                <ul class="breadcrumbs pull-right">
-                    <li>
-                        <a href="#">HOME</a>
-                    </li>
-                    <li>
-                        <a href="#">PAGES</a>
-                    </li>
-                    <li class="active">Resturants</li>
-                </ul>
-            </div>
-        </div> -->
+        
 
 
         <section id="content" class="tour">
@@ -795,28 +780,14 @@
 
                                     <form>
                                         <div class="row">
-                                            <div class="col-sm-2 col-xs-12">
-                                                {#
-                                                <label>
-                                                    <select ng-model="userLocation" ng-init="userLocation = '{{user_location}}'" ng-change="setValues(userLocation)" style="width: 100%;">
-                                                        <option value disabled>--Select Location--</option>
-                                                        {% for location in locations %}
-                                                        <option value="{{location}}">{{location}}</option>
-                                                        {% endfor %}
-                                                    </select>
-                                                </label> #}
+                                            <div class="col-sm-2 col-xs-12 form-group">
+                                               
 
                                                 <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
-                                                    <!-- <button style="width:100%;border-radius: 0;" class="btn btn-default  makePaymentDropdownBtn" type="button"
-                                                         ng-click="serchFilter = ''" ng-init="userLocation = '{{user_location}}'"
-                                                        data-toggle="dropdown" ng-cloak="">[[userLocation || 'Select City']]
-                                                        <span class="caret pull-right" style="margin-top:10px;"></span>
-                                                    </button> -->
-                                                    <input ng-cloak style="border-radius: 0;font-weight:900" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Search City']]"
+                                                   
+                                                <input ng-cloak style="border-radius: 0;font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Enter a city']]"
                                                     />
-                                                    <span ng-show="submitted">
-                                                        <label class="error">Select an Individual</label>
-                                                    </span>
+                                                    
                                                     <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
                                                         
                                                         <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
@@ -952,7 +923,7 @@
 
                             </div>
                             <div class="text-center ">
-                                <a data-toggle="tab" href="#search" class="button btn-medium dark-orange
+                                <a data-toggle="tab" href="#search" class="button btn-medium dark-orange form-group
                                                 uppercase animated fadeInLeftBig " data-animation-type="fadeInLeftBig "
                                     style="animation-duration: 1s; visibility: visible; ">Order Online</a>
                                 &nbsp;&nbsp;
@@ -1007,32 +978,23 @@
                                 <div ng-show="!showlocationDiv" class="col-xs-6">
                                     <button class="button btn-medium red" ng-click="showlocationDiv = true;">Deny</button>
                                 </div>
-                                <!-- <div class="col-sm-6">
-                                    <button class="button btn-medium sky-blue1" ng-click="getLocationByGPS()" style="width:100%;">use GPS</button>
-
-                                </div> -->
-                                <!-- <div class="col-sm-1">
-                                    <strong>OR</strong>
-                                </div> -->
+                                
                                 <div class="col-sm-6" ng-show="showlocationDiv">
                                     <h3>Select location below:</h3>
-                                    <div class="dropdown makePaymentDropdownMainDiv" auto-close="outsideClick">
-                                        <button style="width:100%;border-radius: 0;" class="btn btn-default dropdown-toggle makePaymentDropdownBtn" type="button"
-                                            id="individualDrop" ng-click="serchFilter = ''" data-toggle="dropdown" ng-cloak="">
-                                            Select City
-                                            <span class="caret pull-right" style="margin-top:10px;"></span>
-                                        </button>
-                                        <span ng-show="submitted">
-                                            <label class="error">Select an Individual</label>
-                                        </span>
-                                        <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
-                                            <input disable-auto-close type="search" ng-model="serchFilter" class="makePaymentDropdownSearchBox form-control" placeholder="Search City"
-                                            />
-                                            <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
-                                                <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}" ng-init="userLocation = '{{user_location}}'">
+                                        
+                                         <input ng-cloak style="border-radius: 0;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop" class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation!='None'  ? userLocation : 'Enter a city']]"
+                                         />
+                                         <span ng-show="submitted">
+                                             <label class="error">Select Location</label>
+                                         </span>
+                                         <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                                             
+                                             <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                 <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                             </li>
+                                         </ul>
+                                     </div>
                                 </div>
                             </div>
                             {#
@@ -1067,10 +1029,11 @@
 
 
                     <div class="row image-box style2 add-clearfix ">
-                        {% for collection in collections %}
+                        {% if collections %}
+                        {% for collection in collections[:3]  %}
                         <div class="col-md-4 collection-card">
-                            <article class="box ">
-                                <figure>
+                            <article class="box" >
+                                <figure style="height: 117px;overflow: hidden;">
                                     <a title=" " href="/restaurant/search?collection={{collection.collection}}">
                                         <img class="collection-card-img" alt="{{collection.collection}} " src="{{collection.image}} ">
                                     </a>
@@ -1084,22 +1047,24 @@
                             </article>
                         </div>
                         {% endfor %}
+                        {% endif %}
 
                         <div class="col-sm-12 ">
                             <div class="row">
                                 <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
-                                    <a href="/restaurant/collection " class="button btn-medium green">see more collections</a>
+                                    <a href="/restaurant/collection " class="button btn-large green">See More Collections</a>
 
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12"><hr></div>
+                        <!-- <div class="col-md-12"><hr></div> -->
                        
                     </div>
 
-                    <h2>Our Menu Card</h2>
+                    <h2 class="h2">Our Menu Card</h2>
+                    <div class="col-md-12"><hr></div>
                     <div class="block clearfix ">
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=breakfast ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-breakfast "></i> -->
@@ -1109,7 +1074,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=lunch ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-beach "></i> -->
@@ -1119,7 +1084,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=dinner ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-beach "></i> -->
@@ -1129,7 +1094,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=cafe ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-coffee "></i> -->
@@ -1139,7 +1104,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=lounge ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-playplace "></i> -->
@@ -1149,7 +1114,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=restaurant ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-couples "></i> -->
@@ -1159,7 +1124,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=bars ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-winebar"></i> -->
@@ -1169,7 +1134,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=nightlife ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
@@ -1179,7 +1144,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=luxury ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
@@ -1189,7 +1154,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=street_stalls ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-food"></i> -->
@@ -1199,7 +1164,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=pocket_friendly ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-savings "></i> -->
@@ -1209,7 +1174,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-10 col-sm-4 col-md-1 ">
+                        <div class="col-xs-6 col-sm-4 col-md-1 ">
                             <a href="/restaurant/search?menu=diet ">
                                 <div class="icon-box style4 ">
                                     <!-- <i class="soap-icon-ski "></i> -->
@@ -1219,6 +1184,8 @@
                                 </div>
                             </a>
                         </div>
+                    <div class="col-md-12"><hr></div>
+                    
                     </div>
 
                     <h2>Popular Resturants</h2>
@@ -1240,7 +1207,7 @@
                                 <article class="box">
                                     <figure style="height:171px;overflow:hidden;">
                                         <a href="/restaurant/{{restaurant.id}}" class="hover-effect">
-                                            <span class="restaurent-type">{{categories_data_reverse[restaurant.category|string] }}</span>
+                                            <span class="restaurent-type">{{capitalizeString(categories_data_reverse[restaurant.category|string]) }}</span>
                                             <img width="270" height="161" alt="" ng-src="{{restaurant.images[0].image_url}}">
                                         </a>
                                     </figure>
@@ -1264,8 +1231,7 @@
                                             <!-- <div>
                                                 Type : {{categories_data_reverse[restaurant.category|string] }}
                                             </div> -->
-                                            <div class="restaurant-address " ng-click="showMap(restaurant.latitude, restaurant.longitude, restaurant.name);" role="button"
-                                                data-toggle="modal" data-target="#show-map">{{restaurant.address}}</div>
+                                            <div class="restaurant-address" >{{restaurant.address}}</div>
                                             <span>Cuisine:</span>
                                             {% for cuisine in restaurant.cuisines %}
                                             <span>
@@ -1413,12 +1379,6 @@
                                             </div>
 
                                         </p>
-                                        <!-- <div class="action">
-                                            <a class="button btn-small green" href="javascript:;" data-toggle="modal" data-target="#view-menu-modal" ng-click="$parent.getMenubyId(restaurant.id, restaurant.name)">
-                                                <i class="fa fa-file-text-o" aria-hidden="true"></i> VIEW MENU</a>
-                                            <a class="button btn-small" href="tel:{{restaurant.phone}}">CALL</a>
-
-                                        </div> -->
                                     </div>
                                 </article>
                             </div>
@@ -1854,7 +1814,7 @@
                             <div class="col-sm-12 ">
                                 <div class="row">
                                     <div class="col-xs-offset-3 col-xs-6 col-md-offset-5 col-md-6">
-                                        <a href="/restaurant/collection " class="button btn-medium green">see more recipes</a>
+                                        <a href="/restaurant/collection " class="button btn-large green">See more recipes</a>
 
                                     </div>
                                 </div>

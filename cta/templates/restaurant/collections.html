@@ -1,25 +1,23 @@
+ {% include '/restaurant/components/header_with_searchbar.html' %}
 
-    {% include '/restaurant/components/header_with_searchbar.html' %}
-
+<section id="content">
     <div class="container">
-        
+        <h2>
+            Showing Collection for {{user_location}}
+        </h2>
+        <br/>
         <div class="row image-box style2 add-clearfix mt20">
-            <h2 class="col-md-12">
-                    Showing Collection for {{user_location}}
-            </h2>
-
-            {% if collections|length > 0 %}
-            {% for collection_key, collection_value in collections.items() %}
+            {% if collections|length > 0 %} {% for collection_key, collection_value in collections.items() %}
             <div class="col-md-4 collection-card">
                 <article class="box ">
-                    <figure>
+                    <figure style="height: 117px;overflow: hidden;">
                         <a title=" " href="/restaurant/search?collection={{collection_value.collection}} ">
                             <img class="collection-card-img" alt="{{collection_value.collection}} " src="{{collection_value.image}} ">
                         </a>
                     </figure>
                     <div class="details collection-card-details ">
                         <h3 class="box-title ">{{collection_value.collection}}</h3>
-                        <p>{{collection_value.desc}} </p>
+                        <p class="collection-desc">{{collection_value.desc}} </p>
                     </div>
                 </article>
             </div>
@@ -65,6 +63,7 @@
 
 
     </div>
+</section>
 {% include '/restaurant/components/footer.html' %}
 
 </body>

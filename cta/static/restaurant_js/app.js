@@ -130,6 +130,20 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
     }
 
+
+    $scope.getCapitalize = function (stringValue) {
+      var string = stringValue.replace("_", " ").split(" ");
+
+      var capitalizeString = "";
+
+      for (i in string) {
+        capitalizeString += string[i].charAt(0).toUpperCase() + string[i].slice(1) + " ";
+      }
+
+      return capitalizeString;
+
+    }
+
     $scope.reload = function () {
       window.location.reload();
     }
@@ -1223,6 +1237,20 @@ var app = angular.module("restaurantApp", ['angular.filter'])
     overlayBox.onclick = function () {
       searchSuggestionDiv.style.display = "none";
       overlayBox.style.display = "none";
+    }
+
+    var collection_desc = document.getElementsByClassName("collection-desc")
+
+    if (collection_desc.length) {
+      for (i in collection_desc) {
+        console.log(collection_desc[i]);
+        try {
+          $clamp(collection_desc[i], { clamp: 2 });
+        } catch (error) {
+          console.log(error);
+        }
+
+      }
     }
 
     $scope.searchQuery = function (query, cityLocation) {

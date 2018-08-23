@@ -34,6 +34,8 @@
     <script type="text/javascript">
         var DOMAIN_URL = "{{config['DOMAIN_URL']}}";
     </script>
+    <script src="https://rawgit.com/josephschmitt/Clamp.js/master/clamp.min.js" type="text/javascript"></script>
+    
     <script type="text/javascript" src="/restaurant_js/app.js"></script>
 
 </head>
@@ -1387,193 +1389,7 @@
             </div>
         </header>
 
-        <!-- <div class="page-title-container">
-            <div class="container">
-                <div class="page-title pull-left">
-                    <h2 class="entry-title">Resturants</h2>
-                </div>
-                <ul class="breadcrumbs pull-right">
-                    <li>
-                        <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">HOME</a>
-                    </li>
-                    <li>
-                        <a href="http://www.soaptheme.net/html/travelo/extra-pages-inflight-experience.html#">PAGES</a>
-                    </li>
-                    <li class="active">Resturants</li>
-                </ul>
-            </div>
-        </div> -->
-
-
         <section id="content" class="tour">
-            <!-- <div class="banner imagebg-container" style="height: 150px; background-image: url(https://ferepaketo.gr/upload/1478076860-food-banneraki.jpg);">
-                <div class="container">
-                    <h2 class="med-caption">We're Bring You The Best Taste ,
-                </div>
-            </div> -->
-
-
-
-            <!-- <div class="tab-wrapper">
-                <div class="tab-container container trans-style">
-                    <ul class="tabs no-padding">
-                        <li class="active">
-                            <a data-toggle="tab" href="#search" aria-expanded="true">
-                                <i class="soap-icon-food"></i>Search The Stuff</a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#order-food" aria-expanded="false">
-                                <i class="soap-icon-shopping-3"></i>Order Food</a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#book-table" aria-expanded="false">
-                                <i class="soap-icon-passenger"></i>Book a Table</a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#book-party" aria-expanded="false">
-                                <i class="soap-icon-wifi"></i>Book for a Party</a>
-                        </li>
-                        <li class="">
-                            <a data-toggle="tab" href="#chefs-recipie-corner" aria-expanded="false">
-                                <i class="soap-icon-baggage-4"></i>Chefs Recipie Corner</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content">
-
-
-
-                        <div id="search" class="tab-pane fade active in">
-                            <div class="search-tab-content">
-                                <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
-                                <form action="/restaurant/search" method="get">
-                                    <div class="row">
-                                        <div class="form-group col-sm-6 col-md-6">
-                                            <h4 class="title">Trip Keys Resturants</h4>
-                                            <label>Search for a Perfect Dinning</label>
-                                            <input type="text" class="input-text full-width search-input-text" placeholder="Search for a Dish" ng-model="searchQueryValue"
-                                                ng-change="searchQuery(searchQueryValue)">
-                                        </div>
-
-
-
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
-                                            <label class="hidden-xs">&nbsp;</label>
-                                            <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1"
-                                                style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <div class="col-sm-6 col-md-2 search-suggestion-box" id="search-suggestion" ng-init="searchQueryValue = '{{ searched_value }}'">
-                                    <ul id="search-suggestion-list" ng-repeat="(searchType, searchValue) in searchSuggestion">
-                                        <li ng-repeat="searchResult in searchValue">
-                                            <a ng-cloak href="{{config['DOMAIN_URL']}}/restaurant/search?[[searchType]]=[[searchResult]]">
-                                                <span ng-bind-html="highlight(searchResult, searchQueryValue)"></span> - [[searchType]]
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div id="overlay-box"></div>
-                            </div>
-                        </div>
-
-                        <div id="order-food" class="tab-pane fade">
-
-                            <div class="search-tab-content">
-                                <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
-                                <form action="" method="post">
-                                    <div class="row">
-                                        <div class="form-group col-sm-6 col-md-6">
-                                            <h4 class="title">Order Online</h4>
-                                            <label>Hungry ? Worry Not , We'll Get Your Order Placed</label>
-
-                                            <input type="text" class="input-text full-width search-input-text" placeholder="Tell Us ! What are You Hungry For ?" ng-model="searchQueryValue"
-                                                ng-change="searchQuery(searchQueryValue)">
-                                        </div>
-
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
-                                            <label class="hidden-xs">&nbsp;</label>
-                                            <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1"
-                                                style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div id="book-table" class="tab-pane fade">
-                            <div class="search-tab-content">
-                                <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
-                                <form action="" method="post">
-                                    <div class="row">
-                                        <div class="form-group col-sm-6 col-md-6">
-                                            <h4 class="title">Book a Table</h4>
-                                            <label>We'll Help You for a Perfect Dine Out , Book With Us </label>
-                                            <input type="text" class="input-text full-width" placeholder="Search for Resturants Around You">
-                                        </div>
-
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
-                                            <label class="hidden-xs">&nbsp;</label>
-                                            <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1"
-                                                style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div id="book-party" class="tab-pane fade">
-                            <div class="search-tab-content">
-                                <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
-                                <form action="" method="post">
-                                    <div class="row">
-                                        <div class="form-group col-sm-6 col-md-6">
-                                            <h4 class="title">Book For a Party , Event</h4>
-                                            <label>Let the Fun Begin , Book the Most Auspicious Place For Your Occasion</label>
-                                            <input type="text" class="input-text full-width" placeholder="Search for Resturants Around You">
-                                        </div>
-
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
-                                            <label class="hidden-xs">&nbsp;</label>
-                                            <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1"
-                                                style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div id="chefs-recipie-corner" class="tab-pane fade">
-                            <div class="search-tab-content">
-                                <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i>
-                                <form action="" method="post">
-                                    <div class="row">
-                                        <div class="form-group col-sm-6 col-md-6">
-                                            <h4 class="title">Chefs Recipie Corner</h4>
-                                            <label>Looking to Cook at Home , Try Something New With Recipies from Our MOM Chef's</label>
-                                            <input type="text" class="input-text full-width" placeholder="Search for a Dish ">
-                                        </div>
-
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
-                                            <label class="hidden-xs">&nbsp;</label>
-                                            <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="1"
-                                                style="animation-duration: 1s; visibility: visible;">SEARCH NOW</button>
-                                        </div>
-                                        <div class="form-group col-sm-6 col-md-2 fixheight">
-                                            <label class="hidden-xs">&nbsp;</label>
-                                            <button type="submit" class="full-width icon-check animated bounce" data-animation-type="bounce" data-animation-duration="2"
-                                                style="animation-duration: 3s; visibility: visible;">VIEW RECIPIES</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div> -->
-
             <div id="slideshow" class="slideshow-bg" style="max-height: 400px;min-height:0;">
 
                 <div class="flexslider">
@@ -1607,43 +1423,37 @@
                                 <img src="images/logo.png" alt="">
                             </div>
                             <div class="heading box">
-                                <h1 class="title">#TB Restaurants</h1>
+                                <h1 class="title"  style="font-size: 3.1667em;">#TB Restaurants</h1>
                             </div>
                             <div class="search-box">
                                 <form>
                                     <div class="row">
-                                        <!-- <div class="col-sm-4 col-md-8 form-group">
-                                            <div class="row"> -->
-                                                <div class="col-sm-2 col-xs-12">
-                                                    
 
-                                                    <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
-                                                       
-                                                        <input ng-cloak ng-init="userLocation = '{{user_location}}'" style="border-radius: 0;font-weight:900" disable-auto-close
-                                                            type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop"
-                                                            class="dropdown-toggle makePaymentDropdownSearchBox form-control"
-                                                            placeholder="[[userLocation || 'Search City']]" />
-                                                        <span ng-show="submitted">
-                                                            <label class="error">Select an Individual</label>
-                                                        </span>
-                                                        <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
-
-                                                            <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
-                                                                <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                        <div class="col-sm-2 col-xs-12 form-group ">
 
 
-                                                </div>
-                                                <div class="col-sm-6 col-xs-12" ng-init="searchQueryValue = '{{ searched_value }}'">
-                                                    <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
-                                                        ng-change="searchQuery(searchQueryValue, userLocation)">
-                                                </div>
-                                            <!-- </div> -->
+                                            <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="individuals = {{locations|safe}}">
+
+                                                <input ng-cloak ng-init="userLocation = '{{user_location}}'" style="border-radius: 0;font-size:12px;" disable-auto-close
+                                                    type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop"
+                                                    class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="[[userLocation || 'Enter a city']]"
+                                                />
+                                               
+                                                <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+
+                                                    <li role="presentation" ng-repeat="indi in individuals | filter: serchFilter">
+                                                        <a role="menuitem" href="javascript:;" ng-click="$parent.userLocation = indi;setValues(userLocation);">[[indi]]</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
 
 
-                                        <!-- </div> -->
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12 form-group " ng-init="searchQueryValue = '{{ searched_value }}'">
+                                            <input type="text" class="input-text full-width" placeholder="Where Do You Wanna Visit ? .... " ng-model="searchQueryValue"
+                                                ng-change="searchQuery(searchQueryValue, userLocation)">
+                                        </div>
+
 
 
                                         <div class=" col-sm-4 col-xs-12 form-group ">
@@ -1654,25 +1464,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- <div class="text-center ">
-                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium dark-orange
-                                                                    uppercase animated fadeInLeftBig " data-animation-type="fadeInLeftBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Order Online</a>
-                                &nbsp;&nbsp;
-                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium yellow
-                                                                    uppercase animated fadeInUpBig " data-animation-type="fadeInUpBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Book a Table</a>
-                                &nbsp;&nbsp;
-                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium green uppercase
-                                                                    animated fadeInDownBig " data-animation-type="fadeInDownBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Book a Party</a>
-                                &nbsp;&nbsp;
-                                <a href="http://www.travelbeans.in/hotel-collections " class="button btn-medium sky-blue1
-                                                                    uppercase animated fadeInRightBig " data-animation-type="fadeInRightBig "
-                                    style="animation-duration: 1s; visibility: visible; ">Chef's Recipies</a>
-                                &nbsp;&nbsp;
 
-                            </div> -->
                         </div>
                     </div>
                 </div>
