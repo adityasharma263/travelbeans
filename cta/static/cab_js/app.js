@@ -658,6 +658,25 @@ angular.module('comparetravel', ['angular.filter'])
         console.log("$scope.deals",$scope.deals);
         $scope.min_base_fare = Math.min.apply(Math,$scope.deals.map(function(item){return item.base_fare;}));
         $scope.max_base_fare = Math.max.apply(Math,$scope.deals.map(function(item){return item.base_fare;}));
+        $scope.max_km_restriction = Math.max.apply(Math,$scope.deals.map(function(item){return item.km_restriction;}));
+        console.log( $scope.max_km_restriction);
+        // this callback will be called asynchronously
+        // when the response is available
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    })
+
+    $http({
+      method: 'GET',
+      url: '/api/v1/cab/amenity'
+    }).then(function successCallback(response) {
+
+        $scope.amenities= response.data.result.amenities;
+        console.log("$scope.amenities",$scope.amenities);
+        $scope.max_fuel_capacity = Math.max.apply(Math,$scope.amenities.map(function(item){return item.fuel_capacity;}));
+      
+
         
         // this callback will be called asynchronously
         // when the response is available
@@ -687,10 +706,9 @@ angular.module('comparetravel', ['angular.filter'])
 
 
     $scope.getCab_fuel_capacity = function(){
-      $scope.fuel_capacity = $scope.cab.amenities.fuel_capacity;
       $http({
         method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.cabfuel_capacity
+        url: '/api/v1/cab' + document.location.search + '&fuel_capacity=' + $scope.cab.fuel_capacity
       }).then(function successCallback(response) {
           $scope.cabs = response.data.result.cabs;
           console.log(" $scope.cabs ", $scope.cabs );

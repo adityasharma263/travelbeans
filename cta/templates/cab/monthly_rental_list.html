@@ -756,7 +756,12 @@
         <div class="page-title-container">
             <div class="container">
                 <div class="page-title pull-left">
-                    <h2 class="entry-title">Car Search Results</h2>
+                    <h2 class="entry-title" ng-if="cab_type==1">Monthly Rental cabs from [[default_Pickup_Location]] </h2>
+                    <h2 class="entry-title" ng-if="cab_type==2">Sight Seeing cabs from [[default_Pickup_Location]] </h2>
+                    <h2 class="entry-title" ng-if="cab_type==3">Luxury cabs from [[default_Pickup_Location]] </h2>
+                    <h2 class="entry-title" ng-if="cab_type==4">Outstation cabs from [[default_Pickup_Location]] </h2>
+                    <h2 class="entry-title" ng-if="cab_type==5">Self Drive cabs from [[default_Pickup_Location]] </h2>
+                    <h2 class="entry-title" ng-if="cab_type==6">Hire a Driver cabs from [[default_Pickup_Location]] </h2>
                 </div>
                 <ul class="breadcrumbs pull-right">
                     <li><a href="#">HOME</a></li>
@@ -768,350 +773,356 @@
 <section id="content" class="gray-area">
 <div class="container">
         <div id="main">
-                <div class="sort-by-section clearfix" ng-if="cab_type==1">
-                        <div class="search-tab-content">
-                                <h2>Modify Search</h2>
-                                <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                                <form>
+                <div class="search-box-wrapper style2">
+                
+                        <div class="container search-box" style="background:rgba(0,0,0,0.75);padding:10px;"> 
+            <div class="sort-by-section clearfix" ng-if="cab_type==1">
+                <div class="search-tab-content">
+                        <h2>Modify Search</h2>
+                        <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                        <form>
+                            <div class="row">
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group" onload="modify_search_value()">
+                                        
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div >
+                                                    <label>Pickup Location</label>
+                                                    <input type="text" id="default_" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div >
+                                                    <label>Pickup Time</label>
+                                                    <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div >
+                                                        <label>Drop Off Location</label>
+                                                        <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+
+                                                </div>
+                                            </div>
+
+                                                <div class="col-md-2">
+                                                <div >
+                                                    <label>Drop Off Time</label>
+                                                    <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div >
+                                                    <label>For Variety of Prices</label>
+                                                    <button type="submit" class="full-width" ng-click="getCabs(1)">SEARCH NOW</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </form>
+                        </div>
+            </div>  
+            <div class="sort-by-section clearfix" ng-if="cab_type==2">
+                <div class="search-tab-content">
+                        <h2>Modify Search</h2>
+                    <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                    <form>
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    
                                     <div class="row">
-                                        
-                                        <div class="col-md-12">
-                                            <div class="form-group" onload="modify_search_value()">
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div >
-                                                            <label>Pickup Location</label>
-                                                            <input type="text" id="default_" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-        
-                                                        </div>
-                                                    </div>
-        
-                                                    <div class="col-md-2">
-                                                        <div >
-                                                            <label>Pickup Time</label>
-                                                            <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
-                                                        </div>
-                                                    </div>
-        
-                                                    <div class="col-md-3">
-                                                        <div >
-                                                                <label>Drop Off Location</label>
-                                                                <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-        
-                                                        </div>
-                                                    </div>
-        
-                                                        <div class="col-md-2">
-                                                        <div >
-                                                            <label>Drop Off Time</label>
-                                                            <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div >
-                                                            <label>For Variety of Prices</label>
-                                                            <button type="submit" class="full-width" ng-click="getCabs(1)">SEARCH NOW</button>
-                                                        </div>
-                                                    </div>
-        
-                                                </div>
+                                        <div class="col-md-3">
+                                            <div >
+                                                <label>Pickup Location</label>
+                                                <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+
                                             </div>
                                         </div>
-                                        
-                                    </div>
-                                </form>
-                                </div>
-                    </div>  
-                    <div class="sort-by-section clearfix" ng-if="cab_type==2">
-                        <div class="search-tab-content">
-                                <h2>Modify Search</h2>
-                            <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                            <form>
-                                <div class="row">
-                                    
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div >
-                                                        <label>Pickup Location</label>
-                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>Pickup Time</label>
-                                                        <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-3">
-                                                    <div >
-                                                            <label>Drop Off Location</label>
-                                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                    <div class="col-md-2">
-                                                    <div >
-                                                        <label>Drop Off Time</label>
-                                                        <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>For Variety of Prices</label>
-                                                        <button type="submit" class="full-width" ng-click="getCabs(2)">SEARCH NOW</button>
-                                                    </div>
-                                                </div>
-    
+
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>Pickup Time</label>
+                                                <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                </div>
-                            </form>
-                        </div>
-                    </div>      
-                    <div class="sort-by-section clearfix" ng-if="cab_type==3">
-                        <div class="search-tab-content">
-                                <h2>Modify Search</h2>
-                            <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                            <form>
-                                <div class="row">
-                                    
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div >
-                                                        <label>Pickup Location</label>
-                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>Pickup Time</label>
-                                                        <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-3">
-                                                    <div >
-                                                            <label>Drop Off Location</label>
-                                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                    <div class="col-md-2">
-                                                    <div >
-                                                        <label>Drop Off Time</label>
-                                                        <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>For Variety of Prices</label>
-                                                        <button type="submit" class="full-width" ng-click="getCabs(3)">SEARCH NOW</button>
-                                                    </div>
-                                                </div>
-    
+
+                                        <div class="col-md-3">
+                                            <div >
+                                                    <label>Drop Off Location</label>
+                                                    <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                </div>
-                            </form>
-                        </div>
-                    </div>  
-                    <div class="search-box-wrapper style2">
-                        
-                    <div class="container search-box" style="background:rgba(0,0,0,0.75);padding:10px;">     
-                    <div class="sort-by-section clearfix" ng-if="cab_type==4">
-                        <div class="search-tab-content">
-                            <h2>Modify Search</h2>
-                             <!--<i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                           <form>
-                                <div class="row">
-                                    <label>
-                                        <input type="radio" value="true" ng-model="info.one_way"/>One Way
-                                        <input type="radio" value="false" ng-model="info.one_way"/>Round Trip
-                                    </label>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div >
-                                                        <label>Pickup Location</label>
-                                                        <input type="text"  ng-value="default_Pickup_Location" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>Pickup Time</label>
-                                                        <input type="datetime" ng-value="default_Pickup_Time" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-3">
-                                                    <div >
-                                                            <label>Drop Off Location</label>
-                                                            <input type="text" ng-value="default_Drop_Off_Location" class="input-text full-width" ng-model="info.drop_location">
-    
-                                                    </div>
-                                                </div>
-    
-                                                    <div class="col-md-2">
-                                                    <div >
-                                                        <label>Drop Off Time</label>
-                                                        <input type="datetime" ng-value="default_Drop_Off_Time" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>For Variety of Prices</label>
-                                                        <button type="submit" class="full-width" ng-click="getCabs(4)">SEARCH NOW</button>
-                                                    </div>
-                                                </div>
-    
+
+                                            <div class="col-md-2">
+                                            <div >
+                                                <label>Drop Off Time</label>
+                                                <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                </div>
-                            </form> 
-                        </div>
-                    </div>       
-                    </div> 
-                        
-                    
-                        </div>
-                    </div>
-                    <div class="sort-by-section clearfix" ng-if="cab_type==5">
-                        <div class="search-tab-content">
-                                <h2>Modify Search</h2>
-                            <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                            <form>
-                                <div class="row">
-                                    
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div >
-                                                        <label>Pickup Location</label>
-                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>Pickup Time</label>
-                                                        <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-3">
-                                                    <div >
-                                                            <label>Drop Off Location</label>
-                                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                    <div class="col-md-2">
-                                                    <div >
-                                                        <label>Drop Off Time</label>
-                                                        <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>For Variety of Prices</label>
-                                                        <button type="submit" class="full-width" ng-click="getCabs(5)">SEARCH NOW</button>
-                                                    </div>
-                                                </div>
-    
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>For Variety of Prices</label>
+                                                <button type="submit" class="full-width" ng-click="getCabs(2)">SEARCH NOW</button>
                                             </div>
                                         </div>
+
                                     </div>
-                                    
                                 </div>
-                            </form>
+                            </div>
+                            
                         </div>
-                    </div>     
-                    <div class="sort-by-section clearfix" ng-if="cab_type==6">
-                        <div class="search-tab-content">
-                                <h2>Modify Search</h2>
-                            <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
-                            <form>
-                                <div class="row">
-                                    <label>
-                                        <input type="radio" value="true" ng-model="info.outstation"/>Outstation
-                                        <input type="radio" value="false" ng-model="info.outstation"/>Interstate
-                                    </label>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div >
-                                                        <label>Pickup Location</label>
-                                                        <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>Pickup Time</label>
-                                                        <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-    
-                                                <div class="col-md-3">
-                                                    <div >
-                                                            <label>Drop Off Location</label>
-                                                            <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
-    
-                                                    </div>
-                                                </div>
-    
-                                                    <div class="col-md-2">
-                                                    <div >
-                                                        <label>Drop Off Time</label>
-                                                        <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div >
-                                                        <label>For Variety of Prices</label>
-                                                        <button type="submit" class="full-width" ng-click="getCabs(6)">SEARCH NOW</button>
-                                                    </div>
-                                                </div>
-    
+                    </form>
+                </div>
+            </div>      
+            <div class="sort-by-section clearfix" ng-if="cab_type==3">
+                <div class="search-tab-content">
+                        <h2>Modify Search</h2>
+                    <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                    <form>
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div >
+                                                <label>Pickup Location</label>
+                                                <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+
                                             </div>
                                         </div>
+
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>Pickup Time</label>
+                                                <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div >
+                                                    <label>Drop Off Location</label>
+                                                    <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+
+                                            </div>
+                                        </div>
+
+                                            <div class="col-md-2">
+                                            <div >
+                                                <label>Drop Off Time</label>
+                                                <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>For Variety of Prices</label>
+                                                <button type="submit" class="full-width" ng-click="getCabs(3)">SEARCH NOW</button>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    
                                 </div>
-                            </form>
+                            </div>
+                            
                         </div>
-                    </div>         
+                    </form>
+                </div>
+            </div>  
+            <!-- <div class="search-box-wrapper style2">
+                
+            <div class="container search-box" style="background:rgba(0,0,0,0.75);padding:10px;">      -->
+            <div class="sort-by-section clearfix" ng-if="cab_type==4">
+                <div class="search-tab-content">
+                    <h2>Modify Search</h2>
+                     <!--<i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                   <form>
+                        <div class="row">
+                            <label>
+                                <input type="radio" value="true" ng-model="info.one_way"/>One Way
+                                <input type="radio" value="false" ng-model="info.one_way"/>Round Trip
+                            </label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div >
+                                                <label>Pickup Location</label>
+                                                <input type="text"  ng-value="default_Pickup_Location" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>Pickup Time</label>
+                                                <input type="datetime" ng-value="default_Pickup_Time" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div >
+                                                    <label>Drop Off Location</label>
+                                                    <input type="text" ng-value="default_Drop_Off_Location" class="input-text full-width" ng-model="info.drop_location">
+
+                                            </div>
+                                        </div>
+
+                                            <div class="col-md-2">
+                                            <div >
+                                                <label>Drop Off Time</label>
+                                                <input type="datetime" ng-value="default_Drop_Off_Time" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>For Variety of Prices</label>
+                                                <button type="submit" class="full-width" ng-click="getCabs(4)">SEARCH NOW</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form> 
+                </div>
+            </div>       
+            <!-- </div> 
+                
+            
+                </div> -->
+            
+            <div class="sort-by-section clearfix" ng-if="cab_type==5">
+                <div class="search-tab-content">
+                        <h2>Modify Search</h2>
+                    <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                    <form>
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div >
+                                                <label>Pickup Location</label>
+                                                <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>Pickup Time</label>
+                                                <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div >
+                                                    <label>Drop Off Location</label>
+                                                    <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+
+                                            </div>
+                                        </div>
+
+                                            <div class="col-md-2">
+                                            <div >
+                                                <label>Drop Off Time</label>
+                                                <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>For Variety of Prices</label>
+                                                <button type="submit" class="full-width" ng-click="getCabs(5)">SEARCH NOW</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>     
+            <div class="sort-by-section clearfix" ng-if="cab_type==6">
+                <div class="search-tab-content">
+                        <h2>Modify Search</h2>
+                    <!-- <i class="soap-icon-passenger white-color skin-bg no-border pull-left" style="font-size: 74px; margin-right: 30px;"></i> -->
+                    <form>
+                        <div class="row">
+                            <label>
+                                <input type="radio" value="true" ng-model="info.outstation"/>Outstation
+                                <input type="radio" value="false" ng-model="info.outstation"/>Interstate
+                            </label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div >
+                                                <label>Pickup Location</label>
+                                                <input type="text" class="input-text full-width" ng-model="info.pickup_location" placeholder="city, distirct or specific airpot">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>Pickup Time</label>
+                                                <input type="datetime-local" ng-model="info.pickup_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div >
+                                                    <label>Drop Off Location</label>
+                                                    <input type="text" class="input-text full-width" ng-model="info.drop_location" placeholder="city, distirct or specific airpot">
+
+                                            </div>
+                                        </div>
+
+                                            <div class="col-md-2">
+                                            <div >
+                                                <label>Drop Off Time</label>
+                                                <input type="datetime-local" ng-model="info.drop_time" class="input-text full-width hasDatepicker">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div >
+                                                <label>For Variety of Prices</label>
+                                                <button type="submit" class="full-width" ng-click="getCabs(6)">SEARCH NOW</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>   
+            </div>
+            </div>
+            
                     <div class="row" style="margin-top:15px;">
                             <div class="col-sm-4 col-md-3">
                             <div class="toggle-container filters-container">
@@ -1120,9 +1131,9 @@
                                     </div>
                             <div class="panel style1 arrow-right">
                                     <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#filter" class="collapsed">Filter</a>
+                                            <a data-toggle="collapse" href="#filter" aria-expanded="true">Filter</a>
                                         </h4>
-                            <div id="filter" class="panel-collapse collapse">            
+                            <div id="filter" class="panel-collapse collapse in">            
                                 <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#price-filter" class="collapsed">Range</a>
@@ -1161,7 +1172,7 @@
                                 </div>
                                 <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
-                                            <a data-toggle="collapse" href="#amenities-filter" class="collapsed">amenities</a>
+                                            <a data-toggle="collapse" href="#amenities-filter" class="collapsed">Amenities</a>
                                         </h4>
                                         <div id="amenities-filter" class="panel-collapse collapse">
                                             <div class="panel-content">
@@ -1169,7 +1180,7 @@
                                             <div>
                                                 <h4 class="panel-title">
                                                         Air Condition
-                                                    </h4>
+                                                </h4>
                                                 <ul class="check-square filters-option">
                                                     <input type="radio" name="ac" value="true" ng-click="getAmenity('air_condition',true)"/>AC
                                                     <br>
@@ -1231,10 +1242,16 @@
                                             </h4>
                                             <div id="Free-Km-filter" class="panel-collapse collapse">
                                                 <div class="panel-content">
-                                                   <input type="text" ng-model="cab.km_restriction">
-                                                   <br>
-                                                   <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_free_km()" style="margin-top:10px">search again</button>                                            
-                                                   
+                                                        <div class="form-group">
+                                                            <div >
+                                                                    <label>Free Km:</label>
+                                                                    <input type="range" min="0" max="[[max_km_restriction]]" value="[[max_km_restriction]]" ng-model="cab.km_restriction" >
+                                                                    <p>Value: <span>[[cab.km_restriction]]</span></p>
+                                                            
+                                                            </div>
+                                                            <br>
+                                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_base_fare()">search again</button>    
+                                                        </div>
                                                 </div><!-- end content -->
                        
                                             </div>
@@ -1279,10 +1296,16 @@
                                 </h4>
                                 <div id="Fuel-Capacity-filter" class="panel-collapse collapse filters-container">
                                     <div class="panel-content">
-                                        <input type="text" ng-model="cab.amenities.fuel_capacity">
-                                        <br>
-                                    <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_fuel_capacity()" style="margin-top:10px">search again</button>                                            
-                                    
+                                        <div class="form-group">
+                                            <div >
+                                                    <label>Fuel Capacity:</label>
+                                                    <input type="range" min="0" max="[[max_fuel_capacity]]" value="[[max_fuel_capacity]]" ng-model="cab.fuel_capacity" >
+                                                    <p>Value: <span>[[cab.fuel_capacity]]</span></p>
+                                            
+                                            </div>
+                                            <br>
+                                            <button class="btn-medium icon-check uppercase full-width" ng-click="getCab_base_fare()">search again</button>    
+                                        </div>
                                     </div> 
                                     
                                 </div>
@@ -1332,7 +1355,7 @@
                                             <a><img style="max-width: 100%" alt="" src="[[cab.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
-                                            <span class="price">₹ [[(cab.deals | orderBy:'total_fare')[0].total_fare]]</span>
+                                            <span class="price"><a href="[[(cab.deals | orderBy:'total_fare')[0].cab_url]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
                                             <h4 class="box-title">[[type(cab.car_type)]]<small>[[cab.car_name]]</small></h4>
                                             <div class="amenities">
                                                 <ul>
@@ -1352,88 +1375,396 @@
                                                
                                             
                                         </div>
+                                        <div id="[[cab.id]]" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true" ng-if="[[cab.deals.length]] == 0">
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                             <td>
+                                                               <h4 style="text-align: center"> No More Deals..:(</h4>
+                                                            </td>
+                                                         </tr>
+                                                    </tbody>
+                                                </table>
+
+                                        </div>
                                         <div id="[[cab.id]]" class="col sm-12 collapse" style="transition: 2s;" aria-expanded="true">
                                         
                                     <table class="table table-hover">
-                                        
+
                                         <tbody class="ng-scope">
                                             <tr ng-repeat="deal in cab.deals | orderBy:'total_fare' ">
                                             <td ><span >[[deal.website.logo_image]]</span></td>
                                                                                                                                    
-                                            <td ><a  class="button btn-mini orange" data-toggle="modal" data-target="#[[deal.id]]">fare detail</a></td>
-                                            <td class="price"><a class="ng-binding"> ₹ [[deal.total_fare]]</a></td> 
-                                        </tr>
-                                         <!-- Modal -->
-                                        
-                                             <div ng-repeat="deal in cab.deals">
-                                         
-                                        <div class="modal fade" id="[[deal.id]]" role="dialog">
-                                            <div class="modal-dialog modal-sm">
-                                            
-                                            <!-- Modal content-->
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">fare details</h4>
+                                            <td ><a  class="button btn-mini orange" data-toggle="modal" data-target="#d[[deal.id]][[cab.cab_type]]">fare detail</a>
+
+                                                <!-- Modal -->
+                                                <div id="d[[deal.id]]1" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
                                                 
-                                                </div>
-                                                <div class="modal-body" style="margin-left:30px;">
-                                                       
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <h4 class="title">Fare Calculation</h4>
-                                                                <div class="form-group">
-                                                                        <div class="row">
-                                                                                <div class="col-sm-8"><label>Per km fare (f):</label></div>
-                                                                                <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="km in deal.deals">[[km.distance]]</p></div>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                        <div class="row">
-                                                                                <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
-                                                                                <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="cancel in deal.deals">[[cancel.cancellation_charges]]</p></div>
-                                                                        </div>  
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="row">
-                                                                            <div class="col-sm-8"><label>Tax (t):</label></div>
-                                                                            <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="taxs in deal.deals">[[taxs.cancellation_charges]]</p></div>
-                                                                    </div>  
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                        <div class="col-sm-8"><label>Distance (x):</label></div>
-                                                                        <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="distance in deal.deals">[[distance.distance]]</p></div>
-                                                                </div>  
-                                                            </div>
-                                                            <div class="form-group">
-                                                                    <div class="row">
-                                                                            <div class="col-sm-8"><label>Total fare:</label></div>
-                                                                            <div class="col-sm-4"><p>x*f+cc+t</p></div>
-                                                                    </div>  
-                                                                </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
-                                                                        <div class="col-sm-4" ng-repeat="deal in cab"><p ng-repeat="total in deal.deals">[[total.total_fare]]</p></div>
-                                                                </div>  
-                                                            </div>
-                                                            </div>
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">fare details</h4>
                                                             
+                                                            </div>
+                                                            <div class="modal-body" style="margin-left:30px;">
+                                                                   
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <h4 class="title">Fare Calculation</h4>
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Distance(d):</label></div>
+                                                                                            <div class="col-sm-4"><p >[[deal.booking.distance]]</p></div>
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                            <div class="col-sm-4" ><p >[[deal.cancellation_charges]]</p></div>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                        <div class="col-sm-4"><p >[[deal.booking.tax]]</p></div>
+                                                                                </div>  
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                        <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                    <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                    <div class="col-sm-4"><p>[[deal.booking.total_fare]]</p></div>
+                                                                            </div>  
+                                                                        </div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
                                                         </div>
+                                                
+                                                    </div>
+                                                </div>
+
+                                                    <!-- Modal -->
+                                                    <div id="d[[deal.id]]2" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+                                                        
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title">fare details</h4>
+                                                                    
+                                                                    </div>
+                                                                    <div class="modal-body" style="margin-left:30px;">
+                                                                           
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <h4 class="title">Fare Calculation</h4>
+                                                                                    <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                    <div class="col-sm-8"><label>Distance(d):</label></div>
+                                                                                                    <div class="col-sm-4"><p >[[deal.booking.distance]]</p></div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                            <div class="row">
+                                                                                                    <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                                    <div class="col-sm-4" ><p >[[deal.cancellation_charges]]</p></div>
+                                                                                            </div>  
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                                <div class="col-sm-4"><p >[[deal.booking.tax]]</p></div>
+                                                                                        </div>  
+                                                                                </div>
+                                                                                
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                                <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                            <div class="col-sm-4"><p>[[deal.booking.total_fare]]</p></div>
+                                                                                    </div>  
+                                                                                </div>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                        
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Modal -->
+                                                    <div id="d[[deal.id]]3" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
                                                     
-                                                </div>
-                                                <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                            
-                                            </div>
-                                        </div>
-                                        </div>
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">fare details</h4>
+                                                                
+                                                                </div>
+                                                                <div class="modal-body" style="margin-left:30px;">
+                                                                       
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <h4 class="title">Fare Calculation</h4>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Distance(d):</label></div>
+                                                                                                <div class="col-sm-4"><p >[[deal.booking.distance]]</p></div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                                <div class="col-sm-4" ><p >[[deal.cancellation_charges]]</p></div>
+                                                                                        </div>  
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                            <div class="col-sm-4"><p >[[deal.booking.tax]]</p></div>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                            <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                    </div>  
+                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                        <div class="col-sm-4"><p>[[deal.booking.total_fare]]</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                    
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Modal -->
+                                                    <div id="d[[deal.id]]4" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                    
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">fare details</h4>
+                                                                
+                                                                </div>
+                                                                <div class="modal-body" style="margin-left:30px;">
+                                                                       
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <h4 class="title">Fare Calculation</h4>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Distance(d):</label></div>
+                                                                                                <div class="col-sm-4"><p >[[deal.booking.distance]]</p></div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                                <div class="col-sm-4" ><p >[[deal.cancellation_charges]]</p></div>
+                                                                                        </div>  
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                            <div class="col-sm-4"><p >[[deal.booking.tax]]</p></div>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                            <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                    </div>  
+                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                        <div class="col-sm-4"><p>[[deal.booking.total_fare]]</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                    
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Modal -->
+                                                    <div id="d[[deal.id]]5" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                    
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">fare details</h4>
+                                                                
+                                                                </div>
+                                                                <div class="modal-body" style="margin-left:30px;">
+                                                                       
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <h4 class="title">Fare Calculation</h4>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Distance(d):</label></div>
+                                                                                                <div class="col-sm-4"><p >[[deal.booking.distance]]</p></div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                                <div class="col-sm-4" ><p >[[deal.cancellation_charges]]</p></div>
+                                                                                        </div>  
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                            <div class="col-sm-4"><p >[[deal.booking.tax]]</p></div>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                            <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                    </div>  
+                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                        <div class="col-sm-4"><p>[[deal.booking.total_fare]]</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                    
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Modal -->
+                                                    <div id="d[[deal.id]]6" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                    
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                <h4 class="modal-title">fare details</h4>
+                                                                
+                                                                </div>
+                                                                <div class="modal-body" style="margin-left:30px;">
+                                                                       
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <h4 class="title">Fare Calculation</h4>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Distance(d):</label></div>
+                                                                                                <div class="col-sm-4"><p >[[deal.booking.distance]]</p></div>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-8"><label>Cancellation Charges (cc):</label></div>
+                                                                                                <div class="col-sm-4" ><p >[[deal.cancellation_charges]]</p></div>
+                                                                                        </div>  
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Tax (t):</label></div>
+                                                                                            <div class="col-sm-4"><p >[[deal.booking.tax]]</p></div>
+                                                                                    </div>  
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group">
+                                                                                    <div class="row">
+                                                                                            <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                            <div class="col-sm-4"><p>x*f+cc+t</p></div>
+                                                                                    </div>  
+                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Total fare:</label></div>
+                                                                                        <div class="col-sm-4"><p>[[deal.booking.total_fare]]</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                    
+                                                        </div>
+                                                    </div>
+
+                                                
+                                            </td>
+                                            <td class="price"><a href="[[deal.cab_url]]"> ₹ [[deal.booking.total_fare]]</a></td> 
+                                            <td class="price" ng-if="[[cab.is_partner]]==true"><a href="/detail"> ₹ [[deal.booking.total_fare]]</a></td> 
+                                            </tr>
+                                         
                                         
-                                    </tbody>
-                                    
+                                        </tbody>
                                     </table>
                                     
                                     </div>
