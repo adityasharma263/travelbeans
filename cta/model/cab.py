@@ -9,12 +9,12 @@ class Cab(Base):
     car_name = db.Column(db.String)
     city = db.Column(db.String, nullable=True)
     rating = db.Column(db.DECIMAL, nullable=True)
-    is_partner = db.Column(db.Boolean, default=False, nullable=True)
     car_type = db.Column(db.Integer, nullable=True)
     cab_type = db.Column(db.Integer, nullable=True)
     desc = db.Column(db.Text, nullable=True)
     deals = db.relationship('CabDeal', secondary='cab_deal_association')
     images = db.relationship('CabImage', backref='cab')
+    collection_id = db.Column(db.Integer, db.ForeignKey('cab_collection.id'), nullable=True)
     amenities = db.relationship('CabAmenity', uselist=False, backref='cab')
 
     def __init__(self, *args, **kwargs):
@@ -27,52 +27,88 @@ class Cab(Base):
         return hash(self.name)
 
 
-class CabUser(Base):
-    __tablename__ = 'cab_user'
+class CabCollection(Base):
+    __tablename__ = 'cab_collection'
 
-    name = db.Column(db.String)
-    phone = db.Column(db.String, nullable=True, unique=True)
-    email = db.Column(db.String(120), unique=True)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<name %r>' % self.name
-
-
-class CabBooking(Base):
-    __tablename__ = 'cab_booking'
-
-    cab_booking_id = db.Column(db.String, nullable=True)
-    booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
-    mode_of_payment = db.Column(db.Integer, nullable=True)
-    booking_status = db.Column(db.Integer, nullable=True)
-    pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
-    drop_time = db.Column(db.DateTime(timezone=True), nullable=False)
-    drop_latitude = db.Column('drop_latitude', db.Float(asdecimal=True), nullable=True)
-    drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
-    pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
-    pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
-    total_fare = db.Column(db.DECIMAL, nullable=True)
-    total_days = db.Column(db.Integer, nullable=True)
-    total_distance = db.Column(db.DECIMAL, nullable=True)
-    total_hours = db.Column(db.Integer, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('cab_user.id'))
-    cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
-    deal_id = db.Column(db.Integer, db.ForeignKey('cab_deal.id'))
-    cab = db.relationship('Cab', foreign_keys=cab_id)
-    user = db.relationship('CabUser', foreign_keys=user_id)
-    deal = db.relationship('CabDeal', foreign_keys=deal_id)
-    tax = db.relationship('CabTax', uselist=False, backref='cab_booking')
-
-
+    collection_name = db.Column(db.String, nullable=True)
+    featured = db.Column(db.Boolean, default=False, nullable=True)
+    desc = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String, nullable=True)
+    products = db.relationship('CabCollectionProduct', backref='cab_collection')
+    cabs = db.relationship('Cab', backref='cab_collection')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return '<deal_id %r>' % self.deal_id
+        return '<collection %r>' % self.collection
+
+
+class CabCollectionProduct(Base):
+    __tablename__ = 'cab_collection_product'
+
+    cab_collection_id = db.Column(db.Integer, db.ForeignKey('cab_collection.id'), nullable=False)
+    product_url = db.Column(db.String, nullable=True)
+    product_name = db.Column(db.String, nullable=True)
+    featured_product = db.Column(db.Boolean, default=False, nullable=True)
+    product_desc = db.Column(db.Text, nullable=True)
+    product_image = db.Column(db.String, nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __repr__(self):
+        return '<image_url %r>' % self.image_url
+
+
+
+#
+# class CabUser(Base):
+#     __tablename__ = 'cab_user'
+#
+#     name = db.Column(db.String)
+#     phone = db.Column(db.String, nullable=True, unique=True)
+#     email = db.Column(db.String(120), unique=True)
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#     def __repr__(self):
+#         return '<name %r>' % self.name
+#
+#
+# class CabBooking(Base):
+#     __tablename__ = 'cab_booking'
+#
+#     cab_booking_id = db.Column(db.String, nullable=True)
+#     booking_date = db.Column(db.DateTime(timezone=True), nullable=True)
+#     mode_of_payment = db.Column(db.Integer, nullable=True)
+#     booking_status = db.Column(db.Integer, nullable=True)
+#     pickup_time = db.Column(db.DateTime(timezone=True), nullable=False)
+#     drop_time = db.Column(db.DateTime(timezone=True), nullable=False)
+#     drop_latitude = db.Column('drop_latitude', db.Float(asdecimal=True), nullable=True)
+#     drop_longitude = db.Column('drop_longitude', db.Float(asdecimal=True), nullable=True)
+#     pickup_latitude = db.Column('pickup_latitude', db.Float(asdecimal=True), nullable=True)
+#     pickup_longitude = db.Column('pickup_longitude', db.Float(asdecimal=True), nullable=True)
+#     total_fare = db.Column(db.DECIMAL, nullable=True)
+#     total_days = db.Column(db.Integer, nullable=True)
+#     total_distance = db.Column(db.DECIMAL, nullable=True)
+#     total_hours = db.Column(db.Integer, nullable=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('cab_user.id'))
+#     cab_id = db.Column(db.Integer, db.ForeignKey('cab.id'))
+#     deal_id = db.Column(db.Integer, db.ForeignKey('cab_deal.id'))
+#     cab = db.relationship('Cab', foreign_keys=cab_id)
+#     user = db.relationship('CabUser', foreign_keys=user_id)
+#     deal = db.relationship('CabDeal', foreign_keys=deal_id)
+#     tax = db.relationship('CabTax', uselist=False, backref='cab_booking')
+#
+#
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#     def __repr__(self):
+#         return '<deal_id %r>' % self.deal_id
 
 
 class CabImage(Base):
@@ -122,26 +158,12 @@ class CabWebsite(Base):
     def __repr__(self):
         return '<website %r>' % self.website
 
-class CabTax(Base):
-    __tablename__ = 'cab_tax'
-
-    booking_id = db.Column(db.Integer, db.ForeignKey('cab_booking.id'), unique=True)
-    gst = db.Column(db.DECIMAL, nullable=True)
-    s_gst = db.Column(db.DECIMAL, nullable=True)
-    c_gst = db.Column(db.DECIMAL, nullable=True)
-    i_gst = db.Column(db.DECIMAL, nullable=True)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __repr__(self):
-        return '<cab_id %r>' % self.cab_id
-
 
 class CabDeal(Base):
     __tablename__ = 'cab_deal'
 
     website_id = db.Column(db.Integer, db.ForeignKey('cab_website.id'), unique=False)
+    is_partner = db.Column(db.Boolean, default=False, nullable=True)
     cab_url = db.Column(db.String, nullable=True)
     outstation = db.Column(db.Boolean, default=False, nullable=True)
     one_way = db.Column(db.Boolean, default=False, nullable=True)
