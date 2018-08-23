@@ -1,10 +1,10 @@
-from cta.model.cab import Cab, CabAmenity, CabBooking, CabImage, CabDeal, CabTax, CabDealAssociation, CabUser,\
+from cta.model.cab import Cab, CabAmenity, CabImage, CabDeal, CabDealAssociation,\
     CabWebsite, CabCollectionProduct, CabCollection
 from cta import app, db
 from flask import jsonify, request
 from cta.lib.cab_fare import CabFare
-from cta.schema.cab import CabAmenitySchema, CabBookingSchema, CabImageSchema, CabDealSchema, CabSchema, CabTaxSchema,\
-    CabUserSchema, CabWebsiteSchema, CabCollectionProductSchema, CabCollectionSchema
+from cta.schema.cab import CabAmenitySchema, CabImageSchema, CabDealSchema, CabSchema,\
+     CabWebsiteSchema, CabCollectionProductSchema, CabCollectionSchema
 import datetime
 from itertools import cycle
 import simplejson as json
@@ -63,6 +63,18 @@ def cab_api():
                 if cab.get("deals", None):
                     deals = cab.get("deals", None)
                     for deal in deals:
+                        fule = None
+                        if cab.get("amenities", None):
+                            amenities = cab.get("amenities", None)
+                            fuel = amenities.get("fuel", None)
+                        weekno = datetime.datetime.today().weekday()
+                        if weekno > 4:
+                            base_fare = deal.get('base_fare_weekend', None)
+                        elif fuel:
+                            base_fare = deal.get('base_fare_with_fuel', None)
+                        else:
+                            base_fare = deal.get('base_fare', None)
+
                         fare_obj = {
                             "pickup_time": pickup_time,
                             "drop_time": drop_time,
@@ -71,7 +83,7 @@ def cab_api():
                             "drop_lat": drop_lat,
                             "drop_lon": drop_lon,
                             "cab_type": cab_type,
-                            "base_fare": deal.get('base_fare', None),
+                            "base_fare": base_fare,
                             "one_way": deal.get('one_way', None),
                             "driver_per_hr_allowance_charge": deal.get('driver_per_hr_allowance_charge', None),
                             "slab": deal.get('slab', None),
@@ -183,23 +195,6 @@ def cab_amenity():
         return jsonify({'result': {'amenities': result.data}, 'message': "Success", 'error': False})
 
 
-@app.route('/api/v1/cab/user', methods=['GET', 'POST'])
-def cab_user():
-    if request.method == 'GET':
-        args = request.args.to_dict()
-        args.pop('page', None)
-        args.pop('per_page', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
-        data = CabUser.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = CabUserSchema(many=True).dump(data)
-        return jsonify({'result': {'users': result.data}, 'message': "Success", 'error': False})
-    else:
-        post = CabUser(**request.json)
-        post.save()
-        result = CabUserSchema().dump(post)
-        return jsonify({'result': {'users': result.data}, 'message': "Success", 'error': False})
-
 
 @app.route('/api/v1/cab/deal', methods=['GET', 'POST'])
 def cab_deal():
@@ -287,74 +282,6 @@ def cabWebsite_api():
         post.save()
         result = CabWebsiteSchema().dump(post)
         return jsonify({'result': {'website': result.data}, 'message': "Success", 'error': False})
-
-
-
-@app.route('/api/v1/cab/booking', methods=['GET', 'POST'])
-def cab_booking():
-    if request.method == 'GET':
-        args = request.args.to_dict()
-        args.pop('page', None)
-        args.pop('per_page', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
-        data = CabBooking.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = CabBookingSchema(many=True).dump(data)
-        return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
-    else:
-        booking = request.json
-        tax = booking.get("tax", None)
-        user = booking.get("user", None)
-        booking.pop('user', None)
-        booking.pop('tax', None)
-        tax_post = CabTax(**tax)
-        tax_post.save()
-        user_post = CabUser(**user)
-        user_post.save()
-        booking["tax_id"] = tax_post.id
-        booking["user_id"] = user_post.id
-        booking_post = CabBooking(**booking)
-        booking_post.save()
-        booking_post.tax = tax_post
-        booking_post.user = user_post
-        result = CabBookingSchema().dump(booking_post)
-        return jsonify({'result': {'bookings': result.data}, 'message': "Success", 'error': False})
-
-@app.route('/api/v1/cab/booking/<int:id>', methods=['PUT', 'DELETE'])
-def cab_booking_id(id):
-    if request.method == 'PUT':
-        put = CabBooking.query.filter_by(id=id).update(request.json)
-        if put:
-            CabBooking.update_db()
-            data = CabBooking.query.filter_by(id=id).first()
-            result = CabBookingSchema(many=False).dump(data)
-            return jsonify({'result': result.data, "status": "Success", 'error': False})
-    else:
-        booking = CabBooking.query.filter_by(id=id).first()
-        if not booking:
-            return jsonify({'result': {}, 'message': "No Found", 'error': True})
-        CabTax.query.filter_by(booking_id=id).delete()
-        CabBooking.delete_db(booking)
-        return jsonify({'result': {}, 'message': "Success", 'error': False})
-
-
-
-@app.route('/api/v1/cab/tax', methods=['GET', 'POST'])
-def cab_tax():
-    if request.method == 'GET':
-        args = request.args.to_dict()
-        args.pop('page', None)
-        args.pop('per_page', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
-        data = CabTax.query.filter_by(**args).offset((page - 1) * per_page).limit(per_page).all()
-        result = CabTaxSchema(many=True).dump(data)
-        return jsonify({'result': {'taxes': result.data}, 'message': "Success", 'error': False})
-    else:
-        post = CabTax(**request.json)
-        post.save()
-        result = CabTaxSchema().dump(post)
-        return jsonify({'result': {'taxes': result.data}, 'message': "Success", 'error': False})
 
 
 @app.route('/api/v1/cab/website', methods=['GET', 'POST'])
