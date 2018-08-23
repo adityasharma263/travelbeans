@@ -63,7 +63,7 @@ def cab_api():
                 if cab.get("deals", None):
                     deals = cab.get("deals", None)
                     for deal in deals:
-                        fule = None
+                        fuel = None
                         if cab.get("amenities", None):
                             amenities = cab.get("amenities", None)
                             fuel = amenities.get("fuel", None)
@@ -154,8 +154,8 @@ def cab_id(id):
         if not cab:
             return jsonify({'result': {}, 'message': "No Found", 'error': True})
         CabAmenity.query.filter_by(cab_id=id).delete()
-        CabImage.query.filter_by(restaurant_id=id).delete()
-        CabDealAssociation.query.filter_by(Cab_id=id).delete()
+        CabImage.query.filter_by(cab_id=id).delete()
+        CabDealAssociation.query.filter_by(cab_id=id).delete()
         Cab.delete_db(cab)
         return jsonify({'result': {}, 'message': "Success", 'error': False})
 

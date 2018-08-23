@@ -1760,7 +1760,12 @@
                                                 
                                             </td>
                                             <td class="price"><a href="[[deal.cab_url]]"> ₹ [[deal.booking.total_fare]]</a></td> 
-                                            <td class="price" ng-if="[[cab.is_partner]]==true"><a href="/detail"> ₹ [[deal.booking.total_fare]]</a></td> 
+                                            <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==1"><a href="/monthly_rental/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
+                                            <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==2"><a href="/sight_seeing/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
+                                            <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==3"><a href="/luxury/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
+                                            <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==4"><a href="/outstation/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
+                                            <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==5"><a href="/self_drive/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
+                                            <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==6"><a href="/hire_a_driver/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td> 
                                             </tr>
                                          
                                         

@@ -351,19 +351,19 @@
             </div>
     
             <div class="row">
-                <div class="col-sm-4" ng-repeat="cabs in cabs | filter: search">
+                <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
                     <div class="thumbnail">
-                        <img ng-src="[[cabs.images[0].image_url]]" alt="">
+                        <img ng-src="[[cab.images[0].image_url]]" alt="">
                         <div class="caption">
-                            <h4>[[cabs.car_name]]</h4>
+                            <h4>[[cab.car_name]]</h4>
                             <p>
                                 <span>location :
-                                    <span>[[cabs.city]]</span>
+                                    <span>[[cab.city]]</span>
                                 </span>
                             </p>
                             <p>
                                 <button class="btn btn-primary" role="button" ng-click="$parent.editRestaurant(restaurant)">Edit</button>
-                                <button class="btn btn-default" role="button" ng-click="deleteRestaurant(restaurant.id, $index)">Delete</button>
+                                <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
                             </p>
                         </div>
                     </div>

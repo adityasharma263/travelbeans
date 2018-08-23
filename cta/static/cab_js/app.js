@@ -879,7 +879,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.amenities = Constants.Amenities;
     $scope.cab_types = Constants.Cab_types;
 
-    $http.get("/api/v1/cab/id")
+    $http.get("/api/v1/cab")
     .then(function (res) {
       $scope.cabs = res.data.result.cabs;
     }, function (err) {
@@ -972,6 +972,17 @@ angular.module('comparetravel', ['angular.filter'])
         sendPostCall('/api/v1/cab', $scope.cab)
     }
 
+    $scope.deleteCab = function (cabId, index) {
+
+      $http.delete("/api/v1/cab/" + cabId)
+        .then(function (res) {
+          $scope.cabs.splice(index, 1);
+          alert("Deleted!!");
+        }, function (err) {
+          alert("err " + err);
+        })
+
+    }
    
 
 
