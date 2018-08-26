@@ -546,12 +546,25 @@ var app = angular.module("restaurantApp", ['angular.filter'])
       $scope.restaurantData.dishes.push(moreDishes);
     };
 
-    $http.get("/api/v1/restaurant")
+    $http.get("/restaurant/location")
       .then(function (res) {
-        $scope.restaurants = res.data.result.restaurants;
-      }, function (err) {
-        console.log(err);
-      });
+        $scope.locations = res.data.result.locations;
+      })
+
+    $scope.getRestaurantByLocation = function (location) {
+      $http.get("/api/v1/restaurant", {params : {city: location}})
+        .then(function (res) {
+          $scope.restaurants = res.data.result.restaurants;
+          
+          $scope.serchFilter = location;
+        }, function (err) {
+          console.log(err);
+        });
+    }
+
+    $scope.getRestaurantByLocation("Delhi");
+    
+
 
     $http.get("/api/v1/restaurant/cuisine")
       .then(function (res) {

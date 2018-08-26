@@ -46,6 +46,18 @@ content%}
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="from-group">
+                    <label>Website</label>
+                    <input type="text" class="form-control" ng-model="restaurantData.website" placeholder="http://wwww.example.com">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label>Mode of payment</label>
+                <input type="text" class="form-control" ng-model="restaurantData.mode_of_payment" >
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-sm-6">
@@ -349,9 +361,9 @@ content%}
         </div>
 
 
-        <div class="row" >
+        <div class="row">
             <div class="col-sm-6" ng-show="!showAddBranch">
-                <label >Add Branch</label>
+                <label>Add Branch</label>
                 <select ng-model="restaurantData.restaurent_chain.restaurant_chain_id">
                     <option value disabled>-- select branch--</option>
                     <option ng-value="[[chain.id]]" ng-repeat="chain in restaurent_chain">[[chain.restaurant_chain_name]]</option>
@@ -367,10 +379,10 @@ content%}
                     <option value="[[$index+1]]" ng-repeat="category in categories">[[category]]</option>
                 </select>
 
-                <label >Description</label>
+                <label>Description</label>
                 <input type="text" class="form-control" ng-model="restaurantData.restaurent_chain.restaurant_chain_desc">
 
-                <label >Branch Name</label>
+                <label>Branch Name</label>
                 <input type="text" class="form-control" ng-model="restaurantData.restaurent_chain.restaurant_chain_name">
                 <!-- <button class="btn btn-default" ng-click="showAddBranch = false;"></button> -->
                 <button class="btn btn-default" ng-click="showAddBranch = false;">Cancel</button>
@@ -388,9 +400,36 @@ content%}
     </div>
 
     <div class="col-sm-6">
-        <div class="form-group">
-            <input type="text" class="form-control" ng-model="search" placeholder="search hotels...">
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <!-- <select ng-model="restaurantLocation" ng-change="getRestaurantByLocation(restaurantLocation)">
+                    <option value disabled>--Select Location--</option>
+                    <option ng-value="[[location]]" ng-repeat="location in locations">[[location]]</option>
+                </select> -->
+
+                <div class="dropdown pull-right makePaymentDropdownMainDiv" style="width:100%;" auto-close="outsideClick" ng-init="userLocation = 'Delhi'">
+
+                    <input ng-cloak style="font-size:12px;" disable-auto-close type="search" data-toggle="dropdown" ng-model="serchFilter" id="individualDrop"
+                        class="dropdown-toggle makePaymentDropdownSearchBox form-control" placeholder="Enter a city" />
+
+                    <ul class="dropdown-menu makePaymentDropdownUlStyle" role="menu" aria-labelledby="individualDrop">
+                        <li role="presentation">
+                            <a role="menuitem" href="javascript:;" ng-click="$parent.getRestaurantByLocation()">All location</a>
+                        </li>
+                        <li role="presentation" ng-repeat="indi in locations | filter: serchFilter">
+                            <a role="menuitem" href="javascript:;" ng-click="$parent.getRestaurantByLocation(indi)">[[indi]]</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="search" placeholder="search hotels...">
+                </div>
+            </div>
         </div>
+
 
         <div class="row">
             <div class="col-sm-4" ng-repeat="restaurant in restaurants | filter: search">
