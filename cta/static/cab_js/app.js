@@ -686,6 +686,25 @@ angular.module('comparetravel', ['angular.filter'])
         // or server returns response with an error status.
     })
 
+    $scope.getCab_Rating = function(){
+      
+  
+      $http({
+        method: 'GET',
+        url: '/api/v1/cab' + document.location.search + '&rating=' + $scope.cab.rating
+      }).then(function successCallback(response) {
+          $scope.cabs = response.data.result.cabs;
+          
+          console.log("$scope.cabs",$scope.cabs);
+          // this callback will be called asynchronously
+          // when the response is available
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+      })
+  
+    }
+
     $scope.getCab_base_fare = function(){
       
       $http({

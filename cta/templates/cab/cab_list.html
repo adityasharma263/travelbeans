@@ -28,6 +28,18 @@
     <link rel="stylesheet" type="text/css" href="/css/flexslider.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/css/icon.css" media="screen" />
     <link id="main-style" rel="stylesheet" href="/css/style-orange.css">    
+    <style>
+     .label {
+            color: white;
+            padding: 8px;
+        }
+        .success {background-color: #4CAF50;} /* Green */
+        .info {background-color: #2196F3;} /* Blue */
+        .warning {background-color: #ff9800;} /* Orange */
+        .danger {background-color: #f44336;} /* Red */ 
+        .other {background-color: #e7e7e7; color: black;} /* Gray */ 
+    
+    </style>
         
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
@@ -834,6 +846,35 @@
                                             </div><!-- end content -->
                                         </div>
                                 </div>
+
+                                <div class="panel style1 arrow-right">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="http://www.soaptheme.net/html/travelo/hotel-list-view.html#rating-filter" class="collapsed">User Rating</a>
+                                    </h4>
+                                    <div id="rating-filter" class="panel-collapse collapse filters-container">
+                                        <div class="panel-content">
+                                            <div class="form-group">
+                                                <input id="rating1" type="radio" name="rating" value="9" ng-click="getCab_Rating()" ng-model="cab.rating"/>
+                                                <label class="label success">9+</label>
+                                                <br>
+                                                <input id="rating2" type="radio" name="rating" value="8" ng-click="getCab_Rating()" ng-model="cab.rating"/>
+                                                <label class="label info">8+</label>
+                                                <br>
+                                                <input id="rating3" type="radio" name="rating" value="7" ng-click="getCab_Rating()" ng-model="cab.rating"/>
+                                                <label class="label warning">7+</label>
+                                                <br>
+                                                <input id="rating4" type="radio" name="rating" value="5" ng-click="getCab_Rating()" ng-model="cab.rating"/>
+                                                <label class="label danger">5+</label>
+                                                <br>
+                                                <input id="rating5" type="radio" name="rating" value="0" ng-click="getCab_Rating()" ng-model="cab.rating"/>
+                                                <label class="label other">0+</label>
+                                            </div>
+                                            <br>
+                                            <!-- <button class="btn-medium icon-check uppercase full-width" ng-click="getHotelRating()">search again</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="panel style1 arrow-right">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#amenities-filter" class="collapsed">Amenities</a>
@@ -1019,7 +1060,13 @@
                                             <a><img style="max-width: 100%" alt="" src="[[cab.images[0].image_url]]"></a>
                                         </figure>
                                         <div class="details">
-                                            <span class="price"><a href="[[(cab.deals | orderBy:'total_fare')[0].cab_url]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price"ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==false"><a href="[[(cab.deals | orderBy:'total_fare')[0].cab_url]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price" ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==true && [[cab.cab_type]]==1"><a href="/monthly_rental/[[(cab.deals | orderBy:'total_fare')[0].id]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price" ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==true && [[cab.cab_type]]==2"><a href="/sight_seeing/[[(cab.deals | orderBy:'total_fare')[0].id]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price" ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==true && [[cab.cab_type]]==3"><a href="/luxury/[[(cab.deals | orderBy:'total_fare')[0].id]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price" ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==true && [[cab.cab_type]]==4"><a href="/outstation/[[(cab.deals | orderBy:'total_fare')[0].id]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price" ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==true && [[cab.cab_type]]==5"><a href="/self_drive/[[(cab.deals | orderBy:'total_fare')[0].id]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
+                                            <span class="price" ng-if="[[(cab.deals | orderBy:'total_fare')[0].is_partner]]==true && [[cab.cab_type]]==6"><a href="/hire_a_driver/[[(cab.deals | orderBy:'total_fare')[0].id]]">₹ [[(cab.deals | orderBy:'total_fare')[0].booking.total_fare]]</a></span>
                                             <h4 class="box-title">[[type(cab.car_type)]]<small>[[cab.car_name]]</small></h4>
                                             <div class="amenities">
                                                 <ul>
@@ -1319,14 +1366,20 @@
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <div class="row">
-                                                                                        <div class="col-sm-8"><label>Free km :</label></div>
+                                                                                        <div class="col-sm-8"><label>Free km(fk) :</label></div>
                                                                                         <div class="col-sm-4" ><p >[[deal.initial_km]]</p></div>
                                                                                 </div>  
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <div class="row">
-                                                                                        <div class="col-sm-8"><label>Free km Fare:</label></div>
+                                                                                        <div class="col-sm-8"><label>Free km Fare(fkf):</label></div>
                                                                                         <div class="col-sm-4" ><p >[[deal.initial_km_fare]]</p></div>
+                                                                                </div>  
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="row">
+                                                                                        <div class="col-sm-8"><label>Driver daily allowance charge(DA):</label></div>
+                                                                                        <div class="col-sm-4" ><p >[[deal.driver_daily_allowance_charge]]</p></div>
                                                                                 </div>  
                                                                             </div>
                                                                             <div class="form-group">
@@ -1339,7 +1392,7 @@
                                                                         <div class="form-group">
                                                                                 <div class="row">
                                                                                         <div class="col-sm-8"><label>Total fare:</label></div>
-                                                                                        <div class="col-sm-4"><p>BF</p></div>
+                                                                                        <div class="col-sm-4"><p>(d-fk)*BF*fk*fkf+DA*days</p></div>
                                                                                 </div>  
                                                                             </div>
                                                                         <div class="form-group">
@@ -1417,7 +1470,7 @@
                                                                         <div class="form-group">
                                                                                 <div class="row">
                                                                                         <div class="col-sm-8"><label>Total fare:</label></div>
-                                                                                        <div class="col-sm-4"><p>BF</p></div>
+                                                                                        <div class="col-sm-4"><p>BF*total hrs</p></div>
                                                                                 </div>  
                                                                             </div>
                                                                         <div class="form-group">
@@ -1519,7 +1572,7 @@
 
                                                 
                                             </td>
-                                            <td class="price"><a href="[[deal.cab_url]]"> ₹ [[deal.booking.total_fare]]</a></td> 
+                                            <td class="price" ng-if="[[deal.is_partner]]==false"><a href="[[deal.cab_url]]"> ₹ [[deal.booking.total_fare]]</a></td> 
                                             <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==1"><a href="/monthly_rental/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
                                             <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==2"><a href="/sight_seeing/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
                                             <td class="price" ng-if="[[deal.is_partner]]==true && [[cab.cab_type]]==3"><a href="/luxury/[[deal.id]]"> ₹ [[deal.booking.total_fare]]</a></td>
