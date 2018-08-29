@@ -553,6 +553,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.dlatitude = 0;
     $scope.plongitude = 0;
     $scope.dlongitude = 0;
+    $scope.limit = 10;
 
     var str = document.location.search.split("&");
     var type = str[0].split("=");
@@ -658,8 +659,8 @@ angular.module('comparetravel', ['angular.filter'])
         console.log("$scope.deals",$scope.deals);
         $scope.min_base_fare = Math.min.apply(Math,$scope.deals.map(function(item){return item.base_fare;}));
         $scope.max_base_fare = Math.max.apply(Math,$scope.deals.map(function(item){return item.base_fare;}));
-        $scope.max_km_restriction = Math.max.apply(Math,$scope.deals.map(function(item){return item.km_restriction;}));
-        console.log( $scope.max_km_restriction);
+        $scope.max_initial_km = Math.max.apply(Math,$scope.deals.map(function(item){return item.initial_km;}));
+        console.log( $scope.max_initial_km);
         // this callback will be called asynchronously
         // when the response is available
       }, function errorCallback(response) {
@@ -748,11 +749,11 @@ angular.module('comparetravel', ['angular.filter'])
       // $scope.km_restriction = $scope.cab.km_restriction;
       $http({
         method: 'GET',
-        url: '/api/v1/cab' + document.location.search + '&km_restriction=' + $scope.cab.km_restriction
+        url: '/api/v1/cab' + document.location.search + '&initial_km=' + $scope.cab.initial_km
       }).then(function successCallback(response) {
           $scope.cabs = response.data.result.cabs;
           console.log(" $scope.cabs ", $scope.cabs );
-          console.log($scope.km_restriction);
+          console.log($scope.initial_km);
 
           // this callback will be called asynchronously
   
@@ -983,6 +984,43 @@ angular.module('comparetravel', ['angular.filter'])
         })
 
     }
+
+    $scope.editCab = function (cabData) {
+      $scope.functionCalling = "Update";
+      $scope.disable_amenity = true;
+      $scope.disable_association = true;
+      $scope.disable_dish = true;
+      $scope.disable_menu = true;
+      $scope.disable_images = true;
+
+
+      restaurantData.phone = parseInt(restaurantData.phone);
+      put_restaurant_id = restaurantData.id;
+
+      for (i in restaurantData.association) {
+        restaurantData.association[i].collections.collection_id = restaurantData.association[i].collections.id + ""
+        restaurantData.association[i].cuisines.cuisine_id = restaurantData.association[i].cuisines.id + ""
+        restaurantData.association[i].collections.collection = null;
+        restaurantData.association[i].collections.image = null;
+        restaurantData.association[i].collections.desc = null;
+        restaurantData.association[i].collections.featured = null;
+      }
+
+      for (i in restaurantData.images) {
+        restaurantData.images[i].image_type = restaurantData.images[i].image_type + ""
+      }
+
+      restaurantData.category = restaurantData.category + ""
+
+      $scope.restaurantData = restaurantData;
+      console.log(restaurantData);
+      console.log($scope.restaurantData);
+
+
+
+
+    }
+
    
 
 
