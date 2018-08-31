@@ -38,8 +38,8 @@ def cab_api():
         args.pop('max_base_fare', None)
         args.pop('min_total_fare', None)
         args.pop('max_total_fare', None)
-        page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 20))
+        page = request.args.get('page', None)
+        per_page = request.args.get('per_page', None)
         args.pop('page', None)
         args.pop('per_page', None)
         q = db.session.query(Cab).outerjoin(Cab.amenities).outerjoin(Cab.deals)
@@ -52,11 +52,13 @@ def cab_api():
                 q = q.filter(getattr(CabDeal, key) == args[key])
         if min_base_fare and max_base_fare:
             q = q.filter(CabDeal.base_fare >= min_base_fare, CabDeal.base_fare <= max_base_fare)
-        elif min_total_fare and max_total_fare:
+        if min_total_fare and max_total_fare:
             q = q.filter(CabDeal.total_fare >= min_total_fare, CabDeal.total_fare <= max_total_fare)
-        elif rating:
+        if rating:
             q = q.filter(Cab.rating >= rating)
-        data = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page)).all()
+        if page and per_page:
+            q = q.offset((int(page) - 1) * int(per_page)).limit(int(per_page))
+        data = q.all()
         result = CabSchema(many=True).dump(data)
         if pickup_time and drop_time:
             for cab in result.data:
