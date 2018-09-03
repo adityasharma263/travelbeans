@@ -22,10 +22,10 @@ PASSWORD = 'root'
 
 PORT = 5432
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://travelbeans:orev-travel-beans@travel-beans.c0dfxfu6dtnp.ap-south-1.rds.amazonaws.com:5432/travelbeans'
+SQLALCHEMY_DATABASE_URI = 'postgresql://travelbeans:orev-travel-beans@travelbeans.c0dfxfu6dtnp.ap-south-1.rds.amazonaws.com:5432/travelbeans'
 
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 #variables
 
-DOMAIN_URL = 'http://travel-beans.ap-south-1.elasticbeanstalk.com'
+DOMAIN_URL = 'http://travelbean-env.vrmfxxrz8i.ap-south-1.elasticbeanstalk.com/'

@@ -677,6 +677,15 @@ def cab_list():
     return render_template('cab/cab_list.html', cab_details=cab_data)
 
 
+@app.route('/cab/<int:cab_id>', methods=['GET'])
+def cab_detail(cab_id):
+    cab_api_url = str(app.config["DOMAIN_URL"]) + "/api/v1/cab"
+    args = request.args
+    args['id'] = cab_id
+    cab_data = requests.get(url=cab_api_url, params=args).json()
+    return render_template('cab/cab_detail.html', cab_details=cab_data)
+
+
 
 @app.route('/cab/detail/hire_driver', methods=['GET'])
 def detail_hire_driver():
