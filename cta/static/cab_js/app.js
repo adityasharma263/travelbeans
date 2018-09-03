@@ -523,6 +523,7 @@ angular.module('comparetravel', ['angular.filter'])
           } 
         }); 
         
+        console.log("$scope.platitude-----",$scope.platitude);
 
         geocoder.geocode( { 'address': daddress}, function(results, status) {
 
@@ -863,7 +864,10 @@ angular.module('comparetravel', ['angular.filter'])
 
     }
 
-    
+    $scope.showDetail=function(cabid, dealid){
+      window.open(document.location.href+"/"+cabid+"/"+dealid);
+      
+    }
     
 
     $http({
@@ -1054,7 +1058,6 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.bank = bank_type.bank;
     
     $scope.cab= {}; // main cab model
-    console.log("js file");
     $http({
         method: 'GET',
         url: '/api/v1/cab' 
