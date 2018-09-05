@@ -500,7 +500,7 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.dlatitude = 0;
     $scope.plongitude = 0;
     $scope.dlongitude = 0;
-
+    $scope.loc=[];
     
     $scope.getCabs = function(id) {
         // console.log("$location.path",$location.path);
@@ -508,37 +508,88 @@ angular.module('comparetravel', ['angular.filter'])
         console.log($scope.info.pickup_time);
         $scope.info.drop_time = Date.parse($scope.info.drop_time)/1000;
 
-        var geocoder = new google.maps.Geocoder();
-        var paddress = $scope.info.pickup_location;
-        var daddress = $scope.info.drop_location;
+        //var getLocation =  function(address) {
+         var geocoder = new google.maps.Geocoder();
 
-        geocoder.geocode( { 'address': paddress}, function(results, status) {
-
-          if (status == google.maps.GeocoderStatus.OK) {
-             $scope.platitude = results[0].geometry.location.lat();
-             $scope.plongitude = results[0].geometry.location.lng();
-             alert($scope.platitude);
-             console.log("$scope.platitude",$scope.platitude);
-            
-          } 
-        }); 
+         var paddress = $scope.info.pickup_location;
+         
+          geocoder.geocode( { 'address': paddress}, function(results, status) {
         
-        console.log("$scope.platitude-----",$scope.platitude);
-
-        geocoder.geocode( { 'address': daddress}, function(results, status) {
-
           if (status == google.maps.GeocoderStatus.OK) {
-              $scope.dlatitude = results[0].geometry.location.lat();
-              $scope.dlongitude = results[0].geometry.location.lng();
-              alert($scope.dlatitude);
-          } 
-        }); 
+              $scope.loc.push(results[0].geometry.location.lat());
+              $scope.loc.push(results[0].geometry.location.lng());
+              console.log("in the geo code",$scope.loc);
+              redirectPage($scope.loc)
 
+              
+              } 
+
+          }); 
+
+          var daddress = $scope.info.drop_location;
+
+          geocoder.geocode( { 'address': daddress}, function(results, status) {
+        
+            if (status == google.maps.GeocoderStatus.OK) {
+                $scope.loc.push(results[0].geometry.location.lat());
+                $scope.loc.push(results[0].geometry.location.lng());
+                console.log("in the geo code",$scope.loc);
+                redirectPage($scope.loc)
+  
+                
+                } 
+  
+            }); 
+          
+        
+          
+        //}
+        // var source = getLocation($scope.info.pickup_location);
+        //$scope.source = getLocation($scope.info.pickup_location);
+        //$scope.platitude = $scope.source[0];
+        //$scope.plongitude = $scope.source[1];
+        //console.log("$scope.platitude-----",$scope.source);
+        
+        // $scope.plongitude = source.longitude;
+
+        // var destination = getLocation($scope.info.drop_location);
+        // $scope.dlatitude = destination.latitude;
+        // $scope.dlongitude = destination.longitude;
+
+
+        // var geocoder = new google.maps.Geocoder();
+        // var paddress = $scope.info.pickup_location;
+        // var daddress = $scope.info.drop_location;
+
+        // geocoder.geocode( { 'address': paddress}, function(results, status) {
+
+        //   if (status == google.maps.GeocoderStatus.OK) {
+        //      $scope.platitude = results[0].geometry.location.lat();
+        //      $scope.plongitude = results[0].geometry.location.lng();
+        //      alert($scope.platitude);
+        //      console.log("$scope.platitude",$scope.platitude);
+            
+        //   } 
+        // }); 
+        
+        // console.log("$scope.platitude-----",$scope.platitude);
+
+        // geocoder.geocode( { 'address': daddress}, function(results, status) {
+
+        //   if (status == google.maps.GeocoderStatus.OK) {
+        //       $scope.dlatitude = results[0].geometry.location.lat();
+        //       $scope.dlongitude = results[0].geometry.location.lng();
+        //       alert($scope.dlatitude);
+        //   } 
+        // }); 
         console.log("$scope.info",$scope.info);
         dataShare.sendData($scope.info);
         $scope.location=document.location.href;
         console.log("$scope.location",$scope.location);
-        window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=" + id + "&pickup_time="  + $scope.info.pickup_time + "&drop_time=" + $scope.info.drop_time + "&pickup_lat="  + $scope.platitude + "&pickup_lon="  + $scope.plongitude+ "&drop_lat="  + $scope.dlatitude + "&drop_lon="  + $scope.dlongitude,'_self'); 
+        var redirectPage=function(){
+          console.log("$scope.location array",$scope.loc);
+         window.open($scope.location + "/list?city=" + $scope.info.pickup_location + "&cab_type=" + id + "&pickup_time="  + $scope.info.pickup_time + "&drop_time=" + $scope.info.drop_time + "&pickup_lat="  + $scope.loc[0] + "&pickup_lon="  + $scope.loc[1]+ "&drop_lat="  + $scope.loc[2] + "&drop_lon="  + $scope.loc[3],'_self'); 
+        }
       } 
     
   
@@ -549,7 +600,7 @@ angular.module('comparetravel', ['angular.filter'])
     
     $scope.car_types = Constants.Car_types;
     var info = {};
-    $scope.info = {};
+    $scope.info = {};Value: 50
     $scope.platitude = 0;
     $scope.dlatitude = 0;
     $scope.plongitude = 0;
