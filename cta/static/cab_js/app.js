@@ -885,13 +885,18 @@ angular.module('comparetravel', ['angular.filter'])
     $scope.fuel_types = Constants.Fuel_types;
     $scope.amenities = Constants.Amenities;
     $scope.cab_types = Constants.Cab_types;
+    
 
-    $http.get("/api/v1/cab")
+    $scope.cab = function(id){
+     
+
+    $http.get("/api/v1/cab?cab_type=" + id)
     .then(function (res) {
       $scope.cabs = res.data.result.cabs;
     }, function (err) {
       console.log(err);
     });
+  }
 
     var createToast=function(msg, color){
       var x= document.getElementById("snackbar");
@@ -992,35 +997,17 @@ angular.module('comparetravel', ['angular.filter'])
     }
 
     $scope.editCab = function (cabData) {
-      $scope.functionCalling = "Update";
-      $scope.disable_amenity = true;
-      $scope.disable_association = true;
-      $scope.disable_dish = true;
-      $scope.disable_menu = true;
-      $scope.disable_images = true;
+      $scope.cab=cabData;
+      
+      for(i in Constants.Cab_types){
+          if(cabData.cab_type==i){
 
-
-      restaurantData.phone = parseInt(restaurantData.phone);
-      put_restaurant_id = restaurantData.id;
-
-      for (i in restaurantData.association) {
-        restaurantData.association[i].collections.collection_id = restaurantData.association[i].collections.id + ""
-        restaurantData.association[i].cuisines.cuisine_id = restaurantData.association[i].cuisines.id + ""
-        restaurantData.association[i].collections.collection = null;
-        restaurantData.association[i].collections.image = null;
-        restaurantData.association[i].collections.desc = null;
-        restaurantData.association[i].collections.featured = null;
+            $scope.cab.cab_type=Constants.Cab_types[i];
+          }
       }
 
-      for (i in restaurantData.images) {
-        restaurantData.images[i].image_type = restaurantData.images[i].image_type + ""
-      }
 
-      restaurantData.category = restaurantData.category + ""
-
-      $scope.restaurantData = restaurantData;
-      console.log(restaurantData);
-      console.log($scope.restaurantData);
+      
 
 
 

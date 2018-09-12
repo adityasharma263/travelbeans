@@ -3,7 +3,7 @@
     <h3>Enter Cab Details</h3>
     
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="add">
             <!-- <form> -->
             <form class="form-horizontal" ng-submit="createCab()">
             <div class="row">
@@ -349,8 +349,545 @@
             <!-- </form> -->
             <hr>
         </div>
+
+
+        <div class="col-sm-6" id="edit" style="display: none">
+            <!-- <form> -->
+            <form class="form-horizontal" ng-submit="createCab()">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Cab Type:</label>
+                        <br>
+                        <select ng-model="cab.cab_type" ng-required="true">
+                            <option value disabled>-- select cab type --</option>
+                            <option value="[[$index+1]]" ng-repeat="type in cab_types">[[type]]</option>
+                        </select>
     
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Car Name:</label>
+                        <input type="text" class="form-control" ng-model="cab.car_name" ng-required="true">
+    
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Rating(out of 10.0):</label>
+                        <input type="number" class="form-control" step="any" ng-model="cab.rating" ng-required="true">
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea class="form-control" ng-model="cab.desc" ng-required="true"></textarea>
+            </div>
+    
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>City:</label>
+                        <br>
+                        <!-- <input type="text" class="form-control" ng-model="" ng-required="true"> -->
+                        <select ng-model="cab.city" ng-required="true">
+                            <option value disabled selected>--Select Your Location--</option>
+                            <option value="[[location]]" ng-repeat="location in locations">[[location]]</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Car Type:</label>
+                        <br>
+                        <select ng-model="cab.car_type" ng-required="true">
+                            <option value disabled>-- select car type --</option>
+                            <option value="[[$index+1]]" ng-repeat="type in car_types">[[type]]</option>
+                        </select>
+    
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6"> 
+                    <label>Image Url</label>         
+                    <input class="form-control" ng-model="images.image_url" type="text">
+                </div>
+                <div class="col-sm-6"> 
+                    <div style="display:inline-block; background-color: #9a9292; color: white;border-radius: 100%;text-align: center; width: 24px; margin: 12px;">
+                        [[cabImg.length]]
+                    </div>
+                    <button type="button" class="btn btn-primary" ng-click=addImg()>add more</button>
+                </div>
+            </div>
+
+    
+            <fieldset>
+                <h4>Amenity</h4>
+                <div class="row">
+    
+                    <div class="col-sm-4 panel h25" ng-repeat=" (amenity_key, amenity_value) in  amenities">
+    
+                        <label>
+                            
+                            <input type="checkbox" ng-model="cab.amenities[amenity_key]" ng-true-value="true" ng-false-value="false" ng-disabled="disable_amenity">[[amenity_key]]
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Fuel Capacity:</label>
+                            <input type="number" class="form-control" ng-model="cab.amenities.fuel_capacity" ng-required="true">
+        
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fuel Type:</label>
+                                <br>
+                                <select ng-model="cab.amenities.fuel_type" ng-required="true">
+                                    <option value disabled>-- select fuel type --</option>
+                                    <option value="[[$index+1]]" ng-repeat="type in fuel_types">[[type]]</option>
+                                </select>
+            
+                            </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Seater:</label>
+                            <input type="number" class="form-control" ng-model="cab.amenities.seater" ng-required="true">
+        
+                        </div>
+                    </div>
+                </div>
+
+                 
+    
+            </fieldset>
+
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Deal</h4>
+                    </div>
+                    <div class="col-sm-6" style="display:inline-block; background-color: #9a9292; color: white;border-radius: 100%;text-align: center; width: 24px; ">
+                        [[cabDeals.length]]
+                    </div>
+                </div>
+                <div class="row" ng-show="myVar">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Website name:</label>
+                            <select class="form-control" ng-model="deals.website_id">
+                                <option ng-repeat="obj in websites" value="[[obj.id]]">[[obj.website]]</option>
+                            </select>  
+                        </div>
+                    </div>      
+
+                    <div class="col-sm-6">
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#website" ng-click="show()">add new website</button>
+                    </div>
+                    
+                    <!-- <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Deals</label>
+                                <select class="form-control">
+                                    <option ng-repeat="obj in availableDeals" value="[[obj.id]]">[[obj.]]</option>
+                                </select>  
+                            </div>
+                        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#deal">add new deal</button>
+                    </div> -->
+                </div>
+
+                <div id="website" class="collapse">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Website name:</label>
+                                <input type="text" class="form-control" ng-model="deals.website.website" >           
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Website logo image:</label>
+                                <input type="text" class="form-control" ng-model="deals.website.logo_image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div> <!-- id="deal" class="collapse" -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare" >           
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare Peak Season:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_peak_season">
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare Weekend:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_weekend" >
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Base Fare with Fuel:</label>
+                                <input type="number" class="form-control" ng-model="deals.base_fare_with_fuel">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Cancellation Charge:</label>
+                                <input type="number" class="form-control" ng-model="deals.cancellation_charges" >            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Night Allowance Charge:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.car_night_allowance_charge">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Driver Daily Allowance Charge:</label>
+                                <input type="number" class="form-control" ng-model="deals.driver_daily_allowance_charge" >
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Different pickup drop point Charge:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.different_pickup_drop_point_charge" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fare exceeded per Km:</label>
+                                <input type="number" class="form-control" ng-model="deals.fare_exceeded_per_km">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Fare exceeded per Hr:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.fare_exceeded_per_hr">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Initial Km:</label>
+                                <input type="number" class="form-control" ng-model="deals.initial_km">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Initial Km Fare:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.initial_km_fare">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Km Restriction:</label>
+                                <input type="number" class="form-control" ng-model="deals.km_restriction">
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Slab:</label>
+                                <input type="number" class="form-control" step="any" ng-model="deals.slab">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>
+                                <input type="checkbox" ng-model="deals.one_way">One Way
+                                </label>
+            
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>
+                                <input type="checkbox" step="any" ng-model="deals.outstation">Outstation
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <br>
+                                <label>
+                                    <input type="checkbox" ng-model="deals.is_partner" ng-true-value="true" ng-false-value="false">Is partner?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cab Url: </label>
+                                    <input  class="form-control" id="name"  ng-model="deals.cab_url" type="text">
+                                </div>
+                            </div>
+                        </div>   
+
+                        <div class="form-group">        
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-primary" ng-click=addDeal()>Add more deals</button>
+                            </div>
+                        </div>
+                    </div>
+            </fieldset>
+    
+           
+            
+
+            <button type="submit" class="btn btn-success">Add</button>
+            </form>
+            <!-- </form> -->
+            <hr>
+        </div>
+
         <div class="col-sm-6">
+
+
+ 
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#monthly" ng-click="cab(1)">Monthly Rental</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#sight" ng-click="cab(2)">Sight Seeing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#luxury" ng-click="cab(3)">Luxury</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#outstation" ng-click="cab(4)">Outstation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#self" ng-click="cab(5)">Self Drive</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#hire" ng-click="cab(6)">Hire a Driver</a>
+      </li>
+    </ul>
+  
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="monthly" class=" tab-pane active"><br>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[cab.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[cab.car_name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[cab.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" onclick="hide('add'),show('edit')" ng-click="$parent.editCab(cab)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      </div>
+      <div id="sight" class="tab-pane fade"><br>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[cab.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[cab.car_name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[cab.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" onclick="hide('add'),show('edit')" ng-click="$parent.editCab(cab)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </div>
+      <div id="luxury" class="tab-pane fade"><br>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[cab.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[cab.car_name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[cab.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" onclick="hide('add'),show('edit')" ng-click="$parent.editCab(cab)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+      </div>
+      <div id="outstation" class="tab-pane fade"><br>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[cab.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[cab.car_name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[cab.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" onclick="hide('add'),show('edit')" ng-click="$parent.editCab(cab)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+      </div>
+      <div id="self" class="tab-pane fade"><br>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[cab.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[cab.car_name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[cab.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" onclick="hide('add'),show('edit')" ng-click="$parent.editCab(cab)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+      </div>
+      <div id="hire" class="tab-pane fade"><br>
+        <div class="form-group">
+            <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4" ng-repeat="cab in cabs | filter: search">
+                <div class="thumbnail">
+                    <img ng-src="[[cab.images[0].image_url]]" alt="">
+                    <div class="caption">
+                        <h4>[[cab.car_name]]</h4>
+                        <p>
+                            <span>location :
+                                <span>[[cab.city]]</span>
+                            </span>
+                        </p>
+                        <p>
+                            <button class="btn btn-primary" role="button" onclick="hide('add'),show('edit')" ng-click="$parent.editCab(cab)">Edit</button>
+                            <button class="btn btn-default" role="button" ng-click="deleteCab(cab.id, $index)">Delete</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+      </div>
+    </div>
+
+        </div>
+    
+        <!-- <div class="col-sm-6">
             <div class="form-group">
                 <input type="text" class="form-control" ng-model="search" placeholder="search cabs...">
             </div>
@@ -374,7 +911,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     
     
     </div>
