@@ -11,7 +11,7 @@ graphene-sqlalchemy>=2.0
 requests==2.19.1
 SQLAlchemy==1.0.13
 marshmallow-sqlalchemy==0.13.1
-numpy==1.13.1
+numpy==1.21.0
 simplejson==3.16.0
 xlrd==1.1.0
 graphene>=2.0
